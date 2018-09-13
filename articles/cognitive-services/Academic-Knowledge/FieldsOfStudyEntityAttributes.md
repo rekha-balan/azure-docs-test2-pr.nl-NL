@@ -1,0 +1,33 @@
+---
+title: Field of Study entity attributes in the Academic Knowledge API | Microsoft Docs
+description: Learn the attributes you can use with the Field of Study entity in the Academic Knowledge API in Cognitive Services.
+services: cognitive-services
+author: alch-msft
+manager: kuansanw
+ms.service: cognitive-services
+ms.technology: academic-knowledge
+ms.topic: article
+ms.date: 03/31/2017
+ms.author: alch
+ms.openlocfilehash: 27c1f15e09b80166ff3daef2899b21a9a21a1f33
+ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
+ms.translationtype: HT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 08/02/2018
+ms.locfileid: "44562986"
+---
+# <a name="field-of-study-entity"></a><span data-ttu-id="45fc8-103">Field Of Study Entity</span><span class="sxs-lookup"><span data-stu-id="45fc8-103">Field Of Study Entity</span></span>
+
+<span data-ttu-id="45fc8-104"><sub> \*Below attributes are specific to field of study entity. (Ty = '6') </sub></span><span class="sxs-lookup"><span data-stu-id="45fc8-104"><sub> \*Below attributes are specific to field of study entity. (Ty = '6') </sub></span></span>
+
+<span data-ttu-id="45fc8-105">Name</span><span class="sxs-lookup"><span data-stu-id="45fc8-105">Name</span></span>    |<span data-ttu-id="45fc8-106">Description</span><span class="sxs-lookup"><span data-stu-id="45fc8-106">Description</span></span>                            |<span data-ttu-id="45fc8-107">Type</span><span class="sxs-lookup"><span data-stu-id="45fc8-107">Type</span></span>       | <span data-ttu-id="45fc8-108">Operations</span><span class="sxs-lookup"><span data-stu-id="45fc8-108">Operations</span></span>
+------- | ------------------------------------- | --------- | ----------------------------
+<span data-ttu-id="45fc8-109">Id</span><span class="sxs-lookup"><span data-stu-id="45fc8-109">Id</span></span>      |<span data-ttu-id="45fc8-110">Entity ID</span><span class="sxs-lookup"><span data-stu-id="45fc8-110">Entity ID</span></span>                              |<span data-ttu-id="45fc8-111">Int64</span><span class="sxs-lookup"><span data-stu-id="45fc8-111">Int64</span></span>      |<span data-ttu-id="45fc8-112">Equals</span><span class="sxs-lookup"><span data-stu-id="45fc8-112">Equals</span></span>
+<span data-ttu-id="45fc8-113">FN</span><span class="sxs-lookup"><span data-stu-id="45fc8-113">FN</span></span>      |<span data-ttu-id="45fc8-114">Field of study normalized name</span><span class="sxs-lookup"><span data-stu-id="45fc8-114">Field of study normalized name</span></span>         |<span data-ttu-id="45fc8-115">String</span><span class="sxs-lookup"><span data-stu-id="45fc8-115">String</span></span>     |<span data-ttu-id="45fc8-116">Equals</span><span class="sxs-lookup"><span data-stu-id="45fc8-116">Equals</span></span>
+<span data-ttu-id="45fc8-117">DFN</span><span class="sxs-lookup"><span data-stu-id="45fc8-117">DFN</span></span>     |<span data-ttu-id="45fc8-118">Field of study display name</span><span class="sxs-lookup"><span data-stu-id="45fc8-118">Field of study display name</span></span>            |<span data-ttu-id="45fc8-119">String</span><span class="sxs-lookup"><span data-stu-id="45fc8-119">String</span></span>     |<span data-ttu-id="45fc8-120">none</span><span class="sxs-lookup"><span data-stu-id="45fc8-120">none</span></span>
+<span data-ttu-id="45fc8-121">CC</span><span class="sxs-lookup"><span data-stu-id="45fc8-121">CC</span></span>      |<span data-ttu-id="45fc8-122">Field of study total citation count</span><span class="sxs-lookup"><span data-stu-id="45fc8-122">Field of study total citation count</span></span>    |<span data-ttu-id="45fc8-123">Int32</span><span class="sxs-lookup"><span data-stu-id="45fc8-123">Int32</span></span>      |<span data-ttu-id="45fc8-124">none</span><span class="sxs-lookup"><span data-stu-id="45fc8-124">none</span></span>  
+<span data-ttu-id="45fc8-125">ECC</span><span class="sxs-lookup"><span data-stu-id="45fc8-125">ECC</span></span>     |<span data-ttu-id="45fc8-126">Field of total estimated citation count</span><span class="sxs-lookup"><span data-stu-id="45fc8-126">Field of total estimated citation count</span></span>|<span data-ttu-id="45fc8-127">Int32</span><span class="sxs-lookup"><span data-stu-id="45fc8-127">Int32</span></span>      |<span data-ttu-id="45fc8-128">none</span><span class="sxs-lookup"><span data-stu-id="45fc8-128">none</span></span>
+<span data-ttu-id="45fc8-129">FL</span><span class="sxs-lookup"><span data-stu-id="45fc8-129">FL</span></span>      |<span data-ttu-id="45fc8-130">Level in fields of study hierarchy</span><span class="sxs-lookup"><span data-stu-id="45fc8-130">Level in fields of study hierarchy</span></span>     |<span data-ttu-id="45fc8-131">Int32</span><span class="sxs-lookup"><span data-stu-id="45fc8-131">Int32</span></span>      |<span data-ttu-id="45fc8-132">Equals,</span><span class="sxs-lookup"><span data-stu-id="45fc8-132">Equals,</span></span> <br/><span data-ttu-id="45fc8-133">IsBetween</span><span class="sxs-lookup"><span data-stu-id="45fc8-133">IsBetween</span></span>
+<span data-ttu-id="45fc8-134">FP.FN</span><span class="sxs-lookup"><span data-stu-id="45fc8-134">FP.FN</span></span>   |<span data-ttu-id="45fc8-135">Parent field of study name</span><span class="sxs-lookup"><span data-stu-id="45fc8-135">Parent field of study name</span></span>             |<span data-ttu-id="45fc8-136">String</span><span class="sxs-lookup"><span data-stu-id="45fc8-136">String</span></span>     |<span data-ttu-id="45fc8-137">Equals</span><span class="sxs-lookup"><span data-stu-id="45fc8-137">Equals</span></span>
+<span data-ttu-id="45fc8-138">FP.FId</span><span class="sxs-lookup"><span data-stu-id="45fc8-138">FP.FId</span></span>  |<span data-ttu-id="45fc8-139">Parent field of study ID</span><span class="sxs-lookup"><span data-stu-id="45fc8-139">Parent field of study ID</span></span>               |<span data-ttu-id="45fc8-140">Int64</span><span class="sxs-lookup"><span data-stu-id="45fc8-140">Int64</span></span>      |<span data-ttu-id="45fc8-141">Equals</span><span class="sxs-lookup"><span data-stu-id="45fc8-141">Equals</span></span>
+<span data-ttu-id="45fc8-142">SSD</span><span class="sxs-lookup"><span data-stu-id="45fc8-142">SSD</span></span>     |<span data-ttu-id="45fc8-143">Satori data</span><span class="sxs-lookup"><span data-stu-id="45fc8-143">Satori data</span></span>                            |<span data-ttu-id="45fc8-144">String</span><span class="sxs-lookup"><span data-stu-id="45fc8-144">String</span></span>     |<span data-ttu-id="45fc8-145">none</span><span class="sxs-lookup"><span data-stu-id="45fc8-145">none</span></span>

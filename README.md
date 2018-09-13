@@ -1,0 +1,3 @@
+# <a name="microsoftdocs"></a><span data-ttu-id="a6559-101">microsoft.docs</span><span class="sxs-lookup"><span data-stu-id="a6559-101">microsoft.docs</span></span>
+
+<span data-ttu-id="a6559-102">TODO: Create a file called LICENSE (not LICENSE.TXT, LICENSE.md, etc.)…</span><span class="sxs-lookup"><span data-stu-id="a6559-102">TODO: Create a file called LICENSE (not LICENSE.TXT, LICENSE.md, etc.)…</span></span>
