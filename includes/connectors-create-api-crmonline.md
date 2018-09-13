@@ -1,0 +1,21 @@
+#### <a name="prerequisites"></a><span data-ttu-id="1b159-101">Prerequisites</span><span class="sxs-lookup"><span data-stu-id="1b159-101">Prerequisites</span></span>
+* <span data-ttu-id="1b159-102">An Azure account; you can create a [free account](https://azure.microsoft.com/free)</span><span class="sxs-lookup"><span data-stu-id="1b159-102">An Azure account; you can create a [free account](https://azure.microsoft.com/free)</span></span>
+* <span data-ttu-id="1b159-103">A [Dynamics CRM Online](https://www.microsoft.com/en-us/dynamics/crm-free-trial-overview.aspx) account</span><span class="sxs-lookup"><span data-stu-id="1b159-103">A [Dynamics CRM Online](https://www.microsoft.com/en-us/dynamics/crm-free-trial-overview.aspx) account</span></span> 
+
+<span data-ttu-id="1b159-104">Before using your Dynamics account in a logic app, authorize the logic app to connect to your CRM Online account.</span><span class="sxs-lookup"><span data-stu-id="1b159-104">Before using your Dynamics account in a logic app, authorize the logic app to connect to your CRM Online account.</span></span> <span data-ttu-id="1b159-105">You can do this easily within your logic app on the Azure portal.</span><span class="sxs-lookup"><span data-stu-id="1b159-105">You can do this easily within your logic app on the Azure portal.</span></span> 
+
+<span data-ttu-id="1b159-106">Authorize your logic app to connect to your CRM Online account using the following steps:</span><span class="sxs-lookup"><span data-stu-id="1b159-106">Authorize your logic app to connect to your CRM Online account using the following steps:</span></span>
+
+1. <span data-ttu-id="1b159-107">Create a logic app.</span><span class="sxs-lookup"><span data-stu-id="1b159-107">Create a logic app.</span></span> <span data-ttu-id="1b159-108">In the Logic Apps designer, select **Show Microsoft managed APIs** in the drop down list, and then enter "dynamics" in the search box.</span><span class="sxs-lookup"><span data-stu-id="1b159-108">In the Logic Apps designer, select **Show Microsoft managed APIs** in the drop down list, and then enter "dynamics" in the search box.</span></span> <span data-ttu-id="1b159-109">Select one of the triggers or actions:</span><span class="sxs-lookup"><span data-stu-id="1b159-109">Select one of the triggers or actions:</span></span>  
+   ![](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/connectors-create-api-crmonline/dynamics-triggers.png)
+2. <span data-ttu-id="1b159-110">If you haven't previously created any connections to Dynamics, you are prompted to sign in using your Dynamics credentials:</span><span class="sxs-lookup"><span data-stu-id="1b159-110">If you haven't previously created any connections to Dynamics, you are prompted to sign in using your Dynamics credentials:</span></span>  
+   ![](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/connectors-create-api-crmonline/dynamics-signin.png)
+3. <span data-ttu-id="1b159-111">Select **Sign in**, and enter your user name and password.</span><span class="sxs-lookup"><span data-stu-id="1b159-111">Select **Sign in**, and enter your user name and password.</span></span> <span data-ttu-id="1b159-112">Select **Sign in**.</span><span class="sxs-lookup"><span data-stu-id="1b159-112">Select **Sign in**.</span></span> 
+   
+    <span data-ttu-id="1b159-113">These credentials are used to authorize your logic app to connect to, and access the data in your Dynamics account.</span><span class="sxs-lookup"><span data-stu-id="1b159-113">These credentials are used to authorize your logic app to connect to, and access the data in your Dynamics account.</span></span> 
+4. <span data-ttu-id="1b159-114">Notice the connection has been created.</span><span class="sxs-lookup"><span data-stu-id="1b159-114">Notice the connection has been created.</span></span> <span data-ttu-id="1b159-115">Now, proceed with the other steps in your logic app:</span><span class="sxs-lookup"><span data-stu-id="1b159-115">Now, proceed with the other steps in your logic app:</span></span>  
+   ![](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/connectors-create-api-crmonline/dynamics-properties.png)
+
+
+
+

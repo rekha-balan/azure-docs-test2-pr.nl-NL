@@ -1,0 +1,105 @@
+---
+title: Deploy the StorSimple Manager service | Microsoft Docs
+description: Explains how to create and delete the StorSimple Manager service in the Azure classic portal, and describes how to manage the service registration key.
+services: storsimple
+documentationcenter: ''
+author: alkohli
+manager: timlt
+editor: ''
+ms.assetid: bc1d5650-275c-42ed-bc77-cdb596f85943
+ms.service: storsimple
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 02/27/2017
+ms.author: alkohli
+ms.custom: H1Hack27Feb2017
+ms.openlocfilehash: 79015e559c0aaef36944a0202de6d5ce5603a12e
+ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 08/02/2018
+ms.locfileid: "44553918"
+---
+# <a name="deploy-the-storsimple-manager-service-in-the-azure-classic-portal"></a><span data-ttu-id="36ed0-103">Deploy the StorSimple Manager service in the Azure classic portal</span><span class="sxs-lookup"><span data-stu-id="36ed0-103">Deploy the StorSimple Manager service in the Azure classic portal</span></span>
+
+## <a name="overview"></a><span data-ttu-id="36ed0-104">Overview</span><span class="sxs-lookup"><span data-stu-id="36ed0-104">Overview</span></span>
+<span data-ttu-id="36ed0-105">The StorSimple Manager service runs in Microsoft Azure and connects to multiple StorSimple devices.</span><span class="sxs-lookup"><span data-stu-id="36ed0-105">The StorSimple Manager service runs in Microsoft Azure and connects to multiple StorSimple devices.</span></span> <span data-ttu-id="36ed0-106">After you create the service, you can use it to manage the devices from the Microsoft Azure classic portal running in a browser.</span><span class="sxs-lookup"><span data-stu-id="36ed0-106">After you create the service, you can use it to manage the devices from the Microsoft Azure classic portal running in a browser.</span></span> <span data-ttu-id="36ed0-107">This allows you to monitor all the devices that are connected to the StorSimple Manager service from a single, central location, thereby minimizing administrative burden.</span><span class="sxs-lookup"><span data-stu-id="36ed0-107">This allows you to monitor all the devices that are connected to the StorSimple Manager service from a single, central location, thereby minimizing administrative burden.</span></span>
+
+<span data-ttu-id="36ed0-108">The StorSimple Manager landing page lists all the StorSimple Manager services that you can use to manage your StorSimple storage devices.</span><span class="sxs-lookup"><span data-stu-id="36ed0-108">The StorSimple Manager landing page lists all the StorSimple Manager services that you can use to manage your StorSimple storage devices.</span></span> <span data-ttu-id="36ed0-109">For each StorSimple Manager service, the following information is presented on the StorSimple Manager page:</span><span class="sxs-lookup"><span data-stu-id="36ed0-109">For each StorSimple Manager service, the following information is presented on the StorSimple Manager page:</span></span>
+
+* <span data-ttu-id="36ed0-110">**Name** – The name that was assigned to your StorSimple Manager service when it was created.</span><span class="sxs-lookup"><span data-stu-id="36ed0-110">**Name** – The name that was assigned to your StorSimple Manager service when it was created.</span></span> <span data-ttu-id="36ed0-111">The service name cannot be changed after the service is created.</span><span class="sxs-lookup"><span data-stu-id="36ed0-111">The service name cannot be changed after the service is created.</span></span>
+* <span data-ttu-id="36ed0-112">**Status** – The status of the service, which can be **Active**, **Creating**, or **Online**.</span><span class="sxs-lookup"><span data-stu-id="36ed0-112">**Status** – The status of the service, which can be **Active**, **Creating**, or **Online**.</span></span>
+* <span data-ttu-id="36ed0-113">**Location** – The geographical location in which the StorSimple device will be deployed.</span><span class="sxs-lookup"><span data-stu-id="36ed0-113">**Location** – The geographical location in which the StorSimple device will be deployed.</span></span>
+* <span data-ttu-id="36ed0-114">**Subscription** – The billing subscription that is associated with your service.</span><span class="sxs-lookup"><span data-stu-id="36ed0-114">**Subscription** – The billing subscription that is associated with your service.</span></span>
+
+<span data-ttu-id="36ed0-115">The common tasks that can be performed through the StorSimple Manager page are:</span><span class="sxs-lookup"><span data-stu-id="36ed0-115">The common tasks that can be performed through the StorSimple Manager page are:</span></span>
+
+* <span data-ttu-id="36ed0-116">Create a service</span><span class="sxs-lookup"><span data-stu-id="36ed0-116">Create a service</span></span>
+* <span data-ttu-id="36ed0-117">Delete a service</span><span class="sxs-lookup"><span data-stu-id="36ed0-117">Delete a service</span></span>
+* <span data-ttu-id="36ed0-118">Get the service registration key</span><span class="sxs-lookup"><span data-stu-id="36ed0-118">Get the service registration key</span></span>
+* <span data-ttu-id="36ed0-119">Regenerate the service registration key</span><span class="sxs-lookup"><span data-stu-id="36ed0-119">Regenerate the service registration key</span></span>
+
+<span data-ttu-id="36ed0-120">This tutorial describes how to perform each of these tasks.</span><span class="sxs-lookup"><span data-stu-id="36ed0-120">This tutorial describes how to perform each of these tasks.</span></span>
+
+## <a name="create-a-service"></a><span data-ttu-id="36ed0-121">Create a service</span><span class="sxs-lookup"><span data-stu-id="36ed0-121">Create a service</span></span>
+<span data-ttu-id="36ed0-122">Use the **Quick Create** option to create a StorSimple Manager service if you want to deploy your StorSimple device.</span><span class="sxs-lookup"><span data-stu-id="36ed0-122">Use the **Quick Create** option to create a StorSimple Manager service if you want to deploy your StorSimple device.</span></span> <span data-ttu-id="36ed0-123">To create a service, you need to have:</span><span class="sxs-lookup"><span data-stu-id="36ed0-123">To create a service, you need to have:</span></span>
+
+* <span data-ttu-id="36ed0-124">A subscription with an Enterprise Agreement</span><span class="sxs-lookup"><span data-stu-id="36ed0-124">A subscription with an Enterprise Agreement</span></span>
+* <span data-ttu-id="36ed0-125">An active Microsoft Azure storage account</span><span class="sxs-lookup"><span data-stu-id="36ed0-125">An active Microsoft Azure storage account</span></span>
+* <span data-ttu-id="36ed0-126">The billing information that is used for access management</span><span class="sxs-lookup"><span data-stu-id="36ed0-126">The billing information that is used for access management</span></span>
+
+<span data-ttu-id="36ed0-127">You can also choose to generate a default storage account when you create the service.</span><span class="sxs-lookup"><span data-stu-id="36ed0-127">You can also choose to generate a default storage account when you create the service.</span></span>
+
+<span data-ttu-id="36ed0-128">A single service can manage multiple devices.</span><span class="sxs-lookup"><span data-stu-id="36ed0-128">A single service can manage multiple devices.</span></span> <span data-ttu-id="36ed0-129">However, a device cannot span multiple services.</span><span class="sxs-lookup"><span data-stu-id="36ed0-129">However, a device cannot span multiple services.</span></span> <span data-ttu-id="36ed0-130">A large enterprise can have multiple service instances to work with different subscriptions, organizations, or even deployment locations.</span><span class="sxs-lookup"><span data-stu-id="36ed0-130">A large enterprise can have multiple service instances to work with different subscriptions, organizations, or even deployment locations.</span></span> <span data-ttu-id="36ed0-131">Please note that you need separate instances of StorSimple Manager service to manage StorSimple 8000 series devices and StorSimple Virtual Arrays.</span><span class="sxs-lookup"><span data-stu-id="36ed0-131">Please note that you need separate instances of StorSimple Manager service to manage StorSimple 8000 series devices and StorSimple Virtual Arrays.</span></span>
+
+> [!IMPORTANT] 
+> <span data-ttu-id="36ed0-132">If you have an unused service created (no device operations were performed on this resource) prior to August 2016, it cannot be managed via Azure portal or Azure classic portal.</span><span class="sxs-lookup"><span data-stu-id="36ed0-132">If you have an unused service created (no device operations were performed on this resource) prior to August 2016, it cannot be managed via Azure portal or Azure classic portal.</span></span> <span data-ttu-id="36ed0-133">We recommend that you create a new service in the Azure portal.</span><span class="sxs-lookup"><span data-stu-id="36ed0-133">We recommend that you create a new service in the Azure portal.</span></span>
+
+<span data-ttu-id="36ed0-134">Perform the following steps to create a service.</span><span class="sxs-lookup"><span data-stu-id="36ed0-134">Perform the following steps to create a service.</span></span>
+
+[!INCLUDE [storsimple-create-new-service](../../includes/storsimple-create-new-service.md)]
+
+## <a name="delete-a-service"></a><span data-ttu-id="36ed0-135">Delete a service</span><span class="sxs-lookup"><span data-stu-id="36ed0-135">Delete a service</span></span>
+<span data-ttu-id="36ed0-136">Before you delete a service, make sure that no connected devices are using it.</span><span class="sxs-lookup"><span data-stu-id="36ed0-136">Before you delete a service, make sure that no connected devices are using it.</span></span> <span data-ttu-id="36ed0-137">If the service is in use, deactivate the connected devices.</span><span class="sxs-lookup"><span data-stu-id="36ed0-137">If the service is in use, deactivate the connected devices.</span></span> <span data-ttu-id="36ed0-138">The deactivate operation will sever the connection between the device and the service, but preserve the device data in the cloud.</span><span class="sxs-lookup"><span data-stu-id="36ed0-138">The deactivate operation will sever the connection between the device and the service, but preserve the device data in the cloud.</span></span>
+
+> [!IMPORTANT] 
+> <span data-ttu-id="36ed0-139">After a service is deleted, the operation cannot be reversed.</span><span class="sxs-lookup"><span data-stu-id="36ed0-139">After a service is deleted, the operation cannot be reversed.</span></span> <span data-ttu-id="36ed0-140">Any device that was using the service will need to be factory reset before it can be used with another service.</span><span class="sxs-lookup"><span data-stu-id="36ed0-140">Any device that was using the service will need to be factory reset before it can be used with another service.</span></span> <span data-ttu-id="36ed0-141">In this scenario, the local data on the device, as well as the configuration, will be lost.</span><span class="sxs-lookup"><span data-stu-id="36ed0-141">In this scenario, the local data on the device, as well as the configuration, will be lost.</span></span>
+
+<span data-ttu-id="36ed0-142">Perform the following steps to delete a service.</span><span class="sxs-lookup"><span data-stu-id="36ed0-142">Perform the following steps to delete a service.</span></span>
+
+### <a name="to-delete-a-service"></a><span data-ttu-id="36ed0-143">To delete a service</span><span class="sxs-lookup"><span data-stu-id="36ed0-143">To delete a service</span></span>
+1. <span data-ttu-id="36ed0-144">On the **StorSimple Manager service** page, select the service that you wish to delete.</span><span class="sxs-lookup"><span data-stu-id="36ed0-144">On the **StorSimple Manager service** page, select the service that you wish to delete.</span></span>
+2. <span data-ttu-id="36ed0-145">Click **Delete** at the bottom of the page.</span><span class="sxs-lookup"><span data-stu-id="36ed0-145">Click **Delete** at the bottom of the page.</span></span>
+3. <span data-ttu-id="36ed0-146">Click **Yes** in the confirmation notification.</span><span class="sxs-lookup"><span data-stu-id="36ed0-146">Click **Yes** in the confirmation notification.</span></span> <span data-ttu-id="36ed0-147">It may take a few minutes for the service to be deleted.</span><span class="sxs-lookup"><span data-stu-id="36ed0-147">It may take a few minutes for the service to be deleted.</span></span>
+
+## <a name="get-the-service-registration-key"></a><span data-ttu-id="36ed0-148">Get the service registration key</span><span class="sxs-lookup"><span data-stu-id="36ed0-148">Get the service registration key</span></span>
+<span data-ttu-id="36ed0-149">After you have successfully created a service, you will need to register your StorSimple device with the service.</span><span class="sxs-lookup"><span data-stu-id="36ed0-149">After you have successfully created a service, you will need to register your StorSimple device with the service.</span></span> <span data-ttu-id="36ed0-150">To register your first StorSimple device, you will need the service registration key.</span><span class="sxs-lookup"><span data-stu-id="36ed0-150">To register your first StorSimple device, you will need the service registration key.</span></span> <span data-ttu-id="36ed0-151">To register additional devices with an existing StorSimple service, you will need both the registration key and the service data encryption key (which is generated on the first device during registration).</span><span class="sxs-lookup"><span data-stu-id="36ed0-151">To register additional devices with an existing StorSimple service, you will need both the registration key and the service data encryption key (which is generated on the first device during registration).</span></span> <span data-ttu-id="36ed0-152">For more information about the service data encryption key, see [StorSimple security](storsimple-security.md).</span><span class="sxs-lookup"><span data-stu-id="36ed0-152">For more information about the service data encryption key, see [StorSimple security](storsimple-security.md).</span></span> <span data-ttu-id="36ed0-153">You can get the registration key by accessing **Registration Key** on the **Services** page.</span><span class="sxs-lookup"><span data-stu-id="36ed0-153">You can get the registration key by accessing **Registration Key** on the **Services** page.</span></span>
+
+<span data-ttu-id="36ed0-154">Perform the following steps to get the service registration key.</span><span class="sxs-lookup"><span data-stu-id="36ed0-154">Perform the following steps to get the service registration key.</span></span>
+
+[!INCLUDE [storsimple-get-service-registration-key](../../includes/storsimple-get-service-registration-key.md)]
+
+<span data-ttu-id="36ed0-155">Keep the service registration key in a safe location.</span><span class="sxs-lookup"><span data-stu-id="36ed0-155">Keep the service registration key in a safe location.</span></span> <span data-ttu-id="36ed0-156">You will need this key, as well as the service data encryption key, to register additional devices with this service.</span><span class="sxs-lookup"><span data-stu-id="36ed0-156">You will need this key, as well as the service data encryption key, to register additional devices with this service.</span></span> <span data-ttu-id="36ed0-157">After obtaining the service registration key, you will need to configure your device through the Windows PowerShell for StorSimple interface.</span><span class="sxs-lookup"><span data-stu-id="36ed0-157">After obtaining the service registration key, you will need to configure your device through the Windows PowerShell for StorSimple interface.</span></span>
+
+<span data-ttu-id="36ed0-158">For details on how to use this registration key, see [Step 3: Configure and register the device through Windows PowerShell for StorSimple](storsimple-deployment-walkthrough.md#step-3-configure-and-register-the-device-through-windows-powershell-for-storsimple).</span><span class="sxs-lookup"><span data-stu-id="36ed0-158">For details on how to use this registration key, see [Step 3: Configure and register the device through Windows PowerShell for StorSimple](storsimple-deployment-walkthrough.md#step-3-configure-and-register-the-device-through-windows-powershell-for-storsimple).</span></span>
+
+## <a name="regenerate-the-service-registration-key"></a><span data-ttu-id="36ed0-159">Regenerate the service registration key</span><span class="sxs-lookup"><span data-stu-id="36ed0-159">Regenerate the service registration key</span></span>
+<span data-ttu-id="36ed0-160">You will need to regenerate a service registration key if you are required to perform key rotation or if the list of service administrators has changed.</span><span class="sxs-lookup"><span data-stu-id="36ed0-160">You will need to regenerate a service registration key if you are required to perform key rotation or if the list of service administrators has changed.</span></span> <span data-ttu-id="36ed0-161">When you regenerate the key, the new key is used only for registering subsequent devices.</span><span class="sxs-lookup"><span data-stu-id="36ed0-161">When you regenerate the key, the new key is used only for registering subsequent devices.</span></span> <span data-ttu-id="36ed0-162">The devices that were already registered are unaffected by this process.</span><span class="sxs-lookup"><span data-stu-id="36ed0-162">The devices that were already registered are unaffected by this process.</span></span>
+
+<span data-ttu-id="36ed0-163">Perform the following steps to regenerate a service registration key.</span><span class="sxs-lookup"><span data-stu-id="36ed0-163">Perform the following steps to regenerate a service registration key.</span></span>
+
+### <a name="to-regenerate-the-service-registration-key"></a><span data-ttu-id="36ed0-164">To regenerate the service registration key</span><span class="sxs-lookup"><span data-stu-id="36ed0-164">To regenerate the service registration key</span></span>
+1. <span data-ttu-id="36ed0-165">On the **StorSimple Manager service** page, click **Registration Key**.</span><span class="sxs-lookup"><span data-stu-id="36ed0-165">On the **StorSimple Manager service** page, click **Registration Key**.</span></span>
+2. <span data-ttu-id="36ed0-166">In the **Service Registration Key** dialog box, click **Regenerate**.</span><span class="sxs-lookup"><span data-stu-id="36ed0-166">In the **Service Registration Key** dialog box, click **Regenerate**.</span></span>
+3. <span data-ttu-id="36ed0-167">You will see a confirmation message.</span><span class="sxs-lookup"><span data-stu-id="36ed0-167">You will see a confirmation message.</span></span> <span data-ttu-id="36ed0-168">Click **OK** to continue with the regeneration.</span><span class="sxs-lookup"><span data-stu-id="36ed0-168">Click **OK** to continue with the regeneration.</span></span>
+4. <span data-ttu-id="36ed0-169">A new service registration key will appear.</span><span class="sxs-lookup"><span data-stu-id="36ed0-169">A new service registration key will appear.</span></span>
+5. <span data-ttu-id="36ed0-170">Copy this key and save it for registering any new devices with this service.</span><span class="sxs-lookup"><span data-stu-id="36ed0-170">Copy this key and save it for registering any new devices with this service.</span></span>
+6. <span data-ttu-id="36ed0-171">Click the check icon</span><span class="sxs-lookup"><span data-stu-id="36ed0-171">Click the check icon</span></span> ![Check icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-manage-service/HCS_CheckIcon.png) <span data-ttu-id="36ed0-173">to close this dialog box.</span><span class="sxs-lookup"><span data-stu-id="36ed0-173">to close this dialog box.</span></span>
+
+## <a name="next-steps"></a><span data-ttu-id="36ed0-174">Next steps</span><span class="sxs-lookup"><span data-stu-id="36ed0-174">Next steps</span></span>
+* <span data-ttu-id="36ed0-175">Learn more about the [StorSimple deployment process](storsimple-deployment-walkthrough-u2.md).</span><span class="sxs-lookup"><span data-stu-id="36ed0-175">Learn more about the [StorSimple deployment process](storsimple-deployment-walkthrough-u2.md).</span></span>
+* <span data-ttu-id="36ed0-176">Learn more about [managing your StorSimple storage account](storsimple-manage-storage-accounts.md).</span><span class="sxs-lookup"><span data-stu-id="36ed0-176">Learn more about [managing your StorSimple storage account](storsimple-manage-storage-accounts.md).</span></span>
+* <span data-ttu-id="36ed0-177">Learn more about how to [use the StorSimple Manager service to administer your StorSimple device](storsimple-manager-service-administration.md).</span><span class="sxs-lookup"><span data-stu-id="36ed0-177">Learn more about how to [use the StorSimple Manager service to administer your StorSimple device](storsimple-manager-service-administration.md).</span></span>
+

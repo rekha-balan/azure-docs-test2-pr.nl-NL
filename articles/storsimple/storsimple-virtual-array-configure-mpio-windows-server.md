@@ -1,0 +1,174 @@
+---
+title: Configure MPIO on host connected to StorSimple Virtual Array | Microsoft Docs
+description: Describes how to configure Multipath I/O (MPIO) for your StorSimple Virtual Array connected to a host running Windows Server 2012 R2.
+services: storsimple
+documentationcenter: ''
+author: alkohli
+manager: carmonm
+editor: ''
+ms.assetid: 5b7a7f99-ee5b-4b7d-ab32-483a5a1fa504
+ms.service: storsimple
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 11/21/2016
+ms.author: alkohli
+ms.openlocfilehash: 99531a7ad6ce3a50f24f2482677c02ef1af869d1
+ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 08/02/2018
+ms.locfileid: "44553241"
+---
+# <a name="configure-multipath-io-on-windows-server-host-for-the-storsimple-virtual-array"></a><span data-ttu-id="494f6-103">Configure Multipath I/O on Windows Server host for the StorSimple Virtual Array</span><span class="sxs-lookup"><span data-stu-id="494f6-103">Configure Multipath I/O on Windows Server host for the StorSimple Virtual Array</span></span>
+## <a name="overview"></a><span data-ttu-id="494f6-104">Overview</span><span class="sxs-lookup"><span data-stu-id="494f6-104">Overview</span></span>
+<span data-ttu-id="494f6-105">This article describes how to install Multipath I/O feature (MPIO) on your Windows Server host, apply specific configuration settings for StorSimple-only volumes, and then verify MPIO for StorSimple volumes.</span><span class="sxs-lookup"><span data-stu-id="494f6-105">This article describes how to install Multipath I/O feature (MPIO) on your Windows Server host, apply specific configuration settings for StorSimple-only volumes, and then verify MPIO for StorSimple volumes.</span></span> <span data-ttu-id="494f6-106">The procedure assumes that your StorSimple 1200 Virtual Array with two network interfaces is connected to a Windows Server host with two network interfaces.</span><span class="sxs-lookup"><span data-stu-id="494f6-106">The procedure assumes that your StorSimple 1200 Virtual Array with two network interfaces is connected to a Windows Server host with two network interfaces.</span></span> <span data-ttu-id="494f6-107">The information contained in this article applies only to the virtual array.</span><span class="sxs-lookup"><span data-stu-id="494f6-107">The information contained in this article applies only to the virtual array.</span></span> <span data-ttu-id="494f6-108">For information on StorSimple 8000 series devices, go to [Configure MPIO for StorSimple host](storsimple-configure-mpio-windows-server.md).</span><span class="sxs-lookup"><span data-stu-id="494f6-108">For information on StorSimple 8000 series devices, go to [Configure MPIO for StorSimple host](storsimple-configure-mpio-windows-server.md).</span></span> 
+
+<span data-ttu-id="494f6-109">The MPIO feature in Windows Server helps build highly available, fault-tolerant storage configurations.</span><span class="sxs-lookup"><span data-stu-id="494f6-109">The MPIO feature in Windows Server helps build highly available, fault-tolerant storage configurations.</span></span> <span data-ttu-id="494f6-110">MPIO uses redundant physical path components — adapters, cables, and switches — to create logical paths between the server and the storage device.</span><span class="sxs-lookup"><span data-stu-id="494f6-110">MPIO uses redundant physical path components — adapters, cables, and switches — to create logical paths between the server and the storage device.</span></span> <span data-ttu-id="494f6-111">If there is a component failure, causing a logical path to fail, multipathing logic uses an alternate path for I/O so that applications can still access their data.</span><span class="sxs-lookup"><span data-stu-id="494f6-111">If there is a component failure, causing a logical path to fail, multipathing logic uses an alternate path for I/O so that applications can still access their data.</span></span> <span data-ttu-id="494f6-112">Additionally depending on your configuration, MPIO can also improve performance by re-balancing the load across all these paths.</span><span class="sxs-lookup"><span data-stu-id="494f6-112">Additionally depending on your configuration, MPIO can also improve performance by re-balancing the load across all these paths.</span></span> <span data-ttu-id="494f6-113">For more information, see [MPIO overview](https://technet.microsoft.com/library/cc725907.aspx "MPIO overview and features").</span><span class="sxs-lookup"><span data-stu-id="494f6-113">For more information, see [MPIO overview](https://technet.microsoft.com/library/cc725907.aspx "MPIO overview and features").</span></span>
+
+<span data-ttu-id="494f6-114">For the high-availability of your StorSimple solution, configure MPIO on the Windows Server hosts connected to your StorSimple Virtual Array (model 1200).</span><span class="sxs-lookup"><span data-stu-id="494f6-114">For the high-availability of your StorSimple solution, configure MPIO on the Windows Server hosts connected to your StorSimple Virtual Array (model 1200).</span></span> <span data-ttu-id="494f6-115">The host servers can then tolerate a link, network, or interface failure.</span><span class="sxs-lookup"><span data-stu-id="494f6-115">The host servers can then tolerate a link, network, or interface failure.</span></span> 
+
+<span data-ttu-id="494f6-116">You will need to follow these steps to configure MPIO:</span><span class="sxs-lookup"><span data-stu-id="494f6-116">You will need to follow these steps to configure MPIO:</span></span> 
+
+* <span data-ttu-id="494f6-117">Configuration prerequisites</span><span class="sxs-lookup"><span data-stu-id="494f6-117">Configuration prerequisites</span></span>
+* <span data-ttu-id="494f6-118">Step 1: Install MPIO on the Windows Server host</span><span class="sxs-lookup"><span data-stu-id="494f6-118">Step 1: Install MPIO on the Windows Server host</span></span>
+* <span data-ttu-id="494f6-119">Step 2: Configure MPIO for StorSimple volumes</span><span class="sxs-lookup"><span data-stu-id="494f6-119">Step 2: Configure MPIO for StorSimple volumes</span></span>
+* <span data-ttu-id="494f6-120">Step 3: Mount StorSimple volumes on the host</span><span class="sxs-lookup"><span data-stu-id="494f6-120">Step 3: Mount StorSimple volumes on the host</span></span>
+
+<span data-ttu-id="494f6-121">Each of the above steps is discussed in the following sections.</span><span class="sxs-lookup"><span data-stu-id="494f6-121">Each of the above steps is discussed in the following sections.</span></span>
+
+## <a name="prerequisites"></a><span data-ttu-id="494f6-122">Prerequisites</span><span class="sxs-lookup"><span data-stu-id="494f6-122">Prerequisites</span></span>
+<span data-ttu-id="494f6-123">This section details the configuration prerequisites for the Windows Server host and your virtual array.</span><span class="sxs-lookup"><span data-stu-id="494f6-123">This section details the configuration prerequisites for the Windows Server host and your virtual array.</span></span>
+
+### <a name="on-windows-server-host"></a><span data-ttu-id="494f6-124">On Windows Server host</span><span class="sxs-lookup"><span data-stu-id="494f6-124">On Windows Server host</span></span>
+* <span data-ttu-id="494f6-125">Make sure that your Windows Server host has 2 network interfaces enabled.</span><span class="sxs-lookup"><span data-stu-id="494f6-125">Make sure that your Windows Server host has 2 network interfaces enabled.</span></span>
+
+### <a name="on-storsimple-virtual-array"></a><span data-ttu-id="494f6-126">On StorSimple Virtual Array</span><span class="sxs-lookup"><span data-stu-id="494f6-126">On StorSimple Virtual Array</span></span>
+* <span data-ttu-id="494f6-127">The virtual array should be configured as an iSCSI server.</span><span class="sxs-lookup"><span data-stu-id="494f6-127">The virtual array should be configured as an iSCSI server.</span></span> <span data-ttu-id="494f6-128">To learn more, see [set up virtual array as an iSCSI server](storsimple-virtual-array-deploy3-iscsi-setup.md).</span><span class="sxs-lookup"><span data-stu-id="494f6-128">To learn more, see [set up virtual array as an iSCSI server](storsimple-virtual-array-deploy3-iscsi-setup.md).</span></span> <span data-ttu-id="494f6-129">One or more network interfaces should be enabled on the array.</span><span class="sxs-lookup"><span data-stu-id="494f6-129">One or more network interfaces should be enabled on the array.</span></span>   
+* <span data-ttu-id="494f6-130">The network interfaces on your virtual array should be reachable from the Windows Server host.</span><span class="sxs-lookup"><span data-stu-id="494f6-130">The network interfaces on your virtual array should be reachable from the Windows Server host.</span></span>
+* <span data-ttu-id="494f6-131">One or more volumes should be created on your StorSimple Virtual Array.</span><span class="sxs-lookup"><span data-stu-id="494f6-131">One or more volumes should be created on your StorSimple Virtual Array.</span></span> <span data-ttu-id="494f6-132">To learn more, see [Add a volume](storsimple-ova-deploy3-iscsi-setup.md#step-3-add-a-volume) on your StorSimple Virtual Array.</span><span class="sxs-lookup"><span data-stu-id="494f6-132">To learn more, see [Add a volume](storsimple-ova-deploy3-iscsi-setup.md#step-3-add-a-volume) on your StorSimple Virtual Array.</span></span> <span data-ttu-id="494f6-133">In this procedure, we created 3 volumes (1 locally pinned and 2 tiered volumes as shown below) on the virtual array.</span><span class="sxs-lookup"><span data-stu-id="494f6-133">In this procedure, we created 3 volumes (1 locally pinned and 2 tiered volumes as shown below) on the virtual array.</span></span>
+  
+    ![mpio0](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-configure-mpio-windows-server/mpio0.png)
+
+### <a name="hardware-configuration-for-storsimple-virtual-array"></a><span data-ttu-id="494f6-135">Hardware configuration for StorSimple Virtual Array</span><span class="sxs-lookup"><span data-stu-id="494f6-135">Hardware configuration for StorSimple Virtual Array</span></span>
+<span data-ttu-id="494f6-136">The figure below shows the hardware configuration for high availability and load-balancing multipathing for your Windows Server host and StorSimple Virtual Array used in this procedure.</span><span class="sxs-lookup"><span data-stu-id="494f6-136">The figure below shows the hardware configuration for high availability and load-balancing multipathing for your Windows Server host and StorSimple Virtual Array used in this procedure.</span></span>
+
+![mpio hardware configuration](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-configure-mpio-windows-server/1200hardwareconfig.png)
+
+<span data-ttu-id="494f6-138">As shown in the preceding figure:</span><span class="sxs-lookup"><span data-stu-id="494f6-138">As shown in the preceding figure:</span></span>
+
+* <span data-ttu-id="494f6-139">Your StorSimple Virtual Array provisioned on Hyper-V is a single node active device configured as an iSCSI server.</span><span class="sxs-lookup"><span data-stu-id="494f6-139">Your StorSimple Virtual Array provisioned on Hyper-V is a single node active device configured as an iSCSI server.</span></span>
+* <span data-ttu-id="494f6-140">Two virtual network interfaces are enabled on your array.</span><span class="sxs-lookup"><span data-stu-id="494f6-140">Two virtual network interfaces are enabled on your array.</span></span> <span data-ttu-id="494f6-141">In the local web UI of your virtual array, verify that two network interfaces are enabled by navigating to **Network Settings** as shown below:</span><span class="sxs-lookup"><span data-stu-id="494f6-141">In the local web UI of your virtual array, verify that two network interfaces are enabled by navigating to **Network Settings** as shown below:</span></span>
+  
+    ![Network interfaces enabled on 1200](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-configure-mpio-windows-server/mpio9.png)
+  
+    <span data-ttu-id="494f6-143">Note the IPv4 addresses of the enabled network interfaces (Ethernet, Ethernet 2 by default) and save for later use on the host.</span><span class="sxs-lookup"><span data-stu-id="494f6-143">Note the IPv4 addresses of the enabled network interfaces (Ethernet, Ethernet 2 by default) and save for later use on the host.</span></span>
+* <span data-ttu-id="494f6-144">Two network interfaces are enabled on your Windows Server host.</span><span class="sxs-lookup"><span data-stu-id="494f6-144">Two network interfaces are enabled on your Windows Server host.</span></span> <span data-ttu-id="494f6-145">If the connected interfaces for host and array are on the same subnet, then there will be 4 paths available.</span><span class="sxs-lookup"><span data-stu-id="494f6-145">If the connected interfaces for host and array are on the same subnet, then there will be 4 paths available.</span></span> <span data-ttu-id="494f6-146">This was the case in this procedure.</span><span class="sxs-lookup"><span data-stu-id="494f6-146">This was the case in this procedure.</span></span> <span data-ttu-id="494f6-147">However, if each network interface on the array and host interface are on a different IP subnet (and not routable), then only 2 paths will be available.</span><span class="sxs-lookup"><span data-stu-id="494f6-147">However, if each network interface on the array and host interface are on a different IP subnet (and not routable), then only 2 paths will be available.</span></span>
+
+## <a name="step-1-install-mpio-on-the-windows-server-host"></a><span data-ttu-id="494f6-148">Step 1: Install MPIO on the Windows Server host</span><span class="sxs-lookup"><span data-stu-id="494f6-148">Step 1: Install MPIO on the Windows Server host</span></span>
+<span data-ttu-id="494f6-149">MPIO is an optional feature on Windows Server and is not installed by default.</span><span class="sxs-lookup"><span data-stu-id="494f6-149">MPIO is an optional feature on Windows Server and is not installed by default.</span></span> <span data-ttu-id="494f6-150">It should be installed as a feature through Server Manager.</span><span class="sxs-lookup"><span data-stu-id="494f6-150">It should be installed as a feature through Server Manager.</span></span> <span data-ttu-id="494f6-151">To install this feature on your Windows Server host, complete the following procedure.</span><span class="sxs-lookup"><span data-stu-id="494f6-151">To install this feature on your Windows Server host, complete the following procedure.</span></span>
+
+[!INCLUDE [storsimple-install-mpio-windows-server-host](../../includes/storsimple-install-mpio-windows-server-host.md)]
+
+## <a name="step-2-configure-mpio-for-storsimple-volumes"></a><span data-ttu-id="494f6-152">Step 2: Configure MPIO for StorSimple volumes</span><span class="sxs-lookup"><span data-stu-id="494f6-152">Step 2: Configure MPIO for StorSimple volumes</span></span>
+<span data-ttu-id="494f6-153">MPIO needs to be configured to identify StorSimple volumes.</span><span class="sxs-lookup"><span data-stu-id="494f6-153">MPIO needs to be configured to identify StorSimple volumes.</span></span> <span data-ttu-id="494f6-154">To configure MPIO to recognize StorSimple volumes, perform the following steps.</span><span class="sxs-lookup"><span data-stu-id="494f6-154">To configure MPIO to recognize StorSimple volumes, perform the following steps.</span></span>
+
+[!INCLUDE [storsimple-configure-mpio-volumes](../../includes/storsimple-configure-mpio-volumes.md)]
+
+## <a name="step-3-mount-storsimple-volumes-on-the-host"></a><span data-ttu-id="494f6-155">Step 3: Mount StorSimple volumes on the host</span><span class="sxs-lookup"><span data-stu-id="494f6-155">Step 3: Mount StorSimple volumes on the host</span></span>
+<span data-ttu-id="494f6-156">After MPIO is configured on Windows Server, volume(s) created on the StorSimple array can be mounted and can then take advantage of MPIO for redundancy.</span><span class="sxs-lookup"><span data-stu-id="494f6-156">After MPIO is configured on Windows Server, volume(s) created on the StorSimple array can be mounted and can then take advantage of MPIO for redundancy.</span></span> <span data-ttu-id="494f6-157">To mount a volume, perform the following steps.</span><span class="sxs-lookup"><span data-stu-id="494f6-157">To mount a volume, perform the following steps.</span></span>
+
+#### <a name="to-mount-volumes-on-the-host"></a><span data-ttu-id="494f6-158">To mount volumes on the host</span><span class="sxs-lookup"><span data-stu-id="494f6-158">To mount volumes on the host</span></span>
+1. <span data-ttu-id="494f6-159">Open the **iSCSI Initiator Properties** window on the Windows Server host.</span><span class="sxs-lookup"><span data-stu-id="494f6-159">Open the **iSCSI Initiator Properties** window on the Windows Server host.</span></span> <span data-ttu-id="494f6-160">Go to **Server Manager > Dashboard > Tools > iSCSI Initiator**.</span><span class="sxs-lookup"><span data-stu-id="494f6-160">Go to **Server Manager > Dashboard > Tools > iSCSI Initiator**.</span></span>
+2. <span data-ttu-id="494f6-161">In the **iSCSI Initiator Properties** dialog box, click **Discovery**, and then click **Discover Target Portal**.</span><span class="sxs-lookup"><span data-stu-id="494f6-161">In the **iSCSI Initiator Properties** dialog box, click **Discovery**, and then click **Discover Target Portal**.</span></span>
+3. <span data-ttu-id="494f6-162">In the **Discover Target Portal** dialog box, do the following:</span><span class="sxs-lookup"><span data-stu-id="494f6-162">In the **Discover Target Portal** dialog box, do the following:</span></span>
+   
+    1. <span data-ttu-id="494f6-163">Enter the IP address of the first enabled network interface on your StorSimple Virtual Array.</span><span class="sxs-lookup"><span data-stu-id="494f6-163">Enter the IP address of the first enabled network interface on your StorSimple Virtual Array.</span></span> <span data-ttu-id="494f6-164">By default, this would be **Ethernet**.</span><span class="sxs-lookup"><span data-stu-id="494f6-164">By default, this would be **Ethernet**.</span></span> 
+    2. <span data-ttu-id="494f6-165">Click **OK** to return to the **iSCSI Initiator Properties** dialog box.</span><span class="sxs-lookup"><span data-stu-id="494f6-165">Click **OK** to return to the **iSCSI Initiator Properties** dialog box.</span></span>
+     
+    > [!IMPORTANT]
+    > <span data-ttu-id="494f6-166">If you are using a private network for iSCSI connections, enter the IP address of the DATA port that is connected to the private network.</span><span class="sxs-lookup"><span data-stu-id="494f6-166">If you are using a private network for iSCSI connections, enter the IP address of the DATA port that is connected to the private network.</span></span>
+     
+4. <span data-ttu-id="494f6-167">Repeat steps 2-3 for a second network interface (for example, Ethernet 2) on your array.</span><span class="sxs-lookup"><span data-stu-id="494f6-167">Repeat steps 2-3 for a second network interface (for example, Ethernet 2) on your array.</span></span> 
+5. <span data-ttu-id="494f6-168">Select the **Targets** tab in the **iSCSI Initiator Properties** dialog box.</span><span class="sxs-lookup"><span data-stu-id="494f6-168">Select the **Targets** tab in the **iSCSI Initiator Properties** dialog box.</span></span> <span data-ttu-id="494f6-169">For your virtual array, you should see each volume surface as a target under **Discovered Targets**.</span><span class="sxs-lookup"><span data-stu-id="494f6-169">For your virtual array, you should see each volume surface as a target under **Discovered Targets**.</span></span> <span data-ttu-id="494f6-170">In this case, three targets (corresponding to three volumes) would be discovered.</span><span class="sxs-lookup"><span data-stu-id="494f6-170">In this case, three targets (corresponding to three volumes) would be discovered.</span></span>
+   
+    ![mpio1](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-configure-mpio-windows-server/mpio1.png)
+6. <span data-ttu-id="494f6-172">Click **Connect** to establish an iSCSI session with your StorSimple Virtual Array.</span><span class="sxs-lookup"><span data-stu-id="494f6-172">Click **Connect** to establish an iSCSI session with your StorSimple Virtual Array.</span></span> <span data-ttu-id="494f6-173">A **Connect to Target** dialog box will appear.</span><span class="sxs-lookup"><span data-stu-id="494f6-173">A **Connect to Target** dialog box will appear.</span></span> <span data-ttu-id="494f6-174">Select the **Enable multi-path** check box.</span><span class="sxs-lookup"><span data-stu-id="494f6-174">Select the **Enable multi-path** check box.</span></span> <span data-ttu-id="494f6-175">Click **Advanced**.</span><span class="sxs-lookup"><span data-stu-id="494f6-175">Click **Advanced**.</span></span>
+   
+    ![mpio2](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-configure-mpio-windows-server/mpio2.png)
+7. <span data-ttu-id="494f6-177">In the **Advanced Settings** dialog box, do the following:</span><span class="sxs-lookup"><span data-stu-id="494f6-177">In the **Advanced Settings** dialog box, do the following:</span></span>                                        
+   
+    1. <span data-ttu-id="494f6-178">On the **Local Adapter** drop-down list, select **Microsoft iSCSI Initiator**.</span><span class="sxs-lookup"><span data-stu-id="494f6-178">On the **Local Adapter** drop-down list, select **Microsoft iSCSI Initiator**.</span></span>
+    2. <span data-ttu-id="494f6-179">On the **Initiator IP** drop-down list, select the IP address of the host.</span><span class="sxs-lookup"><span data-stu-id="494f6-179">On the **Initiator IP** drop-down list, select the IP address of the host.</span></span>
+    3. <span data-ttu-id="494f6-180">On the **Target Portal** IP drop-down list, select the IP of array interface.</span><span class="sxs-lookup"><span data-stu-id="494f6-180">On the **Target Portal** IP drop-down list, select the IP of array interface.</span></span>
+    4. <span data-ttu-id="494f6-181">Click **OK** to return to the **iSCSI Initiator Properties** dialog box.</span><span class="sxs-lookup"><span data-stu-id="494f6-181">Click **OK** to return to the **iSCSI Initiator Properties** dialog box.</span></span>
+     
+        ![mpio3](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-ova-configure-mpio-windows-server/mpio3.png)
+
+8. <span data-ttu-id="494f6-183">Click **Properties**.</span><span class="sxs-lookup"><span data-stu-id="494f6-183">Click **Properties**.</span></span> 
+   
+    ![mpio4](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-ova-configure-mpio-windows-server/mpio4.png)
+
+9. <span data-ttu-id="494f6-185">In the **Properties** dialog box, click **Add Session**.</span><span class="sxs-lookup"><span data-stu-id="494f6-185">In the **Properties** dialog box, click **Add Session**.</span></span>
+   
+   ![mpio5](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-ova-configure-mpio-windows-server/mpio5.png)
+10. <span data-ttu-id="494f6-187">In the **Connect to Target** dialog box, select the **Enable multi-path** check box.</span><span class="sxs-lookup"><span data-stu-id="494f6-187">In the **Connect to Target** dialog box, select the **Enable multi-path** check box.</span></span> <span data-ttu-id="494f6-188">Click **Advanced**.</span><span class="sxs-lookup"><span data-stu-id="494f6-188">Click **Advanced**.</span></span>
+11. <span data-ttu-id="494f6-189">In the **Advanced Settings** dialog box:</span><span class="sxs-lookup"><span data-stu-id="494f6-189">In the **Advanced Settings** dialog box:</span></span>                                        
+    
+    1. <span data-ttu-id="494f6-190">On the **Local adapter** drop-down list, select Microsoft iSCSI Initiator.</span><span class="sxs-lookup"><span data-stu-id="494f6-190">On the **Local adapter** drop-down list, select Microsoft iSCSI Initiator.</span></span>
+
+    2. <span data-ttu-id="494f6-191">On the **Initiator IP** drop-down list, select the IP address corresponding to the host.</span><span class="sxs-lookup"><span data-stu-id="494f6-191">On the **Initiator IP** drop-down list, select the IP address corresponding to the host.</span></span> <span data-ttu-id="494f6-192">In this case, you are connecting two network interfaces on the array to a single network interface on the host.</span><span class="sxs-lookup"><span data-stu-id="494f6-192">In this case, you are connecting two network interfaces on the array to a single network interface on the host.</span></span> <span data-ttu-id="494f6-193">Therefore, this interface is the same as that provided for the first session.</span><span class="sxs-lookup"><span data-stu-id="494f6-193">Therefore, this interface is the same as that provided for the first session.</span></span>
+
+    3. <span data-ttu-id="494f6-194">On the **Target Portal IP** drop-down list, select the IP address for the second data interface enabled on the array.</span><span class="sxs-lookup"><span data-stu-id="494f6-194">On the **Target Portal IP** drop-down list, select the IP address for the second data interface enabled on the array.</span></span>
+
+    4. <span data-ttu-id="494f6-195">Click **OK** to return to the iSCSI Initiator Properties dialog box.</span><span class="sxs-lookup"><span data-stu-id="494f6-195">Click **OK** to return to the iSCSI Initiator Properties dialog box.</span></span> <span data-ttu-id="494f6-196">You have added a second session to the target.</span><span class="sxs-lookup"><span data-stu-id="494f6-196">You have added a second session to the target.</span></span>
+      
+       ![mpio11](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-configure-mpio-windows-server/mpio11.png)
+    
+    5. <span data-ttu-id="494f6-198">After adding the desired sessions (paths), in the **iSCSI Initiator Properties** dialog box, select the target and click **Properties**.</span><span class="sxs-lookup"><span data-stu-id="494f6-198">After adding the desired sessions (paths), in the **iSCSI Initiator Properties** dialog box, select the target and click **Properties**.</span></span> <span data-ttu-id="494f6-199">On the Sessions tab of the **Properties** dialog box, note the four session identifiers that correspond to the possible path permutations.</span><span class="sxs-lookup"><span data-stu-id="494f6-199">On the Sessions tab of the **Properties** dialog box, note the four session identifiers that correspond to the possible path permutations.</span></span> <span data-ttu-id="494f6-200">To cancel a session, select the check box next to a session identifier, and then click **Disconnect**.</span><span class="sxs-lookup"><span data-stu-id="494f6-200">To cancel a session, select the check box next to a session identifier, and then click **Disconnect**.</span></span>
+
+    6. <span data-ttu-id="494f6-201">To view devices presented within sessions, select the **Devices** tab. To configure the MPIO policy for a selected device, click **MPIO**.</span><span class="sxs-lookup"><span data-stu-id="494f6-201">To view devices presented within sessions, select the **Devices** tab. To configure the MPIO policy for a selected device, click **MPIO**.</span></span>
+
+    7. <span data-ttu-id="494f6-202">The **Details** dialog box will appear.</span><span class="sxs-lookup"><span data-stu-id="494f6-202">The **Details** dialog box will appear.</span></span> <span data-ttu-id="494f6-203">On the **MPIO** tab, you can select the appropriate **Load Balance Policy** settings.</span><span class="sxs-lookup"><span data-stu-id="494f6-203">On the **MPIO** tab, you can select the appropriate **Load Balance Policy** settings.</span></span> <span data-ttu-id="494f6-204">You can also view the **Active** or **Standby** path type.</span><span class="sxs-lookup"><span data-stu-id="494f6-204">You can also view the **Active** or **Standby** path type.</span></span>
+12. <span data-ttu-id="494f6-205">Repeat steps 8-11 to add additional sessions (paths) to the target.</span><span class="sxs-lookup"><span data-stu-id="494f6-205">Repeat steps 8-11 to add additional sessions (paths) to the target.</span></span> <span data-ttu-id="494f6-206">With two interfaces on the host and two on the virtual array, you can add a total of four sessions for each target.</span><span class="sxs-lookup"><span data-stu-id="494f6-206">With two interfaces on the host and two on the virtual array, you can add a total of four sessions for each target.</span></span> 
+    
+    ![mpio14](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-configure-mpio-windows-server/mpio14.png)
+13. <span data-ttu-id="494f6-208">You will need to repeat these steps for each volume (surfaces as a target).</span><span class="sxs-lookup"><span data-stu-id="494f6-208">You will need to repeat these steps for each volume (surfaces as a target).</span></span>
+    
+    ![mpio15](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-configure-mpio-windows-server/mpio15.png)
+14. <span data-ttu-id="494f6-210">Open **Computer Management** by navigating to **Server Manager > Dashboard > Computer Management**.</span><span class="sxs-lookup"><span data-stu-id="494f6-210">Open **Computer Management** by navigating to **Server Manager > Dashboard > Computer Management**.</span></span> <span data-ttu-id="494f6-211">In the left pane, click **Storage > Disk Management**.</span><span class="sxs-lookup"><span data-stu-id="494f6-211">In the left pane, click **Storage > Disk Management**.</span></span> <span data-ttu-id="494f6-212">The volume(s) created on the StorSimple Virtual Array that are visible to this host will appear under **Disk Management** as new disk(s).</span><span class="sxs-lookup"><span data-stu-id="494f6-212">The volume(s) created on the StorSimple Virtual Array that are visible to this host will appear under **Disk Management** as new disk(s).</span></span>
+15. <span data-ttu-id="494f6-213">Initialize the disk and create a new volume.</span><span class="sxs-lookup"><span data-stu-id="494f6-213">Initialize the disk and create a new volume.</span></span> <span data-ttu-id="494f6-214">During the format process, select an allocation unit size (AUS) of 64 KB.</span><span class="sxs-lookup"><span data-stu-id="494f6-214">During the format process, select an allocation unit size (AUS) of 64 KB.</span></span> <span data-ttu-id="494f6-215">Repeat the process for all the available volumes.</span><span class="sxs-lookup"><span data-stu-id="494f6-215">Repeat the process for all the available volumes.</span></span>
+    
+    ![Disk Management](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-configure-mpio-windows-server/mpio20.png)
+16. <span data-ttu-id="494f6-217">Under **Disk Management**, right-click the **Disk** and select **Properties**.</span><span class="sxs-lookup"><span data-stu-id="494f6-217">Under **Disk Management**, right-click the **Disk** and select **Properties**.</span></span>
+17. <span data-ttu-id="494f6-218">In the **Multi-Path Disk Device Properties** dialog box, click the **MPIO** tab.</span><span class="sxs-lookup"><span data-stu-id="494f6-218">In the **Multi-Path Disk Device Properties** dialog box, click the **MPIO** tab.</span></span>
+    
+    ![Disk Properties](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-configure-mpio-windows-server/mpio21.png)
+18. <span data-ttu-id="494f6-220">In the **DSM Name** section, click **Details** and verify that the parameters are set to the default parameters.</span><span class="sxs-lookup"><span data-stu-id="494f6-220">In the **DSM Name** section, click **Details** and verify that the parameters are set to the default parameters.</span></span> <span data-ttu-id="494f6-221">The default parameters are:</span><span class="sxs-lookup"><span data-stu-id="494f6-221">The default parameters are:</span></span>
+    
+    * <span data-ttu-id="494f6-222">Path Verify Period = 30</span><span class="sxs-lookup"><span data-stu-id="494f6-222">Path Verify Period = 30</span></span>
+    * <span data-ttu-id="494f6-223">Retry Count = 3</span><span class="sxs-lookup"><span data-stu-id="494f6-223">Retry Count = 3</span></span>
+    * <span data-ttu-id="494f6-224">PDO Remove Period = 20</span><span class="sxs-lookup"><span data-stu-id="494f6-224">PDO Remove Period = 20</span></span>
+    * <span data-ttu-id="494f6-225">Retry Interval = 1</span><span class="sxs-lookup"><span data-stu-id="494f6-225">Retry Interval = 1</span></span>
+    * <span data-ttu-id="494f6-226">Path Verify Enabled = Unchecked.</span><span class="sxs-lookup"><span data-stu-id="494f6-226">Path Verify Enabled = Unchecked.</span></span>
+    
+    > [!NOTE]
+    > <span data-ttu-id="494f6-227">**Do not modify the default parameters.**</span><span class="sxs-lookup"><span data-stu-id="494f6-227">**Do not modify the default parameters.**</span></span>
+   
+## <a name="next-steps"></a><span data-ttu-id="494f6-228">Next steps</span><span class="sxs-lookup"><span data-stu-id="494f6-228">Next steps</span></span>
+<span data-ttu-id="494f6-229">Learn more about [using the StorSimple Device Manager service to administer your StorSimple Virtual Array](storsimple-virtual-array-manager-service-administration.md).</span><span class="sxs-lookup"><span data-stu-id="494f6-229">Learn more about [using the StorSimple Device Manager service to administer your StorSimple Virtual Array](storsimple-virtual-array-manager-service-administration.md).</span></span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,40 @@
+---
+title: Options for debugging Azure cloud services | Microsoft Docs
+description: Debugging Azure cloud services
+services: visual-studio-online
+documentationcenter: n/a
+author: TomArcher
+manager: douge
+editor: ''
+ms.assetid: 80755da7-8350-4f5c-97ce-2962beabb36d
+ms.service: visual-studio-online
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: multiple
+ms.workload: na
+ms.date: 03/18/2017
+ms.author: tarcher
+ms.openlocfilehash: e79aa1db6c89ad1e382c7a70017f868fe186aa74
+ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
+ms.translationtype: HT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 08/02/2018
+ms.locfileid: "44552741"
+---
+# <a name="learn-the-various-ways-to-debug-an-azure-cloud-service"></a><span data-ttu-id="2ed26-103">Learn the various ways to debug an Azure cloud service</span><span class="sxs-lookup"><span data-stu-id="2ed26-103">Learn the various ways to debug an Azure cloud service</span></span>
+<span data-ttu-id="2ed26-104">This article provides links to the various ways to debug an Azure cloud service.</span><span class="sxs-lookup"><span data-stu-id="2ed26-104">This article provides links to the various ways to debug an Azure cloud service.</span></span> 
+
+## <a name="debugging-an-azure-cloud-service-in-visual-studio"></a><span data-ttu-id="2ed26-105">Debugging an Azure cloud service in Visual Studio</span><span class="sxs-lookup"><span data-stu-id="2ed26-105">Debugging an Azure cloud service in Visual Studio</span></span>
+<span data-ttu-id="2ed26-106">You can save time and money by using the Azure compute emulator to debug your cloud service on a local machine.</span><span class="sxs-lookup"><span data-stu-id="2ed26-106">You can save time and money by using the Azure compute emulator to debug your cloud service on a local machine.</span></span> <span data-ttu-id="2ed26-107">By debugging a service locally before you deploy it, you can improve reliability and performance without paying for compute time.</span><span class="sxs-lookup"><span data-stu-id="2ed26-107">By debugging a service locally before you deploy it, you can improve reliability and performance without paying for compute time.</span></span> <span data-ttu-id="2ed26-108">However, some errors might occur only when you run a cloud service in Azure.</span><span class="sxs-lookup"><span data-stu-id="2ed26-108">However, some errors might occur only when you run a cloud service in Azure.</span></span> <span data-ttu-id="2ed26-109">Errors that occur only when you run a cloud service in Azure can be debugged by enabling remote debugging when you publish your service, and then attaching the debugger to a role instance.</span><span class="sxs-lookup"><span data-stu-id="2ed26-109">Errors that occur only when you run a cloud service in Azure can be debugged by enabling remote debugging when you publish your service, and then attaching the debugger to a role instance.</span></span> <span data-ttu-id="2ed26-110">For more information, see [Debug your cloud service on your local computer](vs-azure-tools-debug-cloud-services-virtual-machines.md#debug-your-cloud-service-on-your-local-computer).</span><span class="sxs-lookup"><span data-stu-id="2ed26-110">For more information, see [Debug your cloud service on your local computer](vs-azure-tools-debug-cloud-services-virtual-machines.md#debug-your-cloud-service-on-your-local-computer).</span></span>
+
+## <a name="using-azure-diagnostics"></a><span data-ttu-id="2ed26-111">Using Azure Diagnostics</span><span class="sxs-lookup"><span data-stu-id="2ed26-111">Using Azure Diagnostics</span></span> 
+<span data-ttu-id="2ed26-112">You can use Azure Diagnostics to log detailed information from code running within roles, whether the roles are running in the development environment or in Azure.</span><span class="sxs-lookup"><span data-stu-id="2ed26-112">You can use Azure Diagnostics to log detailed information from code running within roles, whether the roles are running in the development environment or in Azure.</span></span> <span data-ttu-id="2ed26-113">For more information, see [Enabling Azure Diagnostics in Azure Cloud Services](http://go.microsoft.com/fwlink/p/?LinkId=400450).</span><span class="sxs-lookup"><span data-stu-id="2ed26-113">For more information, see [Enabling Azure Diagnostics in Azure Cloud Services](http://go.microsoft.com/fwlink/p/?LinkId=400450).</span></span>
+
+## <a name="using-intellitrace"></a><span data-ttu-id="2ed26-114">Using IntelliTrace</span><span class="sxs-lookup"><span data-stu-id="2ed26-114">Using IntelliTrace</span></span> 
+<span data-ttu-id="2ed26-115">If you are using Visual Studio Enterprise to write roles targeted .NET Framework 4.5, you can enable IntelliTrace at the time that you deploy an Azure cloud service from Visual Studio.</span><span class="sxs-lookup"><span data-stu-id="2ed26-115">If you are using Visual Studio Enterprise to write roles targeted .NET Framework 4.5, you can enable IntelliTrace at the time that you deploy an Azure cloud service from Visual Studio.</span></span> <span data-ttu-id="2ed26-116">IntelliTrace provides a log that you can use with Visual Studio to debug your application as if it were running in Azure.</span><span class="sxs-lookup"><span data-stu-id="2ed26-116">IntelliTrace provides a log that you can use with Visual Studio to debug your application as if it were running in Azure.</span></span> <span data-ttu-id="2ed26-117">For more information, see [Debugging a published cloud service with IntelliTrace and Visual Studio](http://go.microsoft.com/fwlink/p/?LinkId=623016).</span><span class="sxs-lookup"><span data-stu-id="2ed26-117">For more information, see [Debugging a published cloud service with IntelliTrace and Visual Studio](http://go.microsoft.com/fwlink/p/?LinkId=623016).</span></span>
+
+## <a name="remote-debugging"></a><span data-ttu-id="2ed26-118">Remote debugging</span><span class="sxs-lookup"><span data-stu-id="2ed26-118">Remote debugging</span></span> 
+<span data-ttu-id="2ed26-119">You can enable remote debugging on your cloud services at the time when you deploy the cloud service from Visual Studio.</span><span class="sxs-lookup"><span data-stu-id="2ed26-119">You can enable remote debugging on your cloud services at the time when you deploy the cloud service from Visual Studio.</span></span> <span data-ttu-id="2ed26-120">If you choose to enable remote debugging for a deployment, remote debugging services are installed on the virtual machines that run each role instance.</span><span class="sxs-lookup"><span data-stu-id="2ed26-120">If you choose to enable remote debugging for a deployment, remote debugging services are installed on the virtual machines that run each role instance.</span></span> <span data-ttu-id="2ed26-121">These services - such as `msvsmon.exe` - do not affect performance or result in extra costs.</span><span class="sxs-lookup"><span data-stu-id="2ed26-121">These services - such as `msvsmon.exe` - do not affect performance or result in extra costs.</span></span> <span data-ttu-id="2ed26-122">For more information, see [Debug a cloud service in Azure](vs-azure-tools-debug-cloud-services-virtual-machines.md#debug-a-cloud-service-in-azure).</span><span class="sxs-lookup"><span data-stu-id="2ed26-122">For more information, see [Debug a cloud service in Azure](vs-azure-tools-debug-cloud-services-virtual-machines.md#debug-a-cloud-service-in-azure).</span></span>
+
+## <a name="next-steps"></a><span data-ttu-id="2ed26-123">Next steps</span><span class="sxs-lookup"><span data-stu-id="2ed26-123">Next steps</span></span>
+- <span data-ttu-id="2ed26-124">[Debugging an Azure cloud service or VM in Visual Studio](./vs-azure-tools-debug-cloud-services-virtual-machines.md) - Learn the details of how to debug Azure cloud services.</span><span class="sxs-lookup"><span data-stu-id="2ed26-124">[Debugging an Azure cloud service or VM in Visual Studio](./vs-azure-tools-debug-cloud-services-virtual-machines.md) - Learn the details of how to debug Azure cloud services.</span></span>
