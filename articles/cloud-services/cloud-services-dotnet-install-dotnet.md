@@ -1,0 +1,210 @@
+---
+title: Install .NET on a Cloud Service Role | Microsoft Docs
+description: This article describes how to manually install .NET framework on Cloud Service Web and Worker Roles
+services: cloud-services
+documentationcenter: .net
+author: thraka
+manager: timlt
+editor: ''
+ms.assetid: 8d1243dc-879c-4d1f-9ed0-eecd1f6a6653
+ms.service: cloud-services
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 04/19/2017
+ms.author: adegeo
+ms.openlocfilehash: 7ed139c73116bf7efecee58e7693b322a82d9f15
+ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
+ms.translationtype: HT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 08/02/2018
+ms.locfileid: "44551779"
+---
+# <a name="install-net-on-a-cloud-service-role"></a><span data-ttu-id="2874c-103">Install .NET on a Cloud Service Role</span><span class="sxs-lookup"><span data-stu-id="2874c-103">Install .NET on a Cloud Service Role</span></span>
+<span data-ttu-id="2874c-104">This article describes how to install different versions of .NET framework on Cloud Service Web and Worker Roles than what comes with the Guest OS.</span><span class="sxs-lookup"><span data-stu-id="2874c-104">This article describes how to install different versions of .NET framework on Cloud Service Web and Worker Roles than what comes with the Guest OS.</span></span> <span data-ttu-id="2874c-105">For example, you can use these steps to install .NET 4.6.1 on the Azure Guest OS Family 4 which does not come with any version of .NET 4.6.</span><span class="sxs-lookup"><span data-stu-id="2874c-105">For example, you can use these steps to install .NET 4.6.1 on the Azure Guest OS Family 4 which does not come with any version of .NET 4.6.</span></span> <span data-ttu-id="2874c-106">For the latest information on Guest OS releases see the [Azure Guest OS release news](cloud-services-guestos-update-matrix.md).</span><span class="sxs-lookup"><span data-stu-id="2874c-106">For the latest information on Guest OS releases see the [Azure Guest OS release news](cloud-services-guestos-update-matrix.md).</span></span>
+
+>[!NOTE]
+><span data-ttu-id="2874c-107">Guest OS 5 includes .NET 4.6</span><span class="sxs-lookup"><span data-stu-id="2874c-107">Guest OS 5 includes .NET 4.6</span></span>
+
+>[!IMPORTANT]
+><span data-ttu-id="2874c-108">Azure SDK 2.9 contains a restriction on deploying .NET 4.6 on Guest OS 4 or less.</span><span class="sxs-lookup"><span data-stu-id="2874c-108">Azure SDK 2.9 contains a restriction on deploying .NET 4.6 on Guest OS 4 or less.</span></span> <span data-ttu-id="2874c-109">A fix is available [here](https://github.com/MicrosoftDocs/azure-cloud-services-files/tree/master/Azure%20Targets%20SDK%202.9).</span><span class="sxs-lookup"><span data-stu-id="2874c-109">A fix is available [here](https://github.com/MicrosoftDocs/azure-cloud-services-files/tree/master/Azure%20Targets%20SDK%202.9).</span></span>
+
+<span data-ttu-id="2874c-110">The process of installing .NET on your web and worker roles involves including the .NET installer package as part of your Cloud Project and launching the installer as part of the role's startup tasks.</span><span class="sxs-lookup"><span data-stu-id="2874c-110">The process of installing .NET on your web and worker roles involves including the .NET installer package as part of your Cloud Project and launching the installer as part of the role's startup tasks.</span></span>  
+
+## <a name="add-the-net-installer-to-your-project"></a><span data-ttu-id="2874c-111">Add the .NET installer to your project</span><span class="sxs-lookup"><span data-stu-id="2874c-111">Add the .NET installer to your project</span></span>
+* <span data-ttu-id="2874c-112">Download the the web installer for the .NET framework you want to install</span><span class="sxs-lookup"><span data-stu-id="2874c-112">Download the the web installer for the .NET framework you want to install</span></span>
+  * [<span data-ttu-id="2874c-113">.NET 4.6.1 Web Installer</span><span class="sxs-lookup"><span data-stu-id="2874c-113">.NET 4.6.1 Web Installer</span></span>](http://go.microsoft.com/fwlink/?LinkId=671729)
+* <span data-ttu-id="2874c-114">For a Web Role</span><span class="sxs-lookup"><span data-stu-id="2874c-114">For a Web Role</span></span>
+  1. <span data-ttu-id="2874c-115">In **Solution Explorer**, under In **Roles** in the cloud service project right click on your role and select **Add>New Folder**.</span><span class="sxs-lookup"><span data-stu-id="2874c-115">In **Solution Explorer**, under In **Roles** in the cloud service project right click on your role and select **Add>New Folder**.</span></span> <span data-ttu-id="2874c-116">Create a folder named *bin*</span><span class="sxs-lookup"><span data-stu-id="2874c-116">Create a folder named *bin*</span></span>
+  2. <span data-ttu-id="2874c-117">Right click on the **bin** folder and select **Add>Existing Item**.</span><span class="sxs-lookup"><span data-stu-id="2874c-117">Right click on the **bin** folder and select **Add>Existing Item**.</span></span> <span data-ttu-id="2874c-118">Select the .NET installer and add it to the bin folder.</span><span class="sxs-lookup"><span data-stu-id="2874c-118">Select the .NET installer and add it to the bin folder.</span></span>
+* <span data-ttu-id="2874c-119">For a Worker Role</span><span class="sxs-lookup"><span data-stu-id="2874c-119">For a Worker Role</span></span>
+  1. <span data-ttu-id="2874c-120">Right click on your role and select **Add>Existing Item**.</span><span class="sxs-lookup"><span data-stu-id="2874c-120">Right click on your role and select **Add>Existing Item**.</span></span> <span data-ttu-id="2874c-121">Select the .NET installer and add it to the role.</span><span class="sxs-lookup"><span data-stu-id="2874c-121">Select the .NET installer and add it to the role.</span></span> 
+
+<span data-ttu-id="2874c-122">Files added this way to the Role Content Folder will automatically be added to the cloud service package and deployed to a consistent location on the virtual machine.</span><span class="sxs-lookup"><span data-stu-id="2874c-122">Files added this way to the Role Content Folder will automatically be added to the cloud service package and deployed to a consistent location on the virtual machine.</span></span> <span data-ttu-id="2874c-123">Repeat this process for all web and worker roles in your Cloud Service so all roles have a copy of the installer.</span><span class="sxs-lookup"><span data-stu-id="2874c-123">Repeat this process for all web and worker roles in your Cloud Service so all roles have a copy of the installer.</span></span>
+
+> [!NOTE]
+> <span data-ttu-id="2874c-124">You should install .NET 4.6.1 on your Cloud Service role even if your application targets .NET 4.6.</span><span class="sxs-lookup"><span data-stu-id="2874c-124">You should install .NET 4.6.1 on your Cloud Service role even if your application targets .NET 4.6.</span></span> <span data-ttu-id="2874c-125">The Azure Guest OS includes updates [3098779](https://support.microsoft.com/kb/3098779) and [3097997](https://support.microsoft.com/kb/3097997).</span><span class="sxs-lookup"><span data-stu-id="2874c-125">The Azure Guest OS includes updates [3098779](https://support.microsoft.com/kb/3098779) and [3097997](https://support.microsoft.com/kb/3097997).</span></span> <span data-ttu-id="2874c-126">Installing .NET 4.6 on top of these updates may cause issues when running your .NET applications, so you should directly install .NET 4.6.1 instead of .NET 4.6.</span><span class="sxs-lookup"><span data-stu-id="2874c-126">Installing .NET 4.6 on top of these updates may cause issues when running your .NET applications, so you should directly install .NET 4.6.1 instead of .NET 4.6.</span></span> <span data-ttu-id="2874c-127">For more information, see [KB 3118750](https://support.microsoft.com/kb/3118750).</span><span class="sxs-lookup"><span data-stu-id="2874c-127">For more information, see [KB 3118750](https://support.microsoft.com/kb/3118750).</span></span>
+> 
+> 
+
+![Role Contents with installer files][1]
+
+## <a name="define-startup-tasks-for-your-roles"></a><span data-ttu-id="2874c-129">Define startup tasks for your roles</span><span class="sxs-lookup"><span data-stu-id="2874c-129">Define startup tasks for your roles</span></span>
+<span data-ttu-id="2874c-130">Startup tasks allow you to perform operations before a role starts.</span><span class="sxs-lookup"><span data-stu-id="2874c-130">Startup tasks allow you to perform operations before a role starts.</span></span> <span data-ttu-id="2874c-131">Installing the .NET Framework as part of the startup task will ensure that the framework is installed before any of your application code is run.</span><span class="sxs-lookup"><span data-stu-id="2874c-131">Installing the .NET Framework as part of the startup task will ensure that the framework is installed before any of your application code is run.</span></span> <span data-ttu-id="2874c-132">For more information on startup tasks see: [Run Startup Tasks in Azure](cloud-services-startup-tasks.md).</span><span class="sxs-lookup"><span data-stu-id="2874c-132">For more information on startup tasks see: [Run Startup Tasks in Azure](cloud-services-startup-tasks.md).</span></span> 
+
+1. <span data-ttu-id="2874c-133">Add the following to the *ServiceDefinition.csdef* file under the **WebRole** or **WorkerRole** node for all roles:</span><span class="sxs-lookup"><span data-stu-id="2874c-133">Add the following to the *ServiceDefinition.csdef* file under the **WebRole** or **WorkerRole** node for all roles:</span></span>
+   
+    ```xml
+    <LocalResources>
+      <LocalStorage name="NETFXInstall" sizeInMB="1024" cleanOnRoleRecycle="false" />
+    </LocalResources>    
+    <Startup>
+      <Task commandLine="install.cmd" executionContext="elevated" taskType="simple">
+        <Environment>
+          <Variable name="PathToNETFXInstall">
+            <RoleInstanceValue xpath="/RoleEnvironment/CurrentInstance/LocalResources/LocalResource[@name='NETFXInstall']/@path" />
+          </Variable>
+          <Variable name="ComputeEmulatorRunning">
+            <RoleInstanceValue xpath="/RoleEnvironment/Deployment/@emulated" />
+          </Variable>
+        </Environment>
+      </Task>
+    </Startup>
+    ```
+   
+    <span data-ttu-id="2874c-134">The above configuration will run the console command *install.cmd* with administrator privileges so it can install the .NET framework.</span><span class="sxs-lookup"><span data-stu-id="2874c-134">The above configuration will run the console command *install.cmd* with administrator privileges so it can install the .NET framework.</span></span> <span data-ttu-id="2874c-135">The configuration also creates a LocalStorage with the name *NETFXInstall*.</span><span class="sxs-lookup"><span data-stu-id="2874c-135">The configuration also creates a LocalStorage with the name *NETFXInstall*.</span></span> <span data-ttu-id="2874c-136">The startup script will set the temp folder to use this local storage resource so that the .NET framework installer will be downloaded and installed from this resource.</span><span class="sxs-lookup"><span data-stu-id="2874c-136">The startup script will set the temp folder to use this local storage resource so that the .NET framework installer will be downloaded and installed from this resource.</span></span> <span data-ttu-id="2874c-137">It is important to set the size of this resource to at least 1024MB to ensure the framework will install correctly.</span><span class="sxs-lookup"><span data-stu-id="2874c-137">It is important to set the size of this resource to at least 1024MB to ensure the framework will install correctly.</span></span> <span data-ttu-id="2874c-138">For more information about startup tasks see: [Common Cloud Service startup tasks](cloud-services-startup-tasks-common.md)</span><span class="sxs-lookup"><span data-stu-id="2874c-138">For more information about startup tasks see: [Common Cloud Service startup tasks](cloud-services-startup-tasks-common.md)</span></span> 
+2. <span data-ttu-id="2874c-139">Create a file **install.cmd** and add it to all roles by right click on the role and selecting **Add>Existing Item...**. So all roles should now have the .NET installer file as well as the install.cmd file.</span><span class="sxs-lookup"><span data-stu-id="2874c-139">Create a file **install.cmd** and add it to all roles by right click on the role and selecting **Add>Existing Item...**. So all roles should now have the .NET installer file as well as the install.cmd file.</span></span>
+   
+    ![Role Contents with all files][2]
+   
+   > [!NOTE]
+   > <span data-ttu-id="2874c-141">Use a simple text editor like notepad to create this file.</span><span class="sxs-lookup"><span data-stu-id="2874c-141">Use a simple text editor like notepad to create this file.</span></span> <span data-ttu-id="2874c-142">If you use Visual Studio to create a text file and then rename it to '.cmd' the file may still contain a UTF-8 Byte Order Mark and running the first line of the script will result in an error.</span><span class="sxs-lookup"><span data-stu-id="2874c-142">If you use Visual Studio to create a text file and then rename it to '.cmd' the file may still contain a UTF-8 Byte Order Mark and running the first line of the script will result in an error.</span></span> <span data-ttu-id="2874c-143">If you were to use Visual Studio to create the file leave add a REM (Remark) to the first line of the file so that it is ignored when run.</span><span class="sxs-lookup"><span data-stu-id="2874c-143">If you were to use Visual Studio to create the file leave add a REM (Remark) to the first line of the file so that it is ignored when run.</span></span> 
+   > 
+   > 
+3. <span data-ttu-id="2874c-144">Add the following script to the **install.cmd** file:</span><span class="sxs-lookup"><span data-stu-id="2874c-144">Add the following script to the **install.cmd** file:</span></span>
+   
+    ```cmd
+    REM Set the value of netfx to install appropriate .NET Framework. 
+    REM ***** To install .NET 4.5.2 set the variable netfx to "NDP452" *****
+    REM ***** To install .NET 4.6 set the variable netfx to "NDP46" *****
+    REM ***** To install .NET 4.6.1 set the variable netfx to "NDP461" *****
+    REM ***** To install .NET 4.6.2 set the variable netfx to "NDP462" *****
+    set netfx="NDP461"
+   
+    REM ***** Set script start timestamp *****
+    set timehour=%time:~0,2%
+    set timestamp=%date:~-4,4%%date:~-10,2%%date:~-7,2%-%timehour: =0%%time:~3,2%
+    set "log=install.cmd started %timestamp%."
+   
+    REM ***** Exit script if running in Emulator *****
+    if %ComputeEmulatorRunning%=="true" goto exit
+   
+    REM ***** Needed to correctly install .NET 4.6.1, otherwise you may see an out of disk space error *****
+    set TMP=%PathToNETFXInstall%
+    set TEMP=%PathToNETFXInstall%
+   
+    REM ***** Setup .NET filenames and registry keys *****
+    if %netfx%=="NDP462" goto NDP462
+    if %netfx%=="NDP461" goto NDP461
+    if %netfx%=="NDP46" goto NDP46
+        set "netfxinstallfile=NDP452-KB2901954-Web.exe"
+        set netfxregkey="0x5cbf5"
+        goto logtimestamp
+   
+    :NDP46
+    set "netfxinstallfile=NDP46-KB3045560-Web.exe"
+    set netfxregkey="0x6004f"
+    goto logtimestamp
+   
+    :NDP461
+    set "netfxinstallfile=NDP461-KB3102438-Web.exe"
+    set netfxregkey="0x6040e"
+    goto logtimestamp
+   
+    :NDP462
+    set "netfxinstallfile=NDP462-KB3151802-Web.exe"
+    set netfxregkey="0x60632"
+   
+    :logtimestamp
+    REM ***** Setup LogFile with timestamp *****
+    md "%PathToNETFXInstall%\log"
+    set startuptasklog="%PathToNETFXInstall%log\startuptasklog-%timestamp%.txt"
+    set netfxinstallerlog="%PathToNETFXInstall%log\NetFXInstallerLog-%timestamp%"
+    echo %log% >> %startuptasklog%
+    echo Logfile generated at: %startuptasklog% >> %startuptasklog%
+    echo TMP set to: %TMP% >> %startuptasklog%
+    echo TEMP set to: %TEMP% >> %startuptasklog%
+   
+    REM ***** Check if .NET is installed *****
+    echo Checking if .NET (%netfx%) is installed >> %startuptasklog%
+    set /A netfxregkeydecimal=%netfxregkey%
+    set foundkey=0
+    FOR /F "usebackq skip=2 tokens=1,2*" %%A in (`reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full" /v Release 2^>nul`) do @set /A foundkey=%%C
+    echo Minimum required key: %netfxregkeydecimal% -- found key: %foundkey% >> %startuptasklog%
+    if %foundkey% GEQ %netfxregkeydecimal% goto installed
+   
+    REM ***** Installing .NET *****
+    echo Installing .NET with commandline: start /wait %~dp0%netfxinstallfile% /q /serialdownload /log %netfxinstallerlog%  /chainingpackage "CloudService Startup Task" >> %startuptasklog%
+    start /wait %~dp0%netfxinstallfile% /q /serialdownload /log %netfxinstallerlog% /chainingpackage "CloudService Startup Task" >> %startuptasklog% 2>>&1
+    if %ERRORLEVEL%== 0 goto installed
+        echo .NET installer exited with code %ERRORLEVEL% >> %startuptasklog%    
+        if %ERRORLEVEL%== 3010 goto restart
+        if %ERRORLEVEL%== 1641 goto restart
+        echo .NET (%netfx%) install failed with Error Code %ERRORLEVEL%. Further logs can be found in %netfxinstallerlog% >> %startuptasklog%
+   
+    :restart
+    echo Restarting to complete .NET (%netfx%) installation >> %startuptasklog%
+    EXIT /B %ERRORLEVEL%
+   
+    :installed
+    echo .NET (%netfx%) is installed >> %startuptasklog%
+   
+    :end
+    echo install.cmd completed: %date:~-4,4%%date:~-10,2%%date:~-7,2%-%timehour: =0%%time:~3,2% >> %startuptasklog%
+   
+    :exit
+    EXIT /B 0
+    ```
+   
+    <span data-ttu-id="2874c-145">The install script checks whether the specified .NET framework version is already installed on the machine by querying the registry.</span><span class="sxs-lookup"><span data-stu-id="2874c-145">The install script checks whether the specified .NET framework version is already installed on the machine by querying the registry.</span></span> <span data-ttu-id="2874c-146">If the .NET version is not installed then the .Net Web Installer is launched.</span><span class="sxs-lookup"><span data-stu-id="2874c-146">If the .NET version is not installed then the .Net Web Installer is launched.</span></span> <span data-ttu-id="2874c-147">To help troubleshoot with any issues the script will log all activity to a file named *startuptasklog-(currentdatetime).txt* stored in *InstallLogs* local storage.</span><span class="sxs-lookup"><span data-stu-id="2874c-147">To help troubleshoot with any issues the script will log all activity to a file named *startuptasklog-(currentdatetime).txt* stored in *InstallLogs* local storage.</span></span>
+   
+   > [!NOTE]
+   > <span data-ttu-id="2874c-148">The script still shows you how to install .NET 4.5.2 or .NET 4.6 for continuity.</span><span class="sxs-lookup"><span data-stu-id="2874c-148">The script still shows you how to install .NET 4.5.2 or .NET 4.6 for continuity.</span></span> <span data-ttu-id="2874c-149">There is no need to install .NET 4.5.2 manually as it is already available on Azure Guest OS.</span><span class="sxs-lookup"><span data-stu-id="2874c-149">There is no need to install .NET 4.5.2 manually as it is already available on Azure Guest OS.</span></span> <span data-ttu-id="2874c-150">Instead of installing .NET 4.6 you should directly install .NET 4.6.1 due to [KB 3118750](https://support.microsoft.com/kb/3118750).</span><span class="sxs-lookup"><span data-stu-id="2874c-150">Instead of installing .NET 4.6 you should directly install .NET 4.6.1 due to [KB 3118750](https://support.microsoft.com/kb/3118750).</span></span>
+   > 
+   > 
+
+## <a name="configure-diagnostics-to-transfer-the-startup-task-logs-to-blob-storage"></a><span data-ttu-id="2874c-151">Configure diagnostics to transfer the startup task logs to blob storage</span><span class="sxs-lookup"><span data-stu-id="2874c-151">Configure diagnostics to transfer the startup task logs to blob storage</span></span>
+<span data-ttu-id="2874c-152">To simplify troubleshooting any install issues you can configure Azure Diagnostics to transfer any log files generated by the startup script or the .NET installer to blob storage.</span><span class="sxs-lookup"><span data-stu-id="2874c-152">To simplify troubleshooting any install issues you can configure Azure Diagnostics to transfer any log files generated by the startup script or the .NET installer to blob storage.</span></span> <span data-ttu-id="2874c-153">With this approach you can view the logs by simply downloading the log files from blob storage rather than having to remote desktop into the role.</span><span class="sxs-lookup"><span data-stu-id="2874c-153">With this approach you can view the logs by simply downloading the log files from blob storage rather than having to remote desktop into the role.</span></span>
+
+<span data-ttu-id="2874c-154">To configure diagnostics open the *diagnostics.wadcfgx* and add the following under the **Directories** node:</span><span class="sxs-lookup"><span data-stu-id="2874c-154">To configure diagnostics open the *diagnostics.wadcfgx* and add the following under the **Directories** node:</span></span> 
+
+```xml 
+<DataSources>
+ <DirectoryConfiguration containerName="netfx-install">
+  <LocalResource name="NETFXInstall" relativePath="log"/>
+ </DirectoryConfiguration>
+</DataSources>
+```
+
+<span data-ttu-id="2874c-155">This will configure azure diagnostics to transfer all files in the *log* directory under the *NETFXInstall* resource to the diagnostics storage account in the *netfx-install* blob container.</span><span class="sxs-lookup"><span data-stu-id="2874c-155">This will configure azure diagnostics to transfer all files in the *log* directory under the *NETFXInstall* resource to the diagnostics storage account in the *netfx-install* blob container.</span></span>
+
+## <a name="deploying-your-service"></a><span data-ttu-id="2874c-156">Deploying your service</span><span class="sxs-lookup"><span data-stu-id="2874c-156">Deploying your service</span></span>
+<span data-ttu-id="2874c-157">When you deploy your service the startup tasks will run and install the .NET framework if it is not already installed.</span><span class="sxs-lookup"><span data-stu-id="2874c-157">When you deploy your service the startup tasks will run and install the .NET framework if it is not already installed.</span></span> <span data-ttu-id="2874c-158">Your roles will be in the busy state while the framework is installing and may even restart if the framework install requires it.</span><span class="sxs-lookup"><span data-stu-id="2874c-158">Your roles will be in the busy state while the framework is installing and may even restart if the framework install requires it.</span></span> 
+
+## <a name="additional-resources"></a><span data-ttu-id="2874c-159">Additional Resources</span><span class="sxs-lookup"><span data-stu-id="2874c-159">Additional Resources</span></span>
+* <span data-ttu-id="2874c-160">[Installing the .NET Framework][Installing the .NET Framework]</span><span class="sxs-lookup"><span data-stu-id="2874c-160">[Installing the .NET Framework][Installing the .NET Framework]</span></span>
+* <span data-ttu-id="2874c-161">[How to: Determine Which .NET Framework Versions Are Installed][How to: Determine Which .NET Framework Versions Are Installed]</span><span class="sxs-lookup"><span data-stu-id="2874c-161">[How to: Determine Which .NET Framework Versions Are Installed][How to: Determine Which .NET Framework Versions Are Installed]</span></span>
+* <span data-ttu-id="2874c-162">[Troubleshooting .NET Framework Installations][Troubleshooting .NET Framework Installations]</span><span class="sxs-lookup"><span data-stu-id="2874c-162">[Troubleshooting .NET Framework Installations][Troubleshooting .NET Framework Installations]</span></span>
+
+[How to: Determine Which .NET Framework Versions Are Installed]: https://msdn.microsoft.com/library/hh925568.aspx
+[Installing the .NET Framework]: https://msdn.microsoft.com/library/5a4x27ek.aspx
+[Troubleshooting .NET Framework Installations]: https://msdn.microsoft.com/library/hh925569.aspx
+
+<!--Image references-->
+[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/cloud-services/media/cloud-services-dotnet-install-dotnet/rolecontentwithinstallerfiles.png
+[2]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/cloud-services/media/cloud-services-dotnet-install-dotnet/rolecontentwithallfiles.png
+
+
+
+

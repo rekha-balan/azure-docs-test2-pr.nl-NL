@@ -1,0 +1,122 @@
+---
+title: Help secure communication for services in Azure Service Fabric | Microsoft Docs
+description: Overview of how to help secure communication for reliable services that are running in an Azure Service Fabric cluster.
+services: service-fabric
+documentationcenter: java
+author: PavanKunapareddyMSFT
+manager: timlt
+ms.assetid: ''
+ms.service: service-fabric
+ms.devlang: java
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: required
+ms.date: 03/09/2017
+ms.author: pakunapa
+ms.openlocfilehash: 5640901dae5d8c9d8619865be66b6c188a059363
+ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
+ms.translationtype: HT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 08/02/2018
+ms.locfileid: "44550378"
+---
+# <a name="help-secure-communication-for-services-in-azure-service-fabric"></a><span data-ttu-id="b23ff-103">Help secure communication for services in Azure Service Fabric</span><span class="sxs-lookup"><span data-stu-id="b23ff-103">Help secure communication for services in Azure Service Fabric</span></span>
+> [!div class="op_single_selector"]
+> * [C# on Windows](service-fabric-reliable-services-secure-communication.md)
+> * [Java on Linux](service-fabric-reliable-services-secure-communication-java.md)
+>
+>
+
+## <a name="help-secure-a-service-when-youre-using-service-remoting"></a><span data-ttu-id="b23ff-106">Help secure a service when you're using service remoting</span><span class="sxs-lookup"><span data-stu-id="b23ff-106">Help secure a service when you're using service remoting</span></span>
+<span data-ttu-id="b23ff-107">We'll be using an existing [example](service-fabric-reliable-services-communication-remoting-java.md) that explains how to set up remoting for reliable services.</span><span class="sxs-lookup"><span data-stu-id="b23ff-107">We'll be using an existing [example](service-fabric-reliable-services-communication-remoting-java.md) that explains how to set up remoting for reliable services.</span></span> <span data-ttu-id="b23ff-108">To help secure a service when you're using service remoting, follow these steps:</span><span class="sxs-lookup"><span data-stu-id="b23ff-108">To help secure a service when you're using service remoting, follow these steps:</span></span>
+
+1. <span data-ttu-id="b23ff-109">Create an interface, `HelloWorldStateless`, that defines the methods that will be available for a remote procedure call on your service.</span><span class="sxs-lookup"><span data-stu-id="b23ff-109">Create an interface, `HelloWorldStateless`, that defines the methods that will be available for a remote procedure call on your service.</span></span> <span data-ttu-id="b23ff-110">Your service will use `FabricTransportServiceRemotingListener`, which is declared in the `microsoft.serviceFabric.services.remoting.fabricTransport.runtime` package.</span><span class="sxs-lookup"><span data-stu-id="b23ff-110">Your service will use `FabricTransportServiceRemotingListener`, which is declared in the `microsoft.serviceFabric.services.remoting.fabricTransport.runtime` package.</span></span> <span data-ttu-id="b23ff-111">This is an `CommunicationListener` implementation that provides remoting capabilities.</span><span class="sxs-lookup"><span data-stu-id="b23ff-111">This is an `CommunicationListener` implementation that provides remoting capabilities.</span></span>
+
+    ```java
+    public interface HelloWorldStateless extends Service {
+        CompletableFuture<String> getHelloWorld();
+    }
+
+    class HelloWorldStatelessImpl extends StatelessService implements HelloWorldStateless {
+        @Override
+        protected List<ServiceInstanceListener> createServiceInstanceListeners() {
+            ArrayList<ServiceInstanceListener> listeners = new ArrayList<>();
+            listeners.add(new ServiceInstanceListener((context) -> {
+                return new FabricTransportServiceRemotingListener(context,this);
+            }));
+        return listeners;
+        }
+
+        public CompletableFuture<String> getHelloWorld() {
+            return CompletableFuture.completedFuture("Hello World!");
+        }
+    }
+    ```
+2. <span data-ttu-id="b23ff-112">Add listener settings and security credentials.</span><span class="sxs-lookup"><span data-stu-id="b23ff-112">Add listener settings and security credentials.</span></span>
+
+    <span data-ttu-id="b23ff-113">Make sure that the certificate that you want to use to help secure your service communication is installed on all the nodes in the cluster.</span><span class="sxs-lookup"><span data-stu-id="b23ff-113">Make sure that the certificate that you want to use to help secure your service communication is installed on all the nodes in the cluster.</span></span> <span data-ttu-id="b23ff-114">There are two ways that you can provide listener settings and security credentials:</span><span class="sxs-lookup"><span data-stu-id="b23ff-114">There are two ways that you can provide listener settings and security credentials:</span></span>
+
+   1. <span data-ttu-id="b23ff-115">Provide them by using a [config package](service-fabric-application-model.md):</span><span class="sxs-lookup"><span data-stu-id="b23ff-115">Provide them by using a [config package](service-fabric-application-model.md):</span></span>
+
+       <span data-ttu-id="b23ff-116">Add a `TransportSettings` section in the settings.xml file.</span><span class="sxs-lookup"><span data-stu-id="b23ff-116">Add a `TransportSettings` section in the settings.xml file.</span></span>
+
+       ```xml
+       <!--Section name should always end with "TransportSettings".-->
+       <!--Here we are using a prefix "HelloWorldStateless".-->
+        <Section Name="HelloWorldStatelessTransportSettings">
+            <Parameter Name="MaxMessageSize" Value="10000000" />
+            <Parameter Name="SecurityCredentialsType" Value="X509_2" />
+            <Parameter Name="CertificatePath" Value="/path/to/cert/BD1C71E248B8C6834C151174DECDBDC02DE1D954.crt" />
+            <Parameter Name="CertificateProtectionLevel" Value="EncryptandSign" />
+            <Parameter Name="CertificateRemoteThumbprints" Value="BD1C71E248B8C6834C151174DECDBDC02DE1D954" />
+        </Section>
+
+       ```
+
+       <span data-ttu-id="b23ff-117">In this case, the `createServiceInstanceListeners` method will look like this:</span><span class="sxs-lookup"><span data-stu-id="b23ff-117">In this case, the `createServiceInstanceListeners` method will look like this:</span></span>
+
+       ```java
+        protected List<ServiceInstanceListener> createServiceInstanceListeners() {
+            ArrayList<ServiceInstanceListener> listeners = new ArrayList<>();
+            listeners.add(new ServiceInstanceListener((context) -> {
+                return new FabricTransportServiceRemotingListener(context,this, FabricTransportRemotingListenerSettings.loadFrom(HelloWorldStatelessTransportSettings));
+            }));
+            return listeners;
+        }
+       ```
+
+        <span data-ttu-id="b23ff-118">If you add a `TransportSettings` section in the settings.xml file without any prefix, `FabricTransportListenerSettings` will load all the settings from this section by default.</span><span class="sxs-lookup"><span data-stu-id="b23ff-118">If you add a `TransportSettings` section in the settings.xml file without any prefix, `FabricTransportListenerSettings` will load all the settings from this section by default.</span></span>
+
+        ```xml
+        <!--"TransportSettings" section without any prefix.-->
+        <Section Name="TransportSettings">
+            ...
+        </Section>
+        ```
+        <span data-ttu-id="b23ff-119">In this case, the `CreateServiceReplicaListeners` method will look like this:</span><span class="sxs-lookup"><span data-stu-id="b23ff-119">In this case, the `CreateServiceReplicaListeners` method will look like this:</span></span>
+
+        ```java
+        protected List<ServiceInstanceListener> createServiceInstanceListeners() {
+            ArrayList<ServiceInstanceListener> listeners = new ArrayList<>();
+            listeners.add(new ServiceInstanceListener((context) -> {
+                return new FabricTransportServiceRemotingListener(context,this);
+            }));
+            return listeners;
+        }
+       ```
+3. <span data-ttu-id="b23ff-120">When you call methods on a secured service by using the remoting stack, instead of using the `microsoft.serviceFabric.services.remoting.client.ServiceProxyBase` class to create a service proxy, use `microsoft.serviceFabric.services.remoting.client.FabricServiceProxyFactory`.</span><span class="sxs-lookup"><span data-stu-id="b23ff-120">When you call methods on a secured service by using the remoting stack, instead of using the `microsoft.serviceFabric.services.remoting.client.ServiceProxyBase` class to create a service proxy, use `microsoft.serviceFabric.services.remoting.client.FabricServiceProxyFactory`.</span></span>
+
+    <span data-ttu-id="b23ff-121">If the client code is running as part of a service, you can load `FabricTransportSettings` from the settings.xml file.</span><span class="sxs-lookup"><span data-stu-id="b23ff-121">If the client code is running as part of a service, you can load `FabricTransportSettings` from the settings.xml file.</span></span> <span data-ttu-id="b23ff-122">Create a TransportSettings section that is similar to the service code, as shown earlier.</span><span class="sxs-lookup"><span data-stu-id="b23ff-122">Create a TransportSettings section that is similar to the service code, as shown earlier.</span></span> <span data-ttu-id="b23ff-123">Make the following changes to the client code:</span><span class="sxs-lookup"><span data-stu-id="b23ff-123">Make the following changes to the client code:</span></span>
+
+    ```java
+
+    FabricServiceProxyFactory serviceProxyFactory = new FabricServiceProxyFactory(c -> {
+            return new FabricTransportServiceRemotingClientFactory(FabricTransportRemotingSettings.loadFrom("TransportPrefixTransportSettings"), null, null, null, null);
+        }, null)
+
+    HelloWorldStateless client = serviceProxyFactory.createServiceProxy(HelloWorldStateless.class,
+        new URI("fabric:/MyApplication/MyHelloWorldService"));
+
+    CompletableFuture<String> message = client.getHelloWorld();
+
+    ```

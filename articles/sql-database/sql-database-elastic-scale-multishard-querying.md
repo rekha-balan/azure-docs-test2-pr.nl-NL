@@ -1,0 +1,79 @@
+---
+title: Query sharded Azure SQL databases | Microsoft Docs
+description: Run queries across shards using the elastic database client library.
+services: sql-database
+documentationcenter: ''
+manager: jhubbard
+author: torsteng
+editor: ''
+ms.assetid: a4379c15-f213-4026-ab6f-a450ee9d5758
+ms.service: sql-database
+ms.custom: multiple databases
+ms.workload: sql-database
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 04/12/2016
+ms.author: torsteng
+ms.openlocfilehash: aa54ec3d982ea4422422bd4e520d2211aad57159
+ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
+ms.translationtype: HT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 08/02/2018
+ms.locfileid: "44550427"
+---
+# <a name="multi-shard-querying"></a><span data-ttu-id="0b507-103">Multi-shard querying</span><span class="sxs-lookup"><span data-stu-id="0b507-103">Multi-shard querying</span></span>
+## <a name="overview"></a><span data-ttu-id="0b507-104">Overview</span><span class="sxs-lookup"><span data-stu-id="0b507-104">Overview</span></span>
+<span data-ttu-id="0b507-105">With the [Elastic Database tools](sql-database-elastic-scale-introduction.md), you can create sharded database solutions.</span><span class="sxs-lookup"><span data-stu-id="0b507-105">With the [Elastic Database tools](sql-database-elastic-scale-introduction.md), you can create sharded database solutions.</span></span> <span data-ttu-id="0b507-106">**Multi-shard querying** is used for tasks such as data collection/reporting that require running a query that stretches across several shards.</span><span class="sxs-lookup"><span data-stu-id="0b507-106">**Multi-shard querying** is used for tasks such as data collection/reporting that require running a query that stretches across several shards.</span></span> <span data-ttu-id="0b507-107">(Contrast this to [data-dependent routing](sql-database-elastic-scale-data-dependent-routing.md), which performs all work on a single shard.)</span><span class="sxs-lookup"><span data-stu-id="0b507-107">(Contrast this to [data-dependent routing](sql-database-elastic-scale-data-dependent-routing.md), which performs all work on a single shard.)</span></span> 
+
+1. <span data-ttu-id="0b507-108">Get a [**RangeShardMap**](https://msdn.microsoft.com/library/azure/dn807318.aspx) or [**ListShardMap**](https://msdn.microsoft.com/library/azure/dn807370.aspx) using the [**TryGetRangeShardMap**](https://msdn.microsoft.com/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager.trygetrangeshardmap.aspx), the [**TryGetListShardMap**](https://msdn.microsoft.com/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager.trygetlistshardmap.aspx), or the [**GetShardMap**](https://msdn.microsoft.com/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager.getshardmap.aspx) method.</span><span class="sxs-lookup"><span data-stu-id="0b507-108">Get a [**RangeShardMap**](https://msdn.microsoft.com/library/azure/dn807318.aspx) or [**ListShardMap**](https://msdn.microsoft.com/library/azure/dn807370.aspx) using the [**TryGetRangeShardMap**](https://msdn.microsoft.com/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager.trygetrangeshardmap.aspx), the [**TryGetListShardMap**](https://msdn.microsoft.com/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager.trygetlistshardmap.aspx), or the [**GetShardMap**](https://msdn.microsoft.com/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager.getshardmap.aspx) method.</span></span> <span data-ttu-id="0b507-109">See [**Constructing a ShardMapManager**](sql-database-elastic-scale-shard-map-management.md#constructing-a-shardmapmanager) and [**Get a RangeShardMap or ListShardMap**](sql-database-elastic-scale-shard-map-management.md#get-a-rangeshardmap-or-listshardmap).</span><span class="sxs-lookup"><span data-stu-id="0b507-109">See [**Constructing a ShardMapManager**](sql-database-elastic-scale-shard-map-management.md#constructing-a-shardmapmanager) and [**Get a RangeShardMap or ListShardMap**](sql-database-elastic-scale-shard-map-management.md#get-a-rangeshardmap-or-listshardmap).</span></span>
+2. <span data-ttu-id="0b507-110">Create a **[MultiShardConnection](https://msdn.microsoft.com/library/azure/microsoft.azure.sqldatabase.elasticscale.query.multishardconnection.aspx)** object.</span><span class="sxs-lookup"><span data-stu-id="0b507-110">Create a **[MultiShardConnection](https://msdn.microsoft.com/library/azure/microsoft.azure.sqldatabase.elasticscale.query.multishardconnection.aspx)** object.</span></span>
+3. <span data-ttu-id="0b507-111">Create a **[MultiShardCommand](https://msdn.microsoft.com/library/azure/microsoft.azure.sqldatabase.elasticscale.query.multishardcommand.aspx)**.</span><span class="sxs-lookup"><span data-stu-id="0b507-111">Create a **[MultiShardCommand](https://msdn.microsoft.com/library/azure/microsoft.azure.sqldatabase.elasticscale.query.multishardcommand.aspx)**.</span></span> 
+4. <span data-ttu-id="0b507-112">Set the **[CommandText property](https://msdn.microsoft.com/library/azure/microsoft.azure.sqldatabase.elasticscale.query.multishardcommand.commandtext.aspx#P:Microsoft.Azure.SqlDatabase.ElasticScale.Query.MultiShardCommand.CommandText)** to a T-SQL command.</span><span class="sxs-lookup"><span data-stu-id="0b507-112">Set the **[CommandText property](https://msdn.microsoft.com/library/azure/microsoft.azure.sqldatabase.elasticscale.query.multishardcommand.commandtext.aspx#P:Microsoft.Azure.SqlDatabase.ElasticScale.Query.MultiShardCommand.CommandText)** to a T-SQL command.</span></span>
+5. <span data-ttu-id="0b507-113">Execute the command by calling the **[ExecuteReader method](https://msdn.microsoft.com/library/azure/microsoft.azure.sqldatabase.elasticscale.query.multishardcommand.executereader.aspx)**.</span><span class="sxs-lookup"><span data-stu-id="0b507-113">Execute the command by calling the **[ExecuteReader method](https://msdn.microsoft.com/library/azure/microsoft.azure.sqldatabase.elasticscale.query.multishardcommand.executereader.aspx)**.</span></span>
+6. <span data-ttu-id="0b507-114">View the results using the **[MultiShardDataReader class](https://msdn.microsoft.com/library/azure/microsoft.azure.sqldatabase.elasticscale.query.multisharddatareader.aspx)**.</span><span class="sxs-lookup"><span data-stu-id="0b507-114">View the results using the **[MultiShardDataReader class](https://msdn.microsoft.com/library/azure/microsoft.azure.sqldatabase.elasticscale.query.multisharddatareader.aspx)**.</span></span> 
+
+## <a name="example"></a><span data-ttu-id="0b507-115">Example</span><span class="sxs-lookup"><span data-stu-id="0b507-115">Example</span></span>
+<span data-ttu-id="0b507-116">The following code illustrates the usage of multi-shard querying using a given **ShardMap** named *myShardMap*.</span><span class="sxs-lookup"><span data-stu-id="0b507-116">The following code illustrates the usage of multi-shard querying using a given **ShardMap** named *myShardMap*.</span></span> 
+
+    using (MultiShardConnection conn = new MultiShardConnection( 
+                                        myShardMap.GetShards(), 
+                                        myShardConnectionString) 
+          ) 
+    { 
+    using (MultiShardCommand cmd = conn.CreateCommand())
+           { 
+            cmd.CommandText = "SELECT c1, c2, c3 FROM ShardedTable"; 
+            cmd.CommandType = CommandType.Text; 
+            cmd.ExecutionOptions = MultiShardExecutionOptions.IncludeShardNameColumn; 
+            cmd.ExecutionPolicy = MultiShardExecutionPolicy.PartialResults; 
+
+            using (MultiShardDataReader sdr = cmd.ExecuteReader()) 
+                { 
+                    while (sdr.Read())
+                        { 
+                            var c1Field = sdr.GetString(0); 
+                            var c2Field = sdr.GetFieldValue<int>(1); 
+                            var c3Field = sdr.GetFieldValue<Int64>(2);
+                        } 
+                 } 
+           } 
+    } 
+
+
+<span data-ttu-id="0b507-117">A key difference is the construction of multi-shard connections.</span><span class="sxs-lookup"><span data-stu-id="0b507-117">A key difference is the construction of multi-shard connections.</span></span> <span data-ttu-id="0b507-118">Where **SqlConnection** operates on a single database, the **MultiShardConnection** takes a ***collection of shards*** as its input.</span><span class="sxs-lookup"><span data-stu-id="0b507-118">Where **SqlConnection** operates on a single database, the **MultiShardConnection** takes a ***collection of shards*** as its input.</span></span> <span data-ttu-id="0b507-119">Populate the collection of shards from a shard map.</span><span class="sxs-lookup"><span data-stu-id="0b507-119">Populate the collection of shards from a shard map.</span></span> <span data-ttu-id="0b507-120">The query is then executed on the collection of shards using **UNION ALL** semantics to assemble a single overall result.</span><span class="sxs-lookup"><span data-stu-id="0b507-120">The query is then executed on the collection of shards using **UNION ALL** semantics to assemble a single overall result.</span></span> <span data-ttu-id="0b507-121">Optionally, the name of the shard where the row originates from can be added to the output using the **ExecutionOptions** property on command.</span><span class="sxs-lookup"><span data-stu-id="0b507-121">Optionally, the name of the shard where the row originates from can be added to the output using the **ExecutionOptions** property on command.</span></span> 
+
+<span data-ttu-id="0b507-122">Note the call to **myShardMap.GetShards()**.</span><span class="sxs-lookup"><span data-stu-id="0b507-122">Note the call to **myShardMap.GetShards()**.</span></span> <span data-ttu-id="0b507-123">This method retrieves all shards from the shard map and provides an easy way to run a query across all relevant databases.</span><span class="sxs-lookup"><span data-stu-id="0b507-123">This method retrieves all shards from the shard map and provides an easy way to run a query across all relevant databases.</span></span> <span data-ttu-id="0b507-124">The collection of shards for a multi-shard query can be refined further by performing a LINQ query over the collection returned from the call to **myShardMap.GetShards()**.</span><span class="sxs-lookup"><span data-stu-id="0b507-124">The collection of shards for a multi-shard query can be refined further by performing a LINQ query over the collection returned from the call to **myShardMap.GetShards()**.</span></span> <span data-ttu-id="0b507-125">In combination with the partial results policy, the current capability in multi-shard querying has been designed to work well for tens up to hundreds of shards.</span><span class="sxs-lookup"><span data-stu-id="0b507-125">In combination with the partial results policy, the current capability in multi-shard querying has been designed to work well for tens up to hundreds of shards.</span></span>
+
+<span data-ttu-id="0b507-126">A limitation with multi-shard querying is currently the lack of validation for shards and shardlets that are queried.</span><span class="sxs-lookup"><span data-stu-id="0b507-126">A limitation with multi-shard querying is currently the lack of validation for shards and shardlets that are queried.</span></span> <span data-ttu-id="0b507-127">While data-dependent routing verifies that a given shard is part of the shard map at the time of querying, multi-shard queries do not perform this check.</span><span class="sxs-lookup"><span data-stu-id="0b507-127">While data-dependent routing verifies that a given shard is part of the shard map at the time of querying, multi-shard queries do not perform this check.</span></span> <span data-ttu-id="0b507-128">This can lead to multi-shard queries running on databases that have  been removed from the shard map.</span><span class="sxs-lookup"><span data-stu-id="0b507-128">This can lead to multi-shard queries running on databases that have  been removed from the shard map.</span></span>
+
+## <a name="multi-shard-queries-and-split-merge-operations"></a><span data-ttu-id="0b507-129">Multi-shard queries and split-merge operations</span><span class="sxs-lookup"><span data-stu-id="0b507-129">Multi-shard queries and split-merge operations</span></span>
+<span data-ttu-id="0b507-130">Multi-shard queries do not verify whether shardlets on the queried database are participating in ongoing split-merge operations.</span><span class="sxs-lookup"><span data-stu-id="0b507-130">Multi-shard queries do not verify whether shardlets on the queried database are participating in ongoing split-merge operations.</span></span> <span data-ttu-id="0b507-131">(See [Scaling using the Elastic Database split-merge tool](sql-database-elastic-scale-overview-split-and-merge.md).) This can lead to inconsistencies where rows from the same shardlet show for multiple databases in the same multi-shard query.</span><span class="sxs-lookup"><span data-stu-id="0b507-131">(See [Scaling using the Elastic Database split-merge tool](sql-database-elastic-scale-overview-split-and-merge.md).) This can lead to inconsistencies where rows from the same shardlet show for multiple databases in the same multi-shard query.</span></span> <span data-ttu-id="0b507-132">Be aware of these limitations and consider draining ongoing split-merge operations and changes to the shard map while performing multi-shard queries.</span><span class="sxs-lookup"><span data-stu-id="0b507-132">Be aware of these limitations and consider draining ongoing split-merge operations and changes to the shard map while performing multi-shard queries.</span></span>
+
+[!INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
+
+## <a name="see-also"></a><span data-ttu-id="0b507-133">See also</span><span class="sxs-lookup"><span data-stu-id="0b507-133">See also</span></span>
+<span data-ttu-id="0b507-134">**[System.Data.SqlClient](http://msdn.microsoft.com/library/System.Data.SqlClient.aspx)** classes and methods.</span><span class="sxs-lookup"><span data-stu-id="0b507-134">**[System.Data.SqlClient](http://msdn.microsoft.com/library/System.Data.SqlClient.aspx)** classes and methods.</span></span>
+
+<span data-ttu-id="0b507-135">Manage shards using the [Elastic Database client library](sql-database-elastic-database-client-library.md).</span><span class="sxs-lookup"><span data-stu-id="0b507-135">Manage shards using the [Elastic Database client library](sql-database-elastic-database-client-library.md).</span></span> <span data-ttu-id="0b507-136">Includes a  namespace called [Microsoft.Azure.SqlDatabase.ElasticScale.Query](https://msdn.microsoft.com/library/azure/microsoft.azure.sqldatabase.elasticscale.query.aspx) that provides the ability to query multiple shards using a single query and result.</span><span class="sxs-lookup"><span data-stu-id="0b507-136">Includes a  namespace called [Microsoft.Azure.SqlDatabase.ElasticScale.Query](https://msdn.microsoft.com/library/azure/microsoft.azure.sqldatabase.elasticscale.query.aspx) that provides the ability to query multiple shards using a single query and result.</span></span> <span data-ttu-id="0b507-137">It provides a querying abstraction over a collection of shards.</span><span class="sxs-lookup"><span data-stu-id="0b507-137">It provides a querying abstraction over a collection of shards.</span></span> <span data-ttu-id="0b507-138">It also provides alternative execution policies, in particular partial results, to deal with failures when querying over many shards.</span><span class="sxs-lookup"><span data-stu-id="0b507-138">It also provides alternative execution policies, in particular partial results, to deal with failures when querying over many shards.</span></span>  
+

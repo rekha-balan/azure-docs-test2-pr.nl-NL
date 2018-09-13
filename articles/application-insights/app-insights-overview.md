@@ -1,0 +1,176 @@
+---
+title: What is Azure Application Insights? | Microsoft Docs
+description: Application Performance Management and usage tracking of your live web application.  Detect, triage and diagnose problems, understand how people use your app.
+services: application-insights
+documentationcenter: ''
+author: alancameronwills
+manager: carmonm
+ms.assetid: 379721d1-0f82-445a-b416-45b94cb969ec
+ms.service: application-insights
+ms.workload: tbd
+ms.tgt_pltfrm: ibiza
+ms.devlang: na
+ms.topic: get-started-article
+ms.date: 02/07/2017
+ms.author: awills
+ms.openlocfilehash: bd742ec16b48b7b79c97f762f2ff02f1a03bb3c7
+ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
+ms.translationtype: HT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 08/02/2018
+ms.locfileid: "44552307"
+---
+# <a name="what-is-application-insights"></a><span data-ttu-id="00926-105">What is Application Insights?</span><span class="sxs-lookup"><span data-stu-id="00926-105">What is Application Insights?</span></span>
+<span data-ttu-id="00926-106">Application Insights is an extensible Application Performance Management (APM) service for web developers on multiple platforms.</span><span class="sxs-lookup"><span data-stu-id="00926-106">Application Insights is an extensible Application Performance Management (APM) service for web developers on multiple platforms.</span></span> <span data-ttu-id="00926-107">Use it to monitor your live web application.</span><span class="sxs-lookup"><span data-stu-id="00926-107">Use it to monitor your live web application.</span></span> <span data-ttu-id="00926-108">It will automatically detect performance anomalies.</span><span class="sxs-lookup"><span data-stu-id="00926-108">It will automatically detect performance anomalies.</span></span> <span data-ttu-id="00926-109">It includes powerful analytics tools to help you diagnose issues and to understand what users actually do with your app.</span><span class="sxs-lookup"><span data-stu-id="00926-109">It includes powerful analytics tools to help you diagnose issues and to understand what users actually do with your app.</span></span>  <span data-ttu-id="00926-110">It's designed to help you continuously improve  performance and usability.</span><span class="sxs-lookup"><span data-stu-id="00926-110">It's designed to help you continuously improve  performance and usability.</span></span> <span data-ttu-id="00926-111">It works for apps on a wide variety of platforms including .NET, Node.js and J2EE, hosted on-premises or in the cloud.</span><span class="sxs-lookup"><span data-stu-id="00926-111">It works for apps on a wide variety of platforms including .NET, Node.js and J2EE, hosted on-premises or in the cloud.</span></span> <span data-ttu-id="00926-112">It  integrates with your devOps process, and has connection points to a variety of development tools.</span><span class="sxs-lookup"><span data-stu-id="00926-112">It  integrates with your devOps process, and has connection points to a variety of development tools.</span></span>
+
+![Chart user activity statistics, or drill into specific events.](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-overview/00-sample.png)
+
+<span data-ttu-id="00926-114">[Take a look at the intro animation](https://www.youtube.com/watch?v=fX2NtGrh-Y0).</span><span class="sxs-lookup"><span data-stu-id="00926-114">[Take a look at the intro animation](https://www.youtube.com/watch?v=fX2NtGrh-Y0).</span></span>
+
+## <a name="how-does-application-insights-work"></a><span data-ttu-id="00926-115">How does Application Insights work?</span><span class="sxs-lookup"><span data-stu-id="00926-115">How does Application Insights work?</span></span>
+<span data-ttu-id="00926-116">You install a small instrumentation package in your application, and set up an Application Insights resource in the Microsoft Azure portal.</span><span class="sxs-lookup"><span data-stu-id="00926-116">You install a small instrumentation package in your application, and set up an Application Insights resource in the Microsoft Azure portal.</span></span> <span data-ttu-id="00926-117">The instrumentation monitors your app and sends telemetry data to the portal.</span><span class="sxs-lookup"><span data-stu-id="00926-117">The instrumentation monitors your app and sends telemetry data to the portal.</span></span> <span data-ttu-id="00926-118">(The application can run anywhere - it doesn't have to be hosted in Azure.)</span><span class="sxs-lookup"><span data-stu-id="00926-118">(The application can run anywhere - it doesn't have to be hosted in Azure.)</span></span>
+
+<span data-ttu-id="00926-119">You can instrument not only the web service application, but also any background components, and the JavaScript in the web pages themselves.</span><span class="sxs-lookup"><span data-stu-id="00926-119">You can instrument not only the web service application, but also any background components, and the JavaScript in the web pages themselves.</span></span> 
+
+![Application Insights instrumentation in your app sends telemetry to your Application Insights resource.](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-overview/01-scheme.png)
+
+
+<span data-ttu-id="00926-121">In addition, you can pull in telemetry from the host environments such as performance counters, Azure diagnostics, or Docker logs.</span><span class="sxs-lookup"><span data-stu-id="00926-121">In addition, you can pull in telemetry from the host environments such as performance counters, Azure diagnostics, or Docker logs.</span></span> <span data-ttu-id="00926-122">You can also set up web tests that periodically send synthetic requests to your web service.</span><span class="sxs-lookup"><span data-stu-id="00926-122">You can also set up web tests that periodically send synthetic requests to your web service.</span></span>
+
+<span data-ttu-id="00926-123">All these telemetry streams are integrated in the Azure portal, where you can apply powerful analytic and search tools to the raw data.</span><span class="sxs-lookup"><span data-stu-id="00926-123">All these telemetry streams are integrated in the Azure portal, where you can apply powerful analytic and search tools to the raw data.</span></span>
+
+
+### <a name="whats-the-overhead"></a><span data-ttu-id="00926-124">What's the overhead?</span><span class="sxs-lookup"><span data-stu-id="00926-124">What's the overhead?</span></span>
+<span data-ttu-id="00926-125">The impact on your app's performance is very small.</span><span class="sxs-lookup"><span data-stu-id="00926-125">The impact on your app's performance is very small.</span></span> <span data-ttu-id="00926-126">Tracking calls are non-blocking, and are batched and sent in a separate thread.</span><span class="sxs-lookup"><span data-stu-id="00926-126">Tracking calls are non-blocking, and are batched and sent in a separate thread.</span></span>
+
+## <a name="what-does-application-insights-monitor"></a><span data-ttu-id="00926-127">What does Application Insights monitor?</span><span class="sxs-lookup"><span data-stu-id="00926-127">What does Application Insights monitor?</span></span>
+
+<span data-ttu-id="00926-128">Application Insights is aimed at the development team, to help you understand how your app is performing and how it's being used.</span><span class="sxs-lookup"><span data-stu-id="00926-128">Application Insights is aimed at the development team, to help you understand how your app is performing and how it's being used.</span></span> <span data-ttu-id="00926-129">It monitors:</span><span class="sxs-lookup"><span data-stu-id="00926-129">It monitors:</span></span>
+
+* <span data-ttu-id="00926-130">**Request rates, response times, and failure rates** - Find out which pages are most popular, at what times of day, and where your users are.</span><span class="sxs-lookup"><span data-stu-id="00926-130">**Request rates, response times, and failure rates** - Find out which pages are most popular, at what times of day, and where your users are.</span></span> <span data-ttu-id="00926-131">See which pages perform best.</span><span class="sxs-lookup"><span data-stu-id="00926-131">See which pages perform best.</span></span> <span data-ttu-id="00926-132">If your response times and failure rates go high when there are more requests, then perhaps you have a resourcing problem.</span><span class="sxs-lookup"><span data-stu-id="00926-132">If your response times and failure rates go high when there are more requests, then perhaps you have a resourcing problem.</span></span> 
+* <span data-ttu-id="00926-133">**Dependency rates, response times, and failure rates** - Find out whether external services are slowing you down.</span><span class="sxs-lookup"><span data-stu-id="00926-133">**Dependency rates, response times, and failure rates** - Find out whether external services are slowing you down.</span></span>
+* <span data-ttu-id="00926-134">**Exceptions** - Analyse the aggregated statistics, or pick specific instances and drill into the stack trace and related requests.</span><span class="sxs-lookup"><span data-stu-id="00926-134">**Exceptions** - Analyse the aggregated statistics, or pick specific instances and drill into the stack trace and related requests.</span></span> <span data-ttu-id="00926-135">Both server and browser exceptions are reported.</span><span class="sxs-lookup"><span data-stu-id="00926-135">Both server and browser exceptions are reported.</span></span>
+* <span data-ttu-id="00926-136">**Page views and load performance** - reported by your users' browsers.</span><span class="sxs-lookup"><span data-stu-id="00926-136">**Page views and load performance** - reported by your users' browsers.</span></span>
+* <span data-ttu-id="00926-137">**AJAX calls** from web pages - rates, response times, and failure rates.</span><span class="sxs-lookup"><span data-stu-id="00926-137">**AJAX calls** from web pages - rates, response times, and failure rates.</span></span>
+* <span data-ttu-id="00926-138">**User and session counts**.</span><span class="sxs-lookup"><span data-stu-id="00926-138">**User and session counts**.</span></span>
+* <span data-ttu-id="00926-139">**Performance counters** from your Windows or Linux server machines, such as CPU, memory, and network usage.</span><span class="sxs-lookup"><span data-stu-id="00926-139">**Performance counters** from your Windows or Linux server machines, such as CPU, memory, and network usage.</span></span> 
+* <span data-ttu-id="00926-140">**Host diagnostics** from Docker or Azure.</span><span class="sxs-lookup"><span data-stu-id="00926-140">**Host diagnostics** from Docker or Azure.</span></span> 
+* <span data-ttu-id="00926-141">**Diagnostic trace logs** from your app - so that you can correlate trace events with requests.</span><span class="sxs-lookup"><span data-stu-id="00926-141">**Diagnostic trace logs** from your app - so that you can correlate trace events with requests.</span></span>
+* <span data-ttu-id="00926-142">**Custom events and metrics** that you write yourself in the client or server code, to track business events such as items sold or games won.</span><span class="sxs-lookup"><span data-stu-id="00926-142">**Custom events and metrics** that you write yourself in the client or server code, to track business events such as items sold or games won.</span></span>
+
+## <a name="where-do-i-see-my-telemetry"></a><span data-ttu-id="00926-143">Where do I see my telemetry?</span><span class="sxs-lookup"><span data-stu-id="00926-143">Where do I see my telemetry?</span></span>
+
+<span data-ttu-id="00926-144">There are plenty of ways to explore your data.</span><span class="sxs-lookup"><span data-stu-id="00926-144">There are plenty of ways to explore your data.</span></span> <span data-ttu-id="00926-145">Check out these articles:</span><span class="sxs-lookup"><span data-stu-id="00926-145">Check out these articles:</span></span>
+
+|  |  |
+| --- | --- |
+| [<span data-ttu-id="00926-146">**Application map**</span><span class="sxs-lookup"><span data-stu-id="00926-146">**Application map**</span></span>](app-insights-app-map.md)<br/><span data-ttu-id="00926-147">The components of your app, with key metrics and alerts.</span><span class="sxs-lookup"><span data-stu-id="00926-147">The components of your app, with key metrics and alerts.</span></span> |![Application map](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-overview/appmap-tn.png)  |
+| [<span data-ttu-id="00926-149">**Diagnostic search for instance data**</span><span class="sxs-lookup"><span data-stu-id="00926-149">**Diagnostic search for instance data**</span></span>](app-insights-diagnostic-search.md)<br/><span data-ttu-id="00926-150">Search and filter events such as requests, exceptions, dependency calls, log traces, and page views.</span><span class="sxs-lookup"><span data-stu-id="00926-150">Search and filter events such as requests, exceptions, dependency calls, log traces, and page views.</span></span>  |![Search telemetry](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-overview/search-tn.png) |
+| [<span data-ttu-id="00926-152">**Metrics Explorer for aggregated data**</span><span class="sxs-lookup"><span data-stu-id="00926-152">**Metrics Explorer for aggregated data**</span></span>](app-insights-metrics-explorer.md)<br/><span data-ttu-id="00926-153">Explore, filter, and segment aggregated data such as rates of requests, failures, and exceptions; response times, page load times.</span><span class="sxs-lookup"><span data-stu-id="00926-153">Explore, filter, and segment aggregated data such as rates of requests, failures, and exceptions; response times, page load times.</span></span> |![Metrics](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-overview/metrics-tn.png) |
+| [<span data-ttu-id="00926-155">**Dashboards**</span><span class="sxs-lookup"><span data-stu-id="00926-155">**Dashboards**</span></span>](app-insights-dashboards.md#dashboards)<br/><span data-ttu-id="00926-156">Mash up data from multiple resources and share with others.</span><span class="sxs-lookup"><span data-stu-id="00926-156">Mash up data from multiple resources and share with others.</span></span> <span data-ttu-id="00926-157">Great for multi-component applications, and for continuous display in the team room.</span><span class="sxs-lookup"><span data-stu-id="00926-157">Great for multi-component applications, and for continuous display in the team room.</span></span> |![Dashboards sample](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-overview/dashboard-tn.png) |
+| [<span data-ttu-id="00926-159">**Live Metrics Stream**</span><span class="sxs-lookup"><span data-stu-id="00926-159">**Live Metrics Stream**</span></span>](app-insights-live-stream.md)<br/><span data-ttu-id="00926-160">When you deploy a new build, watch these near-real-time performance indicators to make sure everything works as expected.</span><span class="sxs-lookup"><span data-stu-id="00926-160">When you deploy a new build, watch these near-real-time performance indicators to make sure everything works as expected.</span></span> |![Live metrics sample](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-overview/live-metrics-tn.png) |
+| [<span data-ttu-id="00926-162">**Analytics**</span><span class="sxs-lookup"><span data-stu-id="00926-162">**Analytics**</span></span>](app-insights-analytics.md)<br/><span data-ttu-id="00926-163">Answer tough questions about your app's performance and usage by using this powerful query language.</span><span class="sxs-lookup"><span data-stu-id="00926-163">Answer tough questions about your app's performance and usage by using this powerful query language.</span></span> |![Analytics sample](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-overview/analytics-tn.png) |
+| [<span data-ttu-id="00926-165">**Automatic and manual alerts**</span><span class="sxs-lookup"><span data-stu-id="00926-165">**Automatic and manual alerts**</span></span>](app-insights-alerts.md)<br/><span data-ttu-id="00926-166">Automatic alerts adapt to your app's normal patterns of telemetry and trigger when there's something outside the usual pattern.</span><span class="sxs-lookup"><span data-stu-id="00926-166">Automatic alerts adapt to your app's normal patterns of telemetry and trigger when there's something outside the usual pattern.</span></span> <span data-ttu-id="00926-167">You can also set alerts on particular levels of custom or standard metrics.</span><span class="sxs-lookup"><span data-stu-id="00926-167">You can also set alerts on particular levels of custom or standard metrics.</span></span> |![Alert sample](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-overview/alerts-tn.png) |
+| [<span data-ttu-id="00926-169">**Visual Studio**</span><span class="sxs-lookup"><span data-stu-id="00926-169">**Visual Studio**</span></span>](app-insights-visual-studio.md)<br/><span data-ttu-id="00926-170">See performance data in the code.</span><span class="sxs-lookup"><span data-stu-id="00926-170">See performance data in the code.</span></span> <span data-ttu-id="00926-171">Go to code from stack traces.</span><span class="sxs-lookup"><span data-stu-id="00926-171">Go to code from stack traces.</span></span>|![Visual studio](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-overview/visual-studio-tn.png) |
+| [<span data-ttu-id="00926-173">**Power BI**</span><span class="sxs-lookup"><span data-stu-id="00926-173">**Power BI**</span></span>](app-insights-export-power-bi.md)<br/><span data-ttu-id="00926-174">Integrate usage metrics with other business intelligence.</span><span class="sxs-lookup"><span data-stu-id="00926-174">Integrate usage metrics with other business intelligence.</span></span>| ![Power BI](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-overview/power-bi.png)|
+| [<span data-ttu-id="00926-176">**REST API**</span><span class="sxs-lookup"><span data-stu-id="00926-176">**REST API**</span></span>](https://dev.applicationinsights.io/)<br/><span data-ttu-id="00926-177">Write code to run queries over your metrics and raw data.</span><span class="sxs-lookup"><span data-stu-id="00926-177">Write code to run queries over your metrics and raw data.</span></span>| ![REST API](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-overview/rest-tn.png) |
+| [<span data-ttu-id="00926-179">**Continuous export**</span><span class="sxs-lookup"><span data-stu-id="00926-179">**Continuous export**</span></span>](app-insights-export-telemetry.md)<br/><span data-ttu-id="00926-180">Bulk export of raw data to storage as soon as it arrives.</span><span class="sxs-lookup"><span data-stu-id="00926-180">Bulk export of raw data to storage as soon as it arrives.</span></span> |![Export](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-overview/export-tn.png) |
+
+## <a name="how-do-i-use-application-insights"></a><span data-ttu-id="00926-182">How do I use Application Insights?</span><span class="sxs-lookup"><span data-stu-id="00926-182">How do I use Application Insights?</span></span>
+
+### <a name="monitor"></a><span data-ttu-id="00926-183">Monitor</span><span class="sxs-lookup"><span data-stu-id="00926-183">Monitor</span></span>
+<span data-ttu-id="00926-184">Install Application Insights in your app, set up [availability web tests](app-insights-monitor-web-app-availability.md), and:</span><span class="sxs-lookup"><span data-stu-id="00926-184">Install Application Insights in your app, set up [availability web tests](app-insights-monitor-web-app-availability.md), and:</span></span>
+
+* <span data-ttu-id="00926-185">Set up a [dashboard](app-insights-dashboards.md) for your team room to keep an eye on load, responsiveness, and the performance of your dependencies, page loads, and AJAX calls.</span><span class="sxs-lookup"><span data-stu-id="00926-185">Set up a [dashboard](app-insights-dashboards.md) for your team room to keep an eye on load, responsiveness, and the performance of your dependencies, page loads, and AJAX calls.</span></span>
+* <span data-ttu-id="00926-186">Discover which are the slowest and most failing requests.</span><span class="sxs-lookup"><span data-stu-id="00926-186">Discover which are the slowest and most failing requests.</span></span>
+* <span data-ttu-id="00926-187">Watch [Live Stream](app-insights-live-stream.md) when you deploy a new release, to know immediately about any degradation.</span><span class="sxs-lookup"><span data-stu-id="00926-187">Watch [Live Stream](app-insights-live-stream.md) when you deploy a new release, to know immediately about any degradation.</span></span>
+
+### <a name="detect-diagnose"></a><span data-ttu-id="00926-188">Detect, Diagnose</span><span class="sxs-lookup"><span data-stu-id="00926-188">Detect, Diagnose</span></span>
+<span data-ttu-id="00926-189">When you receive an alert or discover a problem:</span><span class="sxs-lookup"><span data-stu-id="00926-189">When you receive an alert or discover a problem:</span></span>
+
+* <span data-ttu-id="00926-190">Assess how many users are affected.</span><span class="sxs-lookup"><span data-stu-id="00926-190">Assess how many users are affected.</span></span>
+* <span data-ttu-id="00926-191">Correlate failures with exceptions, dependency calls and traces.</span><span class="sxs-lookup"><span data-stu-id="00926-191">Correlate failures with exceptions, dependency calls and traces.</span></span>
+* <span data-ttu-id="00926-192">Examine stack dumps and trace logs.</span><span class="sxs-lookup"><span data-stu-id="00926-192">Examine stack dumps and trace logs.</span></span>
+
+### <a name="build-measure-learn"></a><span data-ttu-id="00926-193">Build, Measure, Learn</span><span class="sxs-lookup"><span data-stu-id="00926-193">Build, Measure, Learn</span></span>
+<span data-ttu-id="00926-194">Measure the effectiveness of each new feature that you deploy.</span><span class="sxs-lookup"><span data-stu-id="00926-194">Measure the effectiveness of each new feature that you deploy.</span></span>
+
+* <span data-ttu-id="00926-195">Plan to measure how customers use new UX or business features.</span><span class="sxs-lookup"><span data-stu-id="00926-195">Plan to measure how customers use new UX or business features.</span></span>
+* <span data-ttu-id="00926-196">Write custom telemetry into your code.</span><span class="sxs-lookup"><span data-stu-id="00926-196">Write custom telemetry into your code.</span></span>
+* <span data-ttu-id="00926-197">Base the next development cycle on hard evidence from your telemetry.</span><span class="sxs-lookup"><span data-stu-id="00926-197">Base the next development cycle on hard evidence from your telemetry.</span></span>
+
+## <a name="get-started"></a><span data-ttu-id="00926-198">Get started</span><span class="sxs-lookup"><span data-stu-id="00926-198">Get started</span></span>
+<span data-ttu-id="00926-199">Application Insights is one of the many services hosted within Microsoft Azure, and telemetry is sent there for analysis and presentation.</span><span class="sxs-lookup"><span data-stu-id="00926-199">Application Insights is one of the many services hosted within Microsoft Azure, and telemetry is sent there for analysis and presentation.</span></span> <span data-ttu-id="00926-200">So before you do anything else, you'll need a subscription to [Microsoft Azure](http://azure.com).</span><span class="sxs-lookup"><span data-stu-id="00926-200">So before you do anything else, you'll need a subscription to [Microsoft Azure](http://azure.com).</span></span> <span data-ttu-id="00926-201">It's free to sign up, and if you choose the basic [pricing plan](https://azure.microsoft.com/pricing/details/application-insights/) of Application Insights, there's no charge until your application has grown to have substantial usage.</span><span class="sxs-lookup"><span data-stu-id="00926-201">It's free to sign up, and if you choose the basic [pricing plan](https://azure.microsoft.com/pricing/details/application-insights/) of Application Insights, there's no charge until your application has grown to have substantial usage.</span></span> <span data-ttu-id="00926-202">If your organization already has a subscription, they could add your Microsoft account to it.</span><span class="sxs-lookup"><span data-stu-id="00926-202">If your organization already has a subscription, they could add your Microsoft account to it.</span></span>
+
+<span data-ttu-id="00926-203">There are several ways to get started.</span><span class="sxs-lookup"><span data-stu-id="00926-203">There are several ways to get started.</span></span> <span data-ttu-id="00926-204">Begin with whichever works best for you.</span><span class="sxs-lookup"><span data-stu-id="00926-204">Begin with whichever works best for you.</span></span> <span data-ttu-id="00926-205">You can add the others later.</span><span class="sxs-lookup"><span data-stu-id="00926-205">You can add the others later.</span></span>
+
+* <span data-ttu-id="00926-206">**At run time: instrument your web app on the server.**</span><span class="sxs-lookup"><span data-stu-id="00926-206">**At run time: instrument your web app on the server.**</span></span> <span data-ttu-id="00926-207">Avoids any update to the code.</span><span class="sxs-lookup"><span data-stu-id="00926-207">Avoids any update to the code.</span></span> <span data-ttu-id="00926-208">You need admin access to your server.</span><span class="sxs-lookup"><span data-stu-id="00926-208">You need admin access to your server.</span></span>
+  * [<span data-ttu-id="00926-209">**IIS on-premises or on a VM**</span><span class="sxs-lookup"><span data-stu-id="00926-209">**IIS on-premises or on a VM**</span></span>](app-insights-monitor-performance-live-website-now.md)
+  * [<span data-ttu-id="00926-210">**Azure web app or VM**</span><span class="sxs-lookup"><span data-stu-id="00926-210">**Azure web app or VM**</span></span>](app-insights-monitor-performance-live-website-now.md)
+  * [<span data-ttu-id="00926-211">**J2EE**</span><span class="sxs-lookup"><span data-stu-id="00926-211">**J2EE**</span></span>](app-insights-java-live.md)
+* <span data-ttu-id="00926-212">**At development time: add Application Insights to your code.**</span><span class="sxs-lookup"><span data-stu-id="00926-212">**At development time: add Application Insights to your code.**</span></span> <span data-ttu-id="00926-213">Allows you to write custom telemetry and to instrument back-end and desktop apps.</span><span class="sxs-lookup"><span data-stu-id="00926-213">Allows you to write custom telemetry and to instrument back-end and desktop apps.</span></span>
+  * <span data-ttu-id="00926-214">[Visual Studio](app-insights-asp-net.md) 2013 update 2 or later.</span><span class="sxs-lookup"><span data-stu-id="00926-214">[Visual Studio](app-insights-asp-net.md) 2013 update 2 or later.</span></span>
+  * <span data-ttu-id="00926-215">Java in [Eclipse](app-insights-java-eclipse.md) or [other tools](app-insights-java-get-started.md)</span><span class="sxs-lookup"><span data-stu-id="00926-215">Java in [Eclipse](app-insights-java-eclipse.md) or [other tools](app-insights-java-get-started.md)</span></span>
+  * [<span data-ttu-id="00926-216">Node.js</span><span class="sxs-lookup"><span data-stu-id="00926-216">Node.js</span></span>](app-insights-nodejs.md)
+  * [<span data-ttu-id="00926-217">Other platforms</span><span class="sxs-lookup"><span data-stu-id="00926-217">Other platforms</span></span>](app-insights-platforms.md)
+* <span data-ttu-id="00926-218">**[Instrument your web pages](app-insights-javascript.md)** for page view, AJAX and other client-side telemetry.</span><span class="sxs-lookup"><span data-stu-id="00926-218">**[Instrument your web pages](app-insights-javascript.md)** for page view, AJAX and other client-side telemetry.</span></span>
+* <span data-ttu-id="00926-219">**[Availability tests](app-insights-monitor-web-app-availability.md)** - ping your website regularly from our servers.</span><span class="sxs-lookup"><span data-stu-id="00926-219">**[Availability tests](app-insights-monitor-web-app-availability.md)** - ping your website regularly from our servers.</span></span>
+
+
+## <a name="next-steps"></a><span data-ttu-id="00926-220">Next steps</span><span class="sxs-lookup"><span data-stu-id="00926-220">Next steps</span></span>
+<span data-ttu-id="00926-221">Get started at runtime with:</span><span class="sxs-lookup"><span data-stu-id="00926-221">Get started at runtime with:</span></span>
+
+* [<span data-ttu-id="00926-222">IIS server</span><span class="sxs-lookup"><span data-stu-id="00926-222">IIS server</span></span>](app-insights-monitor-performance-live-website-now.md)
+* [<span data-ttu-id="00926-223">J2EE server</span><span class="sxs-lookup"><span data-stu-id="00926-223">J2EE server</span></span>](app-insights-java-live.md)
+
+<span data-ttu-id="00926-224">Get started at development time with:</span><span class="sxs-lookup"><span data-stu-id="00926-224">Get started at development time with:</span></span>
+
+* [<span data-ttu-id="00926-225">ASP.NET</span><span class="sxs-lookup"><span data-stu-id="00926-225">ASP.NET</span></span>](app-insights-asp-net.md)
+* [<span data-ttu-id="00926-226">Java</span><span class="sxs-lookup"><span data-stu-id="00926-226">Java</span></span>](app-insights-java-get-started.md)
+* [<span data-ttu-id="00926-227">Node.js</span><span class="sxs-lookup"><span data-stu-id="00926-227">Node.js</span></span>](app-insights-nodejs.md)
+
+## <a name="support-and-feedback"></a><span data-ttu-id="00926-228">Support and feedback</span><span class="sxs-lookup"><span data-stu-id="00926-228">Support and feedback</span></span>
+* <span data-ttu-id="00926-229">Questions and Issues:</span><span class="sxs-lookup"><span data-stu-id="00926-229">Questions and Issues:</span></span>
+  * <span data-ttu-id="00926-230">[Troubleshooting][qna]</span><span class="sxs-lookup"><span data-stu-id="00926-230">[Troubleshooting][qna]</span></span>
+  * [<span data-ttu-id="00926-231">MSDN Forum</span><span class="sxs-lookup"><span data-stu-id="00926-231">MSDN Forum</span></span>](https://social.msdn.microsoft.com/Forums/vstudio/home?forum=ApplicationInsights)
+  * [<span data-ttu-id="00926-232">StackOverflow</span><span class="sxs-lookup"><span data-stu-id="00926-232">StackOverflow</span></span>](http://stackoverflow.com/questions/tagged/ms-application-insights)
+* <span data-ttu-id="00926-233">Your suggestions:</span><span class="sxs-lookup"><span data-stu-id="00926-233">Your suggestions:</span></span>
+  * [<span data-ttu-id="00926-234">UserVoice</span><span class="sxs-lookup"><span data-stu-id="00926-234">UserVoice</span></span>](https://visualstudio.uservoice.com/forums/357324)
+* <span data-ttu-id="00926-235">Blog:</span><span class="sxs-lookup"><span data-stu-id="00926-235">Blog:</span></span>
+  * [<span data-ttu-id="00926-236">Application Insights blog</span><span class="sxs-lookup"><span data-stu-id="00926-236">Application Insights blog</span></span>](https://azure.microsoft.com/blog/tag/application-insights)
+
+## <a name="videos"></a><span data-ttu-id="00926-237">Videos</span><span class="sxs-lookup"><span data-stu-id="00926-237">Videos</span></span>
+
+<span data-ttu-id="00926-238">[![Animated introduction](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-overview/video-front-1.png)](https://www.youtube.com/watch?v=fX2NtGrh-Y0)</span><span class="sxs-lookup"><span data-stu-id="00926-238">[![Animated introduction](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-overview/video-front-1.png)](https://www.youtube.com/watch?v=fX2NtGrh-Y0)</span></span>
+
+> [!VIDEO https://channel9.msdn.com/events/Connect/2016/100/player] 
+
+<!--Link references-->
+
+[android]: https://github.com/Microsoft/ApplicationInsights-Android
+[azure]: ../insights-perf-analytics.md
+[client]: app-insights-javascript.md
+[desktop]: app-insights-windows-desktop.md
+[detect]: app-insights-detect-triage-diagnose.md
+[greenbrown]: app-insights-asp-net.md
+[ios]: https://github.com/Microsoft/ApplicationInsights-iOS
+[java]: app-insights-java-get-started.md
+[knowUsers]: app-insights-web-track-usage.md
+[platforms]: app-insights-platforms.md
+[portal]: http://portal.azure.com/
+[qna]: app-insights-troubleshoot-faq.md
+[redfield]: app-insights-monitor-performance-live-website-now.md
+
+
+
+
+
+
+
+
+
+
+
+
+
+

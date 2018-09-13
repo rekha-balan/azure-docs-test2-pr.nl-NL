@@ -1,0 +1,116 @@
+---
+title: Azure Data Lake Store MapReduce Performance Tuning Guidelines | Microsoft Docs
+description: Azure Data Lake Store MapReduce Performance Tuning Guidelines
+services: data-lake-store
+documentationcenter: ''
+author: stewu
+manager: amitkul
+editor: stewu
+ms.assetid: ebde7b9f-2e51-4d43-b7ab-566417221335
+ms.service: data-lake-store
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 12/19/2016
+ms.author: stewu
+ms.openlocfilehash: 564141d09bc54fbf4beb36d28bec160a7097f897
+ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
+ms.translationtype: HT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 08/02/2018
+ms.locfileid: "44552204"
+---
+# <a name="performance-tuning-guidance-for-mapreduce-on-hdinsight-and-azure-data-lake-store"></a><span data-ttu-id="c43ce-103">Performance tuning guidance for MapReduce on HDInsight and Azure Data Lake Store</span><span class="sxs-lookup"><span data-stu-id="c43ce-103">Performance tuning guidance for MapReduce on HDInsight and Azure Data Lake Store</span></span>
+
+
+## <a name="prerequisites"></a><span data-ttu-id="c43ce-104">Prerequisites</span><span class="sxs-lookup"><span data-stu-id="c43ce-104">Prerequisites</span></span>
+
+* <span data-ttu-id="c43ce-105">**An Azure subscription**.</span><span class="sxs-lookup"><span data-stu-id="c43ce-105">**An Azure subscription**.</span></span> <span data-ttu-id="c43ce-106">See [Get Azure free trial](https://azure.microsoft.com/pricing/free-trial/).</span><span class="sxs-lookup"><span data-stu-id="c43ce-106">See [Get Azure free trial](https://azure.microsoft.com/pricing/free-trial/).</span></span>
+* <span data-ttu-id="c43ce-107">**An Azure Data Lake Store account**.</span><span class="sxs-lookup"><span data-stu-id="c43ce-107">**An Azure Data Lake Store account**.</span></span> <span data-ttu-id="c43ce-108">For instructions on how to create one, see [Get started with Azure Data Lake Store](data-lake-store-get-started-portal.md)</span><span class="sxs-lookup"><span data-stu-id="c43ce-108">For instructions on how to create one, see [Get started with Azure Data Lake Store](data-lake-store-get-started-portal.md)</span></span>
+* <span data-ttu-id="c43ce-109">**Azure HDInsight cluster** with access to a Data Lake Store account.</span><span class="sxs-lookup"><span data-stu-id="c43ce-109">**Azure HDInsight cluster** with access to a Data Lake Store account.</span></span> <span data-ttu-id="c43ce-110">See [Create an HDInsight cluster with Data Lake Store](data-lake-store-hdinsight-hadoop-use-portal.md).</span><span class="sxs-lookup"><span data-stu-id="c43ce-110">See [Create an HDInsight cluster with Data Lake Store](data-lake-store-hdinsight-hadoop-use-portal.md).</span></span> <span data-ttu-id="c43ce-111">Make sure you enable Remote Desktop for the cluster.</span><span class="sxs-lookup"><span data-stu-id="c43ce-111">Make sure you enable Remote Desktop for the cluster.</span></span>
+* <span data-ttu-id="c43ce-112">**Using MapReduce on HDInsight**.</span><span class="sxs-lookup"><span data-stu-id="c43ce-112">**Using MapReduce on HDInsight**.</span></span>  <span data-ttu-id="c43ce-113">For more information, see [Use MapReduce in Hadoop on HDInsight](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-use-mapreduce)</span><span class="sxs-lookup"><span data-stu-id="c43ce-113">For more information, see [Use MapReduce in Hadoop on HDInsight](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-use-mapreduce)</span></span>  
+* <span data-ttu-id="c43ce-114">**Performance tuning guidelines on ADLS**.</span><span class="sxs-lookup"><span data-stu-id="c43ce-114">**Performance tuning guidelines on ADLS**.</span></span>  <span data-ttu-id="c43ce-115">For general performance concepts, see [Data Lake Store Performance Tuning Guidance](https://docs.microsoft.com/en-us/azure/data-lake-store/data-lake-store-performance-tuning-guidance)</span><span class="sxs-lookup"><span data-stu-id="c43ce-115">For general performance concepts, see [Data Lake Store Performance Tuning Guidance](https://docs.microsoft.com/en-us/azure/data-lake-store/data-lake-store-performance-tuning-guidance)</span></span>  
+
+## <a name="parameters"></a><span data-ttu-id="c43ce-116">Parameters</span><span class="sxs-lookup"><span data-stu-id="c43ce-116">Parameters</span></span>
+
+<span data-ttu-id="c43ce-117">When running MapReduce jobs, here are the most important parameters that you can configure to increase performance on ADLS:</span><span class="sxs-lookup"><span data-stu-id="c43ce-117">When running MapReduce jobs, here are the most important parameters that you can configure to increase performance on ADLS:</span></span>
+
+* <span data-ttu-id="c43ce-118">**Mapreduce.map.memory.mb** – The amount of memory to allocate to each mapper</span><span class="sxs-lookup"><span data-stu-id="c43ce-118">**Mapreduce.map.memory.mb** – The amount of memory to allocate to each mapper</span></span>
+* <span data-ttu-id="c43ce-119">**Mapreduce.job.maps** – The number of map tasks per job</span><span class="sxs-lookup"><span data-stu-id="c43ce-119">**Mapreduce.job.maps** – The number of map tasks per job</span></span>
+* <span data-ttu-id="c43ce-120">**Mapreduce.reduce.memory.mb** – The amount of memory to allocate to each reducer</span><span class="sxs-lookup"><span data-stu-id="c43ce-120">**Mapreduce.reduce.memory.mb** – The amount of memory to allocate to each reducer</span></span>
+* <span data-ttu-id="c43ce-121">**Mapreduce.job.reduces** – The number of reduce tasks per job</span><span class="sxs-lookup"><span data-stu-id="c43ce-121">**Mapreduce.job.reduces** – The number of reduce tasks per job</span></span>
+
+<span data-ttu-id="c43ce-122">**Mapreduce.map.memory / Mapreduce.reduce.memory** This number should be adjusted based on how much memory is needed for the map and/or reduce task.</span><span class="sxs-lookup"><span data-stu-id="c43ce-122">**Mapreduce.map.memory / Mapreduce.reduce.memory** This number should be adjusted based on how much memory is needed for the map and/or reduce task.</span></span>  <span data-ttu-id="c43ce-123">The default values of mapreduce.map.memory and mapreduce.reduce.memory can be viewed in Ambari via the Yarn configuration.</span><span class="sxs-lookup"><span data-stu-id="c43ce-123">The default values of mapreduce.map.memory and mapreduce.reduce.memory can be viewed in Ambari via the Yarn configuration.</span></span>  <span data-ttu-id="c43ce-124">In Ambari, navigate to YARN and view the Configs tab.  You can see the memory</span><span class="sxs-lookup"><span data-stu-id="c43ce-124">In Ambari, navigate to YARN and view the Configs tab.  You can see the memory</span></span>     
+
+<span data-ttu-id="c43ce-125">**Mapreduce.job.maps / Mapreduce.job.reduces** This will determine the maximum number of mappers or reducers to be created.</span><span class="sxs-lookup"><span data-stu-id="c43ce-125">**Mapreduce.job.maps / Mapreduce.job.reduces** This will determine the maximum number of mappers or reducers to be created.</span></span>  <span data-ttu-id="c43ce-126">The number of splits will determine how many mappers will be created for the MapReduce job.</span><span class="sxs-lookup"><span data-stu-id="c43ce-126">The number of splits will determine how many mappers will be created for the MapReduce job.</span></span>  <span data-ttu-id="c43ce-127">Therefore, you may get less mappers than you requested if there are less splits than the number of mappers requested.</span><span class="sxs-lookup"><span data-stu-id="c43ce-127">Therefore, you may get less mappers than you requested if there are less splits than the number of mappers requested.</span></span>       
+
+## <a name="guidance"></a><span data-ttu-id="c43ce-128">Guidance</span><span class="sxs-lookup"><span data-stu-id="c43ce-128">Guidance</span></span>
+
+<span data-ttu-id="c43ce-129">**Step 1: Determine number of jobs running** - By default, MapReduce will use the entire cluster for your job.</span><span class="sxs-lookup"><span data-stu-id="c43ce-129">**Step 1: Determine number of jobs running** - By default, MapReduce will use the entire cluster for your job.</span></span>  <span data-ttu-id="c43ce-130">You can use less of the cluster by using less mappers than there are available containers.</span><span class="sxs-lookup"><span data-stu-id="c43ce-130">You can use less of the cluster by using less mappers than there are available containers.</span></span>  <span data-ttu-id="c43ce-131">The guidance in this document assumes that your application is the only application running on your cluster.</span><span class="sxs-lookup"><span data-stu-id="c43ce-131">The guidance in this document assumes that your application is the only application running on your cluster.</span></span>      
+
+<span data-ttu-id="c43ce-132">**Step 2: Set mapreduce.map.memory/mapreduce.reduce.memory** –  The size of the memory for map and reduce tasks will be dependent on your specific job.</span><span class="sxs-lookup"><span data-stu-id="c43ce-132">**Step 2: Set mapreduce.map.memory/mapreduce.reduce.memory** –  The size of the memory for map and reduce tasks will be dependent on your specific job.</span></span>  <span data-ttu-id="c43ce-133">You can reduce the memory size if you want to increase concurrency.</span><span class="sxs-lookup"><span data-stu-id="c43ce-133">You can reduce the memory size if you want to increase concurrency.</span></span>  <span data-ttu-id="c43ce-134">The number of concurrently running tasks depends on the number of containers.</span><span class="sxs-lookup"><span data-stu-id="c43ce-134">The number of concurrently running tasks depends on the number of containers.</span></span>  <span data-ttu-id="c43ce-135">By decreasing the amount of memory per mapper or reducer, more containers can be created, which enable more mappers or reducers to run concurrently.</span><span class="sxs-lookup"><span data-stu-id="c43ce-135">By decreasing the amount of memory per mapper or reducer, more containers can be created, which enable more mappers or reducers to run concurrently.</span></span>  <span data-ttu-id="c43ce-136">Decreasing the amount of memory too much may cause some processes to run out of memory.</span><span class="sxs-lookup"><span data-stu-id="c43ce-136">Decreasing the amount of memory too much may cause some processes to run out of memory.</span></span>  <span data-ttu-id="c43ce-137">If you get a heap error when running your job, you should increase the memory per mapper or reducer.</span><span class="sxs-lookup"><span data-stu-id="c43ce-137">If you get a heap error when running your job, you should increase the memory per mapper or reducer.</span></span>  <span data-ttu-id="c43ce-138">You should consider that adding more containers will add extra overhead for each additional container, which can potentially degrade performance.</span><span class="sxs-lookup"><span data-stu-id="c43ce-138">You should consider that adding more containers will add extra overhead for each additional container, which can potentially degrade performance.</span></span>  <span data-ttu-id="c43ce-139">Another alternative is to get more memory by using a cluster that has higher amounts of memory or increasing the number of nodes in your cluster.</span><span class="sxs-lookup"><span data-stu-id="c43ce-139">Another alternative is to get more memory by using a cluster that has higher amounts of memory or increasing the number of nodes in your cluster.</span></span>  <span data-ttu-id="c43ce-140">More memory will enable more containers to be used, which means more concurrency.</span><span class="sxs-lookup"><span data-stu-id="c43ce-140">More memory will enable more containers to be used, which means more concurrency.</span></span>  
+
+<span data-ttu-id="c43ce-141">**Step 3: Determine Total YARN memory** - To tune mapreduce.job.maps/mapreduce.job.reduces, you should consider the amount of total YARN memory available for use.</span><span class="sxs-lookup"><span data-stu-id="c43ce-141">**Step 3: Determine Total YARN memory** - To tune mapreduce.job.maps/mapreduce.job.reduces, you should consider the amount of total YARN memory available for use.</span></span>  <span data-ttu-id="c43ce-142">This information is available in Ambari.</span><span class="sxs-lookup"><span data-stu-id="c43ce-142">This information is available in Ambari.</span></span>  <span data-ttu-id="c43ce-143">Navigate to YARN and view the Configs tab.  The YARN memory is displayed in this window.</span><span class="sxs-lookup"><span data-stu-id="c43ce-143">Navigate to YARN and view the Configs tab.  The YARN memory is displayed in this window.</span></span>  <span data-ttu-id="c43ce-144">You should multiply the YARN memory with the number of nodes in your cluster to get the total YARN memory.</span><span class="sxs-lookup"><span data-stu-id="c43ce-144">You should multiply the YARN memory with the number of nodes in your cluster to get the total YARN memory.</span></span>
+
+    Total YARN memory = nodes * YARN memory per node
+<span data-ttu-id="c43ce-145">If you are using an empty cluster, then memory can be the total YARN memory for your cluster.</span><span class="sxs-lookup"><span data-stu-id="c43ce-145">If you are using an empty cluster, then memory can be the total YARN memory for your cluster.</span></span>  <span data-ttu-id="c43ce-146">If other applications are using memory, then you can choose to only use a portion of your cluster’s memory by reducing the number of mappers or reducers to the number of containers you want to use.</span><span class="sxs-lookup"><span data-stu-id="c43ce-146">If other applications are using memory, then you can choose to only use a portion of your cluster’s memory by reducing the number of mappers or reducers to the number of containers you want to use.</span></span>  
+
+<span data-ttu-id="c43ce-147">**Step 4: Calculate number of YARN containers** – YARN containers dictate the amount of concurrency available for the job.</span><span class="sxs-lookup"><span data-stu-id="c43ce-147">**Step 4: Calculate number of YARN containers** – YARN containers dictate the amount of concurrency available for the job.</span></span>  <span data-ttu-id="c43ce-148">Take total YARN memory and divide that by mapreduce.map.memory.</span><span class="sxs-lookup"><span data-stu-id="c43ce-148">Take total YARN memory and divide that by mapreduce.map.memory.</span></span>  
+
+    # of YARN containers = total YARN memory / mapreduce.map.memory
+    
+<span data-ttu-id="c43ce-149">You should use at least as many mappers and reducers as the # of YARN containers to get the most concurrency.</span><span class="sxs-lookup"><span data-stu-id="c43ce-149">You should use at least as many mappers and reducers as the # of YARN containers to get the most concurrency.</span></span>  <span data-ttu-id="c43ce-150">You can experiment further by increasing the number of mappers and reducers to see if you get better performance.</span><span class="sxs-lookup"><span data-stu-id="c43ce-150">You can experiment further by increasing the number of mappers and reducers to see if you get better performance.</span></span>  <span data-ttu-id="c43ce-151">Keep in mind that more mappers will have additional overhead so having too many mappers may degrade performance.</span><span class="sxs-lookup"><span data-stu-id="c43ce-151">Keep in mind that more mappers will have additional overhead so having too many mappers may degrade performance.</span></span>  
+
+<span data-ttu-id="c43ce-152">Note: CPU scheduling and CPU isolation are turned off by default so the number of YARN containers is constrained by memory.</span><span class="sxs-lookup"><span data-stu-id="c43ce-152">Note: CPU scheduling and CPU isolation are turned off by default so the number of YARN containers is constrained by memory.</span></span>
+
+## <a name="example-calculation"></a><span data-ttu-id="c43ce-153">Example Calculation</span><span class="sxs-lookup"><span data-stu-id="c43ce-153">Example Calculation</span></span>
+
+<span data-ttu-id="c43ce-154">Let’s say you currently have a cluster composed of 8 D14 nodes and you want to run an I/O intensive job.</span><span class="sxs-lookup"><span data-stu-id="c43ce-154">Let’s say you currently have a cluster composed of 8 D14 nodes and you want to run an I/O intensive job.</span></span>  <span data-ttu-id="c43ce-155">Here are the calculations you should do:</span><span class="sxs-lookup"><span data-stu-id="c43ce-155">Here are the calculations you should do:</span></span>
+
+<span data-ttu-id="c43ce-156">**Step 1: Determine number of jobs running** - for our example, we assume that our job is the only one running.</span><span class="sxs-lookup"><span data-stu-id="c43ce-156">**Step 1: Determine number of jobs running** - for our example, we assume that our job is the only one running.</span></span>  
+
+<span data-ttu-id="c43ce-157">**Step 2: Set mapreduce.map.memory/mapreduce.reduce.memory** – for our example, you are running an I/O intensive job and decide that 3GB of memory for map tasks will be sufficient.</span><span class="sxs-lookup"><span data-stu-id="c43ce-157">**Step 2: Set mapreduce.map.memory/mapreduce.reduce.memory** – for our example, you are running an I/O intensive job and decide that 3GB of memory for map tasks will be sufficient.</span></span>
+
+    mapreduce.map.memory = 3GB
+<span data-ttu-id="c43ce-158">**Step 3: Determine Total YARN memory**</span><span class="sxs-lookup"><span data-stu-id="c43ce-158">**Step 3: Determine Total YARN memory**</span></span> 
+
+    total memory from the cluster is 8 nodes * 96GB of YARN memory for a D14 = 768GB
+<span data-ttu-id="c43ce-159">**Step 4: Calculate # of YARN containers**</span><span class="sxs-lookup"><span data-stu-id="c43ce-159">**Step 4: Calculate # of YARN containers**</span></span>
+
+    # of YARN containers = 768GB of available memory / 3 GB of memory =   256
+
+## <a name="limitations"></a><span data-ttu-id="c43ce-160">Limitations</span><span class="sxs-lookup"><span data-stu-id="c43ce-160">Limitations</span></span>
+
+<span data-ttu-id="c43ce-161">**ADLS throttling**</span><span class="sxs-lookup"><span data-stu-id="c43ce-161">**ADLS throttling**</span></span> 
+
+<span data-ttu-id="c43ce-162">As a multi-tenant service, ADLS sets account level bandwidth limits.</span><span class="sxs-lookup"><span data-stu-id="c43ce-162">As a multi-tenant service, ADLS sets account level bandwidth limits.</span></span>  <span data-ttu-id="c43ce-163">If you hit these limits, you will start to see task failures.</span><span class="sxs-lookup"><span data-stu-id="c43ce-163">If you hit these limits, you will start to see task failures.</span></span> <span data-ttu-id="c43ce-164">This can be identified by observing throttling errors in task logs.</span><span class="sxs-lookup"><span data-stu-id="c43ce-164">This can be identified by observing throttling errors in task logs.</span></span>  <span data-ttu-id="c43ce-165">If you need more bandwidth for your job, please contact us.</span><span class="sxs-lookup"><span data-stu-id="c43ce-165">If you need more bandwidth for your job, please contact us.</span></span>   
+
+<span data-ttu-id="c43ce-166">To check if you are getting throttled, you need to enable the debug logging on the client side.</span><span class="sxs-lookup"><span data-stu-id="c43ce-166">To check if you are getting throttled, you need to enable the debug logging on the client side.</span></span> <span data-ttu-id="c43ce-167">Here’s how you can do that:</span><span class="sxs-lookup"><span data-stu-id="c43ce-167">Here’s how you can do that:</span></span>
+
+1. <span data-ttu-id="c43ce-168">Put the following property in the log4j properties in Ambari > YARN > Config > Advanced yarn-log4j: log4j.logger.com.microsoft.azure.datalake.store=DEBUG</span><span class="sxs-lookup"><span data-stu-id="c43ce-168">Put the following property in the log4j properties in Ambari > YARN > Config > Advanced yarn-log4j: log4j.logger.com.microsoft.azure.datalake.store=DEBUG</span></span>
+
+2. <span data-ttu-id="c43ce-169">Restart all the nodes/service for the config to take effect.</span><span class="sxs-lookup"><span data-stu-id="c43ce-169">Restart all the nodes/service for the config to take effect.</span></span>
+
+3. <span data-ttu-id="c43ce-170">If you are getting throttled, you’ll see the HTTP 429 error code in the YARN log file.</span><span class="sxs-lookup"><span data-stu-id="c43ce-170">If you are getting throttled, you’ll see the HTTP 429 error code in the YARN log file.</span></span> <span data-ttu-id="c43ce-171">The YARN log file is in /tmp/&lt;user&gt;/yarn.log</span><span class="sxs-lookup"><span data-stu-id="c43ce-171">The YARN log file is in /tmp/&lt;user&gt;/yarn.log</span></span>
+
+## <a name="examples-to-run"></a><span data-ttu-id="c43ce-172">Examples to Run</span><span class="sxs-lookup"><span data-stu-id="c43ce-172">Examples to Run</span></span>
+
+<span data-ttu-id="c43ce-173">To demonstrate how MapReduce runs on Azure Data Lake Store, below is some sample code that was run on a cluster with the following settings:</span><span class="sxs-lookup"><span data-stu-id="c43ce-173">To demonstrate how MapReduce runs on Azure Data Lake Store, below is some sample code that was run on a cluster with the following settings:</span></span>
+
+* <span data-ttu-id="c43ce-174">16 node D14v2</span><span class="sxs-lookup"><span data-stu-id="c43ce-174">16 node D14v2</span></span>
+* <span data-ttu-id="c43ce-175">Hadoop cluster running HDI 3.5</span><span class="sxs-lookup"><span data-stu-id="c43ce-175">Hadoop cluster running HDI 3.5</span></span>
+
+<span data-ttu-id="c43ce-176">For a starting point, here are some example commands to run MapReduce Teragen, Terasort, and Teravalidate.</span><span class="sxs-lookup"><span data-stu-id="c43ce-176">For a starting point, here are some example commands to run MapReduce Teragen, Terasort, and Teravalidate.</span></span>  <span data-ttu-id="c43ce-177">You can adjust these commands based on your resources.</span><span class="sxs-lookup"><span data-stu-id="c43ce-177">You can adjust these commands based on your resources.</span></span>
+
+<span data-ttu-id="c43ce-178">**Teragen**</span><span class="sxs-lookup"><span data-stu-id="c43ce-178">**Teragen**</span></span>
+
+    yarn jar /usr/hdp/current/hadoop-mapreduce-client/hadoop-mapreduce-examples.jar teragen -Dmapred.map.tasks=2048 -Dmapred.map.memory.mb=3072 10000000000 adl://example/data/1TB-sort-input
+
+<span data-ttu-id="c43ce-179">**Terasort**</span><span class="sxs-lookup"><span data-stu-id="c43ce-179">**Terasort**</span></span>
+
+    yarn jar /usr/hdp/current/hadoop-mapreduce-client/hadoop-mapreduce-examples.jar terasort -Dmapred.map.tasks=2048 -Dmapred.map.memory.mb=3072 -Dmapred.reduce.tasks=512 -Dmapred.reduce.memory.mb=3072 adl://example/data/1TB-sort-input adl://example/data/1TB-sort-output
+
+<span data-ttu-id="c43ce-180">**Teravalidate**</span><span class="sxs-lookup"><span data-stu-id="c43ce-180">**Teravalidate**</span></span>
+
+    yarn jar /usr/hdp/current/hadoop-mapreduce-client/hadoop-mapreduce-examples.jar teravalidate -Dmapred.map.tasks=512 -Dmapred.map.memory.mb=3072 adl://example/data/1TB-sort-output adl://example/data/1TB-sort-validate

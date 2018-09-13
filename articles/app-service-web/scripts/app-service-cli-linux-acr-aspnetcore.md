@@ -1,0 +1,52 @@
+---
+title: Azure CLI Script Sample - Create an ASP.NET Core web app in a Docker container from Azure Container Registry | Microsoft Docs
+description: Azure CLI Script Sample - Create an ASP.NET Core web app in a Docker container from Azure Container Registry
+services: appservice
+documentationcenter: appservice
+author: syntaxc4
+manager: erikre
+editor: ''
+tags: azure-service-management
+ms.assetid: 3a2d1983-ff7b-476a-ac44-49ec2aabb31a
+ms.service: app-service
+ms.devlang: azurecli
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: web
+ms.date: 03/20/2017
+ms.author: cfowler
+ms.openlocfilehash: b4562b36f8687f8473e8a50871c91abb9363292b
+ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 08/02/2018
+ms.locfileid: "44552484"
+---
+# <a name="create-an-aspnet-core-web-app-in-a-docker-container-from-azure-container-registry"></a><span data-ttu-id="d7e90-103">Create an ASP.NET Core web app in a Docker container from Azure Container Registry</span><span class="sxs-lookup"><span data-stu-id="d7e90-103">Create an ASP.NET Core web app in a Docker container from Azure Container Registry</span></span>
+
+<span data-ttu-id="d7e90-104">In this scenario you will learn how to create a resource group, Linux app service plan, and web app, and deploy an ASP.NET Core application using a Docker Container from the Azure Container Registry.</span><span class="sxs-lookup"><span data-stu-id="d7e90-104">In this scenario you will learn how to create a resource group, Linux app service plan, and web app, and deploy an ASP.NET Core application using a Docker Container from the Azure Container Registry.</span></span>
+
+[!INCLUDE [sample-cli-install](../../../includes/sample-cli-install.md)]
+
+## <a name="create-app-sample"></a><span data-ttu-id="d7e90-105">Create app sample</span><span class="sxs-lookup"><span data-stu-id="d7e90-105">Create app sample</span></span>
+
+[!code-azurecli[main](../../../cli_scripts/app-service/deploy-linux-acr/deploy-linux-acr.sh?highlight=6-9 "Linux Azure Container Registry")]
+
+[!INCLUDE [cli-script-clean-up](../../../includes/cli-script-clean-up.md)]
+
+## <a name="script-explanation"></a><span data-ttu-id="d7e90-106">Script explanation</span><span class="sxs-lookup"><span data-stu-id="d7e90-106">Script explanation</span></span>
+
+<span data-ttu-id="d7e90-107">This script uses the following commands to create a resource group, web app, and all related resources.</span><span class="sxs-lookup"><span data-stu-id="d7e90-107">This script uses the following commands to create a resource group, web app, and all related resources.</span></span> <span data-ttu-id="d7e90-108">Each command in the table links to command specific documentation.</span><span class="sxs-lookup"><span data-stu-id="d7e90-108">Each command in the table links to command specific documentation.</span></span>
+
+| <span data-ttu-id="d7e90-109">Command</span><span class="sxs-lookup"><span data-stu-id="d7e90-109">Command</span></span> | <span data-ttu-id="d7e90-110">Notes</span><span class="sxs-lookup"><span data-stu-id="d7e90-110">Notes</span></span> |
+|---|---|
+| [<span data-ttu-id="d7e90-111">az group create</span><span class="sxs-lookup"><span data-stu-id="d7e90-111">az group create</span></span>](https://docs.microsoft.com/cli/azure/group#create) | <span data-ttu-id="d7e90-112">Creates a resource group in which all resources are stored.</span><span class="sxs-lookup"><span data-stu-id="d7e90-112">Creates a resource group in which all resources are stored.</span></span> |
+| [<span data-ttu-id="d7e90-113">az appservice plan create</span><span class="sxs-lookup"><span data-stu-id="d7e90-113">az appservice plan create</span></span>](https://docs.microsoft.com/cli/azure/appservice/plan#create) | <span data-ttu-id="d7e90-114">Creates an App Service plan.</span><span class="sxs-lookup"><span data-stu-id="d7e90-114">Creates an App Service plan.</span></span> <span data-ttu-id="d7e90-115">This is like a server farm for your Azure web app.</span><span class="sxs-lookup"><span data-stu-id="d7e90-115">This is like a server farm for your Azure web app.</span></span> |
+| [<span data-ttu-id="d7e90-116">az appservice web create</span><span class="sxs-lookup"><span data-stu-id="d7e90-116">az appservice web create</span></span>](https://docs.microsoft.com/cli/azure/appservice/web#create) | <span data-ttu-id="d7e90-117">Creates an Azure web app within the App Service plan.</span><span class="sxs-lookup"><span data-stu-id="d7e90-117">Creates an Azure web app within the App Service plan.</span></span> |
+| [<span data-ttu-id="d7e90-118">az appservice web config container update</span><span class="sxs-lookup"><span data-stu-id="d7e90-118">az appservice web config container update</span></span>](https://docs.microsoft.com/cli/azure/appservice/web/config/container#update) | <span data-ttu-id="d7e90-119">Sets the Docker container for the Azure web app.</span><span class="sxs-lookup"><span data-stu-id="d7e90-119">Sets the Docker container for the Azure web app.</span></span> |
+
+## <a name="next-steps"></a><span data-ttu-id="d7e90-120">Next steps</span><span class="sxs-lookup"><span data-stu-id="d7e90-120">Next steps</span></span>
+
+<span data-ttu-id="d7e90-121">For more information on the Azure CLI, see [Azure CLI documentation](https://docs.microsoft.com/cli/azure/overview).</span><span class="sxs-lookup"><span data-stu-id="d7e90-121">For more information on the Azure CLI, see [Azure CLI documentation](https://docs.microsoft.com/cli/azure/overview).</span></span>
+
+<span data-ttu-id="d7e90-122">Additional App Service CLI script samples can be found in the [Azure App Service documentation](../app-service-cli-samples.md).</span><span class="sxs-lookup"><span data-stu-id="d7e90-122">Additional App Service CLI script samples can be found in the [Azure App Service documentation](../app-service-cli-samples.md).</span></span>

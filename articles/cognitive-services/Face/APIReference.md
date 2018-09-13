@@ -1,0 +1,28 @@
+---
+title: API Reference the Face API Service | Microsoft Docs
+description: API reference provides information about the following the Person Management, Person Group Management, Face List Management, and Face Algorithms APIs.
+services: cognitive-services
+author: v-royhar
+manager: yutkuo
+ms.service: cognitive-services
+ms.technology: face
+ms.topic: article
+ms.date: 01/18/2017
+ms.author: anroth
+ms.openlocfilehash: 96002434313245b08255a384f79b2f6af6e8792a
+ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
+ms.translationtype: HT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 08/02/2018
+ms.locfileid: "44552481"
+---
+# <a name="api-reference"></a><span data-ttu-id="f5873-103">API Reference</span><span class="sxs-lookup"><span data-stu-id="f5873-103">API Reference</span></span>
+
+
+<span data-ttu-id="f5873-104">The Microsoft Face API is a cloud-based API that provides the most advanced algorithms for face detection and recognition.</span><span class="sxs-lookup"><span data-stu-id="f5873-104">The Microsoft Face API is a cloud-based API that provides the most advanced algorithms for face detection and recognition.</span></span> <span data-ttu-id="f5873-105">The reference document can be found in [Microsoft Cognitive Services (formerly Project Oxford) Dev Portal](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236).</span><span class="sxs-lookup"><span data-stu-id="f5873-105">The reference document can be found in [Microsoft Cognitive Services (formerly Project Oxford) Dev Portal](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236).</span></span>
+
+<span data-ttu-id="f5873-106">Face APIs cover the following categories:</span><span class="sxs-lookup"><span data-stu-id="f5873-106">Face APIs cover the following categories:</span></span>
+- <span data-ttu-id="f5873-107">[Person Management APIs](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523c): Used to manage person faces for [Identification](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395239).</span><span class="sxs-lookup"><span data-stu-id="f5873-107">[Person Management APIs](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523c): Used to manage person faces for [Identification](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395239).</span></span>
+- <span data-ttu-id="f5873-108">[Person Group Management APIs](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395244): Used to manage a person dataset for [Identification](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395239).</span><span class="sxs-lookup"><span data-stu-id="f5873-108">[Person Group Management APIs](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395244): Used to manage a person dataset for [Identification](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395239).</span></span>
+- <span data-ttu-id="f5873-109">[Face List Management APIs](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039524b): Used to manage a face list for [Find Similar](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395237).</span><span class="sxs-lookup"><span data-stu-id="f5873-109">[Face List Management APIs](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039524b): Used to manage a face list for [Find Similar](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395237).</span></span>
+- <span data-ttu-id="f5873-110">[Face Algorithm APIs](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236): Covers core functions such as [Detection](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236), [Verification](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523a), and [Identification](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395239).</span><span class="sxs-lookup"><span data-stu-id="f5873-110">[Face Algorithm APIs](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236): Covers core functions such as [Detection](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236), [Verification](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523a), and [Identification](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395239).</span></span>
