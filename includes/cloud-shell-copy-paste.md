@@ -1,0 +1,3 @@
+* <span data-ttu-id="ea901-101">Windows: `Ctrl-c` to copy is supported but use `Shift-insert` to paste.</span><span class="sxs-lookup"><span data-stu-id="ea901-101">Windows: `Ctrl-c` to copy is supported but use `Shift-insert` to paste.</span></span>
+  * <span data-ttu-id="ea901-102">FireFox/IE may not support clipboard permissions properly.</span><span class="sxs-lookup"><span data-stu-id="ea901-102">FireFox/IE may not support clipboard permissions properly.</span></span>
+* <span data-ttu-id="ea901-103">Mac OS: `Cmd-c` to copy and `Cmd-v` to paste.</span><span class="sxs-lookup"><span data-stu-id="ea901-103">Mac OS: `Cmd-c` to copy and `Cmd-v` to paste.</span></span>
