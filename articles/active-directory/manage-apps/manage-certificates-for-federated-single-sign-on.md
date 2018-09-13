@@ -1,0 +1,91 @@
+---
+title: Manage federation certificates in Azure AD | Microsoft Docs
+description: Learn how to customize the expiration date for your federation certificates, and how to renew certificates that will soon expire.
+services: active-directory
+documentationcenter: ''
+author: barbkess
+manager: mtillman
+editor: ''
+ms.service: active-directory
+ms.component: app-mgmt
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: conceptual
+ms.date: 07/09/2017
+ms.author: barbkess
+ms.reviewer: jeedes
+ms.openlocfilehash: 7bae891bd16ecd3fbbad88022fbbffd32ff41eae
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44870654"
+---
+# <a name="manage-certificates-for-federated-single-sign-on-in-azure-active-directory"></a><span data-ttu-id="8b5c7-103">Manage certificates for federated single sign-on in Azure Active Directory</span><span class="sxs-lookup"><span data-stu-id="8b5c7-103">Manage certificates for federated single sign-on in Azure Active Directory</span></span>
+<span data-ttu-id="8b5c7-104">This article covers common questions and information related to the certificates that Azure Active Directory (Azure AD) creates to establish federated single sign-on (SSO) to your SaaS applications.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-104">This article covers common questions and information related to the certificates that Azure Active Directory (Azure AD) creates to establish federated single sign-on (SSO) to your SaaS applications.</span></span> <span data-ttu-id="8b5c7-105">Add applications from the Azure AD app gallery or by using a non-gallery application template.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-105">Add applications from the Azure AD app gallery or by using a non-gallery application template.</span></span> <span data-ttu-id="8b5c7-106">Configure the application by using the federated SSO option.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-106">Configure the application by using the federated SSO option.</span></span>
+
+<span data-ttu-id="8b5c7-107">This article is relevant only to apps that are configured to use Azure AD SSO through SAML federation, as shown in the following example:</span><span class="sxs-lookup"><span data-stu-id="8b5c7-107">This article is relevant only to apps that are configured to use Azure AD SSO through SAML federation, as shown in the following example:</span></span>
+
+![Azure AD Single Sign-On](./media/manage-certificates-for-federated-single-sign-on/saml_sso.PNG)
+
+## <a name="auto-generated-certificate-for-gallery-and-non-gallery-applications"></a><span data-ttu-id="8b5c7-109">Auto-generated certificate for gallery and non-gallery applications</span><span class="sxs-lookup"><span data-stu-id="8b5c7-109">Auto-generated certificate for gallery and non-gallery applications</span></span>
+<span data-ttu-id="8b5c7-110">When you add a new application from the gallery and configure a SAML-based sign-on, Azure AD generates a certificate for the application that is valid for three years.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-110">When you add a new application from the gallery and configure a SAML-based sign-on, Azure AD generates a certificate for the application that is valid for three years.</span></span> <span data-ttu-id="8b5c7-111">You can download this certificate from the **SAML Signing Certificate** section.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-111">You can download this certificate from the **SAML Signing Certificate** section.</span></span> <span data-ttu-id="8b5c7-112">For gallery applications, this section might show an option to download the certificate or metadata, depending on the requirement of the application.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-112">For gallery applications, this section might show an option to download the certificate or metadata, depending on the requirement of the application.</span></span>
+
+![Azure AD single sign-on](./media/manage-certificates-for-federated-single-sign-on/saml_certificate_download.png)
+
+## <a name="customize-the-expiration-date-for-your-federation-certificate-and-roll-it-over-to-a-new-certificate"></a><span data-ttu-id="8b5c7-114">Customize the expiration date for your federation certificate and roll it over to a new certificate</span><span class="sxs-lookup"><span data-stu-id="8b5c7-114">Customize the expiration date for your federation certificate and roll it over to a new certificate</span></span>
+<span data-ttu-id="8b5c7-115">By default, certificates are set to expire after three years.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-115">By default, certificates are set to expire after three years.</span></span> <span data-ttu-id="8b5c7-116">You can choose a different expiration date for your certificate by completing the following steps.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-116">You can choose a different expiration date for your certificate by completing the following steps.</span></span>
+<span data-ttu-id="8b5c7-117">The screenshots use Salesforce for the sake of example, but these steps can apply to any federated SaaS app.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-117">The screenshots use Salesforce for the sake of example, but these steps can apply to any federated SaaS app.</span></span>
+
+1. <span data-ttu-id="8b5c7-118">In the [Azure portal](https://aad.portal.azure.com), click **Enterprise application** in the left pane and then click **New application** on the **Overview** page:</span><span class="sxs-lookup"><span data-stu-id="8b5c7-118">In the [Azure portal](https://aad.portal.azure.com), click **Enterprise application** in the left pane and then click **New application** on the **Overview** page:</span></span>
+
+   ![Open the SSO configuration wizard](./media/manage-certificates-for-federated-single-sign-on/enterprise_application_new_application.png)
+
+2. <span data-ttu-id="8b5c7-120">Search for the gallery application and then select the application that you want to add.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-120">Search for the gallery application and then select the application that you want to add.</span></span> <span data-ttu-id="8b5c7-121">If you cannot find the required application, add the application by using the **Non-gallery application** option.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-121">If you cannot find the required application, add the application by using the **Non-gallery application** option.</span></span> <span data-ttu-id="8b5c7-122">This feature is available only in the Azure AD Premium (P1 and P2) SKU.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-122">This feature is available only in the Azure AD Premium (P1 and P2) SKU.</span></span>
+
+    ![Azure AD single sign-on](./media/manage-certificates-for-federated-single-sign-on/add_gallery_application.png)
+
+3. <span data-ttu-id="8b5c7-124">Click the **Single sign-on** link in the left pane and change **Single Sign-on Mode** to **SAML-based Sign-on**.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-124">Click the **Single sign-on** link in the left pane and change **Single Sign-on Mode** to **SAML-based Sign-on**.</span></span> <span data-ttu-id="8b5c7-125">This step generates a three-year certificate for your application.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-125">This step generates a three-year certificate for your application.</span></span>
+
+4. <span data-ttu-id="8b5c7-126">To create a new certificate, click the **Create new certificate** link in the **SAML Signing Certificate** section.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-126">To create a new certificate, click the **Create new certificate** link in the **SAML Signing Certificate** section.</span></span>
+
+    ![Generate a new certificate](./media/manage-certificates-for-federated-single-sign-on/create_new_certficate.png)
+
+5. <span data-ttu-id="8b5c7-128">The **Create a new certificate** link opens the calendar control.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-128">The **Create a new certificate** link opens the calendar control.</span></span> <span data-ttu-id="8b5c7-129">You can set any date and time up to three years from the current date.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-129">You can set any date and time up to three years from the current date.</span></span> <span data-ttu-id="8b5c7-130">The selected date and time is the new expiration date and time of your new certificate.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-130">The selected date and time is the new expiration date and time of your new certificate.</span></span> <span data-ttu-id="8b5c7-131">Click **Save**.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-131">Click **Save**.</span></span>
+
+    ![Download then upload the certificate](./media/manage-certificates-for-federated-single-sign-on/certifcate_date_selection.PNG)
+
+6. <span data-ttu-id="8b5c7-133">Now the new certificate is available to download.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-133">Now the new certificate is available to download.</span></span> <span data-ttu-id="8b5c7-134">Click the **Certificate** link to download it.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-134">Click the **Certificate** link to download it.</span></span> <span data-ttu-id="8b5c7-135">At this point, your certificate is not active.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-135">At this point, your certificate is not active.</span></span> <span data-ttu-id="8b5c7-136">When you want to roll over to this certificate, select the **Make new certificate active** check box and click **Save**.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-136">When you want to roll over to this certificate, select the **Make new certificate active** check box and click **Save**.</span></span> <span data-ttu-id="8b5c7-137">From that point, Azure AD starts using the new certificate for signing the response.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-137">From that point, Azure AD starts using the new certificate for signing the response.</span></span>
+
+7.  <span data-ttu-id="8b5c7-138">To learn how to upload the certificate to your particular SaaS application, click the **View application configuration tutorial** link.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-138">To learn how to upload the certificate to your particular SaaS application, click the **View application configuration tutorial** link.</span></span>
+
+## <a name="certificate-expiration-notification-email"></a><span data-ttu-id="8b5c7-139">Certificate expiration notification email</span><span class="sxs-lookup"><span data-stu-id="8b5c7-139">Certificate expiration notification email</span></span>
+
+<span data-ttu-id="8b5c7-140">Azure AD will send an email notification 60, 30, and 7 days before SAML certificate expires.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-140">Azure AD will send an email notification 60, 30, and 7 days before SAML certificate expires.</span></span> <span data-ttu-id="8b5c7-141">To specify the email address for where to send the notification:</span><span class="sxs-lookup"><span data-stu-id="8b5c7-141">To specify the email address for where to send the notification:</span></span>
+
+- <span data-ttu-id="8b5c7-142">On the Azure Active Directory application Single sign-on page, go to the Notification Email field.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-142">On the Azure Active Directory application Single sign-on page, go to the Notification Email field.</span></span>
+- <span data-ttu-id="8b5c7-143">Enter the email address that should receive the certificate expiration notification email.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-143">Enter the email address that should receive the certificate expiration notification email.</span></span> <span data-ttu-id="8b5c7-144">By default, this field uses the email address of the admin who added the application.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-144">By default, this field uses the email address of the admin who added the application.</span></span>
+
+<span data-ttu-id="8b5c7-145">You will receive the notification email from aadnotification@microsoft.com.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-145">You will receive the notification email from aadnotification@microsoft.com.</span></span> <span data-ttu-id="8b5c7-146">To avoid the email going to your spam location, be sure to add this email to your contacts.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-146">To avoid the email going to your spam location, be sure to add this email to your contacts.</span></span> 
+
+## <a name="renew-a-certificate-that-will-soon-expire"></a><span data-ttu-id="8b5c7-147">Renew a certificate that will soon expire</span><span class="sxs-lookup"><span data-stu-id="8b5c7-147">Renew a certificate that will soon expire</span></span>
+<span data-ttu-id="8b5c7-148">The following renewal steps should result in no significant downtime for your users.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-148">The following renewal steps should result in no significant downtime for your users.</span></span> <span data-ttu-id="8b5c7-149">The screenshots in this section feature Salesforce as an example, but these steps can apply to any federated SaaS app.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-149">The screenshots in this section feature Salesforce as an example, but these steps can apply to any federated SaaS app.</span></span>
+
+1. <span data-ttu-id="8b5c7-150">On the **Azure Active Directory** application **Single sign-on** page, generate the new certificate for your application.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-150">On the **Azure Active Directory** application **Single sign-on** page, generate the new certificate for your application.</span></span> <span data-ttu-id="8b5c7-151">You can do this by clicking the **Create new certificate** link in the **SAML Signing Certificate** section.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-151">You can do this by clicking the **Create new certificate** link in the **SAML Signing Certificate** section.</span></span>
+
+    ![Generate a new certificate](./media/manage-certificates-for-federated-single-sign-on/create_new_certficate.png)
+
+2. <span data-ttu-id="8b5c7-153">Select the desired expiration date and time for your new certificate and click **Save**.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-153">Select the desired expiration date and time for your new certificate and click **Save**.</span></span>
+
+3. <span data-ttu-id="8b5c7-154">Download the certificate in the **SAML Signing certificate** option.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-154">Download the certificate in the **SAML Signing certificate** option.</span></span> <span data-ttu-id="8b5c7-155">Upload the new certificate to the SaaS application's single sign-on configuration screen.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-155">Upload the new certificate to the SaaS application's single sign-on configuration screen.</span></span> <span data-ttu-id="8b5c7-156">To learn how to do this for your particular SaaS application, click the **View application configuration tutorial** link.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-156">To learn how to do this for your particular SaaS application, click the **View application configuration tutorial** link.</span></span>
+   
+4. <span data-ttu-id="8b5c7-157">To activate the new certificate in Azure AD, select the **Make new certificate active** check box and click the **Save** button at the top of the page.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-157">To activate the new certificate in Azure AD, select the **Make new certificate active** check box and click the **Save** button at the top of the page.</span></span> <span data-ttu-id="8b5c7-158">This rolls over the new certificate on the Azure AD side.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-158">This rolls over the new certificate on the Azure AD side.</span></span> <span data-ttu-id="8b5c7-159">The status of the certificate changes from **New** to **Active**.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-159">The status of the certificate changes from **New** to **Active**.</span></span> <span data-ttu-id="8b5c7-160">From that point, Azure AD starts using the new certificate for signing the response.</span><span class="sxs-lookup"><span data-stu-id="8b5c7-160">From that point, Azure AD starts using the new certificate for signing the response.</span></span> 
+   
+    ![Generate a new certificate](./media/manage-certificates-for-federated-single-sign-on/new_certificate_download.png)
+
+## <a name="related-articles"></a><span data-ttu-id="8b5c7-162">Related articles</span><span class="sxs-lookup"><span data-stu-id="8b5c7-162">Related articles</span></span>
+* [<span data-ttu-id="8b5c7-163">List of tutorials on how to integrate SaaS apps with Azure Active Directory</span><span class="sxs-lookup"><span data-stu-id="8b5c7-163">List of tutorials on how to integrate SaaS apps with Azure Active Directory</span></span>](../saas-apps/tutorial-list.md)
+* [<span data-ttu-id="8b5c7-164">Article index for application management in Azure Active Directory</span><span class="sxs-lookup"><span data-stu-id="8b5c7-164">Article index for application management in Azure Active Directory</span></span>](../active-directory-apps-index.md)
+* [<span data-ttu-id="8b5c7-165">Application access and single sign-on with Azure Active Directory</span><span class="sxs-lookup"><span data-stu-id="8b5c7-165">Application access and single sign-on with Azure Active Directory</span></span>](what-is-single-sign-on.md)
+* [<span data-ttu-id="8b5c7-166">Troubleshooting SAML-based single sign-on</span><span class="sxs-lookup"><span data-stu-id="8b5c7-166">Troubleshooting SAML-based single sign-on</span></span>](../develop/howto-v1-debug-saml-sso-issues.md)
