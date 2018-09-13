@@ -1,0 +1,59 @@
+---
+title: Resource groups for Windows VMs in Azure | Microsoft Docs
+description: Learn about the key design and implementation guidelines for deploying Resource Groups in Azure infrastructure services.
+documentationcenter: ''
+services: virtual-machines-windows
+author: iainfoulds
+manager: timlt
+editor: ''
+tags: azure-resource-manager
+ms.assetid: 0fbcabcd-e96d-4d71-a526-431984887451
+ms.service: virtual-machines-windows
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: article
+ms.date: 03/17/2017
+ms.author: iainfou
+ms.custom: H1Hack27Feb2017
+ms.openlocfilehash: 10f9e3cf57b9845f3071f05187ffb23363eed366
+ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 08/02/2018
+ms.locfileid: "44556339"
+---
+# <a name="azure-resource-group-guidelines-for-windows-vms"></a><span data-ttu-id="651ef-103">Azure resource group guidelines for Windows VMs</span><span class="sxs-lookup"><span data-stu-id="651ef-103">Azure resource group guidelines for Windows VMs</span></span>
+
+[!INCLUDE [virtual-machines-windows-infrastructure-guidelines-intro](../../../includes/virtual-machines-windows-infrastructure-guidelines-intro.md)]
+
+<span data-ttu-id="651ef-104">This article focuses on understanding how to logically build out your environment and group all the components in Resource Groups.</span><span class="sxs-lookup"><span data-stu-id="651ef-104">This article focuses on understanding how to logically build out your environment and group all the components in Resource Groups.</span></span>
+
+## <a name="implementation-guidelines-for-resource-groups"></a><span data-ttu-id="651ef-105">Implementation guidelines for Resource Groups</span><span class="sxs-lookup"><span data-stu-id="651ef-105">Implementation guidelines for Resource Groups</span></span>
+<span data-ttu-id="651ef-106">Decisions:</span><span class="sxs-lookup"><span data-stu-id="651ef-106">Decisions:</span></span>
+
+* <span data-ttu-id="651ef-107">Are you going to build out Resource Groups by the core infrastructure components, or by complete application deployment?</span><span class="sxs-lookup"><span data-stu-id="651ef-107">Are you going to build out Resource Groups by the core infrastructure components, or by complete application deployment?</span></span>
+* <span data-ttu-id="651ef-108">Do you need to restrict access to Resource Groups using Role-Based Access Controls?</span><span class="sxs-lookup"><span data-stu-id="651ef-108">Do you need to restrict access to Resource Groups using Role-Based Access Controls?</span></span>
+
+<span data-ttu-id="651ef-109">Tasks:</span><span class="sxs-lookup"><span data-stu-id="651ef-109">Tasks:</span></span>
+
+* <span data-ttu-id="651ef-110">Define what core infrastructure components and dedicated Resource Groups you need.</span><span class="sxs-lookup"><span data-stu-id="651ef-110">Define what core infrastructure components and dedicated Resource Groups you need.</span></span>
+* <span data-ttu-id="651ef-111">Review how to implement Resource Manager templates for consistent, reproducible deployments.</span><span class="sxs-lookup"><span data-stu-id="651ef-111">Review how to implement Resource Manager templates for consistent, reproducible deployments.</span></span>
+* <span data-ttu-id="651ef-112">Define what user access roles you need for controlling access to Resource Groups.</span><span class="sxs-lookup"><span data-stu-id="651ef-112">Define what user access roles you need for controlling access to Resource Groups.</span></span>
+* <span data-ttu-id="651ef-113">Create the set of Resource Groups using your naming convention.</span><span class="sxs-lookup"><span data-stu-id="651ef-113">Create the set of Resource Groups using your naming convention.</span></span> <span data-ttu-id="651ef-114">You can use Azure PowerShell or the portal.</span><span class="sxs-lookup"><span data-stu-id="651ef-114">You can use Azure PowerShell or the portal.</span></span>
+
+## <a name="resource-groups"></a><span data-ttu-id="651ef-115">Resource Groups</span><span class="sxs-lookup"><span data-stu-id="651ef-115">Resource Groups</span></span>
+<span data-ttu-id="651ef-116">In Azure, you logically group related resources such as storage accounts, virtual networks, and virtual machines (VMs) to deploy, manage, and maintain them as a single entity.</span><span class="sxs-lookup"><span data-stu-id="651ef-116">In Azure, you logically group related resources such as storage accounts, virtual networks, and virtual machines (VMs) to deploy, manage, and maintain them as a single entity.</span></span> <span data-ttu-id="651ef-117">This approach makes it easier to deploy applications while keeping all the related resources together from a management perspective, or to grant others access to that group of resources.</span><span class="sxs-lookup"><span data-stu-id="651ef-117">This approach makes it easier to deploy applications while keeping all the related resources together from a management perspective, or to grant others access to that group of resources.</span></span> <span data-ttu-id="651ef-118">For a more comprehensive understanding of Resource Groups, read the [Azure Resource Manager overview](../../azure-resource-manager/resource-group-overview.md).</span><span class="sxs-lookup"><span data-stu-id="651ef-118">For a more comprehensive understanding of Resource Groups, read the [Azure Resource Manager overview](../../azure-resource-manager/resource-group-overview.md).</span></span>
+
+<span data-ttu-id="651ef-119">A key feature to Resource Groups is ability to build out your environment using templates.</span><span class="sxs-lookup"><span data-stu-id="651ef-119">A key feature to Resource Groups is ability to build out your environment using templates.</span></span> <span data-ttu-id="651ef-120">A template is simply a JSON file that declares the storage, networking, and compute resources.</span><span class="sxs-lookup"><span data-stu-id="651ef-120">A template is simply a JSON file that declares the storage, networking, and compute resources.</span></span> <span data-ttu-id="651ef-121">You can also define any related custom scripts or configurations to apply.</span><span class="sxs-lookup"><span data-stu-id="651ef-121">You can also define any related custom scripts or configurations to apply.</span></span> <span data-ttu-id="651ef-122">By using these templates, you create consistent, reproducible deployments for your applications.</span><span class="sxs-lookup"><span data-stu-id="651ef-122">By using these templates, you create consistent, reproducible deployments for your applications.</span></span> <span data-ttu-id="651ef-123">This approach makes it easy to build out an environment in development and then use that same template to create a production deployment, or vice versa.</span><span class="sxs-lookup"><span data-stu-id="651ef-123">This approach makes it easy to build out an environment in development and then use that same template to create a production deployment, or vice versa.</span></span> <span data-ttu-id="651ef-124">For a better understanding using templates, read [the template walkthrough](../../azure-resource-manager/resource-manager-template-walkthrough.md) that guides you through each step of the building out a template.</span><span class="sxs-lookup"><span data-stu-id="651ef-124">For a better understanding using templates, read [the template walkthrough](../../azure-resource-manager/resource-manager-template-walkthrough.md) that guides you through each step of the building out a template.</span></span>
+
+<span data-ttu-id="651ef-125">There are two different approaches you can take when designing your environment with Resource Groups:</span><span class="sxs-lookup"><span data-stu-id="651ef-125">There are two different approaches you can take when designing your environment with Resource Groups:</span></span>
+
+* <span data-ttu-id="651ef-126">Resource Groups for each application deployment that combines the storage accounts, virtual networks, and subnets, VMs, load balancers, etc.</span><span class="sxs-lookup"><span data-stu-id="651ef-126">Resource Groups for each application deployment that combines the storage accounts, virtual networks, and subnets, VMs, load balancers, etc.</span></span>
+* <span data-ttu-id="651ef-127">Centralized Resource Groups that contain your core virtual networking and subnets or storage accounts.</span><span class="sxs-lookup"><span data-stu-id="651ef-127">Centralized Resource Groups that contain your core virtual networking and subnets or storage accounts.</span></span> <span data-ttu-id="651ef-128">Your applications are then in their own Resource Groups that only contain VMs, load balancers, network interfaces, etc.</span><span class="sxs-lookup"><span data-stu-id="651ef-128">Your applications are then in their own Resource Groups that only contain VMs, load balancers, network interfaces, etc.</span></span>
+
+<span data-ttu-id="651ef-129">As you scale out, creating centralized Resource Groups for your virtual networking and subnets makes it easier to build cross-premises network connections for hybrid connectivity options.</span><span class="sxs-lookup"><span data-stu-id="651ef-129">As you scale out, creating centralized Resource Groups for your virtual networking and subnets makes it easier to build cross-premises network connections for hybrid connectivity options.</span></span> <span data-ttu-id="651ef-130">The alternative approach is for each application to have their own virtual network that requires configuration and maintenance.</span><span class="sxs-lookup"><span data-stu-id="651ef-130">The alternative approach is for each application to have their own virtual network that requires configuration and maintenance.</span></span>  <span data-ttu-id="651ef-131">[Role-Based Access Controls](../../active-directory/role-based-access-control-what-is.md) provide a granular way to control access to Resource Groups.</span><span class="sxs-lookup"><span data-stu-id="651ef-131">[Role-Based Access Controls](../../active-directory/role-based-access-control-what-is.md) provide a granular way to control access to Resource Groups.</span></span> <span data-ttu-id="651ef-132">For production applications, you can control the users that may access those resources, or for the core infrastructure resources you can limit only infrastructure engineers to work with them.</span><span class="sxs-lookup"><span data-stu-id="651ef-132">For production applications, you can control the users that may access those resources, or for the core infrastructure resources you can limit only infrastructure engineers to work with them.</span></span> <span data-ttu-id="651ef-133">Your application owners only have access to the application components within their Resource Group and not the core Azure infrastructure of your environment.</span><span class="sxs-lookup"><span data-stu-id="651ef-133">Your application owners only have access to the application components within their Resource Group and not the core Azure infrastructure of your environment.</span></span> <span data-ttu-id="651ef-134">As you design your environment, consider the users that require access to the resources and design your Resource Groups accordingly.</span><span class="sxs-lookup"><span data-stu-id="651ef-134">As you design your environment, consider the users that require access to the resources and design your Resource Groups accordingly.</span></span> 
+
+## <a name="next-steps"></a><span data-ttu-id="651ef-135">Next steps</span><span class="sxs-lookup"><span data-stu-id="651ef-135">Next steps</span></span>
+[!INCLUDE [virtual-machines-windows-infrastructure-guidelines-next-steps](../../../includes/virtual-machines-windows-infrastructure-guidelines-next-steps.md)]
+

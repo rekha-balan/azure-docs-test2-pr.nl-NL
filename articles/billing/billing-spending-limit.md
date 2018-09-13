@@ -1,0 +1,72 @@
+---
+title: Understand Azure spending limit | Microsoft Docs
+description: Describes how Azure spending limit works and how to remove it
+services: ''
+documentationcenter: ''
+author: genlin
+manager: vikdesai
+editor: ''
+tags: billing
+ms.service: billing
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 04/12/2017
+ms.author: genli
+ms.openlocfilehash: 39ae134d8927f5123667b64bbd0c659cd5f62ffc
+ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
+ms.translationtype: HT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 08/02/2018
+ms.locfileid: "44562935"
+---
+# <a name="understand-azure-spending-limit-and-how-to-remove-it"></a><span data-ttu-id="9cd42-103">Understand Azure spending limit and how to remove it</span><span class="sxs-lookup"><span data-stu-id="9cd42-103">Understand Azure spending limit and how to remove it</span></span>
+
+<span data-ttu-id="9cd42-104">Azure spending limit is a limit on how much your Azure subscription can spend.</span><span class="sxs-lookup"><span data-stu-id="9cd42-104">Azure spending limit is a limit on how much your Azure subscription can spend.</span></span> <span data-ttu-id="9cd42-105">All new customers who sign up for the trial offer or offers that includes credits over multiple months have the spending limit turned by default.</span><span class="sxs-lookup"><span data-stu-id="9cd42-105">All new customers who sign up for the trial offer or offers that includes credits over multiple months have the spending limit turned by default.</span></span> <span data-ttu-id="9cd42-106">The spending limit is $0.</span><span class="sxs-lookup"><span data-stu-id="9cd42-106">The spending limit is $0.</span></span> <span data-ttu-id="9cd42-107">It can’t be changed.</span><span class="sxs-lookup"><span data-stu-id="9cd42-107">It can’t be changed.</span></span> <span data-ttu-id="9cd42-108">The spending limit isn’t available for subscription types such as Pay-As-You-Go subscriptions and commitment plans.</span><span class="sxs-lookup"><span data-stu-id="9cd42-108">The spending limit isn’t available for subscription types such as Pay-As-You-Go subscriptions and commitment plans.</span></span> <span data-ttu-id="9cd42-109">See the [full list of Azure offers and the availability of the spending limit](https://azure.microsoft.com/support/legal/offer-details/).</span><span class="sxs-lookup"><span data-stu-id="9cd42-109">See the [full list of Azure offers and the availability of the spending limit](https://azure.microsoft.com/support/legal/offer-details/).</span></span>
+
+## <a name="what-happens-when-i-reach-the-spending-limit"></a><span data-ttu-id="9cd42-110">What happens when I reach the spending limit?</span><span class="sxs-lookup"><span data-stu-id="9cd42-110">What happens when I reach the spending limit?</span></span>
+
+<span data-ttu-id="9cd42-111">When your usage results in charges that exhaust the monthly amounts included in your offer, the services that you deployed are disabled for the rest of that billing month.</span><span class="sxs-lookup"><span data-stu-id="9cd42-111">When your usage results in charges that exhaust the monthly amounts included in your offer, the services that you deployed are disabled for the rest of that billing month.</span></span> <span data-ttu-id="9cd42-112">For example, Cloud Services that you deployed are removed from production and your Azure virtual machines are stopped and de-allocated.</span><span class="sxs-lookup"><span data-stu-id="9cd42-112">For example, Cloud Services that you deployed are removed from production and your Azure virtual machines are stopped and de-allocated.</span></span> <span data-ttu-id="9cd42-113">To prevent your services from being disabled, you can choose to remove your spending limit.</span><span class="sxs-lookup"><span data-stu-id="9cd42-113">To prevent your services from being disabled, you can choose to remove your spending limit.</span></span> <span data-ttu-id="9cd42-114">When your services are disabled, the data in your storage accounts and databases are available in a read-only manner for administrators.</span><span class="sxs-lookup"><span data-stu-id="9cd42-114">When your services are disabled, the data in your storage accounts and databases are available in a read-only manner for administrators.</span></span> <span data-ttu-id="9cd42-115">At the beginning of the next billing month, if your offer includes credits over multiple months, your subscription will be re-enabled.</span><span class="sxs-lookup"><span data-stu-id="9cd42-115">At the beginning of the next billing month, if your offer includes credits over multiple months, your subscription will be re-enabled.</span></span> <span data-ttu-id="9cd42-116">Then you can redeploy your Cloud Services and have full access to your storage accounts and databases.</span><span class="sxs-lookup"><span data-stu-id="9cd42-116">Then you can redeploy your Cloud Services and have full access to your storage accounts and databases.</span></span>
+
+<span data-ttu-id="9cd42-117">After the free trial subscription reaches the spending limit, you can re-enable the subscription and have it automatically [upgrade to our standard Pay-As-You-Go offer](billing-upgrade-azure-subscription.md) within 90 days.</span><span class="sxs-lookup"><span data-stu-id="9cd42-117">After the free trial subscription reaches the spending limit, you can re-enable the subscription and have it automatically [upgrade to our standard Pay-As-You-Go offer](billing-upgrade-azure-subscription.md) within 90 days.</span></span>
+
+<span data-ttu-id="9cd42-118">You receive notifications when you hit the spending limit for your offer.</span><span class="sxs-lookup"><span data-stu-id="9cd42-118">You receive notifications when you hit the spending limit for your offer.</span></span> <span data-ttu-id="9cd42-119">Log on to the [Azure Account Center](https://account.windowsazure.com), select **ACCOUNT**, and then select **subscriptions**.</span><span class="sxs-lookup"><span data-stu-id="9cd42-119">Log on to the [Azure Account Center](https://account.windowsazure.com), select **ACCOUNT**, and then select **subscriptions**.</span></span> <span data-ttu-id="9cd42-120">You see notifications about subscriptions that have reached the spending limit.</span><span class="sxs-lookup"><span data-stu-id="9cd42-120">You see notifications about subscriptions that have reached the spending limit.</span></span>
+
+## <a name="things-you-are-charged-for-even-if-you-have-a-spending-limit-enabled"></a><span data-ttu-id="9cd42-121">Things you are charged for even if you have a spending limit enabled</span><span class="sxs-lookup"><span data-stu-id="9cd42-121">Things you are charged for even if you have a spending limit enabled</span></span>
+
+<span data-ttu-id="9cd42-122">Some Azure services and [Marketplace purchases](https://azure.microsoft.com/marketplace/) can incur charges under the payment method (CC) even if a spending limit is set.</span><span class="sxs-lookup"><span data-stu-id="9cd42-122">Some Azure services and [Marketplace purchases](https://azure.microsoft.com/marketplace/) can incur charges under the payment method (CC) even if a spending limit is set.</span></span> <span data-ttu-id="9cd42-123">Examples are Visual studio licenses, Azure Active Directory premium, support plans, and most third-party branded services sold through the Marketplace.</span><span class="sxs-lookup"><span data-stu-id="9cd42-123">Examples are Visual studio licenses, Azure Active Directory premium, support plans, and most third-party branded services sold through the Marketplace.</span></span>
+
+
+## <a name="when-not-to-use-the-spending-limit"></a><span data-ttu-id="9cd42-124">When not to use the spending limit</span><span class="sxs-lookup"><span data-stu-id="9cd42-124">When not to use the spending limit</span></span>
+
+<span data-ttu-id="9cd42-125">The spending limit could prevent you from deploying or using certain marketplace and Microsoft services.</span><span class="sxs-lookup"><span data-stu-id="9cd42-125">The spending limit could prevent you from deploying or using certain marketplace and Microsoft services.</span></span> <span data-ttu-id="9cd42-126">Here are the scenarios where you should remove the spending limit on your subscription.</span><span class="sxs-lookup"><span data-stu-id="9cd42-126">Here are the scenarios where you should remove the spending limit on your subscription.</span></span>
+
+- <span data-ttu-id="9cd42-127">You plan to deploy first party images like Oracle and services such as Visual Studio Team Services.</span><span class="sxs-lookup"><span data-stu-id="9cd42-127">You plan to deploy first party images like Oracle and services such as Visual Studio Team Services.</span></span> <span data-ttu-id="9cd42-128">This scenario causes you to exceed your spending limit almost immediately and causes your subscription to be disabled.</span><span class="sxs-lookup"><span data-stu-id="9cd42-128">This scenario causes you to exceed your spending limit almost immediately and causes your subscription to be disabled.</span></span>
+
+- <span data-ttu-id="9cd42-129">You have services that cannot be disrupted.</span><span class="sxs-lookup"><span data-stu-id="9cd42-129">You have services that cannot be disrupted.</span></span>
+
+- <span data-ttu-id="9cd42-130">You have services and resources with settings like virtual IP addresses that you don't want to lose.</span><span class="sxs-lookup"><span data-stu-id="9cd42-130">You have services and resources with settings like virtual IP addresses that you don't want to lose.</span></span> <span data-ttu-id="9cd42-131">These settings are lost when the services and resources are deallocated.</span><span class="sxs-lookup"><span data-stu-id="9cd42-131">These settings are lost when the services and resources are deallocated.</span></span>
+
+
+## <a name="remove-the-spending-limit"></a><span data-ttu-id="9cd42-132">Remove the spending limit</span><span class="sxs-lookup"><span data-stu-id="9cd42-132">Remove the spending limit</span></span>
+
+<span data-ttu-id="9cd42-133">You can remove the spending limit at any time as long as there's a valid payment method associated with your subscription.</span><span class="sxs-lookup"><span data-stu-id="9cd42-133">You can remove the spending limit at any time as long as there's a valid payment method associated with your subscription.</span></span> <span data-ttu-id="9cd42-134">For offers that have credit over multiple months, you can also re-enable the spending limit at the beginning of your next billing cycle.</span><span class="sxs-lookup"><span data-stu-id="9cd42-134">For offers that have credit over multiple months, you can also re-enable the spending limit at the beginning of your next billing cycle.</span></span>
+
+<span data-ttu-id="9cd42-135">To remove your spending limit, follow these steps:</span><span class="sxs-lookup"><span data-stu-id="9cd42-135">To remove your spending limit, follow these steps:</span></span>
+
+1. <span data-ttu-id="9cd42-136">Log on to the [Azure Account Center](https://account.windowsazure.com).</span><span class="sxs-lookup"><span data-stu-id="9cd42-136">Log on to the [Azure Account Center](https://account.windowsazure.com).</span></span>
+
+2. <span data-ttu-id="9cd42-137">Select a subscription.</span><span class="sxs-lookup"><span data-stu-id="9cd42-137">Select a subscription.</span></span>
+
+3. <span data-ttu-id="9cd42-138">If the subscription is disabled due to the Spending Limit being reached, click this notification: "Subscription reached the Spending Limit and has been disabled to prevent charges."</span><span class="sxs-lookup"><span data-stu-id="9cd42-138">If the subscription is disabled due to the Spending Limit being reached, click this notification: "Subscription reached the Spending Limit and has been disabled to prevent charges."</span></span> <span data-ttu-id="9cd42-139">Otherwise, click **Remove spending limit** in the **SUBSCRIPTION STATUS** area.</span><span class="sxs-lookup"><span data-stu-id="9cd42-139">Otherwise, click **Remove spending limit** in the **SUBSCRIPTION STATUS** area.</span></span>
+
+4. <span data-ttu-id="9cd42-140">Select an option that is appropriate for you.</span><span class="sxs-lookup"><span data-stu-id="9cd42-140">Select an option that is appropriate for you.</span></span>
+
+|<span data-ttu-id="9cd42-141">Option</span><span class="sxs-lookup"><span data-stu-id="9cd42-141">Option</span></span>|<span data-ttu-id="9cd42-142">Effect</span><span class="sxs-lookup"><span data-stu-id="9cd42-142">Effect</span></span>|
+|-------|-----|
+|<span data-ttu-id="9cd42-143">Remove spending limit indefinitely</span><span class="sxs-lookup"><span data-stu-id="9cd42-143">Remove spending limit indefinitely</span></span>|<span data-ttu-id="9cd42-144">Removes the spending limit without turning it on automatically at the start of the next billing period.</span><span class="sxs-lookup"><span data-stu-id="9cd42-144">Removes the spending limit without turning it on automatically at the start of the next billing period.</span></span>|
+|<span data-ttu-id="9cd42-145">Remove spending limit for the current billing period</span><span class="sxs-lookup"><span data-stu-id="9cd42-145">Remove spending limit for the current billing period</span></span>|<span data-ttu-id="9cd42-146">Removes the spending limit so that it turns back on automatically at the start of the next billing period.</span><span class="sxs-lookup"><span data-stu-id="9cd42-146">Removes the spending limit so that it turns back on automatically at the start of the next billing period.</span></span>|
+
+## <a name="need-help-contact-support"></a><span data-ttu-id="9cd42-147">Need help?</span><span class="sxs-lookup"><span data-stu-id="9cd42-147">Need help?</span></span> <span data-ttu-id="9cd42-148">Contact support.</span><span class="sxs-lookup"><span data-stu-id="9cd42-148">Contact support.</span></span>
+<span data-ttu-id="9cd42-149">If you still need help, [contact support](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) to get your issue resolved quickly.</span><span class="sxs-lookup"><span data-stu-id="9cd42-149">If you still need help, [contact support](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) to get your issue resolved quickly.</span></span>
