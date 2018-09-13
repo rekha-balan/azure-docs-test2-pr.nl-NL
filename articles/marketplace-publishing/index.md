@@ -1,25 +1,25 @@
 ---
 title: To be submitted | Microsoft Azure
 description: To be submitted.
-services: ''
+services: marketplace
 documentationcenter: ''
-author: squillace
-manager: timlt
+author: czeumault
+manager: carolz
 editor: ''
 tags: billing
 ms.assetid: 5046cab9-60e4-4f70-a39d-cc5bc97bedad
-ms.service: value
+ms.service: marketplace
 ms.devlang: na
-ms.topic: article
+ms.topic: landing-page
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 10/21/2016
-ms.author: tysonn
-ms.openlocfilehash: ef11f8d93149057cbd5af212361bc2219cd247da
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: carolz
+ms.openlocfilehash: 24340610b959bec1930f5eb9ac1c89755f6bc262
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44671774"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44820006"
 ---
-# <a name="to-be-submitted"></a><span data-ttu-id="069ab-103">To be submitted.</span><span class="sxs-lookup"><span data-stu-id="069ab-103">To be submitted.</span></span>
+# <a name="to-be-submitted"></a><span data-ttu-id="8ea54-103">To be submitted.</span><span class="sxs-lookup"><span data-stu-id="8ea54-103">To be submitted.</span></span>

@@ -1,39 +1,34 @@
 ---
-title: Create Action Groups with Resource Manager Templates | Microsoft Docs
-description: Action groups allow you to notify email, SMS or call webhooks when certain events occur.
-author: anirudhcavale
-manager: carmonm
-editor: ''
-services: monitoring-and-diagnostics
-documentationcenter: monitoring-and-diagnostics
-ms.assetid: ''
-ms.service: monitoring-and-diagnostics
-ms.workload: na
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
-ms.date: 03/31/2017
-ms.author: ancav
-ms.openlocfilehash: 2dd7b14f1466fa7244a2af2c030d8b794658aaad
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+title: Create action groups with Resource Manager templates
+description: Learn how to create an action group by using an Azure Resource Manager template.
+author: dkamstra
+services: azure-monitor
+ms.service: azure-monitor
+ms.topic: conceptual
+ms.date: 02/16/2018
+ms.author: dukek
+ms.component: alerts
+ms.openlocfilehash: 9b49d21dad9bb1e48194cc31940c5cd53c909dc0
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44662406"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44794916"
 ---
-# <a name="create-an-action-group-with-a-resource-manager-template"></a><span data-ttu-id="7222a-103">Create an action group with a Resource Manager Template</span><span class="sxs-lookup"><span data-stu-id="7222a-103">Create an action group with a Resource Manager Template</span></span>
-<span data-ttu-id="7222a-104">This article shows how you can use an [Azure Resource Manager template](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-authoring-templates) to configure action groups.</span><span class="sxs-lookup"><span data-stu-id="7222a-104">This article shows how you can use an [Azure Resource Manager template](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-authoring-templates) to configure action groups.</span></span> <span data-ttu-id="7222a-105">Templates enable you to automatically set up action groups on your resources when they are created to ensure that all the correct parties are notified when an alert is triggered.</span><span class="sxs-lookup"><span data-stu-id="7222a-105">Templates enable you to automatically set up action groups on your resources when they are created to ensure that all the correct parties are notified when an alert is triggered.</span></span>
+# <a name="create-an-action-group-with-a-resource-manager-template"></a><span data-ttu-id="440fa-103">Create an action group with a Resource Manager template</span><span class="sxs-lookup"><span data-stu-id="440fa-103">Create an action group with a Resource Manager template</span></span>
+<span data-ttu-id="440fa-104">This article shows you how to use an [Azure Resource Manager template](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-authoring-templates) to configure action groups.</span><span class="sxs-lookup"><span data-stu-id="440fa-104">This article shows you how to use an [Azure Resource Manager template](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-authoring-templates) to configure action groups.</span></span> <span data-ttu-id="440fa-105">By using templates, you can automatically set up action groups that can be reused in certain types of alerts.</span><span class="sxs-lookup"><span data-stu-id="440fa-105">By using templates, you can automatically set up action groups that can be reused in certain types of alerts.</span></span> <span data-ttu-id="440fa-106">These action groups ensure that all the correct parties are notified when an alert is triggered.</span><span class="sxs-lookup"><span data-stu-id="440fa-106">These action groups ensure that all the correct parties are notified when an alert is triggered.</span></span>
 
-<span data-ttu-id="7222a-106">The basic steps are as follows:</span><span class="sxs-lookup"><span data-stu-id="7222a-106">The basic steps are as follows:</span></span>
+<span data-ttu-id="440fa-107">The basic steps are:</span><span class="sxs-lookup"><span data-stu-id="440fa-107">The basic steps are:</span></span>
 
-1.  <span data-ttu-id="7222a-107">Create a template as a JSON file that describes how to create the action group.</span><span class="sxs-lookup"><span data-stu-id="7222a-107">Create a template as a JSON file that describes how to create the action group.</span></span>
-2.  [<span data-ttu-id="7222a-108">Deploy the template using any deployment method.</span><span class="sxs-lookup"><span data-stu-id="7222a-108">Deploy the template using any deployment method.</span></span>](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-template-deploy)
+1. <span data-ttu-id="440fa-108">Create a template as a JSON file that describes how to create the action group.</span><span class="sxs-lookup"><span data-stu-id="440fa-108">Create a template as a JSON file that describes how to create the action group.</span></span>
 
-<span data-ttu-id="7222a-109">Below we describe how to create a Resource Manager template first for an action group alone, then for an action group during the creation of another resource.</span><span class="sxs-lookup"><span data-stu-id="7222a-109">Below we describe how to create a Resource Manager template first for an action group alone, then for an action group during the creation of another resource.</span></span>
+2. <span data-ttu-id="440fa-109">Deploy the template by using [any deployment method](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-template-deploy).</span><span class="sxs-lookup"><span data-stu-id="440fa-109">Deploy the template by using [any deployment method](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-template-deploy).</span></span>
 
-## <a name="resource-manager-template-for-an-action-group"></a><span data-ttu-id="7222a-110">Resource Manager template for an action group</span><span class="sxs-lookup"><span data-stu-id="7222a-110">Resource Manager template for an action group</span></span>
+<span data-ttu-id="440fa-110">First, we describe how to create a Resource Manager template for an action group where the action definitions are hard-coded in the template.</span><span class="sxs-lookup"><span data-stu-id="440fa-110">First, we describe how to create a Resource Manager template for an action group where the action definitions are hard-coded in the template.</span></span> <span data-ttu-id="440fa-111">Second, we describe how to create a template that takes the webhook configuration information as input parameters when the template is deployed.</span><span class="sxs-lookup"><span data-stu-id="440fa-111">Second, we describe how to create a template that takes the webhook configuration information as input parameters when the template is deployed.</span></span>
 
-<span data-ttu-id="7222a-111">To create an action group using a Resource Manager template, you create a resource of type `Microsoft.Insights/actionGroups` and fill in all related properties.</span><span class="sxs-lookup"><span data-stu-id="7222a-111">To create an action group using a Resource Manager template, you create a resource of type `Microsoft.Insights/actionGroups` and fill in all related properties.</span></span> <span data-ttu-id="7222a-112">Following are a couple sample templates that create an action group.</span><span class="sxs-lookup"><span data-stu-id="7222a-112">Following are a couple sample templates that create an action group.</span></span>
+## <a name="resource-manager-templates-for-an-action-group"></a><span data-ttu-id="440fa-112">Resource Manager templates for an action group</span><span class="sxs-lookup"><span data-stu-id="440fa-112">Resource Manager templates for an action group</span></span>
+
+<span data-ttu-id="440fa-113">To create an action group using a Resource Manager template, you create a resource of the type `Microsoft.Insights/actionGroups`.</span><span class="sxs-lookup"><span data-stu-id="440fa-113">To create an action group using a Resource Manager template, you create a resource of the type `Microsoft.Insights/actionGroups`.</span></span> <span data-ttu-id="440fa-114">Then you fill in all related properties.</span><span class="sxs-lookup"><span data-stu-id="440fa-114">Then you fill in all related properties.</span></span> <span data-ttu-id="440fa-115">Here are two sample templates that create an action group.</span><span class="sxs-lookup"><span data-stu-id="440fa-115">Here are two sample templates that create an action group.</span></span>
 
 ```json
 {
@@ -56,7 +51,7 @@ ms.locfileid: "44662406"
   "resources": [
     {
       "type": "Microsoft.Insights/actionGroups",
-      "apiVersion": "2017-03-01-preview",
+      "apiVersion": "2018-03-01",
       "name": "[parameters('actionGroupName')]",
       "location": "Global",
       "properties": {
@@ -126,7 +121,7 @@ ms.locfileid: "44662406"
     "webhookReceiverName": {
       "type": "string",
       "metadata": {
-        "description": "Webhook receiver service URI."
+        "description": "Webhook receiver service Name."
       }
     },    
     "webhookServiceUri": {
@@ -139,7 +134,7 @@ ms.locfileid: "44662406"
   "resources": [
     {
       "type": "Microsoft.Insights/actionGroups",
-      "apiVersion": "2017-03-01-preview",
+      "apiVersion": "2018-03-01",
       "name": "[parameters('actionGroupName')]",
       "location": "Global",
       "properties": {
@@ -168,7 +163,7 @@ ms.locfileid: "44662406"
 ```
 
 
-## <a name="next-steps"></a><span data-ttu-id="7222a-113">Next Steps</span><span class="sxs-lookup"><span data-stu-id="7222a-113">Next Steps</span></span>
-<span data-ttu-id="7222a-114">Learn more about [Action Groups](monitoring-action-groups.md)</span><span class="sxs-lookup"><span data-stu-id="7222a-114">Learn more about [Action Groups](monitoring-action-groups.md)</span></span>  
-<span data-ttu-id="7222a-115">Learn more about [Alerts](monitoring-overview-alerts.md)</span><span class="sxs-lookup"><span data-stu-id="7222a-115">Learn more about [Alerts](monitoring-overview-alerts.md)</span></span>  
-<span data-ttu-id="7222a-116">How to add [Alerts using a Resource Manager template](monitoring-create-activity-log-alerts-with-resource-manager-template.md)</span><span class="sxs-lookup"><span data-stu-id="7222a-116">How to add [Alerts using a Resource Manager template](monitoring-create-activity-log-alerts-with-resource-manager-template.md)</span></span>
+## <a name="next-steps"></a><span data-ttu-id="440fa-116">Next steps</span><span class="sxs-lookup"><span data-stu-id="440fa-116">Next steps</span></span>
+* <span data-ttu-id="440fa-117">Learn more about [action groups](monitoring-action-groups.md).</span><span class="sxs-lookup"><span data-stu-id="440fa-117">Learn more about [action groups](monitoring-action-groups.md).</span></span>
+* <span data-ttu-id="440fa-118">Learn more about [alerts](monitoring-overview-alerts.md).</span><span class="sxs-lookup"><span data-stu-id="440fa-118">Learn more about [alerts](monitoring-overview-alerts.md).</span></span>
+* <span data-ttu-id="440fa-119">Learn how to add [alerts by using a Resource Manager template](monitoring-create-activity-log-alerts-with-resource-manager-template.md).</span><span class="sxs-lookup"><span data-stu-id="440fa-119">Learn how to add [alerts by using a Resource Manager template](monitoring-create-activity-log-alerts-with-resource-manager-template.md).</span></span>

@@ -1,48 +1,41 @@
 ---
-title: Use Hadoop Oozie in HDInsight | Microsoft Docs
+title: Use Hadoop Oozie in HDInsight
 description: Use Hadoop Oozie in HDInsight, a big data service. Learn how to define an Oozie workflow, and submit an Oozie job.
 services: hdinsight
-documentationcenter: ''
-tags: azure-portal
-author: mumian
-manager: jhubbard
-editor: cgronlun
-ms.assetid: 870098f0-f416-4491-9719-78994bf4a369
+author: jasonwhowell
+ms.reviewer: jasonh
+ms.author: jasonh
 ms.service: hdinsight
 ms.custom: hdinsightactive
-ms.workload: big-data
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
-ms.date: 02/22/2017
-ms.author: jgao
+ms.topic: conceptual
+ms.date: 05/25/2017
 ROBOTS: NOINDEX
-ms.openlocfilehash: 82ba8cf60eaeeddb40d40ee230cc29cd78bf52d3
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: f5a6616403d7e3fc7944c26bbbcbfa9fbfb4fff5
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44551733"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44811979"
 ---
-# <a name="use-oozie-with-hadoop-to-define-and-run-a-workflow-in-hdinsight"></a><span data-ttu-id="eaba2-104">Use Oozie with Hadoop to define and run a workflow in HDInsight</span><span class="sxs-lookup"><span data-stu-id="eaba2-104">Use Oozie with Hadoop to define and run a workflow in HDInsight</span></span>
+# <a name="use-oozie-with-hadoop-to-define-and-run-a-workflow-in-hdinsight"></a><span data-ttu-id="b2e72-104">Use Oozie with Hadoop to define and run a workflow in HDInsight</span><span class="sxs-lookup"><span data-stu-id="b2e72-104">Use Oozie with Hadoop to define and run a workflow in HDInsight</span></span>
 [!INCLUDE [oozie-selector](../../includes/hdinsight-oozie-selector.md)]
 
-<span data-ttu-id="eaba2-105">Learn how to use Apache Oozie to define a workflow and run the workflow on HDInsight.</span><span class="sxs-lookup"><span data-stu-id="eaba2-105">Learn how to use Apache Oozie to define a workflow and run the workflow on HDInsight.</span></span> <span data-ttu-id="eaba2-106">To learn about the Oozie coordinator, see [Use time-based Hadoop Oozie Coordinator with HDInsight][hdinsight-oozie-coordinator-time].</span><span class="sxs-lookup"><span data-stu-id="eaba2-106">To learn about the Oozie coordinator, see [Use time-based Hadoop Oozie Coordinator with HDInsight][hdinsight-oozie-coordinator-time].</span></span> <span data-ttu-id="eaba2-107">To learn Azure Data Factory, see [Use Pig and Hive with Data Factory][azure-data-factory-pig-hive].</span><span class="sxs-lookup"><span data-stu-id="eaba2-107">To learn Azure Data Factory, see [Use Pig and Hive with Data Factory][azure-data-factory-pig-hive].</span></span>
+<span data-ttu-id="b2e72-105">Learn how to use Apache Oozie to define a workflow and run the workflow on HDInsight.</span><span class="sxs-lookup"><span data-stu-id="b2e72-105">Learn how to use Apache Oozie to define a workflow and run the workflow on HDInsight.</span></span> <span data-ttu-id="b2e72-106">To learn about the Oozie coordinator, see [Use time-based Hadoop Oozie Coordinator with HDInsight][hdinsight-oozie-coordinator-time].</span><span class="sxs-lookup"><span data-stu-id="b2e72-106">To learn about the Oozie coordinator, see [Use time-based Hadoop Oozie Coordinator with HDInsight][hdinsight-oozie-coordinator-time].</span></span> <span data-ttu-id="b2e72-107">To learn Azure Data Factory, see [Use Pig and Hive with Data Factory][azure-data-factory-pig-hive].</span><span class="sxs-lookup"><span data-stu-id="b2e72-107">To learn Azure Data Factory, see [Use Pig and Hive with Data Factory][azure-data-factory-pig-hive].</span></span>
 
-<span data-ttu-id="eaba2-108">Apache Oozie is a workflow/coordination system that manages Hadoop jobs.</span><span class="sxs-lookup"><span data-stu-id="eaba2-108">Apache Oozie is a workflow/coordination system that manages Hadoop jobs.</span></span> <span data-ttu-id="eaba2-109">It is integrated with the Hadoop stack, and it supports Hadoop jobs for Apache MapReduce, Apache Pig, Apache Hive, and Apache Sqoop.</span><span class="sxs-lookup"><span data-stu-id="eaba2-109">It is integrated with the Hadoop stack, and it supports Hadoop jobs for Apache MapReduce, Apache Pig, Apache Hive, and Apache Sqoop.</span></span> <span data-ttu-id="eaba2-110">It can also be used to schedule jobs that are specific to a system, like Java programs or shell scripts.</span><span class="sxs-lookup"><span data-stu-id="eaba2-110">It can also be used to schedule jobs that are specific to a system, like Java programs or shell scripts.</span></span>
+<span data-ttu-id="b2e72-108">Apache Oozie is a workflow/coordination system that manages Hadoop jobs.</span><span class="sxs-lookup"><span data-stu-id="b2e72-108">Apache Oozie is a workflow/coordination system that manages Hadoop jobs.</span></span> <span data-ttu-id="b2e72-109">It is integrated with the Hadoop stack, and it supports Hadoop jobs for Apache MapReduce, Apache Pig, Apache Hive, and Apache Sqoop.</span><span class="sxs-lookup"><span data-stu-id="b2e72-109">It is integrated with the Hadoop stack, and it supports Hadoop jobs for Apache MapReduce, Apache Pig, Apache Hive, and Apache Sqoop.</span></span> <span data-ttu-id="b2e72-110">It can also be used to schedule jobs that are specific to a system, like Java programs or shell scripts.</span><span class="sxs-lookup"><span data-stu-id="b2e72-110">It can also be used to schedule jobs that are specific to a system, like Java programs or shell scripts.</span></span>
 
-<span data-ttu-id="eaba2-111">The workflow you will implement by following the instructions in this tutorial contains two actions:</span><span class="sxs-lookup"><span data-stu-id="eaba2-111">The workflow you will implement by following the instructions in this tutorial contains two actions:</span></span>
+<span data-ttu-id="b2e72-111">The workflow you implement by following the instructions in this tutorial contains two actions:</span><span class="sxs-lookup"><span data-stu-id="b2e72-111">The workflow you implement by following the instructions in this tutorial contains two actions:</span></span>
 
 ![Workflow diagram][img-workflow-diagram]
 
-1. <span data-ttu-id="eaba2-113">A Hive action runs a HiveQL script to count the occurrences of each log-level type in a log4j file.</span><span class="sxs-lookup"><span data-stu-id="eaba2-113">A Hive action runs a HiveQL script to count the occurrences of each log-level type in a log4j file.</span></span> <span data-ttu-id="eaba2-114">Each log4j file consists of a line of fields that contains a [LOG LEVEL] field that shows the type and the severity, for example:</span><span class="sxs-lookup"><span data-stu-id="eaba2-114">Each log4j file consists of a line of fields that contains a [LOG LEVEL] field that shows the type and the severity, for example:</span></span>
+1. <span data-ttu-id="b2e72-113">A Hive action runs a HiveQL script to count the occurrences of each log-level type in a log4j file.</span><span class="sxs-lookup"><span data-stu-id="b2e72-113">A Hive action runs a HiveQL script to count the occurrences of each log-level type in a log4j file.</span></span> <span data-ttu-id="b2e72-114">Each log4j file consists of a line of fields that contains a [LOG LEVEL] field that shows the type and the severity, for example:</span><span class="sxs-lookup"><span data-stu-id="b2e72-114">Each log4j file consists of a line of fields that contains a [LOG LEVEL] field that shows the type and the severity, for example:</span></span>
    
         2012-02-03 18:35:34 SampleClass6 [INFO] everything normal for id 577725851
         2012-02-03 18:35:34 SampleClass4 [FATAL] system problem at id 1991281254
         2012-02-03 18:35:34 SampleClass3 [DEBUG] detail for id 1304807656
         ...
    
-    <span data-ttu-id="eaba2-115">The Hive script output is similar to:</span><span class="sxs-lookup"><span data-stu-id="eaba2-115">The Hive script output is similar to:</span></span>
+    <span data-ttu-id="b2e72-115">The Hive script output is similar to:</span><span class="sxs-lookup"><span data-stu-id="b2e72-115">The Hive script output is similar to:</span></span>
    
         [DEBUG] 434
         [ERROR] 3
@@ -51,25 +44,25 @@ ms.locfileid: "44551733"
         [TRACE] 816
         [WARN]  4
    
-    <span data-ttu-id="eaba2-116">For more information about Hive, see [Use Hive with HDInsight][hdinsight-use-hive].</span><span class="sxs-lookup"><span data-stu-id="eaba2-116">For more information about Hive, see [Use Hive with HDInsight][hdinsight-use-hive].</span></span>
-2. <span data-ttu-id="eaba2-117">A Sqoop action exports the HiveQL output to a table in an Azure SQL database.</span><span class="sxs-lookup"><span data-stu-id="eaba2-117">A Sqoop action exports the HiveQL output to a table in an Azure SQL database.</span></span> <span data-ttu-id="eaba2-118">For more information about Sqoop, see [Use Hadoop Sqoop with HDInsight][hdinsight-use-sqoop].</span><span class="sxs-lookup"><span data-stu-id="eaba2-118">For more information about Sqoop, see [Use Hadoop Sqoop with HDInsight][hdinsight-use-sqoop].</span></span>
+    <span data-ttu-id="b2e72-116">For more information about Hive, see [Use Hive with HDInsight][hdinsight-use-hive].</span><span class="sxs-lookup"><span data-stu-id="b2e72-116">For more information about Hive, see [Use Hive with HDInsight][hdinsight-use-hive].</span></span>
+2. <span data-ttu-id="b2e72-117">A Sqoop action exports the HiveQL output to a table in an Azure SQL database.</span><span class="sxs-lookup"><span data-stu-id="b2e72-117">A Sqoop action exports the HiveQL output to a table in an Azure SQL database.</span></span> <span data-ttu-id="b2e72-118">For more information about Sqoop, see [Use Hadoop Sqoop with HDInsight][hdinsight-use-sqoop].</span><span class="sxs-lookup"><span data-stu-id="b2e72-118">For more information about Sqoop, see [Use Hadoop Sqoop with HDInsight][hdinsight-use-sqoop].</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="eaba2-119">For supported Oozie versions on HDInsight clusters, see [What's new in the Hadoop cluster versions provided by HDInsight?][hdinsight-versions].</span><span class="sxs-lookup"><span data-stu-id="eaba2-119">For supported Oozie versions on HDInsight clusters, see [What's new in the Hadoop cluster versions provided by HDInsight?][hdinsight-versions].</span></span>
+> <span data-ttu-id="b2e72-119">For supported Oozie versions on HDInsight clusters, see [What's new in the Hadoop cluster versions provided by HDInsight?][hdinsight-versions].</span><span class="sxs-lookup"><span data-stu-id="b2e72-119">For supported Oozie versions on HDInsight clusters, see [What's new in the Hadoop cluster versions provided by HDInsight?][hdinsight-versions].</span></span>
 > 
 > 
 
-### <a name="prerequisites"></a><span data-ttu-id="eaba2-120">Prerequisites</span><span class="sxs-lookup"><span data-stu-id="eaba2-120">Prerequisites</span></span>
-<span data-ttu-id="eaba2-121">Before you begin this tutorial, you must have the following:</span><span class="sxs-lookup"><span data-stu-id="eaba2-121">Before you begin this tutorial, you must have the following:</span></span>
+### <a name="prerequisites"></a><span data-ttu-id="b2e72-120">Prerequisites</span><span class="sxs-lookup"><span data-stu-id="b2e72-120">Prerequisites</span></span>
+<span data-ttu-id="b2e72-121">Before you begin this tutorial, you must have the following item:</span><span class="sxs-lookup"><span data-stu-id="b2e72-121">Before you begin this tutorial, you must have the following item:</span></span>
 
-* <span data-ttu-id="eaba2-122">**A workstation with Azure PowerShell**.</span><span class="sxs-lookup"><span data-stu-id="eaba2-122">**A workstation with Azure PowerShell**.</span></span> 
+* <span data-ttu-id="b2e72-122">**A workstation with Azure PowerShell**.</span><span class="sxs-lookup"><span data-stu-id="b2e72-122">**A workstation with Azure PowerShell**.</span></span> 
   
 
 [!INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
   
 
-## <a name="define-oozie-workflow-and-the-related-hiveql-script"></a><span data-ttu-id="eaba2-123">Define Oozie workflow and the related HiveQL script</span><span class="sxs-lookup"><span data-stu-id="eaba2-123">Define Oozie workflow and the related HiveQL script</span></span>
-<span data-ttu-id="eaba2-124">Oozie workflows definitions are written in hPDL (a XML Process Definition Language).</span><span class="sxs-lookup"><span data-stu-id="eaba2-124">Oozie workflows definitions are written in hPDL (a XML Process Definition Language).</span></span> <span data-ttu-id="eaba2-125">The default workflow file name is *workflow.xml*.</span><span class="sxs-lookup"><span data-stu-id="eaba2-125">The default workflow file name is *workflow.xml*.</span></span> <span data-ttu-id="eaba2-126">The following is the workflow file you will use in this tutorial.</span><span class="sxs-lookup"><span data-stu-id="eaba2-126">The following is the workflow file you will use in this tutorial.</span></span>
+## <a name="define-oozie-workflow-and-the-related-hiveql-script"></a><span data-ttu-id="b2e72-123">Define Oozie workflow and the related HiveQL script</span><span class="sxs-lookup"><span data-stu-id="b2e72-123">Define Oozie workflow and the related HiveQL script</span></span>
+<span data-ttu-id="b2e72-124">Oozie workflows definitions are written in hPDL (a XML Process Definition Language).</span><span class="sxs-lookup"><span data-stu-id="b2e72-124">Oozie workflows definitions are written in hPDL (a XML Process Definition Language).</span></span> <span data-ttu-id="b2e72-125">The default workflow file name is *workflow.xml*.</span><span class="sxs-lookup"><span data-stu-id="b2e72-125">The default workflow file name is *workflow.xml*.</span></span> <span data-ttu-id="b2e72-126">The following is the workflow file you use in this tutorial.</span><span class="sxs-lookup"><span data-stu-id="b2e72-126">The following is the workflow file you use in this tutorial.</span></span>
 
     <workflow-app name="useooziewf" xmlns="uri:oozie:workflow:0.2">
         <start to = "RunHiveScript"/>
@@ -126,78 +119,78 @@ ms.locfileid: "44551733"
         <end name="end"/>
     </workflow-app>
 
-<span data-ttu-id="eaba2-127">There are two actions defined in the workflow.</span><span class="sxs-lookup"><span data-stu-id="eaba2-127">There are two actions defined in the workflow.</span></span> <span data-ttu-id="eaba2-128">The start-to action is *RunHiveScript*.</span><span class="sxs-lookup"><span data-stu-id="eaba2-128">The start-to action is *RunHiveScript*.</span></span> <span data-ttu-id="eaba2-129">If the action runs successfully, the next action is *RunSqoopExport*.</span><span class="sxs-lookup"><span data-stu-id="eaba2-129">If the action runs successfully, the next action is *RunSqoopExport*.</span></span>
+<span data-ttu-id="b2e72-127">There are two actions defined in the workflow.</span><span class="sxs-lookup"><span data-stu-id="b2e72-127">There are two actions defined in the workflow.</span></span> <span data-ttu-id="b2e72-128">The start-to action is *RunHiveScript*.</span><span class="sxs-lookup"><span data-stu-id="b2e72-128">The start-to action is *RunHiveScript*.</span></span> <span data-ttu-id="b2e72-129">If the action runs successfully, the next action is *RunSqoopExport*.</span><span class="sxs-lookup"><span data-stu-id="b2e72-129">If the action runs successfully, the next action is *RunSqoopExport*.</span></span>
 
-<span data-ttu-id="eaba2-130">The RunHiveScript has several variables.</span><span class="sxs-lookup"><span data-stu-id="eaba2-130">The RunHiveScript has several variables.</span></span> <span data-ttu-id="eaba2-131">You will pass the values when you submit the Oozie job from your workstation by using Azure PowerShell.</span><span class="sxs-lookup"><span data-stu-id="eaba2-131">You will pass the values when you submit the Oozie job from your workstation by using Azure PowerShell.</span></span>
+<span data-ttu-id="b2e72-130">The RunHiveScript has several variables.</span><span class="sxs-lookup"><span data-stu-id="b2e72-130">The RunHiveScript has several variables.</span></span> <span data-ttu-id="b2e72-131">You pass the values when you submit the Oozie job from your workstation by using Azure PowerShell.</span><span class="sxs-lookup"><span data-stu-id="b2e72-131">You pass the values when you submit the Oozie job from your workstation by using Azure PowerShell.</span></span>
 
 <table border = "1">
-<tr><th><span data-ttu-id="eaba2-132">Workflow variables</span><span class="sxs-lookup"><span data-stu-id="eaba2-132">Workflow variables</span></span></th><th><span data-ttu-id="eaba2-133">Description</span><span class="sxs-lookup"><span data-stu-id="eaba2-133">Description</span></span></th></tr>
-<tr><td><span data-ttu-id="eaba2-134">${jobTracker}</span><span class="sxs-lookup"><span data-stu-id="eaba2-134">${jobTracker}</span></span></td><td><span data-ttu-id="eaba2-135">Specifies the URL of the Hadoop job tracker.</span><span class="sxs-lookup"><span data-stu-id="eaba2-135">Specifies the URL of the Hadoop job tracker.</span></span> <span data-ttu-id="eaba2-136">Use <strong>jobtrackerhost:9010</strong> in HDInsight version 3.0 and 2.1.</span><span class="sxs-lookup"><span data-stu-id="eaba2-136">Use <strong>jobtrackerhost:9010</strong> in HDInsight version 3.0 and 2.1.</span></span></td></tr>
-<tr><td><span data-ttu-id="eaba2-137">${nameNode}</span><span class="sxs-lookup"><span data-stu-id="eaba2-137">${nameNode}</span></span></td><td><span data-ttu-id="eaba2-138">Specifies the URL of the Hadoop name node.</span><span class="sxs-lookup"><span data-stu-id="eaba2-138">Specifies the URL of the Hadoop name node.</span></span> <span data-ttu-id="eaba2-139">Use the default file system address, for example, <i>wasbs://&lt;containerName&gt;@&lt;storageAccountName&gt;.blob.core.windows.net</i>.</span><span class="sxs-lookup"><span data-stu-id="eaba2-139">Use the default file system address, for example, <i>wasbs://&lt;containerName&gt;@&lt;storageAccountName&gt;.blob.core.windows.net</i>.</span></span></td></tr>
-<tr><td><span data-ttu-id="eaba2-140">${queueName}</span><span class="sxs-lookup"><span data-stu-id="eaba2-140">${queueName}</span></span></td><td><span data-ttu-id="eaba2-141">Specifies the queue name that the job will be submitted to.</span><span class="sxs-lookup"><span data-stu-id="eaba2-141">Specifies the queue name that the job will be submitted to.</span></span> <span data-ttu-id="eaba2-142">Use the <strong>default</strong>.</span><span class="sxs-lookup"><span data-stu-id="eaba2-142">Use the <strong>default</strong>.</span></span></td></tr>
+<tr><th><span data-ttu-id="b2e72-132">Workflow variables</span><span class="sxs-lookup"><span data-stu-id="b2e72-132">Workflow variables</span></span></th><th><span data-ttu-id="b2e72-133">Description</span><span class="sxs-lookup"><span data-stu-id="b2e72-133">Description</span></span></th></tr>
+<tr><td><span data-ttu-id="b2e72-134">${jobTracker}</span><span class="sxs-lookup"><span data-stu-id="b2e72-134">${jobTracker}</span></span></td><td><span data-ttu-id="b2e72-135">Specifies the URL of the Hadoop job tracker.</span><span class="sxs-lookup"><span data-stu-id="b2e72-135">Specifies the URL of the Hadoop job tracker.</span></span> <span data-ttu-id="b2e72-136">Use <strong>jobtrackerhost:9010</strong> in HDInsight version 3.0 and 2.1.</span><span class="sxs-lookup"><span data-stu-id="b2e72-136">Use <strong>jobtrackerhost:9010</strong> in HDInsight version 3.0 and 2.1.</span></span></td></tr>
+<tr><td><span data-ttu-id="b2e72-137">${nameNode}</span><span class="sxs-lookup"><span data-stu-id="b2e72-137">${nameNode}</span></span></td><td><span data-ttu-id="b2e72-138">Specifies the URL of the Hadoop name node.</span><span class="sxs-lookup"><span data-stu-id="b2e72-138">Specifies the URL of the Hadoop name node.</span></span> <span data-ttu-id="b2e72-139">Use the default file system address, for example, <i>wasb://&lt;containerName&gt;@&lt;storageAccountName&gt;.blob.core.windows.net</i>.</span><span class="sxs-lookup"><span data-stu-id="b2e72-139">Use the default file system address, for example, <i>wasb://&lt;containerName&gt;@&lt;storageAccountName&gt;.blob.core.windows.net</i>.</span></span></td></tr>
+<tr><td><span data-ttu-id="b2e72-140">${queueName}</span><span class="sxs-lookup"><span data-stu-id="b2e72-140">${queueName}</span></span></td><td><span data-ttu-id="b2e72-141">Specifies the queue name that the job is submitted to.</span><span class="sxs-lookup"><span data-stu-id="b2e72-141">Specifies the queue name that the job is submitted to.</span></span> <span data-ttu-id="b2e72-142">Use the <strong>default</strong>.</span><span class="sxs-lookup"><span data-stu-id="b2e72-142">Use the <strong>default</strong>.</span></span></td></tr>
 </table>
 
 <table border = "1">
-<tr><th><span data-ttu-id="eaba2-143">Hive action variable</span><span class="sxs-lookup"><span data-stu-id="eaba2-143">Hive action variable</span></span></th><th><span data-ttu-id="eaba2-144">Description</span><span class="sxs-lookup"><span data-stu-id="eaba2-144">Description</span></span></th></tr>
-<tr><td><span data-ttu-id="eaba2-145">${hiveDataFolder}</span><span class="sxs-lookup"><span data-stu-id="eaba2-145">${hiveDataFolder}</span></span></td><td><span data-ttu-id="eaba2-146">Specifies the source directory for the Hive Create Table command.</span><span class="sxs-lookup"><span data-stu-id="eaba2-146">Specifies the source directory for the Hive Create Table command.</span></span></td></tr>
-<tr><td><span data-ttu-id="eaba2-147">${hiveOutputFolder}</span><span class="sxs-lookup"><span data-stu-id="eaba2-147">${hiveOutputFolder}</span></span></td><td><span data-ttu-id="eaba2-148">Specifies the output folder for the INSERT OVERWRITE statement.</span><span class="sxs-lookup"><span data-stu-id="eaba2-148">Specifies the output folder for the INSERT OVERWRITE statement.</span></span></td></tr>
-<tr><td><span data-ttu-id="eaba2-149">${hiveTableName}</span><span class="sxs-lookup"><span data-stu-id="eaba2-149">${hiveTableName}</span></span></td><td><span data-ttu-id="eaba2-150">Specifies the name of the Hive table that references the log4j data files.</span><span class="sxs-lookup"><span data-stu-id="eaba2-150">Specifies the name of the Hive table that references the log4j data files.</span></span></td></tr>
+<tr><th><span data-ttu-id="b2e72-143">Hive action variable</span><span class="sxs-lookup"><span data-stu-id="b2e72-143">Hive action variable</span></span></th><th><span data-ttu-id="b2e72-144">Description</span><span class="sxs-lookup"><span data-stu-id="b2e72-144">Description</span></span></th></tr>
+<tr><td><span data-ttu-id="b2e72-145">${hiveDataFolder}</span><span class="sxs-lookup"><span data-stu-id="b2e72-145">${hiveDataFolder}</span></span></td><td><span data-ttu-id="b2e72-146">Specifies the source directory for the Hive Create Table command.</span><span class="sxs-lookup"><span data-stu-id="b2e72-146">Specifies the source directory for the Hive Create Table command.</span></span></td></tr>
+<tr><td><span data-ttu-id="b2e72-147">${hiveOutputFolder}</span><span class="sxs-lookup"><span data-stu-id="b2e72-147">${hiveOutputFolder}</span></span></td><td><span data-ttu-id="b2e72-148">Specifies the output folder for the INSERT OVERWRITE statement.</span><span class="sxs-lookup"><span data-stu-id="b2e72-148">Specifies the output folder for the INSERT OVERWRITE statement.</span></span></td></tr>
+<tr><td><span data-ttu-id="b2e72-149">${hiveTableName}</span><span class="sxs-lookup"><span data-stu-id="b2e72-149">${hiveTableName}</span></span></td><td><span data-ttu-id="b2e72-150">Specifies the name of the Hive table that references the log4j data files.</span><span class="sxs-lookup"><span data-stu-id="b2e72-150">Specifies the name of the Hive table that references the log4j data files.</span></span></td></tr>
 </table>
 
 <table border = "1">
-<tr><th><span data-ttu-id="eaba2-151">Sqoop action variable</span><span class="sxs-lookup"><span data-stu-id="eaba2-151">Sqoop action variable</span></span></th><th><span data-ttu-id="eaba2-152">Description</span><span class="sxs-lookup"><span data-stu-id="eaba2-152">Description</span></span></th></tr>
-<tr><td><span data-ttu-id="eaba2-153">${sqlDatabaseConnectionString}</span><span class="sxs-lookup"><span data-stu-id="eaba2-153">${sqlDatabaseConnectionString}</span></span></td><td><span data-ttu-id="eaba2-154">Specifies the Azure SQL database connection string.</span><span class="sxs-lookup"><span data-stu-id="eaba2-154">Specifies the Azure SQL database connection string.</span></span></td></tr>
-<tr><td><span data-ttu-id="eaba2-155">${sqlDatabaseTableName}</span><span class="sxs-lookup"><span data-stu-id="eaba2-155">${sqlDatabaseTableName}</span></span></td><td><span data-ttu-id="eaba2-156">Specifies the Azure SQL database table where the data will be exported to.</span><span class="sxs-lookup"><span data-stu-id="eaba2-156">Specifies the Azure SQL database table where the data will be exported to.</span></span></td></tr>
-<tr><td><span data-ttu-id="eaba2-157">${hiveOutputFolder}</span><span class="sxs-lookup"><span data-stu-id="eaba2-157">${hiveOutputFolder}</span></span></td><td><span data-ttu-id="eaba2-158">Specifies the output folder for the Hive INSERT OVERWRITE statement.</span><span class="sxs-lookup"><span data-stu-id="eaba2-158">Specifies the output folder for the Hive INSERT OVERWRITE statement.</span></span> <span data-ttu-id="eaba2-159">This is the same folder for the Sqoop export (export-dir).</span><span class="sxs-lookup"><span data-stu-id="eaba2-159">This is the same folder for the Sqoop export (export-dir).</span></span></td></tr>
+<tr><th><span data-ttu-id="b2e72-151">Sqoop action variable</span><span class="sxs-lookup"><span data-stu-id="b2e72-151">Sqoop action variable</span></span></th><th><span data-ttu-id="b2e72-152">Description</span><span class="sxs-lookup"><span data-stu-id="b2e72-152">Description</span></span></th></tr>
+<tr><td><span data-ttu-id="b2e72-153">${sqlDatabaseConnectionString}</span><span class="sxs-lookup"><span data-stu-id="b2e72-153">${sqlDatabaseConnectionString}</span></span></td><td><span data-ttu-id="b2e72-154">Specifies the Azure SQL database connection string.</span><span class="sxs-lookup"><span data-stu-id="b2e72-154">Specifies the Azure SQL database connection string.</span></span></td></tr>
+<tr><td><span data-ttu-id="b2e72-155">${sqlDatabaseTableName}</span><span class="sxs-lookup"><span data-stu-id="b2e72-155">${sqlDatabaseTableName}</span></span></td><td><span data-ttu-id="b2e72-156">Specifies the Azure SQL database table where the data is exported to.</span><span class="sxs-lookup"><span data-stu-id="b2e72-156">Specifies the Azure SQL database table where the data is exported to.</span></span></td></tr>
+<tr><td><span data-ttu-id="b2e72-157">${hiveOutputFolder}</span><span class="sxs-lookup"><span data-stu-id="b2e72-157">${hiveOutputFolder}</span></span></td><td><span data-ttu-id="b2e72-158">Specifies the output folder for the Hive INSERT OVERWRITE statement.</span><span class="sxs-lookup"><span data-stu-id="b2e72-158">Specifies the output folder for the Hive INSERT OVERWRITE statement.</span></span> <span data-ttu-id="b2e72-159">This is the same folder for the Sqoop export (export-dir).</span><span class="sxs-lookup"><span data-stu-id="b2e72-159">This is the same folder for the Sqoop export (export-dir).</span></span></td></tr>
 </table>
 
-<span data-ttu-id="eaba2-160">For more information about Oozie workflow and using workflow actions, see [Apache Oozie 4.0 documentation][apache-oozie-400] (for HDInsight version 3.0) or [Apache Oozie 3.3.2 documentation][apache-oozie-332] (for HDInsight version 2.1).</span><span class="sxs-lookup"><span data-stu-id="eaba2-160">For more information about Oozie workflow and using workflow actions, see [Apache Oozie 4.0 documentation][apache-oozie-400] (for HDInsight version 3.0) or [Apache Oozie 3.3.2 documentation][apache-oozie-332] (for HDInsight version 2.1).</span></span>
+<span data-ttu-id="b2e72-160">For more information about Oozie workflow and using workflow actions, see [Apache Oozie 4.0 documentation][apache-oozie-400] (for HDInsight version 3.0) or [Apache Oozie 3.3.2 documentation][apache-oozie-332] (for HDInsight version 2.1).</span><span class="sxs-lookup"><span data-stu-id="b2e72-160">For more information about Oozie workflow and using workflow actions, see [Apache Oozie 4.0 documentation][apache-oozie-400] (for HDInsight version 3.0) or [Apache Oozie 3.3.2 documentation][apache-oozie-332] (for HDInsight version 2.1).</span></span>
 
-<span data-ttu-id="eaba2-161">The Hive action in the workflow calls a HiveQL script file.</span><span class="sxs-lookup"><span data-stu-id="eaba2-161">The Hive action in the workflow calls a HiveQL script file.</span></span> <span data-ttu-id="eaba2-162">This script file contains three HiveQL statements:</span><span class="sxs-lookup"><span data-stu-id="eaba2-162">This script file contains three HiveQL statements:</span></span>
+<span data-ttu-id="b2e72-161">The Hive action in the workflow calls a HiveQL script file.</span><span class="sxs-lookup"><span data-stu-id="b2e72-161">The Hive action in the workflow calls a HiveQL script file.</span></span> <span data-ttu-id="b2e72-162">This script file contains three HiveQL statements:</span><span class="sxs-lookup"><span data-stu-id="b2e72-162">This script file contains three HiveQL statements:</span></span>
 
     DROP TABLE ${hiveTableName};
     CREATE EXTERNAL TABLE ${hiveTableName}(t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string) ROW FORMAT DELIMITED FIELDS TERMINATED BY ' ' STORED AS TEXTFILE LOCATION '${hiveDataFolder}';
     INSERT OVERWRITE DIRECTORY '${hiveOutputFolder}' SELECT t4 AS sev, COUNT(*) AS cnt FROM ${hiveTableName} WHERE t4 LIKE '[%' GROUP BY t4;
 
-1. <span data-ttu-id="eaba2-163">**The DROP TABLE statement** deletes the log4j Hive table if it exists.</span><span class="sxs-lookup"><span data-stu-id="eaba2-163">**The DROP TABLE statement** deletes the log4j Hive table if it exists.</span></span>
-2. <span data-ttu-id="eaba2-164">**The CREATE TABLE statement** creates a log4j Hive external table that points to the location of the log4j log file.</span><span class="sxs-lookup"><span data-stu-id="eaba2-164">**The CREATE TABLE statement** creates a log4j Hive external table that points to the location of the log4j log file.</span></span> <span data-ttu-id="eaba2-165">The field delimiter is ",".</span><span class="sxs-lookup"><span data-stu-id="eaba2-165">The field delimiter is ",".</span></span> <span data-ttu-id="eaba2-166">The default line delimiter is "\n".</span><span class="sxs-lookup"><span data-stu-id="eaba2-166">The default line delimiter is "\n".</span></span> <span data-ttu-id="eaba2-167">A Hive external table is used to avoid the data file being removed from the original location if you want to run the Oozie workflow multiple times.</span><span class="sxs-lookup"><span data-stu-id="eaba2-167">A Hive external table is used to avoid the data file being removed from the original location if you want to run the Oozie workflow multiple times.</span></span>
-3. <span data-ttu-id="eaba2-168">**The INSERT OVERWRITE statement** counts the occurrences of each log-level type from the log4j Hive table, and saves the output to a blob in Azure Storage.</span><span class="sxs-lookup"><span data-stu-id="eaba2-168">**The INSERT OVERWRITE statement** counts the occurrences of each log-level type from the log4j Hive table, and saves the output to a blob in Azure Storage.</span></span>
+1. <span data-ttu-id="b2e72-163">**The DROP TABLE statement** deletes the log4j Hive table if it exists.</span><span class="sxs-lookup"><span data-stu-id="b2e72-163">**The DROP TABLE statement** deletes the log4j Hive table if it exists.</span></span>
+2. <span data-ttu-id="b2e72-164">**The CREATE TABLE statement** creates a log4j Hive external table that points to the location of the log4j log file.</span><span class="sxs-lookup"><span data-stu-id="b2e72-164">**The CREATE TABLE statement** creates a log4j Hive external table that points to the location of the log4j log file.</span></span> <span data-ttu-id="b2e72-165">The field delimiter is ",".</span><span class="sxs-lookup"><span data-stu-id="b2e72-165">The field delimiter is ",".</span></span> <span data-ttu-id="b2e72-166">The default line delimiter is "\n".</span><span class="sxs-lookup"><span data-stu-id="b2e72-166">The default line delimiter is "\n".</span></span> <span data-ttu-id="b2e72-167">A Hive external table is used to avoid the data file being removed from the original location if you want to run the Oozie workflow multiple times.</span><span class="sxs-lookup"><span data-stu-id="b2e72-167">A Hive external table is used to avoid the data file being removed from the original location if you want to run the Oozie workflow multiple times.</span></span>
+3. <span data-ttu-id="b2e72-168">**The INSERT OVERWRITE statement** counts the occurrences of each log-level type from the log4j Hive table, and saves the output to a blob in Azure Storage.</span><span class="sxs-lookup"><span data-stu-id="b2e72-168">**The INSERT OVERWRITE statement** counts the occurrences of each log-level type from the log4j Hive table, and saves the output to a blob in Azure Storage.</span></span>
 
-<span data-ttu-id="eaba2-169">There are three variables used in the script:</span><span class="sxs-lookup"><span data-stu-id="eaba2-169">There are three variables used in the script:</span></span>
+<span data-ttu-id="b2e72-169">There are three variables used in the script:</span><span class="sxs-lookup"><span data-stu-id="b2e72-169">There are three variables used in the script:</span></span>
 
-* <span data-ttu-id="eaba2-170">${hiveTableName}</span><span class="sxs-lookup"><span data-stu-id="eaba2-170">${hiveTableName}</span></span>
-* <span data-ttu-id="eaba2-171">${hiveDataFolder}</span><span class="sxs-lookup"><span data-stu-id="eaba2-171">${hiveDataFolder}</span></span>
-* <span data-ttu-id="eaba2-172">${hiveOutputFolder}</span><span class="sxs-lookup"><span data-stu-id="eaba2-172">${hiveOutputFolder}</span></span>
+* <span data-ttu-id="b2e72-170">${hiveTableName}</span><span class="sxs-lookup"><span data-stu-id="b2e72-170">${hiveTableName}</span></span>
+* <span data-ttu-id="b2e72-171">${hiveDataFolder}</span><span class="sxs-lookup"><span data-stu-id="b2e72-171">${hiveDataFolder}</span></span>
+* <span data-ttu-id="b2e72-172">${hiveOutputFolder}</span><span class="sxs-lookup"><span data-stu-id="b2e72-172">${hiveOutputFolder}</span></span>
 
-<span data-ttu-id="eaba2-173">The workflow definition file (workflow.xml in this tutorial) passes these values to this HiveQL script at run time.</span><span class="sxs-lookup"><span data-stu-id="eaba2-173">The workflow definition file (workflow.xml in this tutorial) passes these values to this HiveQL script at run time.</span></span>
+<span data-ttu-id="b2e72-173">The workflow definition file (workflow.xml in this tutorial) passes these values to this HiveQL script at run time.</span><span class="sxs-lookup"><span data-stu-id="b2e72-173">The workflow definition file (workflow.xml in this tutorial) passes these values to this HiveQL script at run time.</span></span>
 
-<span data-ttu-id="eaba2-174">Both the workflow file and the HiveQL file are stored in a blob container.</span><span class="sxs-lookup"><span data-stu-id="eaba2-174">Both the workflow file and the HiveQL file are stored in a blob container.</span></span>  <span data-ttu-id="eaba2-175">The PowerShell script you will use later in this tutorial will copy both files to the default Storage account.</span><span class="sxs-lookup"><span data-stu-id="eaba2-175">The PowerShell script you will use later in this tutorial will copy both files to the default Storage account.</span></span> 
+<span data-ttu-id="b2e72-174">Both the workflow file and the HiveQL file are stored in a blob container.</span><span class="sxs-lookup"><span data-stu-id="b2e72-174">Both the workflow file and the HiveQL file are stored in a blob container.</span></span>  <span data-ttu-id="b2e72-175">The PowerShell script you use later in this tutorial copies both files to the default Storage account.</span><span class="sxs-lookup"><span data-stu-id="b2e72-175">The PowerShell script you use later in this tutorial copies both files to the default Storage account.</span></span> 
 
-## <a name="submit-oozie-jobs-using-powershell"></a><span data-ttu-id="eaba2-176">Submit Oozie jobs using PowerShell</span><span class="sxs-lookup"><span data-stu-id="eaba2-176">Submit Oozie jobs using PowerShell</span></span>
-<span data-ttu-id="eaba2-177">Azure PowerShell currently doesn't provide any cmdlets for defining Oozie jobs.</span><span class="sxs-lookup"><span data-stu-id="eaba2-177">Azure PowerShell currently doesn't provide any cmdlets for defining Oozie jobs.</span></span> <span data-ttu-id="eaba2-178">You can use the **Invoke-RestMethod** cmdlet to invoke Oozie web services.</span><span class="sxs-lookup"><span data-stu-id="eaba2-178">You can use the **Invoke-RestMethod** cmdlet to invoke Oozie web services.</span></span> <span data-ttu-id="eaba2-179">The Oozie web services API is a HTTP REST JSON API.</span><span class="sxs-lookup"><span data-stu-id="eaba2-179">The Oozie web services API is a HTTP REST JSON API.</span></span> <span data-ttu-id="eaba2-180">For more information about the Oozie web services API, see [Apache Oozie 4.0 documentation][apache-oozie-400] (for HDInsight version 3.0) or [Apache Oozie 3.3.2 documentation][apache-oozie-332] (for HDInsight version 2.1).</span><span class="sxs-lookup"><span data-stu-id="eaba2-180">For more information about the Oozie web services API, see [Apache Oozie 4.0 documentation][apache-oozie-400] (for HDInsight version 3.0) or [Apache Oozie 3.3.2 documentation][apache-oozie-332] (for HDInsight version 2.1).</span></span>
+## <a name="submit-oozie-jobs-using-powershell"></a><span data-ttu-id="b2e72-176">Submit Oozie jobs using PowerShell</span><span class="sxs-lookup"><span data-stu-id="b2e72-176">Submit Oozie jobs using PowerShell</span></span>
+<span data-ttu-id="b2e72-177">Azure PowerShell currently doesn't provide any cmdlets for defining Oozie jobs.</span><span class="sxs-lookup"><span data-stu-id="b2e72-177">Azure PowerShell currently doesn't provide any cmdlets for defining Oozie jobs.</span></span> <span data-ttu-id="b2e72-178">You can use the **Invoke-RestMethod** cmdlet to invoke Oozie web services.</span><span class="sxs-lookup"><span data-stu-id="b2e72-178">You can use the **Invoke-RestMethod** cmdlet to invoke Oozie web services.</span></span> <span data-ttu-id="b2e72-179">The Oozie web services API is a HTTP REST JSON API.</span><span class="sxs-lookup"><span data-stu-id="b2e72-179">The Oozie web services API is a HTTP REST JSON API.</span></span> <span data-ttu-id="b2e72-180">For more information about the Oozie web services API, see [Apache Oozie 4.0 documentation][apache-oozie-400] (for HDInsight version 3.0) or [Apache Oozie 3.3.2 documentation][apache-oozie-332] (for HDInsight version 2.1).</span><span class="sxs-lookup"><span data-stu-id="b2e72-180">For more information about the Oozie web services API, see [Apache Oozie 4.0 documentation][apache-oozie-400] (for HDInsight version 3.0) or [Apache Oozie 3.3.2 documentation][apache-oozie-332] (for HDInsight version 2.1).</span></span>
 
-<span data-ttu-id="eaba2-181">The PowerShell script in this section performs the following steps:</span><span class="sxs-lookup"><span data-stu-id="eaba2-181">The PowerShell script in this section performs the following steps:</span></span>
+<span data-ttu-id="b2e72-181">The PowerShell script in this section performs the following steps:</span><span class="sxs-lookup"><span data-stu-id="b2e72-181">The PowerShell script in this section performs the following steps:</span></span>
 
-1. <span data-ttu-id="eaba2-182">Connect to Azure.</span><span class="sxs-lookup"><span data-stu-id="eaba2-182">Connect to Azure.</span></span>
-2. <span data-ttu-id="eaba2-183">Create an Azure resource group.</span><span class="sxs-lookup"><span data-stu-id="eaba2-183">Create an Azure resource group.</span></span> <span data-ttu-id="eaba2-184">For more information, see [Use Azure PowerShell with Azure Resource Manager](../powershell-azure-resource-manager.md).</span><span class="sxs-lookup"><span data-stu-id="eaba2-184">For more information, see [Use Azure PowerShell with Azure Resource Manager](../powershell-azure-resource-manager.md).</span></span>
-3. <span data-ttu-id="eaba2-185">Create an Azure SQL Database server, an Azure SQL database, and two tables.</span><span class="sxs-lookup"><span data-stu-id="eaba2-185">Create an Azure SQL Database server, an Azure SQL database, and two tables.</span></span> <span data-ttu-id="eaba2-186">These are used by the Sqoop action in the workflow.</span><span class="sxs-lookup"><span data-stu-id="eaba2-186">These are used by the Sqoop action in the workflow.</span></span>
+1. <span data-ttu-id="b2e72-182">Connect to Azure.</span><span class="sxs-lookup"><span data-stu-id="b2e72-182">Connect to Azure.</span></span>
+2. <span data-ttu-id="b2e72-183">Create an Azure resource group.</span><span class="sxs-lookup"><span data-stu-id="b2e72-183">Create an Azure resource group.</span></span> <span data-ttu-id="b2e72-184">For more information, see [Use Azure PowerShell with Azure Resource Manager](../powershell-azure-resource-manager.md).</span><span class="sxs-lookup"><span data-stu-id="b2e72-184">For more information, see [Use Azure PowerShell with Azure Resource Manager](../powershell-azure-resource-manager.md).</span></span>
+3. <span data-ttu-id="b2e72-185">Create an Azure SQL Database server, an Azure SQL database, and two tables.</span><span class="sxs-lookup"><span data-stu-id="b2e72-185">Create an Azure SQL Database server, an Azure SQL database, and two tables.</span></span> <span data-ttu-id="b2e72-186">These are used by the Sqoop action in the workflow.</span><span class="sxs-lookup"><span data-stu-id="b2e72-186">These are used by the Sqoop action in the workflow.</span></span>
    
-    <span data-ttu-id="eaba2-187">The table name is *log4jLogCount*.</span><span class="sxs-lookup"><span data-stu-id="eaba2-187">The table name is *log4jLogCount*.</span></span>
-4. <span data-ttu-id="eaba2-188">Create an HDInsight cluster used to run Oozie jobs.</span><span class="sxs-lookup"><span data-stu-id="eaba2-188">Create an HDInsight cluster used to run Oozie jobs.</span></span>
+    <span data-ttu-id="b2e72-187">The table name is *log4jLogCount*.</span><span class="sxs-lookup"><span data-stu-id="b2e72-187">The table name is *log4jLogCount*.</span></span>
+4. <span data-ttu-id="b2e72-188">Create an HDInsight cluster used to run Oozie jobs.</span><span class="sxs-lookup"><span data-stu-id="b2e72-188">Create an HDInsight cluster used to run Oozie jobs.</span></span>
    
-    <span data-ttu-id="eaba2-189">To examine the cluster, you can use the Azure portal or Azure PowerShell.</span><span class="sxs-lookup"><span data-stu-id="eaba2-189">To examine the cluster, you can use the Azure portal or Azure PowerShell.</span></span>
-5. <span data-ttu-id="eaba2-190">Copy the oozie workflow file and the HiveQL script file to the default file system.</span><span class="sxs-lookup"><span data-stu-id="eaba2-190">Copy the oozie workflow file and the HiveQL script file to the default file system.</span></span>
+    <span data-ttu-id="b2e72-189">To examine the cluster, you can use the Azure portal or Azure PowerShell.</span><span class="sxs-lookup"><span data-stu-id="b2e72-189">To examine the cluster, you can use the Azure portal or Azure PowerShell.</span></span>
+5. <span data-ttu-id="b2e72-190">Copy the oozie workflow file and the HiveQL script file to the default file system.</span><span class="sxs-lookup"><span data-stu-id="b2e72-190">Copy the oozie workflow file and the HiveQL script file to the default file system.</span></span>
    
-    <span data-ttu-id="eaba2-191">Both files are stored in a public Blob container.</span><span class="sxs-lookup"><span data-stu-id="eaba2-191">Both files are stored in a public Blob container.</span></span>
+    <span data-ttu-id="b2e72-191">Both files are stored in a public Blob container.</span><span class="sxs-lookup"><span data-stu-id="b2e72-191">Both files are stored in a public Blob container.</span></span>
    
-   * <span data-ttu-id="eaba2-192">Copy the HiveQL script (useoozie.hql) to Azure Storage (wasbs:///tutorials/useoozie/useoozie.hql).</span><span class="sxs-lookup"><span data-stu-id="eaba2-192">Copy the HiveQL script (useoozie.hql) to Azure Storage (wasbs:///tutorials/useoozie/useoozie.hql).</span></span>
-   * <span data-ttu-id="eaba2-193">Copy workflow.xml to wasbs:///tutorials/useoozie/workflow.xml.</span><span class="sxs-lookup"><span data-stu-id="eaba2-193">Copy workflow.xml to wasbs:///tutorials/useoozie/workflow.xml.</span></span>
-   * <span data-ttu-id="eaba2-194">Copy the data file (/example/data/sample.log) to wasbs:///tutorials/useoozie/data/sample.log.</span><span class="sxs-lookup"><span data-stu-id="eaba2-194">Copy the data file (/example/data/sample.log) to wasbs:///tutorials/useoozie/data/sample.log.</span></span>
-6. <span data-ttu-id="eaba2-195">Submit an Oozie job.</span><span class="sxs-lookup"><span data-stu-id="eaba2-195">Submit an Oozie job.</span></span>
+   * <span data-ttu-id="b2e72-192">Copy the HiveQL script (useoozie.hql) to Azure Storage (wasb:///tutorials/useoozie/useoozie.hql).</span><span class="sxs-lookup"><span data-stu-id="b2e72-192">Copy the HiveQL script (useoozie.hql) to Azure Storage (wasb:///tutorials/useoozie/useoozie.hql).</span></span>
+   * <span data-ttu-id="b2e72-193">Copy workflow.xml to wasb:///tutorials/useoozie/workflow.xml.</span><span class="sxs-lookup"><span data-stu-id="b2e72-193">Copy workflow.xml to wasb:///tutorials/useoozie/workflow.xml.</span></span>
+   * <span data-ttu-id="b2e72-194">Copy the data file (/example/data/sample.log) to wasb:///tutorials/useoozie/data/sample.log.</span><span class="sxs-lookup"><span data-stu-id="b2e72-194">Copy the data file (/example/data/sample.log) to wasb:///tutorials/useoozie/data/sample.log.</span></span>
+6. <span data-ttu-id="b2e72-195">Submit an Oozie job.</span><span class="sxs-lookup"><span data-stu-id="b2e72-195">Submit an Oozie job.</span></span>
    
-    <span data-ttu-id="eaba2-196">To examine the OOzie job results, use Visual Studio or other tools to connect to the Azure SQL Database.</span><span class="sxs-lookup"><span data-stu-id="eaba2-196">To examine the OOzie job results, use Visual Studio or other tools to connect to the Azure SQL Database.</span></span>
+    <span data-ttu-id="b2e72-196">To examine the OOzie job results, use Visual Studio or other tools to connect to the Azure SQL Database.</span><span class="sxs-lookup"><span data-stu-id="b2e72-196">To examine the OOzie job results, use Visual Studio or other tools to connect to the Azure SQL Database.</span></span>
 
-<span data-ttu-id="eaba2-197">Here is the script.</span><span class="sxs-lookup"><span data-stu-id="eaba2-197">Here is the script.</span></span>  <span data-ttu-id="eaba2-198">You can run the script from Windows PowerShell ISE.</span><span class="sxs-lookup"><span data-stu-id="eaba2-198">You can run the script from Windows PowerShell ISE.</span></span> <span data-ttu-id="eaba2-199">You only need to configure the first 7 variables.</span><span class="sxs-lookup"><span data-stu-id="eaba2-199">You only need to configure the first 7 variables.</span></span>
+<span data-ttu-id="b2e72-197">Here is the script.</span><span class="sxs-lookup"><span data-stu-id="b2e72-197">Here is the script.</span></span>  <span data-ttu-id="b2e72-198">You can run the script from Windows PowerShell ISE.</span><span class="sxs-lookup"><span data-stu-id="b2e72-198">You can run the script from Windows PowerShell ISE.</span></span> <span data-ttu-id="b2e72-199">You only need to configure the first 7 variables.</span><span class="sxs-lookup"><span data-stu-id="b2e72-199">You only need to configure the first 7 variables.</span></span>
 
     #region - provide the following values
 
@@ -245,7 +238,7 @@ ms.locfileid: "44551733"
     Write-Host "`nConnecting to your Azure subscription ..." -ForegroundColor Green
     try{Get-AzureRmContext}
     catch{
-        Login-AzureRmAccount
+        Connect-AzureRmAccount
         Select-AzureRmSubscription -SubscriptionId $subscriptionID
     }
     #endregion
@@ -447,7 +440,7 @@ ms.locfileid: "44551733"
 
     #region - submit Oozie job
 
-    $storageUri="wasbs://$defaultBlobContainerName@$defaultStorageAccountName.blob.core.windows.net"
+    $storageUri="wasb://$defaultBlobContainerName@$defaultStorageAccountName.blob.core.windows.net"
 
     $oozieJobName = $namePrefix + "OozieJob"
 
@@ -579,14 +572,14 @@ ms.locfileid: "44551733"
     #endregion
 
 
-<span data-ttu-id="eaba2-200">**To re-run the tutorial**</span><span class="sxs-lookup"><span data-stu-id="eaba2-200">**To re-run the tutorial**</span></span>
+<span data-ttu-id="b2e72-200">**To re-run the tutorial**</span><span class="sxs-lookup"><span data-stu-id="b2e72-200">**To re-run the tutorial**</span></span>
 
-<span data-ttu-id="eaba2-201">To re-run the workflow, you must delete the following:</span><span class="sxs-lookup"><span data-stu-id="eaba2-201">To re-run the workflow, you must delete the following:</span></span>
+<span data-ttu-id="b2e72-201">To re-run the workflow, you must delete the following items:</span><span class="sxs-lookup"><span data-stu-id="b2e72-201">To re-run the workflow, you must delete the following items:</span></span>
 
-* <span data-ttu-id="eaba2-202">The Hive script output file</span><span class="sxs-lookup"><span data-stu-id="eaba2-202">The Hive script output file</span></span>
-* <span data-ttu-id="eaba2-203">The data in the log4jLogsCount table</span><span class="sxs-lookup"><span data-stu-id="eaba2-203">The data in the log4jLogsCount table</span></span>
+* <span data-ttu-id="b2e72-202">The Hive script output file</span><span class="sxs-lookup"><span data-stu-id="b2e72-202">The Hive script output file</span></span>
+* <span data-ttu-id="b2e72-203">The data in the log4jLogsCount table</span><span class="sxs-lookup"><span data-stu-id="b2e72-203">The data in the log4jLogsCount table</span></span>
 
-<span data-ttu-id="eaba2-204">Here is a sample PowerShell script that you can use:</span><span class="sxs-lookup"><span data-stu-id="eaba2-204">Here is a sample PowerShell script that you can use:</span></span>
+<span data-ttu-id="b2e72-204">Here is a sample PowerShell script that you can use:</span><span class="sxs-lookup"><span data-stu-id="b2e72-204">Here is a sample PowerShell script that you can use:</span></span>
 
     $resourceGroupName = "<AzureResourceGroupName>"
 
@@ -618,47 +611,47 @@ ms.locfileid: "44551733"
 
     $conn.close()
 
-## <a name="next-steps"></a><span data-ttu-id="eaba2-205">Next steps</span><span class="sxs-lookup"><span data-stu-id="eaba2-205">Next steps</span></span>
-<span data-ttu-id="eaba2-206">In this tutorial, you learned how to define an Oozie workflow and how to run an Oozie job by using PowerShell.</span><span class="sxs-lookup"><span data-stu-id="eaba2-206">In this tutorial, you learned how to define an Oozie workflow and how to run an Oozie job by using PowerShell.</span></span> <span data-ttu-id="eaba2-207">To learn more, see the following articles:</span><span class="sxs-lookup"><span data-stu-id="eaba2-207">To learn more, see the following articles:</span></span>
+## <a name="next-steps"></a><span data-ttu-id="b2e72-205">Next steps</span><span class="sxs-lookup"><span data-stu-id="b2e72-205">Next steps</span></span>
+<span data-ttu-id="b2e72-206">In this tutorial, you learned how to define an Oozie workflow and how to run an Oozie job by using PowerShell.</span><span class="sxs-lookup"><span data-stu-id="b2e72-206">In this tutorial, you learned how to define an Oozie workflow and how to run an Oozie job by using PowerShell.</span></span> <span data-ttu-id="b2e72-207">To learn more, see the following articles:</span><span class="sxs-lookup"><span data-stu-id="b2e72-207">To learn more, see the following articles:</span></span>
 
-* <span data-ttu-id="eaba2-208">[Use time-based Oozie Coordinator with HDInsight][hdinsight-oozie-coordinator-time]</span><span class="sxs-lookup"><span data-stu-id="eaba2-208">[Use time-based Oozie Coordinator with HDInsight][hdinsight-oozie-coordinator-time]</span></span>
-* <span data-ttu-id="eaba2-209">[Get started using Hadoop with Hive in HDInsight to analyze mobile handset use][hdinsight-get-started]</span><span class="sxs-lookup"><span data-stu-id="eaba2-209">[Get started using Hadoop with Hive in HDInsight to analyze mobile handset use][hdinsight-get-started]</span></span>
-* <span data-ttu-id="eaba2-210">[Use Azure Blob storage with HDInsight][hdinsight-storage]</span><span class="sxs-lookup"><span data-stu-id="eaba2-210">[Use Azure Blob storage with HDInsight][hdinsight-storage]</span></span>
-* <span data-ttu-id="eaba2-211">[Administer HDInsight using PowerShell][hdinsight-admin-powershell]</span><span class="sxs-lookup"><span data-stu-id="eaba2-211">[Administer HDInsight using PowerShell][hdinsight-admin-powershell]</span></span>
-* <span data-ttu-id="eaba2-212">[Upload data for Hadoop jobs in HDInsight][hdinsight-upload-data]</span><span class="sxs-lookup"><span data-stu-id="eaba2-212">[Upload data for Hadoop jobs in HDInsight][hdinsight-upload-data]</span></span>
-* <span data-ttu-id="eaba2-213">[Use Sqoop with Hadoop in HDInsight][hdinsight-use-sqoop]</span><span class="sxs-lookup"><span data-stu-id="eaba2-213">[Use Sqoop with Hadoop in HDInsight][hdinsight-use-sqoop]</span></span>
-* <span data-ttu-id="eaba2-214">[Use Hive with Hadoop on HDInsight][hdinsight-use-hive]</span><span class="sxs-lookup"><span data-stu-id="eaba2-214">[Use Hive with Hadoop on HDInsight][hdinsight-use-hive]</span></span>
-* <span data-ttu-id="eaba2-215">[Use Pig with Hadoop on HDInsight][hdinsight-use-pig]</span><span class="sxs-lookup"><span data-stu-id="eaba2-215">[Use Pig with Hadoop on HDInsight][hdinsight-use-pig]</span></span>
-* <span data-ttu-id="eaba2-216">[Develop Java MapReduce programs for HDInsight][hdinsight-develop-mapreduce]</span><span class="sxs-lookup"><span data-stu-id="eaba2-216">[Develop Java MapReduce programs for HDInsight][hdinsight-develop-mapreduce]</span></span>
+* <span data-ttu-id="b2e72-208">[Use time-based Oozie Coordinator with HDInsight][hdinsight-oozie-coordinator-time]</span><span class="sxs-lookup"><span data-stu-id="b2e72-208">[Use time-based Oozie Coordinator with HDInsight][hdinsight-oozie-coordinator-time]</span></span>
+* <span data-ttu-id="b2e72-209">[Get started using Hadoop with Hive in HDInsight to analyze mobile handset use][hdinsight-get-started]</span><span class="sxs-lookup"><span data-stu-id="b2e72-209">[Get started using Hadoop with Hive in HDInsight to analyze mobile handset use][hdinsight-get-started]</span></span>
+* <span data-ttu-id="b2e72-210">[Use Azure Blob storage with HDInsight][hdinsight-storage]</span><span class="sxs-lookup"><span data-stu-id="b2e72-210">[Use Azure Blob storage with HDInsight][hdinsight-storage]</span></span>
+* <span data-ttu-id="b2e72-211">[Administer HDInsight using PowerShell][hdinsight-admin-powershell]</span><span class="sxs-lookup"><span data-stu-id="b2e72-211">[Administer HDInsight using PowerShell][hdinsight-admin-powershell]</span></span>
+* <span data-ttu-id="b2e72-212">[Upload data for Hadoop jobs in HDInsight][hdinsight-upload-data]</span><span class="sxs-lookup"><span data-stu-id="b2e72-212">[Upload data for Hadoop jobs in HDInsight][hdinsight-upload-data]</span></span>
+* <span data-ttu-id="b2e72-213">[Use Sqoop with Hadoop in HDInsight][hdinsight-use-sqoop]</span><span class="sxs-lookup"><span data-stu-id="b2e72-213">[Use Sqoop with Hadoop in HDInsight][hdinsight-use-sqoop]</span></span>
+* <span data-ttu-id="b2e72-214">[Use Hive with Hadoop on HDInsight][hdinsight-use-hive]</span><span class="sxs-lookup"><span data-stu-id="b2e72-214">[Use Hive with Hadoop on HDInsight][hdinsight-use-hive]</span></span>
+* <span data-ttu-id="b2e72-215">[Use Pig with Hadoop on HDInsight][hdinsight-use-pig]</span><span class="sxs-lookup"><span data-stu-id="b2e72-215">[Use Pig with Hadoop on HDInsight][hdinsight-use-pig]</span></span>
+* <span data-ttu-id="b2e72-216">[Develop Java MapReduce programs for HDInsight][hdinsight-develop-mapreduce]</span><span class="sxs-lookup"><span data-stu-id="b2e72-216">[Develop Java MapReduce programs for HDInsight][hdinsight-develop-mapreduce]</span></span>
 
 [hdinsight-cmdlets-download]: http://go.microsoft.com/fwlink/?LinkID=325563
 
 
 
-[azure-data-factory-pig-hive]: ../data-factory/data-factory-data-transformation-activities.md
+[azure-data-factory-pig-hive]: ../data-factory/transform-data.md
 [hdinsight-oozie-coordinator-time]: hdinsight-use-oozie-coordinator-time.md
 [hdinsight-versions]:  hdinsight-component-versioning.md
 [hdinsight-storage]: hdinsight-hadoop-use-blob-storage.md
-[hdinsight-get-started]: hdinsight-hadoop-linux-tutorial-get-started.md
+[hdinsight-get-started]:hadoop/apache-hadoop-linux-tutorial-get-started.md
 [hdinsight-admin-portal]: hdinsight-administer-use-management-portal.md
 
 
-[hdinsight-use-sqoop]: hdinsight-use-sqoop.md
-[hdinsight-provision]: hdinsight-provision-clusters.md
+[hdinsight-use-sqoop]:hadoop/hdinsight-use-sqoop.md
+[hdinsight-provision]: hdinsight-hadoop-provision-linux-clusters.md
 [hdinsight-admin-powershell]: hdinsight-administer-use-powershell.md
 [hdinsight-upload-data]: hdinsight-upload-data.md
-[hdinsight-use-mapreduce]: hdinsight-use-mapreduce.md
-[hdinsight-use-hive]: hdinsight-use-hive.md
-[hdinsight-use-pig]: hdinsight-use-pig.md
+[hdinsight-use-mapreduce]:hadoop/hdinsight-use-mapreduce.md
+[hdinsight-use-hive]:hadoop/hdinsight-use-hive.md
+[hdinsight-use-pig]:hadoop/hdinsight-use-pig.md
 [hdinsight-storage]: hdinsight-hadoop-use-blob-storage.md
 
-[hdinsight-develop-mapreduce]: hdinsight-develop-deploy-java-mapreduce-linux.md
+[hdinsight-develop-mapreduce]:hadoop/apache-hadoop-develop-deploy-java-mapreduce-linux.md
 
 [sqldatabase-create-configue]: ../sql-database-create-configure.md
 [sqldatabase-get-started]: ../sql-database-get-started.md
 
 [azure-management-portal]: https://portal.azure.com/
-[azure-create-storageaccount]: ../storage-create-storage-account.md
+[azure-create-storageaccount]:../storage/common/storage-create-storage-account.md
 
 [apache-hadoop]: http://hadoop.apache.org/
 [apache-oozie-400]: http://oozie.apache.org/docs/4.0.0/
@@ -668,15 +661,12 @@ ms.locfileid: "44551733"
 [powershell-about-profiles]: http://go.microsoft.com/fwlink/?LinkID=113729
 [powershell-install-configure]: /powershell/azureps-cmdlets-docs
 [powershell-start]: http://technet.microsoft.com/library/hh847889.aspx
-[powershell-script]: https://technet.microsoft.com/en-us/library/ee176961.aspx
+[powershell-script]: https://technet.microsoft.com/library/ee176961.aspx
 
 [cindygross-hive-tables]: http://blogs.msdn.com/b/cindygross/archive/2013/02/06/hdinsight-hive-internal-and-external-tables-intro.aspx
 
-[img-workflow-diagram]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/hdinsight/media/hdinsight-use-oozie/HDI.UseOozie.Workflow.Diagram.png
-[img-preparation-output]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/hdinsight/media/hdinsight-use-oozie/HDI.UseOozie.Preparation.Output1.png  
-[img-runworkflow-output]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/hdinsight/media/hdinsight-use-oozie/HDI.UseOozie.RunWF.Output.png
+[img-workflow-diagram]: ./media/hdinsight-use-oozie/HDI.UseOozie.Workflow.Diagram.png
+[img-preparation-output]: ./media/hdinsight-use-oozie/HDI.UseOozie.Preparation.Output1.png  
+[img-runworkflow-output]: ./media/hdinsight-use-oozie/HDI.UseOozie.RunWF.Output.png
 
 [technetwiki-hive-error]: http://social.technet.microsoft.com/wiki/contents/articles/23047.hdinsight-hive-error-unable-to-rename.aspx
-
-
-

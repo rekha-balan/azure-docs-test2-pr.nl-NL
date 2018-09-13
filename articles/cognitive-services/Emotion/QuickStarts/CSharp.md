@@ -1,35 +1,48 @@
 ---
 title: Emotion API C# quick start | Microsoft Docs
-description: Get information and a code sample to help you quickly get started using the Emotion API with C# in Cognitive Services.
+description: Get information and a code sample to help you quickly get started by using the Emotion API with C# in Cognitive Services.
 services: cognitive-services
-author: v-royhar
-manager: yutkuo
+author: anrothMSFT
+manager: corncar
 ms.service: cognitive-services
-ms.technology: emotion
+ms.component: emotion-api
 ms.topic: article
-ms.date: 02/20/2017
+ms.date: 11/02/2017
 ms.author: anroth
-ms.openlocfilehash: 019c5a0396cbc064c4ddfba4dd8f5ea19d12ca2a
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 89735ae54395447e3cb421f45db3d6b99001ecd6
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44540906"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44801143"
 ---
-# <a name="emotion-api-c-quick-start"></a><span data-ttu-id="c9204-103">Emotion API C# Quick Start</span><span class="sxs-lookup"><span data-stu-id="c9204-103">Emotion API C# Quick Start</span></span>
-<span data-ttu-id="c9204-104">This article provides information and a code sample to help you quickly get started using the [Emotion API Recognize method](https://dev.projectoxford.ai/docs/services/5639d931ca73072154c1ce89/operations/563b31ea778daf121cc3a5fa) with C# to recognize the emotions expressed by one or more people in an image.</span><span class="sxs-lookup"><span data-stu-id="c9204-104">This article provides information and a code sample to help you quickly get started using the [Emotion API Recognize method](https://dev.projectoxford.ai/docs/services/5639d931ca73072154c1ce89/operations/563b31ea778daf121cc3a5fa) with C# to recognize the emotions expressed by one or more people in an image.</span></span> 
+# <a name="emotion-api-c-quick-start"></a><span data-ttu-id="e63ce-103">Emotion API C# quick start</span><span class="sxs-lookup"><span data-stu-id="e63ce-103">Emotion API C# quick start</span></span>
 
-## <a name="prerequisites"></a><span data-ttu-id="c9204-105">Prerequisites</span><span class="sxs-lookup"><span data-stu-id="c9204-105">Prerequisites</span></span>
-* <span data-ttu-id="c9204-106">Get the Microsoft Cognitive Emotion API Windows SDK [here](https://www.nuget.org/packages/Microsoft.ProjectOxford.Emotion/)</span><span class="sxs-lookup"><span data-stu-id="c9204-106">Get the Microsoft Cognitive Emotion API Windows SDK [here](https://www.nuget.org/packages/Microsoft.ProjectOxford.Emotion/)</span></span>
-* <span data-ttu-id="c9204-107">Get your free Subscription Key [here](https://www.microsoft.com/cognitive-services/en-us/sign-up)</span><span class="sxs-lookup"><span data-stu-id="c9204-107">Get your free Subscription Key [here](https://www.microsoft.com/cognitive-services/en-us/sign-up)</span></span>
+> [!IMPORTANT]
+> <span data-ttu-id="e63ce-104">The Video API Preview ended on October 30, 2017.</span><span class="sxs-lookup"><span data-stu-id="e63ce-104">The Video API Preview ended on October 30, 2017.</span></span> <span data-ttu-id="e63ce-105">To easily extract insights from videos, try the new [Video Indexer API Preview](https://azure.microsoft.com/services/cognitive-services/video-indexer/).</span><span class="sxs-lookup"><span data-stu-id="e63ce-105">To easily extract insights from videos, try the new [Video Indexer API Preview](https://azure.microsoft.com/services/cognitive-services/video-indexer/).</span></span> <span data-ttu-id="e63ce-106">You also can use it to enhance content discovery experiences, such as search results, by detecting spoken words, faces, characters, and emotions.</span><span class="sxs-lookup"><span data-stu-id="e63ce-106">You also can use it to enhance content discovery experiences, such as search results, by detecting spoken words, faces, characters, and emotions.</span></span> <span data-ttu-id="e63ce-107">To learn more, see the [Video Indexer Preview](https://docs.microsoft.com/azure/cognitive-services/video-indexer/video-indexer-overview) overview.</span><span class="sxs-lookup"><span data-stu-id="e63ce-107">To learn more, see the [Video Indexer Preview](https://docs.microsoft.com/azure/cognitive-services/video-indexer/video-indexer-overview) overview.</span></span>
 
-## <a name="emotion-recognition-c-example-request"></a><span data-ttu-id="c9204-108">Emotion Recognition C# Example Request</span><span class="sxs-lookup"><span data-stu-id="c9204-108">Emotion Recognition C# Example Request</span></span>
+<span data-ttu-id="e63ce-108">This article provides information and a code sample to help you quickly get started by using the [Emotion API Recognize method](https://westus.dev.cognitive.microsoft.com/docs/services/5639d931ca73072154c1ce89/operations/563b31ea778daf121cc3a5fa) with C#.</span><span class="sxs-lookup"><span data-stu-id="e63ce-108">This article provides information and a code sample to help you quickly get started by using the [Emotion API Recognize method](https://westus.dev.cognitive.microsoft.com/docs/services/5639d931ca73072154c1ce89/operations/563b31ea778daf121cc3a5fa) with C#.</span></span> <span data-ttu-id="e63ce-109">You can use it to recognize the emotions expressed by one or more people in an image.</span><span class="sxs-lookup"><span data-stu-id="e63ce-109">You can use it to recognize the emotions expressed by one or more people in an image.</span></span> 
 
-```c#
+## <a name="prerequisites"></a><span data-ttu-id="e63ce-110">Prerequisites</span><span class="sxs-lookup"><span data-stu-id="e63ce-110">Prerequisites</span></span>
+* <span data-ttu-id="e63ce-111">Get the Cognitive Services [Emotion API Windows SDK](https://www.nuget.org/packages/Microsoft.ProjectOxford.Emotion/).</span><span class="sxs-lookup"><span data-stu-id="e63ce-111">Get the Cognitive Services [Emotion API Windows SDK](https://www.nuget.org/packages/Microsoft.ProjectOxford.Emotion/).</span></span>
+* <span data-ttu-id="e63ce-112">Get your free [subscription key](https://azure.microsoft.com/try/cognitive-services/).</span><span class="sxs-lookup"><span data-stu-id="e63ce-112">Get your free [subscription key](https://azure.microsoft.com/try/cognitive-services/).</span></span>
+
+## <a name="emotion-recognition-c-example-request"></a><span data-ttu-id="e63ce-113">Emotion recognition C# example request</span><span class="sxs-lookup"><span data-stu-id="e63ce-113">Emotion recognition C# example request</span></span>
+
+<span data-ttu-id="e63ce-114">Create a new Console solution in Visual Studio, and then replace Program.cs with the following code.</span><span class="sxs-lookup"><span data-stu-id="e63ce-114">Create a new Console solution in Visual Studio, and then replace Program.cs with the following code.</span></span> <span data-ttu-id="e63ce-115">Change the `string uri` to use the region where you obtained your subscription keys.</span><span class="sxs-lookup"><span data-stu-id="e63ce-115">Change the `string uri` to use the region where you obtained your subscription keys.</span></span> <span data-ttu-id="e63ce-116">Replace the **Ocp-Apim-Subscription-Key** value with your valid subscription key.</span><span class="sxs-lookup"><span data-stu-id="e63ce-116">Replace the **Ocp-Apim-Subscription-Key** value with your valid subscription key.</span></span> <span data-ttu-id="e63ce-117">To find the subscription key, go to the Azure portal.</span><span class="sxs-lookup"><span data-stu-id="e63ce-117">To find the subscription key, go to the Azure portal.</span></span> <span data-ttu-id="e63ce-118">On the navigation pane on the left, under the **Keys** section, browse to your Emotion API resource.</span><span class="sxs-lookup"><span data-stu-id="e63ce-118">On the navigation pane on the left, under the **Keys** section, browse to your Emotion API resource.</span></span> <span data-ttu-id="e63ce-119">Similarly, you can get the proper connect URI in the **Overview** panel for your resource listed under **Endpoint**.</span><span class="sxs-lookup"><span data-stu-id="e63ce-119">Similarly, you can get the proper connect URI in the **Overview** panel for your resource listed under **Endpoint**.</span></span>
+
+![Your API resource keys](../../media/emotion-api/keys.png)
+
+<span data-ttu-id="e63ce-121">To process the response of your request, use a library like `Newtonsoft.Json`.</span><span class="sxs-lookup"><span data-stu-id="e63ce-121">To process the response of your request, use a library like `Newtonsoft.Json`.</span></span> <span data-ttu-id="e63ce-122">This way you can handle a JSON string as a series of manageable objects called Tokens.</span><span class="sxs-lookup"><span data-stu-id="e63ce-122">This way you can handle a JSON string as a series of manageable objects called Tokens.</span></span> <span data-ttu-id="e63ce-123">To add this library to your package, right-click your project in Solution Explorer and select **Manage Nuget Packages**.</span><span class="sxs-lookup"><span data-stu-id="e63ce-123">To add this library to your package, right-click your project in Solution Explorer and select **Manage Nuget Packages**.</span></span> <span data-ttu-id="e63ce-124">Then search for **Newtonsoft**.</span><span class="sxs-lookup"><span data-stu-id="e63ce-124">Then search for **Newtonsoft**.</span></span> <span data-ttu-id="e63ce-125">The first result should be **Newtonsoft.Json**.</span><span class="sxs-lookup"><span data-stu-id="e63ce-125">The first result should be **Newtonsoft.Json**.</span></span> <span data-ttu-id="e63ce-126">Select **Install**.</span><span class="sxs-lookup"><span data-stu-id="e63ce-126">Select **Install**.</span></span> <span data-ttu-id="e63ce-127">You can now reference this library in your application.</span><span class="sxs-lookup"><span data-stu-id="e63ce-127">You can now reference this library in your application.</span></span>
+
+![Install Newtonsoft.Json](../../media/emotion-api/newtonsoft-nuget.png)
+
+```csharp
 using System;
 using System.IO;
 using System.Net.Http.Headers;
 using System.Net.Http;
+using Newtonsoft.Json.Linq;
 
 namespace CSHttpClientSample
 {
@@ -43,7 +56,7 @@ namespace CSHttpClientSample
             MakeRequest(imageFilePath);
 
             Console.WriteLine("\n\n\nWait for the result below, then hit ENTER to exit...\n\n\n");
-            Console.ReadLine();
+            Console.ReadLine(); // wait for ENTER to exit program
         }
 
         static byte[] GetImageAsByteArray(string imageFilePath)
@@ -57,9 +70,12 @@ namespace CSHttpClientSample
         {
             var client = new HttpClient();
 
-            // Request headers
-            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "40d7576afa7e4f82b38315516d55cb5e");
+            // Request headers - replace this example key with your valid key.
+            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "<your-subscription-key>"); // 
 
+            // NOTE: You must use the same region in your REST call as you used to obtain your subscription keys.
+            //   For example, if you obtained your subscription keys from westcentralus, replace "westus" in the 
+            //   URI below with "westcentralus".
             string uri = "https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognize?";
             HttpResponseMessage response;
             string responseContent;
@@ -76,17 +92,39 @@ namespace CSHttpClientSample
                 responseContent = response.Content.ReadAsStringAsync().Result;
             }
 
-            //A peak at the JSON response.
+            // A peek at the raw JSON response.
             Console.WriteLine(responseContent);
+
+            // Processing the JSON into manageable objects.
+            JToken rootToken = JArray.Parse(responseContent).First;
+
+            // First token is always the faceRectangle identified by the API.
+            JToken faceRectangleToken = rootToken.First;
+
+            // Second token is all emotion scores.
+            JToken scoresToken = rootToken.Last;
+
+            // Show all face rectangle dimensions
+            JEnumerable<JToken> faceRectangleSizeList = faceRectangleToken.First.Children();
+            foreach (var size in faceRectangleSizeList) {
+                Console.WriteLine(size);
+            }
+
+            // Show all scores
+            JEnumerable<JToken> scoreList = scoresToken.First.Children();
+            foreach (var score in scoreList) {
+                Console.WriteLine(score);
+            }
         }
     }
 }
 ```
 
-## <a name="recognize-emotions-sample-response"></a><span data-ttu-id="c9204-109">Recognize Emotions Sample Response</span><span class="sxs-lookup"><span data-stu-id="c9204-109">Recognize Emotions Sample Response</span></span>
-<span data-ttu-id="c9204-110">A successful call returns an array of face entries and their associated emotion scores, ranked by face rectangle size in descending order.</span><span class="sxs-lookup"><span data-stu-id="c9204-110">A successful call returns an array of face entries and their associated emotion scores, ranked by face rectangle size in descending order.</span></span> <span data-ttu-id="c9204-111">An empty response indicates that no faces were detected.</span><span class="sxs-lookup"><span data-stu-id="c9204-111">An empty response indicates that no faces were detected.</span></span> <span data-ttu-id="c9204-112">An emotion entry contains the following fields:</span><span class="sxs-lookup"><span data-stu-id="c9204-112">An emotion entry contains the following fields:</span></span>
-* <span data-ttu-id="c9204-113">faceRectangle - Rectangle location of face in the image.</span><span class="sxs-lookup"><span data-stu-id="c9204-113">faceRectangle - Rectangle location of face in the image.</span></span>
-* <span data-ttu-id="c9204-114">scores - Emotion scores for each face in the image.</span><span class="sxs-lookup"><span data-stu-id="c9204-114">scores - Emotion scores for each face in the image.</span></span> 
+## <a name="recognize-emotions-sample-response"></a><span data-ttu-id="e63ce-129">Recognize emotions sample response</span><span class="sxs-lookup"><span data-stu-id="e63ce-129">Recognize emotions sample response</span></span>
+<span data-ttu-id="e63ce-130">A successful call returns an array of face entries and their associated emotion scores.</span><span class="sxs-lookup"><span data-stu-id="e63ce-130">A successful call returns an array of face entries and their associated emotion scores.</span></span> <span data-ttu-id="e63ce-131">They are ranked by face rectangle size in descending order.</span><span class="sxs-lookup"><span data-stu-id="e63ce-131">They are ranked by face rectangle size in descending order.</span></span> <span data-ttu-id="e63ce-132">An empty response indicates that no faces were detected.</span><span class="sxs-lookup"><span data-stu-id="e63ce-132">An empty response indicates that no faces were detected.</span></span> <span data-ttu-id="e63ce-133">An emotion entry contains the following fields:</span><span class="sxs-lookup"><span data-stu-id="e63ce-133">An emotion entry contains the following fields:</span></span>
+
+* <span data-ttu-id="e63ce-134">faceRectangle: Rectangle location of face in the image</span><span class="sxs-lookup"><span data-stu-id="e63ce-134">faceRectangle: Rectangle location of face in the image</span></span>
+* <span data-ttu-id="e63ce-135">scores: Emotion scores for each face in the image</span><span class="sxs-lookup"><span data-stu-id="e63ce-135">scores: Emotion scores for each face in the image</span></span> 
 
 ```json
 application/json 

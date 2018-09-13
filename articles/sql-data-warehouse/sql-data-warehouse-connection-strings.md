@@ -1,57 +1,52 @@
 ---
-title: Drivers for SQL Data Warehouse | Microsoft Docs
-description: Connection strings and drivers for SQL Data Warehouse
+title: Connection strings for Azure SQL Data Warehouse | Microsoft Docs
+description: Connection strings for SQL Data Warehouse
 services: sql-data-warehouse
-documentationcenter: NA
-author: barbkess
-manager: jhubbard
-editor: ''
-ms.assetid: 5c91f423-b550-4734-8094-c7f2c418ac8d
+author: kavithaj
+manager: craigg
 ms.service: sql-data-warehouse
-ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: data-services
-ms.custom: connect
-ms.date: 10/31/2016
-ms.author: barbkess
-ms.openlocfilehash: cfdec6b621267d642371104c328f9b5e6fd19c59
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.topic: conceptual
+ms.component: consume
+ms.date: 04/17/2018
+ms.author: kavithaj
+ms.reviewer: igorstan
+ms.openlocfilehash: de875731ffd2170f70d8034f0178d61351d86952
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44556483"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44827515"
 ---
-# <a name="drivers-for-azure-sql-data-warehouse"></a><span data-ttu-id="2ba92-103">Drivers for Azure SQL Data Warehouse</span><span class="sxs-lookup"><span data-stu-id="2ba92-103">Drivers for Azure SQL Data Warehouse</span></span>
-<span data-ttu-id="2ba92-104">You can connect to SQL Data Warehouse with several different application protocols such as, [ADO.NET][ADO.NET], [ODBC][ODBC], [PHP][PHP] and [JDBC][JDBC].</span><span class="sxs-lookup"><span data-stu-id="2ba92-104">You can connect to SQL Data Warehouse with several different application protocols such as, [ADO.NET][ADO.NET], [ODBC][ODBC], [PHP][PHP] and [JDBC][JDBC].</span></span> <span data-ttu-id="2ba92-105">Below are some examples of connections strings for each protocol.</span><span class="sxs-lookup"><span data-stu-id="2ba92-105">Below are some examples of connections strings for each protocol.</span></span>  <span data-ttu-id="2ba92-106">You can also use the Azure portal to build your connection string.</span><span class="sxs-lookup"><span data-stu-id="2ba92-106">You can also use the Azure portal to build your connection string.</span></span>  <span data-ttu-id="2ba92-107">To build your connection string using the Azure portal, navigate to your database blade, under *Essentials* click on *Show database connection strings*.</span><span class="sxs-lookup"><span data-stu-id="2ba92-107">To build your connection string using the Azure portal, navigate to your database blade, under *Essentials* click on *Show database connection strings*.</span></span>
+# <a name="connection-strings-for-azure-sql-data-warehouse"></a><span data-ttu-id="91624-103">Connection strings for Azure SQL Data Warehouse</span><span class="sxs-lookup"><span data-stu-id="91624-103">Connection strings for Azure SQL Data Warehouse</span></span>
+<span data-ttu-id="91624-104">You can connect to SQL Data Warehouse with several different application protocols such as, [ADO.NET][ADO.NET], [ODBC][ODBC], [PHP][PHP] and [JDBC][JDBC].</span><span class="sxs-lookup"><span data-stu-id="91624-104">You can connect to SQL Data Warehouse with several different application protocols such as, [ADO.NET][ADO.NET], [ODBC][ODBC], [PHP][PHP] and [JDBC][JDBC].</span></span> <span data-ttu-id="91624-105">Below are some examples of connections strings for each protocol.</span><span class="sxs-lookup"><span data-stu-id="91624-105">Below are some examples of connections strings for each protocol.</span></span>  <span data-ttu-id="91624-106">You can also use the Azure portal to build your connection string.</span><span class="sxs-lookup"><span data-stu-id="91624-106">You can also use the Azure portal to build your connection string.</span></span>  <span data-ttu-id="91624-107">To build your connection string using the Azure portal, navigate to your database blade, under *Essentials* click on *Show database connection strings*.</span><span class="sxs-lookup"><span data-stu-id="91624-107">To build your connection string using the Azure portal, navigate to your database blade, under *Essentials* click on *Show database connection strings*.</span></span>
 
-## <a name="sample-adonet-connection-string"></a><span data-ttu-id="2ba92-108">Sample ADO.NET connection string</span><span class="sxs-lookup"><span data-stu-id="2ba92-108">Sample ADO.NET connection string</span></span>
-```C#
+## <a name="sample-adonet-connection-string"></a><span data-ttu-id="91624-108">Sample ADO.NET connection string</span><span class="sxs-lookup"><span data-stu-id="91624-108">Sample ADO.NET connection string</span></span>
+```csharp
 Server=tcp:{your_server}.database.windows.net,1433;Database={your_database};User ID={your_user_name};Password={your_password_here};Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
 ```
 
-## <a name="sample-odbc-connection-string"></a><span data-ttu-id="2ba92-109">Sample ODBC connection string</span><span class="sxs-lookup"><span data-stu-id="2ba92-109">Sample ODBC connection string</span></span>
-```C#
+## <a name="sample-odbc-connection-string"></a><span data-ttu-id="91624-109">Sample ODBC connection string</span><span class="sxs-lookup"><span data-stu-id="91624-109">Sample ODBC connection string</span></span>
+```csharp
 Driver={SQL Server Native Client 11.0};Server=tcp:{your_server}.database.windows.net,1433;Database={your_database};Uid={your_user_name};Pwd={your_password_here};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;
 ```
 
-## <a name="sample-php-connection-string"></a><span data-ttu-id="2ba92-110">Sample PHP connection string</span><span class="sxs-lookup"><span data-stu-id="2ba92-110">Sample PHP connection string</span></span>
+## <a name="sample-php-connection-string"></a><span data-ttu-id="91624-110">Sample PHP connection string</span><span class="sxs-lookup"><span data-stu-id="91624-110">Sample PHP connection string</span></span>
 ```PHP
 Server: {your_server}.database.windows.net,1433 \r\nSQL Database: {your_database}\r\nUser Name: {your_user_name}\r\n\r\nPHP Data Objects(PDO) Sample Code:\r\n\r\ntry {\r\n   $conn = new PDO ( \"sqlsrv:server = tcp:{your_server}.database.windows.net,1433; Database = {your_database}\", \"{your_user_name}\", \"{your_password_here}\");\r\n    $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );\r\n}\r\ncatch ( PDOException $e ) {\r\n   print( \"Error connecting to SQL Server.\" );\r\n   die(print_r($e));\r\n}\r\n\rSQL Server Extension Sample Code:\r\n\r\n$connectionInfo = array(\"UID\" => \"{your_user_name}\", \"pwd\" => \"{your_password_here}\", \"Database\" => \"{your_database}\", \"LoginTimeout\" => 30, \"Encrypt\" => 1, \"TrustServerCertificate\" => 0);\r\n$serverName = \"tcp:{your_server}.database.windows.net,1433\";\r\n$conn = sqlsrv_connect($serverName, $connectionInfo);
 ```
 
-## <a name="sample-jdbc-connection-string"></a><span data-ttu-id="2ba92-111">Sample JDBC connection string</span><span class="sxs-lookup"><span data-stu-id="2ba92-111">Sample JDBC connection string</span></span>
+## <a name="sample-jdbc-connection-string"></a><span data-ttu-id="91624-111">Sample JDBC connection string</span><span class="sxs-lookup"><span data-stu-id="91624-111">Sample JDBC connection string</span></span>
 ```Java
 jdbc:sqlserver://yourserver.database.windows.net:1433;database=yourdatabase;user={your_user_name};password={your_password_here};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
 ```
 
 > [!NOTE]
-> <span data-ttu-id="2ba92-112">Consider setting the connection timeout to 300 seconds in order to allow the connection to survive short periods of  unavailability.</span><span class="sxs-lookup"><span data-stu-id="2ba92-112">Consider setting the connection timeout to 300 seconds in order to allow the connection to survive short periods of  unavailability.</span></span>
+> <span data-ttu-id="91624-112">Consider setting the connection timeout to 300 seconds in order to allow the connection to survive short periods of  unavailability.</span><span class="sxs-lookup"><span data-stu-id="91624-112">Consider setting the connection timeout to 300 seconds in order to allow the connection to survive short periods of  unavailability.</span></span>
 > 
 > 
 
-## <a name="next-steps"></a><span data-ttu-id="2ba92-113">Next steps</span><span class="sxs-lookup"><span data-stu-id="2ba92-113">Next steps</span></span>
-<span data-ttu-id="2ba92-114">To start querying your data warehouse with Visual Studio and other applications, see [Query with Visual Studio][Query with Visual Studio].</span><span class="sxs-lookup"><span data-stu-id="2ba92-114">To start querying your data warehouse with Visual Studio and other applications, see [Query with Visual Studio][Query with Visual Studio].</span></span>
+## <a name="next-steps"></a><span data-ttu-id="91624-113">Next steps</span><span class="sxs-lookup"><span data-stu-id="91624-113">Next steps</span></span>
+<span data-ttu-id="91624-114">To start querying your data warehouse with Visual Studio and other applications, see [Query with Visual Studio][Query with Visual Studio].</span><span class="sxs-lookup"><span data-stu-id="91624-114">To start querying your data warehouse with Visual Studio and other applications, see [Query with Visual Studio][Query with Visual Studio].</span></span>
 
 <!--Image references-->
 

@@ -1,56 +1,63 @@
 ---
 title: Create an offer in Azure Stack | Microsoft Docs
-description: As a service administrator, learn how to create an offer for your tenants in Azure Stack.
+description: As a cloud administrator, learn how to create an offer for your users in Azure Stack.
 services: azure-stack
 documentationcenter: ''
-author: ErikjeMS
-manager: byronr
+author: brenduns
+manager: femila
 editor: ''
-ms.assetid: 96b080a4-a9a5-407c-ba54-111de2413d59
 ms.service: azure-stack
 ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: get-started-article
-ms.date: 09/26/2016
-ms.author: erikje
-ms.openlocfilehash: 0826c66d29be42b039fd21b431e2d33917acf0e1
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 08/20/2018
+ms.author: brenduns
+ms.reviewer: efemmano
+ms.openlocfilehash: 66a89c3cb14dd642ae993cbf3c45885635f59759
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44660941"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44793473"
 ---
-# <a name="create-an-offer-in-azure-stack"></a><span data-ttu-id="fd576-103">Create an offer in Azure Stack</span><span class="sxs-lookup"><span data-stu-id="fd576-103">Create an offer in Azure Stack</span></span>
-<span data-ttu-id="fd576-104">[Offers](azure-stack-key-features.md) are groups of one or more plans that providers present to tenants to purchase or subscribe to.</span><span class="sxs-lookup"><span data-stu-id="fd576-104">[Offers](azure-stack-key-features.md) are groups of one or more plans that providers present to tenants to purchase or subscribe to.</span></span> <span data-ttu-id="fd576-105">This document shows you how to create an offer that includes the [plan that you created](azure-stack-create-plan.md) in the last step.</span><span class="sxs-lookup"><span data-stu-id="fd576-105">This document shows you how to create an offer that includes the [plan that you created](azure-stack-create-plan.md) in the last step.</span></span> <span data-ttu-id="fd576-106">This offer gives subscribers the ability to provision virtual machines.</span><span class="sxs-lookup"><span data-stu-id="fd576-106">This offer gives subscribers the ability to provision virtual machines.</span></span>
+# <a name="create-an-offer-in-azure-stack"></a><span data-ttu-id="1549e-103">Create an offer in Azure Stack</span><span class="sxs-lookup"><span data-stu-id="1549e-103">Create an offer in Azure Stack</span></span>
 
-1. <span data-ttu-id="fd576-107">[Sign in](azure-stack-connect-azure-stack.md) to the portal as a service administrator and then click **New** > **Tenant Offers + Plans** > **Offer**.</span><span class="sxs-lookup"><span data-stu-id="fd576-107">[Sign in](azure-stack-connect-azure-stack.md) to the portal as a service administrator and then click **New** > **Tenant Offers + Plans** > **Offer**.</span></span>
-   ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/azure-stack/media/azure-stack-create-offer/image01.png)
-2. <span data-ttu-id="fd576-108">In the **New Offer** blade, fill in **Display Name** and **Resource Name**, and then select a new or existing **Resource Group**.</span><span class="sxs-lookup"><span data-stu-id="fd576-108">In the **New Offer** blade, fill in **Display Name** and **Resource Name**, and then select a new or existing **Resource Group**.</span></span> <span data-ttu-id="fd576-109">The Display Name is the offer's friendly name.</span><span class="sxs-lookup"><span data-stu-id="fd576-109">The Display Name is the offer's friendly name.</span></span> <span data-ttu-id="fd576-110">Only the admin can see the Resource Name.</span><span class="sxs-lookup"><span data-stu-id="fd576-110">Only the admin can see the Resource Name.</span></span> <span data-ttu-id="fd576-111">It's the name that admins use to work with the offer as an Azure Resource Manager resource.</span><span class="sxs-lookup"><span data-stu-id="fd576-111">It's the name that admins use to work with the offer as an Azure Resource Manager resource.</span></span>
+<span data-ttu-id="1549e-104">[Offers](azure-stack-key-features.md) are groups of one or more plans that providers present to users to buy or subscribe to.</span><span class="sxs-lookup"><span data-stu-id="1549e-104">[Offers](azure-stack-key-features.md) are groups of one or more plans that providers present to users to buy or subscribe to.</span></span> <span data-ttu-id="1549e-105">This document shows you how to create an offer that includes the [plan that you created](azure-stack-create-plan.md).</span><span class="sxs-lookup"><span data-stu-id="1549e-105">This document shows you how to create an offer that includes the [plan that you created](azure-stack-create-plan.md).</span></span> <span data-ttu-id="1549e-106">This offer gives subscribers the ability to set up virtual machines.</span><span class="sxs-lookup"><span data-stu-id="1549e-106">This offer gives subscribers the ability to set up virtual machines.</span></span>
 
-   ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/azure-stack/media/azure-stack-create-offer/image01a.png)
-3. <span data-ttu-id="fd576-112">Click **Base plans** and, in the **Plan** blade, select the plans you want to include in the offer, and then click **Select**.</span><span class="sxs-lookup"><span data-stu-id="fd576-112">Click **Base plans** and, in the **Plan** blade, select the plans you want to include in the offer, and then click **Select**.</span></span> <span data-ttu-id="fd576-113">Click **Create** to create the offer.</span><span class="sxs-lookup"><span data-stu-id="fd576-113">Click **Create** to create the offer.</span></span>
+1. <span data-ttu-id="1549e-107">Sign in to the Azure Stack administrator portal (https://adminportal.local.azurestack.external) and select **New** > **Tenant Offers + Plans** > **Offer**.</span><span class="sxs-lookup"><span data-stu-id="1549e-107">Sign in to the Azure Stack administrator portal (https://adminportal.local.azurestack.external) and select **New** > **Tenant Offers + Plans** > **Offer**.</span></span>
 
-   ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/azure-stack/media/azure-stack-create-offer/image02.png)
-4. <span data-ttu-id="fd576-114">Click **Offers** and then click the offer you just created.</span><span class="sxs-lookup"><span data-stu-id="fd576-114">Click **Offers** and then click the offer you just created.</span></span>
+   ![Create an offer](media/azure-stack-create-offer/image01.png)
+  
+2. <span data-ttu-id="1549e-109">Under **New Offer**, enter a **Display Name** and a **Resource Name**, and then under **Resource Group**, select **Create new** or **Use existing**.</span><span class="sxs-lookup"><span data-stu-id="1549e-109">Under **New Offer**, enter a **Display Name** and a **Resource Name**, and then under **Resource Group**, select **Create new** or **Use existing**.</span></span> <span data-ttu-id="1549e-110">The Display Name is the friendly name for the offer.</span><span class="sxs-lookup"><span data-stu-id="1549e-110">The Display Name is the friendly name for the offer.</span></span> <span data-ttu-id="1549e-111">This friendly name is the only information about the offer that the users see when they subscribe to an offer.</span><span class="sxs-lookup"><span data-stu-id="1549e-111">This friendly name is the only information about the offer that the users see when they subscribe to an offer.</span></span> <span data-ttu-id="1549e-112">Use an intuitive name that helps users understand what comes with the offer.</span><span class="sxs-lookup"><span data-stu-id="1549e-112">Use an intuitive name that helps users understand what comes with the offer.</span></span> <span data-ttu-id="1549e-113">Only the admin can see the Resource Name.</span><span class="sxs-lookup"><span data-stu-id="1549e-113">Only the admin can see the Resource Name.</span></span> <span data-ttu-id="1549e-114">It's the name that admins use to work with the offer as an Azure Resource Manager resource.</span><span class="sxs-lookup"><span data-stu-id="1549e-114">It's the name that admins use to work with the offer as an Azure Resource Manager resource.</span></span>
 
-    ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/azure-stack/media/azure-stack-create-offer/image03.png)
-5. <span data-ttu-id="fd576-115">Click **Change State**, and then click **Public**.</span><span class="sxs-lookup"><span data-stu-id="fd576-115">Click **Change State**, and then click **Public**.</span></span>
+   ![New Offer](media/azure-stack-create-offer/image01a.png)
+  
+3. <span data-ttu-id="1549e-116">Select **Base plans** to open the **Plan**.</span><span class="sxs-lookup"><span data-stu-id="1549e-116">Select **Base plans** to open the **Plan**.</span></span> <span data-ttu-id="1549e-117">Select the plans you want to include in the offer, and then choose **Select**.</span><span class="sxs-lookup"><span data-stu-id="1549e-117">Select the plans you want to include in the offer, and then choose **Select**.</span></span> <span data-ttu-id="1549e-118">To create the offer select **Create**.</span><span class="sxs-lookup"><span data-stu-id="1549e-118">To create the offer select **Create**.</span></span>
 
-   ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/azure-stack/media/azure-stack-create-offer/image04.png)
+   ![Select plan](media/azure-stack-create-offer/image02.png)
+  
+4. <span data-ttu-id="1549e-120">After creating the offer, you can change its state.</span><span class="sxs-lookup"><span data-stu-id="1549e-120">After creating the offer, you can change its state.</span></span> <span data-ttu-id="1549e-121">Offers must be made *public* for users to get the full view when they subscribe.</span><span class="sxs-lookup"><span data-stu-id="1549e-121">Offers must be made *public* for users to get the full view when they subscribe.</span></span> <span data-ttu-id="1549e-122">Offers can be:</span><span class="sxs-lookup"><span data-stu-id="1549e-122">Offers can be:</span></span>
 
-<span data-ttu-id="fd576-116">Offers must be made public for tenants to get the full view when subscribing.</span><span class="sxs-lookup"><span data-stu-id="fd576-116">Offers must be made public for tenants to get the full view when subscribing.</span></span> <span data-ttu-id="fd576-117">Offers can be:</span><span class="sxs-lookup"><span data-stu-id="fd576-117">Offers can be:</span></span>
+   - <span data-ttu-id="1549e-123">**Public**: Visible to users.</span><span class="sxs-lookup"><span data-stu-id="1549e-123">**Public**: Visible to users.</span></span>
+   - <span data-ttu-id="1549e-124">**Private**: Only visible to cloud administrators.</span><span class="sxs-lookup"><span data-stu-id="1549e-124">**Private**: Only visible to cloud administrators.</span></span> <span data-ttu-id="1549e-125">This setting is useful while drafting the plan or offer, or if the cloud administrator wants to [create each subscription for users](azure-stack-subscribe-plan-provision-vm.md#create-a-subscription-as-a-cloud-operator).</span><span class="sxs-lookup"><span data-stu-id="1549e-125">This setting is useful while drafting the plan or offer, or if the cloud administrator wants to [create each subscription for users](azure-stack-subscribe-plan-provision-vm.md#create-a-subscription-as-a-cloud-operator).</span></span>
+   - <span data-ttu-id="1549e-126">**Decommissioned**: Closed to new subscribers.</span><span class="sxs-lookup"><span data-stu-id="1549e-126">**Decommissioned**: Closed to new subscribers.</span></span> <span data-ttu-id="1549e-127">The cloud administrator can use decommissioned to prevent future subscriptions, but leave current subscribers unaffected.</span><span class="sxs-lookup"><span data-stu-id="1549e-127">The cloud administrator can use decommissioned to prevent future subscriptions, but leave current subscribers unaffected.</span></span>
 
-* <span data-ttu-id="fd576-118">**Public**: Visible to tenants.</span><span class="sxs-lookup"><span data-stu-id="fd576-118">**Public**: Visible to tenants.</span></span>
-* <span data-ttu-id="fd576-119">**Private**: Only visible to the service administrators.</span><span class="sxs-lookup"><span data-stu-id="fd576-119">**Private**: Only visible to the service administrators.</span></span> <span data-ttu-id="fd576-120">Useful while drafting the plan or offer, or if the service administrator wants to approve every subscription.</span><span class="sxs-lookup"><span data-stu-id="fd576-120">Useful while drafting the plan or offer, or if the service administrator wants to approve every subscription.</span></span>
-* <span data-ttu-id="fd576-121">**Decommissioned**: Closed to new subscribers.</span><span class="sxs-lookup"><span data-stu-id="fd576-121">**Decommissioned**: Closed to new subscribers.</span></span> <span data-ttu-id="fd576-122">The service administrator can use decommissioned to prevent future subscriptions, but leave current subscribers untouched.</span><span class="sxs-lookup"><span data-stu-id="fd576-122">The service administrator can use decommissioned to prevent future subscriptions, but leave current subscribers untouched.</span></span>
+   > [!TIP]  
+   > <span data-ttu-id="1549e-128">Changes to the offer aren't immediately visible to user.</span><span class="sxs-lookup"><span data-stu-id="1549e-128">Changes to the offer aren't immediately visible to user.</span></span> <span data-ttu-id="1549e-129">To see the changes, users might have to sign out and sign in again to the user portal to see the new offer.</span><span class="sxs-lookup"><span data-stu-id="1549e-129">To see the changes, users might have to sign out and sign in again to the user portal to see the new offer.</span></span>
 
-<span data-ttu-id="fd576-123">Changes to the offer are not immediately visible to the tenant.</span><span class="sxs-lookup"><span data-stu-id="fd576-123">Changes to the offer are not immediately visible to the tenant.</span></span> <span data-ttu-id="fd576-124">To see the changes, you might have to logout/login to see the new subscription in the “Subscription picker” when creating resources/resource groups.</span><span class="sxs-lookup"><span data-stu-id="fd576-124">To see the changes, you might have to logout/login to see the new subscription in the “Subscription picker” when creating resources/resource groups.</span></span>
+   <span data-ttu-id="1549e-130">On the Overview for the offer, select **Accessibility state**.</span><span class="sxs-lookup"><span data-stu-id="1549e-130">On the Overview for the offer, select **Accessibility state**.</span></span> <span data-ttu-id="1549e-131">Choose the state you want to use (for example, **Public**) and then select **Save**.</span><span class="sxs-lookup"><span data-stu-id="1549e-131">Choose the state you want to use (for example, **Public**) and then select **Save**.</span></span>
+ 
+     ![Choose the state](media/azure-stack-create-offer/change-stage-1807.png)
 
-## <a name="next-steps"></a><span data-ttu-id="fd576-125">Next steps</span><span class="sxs-lookup"><span data-stu-id="fd576-125">Next steps</span></span>
-[<span data-ttu-id="fd576-126">Subscribe to an offer and then provision a VM</span><span class="sxs-lookup"><span data-stu-id="fd576-126">Subscribe to an offer and then provision a VM</span></span>](azure-stack-subscribe-plan-provision-vm.md)
+     <span data-ttu-id="1549e-133">As an alternative, select **Change state** and then choose a state.</span><span class="sxs-lookup"><span data-stu-id="1549e-133">As an alternative, select **Change state** and then choose a state.</span></span>
 
+    ![Select Accessibility state](media/azure-stack-create-offer/change-stage-select-1807.png)
 
+   > [!NOTE]
+   > <span data-ttu-id="1549e-135">You can also use PowerShell to create default offers, plans, and quotas.</span><span class="sxs-lookup"><span data-stu-id="1549e-135">You can also use PowerShell to create default offers, plans, and quotas.</span></span> <span data-ttu-id="1549e-136">For more information, see [Azure Stack PowerShell Module 1.4.0](https://docs.microsoft.com/powershell/azure/azure-stack/overview?view=azurestackps-1.4.0).</span><span class="sxs-lookup"><span data-stu-id="1549e-136">For more information, see [Azure Stack PowerShell Module 1.4.0](https://docs.microsoft.com/powershell/azure/azure-stack/overview?view=azurestackps-1.4.0).</span></span>
 
+## <a name="next-steps"></a><span data-ttu-id="1549e-137">Next steps</span><span class="sxs-lookup"><span data-stu-id="1549e-137">Next steps</span></span>
 
-
+- [<span data-ttu-id="1549e-138">Create subscriptions</span><span class="sxs-lookup"><span data-stu-id="1549e-138">Create subscriptions</span></span>](azure-stack-subscribe-plan-provision-vm.md)
+- [<span data-ttu-id="1549e-139">Provision a virtual machine</span><span class="sxs-lookup"><span data-stu-id="1549e-139">Provision a virtual machine</span></span>](azure-stack-provision-vm.md)

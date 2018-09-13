@@ -1,235 +1,194 @@
 ---
-title: Authorize developer accounts using Azure Active Directory - Azure API Management | Microsoft Docs
-description: Learn how to authorize users using Azure Active Directory in API Management.
+title: Authorize developer accounts by using Azure Active Directory - Azure API Management | Microsoft Docs
+description: Learn how to authorize users by using Azure Active Directory in API Management.
 services: api-management
 documentationcenter: API Management
-author: steved0x
-manager: erikre
+author: miaojiang
+manager: cfowler
 editor: ''
-ms.assetid: 33a69a83-94f2-4e4e-9cef-f2a5af3c9732
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 01/23/2017
+ms.date: 01/16/2018
 ms.author: apimpm
-ms.openlocfilehash: ee50940a2c1e19c41aac620d6e4142cc1851547f
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 4c1696fc373975eb9857c40366829fbe6a535911
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44562936"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44818641"
 ---
-# <a name="how-to-authorize-developer-accounts-using-azure-active-directory-in-azure-api-management"></a><span data-ttu-id="46102-103">How to authorize developer accounts using Azure Active Directory in Azure API Management</span><span class="sxs-lookup"><span data-stu-id="46102-103">How to authorize developer accounts using Azure Active Directory in Azure API Management</span></span>
-## <a name="overview"></a><span data-ttu-id="46102-104">Overview</span><span class="sxs-lookup"><span data-stu-id="46102-104">Overview</span></span>
-<span data-ttu-id="46102-105">This guide shows you how to enable access to the developer portal for users from Azure Active Directory.</span><span class="sxs-lookup"><span data-stu-id="46102-105">This guide shows you how to enable access to the developer portal for users from Azure Active Directory.</span></span> <span data-ttu-id="46102-106">This guide also shows you how to manage groups of Azure Active Directory users by adding external groups that contain the users of an Azure Active Directory.</span><span class="sxs-lookup"><span data-stu-id="46102-106">This guide also shows you how to manage groups of Azure Active Directory users by adding external groups that contain the users of an Azure Active Directory.</span></span>
+# <a name="authorize-developer-accounts-by-using-azure-active-directory-in-azure-api-management"></a><span data-ttu-id="a1ac3-103">Authorize developer accounts by using Azure Active Directory in Azure API Management</span><span class="sxs-lookup"><span data-stu-id="a1ac3-103">Authorize developer accounts by using Azure Active Directory in Azure API Management</span></span>
 
-> <span data-ttu-id="46102-107">To complete the steps in this guide you must first have an Azure Active Directory in which to create an application.</span><span class="sxs-lookup"><span data-stu-id="46102-107">To complete the steps in this guide you must first have an Azure Active Directory in which to create an application.</span></span>
-> 
-> 
+<span data-ttu-id="a1ac3-104">This article shows you how to enable access to the developer portal for users from Azure Active Directory (Azure AD).</span><span class="sxs-lookup"><span data-stu-id="a1ac3-104">This article shows you how to enable access to the developer portal for users from Azure Active Directory (Azure AD).</span></span> <span data-ttu-id="a1ac3-105">This guide also shows you how to manage groups of Azure AD users by adding external groups that contain the users.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-105">This guide also shows you how to manage groups of Azure AD users by adding external groups that contain the users.</span></span>
 
-## <a name="how-to-authorize-developer-accounts-using-azure-active-directory"></a><span data-ttu-id="46102-108">How to authorize developer accounts using Azure Active Directory</span><span class="sxs-lookup"><span data-stu-id="46102-108">How to authorize developer accounts using Azure Active Directory</span></span>
-<span data-ttu-id="46102-109">To get started, click **Publisher portal** in the Azure portal for your API Management service.</span><span class="sxs-lookup"><span data-stu-id="46102-109">To get started, click **Publisher portal** in the Azure portal for your API Management service.</span></span> <span data-ttu-id="46102-110">This takes you to the API Management publisher portal.</span><span class="sxs-lookup"><span data-stu-id="46102-110">This takes you to the API Management publisher portal.</span></span>
+> [!NOTE]
+> <span data-ttu-id="a1ac3-106">Azure AD integration is available in the [Developer, Standard, and Premium](https://azure.microsoft.com/pricing/details/api-management/) tiers only.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-106">Azure AD integration is available in the [Developer, Standard, and Premium](https://azure.microsoft.com/pricing/details/api-management/) tiers only.</span></span>
 
-![Publisher portal][api-management-management-console]
+## <a name="prerequisites"></a><span data-ttu-id="a1ac3-107">Prerequisites</span><span class="sxs-lookup"><span data-stu-id="a1ac3-107">Prerequisites</span></span>
 
-> <span data-ttu-id="46102-112">If you have not yet created an API Management service instance, see [Create an API Management service instance][Create an API Management service instance] in the [Get started with Azure API Management][Get started with Azure API Management] tutorial.</span><span class="sxs-lookup"><span data-stu-id="46102-112">If you have not yet created an API Management service instance, see [Create an API Management service instance][Create an API Management service instance] in the [Get started with Azure API Management][Get started with Azure API Management] tutorial.</span></span>
-> 
-> 
+- <span data-ttu-id="a1ac3-108">Complete the following quickstart: [Create an Azure API Management instance](get-started-create-service-instance.md).</span><span class="sxs-lookup"><span data-stu-id="a1ac3-108">Complete the following quickstart: [Create an Azure API Management instance](get-started-create-service-instance.md).</span></span>
+- <span data-ttu-id="a1ac3-109">Import and publish an Azure API Management instance.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-109">Import and publish an Azure API Management instance.</span></span> <span data-ttu-id="a1ac3-110">For more information, see [Import and publish](import-and-publish.md).</span><span class="sxs-lookup"><span data-stu-id="a1ac3-110">For more information, see [Import and publish](import-and-publish.md).</span></span>
 
-<span data-ttu-id="46102-113">Click **Security** from the **API Management** menu on the left and click **External Identities**.</span><span class="sxs-lookup"><span data-stu-id="46102-113">Click **Security** from the **API Management** menu on the left and click **External Identities**.</span></span>
+## <a name="authorize-developer-accounts-by-using-azure-ad"></a><span data-ttu-id="a1ac3-111">Authorize developer accounts by using Azure AD</span><span class="sxs-lookup"><span data-stu-id="a1ac3-111">Authorize developer accounts by using Azure AD</span></span>
 
-![External Identities][api-management-security-external-identities]
+1. <span data-ttu-id="a1ac3-112">Sign in to the [Azure portal](https://portal.azure.com).</span><span class="sxs-lookup"><span data-stu-id="a1ac3-112">Sign in to the [Azure portal](https://portal.azure.com).</span></span> 
+1. <span data-ttu-id="a1ac3-113">Select</span><span class="sxs-lookup"><span data-stu-id="a1ac3-113">Select</span></span> ![arrow](./media/api-management-howto-aad/arrow.png)<span data-ttu-id="a1ac3-115">.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-115">.</span></span>
+1. <span data-ttu-id="a1ac3-116">Type **api** in the search box.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-116">Type **api** in the search box.</span></span>
+1. <span data-ttu-id="a1ac3-117">Select **API Management services**.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-117">Select **API Management services**.</span></span>
+1. <span data-ttu-id="a1ac3-118">Select your API Management service instance.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-118">Select your API Management service instance.</span></span>
+1. <span data-ttu-id="a1ac3-119">Under **SECURITY**, select **Identities**.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-119">Under **SECURITY**, select **Identities**.</span></span>
 
-<span data-ttu-id="46102-115">Click **Azure Active Directory**.</span><span class="sxs-lookup"><span data-stu-id="46102-115">Click **Azure Active Directory**.</span></span> <span data-ttu-id="46102-116">Make a note of the **Redirect URL** and switch over to your Azure Active Directory in the Azure Classic Portal.</span><span class="sxs-lookup"><span data-stu-id="46102-116">Make a note of the **Redirect URL** and switch over to your Azure Active Directory in the Azure Classic Portal.</span></span>
+1. <span data-ttu-id="a1ac3-120">Select **+Add** from the top.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-120">Select **+Add** from the top.</span></span>
 
-![External Identities][api-management-security-aad-new]
+    <span data-ttu-id="a1ac3-121">The **Add identity provider** pane appears on the right.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-121">The **Add identity provider** pane appears on the right.</span></span>
+1. <span data-ttu-id="a1ac3-122">Under **Provider type**, select **Azure Active Directory**.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-122">Under **Provider type**, select **Azure Active Directory**.</span></span>
 
-<span data-ttu-id="46102-118">Click the **Add** button to create a new Azure Active Directory application, and choose **Add an application my organization is developing**.</span><span class="sxs-lookup"><span data-stu-id="46102-118">Click the **Add** button to create a new Azure Active Directory application, and choose **Add an application my organization is developing**.</span></span>
+    <span data-ttu-id="a1ac3-123">Controls that enable you to enter other necessary information appear in the pane.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-123">Controls that enable you to enter other necessary information appear in the pane.</span></span> <span data-ttu-id="a1ac3-124">The controls include **Client ID** and **Client secret**.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-124">The controls include **Client ID** and **Client secret**.</span></span> <span data-ttu-id="a1ac3-125">(You get information about these controls later in the article.)</span><span class="sxs-lookup"><span data-stu-id="a1ac3-125">(You get information about these controls later in the article.)</span></span>
+1. <span data-ttu-id="a1ac3-126">Make a note of the contents of **Redirect URL**.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-126">Make a note of the contents of **Redirect URL**.</span></span>
+    
+   ![Steps for adding an identity provider in the Azure portal](./media/api-management-howto-aad/api-management-with-aad001.png)  
+1. <span data-ttu-id="a1ac3-128">In your browser, open a different tab.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-128">In your browser, open a different tab.</span></span> 
+1. <span data-ttu-id="a1ac3-129">Go to the [Azure portal](https://portal.azure.com).</span><span class="sxs-lookup"><span data-stu-id="a1ac3-129">Go to the [Azure portal](https://portal.azure.com).</span></span>
+1. <span data-ttu-id="a1ac3-130">Select</span><span class="sxs-lookup"><span data-stu-id="a1ac3-130">Select</span></span> ![arrow](./media/api-management-howto-aad/arrow.png)<span data-ttu-id="a1ac3-132">.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-132">.</span></span>
+1. <span data-ttu-id="a1ac3-133">Type **active**.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-133">Type **active**.</span></span> <span data-ttu-id="a1ac3-134">The **Azure Active Directory** pane appears.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-134">The **Azure Active Directory** pane appears.</span></span>
+1. <span data-ttu-id="a1ac3-135">Select **Azure Active Directory**.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-135">Select **Azure Active Directory**.</span></span>
+1. <span data-ttu-id="a1ac3-136">Under **MANAGE**, select **App registrations**.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-136">Under **MANAGE**, select **App registrations**.</span></span>
+1. <span data-ttu-id="a1ac3-137">Select **New application registration**.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-137">Select **New application registration**.</span></span>
 
-![Add new Azure Active Directory application][api-management-new-aad-application-menu]
+    ![Selections for creating a new app registration](./media/api-management-howto-aad/api-management-with-aad002.png)
 
-<span data-ttu-id="46102-120">Enter a name for the application, select **Web application and/or Web API**, and click the next button.</span><span class="sxs-lookup"><span data-stu-id="46102-120">Enter a name for the application, select **Web application and/or Web API**, and click the next button.</span></span>
+    <span data-ttu-id="a1ac3-139">The **Create** pane appears on the right.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-139">The **Create** pane appears on the right.</span></span> <span data-ttu-id="a1ac3-140">That's where you enter the Azure AD app-relevant information.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-140">That's where you enter the Azure AD app-relevant information.</span></span>
+1. <span data-ttu-id="a1ac3-141">Enter a name for the application.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-141">Enter a name for the application.</span></span>
+1. <span data-ttu-id="a1ac3-142">For the application type, select **Web app/API**.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-142">For the application type, select **Web app/API**.</span></span>
+1. <span data-ttu-id="a1ac3-143">For the sign-in URL, enter the sign-in URL of your developer portal.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-143">For the sign-in URL, enter the sign-in URL of your developer portal.</span></span> <span data-ttu-id="a1ac3-144">In this example, the sign-in URL is `https://apimwithaad.portal.azure-api.net/signin`.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-144">In this example, the sign-in URL is `https://apimwithaad.portal.azure-api.net/signin`.</span></span>
+1. <span data-ttu-id="a1ac3-145">Select **Create** to create the application.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-145">Select **Create** to create the application.</span></span>
+1. <span data-ttu-id="a1ac3-146">To find your app, select **App registrations** and search by name.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-146">To find your app, select **App registrations** and search by name.</span></span>
 
-![New Azure Active Directory application][api-management-new-aad-application-1]
+    ![Box where you search for an app](./media/api-management-howto-aad/find-your-app.png)
+1. <span data-ttu-id="a1ac3-148">After the application is registered, go to **Reply URL** and make sure **Redirect URL** is set to the value that you got from step 9.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-148">After the application is registered, go to **Reply URL** and make sure **Redirect URL** is set to the value that you got from step 9.</span></span> 
+1. <span data-ttu-id="a1ac3-149">If you want to configure your application (for example, change **App ID URL**), select **Properties**.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-149">If you want to configure your application (for example, change **App ID URL**), select **Properties**.</span></span>
 
-<span data-ttu-id="46102-122">For **Sign-on URL**, enter the sign-on URL of your developer portal.</span><span class="sxs-lookup"><span data-stu-id="46102-122">For **Sign-on URL**, enter the sign-on URL of your developer portal.</span></span> <span data-ttu-id="46102-123">In this example, the **Sign-on URL** is `https://aad03.portal.current.int-azure-api.net/signin`.</span><span class="sxs-lookup"><span data-stu-id="46102-123">In this example, the **Sign-on URL** is `https://aad03.portal.current.int-azure-api.net/signin`.</span></span> 
+    ![Opening the "Properties" pane](./media/api-management-howto-aad/api-management-with-aad004.png)
 
-<span data-ttu-id="46102-124">For the **App ID URL**, enter either the default domain or a custom domain for the Azure Active Directory, and append a unique string to it.</span><span class="sxs-lookup"><span data-stu-id="46102-124">For the **App ID URL**, enter either the default domain or a custom domain for the Azure Active Directory, and append a unique string to it.</span></span> <span data-ttu-id="46102-125">In this example, the default domain of **https://contoso5api.onmicrosoft.com** is used with the suffix of **/api** specified.</span><span class="sxs-lookup"><span data-stu-id="46102-125">In this example, the default domain of **https://contoso5api.onmicrosoft.com** is used with the suffix of **/api** specified.</span></span>
+    <span data-ttu-id="a1ac3-151">If multiple Azure AD instances will be used for this application, select **Yes** for **Multi-tenanted**.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-151">If multiple Azure AD instances will be used for this application, select **Yes** for **Multi-tenanted**.</span></span> <span data-ttu-id="a1ac3-152">The default is **No**.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-152">The default is **No**.</span></span>
+1. <span data-ttu-id="a1ac3-153">Set application permissions by selecting **Required permissions**.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-153">Set application permissions by selecting **Required permissions**.</span></span>
+1. <span data-ttu-id="a1ac3-154">Select your application, and then select the **Read directory data** and **Sign in and read user profile** check boxes.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-154">Select your application, and then select the **Read directory data** and **Sign in and read user profile** check boxes.</span></span>
 
-![New Azure Active Directory application properties][api-management-new-aad-application-2]
+    ![Check boxes for permissions](./media/api-management-howto-aad/api-management-with-aad005.png)
 
-<span data-ttu-id="46102-127">Click the check button to save and create the application, and switch to the **Configure** tab to configure the new application.</span><span class="sxs-lookup"><span data-stu-id="46102-127">Click the check button to save and create the application, and switch to the **Configure** tab to configure the new application.</span></span>
+1. <span data-ttu-id="a1ac3-156">Select **Grant permissions** to consent application permissions.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-156">Select **Grant permissions** to consent application permissions.</span></span>
 
-![New Azure Active Directory application created][api-management-new-aad-app-created]
+    <span data-ttu-id="a1ac3-157">For more information about application permissions and delegated permissions, see [Accessing the Graph API][Accessing the Graph API].</span><span class="sxs-lookup"><span data-stu-id="a1ac3-157">For more information about application permissions and delegated permissions, see [Accessing the Graph API][Accessing the Graph API].</span></span>
+    
+1. <span data-ttu-id="a1ac3-158">In the left pane, copy the **Application ID** value.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-158">In the left pane, copy the **Application ID** value.</span></span>
 
-<span data-ttu-id="46102-129">If multiple Azure Active Directories are going to be used for this application, click **Yes** for **Application is multi-tenant**.</span><span class="sxs-lookup"><span data-stu-id="46102-129">If multiple Azure Active Directories are going to be used for this application, click **Yes** for **Application is multi-tenant**.</span></span> <span data-ttu-id="46102-130">The default is **No**.</span><span class="sxs-lookup"><span data-stu-id="46102-130">The default is **No**.</span></span>
+    !["Application ID" value](./media/api-management-howto-aad/application-id.png)
+1. <span data-ttu-id="a1ac3-160">Switch back to your API Management application.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-160">Switch back to your API Management application.</span></span> 
 
-![Application is multi-tenant][api-management-aad-app-multi-tenant]
+    <span data-ttu-id="a1ac3-161">In the **Add identity provider** window, paste the **Application ID** value in the **Client ID** box.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-161">In the **Add identity provider** window, paste the **Application ID** value in the **Client ID** box.</span></span>
+1. <span data-ttu-id="a1ac3-162">Switch back to the Azure AD configuration, and select **Keys**.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-162">Switch back to the Azure AD configuration, and select **Keys**.</span></span>
+1. <span data-ttu-id="a1ac3-163">Create a new key by specifying a name and duration.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-163">Create a new key by specifying a name and duration.</span></span> 
+1. <span data-ttu-id="a1ac3-164">Select **Save**.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-164">Select **Save**.</span></span> <span data-ttu-id="a1ac3-165">The key is generated.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-165">The key is generated.</span></span>
 
-<span data-ttu-id="46102-132">Copy the **Redirect URL** from the **Azure Active Directory** section of the **External Identities** tab in the publisher portal and paste it into the **Reply URL** text box.</span><span class="sxs-lookup"><span data-stu-id="46102-132">Copy the **Redirect URL** from the **Azure Active Directory** section of the **External Identities** tab in the publisher portal and paste it into the **Reply URL** text box.</span></span> 
+    <span data-ttu-id="a1ac3-166">Copy the key to the clipboard.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-166">Copy the key to the clipboard.</span></span>
 
-![Reply URL][api-management-aad-reply-url]
+    ![Selections for creating a key](./media/api-management-howto-aad/api-management-with-aad006.png)
 
-<span data-ttu-id="46102-134">Scroll to the bottom of the configure tab, select the **Application Permissions** drop-down, and check **Read directory data**.</span><span class="sxs-lookup"><span data-stu-id="46102-134">Scroll to the bottom of the configure tab, select the **Application Permissions** drop-down, and check **Read directory data**.</span></span>
+    > [!NOTE]
+    > <span data-ttu-id="a1ac3-168">Make a note of this key.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-168">Make a note of this key.</span></span> <span data-ttu-id="a1ac3-169">After you close the Azure AD configuration pane, the key cannot be displayed again.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-169">After you close the Azure AD configuration pane, the key cannot be displayed again.</span></span>
+    > 
+    > 
 
-![Application Permissions][api-management-aad-app-permissions]
+1. <span data-ttu-id="a1ac3-170">Switch back to your API Management application.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-170">Switch back to your API Management application.</span></span> 
 
-<span data-ttu-id="46102-136">Select the **Delegate Permissions** drop-down, and check **Enable sign-on and read users' profiles**.</span><span class="sxs-lookup"><span data-stu-id="46102-136">Select the **Delegate Permissions** drop-down, and check **Enable sign-on and read users' profiles**.</span></span>
+    <span data-ttu-id="a1ac3-171">In the **Add identity provider** window, paste the key in the **Client secret** text box.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-171">In the **Add identity provider** window, paste the key in the **Client secret** text box.</span></span>
 
-![Delegated Permissions][api-management-aad-delegated-permissions]
+    > [!IMPORTANT]
+    > <span data-ttu-id="a1ac3-172">Please make sure to update the **Client secret** before the key expires.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-172">Please make sure to update the **Client secret** before the key expires.</span></span> 
+    >  
+    >
 
-> <span data-ttu-id="46102-138">For more information about application and delegated permissions, see [Accessing the Graph API][Accessing the Graph API].</span><span class="sxs-lookup"><span data-stu-id="46102-138">For more information about application and delegated permissions, see [Accessing the Graph API][Accessing the Graph API].</span></span>
-> 
-> 
+1. <span data-ttu-id="a1ac3-173">The **Add identity provider** window also contains the **Allowed Tenants** text box.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-173">The **Add identity provider** window also contains the **Allowed Tenants** text box.</span></span> <span data-ttu-id="a1ac3-174">There, specify the domains of the Azure AD instances to which you want to grant access to the APIs of the API Management service instance.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-174">There, specify the domains of the Azure AD instances to which you want to grant access to the APIs of the API Management service instance.</span></span> <span data-ttu-id="a1ac3-175">You can separate multiple domains with newlines, spaces, or commas.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-175">You can separate multiple domains with newlines, spaces, or commas.</span></span>
 
-<span data-ttu-id="46102-139">Copy the **Client Id** to the clipboard.</span><span class="sxs-lookup"><span data-stu-id="46102-139">Copy the **Client Id** to the clipboard.</span></span>
+    <span data-ttu-id="a1ac3-176">You can specify multiple domains in the **Allowed Tenants** section.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-176">You can specify multiple domains in the **Allowed Tenants** section.</span></span> <span data-ttu-id="a1ac3-177">Before any user can sign in from a different domain than the original domain where the application was registered, a global administrator of the different domain must grant permission for the application to access directory data.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-177">Before any user can sign in from a different domain than the original domain where the application was registered, a global administrator of the different domain must grant permission for the application to access directory data.</span></span> <span data-ttu-id="a1ac3-178">To grant permission, the global administrator should:</span><span class="sxs-lookup"><span data-stu-id="a1ac3-178">To grant permission, the global administrator should:</span></span>
+    
+    <span data-ttu-id="a1ac3-179">a.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-179">a.</span></span> <span data-ttu-id="a1ac3-180">Go to `https://<URL of your developer portal>/aadadminconsent` (for example, https://contoso.portal.azure-api.net/aadadminconsent).</span><span class="sxs-lookup"><span data-stu-id="a1ac3-180">Go to `https://<URL of your developer portal>/aadadminconsent` (for example, https://contoso.portal.azure-api.net/aadadminconsent).</span></span>
+    
+    <span data-ttu-id="a1ac3-181">b.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-181">b.</span></span> <span data-ttu-id="a1ac3-182">Type in the domain name of the Azure AD tenant that they want to give access to.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-182">Type in the domain name of the Azure AD tenant that they want to give access to.</span></span>
+    
+    <span data-ttu-id="a1ac3-183">c.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-183">c.</span></span> <span data-ttu-id="a1ac3-184">Select **Submit**.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-184">Select **Submit**.</span></span> 
+    
+    <span data-ttu-id="a1ac3-185">In the following example, a global administrator from miaoaad.onmicrosoft.com is trying to give permission to this particular developer portal.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-185">In the following example, a global administrator from miaoaad.onmicrosoft.com is trying to give permission to this particular developer portal.</span></span> 
 
-![Client Id][api-management-aad-app-client-id]
+1. <span data-ttu-id="a1ac3-186">After you specify the desired configuration, select **Add**.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-186">After you specify the desired configuration, select **Add**.</span></span>
 
-<span data-ttu-id="46102-141">Switch back to the publisher portal and paste in the **Client Id** copied from the Azure Active Directory application configuration.</span><span class="sxs-lookup"><span data-stu-id="46102-141">Switch back to the publisher portal and paste in the **Client Id** copied from the Azure Active Directory application configuration.</span></span>
+    !["Add" button in "Add identity provider" pane](./media/api-management-howto-aad/api-management-with-aad007.png)
 
-![Client Id][api-management-client-id]
+<span data-ttu-id="a1ac3-188">After the changes are saved, users in the specified Azure AD instance can sign in to the developer portal by following the steps in [Sign in to the developer portal by using an Azure AD account](#log_in_to_dev_portal).</span><span class="sxs-lookup"><span data-stu-id="a1ac3-188">After the changes are saved, users in the specified Azure AD instance can sign in to the developer portal by following the steps in [Sign in to the developer portal by using an Azure AD account](#log_in_to_dev_portal).</span></span>
 
-<span data-ttu-id="46102-143">Switch back to the Azure Active Directory configuration, and click the **Select duration** drop-down in the **Keys** section and specify an interval.</span><span class="sxs-lookup"><span data-stu-id="46102-143">Switch back to the Azure Active Directory configuration, and click the **Select duration** drop-down in the **Keys** section and specify an interval.</span></span> <span data-ttu-id="46102-144">In this example, **1 year** is used.</span><span class="sxs-lookup"><span data-stu-id="46102-144">In this example, **1 year** is used.</span></span>
+![Entering the name of an Azure AD tenant](./media/api-management-howto-aad/api-management-aad-consent.png)
 
-![Key][api-management-aad-key-before-save]
+<span data-ttu-id="a1ac3-190">On the next screen, the global administrator is prompted to confirm giving the permission.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-190">On the next screen, the global administrator is prompted to confirm giving the permission.</span></span> 
 
-<span data-ttu-id="46102-146">Click **Save** to save the configuration and display the key.</span><span class="sxs-lookup"><span data-stu-id="46102-146">Click **Save** to save the configuration and display the key.</span></span> <span data-ttu-id="46102-147">Copy the key to the clipboard.</span><span class="sxs-lookup"><span data-stu-id="46102-147">Copy the key to the clipboard.</span></span>
+![Confirmation of assigning permissions](./media/api-management-howto-aad/api-management-permissions-form.png)
 
-> <span data-ttu-id="46102-148">Make a note of this key.</span><span class="sxs-lookup"><span data-stu-id="46102-148">Make a note of this key.</span></span> <span data-ttu-id="46102-149">Once you close the Azure Active Directory configuration window, the key cannot be displayed again.</span><span class="sxs-lookup"><span data-stu-id="46102-149">Once you close the Azure Active Directory configuration window, the key cannot be displayed again.</span></span>
-> 
-> 
+<span data-ttu-id="a1ac3-192">If a non-global administrator tries to sign in before a global administrator grants permissions, the sign-in attempt fails and an error screen is displayed.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-192">If a non-global administrator tries to sign in before a global administrator grants permissions, the sign-in attempt fails and an error screen is displayed.</span></span>
 
-![Key][api-management-aad-key-after-save]
+## <a name="add-an-external-azure-ad-group"></a><span data-ttu-id="a1ac3-193">Add an external Azure AD group</span><span class="sxs-lookup"><span data-stu-id="a1ac3-193">Add an external Azure AD group</span></span>
 
-<span data-ttu-id="46102-151">Switch back to the publisher portal and paste the key into the **Client Secret** text box.</span><span class="sxs-lookup"><span data-stu-id="46102-151">Switch back to the publisher portal and paste the key into the **Client Secret** text box.</span></span>
+<span data-ttu-id="a1ac3-194">After you enable access for users in an Azure AD instance, you can add Azure AD groups in API Management.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-194">After you enable access for users in an Azure AD instance, you can add Azure AD groups in API Management.</span></span> <span data-ttu-id="a1ac3-195">Then, you can more easily manage the association of the developers in the group with the desired products.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-195">Then, you can more easily manage the association of the developers in the group with the desired products.</span></span>
 
-![Client Secret][api-management-client-secret]
+<span data-ttu-id="a1ac3-196">To configure an external Azure AD group, you must first configure the Azure AD instance on the **Identities** tab by following the procedure in the previous section.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-196">To configure an external Azure AD group, you must first configure the Azure AD instance on the **Identities** tab by following the procedure in the previous section.</span></span> 
 
-<span data-ttu-id="46102-153">**Allowed Tenants** specifies which directories have access to the APIs of the API Management service instance.</span><span class="sxs-lookup"><span data-stu-id="46102-153">**Allowed Tenants** specifies which directories have access to the APIs of the API Management service instance.</span></span> <span data-ttu-id="46102-154">Specify the domains of the Azure Active Directory instances to which you want to grant access.</span><span class="sxs-lookup"><span data-stu-id="46102-154">Specify the domains of the Azure Active Directory instances to which you want to grant access.</span></span> <span data-ttu-id="46102-155">You can separate multiple domains with newlines, spaces, or commas.</span><span class="sxs-lookup"><span data-stu-id="46102-155">You can separate multiple domains with newlines, spaces, or commas.</span></span>
+<span data-ttu-id="a1ac3-197">You add external Azure AD groups from the **Groups** tab of your API Management instance.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-197">You add external Azure AD groups from the **Groups** tab of your API Management instance.</span></span>
 
-![Allowed tenants][api-management-client-allowed-tenants]
+1. <span data-ttu-id="a1ac3-198">Select the **Groups** tab.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-198">Select the **Groups** tab.</span></span>
+1. <span data-ttu-id="a1ac3-199">Select the **Add AAD group** button.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-199">Select the **Add AAD group** button.</span></span>
+   <span data-ttu-id="a1ac3-200">!["Add AAD group" button](./media/api-management-howto-aad/api-management-with-aad008.png)</span><span class="sxs-lookup"><span data-stu-id="a1ac3-200">!["Add AAD group" button](./media/api-management-howto-aad/api-management-with-aad008.png)</span></span>
+1. <span data-ttu-id="a1ac3-201">Select the group that you want to add.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-201">Select the group that you want to add.</span></span>
+1. <span data-ttu-id="a1ac3-202">Press the **Select** button.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-202">Press the **Select** button.</span></span>
 
+<span data-ttu-id="a1ac3-203">After you add an external Azure AD group, you can review and configure its properties.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-203">After you add an external Azure AD group, you can review and configure its properties.</span></span> <span data-ttu-id="a1ac3-204">Select the name of the group from the **Groups** tab. From here, you can edit **Name** and **Description** information for the group.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-204">Select the name of the group from the **Groups** tab. From here, you can edit **Name** and **Description** information for the group.</span></span>
+ 
+<span data-ttu-id="a1ac3-205">Users from the configured Azure AD instance can now sign in to the developer portal.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-205">Users from the configured Azure AD instance can now sign in to the developer portal.</span></span> <span data-ttu-id="a1ac3-206">They can view and subscribe to any groups for which they have visibility.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-206">They can view and subscribe to any groups for which they have visibility.</span></span>
 
-<span data-ttu-id="46102-157">Once the desired configuration is specified, click **Save**.</span><span class="sxs-lookup"><span data-stu-id="46102-157">Once the desired configuration is specified, click **Save**.</span></span>
+## <a name="a-idlogintodevportalsign-in-to-the-developer-portal-by-using-an-azure-ad-account"></a><span data-ttu-id="a1ac3-207"><a id="log_in_to_dev_portal"/>Sign in to the developer portal by using an Azure AD account</span><span class="sxs-lookup"><span data-stu-id="a1ac3-207"><a id="log_in_to_dev_portal"/>Sign in to the developer portal by using an Azure AD account</span></span>
 
-![Save][api-management-client-allowed-tenants-save]
+<span data-ttu-id="a1ac3-208">To sign in to the developer portal by using an Azure AD account that you configured in the previous sections:</span><span class="sxs-lookup"><span data-stu-id="a1ac3-208">To sign in to the developer portal by using an Azure AD account that you configured in the previous sections:</span></span>
 
-<span data-ttu-id="46102-159">Once the changes are saved, the users in the specified Azure Active Directory can sign in to the Developer portal by following the steps in [Log in to the Developer portal using an Azure Active Directory account][Log in to the Developer portal using an Azure Active Directory account].</span><span class="sxs-lookup"><span data-stu-id="46102-159">Once the changes are saved, the users in the specified Azure Active Directory can sign in to the Developer portal by following the steps in [Log in to the Developer portal using an Azure Active Directory account][Log in to the Developer portal using an Azure Active Directory account].</span></span>
+1. <span data-ttu-id="a1ac3-209">Open a new browser window by using the sign-in URL from the Active Directory application configuration, and select **Azure Active Directory**.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-209">Open a new browser window by using the sign-in URL from the Active Directory application configuration, and select **Azure Active Directory**.</span></span>
 
-<span data-ttu-id="46102-160">Multiple domains can be specified in the **Allowed Tenants** section.</span><span class="sxs-lookup"><span data-stu-id="46102-160">Multiple domains can be specified in the **Allowed Tenants** section.</span></span> <span data-ttu-id="46102-161">Before any user can log in from a different domain than the original domain where the application was registered, a global administrator of the different domain must grant permission for the application to access directory data.</span><span class="sxs-lookup"><span data-stu-id="46102-161">Before any user can log in from a different domain than the original domain where the application was registered, a global administrator of the different domain must grant permission for the application to access directory data.</span></span> <span data-ttu-id="46102-162">To grant permission, the global administrator should go to `https://<URL of your developer portal>/aadadminconsent` (for example, https://contoso.portal.azure-api.net/aadadminconsent), type in the domain name of the Active Directory tenant they want to give access to and click Submit.</span><span class="sxs-lookup"><span data-stu-id="46102-162">To grant permission, the global administrator should go to `https://<URL of your developer portal>/aadadminconsent` (for example, https://contoso.portal.azure-api.net/aadadminconsent), type in the domain name of the Active Directory tenant they want to give access to and click Submit.</span></span> <span data-ttu-id="46102-163">In the following example, a global administrator from `miaoaad.onmicrosoft.com` is trying to give permission to this particular developer portal.</span><span class="sxs-lookup"><span data-stu-id="46102-163">In the following example, a global administrator from `miaoaad.onmicrosoft.com` is trying to give permission to this particular developer portal.</span></span> 
+   ![Sign-in page][api-management-dev-portal-signin]
 
-![Permissions][api-management-aad-consent]
+1. <span data-ttu-id="a1ac3-211">Enter the credentials of one of the users in Azure AD, and select **Sign in**.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-211">Enter the credentials of one of the users in Azure AD, and select **Sign in**.</span></span>
 
-<span data-ttu-id="46102-165">In the next screen, the global administrator will be prompted to confirm giving the permission.</span><span class="sxs-lookup"><span data-stu-id="46102-165">In the next screen, the global administrator will be prompted to confirm giving the permission.</span></span> 
+   ![Signing in with username and password][api-management-aad-signin]
 
-![Permissions][api-management-permissions-form]
+1. <span data-ttu-id="a1ac3-213">You might be prompted with a registration form if any additional information is required.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-213">You might be prompted with a registration form if any additional information is required.</span></span> <span data-ttu-id="a1ac3-214">Complete the registration form, and select **Sign up**.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-214">Complete the registration form, and select **Sign up**.</span></span>
 
-> <span data-ttu-id="46102-167">If a non-global administrator tries to log in before permissions are granted by a global administrator, the login attempt fails and an error screen is displayed.</span><span class="sxs-lookup"><span data-stu-id="46102-167">If a non-global administrator tries to log in before permissions are granted by a global administrator, the login attempt fails and an error screen is displayed.</span></span>
-> 
-> 
+   !["Sign up" button on registration form][api-management-complete-registration]
 
-## <a name="how-to-add-an-external-azure-active-directory-group"></a><span data-ttu-id="46102-168">How to add an external Azure Active Directory Group</span><span class="sxs-lookup"><span data-stu-id="46102-168">How to add an external Azure Active Directory Group</span></span>
-<span data-ttu-id="46102-169">After enabling access for users in an Azure Active Directory, you can add Azure Active Directory groups into API Management to more easily manage the association of the developers in the group with the desired products.</span><span class="sxs-lookup"><span data-stu-id="46102-169">After enabling access for users in an Azure Active Directory, you can add Azure Active Directory groups into API Management to more easily manage the association of the developers in the group with the desired products.</span></span>
+<span data-ttu-id="a1ac3-216">Your user is now signed in to the developer portal for your API Management service instance.</span><span class="sxs-lookup"><span data-stu-id="a1ac3-216">Your user is now signed in to the developer portal for your API Management service instance.</span></span>
 
-> <span data-ttu-id="46102-170">To configure an external Azure Active Directory group, the Azure Active Directory must first be configured in the Identities tab by following the procedure in the previous section.</span><span class="sxs-lookup"><span data-stu-id="46102-170">To configure an external Azure Active Directory group, the Azure Active Directory must first be configured in the Identities tab by following the procedure in the previous section.</span></span> 
-> 
-> 
+![Developer portal after registration is complete][api-management-registration-complete]
 
-<span data-ttu-id="46102-171">External Azure Active Directory groups are added from the **Visibility** tab of the product for which you wish to grant access to the group.</span><span class="sxs-lookup"><span data-stu-id="46102-171">External Azure Active Directory groups are added from the **Visibility** tab of the product for which you wish to grant access to the group.</span></span> <span data-ttu-id="46102-172">Click **Products**, and then click the name of the desired product.</span><span class="sxs-lookup"><span data-stu-id="46102-172">Click **Products**, and then click the name of the desired product.</span></span>
-
-![Configure product][api-management-configure-product]
-
-<span data-ttu-id="46102-174">Switch to the **Visibility** tab, and click **Add Groups from Azure Active Directory**.</span><span class="sxs-lookup"><span data-stu-id="46102-174">Switch to the **Visibility** tab, and click **Add Groups from Azure Active Directory**.</span></span>
-
-![Add groups][api-management-add-groups]
-
-<span data-ttu-id="46102-176">Select the **Azure Active Directory Tenant** from the drop-down list, and then type the name of the desired group in the **Groups** to be added text box.</span><span class="sxs-lookup"><span data-stu-id="46102-176">Select the **Azure Active Directory Tenant** from the drop-down list, and then type the name of the desired group in the **Groups** to be added text box.</span></span>
-
-![Select group][api-management-select-group]
-
-<span data-ttu-id="46102-178">This group name can be found in the **Groups** list for your Azure Active Directory, as shown in the following example.</span><span class="sxs-lookup"><span data-stu-id="46102-178">This group name can be found in the **Groups** list for your Azure Active Directory, as shown in the following example.</span></span>
-
-![Azure Active Directory Groups List][api-management-aad-groups-list]
-
-<span data-ttu-id="46102-180">Click **Add** to validate the group name and add the group.</span><span class="sxs-lookup"><span data-stu-id="46102-180">Click **Add** to validate the group name and add the group.</span></span> <span data-ttu-id="46102-181">In this example, the **Contoso 5 Developers** external group is added.</span><span class="sxs-lookup"><span data-stu-id="46102-181">In this example, the **Contoso 5 Developers** external group is added.</span></span> 
-
-![Group added][api-management-aad-group-added]
-
-<span data-ttu-id="46102-183">Click **Save** to save the new group selection.</span><span class="sxs-lookup"><span data-stu-id="46102-183">Click **Save** to save the new group selection.</span></span>
-
-<span data-ttu-id="46102-184">Once an Azure Active Directory group has been configured from one product, it is available to be checked on the **Visibility** tab for the other products in the API Management service instance.</span><span class="sxs-lookup"><span data-stu-id="46102-184">Once an Azure Active Directory group has been configured from one product, it is available to be checked on the **Visibility** tab for the other products in the API Management service instance.</span></span>
-
-<span data-ttu-id="46102-185">To review and configure the properties for external groups once they have been added, click the name of the group from the **Groups** tab.</span><span class="sxs-lookup"><span data-stu-id="46102-185">To review and configure the properties for external groups once they have been added, click the name of the group from the **Groups** tab.</span></span>
-
-![Manage groups][api-management-groups]
-
-<span data-ttu-id="46102-187">From here you can edit the **Name** and the **Description** of the group.</span><span class="sxs-lookup"><span data-stu-id="46102-187">From here you can edit the **Name** and the **Description** of the group.</span></span>
-
-![Edit group][api-management-edit-group]
-
-<span data-ttu-id="46102-189">Users from the configured Azure Active Directory can sign in to the Developer portal and view and subscribe to any groups for which they have visibility by following the instructions in the following section.</span><span class="sxs-lookup"><span data-stu-id="46102-189">Users from the configured Azure Active Directory can sign in to the Developer portal and view and subscribe to any groups for which they have visibility by following the instructions in the following section.</span></span>
-
-## <a name="how-to-log-in-to-the-developer-portal-using-an-azure-active-directory-account"></a><span data-ttu-id="46102-190">How to log in to the Developer portal using an Azure Active Directory account</span><span class="sxs-lookup"><span data-stu-id="46102-190">How to log in to the Developer portal using an Azure Active Directory account</span></span>
-<span data-ttu-id="46102-191">To log into the Developer portal using an Azure Active Directory account configured in the previous sections, open a new browser window using the **Sign-on URL** from the Active Directory application configuration, and click **Azure Active Directory**.</span><span class="sxs-lookup"><span data-stu-id="46102-191">To log into the Developer portal using an Azure Active Directory account configured in the previous sections, open a new browser window using the **Sign-on URL** from the Active Directory application configuration, and click **Azure Active Directory**.</span></span>
-
-![Developer Portal][api-management-dev-portal-signin]
-
-<span data-ttu-id="46102-193">Enter the credentials of one of the users in your Azure Active Directory, and click **Sign in**.</span><span class="sxs-lookup"><span data-stu-id="46102-193">Enter the credentials of one of the users in your Azure Active Directory, and click **Sign in**.</span></span>
-
-![Sign in][api-management-aad-signin]
-
-<span data-ttu-id="46102-195">You may be prompted with a registration form if any additional information is required.</span><span class="sxs-lookup"><span data-stu-id="46102-195">You may be prompted with a registration form if any additional information is required.</span></span> <span data-ttu-id="46102-196">Complete the registration form and click **Sign up**.</span><span class="sxs-lookup"><span data-stu-id="46102-196">Complete the registration form and click **Sign up**.</span></span>
-
-![Registration][api-management-complete-registration]
-
-<span data-ttu-id="46102-198">Your user is now logged into the developer portal for your API Management service instance.</span><span class="sxs-lookup"><span data-stu-id="46102-198">Your user is now logged into the developer portal for your API Management service instance.</span></span>
-
-![Registration Complete][api-management-registration-complete]
-
-[api-management-management-console]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-management-console.png
-[api-management-security-external-identities]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-security-external-identities.png
-[api-management-security-aad-new]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-security-aad-new.png
-[api-management-new-aad-application-menu]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-new-aad-application-menu.png
-[api-management-new-aad-application-1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-new-aad-application-1.png
-[api-management-new-aad-application-2]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-new-aad-application-2.png
-[api-management-new-aad-app-created]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-new-aad-app-created.png
-[api-management-aad-app-permissions]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-aad-app-permissions.png
-[api-management-aad-app-client-id]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-aad-app-client-id.png
-[api-management-client-id]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-client-id.png
-[api-management-aad-key-before-save]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-aad-key-before-save.png
-[api-management-aad-key-after-save]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-aad-key-after-save.png
-[api-management-client-secret]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-client-secret.png
-[api-management-client-allowed-tenants]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-client-allowed-tenants.png
-[api-management-client-allowed-tenants-save]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-client-allowed-tenants-save.png
-[api-management-aad-delegated-permissions]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-aad-delegated-permissions.png
-[api-management-dev-portal-signin]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-dev-portal-signin.png
-[api-management-aad-signin]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-aad-signin.png
-[api-management-complete-registration]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-complete-registration.png
-[api-management-registration-complete]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-registration-complete.png
-[api-management-aad-app-multi-tenant]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-aad-app-multi-tenant.png
-[api-management-aad-reply-url]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-aad-reply-url.png
-[api-management-aad-consent]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-aad-consent.png
-[api-management-permissions-form]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-permissions-form.png
-[api-management-configure-product]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-configure-product.png
-[api-management-add-groups]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-add-groups.png
-[api-management-select-group]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-select-group.png
-[api-management-aad-groups-list]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-aad-groups-list.png
-[api-management-aad-group-added]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-aad-group-added.png
-[api-management-groups]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-groups.png
-[api-management-edit-group]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-edit-group.png
+[api-management-dev-portal-signin]: ./media/api-management-howto-aad/api-management-dev-portal-signin.png
+[api-management-aad-signin]: ./media/api-management-howto-aad/api-management-aad-signin.png
+[api-management-complete-registration]: ./media/api-management-howto-aad/api-management-complete-registration.png
+[api-management-registration-complete]: ./media/api-management-howto-aad/api-management-registration-complete.png
 
 [How to add operations to an API]: api-management-howto-add-operations.md
 [How to add and publish a product]: api-management-howto-add-products.md
 [Monitoring and analytics]: api-management-monitoring.md
 [Add APIs to a product]: api-management-howto-add-products.md#add-apis
 [Publish a product]: api-management-howto-add-products.md#publish-product
-[Get started with Azure API Management]: api-management-get-started.md
+[Get started with Azure API Management]: get-started-create-service-instance.md
 [API Management policy reference]: api-management-policy-reference.md
 [Caching policies]: api-management-policy-reference.md#caching-policies
-[Create an API Management service instance]: api-management-get-started.md#create-service-instance
+[Create an API Management service instance]: get-started-create-service-instance.md
 
 [http://oauth.net/2/]: http://oauth.net/2/
 [WebApp-GraphAPI-DotNet]: https://github.com/AzureADSamples/WebApp-GraphAPI-DotNet
@@ -241,36 +200,4 @@ ms.locfileid: "44562936"
 [Test the OAuth 2.0 user authorization in the Developer Portal]: #step3
 [Next steps]: #next-steps
 
-[Log in to the Developer portal using an Azure Active Directory account]: #Log-in-to-the-Developer-portal-using-an-Azure-Active-Directory-account
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+[Sign in to the developer portal by using an Azure AD account]: #Sign-in-to-the-developer-portal-by-using-an-Azure-AD-account

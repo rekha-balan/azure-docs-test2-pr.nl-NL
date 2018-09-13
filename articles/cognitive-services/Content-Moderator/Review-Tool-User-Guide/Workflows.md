@@ -1,82 +1,89 @@
 ---
-title: Define and use workflows in Content Moderator | Microsoft Docs
-description: Content Moderator includes default workflows, and you can create your own based on content policies that are specific to your business.
+title: Define and use workflows in Azure Content Moderator | Microsoft Docs
+description: Learn how to create custom workflows based on your content policies.
 services: cognitive-services
 author: sanjeev3
 manager: mikemcca
 ms.service: cognitive-services
-ms.technology: content-moderator
+ms.component: content-moderator
 ms.topic: article
-ms.date: 02/03/2017
+ms.date: 01/07/2018
 ms.author: sajagtap
-ms.openlocfilehash: 7609622a3b4ad1b03f3757916aae649618ba5472
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: dfe3ba8a2ef1bcbc69ef585b504a9367d9420bf0
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44556775"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44803716"
 ---
-# <a name="defining-and-using-workflows"></a><span data-ttu-id="4ca9c-103">Defining and using workflows</span><span class="sxs-lookup"><span data-stu-id="4ca9c-103">Defining and using workflows</span></span>  #
+# <a name="define-test-and-use-workflows"></a><span data-ttu-id="afcb1-103">Define, test, and use workflows</span><span class="sxs-lookup"><span data-stu-id="afcb1-103">Define, test, and use workflows</span></span>
 
-<span data-ttu-id="4ca9c-104">In addition to default workflow used for generating reviews, you can define custom workflows and thresholds based on content policies that are specific to your business.</span><span class="sxs-lookup"><span data-stu-id="4ca9c-104">In addition to default workflow used for generating reviews, you can define custom workflows and thresholds based on content policies that are specific to your business.</span></span> <span data-ttu-id="4ca9c-105">Content Moderator allows you to use other APIs in addition to its own API as long as a connector for that API is available.</span><span class="sxs-lookup"><span data-stu-id="4ca9c-105">Content Moderator allows you to use other APIs in addition to its own API as long as a connector for that API is available.</span></span>
+<span data-ttu-id="afcb1-104">You can use the Azure Content Moderator workflow designer and APIs to define custom workflows and thresholds based on your content policies.</span><span class="sxs-lookup"><span data-stu-id="afcb1-104">You can use the Azure Content Moderator workflow designer and APIs to define custom workflows and thresholds based on your content policies.</span></span>
 
-## <a name="make-sure-you-have-valid-credentials"></a><span data-ttu-id="4ca9c-106">Make sure you have valid credentials</span><span class="sxs-lookup"><span data-stu-id="4ca9c-106">Make sure you have valid credentials</span></span> ##
+<span data-ttu-id="afcb1-105">Workflows "connect" to the Content Moderator API by using connectors.</span><span class="sxs-lookup"><span data-stu-id="afcb1-105">Workflows "connect" to the Content Moderator API by using connectors.</span></span> <span data-ttu-id="afcb1-106">You can use other APIs if a connector for that API is available.</span><span class="sxs-lookup"><span data-stu-id="afcb1-106">You can use other APIs if a connector for that API is available.</span></span> <span data-ttu-id="afcb1-107">The example here uses the Content Moderator connector that is included by default.</span><span class="sxs-lookup"><span data-stu-id="afcb1-107">The example here uses the Content Moderator connector that is included by default.</span></span>
 
-<span data-ttu-id="4ca9c-107">To get started on defining a workflow, make sure you have valid credentials for the API you intend to use in your workflow.</span><span class="sxs-lookup"><span data-stu-id="4ca9c-107">To get started on defining a workflow, make sure you have valid credentials for the API you intend to use in your workflow.</span></span> <span data-ttu-id="4ca9c-108">Content Moderator includes a small set of Connectors by default.</span><span class="sxs-lookup"><span data-stu-id="4ca9c-108">Content Moderator includes a small set of Connectors by default.</span></span>
+## <a name="browse-to-the-workflows-section"></a><span data-ttu-id="afcb1-108">Browse to the Workflows section</span><span class="sxs-lookup"><span data-stu-id="afcb1-108">Browse to the Workflows section</span></span>
 
-![Connectors](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cognitive-services/Content-Moderator/Review-Tool-User-Guide/images/2-Workflows.PNG)
+<span data-ttu-id="afcb1-109">On the **Settings** tab, select **Workflows**.</span><span class="sxs-lookup"><span data-stu-id="afcb1-109">On the **Settings** tab, select **Workflows**.</span></span>
 
-## <a name="navigate-to-the-workflows-section"></a><span data-ttu-id="4ca9c-110">Navigate to the Workflows section</span><span class="sxs-lookup"><span data-stu-id="4ca9c-110">Navigate to the Workflows section</span></span> ##
+  ![Workflows setting](images/2-workflows-0.png)
 
-<span data-ttu-id="4ca9c-111">Select the **Workflows** option under **Settings**.</span><span class="sxs-lookup"><span data-stu-id="4ca9c-111">Select the **Workflows** option under **Settings**.</span></span>
+## <a name="start-a-new-workflow"></a><span data-ttu-id="afcb1-111">Start a new workflow</span><span class="sxs-lookup"><span data-stu-id="afcb1-111">Start a new workflow</span></span>
 
-![Connectors](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cognitive-services/Content-Moderator/Review-Tool-User-Guide/images/2-Workflows-0.PNG)
+<span data-ttu-id="afcb1-112">Select **Add Workflow**.</span><span class="sxs-lookup"><span data-stu-id="afcb1-112">Select **Add Workflow**.</span></span>
 
-## <a name="start-a-new-workflow"></a><span data-ttu-id="4ca9c-113">Start a new workflow</span><span class="sxs-lookup"><span data-stu-id="4ca9c-113">Start a new workflow</span></span> ##
+  ![Add a workflow](images/2-workflows-1.png)
 
-<span data-ttu-id="4ca9c-114">Use the **Add Workflows** option to get started.</span><span class="sxs-lookup"><span data-stu-id="4ca9c-114">Use the **Add Workflows** option to get started.</span></span>
+## <a name="assign-a-name-and-description"></a><span data-ttu-id="afcb1-114">Assign a name and description</span><span class="sxs-lookup"><span data-stu-id="afcb1-114">Assign a name and description</span></span>
 
-![Connectors](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cognitive-services/Content-Moderator/Review-Tool-User-Guide/images/2-Workflows-1.PNG)
+<span data-ttu-id="afcb1-115">Name your workflow, enter a description, and choose whether the workflow handles images or text.</span><span class="sxs-lookup"><span data-stu-id="afcb1-115">Name your workflow, enter a description, and choose whether the workflow handles images or text.</span></span>
 
-## <a name="name-your-workflow"></a><span data-ttu-id="4ca9c-116">Name your workflow</span><span class="sxs-lookup"><span data-stu-id="4ca9c-116">Name your workflow</span></span> ##
+  ![Workflow name and description](images/ocr-workflow-step-1.PNG)
 
-<span data-ttu-id="4ca9c-117">Name your workflow, provide a description, and select whether you want to process images or text.</span><span class="sxs-lookup"><span data-stu-id="4ca9c-117">Name your workflow, provide a description, and select whether you want to process images or text.</span></span>
-<span data-ttu-id="4ca9c-118">In the screenshot below, you can see the fields and view the If-Then-Else selections that you need to make to define your custom workflows.</span><span class="sxs-lookup"><span data-stu-id="4ca9c-118">In the screenshot below, you can see the fields and view the If-Then-Else selections that you need to make to define your custom workflows.</span></span>
+## <a name="define-the-evaluation-criteria-condition"></a><span data-ttu-id="afcb1-117">Define the evaluation criteria ("condition")</span><span class="sxs-lookup"><span data-stu-id="afcb1-117">Define the evaluation criteria ("condition")</span></span>
 
-![Connectors](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cognitive-services/Content-Moderator/Review-Tool-User-Guide/images/2-Workflows-2.PNG)
+<span data-ttu-id="afcb1-118">In the following screenshot, you see the fields and the If-Then-Else selections that you need to define for your workflows.</span><span class="sxs-lookup"><span data-stu-id="afcb1-118">In the following screenshot, you see the fields and the If-Then-Else selections that you need to define for your workflows.</span></span> <span data-ttu-id="afcb1-119">Choose a connector.</span><span class="sxs-lookup"><span data-stu-id="afcb1-119">Choose a connector.</span></span> <span data-ttu-id="afcb1-120">This example uses **Content Moderator**.</span><span class="sxs-lookup"><span data-stu-id="afcb1-120">This example uses **Content Moderator**.</span></span> <span data-ttu-id="afcb1-121">Depending on the connector you choose, the available options for output change.</span><span class="sxs-lookup"><span data-stu-id="afcb1-121">Depending on the connector you choose, the available options for output change.</span></span>
 
-## <a name="define-the-evaluation-criteria-condition"></a><span data-ttu-id="4ca9c-120">Define the evaluation criteria (condition)</span><span class="sxs-lookup"><span data-stu-id="4ca9c-120">Define the evaluation criteria (condition)</span></span> ##
+  ![Define workflow condition](images/ocr-workflow-step-2-condition.PNG)
 
-<span data-ttu-id="4ca9c-121">As a first step, enter all the information needed to define your criteria for executing the workflow.</span><span class="sxs-lookup"><span data-stu-id="4ca9c-121">As a first step, enter all the information needed to define your criteria for executing the workflow.</span></span> <span data-ttu-id="4ca9c-122">As shown in the screen below, this includes selecting the API you want to get results from.</span><span class="sxs-lookup"><span data-stu-id="4ca9c-122">As shown in the screen below, this includes selecting the API you want to get results from.</span></span> <span data-ttu-id="4ca9c-123">When you select one of the available APIs (that you have entered your credentials for in the very first step), the next drop-down will show the available outputs from the API.</span><span class="sxs-lookup"><span data-stu-id="4ca9c-123">When you select one of the available APIs (that you have entered your credentials for in the very first step), the next drop-down will show the available outputs from the API.</span></span> <span data-ttu-id="4ca9c-124">The next two fields allow you to specify the check to be performed.</span><span class="sxs-lookup"><span data-stu-id="4ca9c-124">The next two fields allow you to specify the check to be performed.</span></span>
+<span data-ttu-id="afcb1-123">After you choose the connector and its output that you want, select an operator and the value for the condition.</span><span class="sxs-lookup"><span data-stu-id="afcb1-123">After you choose the connector and its output that you want, select an operator and the value for the condition.</span></span>
 
-![Connectors](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cognitive-services/Content-Moderator/Review-Tool-User-Guide/images/2-Workflows-3.PNG)
+## <a name="define-the-action-to-take"></a><span data-ttu-id="afcb1-124">Define the action to take</span><span class="sxs-lookup"><span data-stu-id="afcb1-124">Define the action to take</span></span>
 
-## <a name="define-the-action"></a><span data-ttu-id="4ca9c-126">Define the action</span><span class="sxs-lookup"><span data-stu-id="4ca9c-126">Define the action</span></span> ##
+<span data-ttu-id="afcb1-125">Select the action to take and the condition to meet.</span><span class="sxs-lookup"><span data-stu-id="afcb1-125">Select the action to take and the condition to meet.</span></span> <span data-ttu-id="afcb1-126">The following example creates an image review, assigns a tag `a`, and highlights it for the condition shown.</span><span class="sxs-lookup"><span data-stu-id="afcb1-126">The following example creates an image review, assigns a tag `a`, and highlights it for the condition shown.</span></span> <span data-ttu-id="afcb1-127">You also can combine multiple conditions to get the results you want.</span><span class="sxs-lookup"><span data-stu-id="afcb1-127">You also can combine multiple conditions to get the results you want.</span></span> <span data-ttu-id="afcb1-128">Optionally, add an alternative (Else) path.</span><span class="sxs-lookup"><span data-stu-id="afcb1-128">Optionally, add an alternative (Else) path.</span></span>
 
-<span data-ttu-id="4ca9c-127">Once you have defined the condition, you will tell Content Moderator what action to perform if the condition is met.</span><span class="sxs-lookup"><span data-stu-id="4ca9c-127">Once you have defined the condition, you will tell Content Moderator what action to perform if the condition is met.</span></span> <span data-ttu-id="4ca9c-128">The example shown below creates an image review and assigns it to a subteam.</span><span class="sxs-lookup"><span data-stu-id="4ca9c-128">The example shown below creates an image review and assigns it to a subteam.</span></span> <span data-ttu-id="4ca9c-129">It also specifies an aditional criteria that must be fulfilled for the assigned 'a' tag to be selected.</span><span class="sxs-lookup"><span data-stu-id="4ca9c-129">It also specifies an aditional criteria that must be fulfilled for the assigned 'a' tag to be selected.</span></span> <span data-ttu-id="4ca9c-130">In this way, you can combine multiple conditions to get the results you want.</span><span class="sxs-lookup"><span data-stu-id="4ca9c-130">In this way, you can combine multiple conditions to get the results you want.</span></span>
+  ![Define workflow action](images/ocr-workflow-step-3-action.PNG)
 
-![Connectors](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cognitive-services/Content-Moderator/Review-Tool-User-Guide/images/2-Workflows-5.PNG)
+## <a name="save-your-workflow"></a><span data-ttu-id="afcb1-130">Save your workflow</span><span class="sxs-lookup"><span data-stu-id="afcb1-130">Save your workflow</span></span>
 
-## <a name="optionally-define-the-else-section"></a><span data-ttu-id="4ca9c-132">Optionally, define the Else section</span><span class="sxs-lookup"><span data-stu-id="4ca9c-132">Optionally, define the Else section</span></span> ##
+<span data-ttu-id="afcb1-131">Finally, save the workflow, and note the workflow name.</span><span class="sxs-lookup"><span data-stu-id="afcb1-131">Finally, save the workflow, and note the workflow name.</span></span> <span data-ttu-id="afcb1-132">You need the name to start a moderation job by using the Review API.</span><span class="sxs-lookup"><span data-stu-id="afcb1-132">You need the name to start a moderation job by using the Review API.</span></span>
 
-<span data-ttu-id="4ca9c-133">Optionally, expand the **Else** section to provide similar information like you did for the **If** section.</span><span class="sxs-lookup"><span data-stu-id="4ca9c-133">Optionally, expand the **Else** section to provide similar information like you did for the **If** section.</span></span>
+## <a name="test-the-workflow"></a><span data-ttu-id="afcb1-133">Test the workflow</span><span class="sxs-lookup"><span data-stu-id="afcb1-133">Test the workflow</span></span>
 
-![Connectors](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cognitive-services/Content-Moderator/Review-Tool-User-Guide/images/2-Workflows-6.PNG)
+<span data-ttu-id="afcb1-134">Now that you defined a custom workflow, test it with sample content.</span><span class="sxs-lookup"><span data-stu-id="afcb1-134">Now that you defined a custom workflow, test it with sample content.</span></span>
 
-## <a name="save-the-workflow"></a><span data-ttu-id="4ca9c-135">Save the workflow</span><span class="sxs-lookup"><span data-stu-id="4ca9c-135">Save the workflow</span></span> ##
+<span data-ttu-id="afcb1-135">Select the corresponding **Execute Workflow** button.</span><span class="sxs-lookup"><span data-stu-id="afcb1-135">Select the corresponding **Execute Workflow** button.</span></span>
 
-<span data-ttu-id="4ca9c-136">Finally, save your workflow and note the workflow name.</span><span class="sxs-lookup"><span data-stu-id="4ca9c-136">Finally, save your workflow and note the workflow name.</span></span> <span data-ttu-id="4ca9c-137">You will need it to invoke the workflow with the Review API.</span><span class="sxs-lookup"><span data-stu-id="4ca9c-137">You will need it to invoke the workflow with the Review API.</span></span>
+  ![Workflow test](images/ocr-workflow-step-6-list.PNG)
 
-![Connectors](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cognitive-services/Content-Moderator/Review-Tool-User-Guide/images/2-Workflows-7.PNG)
+### <a name="upload-a-file"></a><span data-ttu-id="afcb1-137">Upload a file</span><span class="sxs-lookup"><span data-stu-id="afcb1-137">Upload a file</span></span>
 
-## <a name="use-the-review-api"></a><span data-ttu-id="4ca9c-139">Use the Review API</span><span class="sxs-lookup"><span data-stu-id="4ca9c-139">Use the Review API</span></span> ##
+<span data-ttu-id="afcb1-138">Save the [sample image](https://moderatorsampleimages.blob.core.windows.net/samples/sample5.png) to your local drive.</span><span class="sxs-lookup"><span data-stu-id="afcb1-138">Save the [sample image](https://moderatorsampleimages.blob.core.windows.net/samples/sample5.png) to your local drive.</span></span> <span data-ttu-id="afcb1-139">To test the workflow, select **Choose File(s)** and upload the image.</span><span class="sxs-lookup"><span data-stu-id="afcb1-139">To test the workflow, select **Choose File(s)** and upload the image.</span></span>
 
-<span data-ttu-id="4ca9c-140">Now that you have a custom workflow defined, use the [**Review API**](https://westus.dev.cognitive.microsoft.com/docs/services/580519463f9b070e5c591178/operations/580519483f9b0709fc47f9c5) to start a moderation job with the workflow name as one of the parameters.</span><span class="sxs-lookup"><span data-stu-id="4ca9c-140">Now that you have a custom workflow defined, use the [**Review API**](https://westus.dev.cognitive.microsoft.com/docs/services/580519463f9b070e5c591178/operations/580519483f9b0709fc47f9c5) to start a moderation job with the workflow name as one of the parameters.</span></span> <span data-ttu-id="4ca9c-141">This should be the workflow name that you noted in the previous step.</span><span class="sxs-lookup"><span data-stu-id="4ca9c-141">This should be the workflow name that you noted in the previous step.</span></span>
+  ![Upload image file](images/ocr-workflow-step-7-upload.PNG)
 
+### <a name="track-the-workflow"></a><span data-ttu-id="afcb1-141">Track the workflow</span><span class="sxs-lookup"><span data-stu-id="afcb1-141">Track the workflow</span></span>
 
+<span data-ttu-id="afcb1-142">Track the workflow as it executes.</span><span class="sxs-lookup"><span data-stu-id="afcb1-142">Track the workflow as it executes.</span></span>
 
+  ![Track workflow execution](images/ocr-workflow-step-4-test.PNG)
 
+### <a name="review-any-images-flagged-for-human-moderation"></a><span data-ttu-id="afcb1-144">Review any images flagged for human moderation</span><span class="sxs-lookup"><span data-stu-id="afcb1-144">Review any images flagged for human moderation</span></span>
 
+<span data-ttu-id="afcb1-145">To see the image review, go to the **Image** tab under **Review**.</span><span class="sxs-lookup"><span data-stu-id="afcb1-145">To see the image review, go to the **Image** tab under **Review**.</span></span>
 
+  ![Review images](images/ocr-sample-image-workflow1.PNG)
 
+## <a name="next-steps"></a><span data-ttu-id="afcb1-147">Next steps</span><span class="sxs-lookup"><span data-stu-id="afcb1-147">Next steps</span></span> 
 
+<span data-ttu-id="afcb1-148">To invoke the workflow from code, use custom workflows with the [`Job` API console quickstart](../try-review-api-job.md) and the [.NET SDK quickstart](../moderation-jobs-quickstart-dotnet.md).</span><span class="sxs-lookup"><span data-stu-id="afcb1-148">To invoke the workflow from code, use custom workflows with the [`Job` API console quickstart](../try-review-api-job.md) and the [.NET SDK quickstart](../moderation-jobs-quickstart-dotnet.md).</span></span>

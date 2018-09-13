@@ -1,10 +1,10 @@
 ---
-title: Control Azure CDN caching behavior with query strings | Microsoft Docs
-description: Azure CDN query string caching controls how files are to be cached when they contain query strings.
+title: Control Azure CDN caching behavior with query strings - standard tier | Microsoft Docs
+description: Azure CDN query string caching controls how files are cached when a web request contains a query string. This article describes query string caching in Azure CDN standard products.
 services: cdn
 documentationcenter: ''
-author: zhangmanling
-manager: erikre
+author: dksimpson
+manager: cfowler
 editor: ''
 ms.assetid: 17410e4f-130e-489c-834e-7ca6d6f9778d
 ms.service: cdn
@@ -12,57 +12,56 @@ ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 01/23/2017
-ms.author: mazha
-ms.openlocfilehash: f93267882e23615833e33d87e2eb32a24a3f6a23
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 06/11/2018
+ms.author: v-deasim
+ms.openlocfilehash: aa553dfc04a755be1169fa117ec66dd10ea75b54
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44550756"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44813994"
 ---
-# <a name="control-azure-cdn-caching-behavior-with-query-strings"></a><span data-ttu-id="2efda-103">Control Azure CDN caching behavior with query strings</span><span class="sxs-lookup"><span data-stu-id="2efda-103">Control Azure CDN caching behavior with query strings</span></span>
+# <a name="control-azure-cdn-caching-behavior-with-query-strings---standard-tier"></a><span data-ttu-id="0da48-104">Control Azure CDN caching behavior with query strings - standard tier</span><span class="sxs-lookup"><span data-stu-id="0da48-104">Control Azure CDN caching behavior with query strings - standard tier</span></span>
 > [!div class="op_single_selector"]
-> * [Standard](cdn-query-string.md)
-> * [Azure CDN Premium from Verizon](cdn-query-string-premium.md)
-> 
+> * [Standard tier](cdn-query-string.md)
+> * [Premium tier](cdn-query-string-premium.md)
 > 
 
-## <a name="overview"></a><span data-ttu-id="2efda-106">Overview</span><span class="sxs-lookup"><span data-stu-id="2efda-106">Overview</span></span>
-<span data-ttu-id="2efda-107">Query string caching controls how files are to be cached when they contain query strings.</span><span class="sxs-lookup"><span data-stu-id="2efda-107">Query string caching controls how files are to be cached when they contain query strings.</span></span>
+## <a name="overview"></a><span data-ttu-id="0da48-107">Overview</span><span class="sxs-lookup"><span data-stu-id="0da48-107">Overview</span></span>
+<span data-ttu-id="0da48-108">With Azure Content Delivery Network (CDN), you can control how files are cached for a web request that contains a query string.</span><span class="sxs-lookup"><span data-stu-id="0da48-108">With Azure Content Delivery Network (CDN), you can control how files are cached for a web request that contains a query string.</span></span> <span data-ttu-id="0da48-109">In a web request with a query string, the query string is that portion of the request that occurs after a question mark (?).</span><span class="sxs-lookup"><span data-stu-id="0da48-109">In a web request with a query string, the query string is that portion of the request that occurs after a question mark (?).</span></span> <span data-ttu-id="0da48-110">A query string can contain one or more key-value pairs, in which the field name and its value are separated by an equals sign (=).</span><span class="sxs-lookup"><span data-stu-id="0da48-110">A query string can contain one or more key-value pairs, in which the field name and its value are separated by an equals sign (=).</span></span> <span data-ttu-id="0da48-111">Each key-value pair is separated by an ampersand (&).</span><span class="sxs-lookup"><span data-stu-id="0da48-111">Each key-value pair is separated by an ampersand (&).</span></span> <span data-ttu-id="0da48-112">For example, http:\//www.contoso.com/content.mov?field1=value1&field2=value2.</span><span class="sxs-lookup"><span data-stu-id="0da48-112">For example, http:\//www.contoso.com/content.mov?field1=value1&field2=value2.</span></span> <span data-ttu-id="0da48-113">If there is more than one key-value pair in a query string of a request, their order does not matter.</span><span class="sxs-lookup"><span data-stu-id="0da48-113">If there is more than one key-value pair in a query string of a request, their order does not matter.</span></span> 
 
 > [!IMPORTANT]
-> The Standard and Premium CDN products provide the same query string caching functionality, but the user interface differs.  This document describes the interface for **Azure CDN Standard from Akamai** and **Azure CDN Standard from Verizon**.  For query string caching with **Azure CDN Premium from Verizon**, see [Controlling caching behavior of CDN requests with query strings - Premium](cdn-query-string-premium.md).
-> 
-> 
+> The Azure CDN standard and premium products provide the same query string caching functionality, but the user interface is different. This article describes the interface for **Azure CDN Standard from Microsoft**, **Azure CDN Standard from Akamai** and **Azure CDN Standard from Verizon**. For query string caching with **Azure CDN Premium from Verizon**, see [Control Azure CDN caching behavior with query strings - premium tier](cdn-query-string-premium.md).
 
-<span data-ttu-id="2efda-111">Three modes are available:</span><span class="sxs-lookup"><span data-stu-id="2efda-111">Three modes are available:</span></span>
+<span data-ttu-id="0da48-117">Three query string modes are available:</span><span class="sxs-lookup"><span data-stu-id="0da48-117">Three query string modes are available:</span></span>
 
-* <span data-ttu-id="2efda-112">**Ignore query strings**:  This is the default mode.</span><span class="sxs-lookup"><span data-stu-id="2efda-112">**Ignore query strings**:  This is the default mode.</span></span>  <span data-ttu-id="2efda-113">The CDN edge node will pass the query string from the requestor to the origin on the first request and cache the asset.</span><span class="sxs-lookup"><span data-stu-id="2efda-113">The CDN edge node will pass the query string from the requestor to the origin on the first request and cache the asset.</span></span>  <span data-ttu-id="2efda-114">All subsequent requests for that asset that are served from the edge node will ignore the query string until the cached asset expires.</span><span class="sxs-lookup"><span data-stu-id="2efda-114">All subsequent requests for that asset that are served from the edge node will ignore the query string until the cached asset expires.</span></span>
-* <span data-ttu-id="2efda-115">**Bypass caching for URL with query strings**:  In this mode, requests with query strings are not cached at the CDN edge node.</span><span class="sxs-lookup"><span data-stu-id="2efda-115">**Bypass caching for URL with query strings**:  In this mode, requests with query strings are not cached at the CDN edge node.</span></span>  <span data-ttu-id="2efda-116">The edge node retrieves the asset directly from the origin and passes it to the requestor with each request.</span><span class="sxs-lookup"><span data-stu-id="2efda-116">The edge node retrieves the asset directly from the origin and passes it to the requestor with each request.</span></span>
-* <span data-ttu-id="2efda-117">**Cache every unique URL**:  This mode treats each request with a query string as a unique asset with its own cache.</span><span class="sxs-lookup"><span data-stu-id="2efda-117">**Cache every unique URL**:  This mode treats each request with a query string as a unique asset with its own cache.</span></span>  <span data-ttu-id="2efda-118">For example, the response from the origin for a request for *foo.ashx?q=bar* would be cached at the edge node and returned for subsequent caches with that same query string.</span><span class="sxs-lookup"><span data-stu-id="2efda-118">For example, the response from the origin for a request for *foo.ashx?q=bar* would be cached at the edge node and returned for subsequent caches with that same query string.</span></span>  <span data-ttu-id="2efda-119">A request for *foo.ashx?q=somethingelse* would be cached as a separate asset with its own time to live.</span><span class="sxs-lookup"><span data-stu-id="2efda-119">A request for *foo.ashx?q=somethingelse* would be cached as a separate asset with its own time to live.</span></span>
+- <span data-ttu-id="0da48-118">**Ignore query strings**: Default mode.</span><span class="sxs-lookup"><span data-stu-id="0da48-118">**Ignore query strings**: Default mode.</span></span> <span data-ttu-id="0da48-119">In this mode, the CDN point-of-presence (POP) node passes the query strings from the requestor to the origin server on the first request and caches the asset.</span><span class="sxs-lookup"><span data-stu-id="0da48-119">In this mode, the CDN point-of-presence (POP) node passes the query strings from the requestor to the origin server on the first request and caches the asset.</span></span> <span data-ttu-id="0da48-120">All subsequent requests for the asset that are served from the POP ignore the query strings until the cached asset expires.</span><span class="sxs-lookup"><span data-stu-id="0da48-120">All subsequent requests for the asset that are served from the POP ignore the query strings until the cached asset expires.</span></span>
 
-## <a name="changing-query-string-caching-settings-for-standard-cdn-profiles"></a><span data-ttu-id="2efda-120">Changing query string caching settings for standard CDN profiles</span><span class="sxs-lookup"><span data-stu-id="2efda-120">Changing query string caching settings for standard CDN profiles</span></span>
-1. <span data-ttu-id="2efda-121">From the CDN profile blade, click the CDN endpoint you wish to manage.</span><span class="sxs-lookup"><span data-stu-id="2efda-121">From the CDN profile blade, click the CDN endpoint you wish to manage.</span></span>
+- <span data-ttu-id="0da48-121">**Bypass caching for query strings**: In this mode, requests with query strings are not cached at the CDN POP node.</span><span class="sxs-lookup"><span data-stu-id="0da48-121">**Bypass caching for query strings**: In this mode, requests with query strings are not cached at the CDN POP node.</span></span> <span data-ttu-id="0da48-122">The POP node retrieves the asset directly from the origin server and passes it to the requestor with each request.</span><span class="sxs-lookup"><span data-stu-id="0da48-122">The POP node retrieves the asset directly from the origin server and passes it to the requestor with each request.</span></span>
+
+- <span data-ttu-id="0da48-123">**Cache every unique URL**: In this mode, each request with a unique URL, including the query string, is treated as a unique asset with its own cache.</span><span class="sxs-lookup"><span data-stu-id="0da48-123">**Cache every unique URL**: In this mode, each request with a unique URL, including the query string, is treated as a unique asset with its own cache.</span></span> <span data-ttu-id="0da48-124">For example, the response from the origin server for a request for example.ashx?q=test1 is cached at the POP node and returned for subsequent caches with the same query string.</span><span class="sxs-lookup"><span data-stu-id="0da48-124">For example, the response from the origin server for a request for example.ashx?q=test1 is cached at the POP node and returned for subsequent caches with the same query string.</span></span> <span data-ttu-id="0da48-125">A request for example.ashx?q=test2 is cached as a separate asset with its own time-to-live setting.</span><span class="sxs-lookup"><span data-stu-id="0da48-125">A request for example.ashx?q=test2 is cached as a separate asset with its own time-to-live setting.</span></span>
    
-    ![CDN profile blade endpoints](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-query-string/cdn-endpoints.png)
+    >[!IMPORTANT] 
+    > Do not use this mode when the query string contains parameters that will change with every request, such as a session ID or a user name, because it will result in a low cache-hit ratio.
+
+## <a name="changing-query-string-caching-settings-for-standard-cdn-profiles"></a><span data-ttu-id="0da48-127">Changing query string caching settings for standard CDN profiles</span><span class="sxs-lookup"><span data-stu-id="0da48-127">Changing query string caching settings for standard CDN profiles</span></span>
+1. <span data-ttu-id="0da48-128">Open a CDN profile, then select the CDN endpoint you want to manage.</span><span class="sxs-lookup"><span data-stu-id="0da48-128">Open a CDN profile, then select the CDN endpoint you want to manage.</span></span>
    
-    <span data-ttu-id="2efda-123">The CDN endpoint blade opens.</span><span class="sxs-lookup"><span data-stu-id="2efda-123">The CDN endpoint blade opens.</span></span>
-2. <span data-ttu-id="2efda-124">Click the **Configure** button.</span><span class="sxs-lookup"><span data-stu-id="2efda-124">Click the **Configure** button.</span></span>
+   ![CDN profile endpoints](./media/cdn-query-string/cdn-endpoints.png)
    
-    ![CDN profile blade manage button](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-query-string/cdn-config-btn.png)
+2. <span data-ttu-id="0da48-130">In the left pane under Settings, click **Caching rules**.</span><span class="sxs-lookup"><span data-stu-id="0da48-130">In the left pane under Settings, click **Caching rules**.</span></span>
    
-    <span data-ttu-id="2efda-126">The CDN Configuration blade opens.</span><span class="sxs-lookup"><span data-stu-id="2efda-126">The CDN Configuration blade opens.</span></span>
-3. <span data-ttu-id="2efda-127">Select a setting from the **Query string caching behavior** dropdown.</span><span class="sxs-lookup"><span data-stu-id="2efda-127">Select a setting from the **Query string caching behavior** dropdown.</span></span>
+    ![CDN Caching rules button](./media/cdn-query-string/cdn-caching-rules-btn.png)
    
-    ![CDN query string caching options](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-query-string/cdn-query-string.png)
-4. <span data-ttu-id="2efda-129">After making your selection, click the **Save** button.</span><span class="sxs-lookup"><span data-stu-id="2efda-129">After making your selection, click the **Save** button.</span></span>
+3. <span data-ttu-id="0da48-132">In the **Query string caching behavior** list, select a query string mode, then click **Save**.</span><span class="sxs-lookup"><span data-stu-id="0da48-132">In the **Query string caching behavior** list, select a query string mode, then click **Save**.</span></span>
+   
+   ![CDN query string caching options](./media/cdn-query-string/cdn-query-string.png)
 
 > [!IMPORTANT]
-> The settings changes may not be immediately visible, as it takes time for the registration to propagate through the CDN.  For <b>Azure CDN from Akamai</b> profiles, propagation will usually complete within one minute.  For <b>Azure CDN from Verizon</b> profiles, propagation will usually complete within 90 minutes, but in some cases can take longer.
-> 
-> 
-
+> Because it takes time for the registration to propagate through Azure CDN, cache string settings changes might not be immediately visible:
+> - For **Azure CDN Standard from Microsoft** profiles, propagation usually completes in 10 minutes. 
+> - For **Azure CDN Standard from Akamai** profiles, propagation usually completes within one minute. 
+> - For **Azure CDN Standard from Verizon** and **Azure CDN Premium from Verizon** profiles, propagation usually completes in 10 minutes. 
 
 
 
