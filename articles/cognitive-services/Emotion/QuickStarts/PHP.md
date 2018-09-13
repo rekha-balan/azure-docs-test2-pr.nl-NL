@@ -2,40 +2,51 @@
 title: Emotion API PHP quick start | Microsoft Docs
 description: Get information and code samples to help you quickly get started using the Emotion API with PHP in Cognitive Services.
 services: cognitive-services
-author: v-royhar
-manager: yutkuo
+author: anrothMSFT
+manager: corncar
 ms.service: cognitive-services
-ms.technology: emotion
+ms.component: emotion-api
 ms.topic: article
-ms.date: 01/30/2017
+ms.date: 05/23/2017
 ms.author: anroth
-ms.openlocfilehash: 381c77c06127b96f74bc2903fa1f2afb5a388a2a
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 987d5a3eedaa17f1127be34e5f90ec2456fab99b
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44549873"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44797906"
 ---
-# <a name="emotion-api-php-quick-start"></a><span data-ttu-id="7b4a7-103">Emotion API PHP Quick Start</span><span class="sxs-lookup"><span data-stu-id="7b4a7-103">Emotion API PHP Quick Start</span></span>
-<span data-ttu-id="7b4a7-104">This article provides information and code samples to help you quickly get started using PHP and the [Emotion API Recognize method](https://dev.projectoxford.ai/docs/services/5639d931ca73072154c1ce89/operations/563b31ea778daf121cc3a5fa) to recognize the emotions expressed by one or more people in an image.</span><span class="sxs-lookup"><span data-stu-id="7b4a7-104">This article provides information and code samples to help you quickly get started using PHP and the [Emotion API Recognize method](https://dev.projectoxford.ai/docs/services/5639d931ca73072154c1ce89/operations/563b31ea778daf121cc3a5fa) to recognize the emotions expressed by one or more people in an image.</span></span> 
+# <a name="emotion-api-php-quick-start"></a><span data-ttu-id="2c35c-103">Emotion API PHP Quick Start</span><span class="sxs-lookup"><span data-stu-id="2c35c-103">Emotion API PHP Quick Start</span></span>
 
-## <a name="prerequisite"></a><span data-ttu-id="7b4a7-105">Prerequisite</span><span class="sxs-lookup"><span data-stu-id="7b4a7-105">Prerequisite</span></span>
-* <span data-ttu-id="7b4a7-106">Get your free Subscription Key [here](https://www.microsoft.com/cognitive-services/en-us/sign-up)</span><span class="sxs-lookup"><span data-stu-id="7b4a7-106">Get your free Subscription Key [here](https://www.microsoft.com/cognitive-services/en-us/sign-up)</span></span>
+> [!IMPORTANT]
+> <span data-ttu-id="2c35c-104">Video API Preview will end on October 30th, 2017.</span><span class="sxs-lookup"><span data-stu-id="2c35c-104">Video API Preview will end on October 30th, 2017.</span></span> <span data-ttu-id="2c35c-105">Try the new [Video Indexer API Preview](https://azure.microsoft.com/services/cognitive-services/video-indexer/) to easily extract insights from videos and to enhance content discovery experiences, such as search results, by detecting spoken words, faces, characters, and emotions.</span><span class="sxs-lookup"><span data-stu-id="2c35c-105">Try the new [Video Indexer API Preview](https://azure.microsoft.com/services/cognitive-services/video-indexer/) to easily extract insights from videos and to enhance content discovery experiences, such as search results, by detecting spoken words, faces, characters, and emotions.</span></span> <span data-ttu-id="2c35c-106">[Learn more](https://docs.microsoft.com/azure/cognitive-services/video-indexer/video-indexer-overview).</span><span class="sxs-lookup"><span data-stu-id="2c35c-106">[Learn more](https://docs.microsoft.com/azure/cognitive-services/video-indexer/video-indexer-overview).</span></span>
 
-## <a name="recognize-emotions-php-example-request"></a><span data-ttu-id="7b4a7-107">Recognize Emotions PHP Example Request</span><span class="sxs-lookup"><span data-stu-id="7b4a7-107">Recognize Emotions PHP Example Request</span></span>
+<span data-ttu-id="2c35c-107">This article provides information and code samples to help you quickly get started using PHP and the [Emotion API Recognize method](https://westus.dev.cognitive.microsoft.com/docs/services/5639d931ca73072154c1ce89/operations/563b31ea778daf121cc3a5fa) to recognize the emotions expressed by one or more people in an image.</span><span class="sxs-lookup"><span data-stu-id="2c35c-107">This article provides information and code samples to help you quickly get started using PHP and the [Emotion API Recognize method](https://westus.dev.cognitive.microsoft.com/docs/services/5639d931ca73072154c1ce89/operations/563b31ea778daf121cc3a5fa) to recognize the emotions expressed by one or more people in an image.</span></span> 
 
-```PHP
+## <a name="prerequisite"></a><span data-ttu-id="2c35c-108">Prerequisite</span><span class="sxs-lookup"><span data-stu-id="2c35c-108">Prerequisite</span></span>
+* <span data-ttu-id="2c35c-109">Get your free Subscription Key [here](https://azure.microsoft.com/try/cognitive-services/)</span><span class="sxs-lookup"><span data-stu-id="2c35c-109">Get your free Subscription Key [here](https://azure.microsoft.com/try/cognitive-services/)</span></span>
+
+## <a name="recognize-emotions-php-example-request"></a><span data-ttu-id="2c35c-110">Recognize Emotions PHP Example Request</span><span class="sxs-lookup"><span data-stu-id="2c35c-110">Recognize Emotions PHP Example Request</span></span>
+
+<span data-ttu-id="2c35c-111">Change the REST URL to use the location where you obtained your subscription keys, change the body to a URL of an image you want to test, and replace the "Ocp-Apim-Subscription-Key" value with your valid subscription key.</span><span class="sxs-lookup"><span data-stu-id="2c35c-111">Change the REST URL to use the location where you obtained your subscription keys, change the body to a URL of an image you want to test, and replace the "Ocp-Apim-Subscription-Key" value with your valid subscription key.</span></span>
+
+```php
 <?php
 // This sample uses the Apache HTTP client from HTTP Components (http://hc.apache.org/httpcomponents-client-ga/)
 require_once 'HTTP/Request2.php';
 
+// NOTE: You must use the same region in your REST call as you used to obtain your subscription keys.
+//   For example, if you obtained your subscription keys from westcentralus, replace "westus" in the 
+//   URL below with "westcentralus".
 $request = new Http_Request2('https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognize');
 $url = $request->getUrl();
 
 $headers = array(
     // Request headers
     'Content-Type' => 'application/json',
-    'Ocp-Apim-Subscription-Key' => '{subscription key}',
+
+    // NOTE: Replace the "Ocp-Apim-Subscription-Key" value with a valid subscription key.
+    'Ocp-Apim-Subscription-Key' => '13hc77781f7e4b19b5fcdd72a8df7156',
 );
 
 $request->setHeader($headers);
@@ -49,7 +60,7 @@ $url->setQueryVariables($parameters);
 $request->setMethod(HTTP_Request2::METHOD_POST);
 
 // Request body
-$request->setBody("{body}");
+$request->setBody('{"url": "http://www.example.com/images/image.jpg"}');
 
 try
 {
@@ -64,10 +75,10 @@ catch (HttpException $ex)
 ?>
 ```
 
-## <a name="recognize-emotions-sample-response"></a><span data-ttu-id="7b4a7-108">Recognize Emotions Sample Response</span><span class="sxs-lookup"><span data-stu-id="7b4a7-108">Recognize Emotions Sample Response</span></span>
-<span data-ttu-id="7b4a7-109">A successful call returns an array of face entries and their associated emotion scores, ranked by face rectangle size in descending order.</span><span class="sxs-lookup"><span data-stu-id="7b4a7-109">A successful call returns an array of face entries and their associated emotion scores, ranked by face rectangle size in descending order.</span></span> <span data-ttu-id="7b4a7-110">An empty response indicates that no faces were detected.</span><span class="sxs-lookup"><span data-stu-id="7b4a7-110">An empty response indicates that no faces were detected.</span></span> <span data-ttu-id="7b4a7-111">An emotion entry contains the following fields:</span><span class="sxs-lookup"><span data-stu-id="7b4a7-111">An emotion entry contains the following fields:</span></span>
-* <span data-ttu-id="7b4a7-112">faceRectangle - Rectangle location of face in the image.</span><span class="sxs-lookup"><span data-stu-id="7b4a7-112">faceRectangle - Rectangle location of face in the image.</span></span>
-* <span data-ttu-id="7b4a7-113">scores - Emotion scores for each face in the image.</span><span class="sxs-lookup"><span data-stu-id="7b4a7-113">scores - Emotion scores for each face in the image.</span></span> 
+## <a name="recognize-emotions-sample-response"></a><span data-ttu-id="2c35c-112">Recognize Emotions Sample Response</span><span class="sxs-lookup"><span data-stu-id="2c35c-112">Recognize Emotions Sample Response</span></span>
+<span data-ttu-id="2c35c-113">A successful call returns an array of face entries and their associated emotion scores, ranked by face rectangle size in descending order.</span><span class="sxs-lookup"><span data-stu-id="2c35c-113">A successful call returns an array of face entries and their associated emotion scores, ranked by face rectangle size in descending order.</span></span> <span data-ttu-id="2c35c-114">An empty response indicates that no faces were detected.</span><span class="sxs-lookup"><span data-stu-id="2c35c-114">An empty response indicates that no faces were detected.</span></span> <span data-ttu-id="2c35c-115">An emotion entry contains the following fields:</span><span class="sxs-lookup"><span data-stu-id="2c35c-115">An emotion entry contains the following fields:</span></span>
+* <span data-ttu-id="2c35c-116">faceRectangle - Rectangle location of face in the image.</span><span class="sxs-lookup"><span data-stu-id="2c35c-116">faceRectangle - Rectangle location of face in the image.</span></span>
+* <span data-ttu-id="2c35c-117">scores - Emotion scores for each face in the image.</span><span class="sxs-lookup"><span data-stu-id="2c35c-117">scores - Emotion scores for each face in the image.</span></span> 
 
 ```json
 application/json 

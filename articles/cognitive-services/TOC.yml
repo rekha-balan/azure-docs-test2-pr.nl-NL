@@ -1,0 +1,50 @@
+items:
+- name: Azure Cognitive Services Documentation
+  href: index.yml
+- name: Overview
+  items:
+  - name: What is Cognitive Services?
+    href: Welcome.md
+  - name: Language support
+    href: language-support.md
+  expanded: true
+- name: Quickstarts
+  items:
+  - name: Create an account
+    href: cognitive-services-apis-create-account.md
+  - name: Build an image classifier
+    href: ./custom-vision-service/getting-started-build-a-classifier.md
+  - name: Build a home automation app
+    href: ./luis/luis-get-started-create-app.md
+  - name: Create a .NET text analytics app
+    href: ./text-analytics/quickstarts/csharp.md
+- name: Tutorials
+  items:
+  - name: Custom search webpage
+    href: ./bing-custom-search/tutorials/custom-search-web-page.md
+  - name: Language Understanding app
+    href: ./luis/luis-nodejs-tutorial-build-bot-framework-sample.md
+  - name: Improve intent accuracy for commands
+    href: ./luis/luis-tutorial-batch-testing.md
+- name: Resources
+  items:
+  - name: Azure Roadmap
+    href: https://azure.microsoft.com/roadmap/?category=cognitive-services
+  - name: Pricing
+    href: https://azure.microsoft.com/pricing/details/cognitive-services/
+  - name: Pricing calculator
+    href: https://azure.microsoft.com/pricing/calculator/
+  - name: Videos
+    href: https://azure.microsoft.com/resources/videos/index/?services=cognitive-services
+  - name: Service updates
+    href: https://azure.microsoft.com/updates/?product=cognitive-services
+  - name: Code of conduct
+    href: http://go.microsoft.com/fwlink/?LinkId=698895
+  - name: Knowledge Base
+    href: https://cognitive.uservoice.com/knowledgebase
+ms.openlocfilehash: 8bd7984fd713a2acbb1ca2cc66e3d64bd49ef5a4
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44870179"

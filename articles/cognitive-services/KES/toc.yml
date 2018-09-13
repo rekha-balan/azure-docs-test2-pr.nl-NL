@@ -1,0 +1,42 @@
+items:
+- name: Knowledge Exploration Service Documentation
+- name: Overview
+  items:
+  - name: Learn about the Knowledge Exploration Service
+    href: Overview.md
+  expanded: true
+- name: Get started
+  items:
+  - name: Create a backend engine
+    href: GettingStarted.md
+  - name: Command line
+    href: CommandLine.md
+  - name: Schema format
+    href: SchemaFormat.md
+  - name: Data format
+    href: DataFormat.md
+  - name: Grammar format
+    href: GrammarFormat.md
+  - name: Semantic interpretation
+    href: SemanticInterpretation.md
+  - name: Web API interface
+    href: WebAPI.md
+    items:
+    - name: calchistogram
+      href: calchistogramMethod.md
+    - name: evaluate
+      href: evaluateMethod.md
+    - name: interpret
+      href: interpretMethod.md
+  - name: Structured query expressions
+    href: Expressions.md
+- name: Resources
+  items:
+  - name: Azure Roadmap
+    href: https://azure.microsoft.com/roadmap/
+ms.openlocfilehash: 7c291c57044379419f292bd4e437f129d3a49f2b
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44870137"

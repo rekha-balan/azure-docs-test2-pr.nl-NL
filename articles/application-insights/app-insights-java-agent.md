@@ -3,52 +3,52 @@ title: Performance monitoring for Java web apps in Azure Application Insights | 
 description: Extended performance and usage monitoring of your Java website with Application Insights.
 services: application-insights
 documentationcenter: java
-author: harelbr
-manager: douge
+author: mrbullwinkle
+manager: carmonm
 ms.assetid: 84017a48-1cb3-40c8-aab1-ff68d65e2128
 ms.service: application-insights
 ms.workload: tbd
 ms.tgt_pltfrm: ibiza
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.date: 08/24/2016
-ms.author: awills
-ms.openlocfilehash: ad15cb60e8ffb9de9f038d8cc08d3c84e1b6bc73
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: mbullwin
+ms.openlocfilehash: 30983e283f47761d103829f02b02bc281bd785ee
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44563087"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44797763"
 ---
-# <a name="monitor-dependencies-exceptions-and-execution-times-in-java-web-apps"></a><span data-ttu-id="0e6ff-103">Monitor dependencies, exceptions and execution times in Java web apps</span><span class="sxs-lookup"><span data-stu-id="0e6ff-103">Monitor dependencies, exceptions and execution times in Java web apps</span></span>
+# <a name="monitor-dependencies-caught-exceptions-and-method-execution-times-in-java-web-apps"></a><span data-ttu-id="797a1-103">Monitor dependencies, caught exceptions and method execution times in Java web apps</span><span class="sxs-lookup"><span data-stu-id="797a1-103">Monitor dependencies, caught exceptions and method execution times in Java web apps</span></span>
 
 
-<span data-ttu-id="0e6ff-104">If you have [instrumented your Java web app with Application Insights][java], you can use the Java Agent to get deeper insights, without any code changes:</span><span class="sxs-lookup"><span data-stu-id="0e6ff-104">If you have [instrumented your Java web app with Application Insights][java], you can use the Java Agent to get deeper insights, without any code changes:</span></span>
+<span data-ttu-id="797a1-104">If you have [instrumented your Java web app with Application Insights][java], you can use the Java Agent to get deeper insights, without any code changes:</span><span class="sxs-lookup"><span data-stu-id="797a1-104">If you have [instrumented your Java web app with Application Insights][java], you can use the Java Agent to get deeper insights, without any code changes:</span></span>
 
-* <span data-ttu-id="0e6ff-105">**Dependencies:** Data about calls that your application makes to other components, including:</span><span class="sxs-lookup"><span data-stu-id="0e6ff-105">**Dependencies:** Data about calls that your application makes to other components, including:</span></span>
-  * <span data-ttu-id="0e6ff-106">**REST calls** made via HttpClient, OkHttp, and RestTemplate (Spring).</span><span class="sxs-lookup"><span data-stu-id="0e6ff-106">**REST calls** made via HttpClient, OkHttp, and RestTemplate (Spring).</span></span>
-  * <span data-ttu-id="0e6ff-107">**Redis** calls made via the Jedis client.</span><span class="sxs-lookup"><span data-stu-id="0e6ff-107">**Redis** calls made via the Jedis client.</span></span> <span data-ttu-id="0e6ff-108">If the call takes longer than 10s, the agent also fetches the call arguments.</span><span class="sxs-lookup"><span data-stu-id="0e6ff-108">If the call takes longer than 10s, the agent also fetches the call arguments.</span></span>
-  * <span data-ttu-id="0e6ff-109">**[JDBC calls](http://docs.oracle.com/javase/7/docs/technotes/guides/jdbc/)** - MySQL, SQL Server, PostgreSQL, SQLite, Oracle DB or Apache Derby DB.</span><span class="sxs-lookup"><span data-stu-id="0e6ff-109">**[JDBC calls](http://docs.oracle.com/javase/7/docs/technotes/guides/jdbc/)** - MySQL, SQL Server, PostgreSQL, SQLite, Oracle DB or Apache Derby DB.</span></span> <span data-ttu-id="0e6ff-110">"executeBatch" calls are supported.</span><span class="sxs-lookup"><span data-stu-id="0e6ff-110">"executeBatch" calls are supported.</span></span> <span data-ttu-id="0e6ff-111">For MySQL and PostgreSQL, if the call takes longer than 10s, the agent reports the query plan.</span><span class="sxs-lookup"><span data-stu-id="0e6ff-111">For MySQL and PostgreSQL, if the call takes longer than 10s, the agent reports the query plan.</span></span>
-* <span data-ttu-id="0e6ff-112">**Caught exceptions:** Data about exceptions that are handled by your code.</span><span class="sxs-lookup"><span data-stu-id="0e6ff-112">**Caught exceptions:** Data about exceptions that are handled by your code.</span></span>
-* <span data-ttu-id="0e6ff-113">**Method execution time:** Data about the time it takes to execute specific methods.</span><span class="sxs-lookup"><span data-stu-id="0e6ff-113">**Method execution time:** Data about the time it takes to execute specific methods.</span></span>
+* <span data-ttu-id="797a1-105">**Dependencies:** Data about calls that your application makes to other components, including:</span><span class="sxs-lookup"><span data-stu-id="797a1-105">**Dependencies:** Data about calls that your application makes to other components, including:</span></span>
+  * <span data-ttu-id="797a1-106">**REST calls** made via HttpClient, OkHttp, and RestTemplate (Spring) are captured.</span><span class="sxs-lookup"><span data-stu-id="797a1-106">**REST calls** made via HttpClient, OkHttp, and RestTemplate (Spring) are captured.</span></span>
+  * <span data-ttu-id="797a1-107">**Redis** calls made via the Jedis client are captured.</span><span class="sxs-lookup"><span data-stu-id="797a1-107">**Redis** calls made via the Jedis client are captured.</span></span>
+  * <span data-ttu-id="797a1-108">**[JDBC calls](http://docs.oracle.com/javase/7/docs/technotes/guides/jdbc/)** - MySQL, SQL Server and Oracle DB commands are automatically captured.</span><span class="sxs-lookup"><span data-stu-id="797a1-108">**[JDBC calls](http://docs.oracle.com/javase/7/docs/technotes/guides/jdbc/)** - MySQL, SQL Server and Oracle DB commands are automatically captured.</span></span> <span data-ttu-id="797a1-109">For MySQL, if the call takes longer than 10s, the agent reports the query plan.</span><span class="sxs-lookup"><span data-stu-id="797a1-109">For MySQL, if the call takes longer than 10s, the agent reports the query plan.</span></span>
+* <span data-ttu-id="797a1-110">**Caught exceptions:** Information about exceptions that are handled by your code.</span><span class="sxs-lookup"><span data-stu-id="797a1-110">**Caught exceptions:** Information about exceptions that are handled by your code.</span></span>
+* <span data-ttu-id="797a1-111">**Method execution time:** Information about the time it takes to execute specific methods.</span><span class="sxs-lookup"><span data-stu-id="797a1-111">**Method execution time:** Information about the time it takes to execute specific methods.</span></span>
 
-<span data-ttu-id="0e6ff-114">To use the Java agent, you install it on your server.</span><span class="sxs-lookup"><span data-stu-id="0e6ff-114">To use the Java agent, you install it on your server.</span></span> <span data-ttu-id="0e6ff-115">Your web apps must be instrumented with the [Application Insights Java SDK][java].</span><span class="sxs-lookup"><span data-stu-id="0e6ff-115">Your web apps must be instrumented with the [Application Insights Java SDK][java].</span></span> 
+<span data-ttu-id="797a1-112">To use the Java agent, you install it on your server.</span><span class="sxs-lookup"><span data-stu-id="797a1-112">To use the Java agent, you install it on your server.</span></span> <span data-ttu-id="797a1-113">Your web apps must be instrumented with the [Application Insights Java SDK][java].</span><span class="sxs-lookup"><span data-stu-id="797a1-113">Your web apps must be instrumented with the [Application Insights Java SDK][java].</span></span> 
 
-## <a name="install-the-application-insights-agent-for-java"></a><span data-ttu-id="0e6ff-116">Install the Application Insights agent for Java</span><span class="sxs-lookup"><span data-stu-id="0e6ff-116">Install the Application Insights agent for Java</span></span>
-1. <span data-ttu-id="0e6ff-117">On the machine running your Java server, [download the agent](https://aka.ms/aijavasdk).</span><span class="sxs-lookup"><span data-stu-id="0e6ff-117">On the machine running your Java server, [download the agent](https://aka.ms/aijavasdk).</span></span>
-2. <span data-ttu-id="0e6ff-118">Edit the application server startup script, and add the following JVM:</span><span class="sxs-lookup"><span data-stu-id="0e6ff-118">Edit the application server startup script, and add the following JVM:</span></span>
+## <a name="install-the-application-insights-agent-for-java"></a><span data-ttu-id="797a1-114">Install the Application Insights agent for Java</span><span class="sxs-lookup"><span data-stu-id="797a1-114">Install the Application Insights agent for Java</span></span>
+1. <span data-ttu-id="797a1-115">On the machine running your Java server, [download the agent](https://github.com/Microsoft/ApplicationInsights-Java/releases/latest).</span><span class="sxs-lookup"><span data-stu-id="797a1-115">On the machine running your Java server, [download the agent](https://github.com/Microsoft/ApplicationInsights-Java/releases/latest).</span></span> <span data-ttu-id="797a1-116">Please ensure to download the same verson of Java Agent as Application Insights Java SDK core and web packages.</span><span class="sxs-lookup"><span data-stu-id="797a1-116">Please ensure to download the same verson of Java Agent as Application Insights Java SDK core and web packages.</span></span>
+2. <span data-ttu-id="797a1-117">Edit the application server startup script, and add the following JVM:</span><span class="sxs-lookup"><span data-stu-id="797a1-117">Edit the application server startup script, and add the following JVM:</span></span>
    
-    <span data-ttu-id="0e6ff-119">`javaagent:`*full path to the agent JAR file*</span><span class="sxs-lookup"><span data-stu-id="0e6ff-119">`javaagent:`*full path to the agent JAR file*</span></span>
+    <span data-ttu-id="797a1-118">`javaagent:`*full path to the agent JAR file*</span><span class="sxs-lookup"><span data-stu-id="797a1-118">`javaagent:`*full path to the agent JAR file*</span></span>
    
-    <span data-ttu-id="0e6ff-120">For example, in Tomcat on a Linux machine:</span><span class="sxs-lookup"><span data-stu-id="0e6ff-120">For example, in Tomcat on a Linux machine:</span></span>
+    <span data-ttu-id="797a1-119">For example, in Tomcat on a Linux machine:</span><span class="sxs-lookup"><span data-stu-id="797a1-119">For example, in Tomcat on a Linux machine:</span></span>
    
     `export JAVA_OPTS="$JAVA_OPTS -javaagent:<full path to agent JAR file>"`
-3. <span data-ttu-id="0e6ff-121">Restart your application server.</span><span class="sxs-lookup"><span data-stu-id="0e6ff-121">Restart your application server.</span></span>
+3. <span data-ttu-id="797a1-120">Restart your application server.</span><span class="sxs-lookup"><span data-stu-id="797a1-120">Restart your application server.</span></span>
 
-## <a name="configure-the-agent"></a><span data-ttu-id="0e6ff-122">Configure the agent</span><span class="sxs-lookup"><span data-stu-id="0e6ff-122">Configure the agent</span></span>
-<span data-ttu-id="0e6ff-123">Create a file named `AI-Agent.xml` and place it in the same folder as the agent JAR file.</span><span class="sxs-lookup"><span data-stu-id="0e6ff-123">Create a file named `AI-Agent.xml` and place it in the same folder as the agent JAR file.</span></span>
+## <a name="configure-the-agent"></a><span data-ttu-id="797a1-121">Configure the agent</span><span class="sxs-lookup"><span data-stu-id="797a1-121">Configure the agent</span></span>
+<span data-ttu-id="797a1-122">Create a file named `AI-Agent.xml` and place it in the same folder as the agent JAR file.</span><span class="sxs-lookup"><span data-stu-id="797a1-122">Create a file named `AI-Agent.xml` and place it in the same folder as the agent JAR file.</span></span>
 
-<span data-ttu-id="0e6ff-124">Set the content of the xml file.</span><span class="sxs-lookup"><span data-stu-id="0e6ff-124">Set the content of the xml file.</span></span> <span data-ttu-id="0e6ff-125">Edit the following example to include or omit the features you want.</span><span class="sxs-lookup"><span data-stu-id="0e6ff-125">Edit the following example to include or omit the features you want.</span></span>
+<span data-ttu-id="797a1-123">Set the content of the xml file.</span><span class="sxs-lookup"><span data-stu-id="797a1-123">Set the content of the xml file.</span></span> <span data-ttu-id="797a1-124">Edit the following example to include or omit the features you want.</span><span class="sxs-lookup"><span data-stu-id="797a1-124">Edit the following example to include or omit the features you want.</span></span>
 
 ```XML
 
@@ -87,20 +87,20 @@ ms.locfileid: "44563087"
 
 ```
 
-<span data-ttu-id="0e6ff-126">You have to enable reports exception and method timing for individual methods.</span><span class="sxs-lookup"><span data-stu-id="0e6ff-126">You have to enable reports exception and method timing for individual methods.</span></span>
+<span data-ttu-id="797a1-125">You have to enable reports exception and method timing for individual methods.</span><span class="sxs-lookup"><span data-stu-id="797a1-125">You have to enable reports exception and method timing for individual methods.</span></span>
 
-<span data-ttu-id="0e6ff-127">By default, `reportExecutionTime` is true and `reportCaughtExceptions` is false.</span><span class="sxs-lookup"><span data-stu-id="0e6ff-127">By default, `reportExecutionTime` is true and `reportCaughtExceptions` is false.</span></span>
+<span data-ttu-id="797a1-126">By default, `reportExecutionTime` is true and `reportCaughtExceptions` is false.</span><span class="sxs-lookup"><span data-stu-id="797a1-126">By default, `reportExecutionTime` is true and `reportCaughtExceptions` is false.</span></span>
 
-## <a name="view-the-data"></a><span data-ttu-id="0e6ff-128">View the data</span><span class="sxs-lookup"><span data-stu-id="0e6ff-128">View the data</span></span>
-<span data-ttu-id="0e6ff-129">In the Application Insights resource, aggregated remote dependency and method execution times appears [under the Performance tile][metrics].</span><span class="sxs-lookup"><span data-stu-id="0e6ff-129">In the Application Insights resource, aggregated remote dependency and method execution times appears [under the Performance tile][metrics].</span></span>
+## <a name="view-the-data"></a><span data-ttu-id="797a1-127">View the data</span><span class="sxs-lookup"><span data-stu-id="797a1-127">View the data</span></span>
+<span data-ttu-id="797a1-128">In the Application Insights resource, aggregated remote dependency and method execution times appears [under the Performance tile][metrics].</span><span class="sxs-lookup"><span data-stu-id="797a1-128">In the Application Insights resource, aggregated remote dependency and method execution times appears [under the Performance tile][metrics].</span></span>
 
-<span data-ttu-id="0e6ff-130">To search for individual instances of dependency, exception, and method reports, open [Search][diagnostic].</span><span class="sxs-lookup"><span data-stu-id="0e6ff-130">To search for individual instances of dependency, exception, and method reports, open [Search][diagnostic].</span></span>
+<span data-ttu-id="797a1-129">To search for individual instances of dependency, exception, and method reports, open [Search][diagnostic].</span><span class="sxs-lookup"><span data-stu-id="797a1-129">To search for individual instances of dependency, exception, and method reports, open [Search][diagnostic].</span></span>
 
-<span data-ttu-id="0e6ff-131">[Diagnosing dependency issues - learn more](app-insights-asp-net-dependencies.md#diagnosis).</span><span class="sxs-lookup"><span data-stu-id="0e6ff-131">[Diagnosing dependency issues - learn more](app-insights-asp-net-dependencies.md#diagnosis).</span></span>
+<span data-ttu-id="797a1-130">[Diagnosing dependency issues - learn more](app-insights-asp-net-dependencies.md#diagnosis).</span><span class="sxs-lookup"><span data-stu-id="797a1-130">[Diagnosing dependency issues - learn more](app-insights-asp-net-dependencies.md#diagnosis).</span></span>
 
-## <a name="questions-problems"></a><span data-ttu-id="0e6ff-132">Questions?</span><span class="sxs-lookup"><span data-stu-id="0e6ff-132">Questions?</span></span> <span data-ttu-id="0e6ff-133">Problems?</span><span class="sxs-lookup"><span data-stu-id="0e6ff-133">Problems?</span></span>
-* <span data-ttu-id="0e6ff-134">No data?</span><span class="sxs-lookup"><span data-stu-id="0e6ff-134">No data?</span></span> [<span data-ttu-id="0e6ff-135">Set firewall exceptions</span><span class="sxs-lookup"><span data-stu-id="0e6ff-135">Set firewall exceptions</span></span>](app-insights-ip-addresses.md)
-* [<span data-ttu-id="0e6ff-136">Troubleshooting Java</span><span class="sxs-lookup"><span data-stu-id="0e6ff-136">Troubleshooting Java</span></span>](app-insights-java-troubleshoot.md)
+## <a name="questions-problems"></a><span data-ttu-id="797a1-131">Questions?</span><span class="sxs-lookup"><span data-stu-id="797a1-131">Questions?</span></span> <span data-ttu-id="797a1-132">Problems?</span><span class="sxs-lookup"><span data-stu-id="797a1-132">Problems?</span></span>
+* <span data-ttu-id="797a1-133">No data?</span><span class="sxs-lookup"><span data-stu-id="797a1-133">No data?</span></span> [<span data-ttu-id="797a1-134">Set firewall exceptions</span><span class="sxs-lookup"><span data-stu-id="797a1-134">Set firewall exceptions</span></span>](app-insights-ip-addresses.md)
+* [<span data-ttu-id="797a1-135">Troubleshooting Java</span><span class="sxs-lookup"><span data-stu-id="797a1-135">Troubleshooting Java</span></span>](app-insights-java-troubleshoot.md)
 
 <!--Link references-->
 

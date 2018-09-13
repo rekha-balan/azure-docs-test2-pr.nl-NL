@@ -1,5 +1,5 @@
 ---
-title: Resource Manager supported services | Microsoft Docs
+title: Azure resource providers and resource types | Microsoft Docs
 description: Describes the resource providers that support Resource Manager, their schemas and available API versions, and the regions that can host the resources.
 services: azure-resource-manager
 documentationcenter: na
@@ -9,282 +9,287 @@ editor: tysonn
 ms.assetid: 3c7a6fe4-371a-40da-9ebe-b574f583305b
 ms.service: azure-resource-manager
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 03/20/2017
+ms.date: 07/25/2017
 ms.author: tomfitz
-ms.openlocfilehash: 6d22ebc28e8f9ff135cd550bfe7cc1b39f123e6b
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 811bb40816339dbe7097e429722625a3ae5c95c0
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44554576"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44811673"
 ---
-# <a name="resource-manager-providers-regions-api-versions-and-schemas"></a><span data-ttu-id="89fcd-103">Resource Manager providers, regions, API versions and schemas</span><span class="sxs-lookup"><span data-stu-id="89fcd-103">Resource Manager providers, regions, API versions and schemas</span></span>
-<span data-ttu-id="89fcd-104">This topic provides a list of resource providers that support Azure Resource Manager.</span><span class="sxs-lookup"><span data-stu-id="89fcd-104">This topic provides a list of resource providers that support Azure Resource Manager.</span></span>
+# <a name="resource-providers-and-types"></a><span data-ttu-id="8d9fa-103">Resource providers and types</span><span class="sxs-lookup"><span data-stu-id="8d9fa-103">Resource providers and types</span></span>
 
-<span data-ttu-id="89fcd-105">When deploying your resources, you also need to know which regions support those resources and which API versions are available for the resources.</span><span class="sxs-lookup"><span data-stu-id="89fcd-105">When deploying your resources, you also need to know which regions support those resources and which API versions are available for the resources.</span></span> <span data-ttu-id="89fcd-106">The section [Supported regions](#supported-regions) shows you how to find out which regions work for your subscription and resources.</span><span class="sxs-lookup"><span data-stu-id="89fcd-106">The section [Supported regions](#supported-regions) shows you how to find out which regions work for your subscription and resources.</span></span> <span data-ttu-id="89fcd-107">The section [Supported API versions](#supported-api-versions) shows you how to determine which API versions you can use.</span><span class="sxs-lookup"><span data-stu-id="89fcd-107">The section [Supported API versions](#supported-api-versions) shows you how to determine which API versions you can use.</span></span>
+<span data-ttu-id="8d9fa-104">When deploying resources, you frequently need to retrieve information about the resource providers and types.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-104">When deploying resources, you frequently need to retrieve information about the resource providers and types.</span></span> <span data-ttu-id="8d9fa-105">In this article, you learn to:</span><span class="sxs-lookup"><span data-stu-id="8d9fa-105">In this article, you learn to:</span></span>
 
-<span data-ttu-id="89fcd-108">To see which services are supported in the Azure portal and classic portal, see [Azure portal availability chart](https://azure.microsoft.com/features/azure-portal/availability/).</span><span class="sxs-lookup"><span data-stu-id="89fcd-108">To see which services are supported in the Azure portal and classic portal, see [Azure portal availability chart](https://azure.microsoft.com/features/azure-portal/availability/).</span></span> <span data-ttu-id="89fcd-109">To see which services support moving resources, see [Move resources to new resource group or subscription](resource-group-move-resources.md).</span><span class="sxs-lookup"><span data-stu-id="89fcd-109">To see which services support moving resources, see [Move resources to new resource group or subscription](resource-group-move-resources.md).</span></span>
+* <span data-ttu-id="8d9fa-106">View all resource providers in Azure</span><span class="sxs-lookup"><span data-stu-id="8d9fa-106">View all resource providers in Azure</span></span>
+* <span data-ttu-id="8d9fa-107">Check registration status of a resource provider</span><span class="sxs-lookup"><span data-stu-id="8d9fa-107">Check registration status of a resource provider</span></span>
+* <span data-ttu-id="8d9fa-108">Register a resource provider</span><span class="sxs-lookup"><span data-stu-id="8d9fa-108">Register a resource provider</span></span>
+* <span data-ttu-id="8d9fa-109">View resource types for a resource provider</span><span class="sxs-lookup"><span data-stu-id="8d9fa-109">View resource types for a resource provider</span></span>
+* <span data-ttu-id="8d9fa-110">View valid locations for a resource type</span><span class="sxs-lookup"><span data-stu-id="8d9fa-110">View valid locations for a resource type</span></span>
+* <span data-ttu-id="8d9fa-111">View valid API versions for a resource type</span><span class="sxs-lookup"><span data-stu-id="8d9fa-111">View valid API versions for a resource type</span></span>
 
-<span data-ttu-id="89fcd-110">The following tables list which Microsoft services support deployment and management through Resource Manager and which do not.</span><span class="sxs-lookup"><span data-stu-id="89fcd-110">The following tables list which Microsoft services support deployment and management through Resource Manager and which do not.</span></span> <span data-ttu-id="89fcd-111">There are also many third-party resource providers that support Resource Manager.</span><span class="sxs-lookup"><span data-stu-id="89fcd-111">There are also many third-party resource providers that support Resource Manager.</span></span> <span data-ttu-id="89fcd-112">You learn how to see all the resource providers in the [Resource providers and types](#resource-providers-and-types) section.</span><span class="sxs-lookup"><span data-stu-id="89fcd-112">You learn how to see all the resource providers in the [Resource providers and types](#resource-providers-and-types) section.</span></span>
+<span data-ttu-id="8d9fa-112">You can perform these steps through the portal, PowerShell, or Azure CLI.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-112">You can perform these steps through the portal, PowerShell, or Azure CLI.</span></span>
 
-## <a name="compute"></a><span data-ttu-id="89fcd-113">Compute</span><span class="sxs-lookup"><span data-stu-id="89fcd-113">Compute</span></span>
-| <span data-ttu-id="89fcd-114">Service</span><span class="sxs-lookup"><span data-stu-id="89fcd-114">Service</span></span> | <span data-ttu-id="89fcd-115">Resource Manager Enabled</span><span class="sxs-lookup"><span data-stu-id="89fcd-115">Resource Manager Enabled</span></span> | <span data-ttu-id="89fcd-116">REST API</span><span class="sxs-lookup"><span data-stu-id="89fcd-116">REST API</span></span> | <span data-ttu-id="89fcd-117">Template format</span><span class="sxs-lookup"><span data-stu-id="89fcd-117">Template format</span></span> |
-| --- | --- | --- | --- |
-| <span data-ttu-id="89fcd-118">Batch</span><span class="sxs-lookup"><span data-stu-id="89fcd-118">Batch</span></span> |<span data-ttu-id="89fcd-119">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-119">Yes</span></span> |[<span data-ttu-id="89fcd-120">Batch REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-120">Batch REST</span></span>](/rest/api/batchservice) |[<span data-ttu-id="89fcd-121">Batch resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-121">Batch resources</span></span>](/azure/templates/microsoft.batch/batchaccounts) |
-| <span data-ttu-id="89fcd-122">Container Registry</span><span class="sxs-lookup"><span data-stu-id="89fcd-122">Container Registry</span></span> |<span data-ttu-id="89fcd-123">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-123">Yes</span></span> |[<span data-ttu-id="89fcd-124">Container Registry REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-124">Container Registry REST</span></span>](/rest/api/containerregistry) |[<span data-ttu-id="89fcd-125">Container Registry resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-125">Container Registry resources</span></span>](/azure/templates/microsoft.containerregistry/registries) |
-| <span data-ttu-id="89fcd-126">Container Service</span><span class="sxs-lookup"><span data-stu-id="89fcd-126">Container Service</span></span> |<span data-ttu-id="89fcd-127">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-127">Yes</span></span> |[<span data-ttu-id="89fcd-128">Container Service REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-128">Container Service REST</span></span>](/rest/api/compute/containerservices) |[<span data-ttu-id="89fcd-129">Container Service resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-129">Container Service resources</span></span>](/azure/templates/microsoft.containerservice/containerservices) |
-| <span data-ttu-id="89fcd-130">Dynamics Lifecycle Services</span><span class="sxs-lookup"><span data-stu-id="89fcd-130">Dynamics Lifecycle Services</span></span> |<span data-ttu-id="89fcd-131">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-131">Yes</span></span> | | |
-| <span data-ttu-id="89fcd-132">Scale Sets</span><span class="sxs-lookup"><span data-stu-id="89fcd-132">Scale Sets</span></span> |<span data-ttu-id="89fcd-133">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-133">Yes</span></span> |[<span data-ttu-id="89fcd-134">Scale Set REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-134">Scale Set REST</span></span>](/rest/api/virtualmachinescalesets/) |[<span data-ttu-id="89fcd-135">Scale Set resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-135">Scale Set resources</span></span>](/azure/templates/microsoft.compute/virtualmachinescalesets) |
-| <span data-ttu-id="89fcd-136">Service Fabric</span><span class="sxs-lookup"><span data-stu-id="89fcd-136">Service Fabric</span></span> |<span data-ttu-id="89fcd-137">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-137">Yes</span></span> |[<span data-ttu-id="89fcd-138">Service Fabric Rest</span><span class="sxs-lookup"><span data-stu-id="89fcd-138">Service Fabric Rest</span></span>](/rest/api/servicefabric) | [<span data-ttu-id="89fcd-139">Service Fabric resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-139">Service Fabric resources</span></span>](/azure/templates/microsoft.servicefabric/clusters) |
-| <span data-ttu-id="89fcd-140">Virtual Machines</span><span class="sxs-lookup"><span data-stu-id="89fcd-140">Virtual Machines</span></span> |<span data-ttu-id="89fcd-141">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-141">Yes</span></span> |[<span data-ttu-id="89fcd-142">VM REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-142">VM REST</span></span>](/rest/api/compute/virtualmachines) |[<span data-ttu-id="89fcd-143">VM resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-143">VM resources</span></span>](/azure/templates/microsoft.compute/virtualmachines) |
-| <span data-ttu-id="89fcd-144">Virtual Machines (classic)</span><span class="sxs-lookup"><span data-stu-id="89fcd-144">Virtual Machines (classic)</span></span> |<span data-ttu-id="89fcd-145">Limited</span><span class="sxs-lookup"><span data-stu-id="89fcd-145">Limited</span></span> |- |- |
-| <span data-ttu-id="89fcd-146">Remote App</span><span class="sxs-lookup"><span data-stu-id="89fcd-146">Remote App</span></span> |<span data-ttu-id="89fcd-147">No</span><span class="sxs-lookup"><span data-stu-id="89fcd-147">No</span></span> |- |- |
-| <span data-ttu-id="89fcd-148">Cloud Services (classic)</span><span class="sxs-lookup"><span data-stu-id="89fcd-148">Cloud Services (classic)</span></span> |<span data-ttu-id="89fcd-149">Limited (see below)</span><span class="sxs-lookup"><span data-stu-id="89fcd-149">Limited (see below)</span></span> |- |- |
+## <a name="powershell"></a><span data-ttu-id="8d9fa-113">PowerShell</span><span class="sxs-lookup"><span data-stu-id="8d9fa-113">PowerShell</span></span>
 
-<span data-ttu-id="89fcd-150">Virtual Machines (classic) refers to resources that were deployed through the classic deployment model, instead of through the Resource Manager deployment model.</span><span class="sxs-lookup"><span data-stu-id="89fcd-150">Virtual Machines (classic) refers to resources that were deployed through the classic deployment model, instead of through the Resource Manager deployment model.</span></span> <span data-ttu-id="89fcd-151">In general, these resources do not support Resource Manager operations, but there are some operations that have been enabled.</span><span class="sxs-lookup"><span data-stu-id="89fcd-151">In general, these resources do not support Resource Manager operations, but there are some operations that have been enabled.</span></span> <span data-ttu-id="89fcd-152">For more information about these deployment models, see [Understanding Resource Manager deployment and classic deployment](resource-manager-deployment-model.md).</span><span class="sxs-lookup"><span data-stu-id="89fcd-152">For more information about these deployment models, see [Understanding Resource Manager deployment and classic deployment](resource-manager-deployment-model.md).</span></span> 
-
-<span data-ttu-id="89fcd-153">Cloud Services (classic) can be used with other classic resources.</span><span class="sxs-lookup"><span data-stu-id="89fcd-153">Cloud Services (classic) can be used with other classic resources.</span></span> <span data-ttu-id="89fcd-154">However, classic resources do not take advantage of all Resource Manager features and are not a good option for future solutions.</span><span class="sxs-lookup"><span data-stu-id="89fcd-154">However, classic resources do not take advantage of all Resource Manager features and are not a good option for future solutions.</span></span> <span data-ttu-id="89fcd-155">Instead, consider changing your application infrastructure to use resources from the Microsoft.Compute, Microsoft.Storage, and Microsoft.Network namespaces.</span><span class="sxs-lookup"><span data-stu-id="89fcd-155">Instead, consider changing your application infrastructure to use resources from the Microsoft.Compute, Microsoft.Storage, and Microsoft.Network namespaces.</span></span>
-
-## <a name="networking"></a><span data-ttu-id="89fcd-156">Networking</span><span class="sxs-lookup"><span data-stu-id="89fcd-156">Networking</span></span>
-| <span data-ttu-id="89fcd-157">Service</span><span class="sxs-lookup"><span data-stu-id="89fcd-157">Service</span></span> | <span data-ttu-id="89fcd-158">Resource Manager Enabled</span><span class="sxs-lookup"><span data-stu-id="89fcd-158">Resource Manager Enabled</span></span> | <span data-ttu-id="89fcd-159">REST API</span><span class="sxs-lookup"><span data-stu-id="89fcd-159">REST API</span></span> | <span data-ttu-id="89fcd-160">Template format</span><span class="sxs-lookup"><span data-stu-id="89fcd-160">Template format</span></span> |
-| --- | --- | --- | --- |
-| <span data-ttu-id="89fcd-161">Application Gateway</span><span class="sxs-lookup"><span data-stu-id="89fcd-161">Application Gateway</span></span> |<span data-ttu-id="89fcd-162">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-162">Yes</span></span> |[<span data-ttu-id="89fcd-163">Application Gateway REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-163">Application Gateway REST</span></span>](https://msdn.microsoft.com/library/azure/mt684939.aspx) | [<span data-ttu-id="89fcd-164">Application Gateway resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-164">Application Gateway resources</span></span>](/azure/templates/microsoft.network/applicationgateways) |
-| <span data-ttu-id="89fcd-165">DNS</span><span class="sxs-lookup"><span data-stu-id="89fcd-165">DNS</span></span> |<span data-ttu-id="89fcd-166">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-166">Yes</span></span> |[<span data-ttu-id="89fcd-167">DNS REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-167">DNS REST</span></span>](/rest/api/dns) |[<span data-ttu-id="89fcd-168">DNS resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-168">DNS resources</span></span>](/azure/templates/microsoft.network/dnszones) |
-| <span data-ttu-id="89fcd-169">ExpressRoute</span><span class="sxs-lookup"><span data-stu-id="89fcd-169">ExpressRoute</span></span> |<span data-ttu-id="89fcd-170">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-170">Yes</span></span> |[<span data-ttu-id="89fcd-171">ExpressRoute REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-171">ExpressRoute REST</span></span>](https://msdn.microsoft.com/library/azure/mt586720.aspx) | [<span data-ttu-id="89fcd-172">ExpressRoute resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-172">ExpressRoute resources</span></span>](/azure/templates/microsoft.network/expressroutecircuits) |
-| <span data-ttu-id="89fcd-173">Load Balancer</span><span class="sxs-lookup"><span data-stu-id="89fcd-173">Load Balancer</span></span> |<span data-ttu-id="89fcd-174">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-174">Yes</span></span> |[<span data-ttu-id="89fcd-175">Load Balancer REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-175">Load Balancer REST</span></span>](https://msdn.microsoft.com/library/azure/mt163651.aspx) |[<span data-ttu-id="89fcd-176">Load Balancer resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-176">Load Balancer resources</span></span>](/azure/templates/microsoft.network/loadbalancers) |
-| <span data-ttu-id="89fcd-177">Traffic Manager</span><span class="sxs-lookup"><span data-stu-id="89fcd-177">Traffic Manager</span></span> |<span data-ttu-id="89fcd-178">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-178">Yes</span></span> |[<span data-ttu-id="89fcd-179">Traffic Manager REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-179">Traffic Manager REST</span></span>](https://msdn.microsoft.com/library/azure/mt163667.aspx) |[<span data-ttu-id="89fcd-180">Traffic Manager resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-180">Traffic Manager resources</span></span>](/azure/templates/microsoft.network/trafficmanagerprofiles) |
-| <span data-ttu-id="89fcd-181">Virtual Networks</span><span class="sxs-lookup"><span data-stu-id="89fcd-181">Virtual Networks</span></span> |<span data-ttu-id="89fcd-182">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-182">Yes</span></span> |[<span data-ttu-id="89fcd-183">Virtual Network REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-183">Virtual Network REST</span></span>](https://msdn.microsoft.com/library/azure/mt163650.aspx) |[<span data-ttu-id="89fcd-184">Virtual Network resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-184">Virtual Network resources</span></span>](/azure/templates/microsoft.network/virtualnetworks) |
-| <span data-ttu-id="89fcd-185">Network Gateway</span><span class="sxs-lookup"><span data-stu-id="89fcd-185">Network Gateway</span></span> |<span data-ttu-id="89fcd-186">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-186">Yes</span></span> |[<span data-ttu-id="89fcd-187">Network Gateway REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-187">Network Gateway REST</span></span>](https://msdn.microsoft.com/library/azure/mt163859.aspx) | [<span data-ttu-id="89fcd-188">Connection resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-188">Connection resources</span></span>](/azure/templates/microsoft.network/connections) <br /> [<span data-ttu-id="89fcd-189">Local Network Gateway resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-189">Local Network Gateway resources</span></span>](/azure/templates/microsoft.network/localnetworkgateways) <br /> [<span data-ttu-id="89fcd-190">Virtual Network Gateway resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-190">Virtual Network Gateway resources</span></span>](/azure/templates/microsoft.network/virtualnetworkgateways) |
-
-## <a name="storage"></a><span data-ttu-id="89fcd-191">Storage</span><span class="sxs-lookup"><span data-stu-id="89fcd-191">Storage</span></span>
-| <span data-ttu-id="89fcd-192">Service</span><span class="sxs-lookup"><span data-stu-id="89fcd-192">Service</span></span> | <span data-ttu-id="89fcd-193">Resource Manager Enabled</span><span class="sxs-lookup"><span data-stu-id="89fcd-193">Resource Manager Enabled</span></span> | <span data-ttu-id="89fcd-194">REST API</span><span class="sxs-lookup"><span data-stu-id="89fcd-194">REST API</span></span> | <span data-ttu-id="89fcd-195">Template format</span><span class="sxs-lookup"><span data-stu-id="89fcd-195">Template format</span></span> |
-| --- | --- | --- | --- | --- |
-| <span data-ttu-id="89fcd-196">Import Export</span><span class="sxs-lookup"><span data-stu-id="89fcd-196">Import Export</span></span> | <span data-ttu-id="89fcd-197">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-197">Yes</span></span> | [<span data-ttu-id="89fcd-198">Import Export REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-198">Import Export REST</span></span>](/rest/api/storageimportexport/) | [<span data-ttu-id="89fcd-199">Import Export resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-199">Import Export resources</span></span>](/azure/templates/microsoft.importexport/jobs) |
-| <span data-ttu-id="89fcd-200">Storage</span><span class="sxs-lookup"><span data-stu-id="89fcd-200">Storage</span></span> |<span data-ttu-id="89fcd-201">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-201">Yes</span></span> |[<span data-ttu-id="89fcd-202">Storage REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-202">Storage REST</span></span>](/rest/api/storagerp) |[<span data-ttu-id="89fcd-203">Storage resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-203">Storage resources</span></span>](/azure/templates/microsoft.storage/storageaccounts) |
-| <span data-ttu-id="89fcd-204">StorSimple</span><span class="sxs-lookup"><span data-stu-id="89fcd-204">StorSimple</span></span> |<span data-ttu-id="89fcd-205">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-205">Yes</span></span> | | |
-
-## <a name="databases"></a><span data-ttu-id="89fcd-206">Databases</span><span class="sxs-lookup"><span data-stu-id="89fcd-206">Databases</span></span>
-| <span data-ttu-id="89fcd-207">Service</span><span class="sxs-lookup"><span data-stu-id="89fcd-207">Service</span></span> | <span data-ttu-id="89fcd-208">Resource Manager Enabled</span><span class="sxs-lookup"><span data-stu-id="89fcd-208">Resource Manager Enabled</span></span> | <span data-ttu-id="89fcd-209">REST API</span><span class="sxs-lookup"><span data-stu-id="89fcd-209">REST API</span></span> | <span data-ttu-id="89fcd-210">Template format</span><span class="sxs-lookup"><span data-stu-id="89fcd-210">Template format</span></span> |
-| --- | --- | --- | --- | --- |
-| <span data-ttu-id="89fcd-211">DocumentDB</span><span class="sxs-lookup"><span data-stu-id="89fcd-211">DocumentDB</span></span> |<span data-ttu-id="89fcd-212">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-212">Yes</span></span> |[<span data-ttu-id="89fcd-213">DocumentDB REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-213">DocumentDB REST</span></span>](/rest/api/documentdbresourceprovider) |[<span data-ttu-id="89fcd-214">DocumentDB resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-214">DocumentDB resources</span></span>](/azure/templates/microsoft.documentdb/databaseaccounts) |
-| <span data-ttu-id="89fcd-215">Redis Cache</span><span class="sxs-lookup"><span data-stu-id="89fcd-215">Redis Cache</span></span> |<span data-ttu-id="89fcd-216">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-216">Yes</span></span> | [<span data-ttu-id="89fcd-217">Redis Cache REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-217">Redis Cache REST</span></span>](/rest/api/redis) |[<span data-ttu-id="89fcd-218">Redis resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-218">Redis resources</span></span>](/azure/templates/microsoft.cache/redis) |
-| <span data-ttu-id="89fcd-219">SQL Database</span><span class="sxs-lookup"><span data-stu-id="89fcd-219">SQL Database</span></span> |<span data-ttu-id="89fcd-220">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-220">Yes</span></span> |[<span data-ttu-id="89fcd-221">SQL Database REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-221">SQL Database REST</span></span>](/rest/api/sql) |[<span data-ttu-id="89fcd-222">SQL Database resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-222">SQL Database resources</span></span>](/azure/templates/microsoft.sql/servers) |
-| <span data-ttu-id="89fcd-223">SQL Data Warehouse</span><span class="sxs-lookup"><span data-stu-id="89fcd-223">SQL Data Warehouse</span></span> |<span data-ttu-id="89fcd-224">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-224">Yes</span></span> | | |
-
-## <a name="web--mobile"></a><span data-ttu-id="89fcd-225">Web & Mobile</span><span class="sxs-lookup"><span data-stu-id="89fcd-225">Web & Mobile</span></span>
-| <span data-ttu-id="89fcd-226">Service</span><span class="sxs-lookup"><span data-stu-id="89fcd-226">Service</span></span> | <span data-ttu-id="89fcd-227">Resource Manager Enabled</span><span class="sxs-lookup"><span data-stu-id="89fcd-227">Resource Manager Enabled</span></span> | <span data-ttu-id="89fcd-228">REST API</span><span class="sxs-lookup"><span data-stu-id="89fcd-228">REST API</span></span> | <span data-ttu-id="89fcd-229">Template format</span><span class="sxs-lookup"><span data-stu-id="89fcd-229">Template format</span></span> |
-| --- | --- | --- | --- |
-| <span data-ttu-id="89fcd-230">API Apps</span><span class="sxs-lookup"><span data-stu-id="89fcd-230">API Apps</span></span> |<span data-ttu-id="89fcd-231">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-231">Yes</span></span> | [<span data-ttu-id="89fcd-232">App Service REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-232">App Service REST</span></span>](/rest/api/appservice) |[<span data-ttu-id="89fcd-233">Web resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-233">Web resources</span></span>](/azure/templates/microsoft.web/sites) |
-| <span data-ttu-id="89fcd-234">API Management</span><span class="sxs-lookup"><span data-stu-id="89fcd-234">API Management</span></span> |<span data-ttu-id="89fcd-235">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-235">Yes</span></span> |[<span data-ttu-id="89fcd-236">API Management REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-236">API Management REST</span></span>](/rest/api/apimanagement) |[<span data-ttu-id="89fcd-237">API Management resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-237">API Management resources</span></span>](/azure/templates/microsoft.apimanagement/service) |
-| <span data-ttu-id="89fcd-238">Certificate Registration</span><span class="sxs-lookup"><span data-stu-id="89fcd-238">Certificate Registration</span></span> | <span data-ttu-id="89fcd-239">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-239">Yes</span></span> | [<span data-ttu-id="89fcd-240">Certificate Registration REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-240">Certificate Registration REST</span></span>](/rest/api/appservice/appservicecertificateorders) | [<span data-ttu-id="89fcd-241">Certificate Registration resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-241">Certificate Registration resources</span></span>](/azure/templates/microsoft.certificateregistration/certificateorders)  |
-| <span data-ttu-id="89fcd-242">Content Moderator</span><span class="sxs-lookup"><span data-stu-id="89fcd-242">Content Moderator</span></span> |<span data-ttu-id="89fcd-243">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-243">Yes</span></span> | | | |
-| <span data-ttu-id="89fcd-244">Domain Registration</span><span class="sxs-lookup"><span data-stu-id="89fcd-244">Domain Registration</span></span> | <span data-ttu-id="89fcd-245">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-245">Yes</span></span> | [<span data-ttu-id="89fcd-246">Domain Registration</span><span class="sxs-lookup"><span data-stu-id="89fcd-246">Domain Registration</span></span>](/rest/api/appservice/domains) | [<span data-ttu-id="89fcd-247">Domain Registration resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-247">Domain Registration resources</span></span>](/azure/templates/microsoft.domainregistration/domains)  |
-| <span data-ttu-id="89fcd-248">Function App</span><span class="sxs-lookup"><span data-stu-id="89fcd-248">Function App</span></span> |<span data-ttu-id="89fcd-249">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-249">Yes</span></span> | [<span data-ttu-id="89fcd-250">Function App REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-250">Function App REST</span></span>](/rest/api/appservice) | [<span data-ttu-id="89fcd-251">Web resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-251">Web resources</span></span>](/azure/templates/microsoft.web/sites) |
-| <span data-ttu-id="89fcd-252">Logic Apps</span><span class="sxs-lookup"><span data-stu-id="89fcd-252">Logic Apps</span></span> |<span data-ttu-id="89fcd-253">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-253">Yes</span></span> |[<span data-ttu-id="89fcd-254">Logic Apps REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-254">Logic Apps REST</span></span>](/rest/api/logic) |[<span data-ttu-id="89fcd-255">Logic App resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-255">Logic App resources</span></span>](/azure/templates/microsoft.logic/workflows) |
-| <span data-ttu-id="89fcd-256">Mobile Apps</span><span class="sxs-lookup"><span data-stu-id="89fcd-256">Mobile Apps</span></span> |<span data-ttu-id="89fcd-257">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-257">Yes</span></span> | [<span data-ttu-id="89fcd-258">App Service REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-258">App Service REST</span></span>](/rest/api/appservice) | [<span data-ttu-id="89fcd-259">Web resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-259">Web resources</span></span>](/azure/templates/microsoft.web/sites) |
-| <span data-ttu-id="89fcd-260">Mobile Engagements</span><span class="sxs-lookup"><span data-stu-id="89fcd-260">Mobile Engagements</span></span> |<span data-ttu-id="89fcd-261">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-261">Yes</span></span> |[<span data-ttu-id="89fcd-262">Mobile Engagement REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-262">Mobile Engagement REST</span></span>](https://msdn.microsoft.com/library/azure/mt683754.aspx) | |
-| <span data-ttu-id="89fcd-263">Search</span><span class="sxs-lookup"><span data-stu-id="89fcd-263">Search</span></span> |<span data-ttu-id="89fcd-264">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-264">Yes</span></span> |[<span data-ttu-id="89fcd-265">Search REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-265">Search REST</span></span>](/rest/api/searchservice) | [<span data-ttu-id="89fcd-266">Search resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-266">Search resources</span></span>](/azure/templates/microsoft.search/searchservices) |
-| <span data-ttu-id="89fcd-267">Web Apps</span><span class="sxs-lookup"><span data-stu-id="89fcd-267">Web Apps</span></span> |<span data-ttu-id="89fcd-268">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-268">Yes</span></span> | [<span data-ttu-id="89fcd-269">Web Apps REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-269">Web Apps REST</span></span>](/rest/api/appservice/webapps) | [<span data-ttu-id="89fcd-270">Web resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-270">Web resources</span></span>](/azure/templates/microsoft.web/sites) |
-
-## <a name="intelligence--analytics"></a><span data-ttu-id="89fcd-271">Intelligence + Analytics</span><span class="sxs-lookup"><span data-stu-id="89fcd-271">Intelligence + Analytics</span></span>
-| <span data-ttu-id="89fcd-272">Service</span><span class="sxs-lookup"><span data-stu-id="89fcd-272">Service</span></span> | <span data-ttu-id="89fcd-273">Resource Manager Enabled</span><span class="sxs-lookup"><span data-stu-id="89fcd-273">Resource Manager Enabled</span></span> | <span data-ttu-id="89fcd-274">REST API</span><span class="sxs-lookup"><span data-stu-id="89fcd-274">REST API</span></span> | <span data-ttu-id="89fcd-275">Template format</span><span class="sxs-lookup"><span data-stu-id="89fcd-275">Template format</span></span> | 
-| --- | --- | --- | --- |
-| <span data-ttu-id="89fcd-276">Analysis Services</span><span class="sxs-lookup"><span data-stu-id="89fcd-276">Analysis Services</span></span> | <span data-ttu-id="89fcd-277">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-277">Yes</span></span> | [<span data-ttu-id="89fcd-278">Analysis Service REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-278">Analysis Service REST</span></span>](/rest/api/analysisservices) | [<span data-ttu-id="89fcd-279">Analysis Services resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-279">Analysis Services resources</span></span>](/azure/templates/microsoft.analysisservices/servers) |
-| <span data-ttu-id="89fcd-280">Cognitive Services</span><span class="sxs-lookup"><span data-stu-id="89fcd-280">Cognitive Services</span></span> |<span data-ttu-id="89fcd-281">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-281">Yes</span></span> | [<span data-ttu-id="89fcd-282">Cognitive Services REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-282">Cognitive Services REST</span></span>](/rest/api/cognitiveservices) |[<span data-ttu-id="89fcd-283">Cognitive Services resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-283">Cognitive Services resources</span></span>](/azure/templates/microsoft.cognitiveservices/accounts) |
-| <span data-ttu-id="89fcd-284">Data Catalog</span><span class="sxs-lookup"><span data-stu-id="89fcd-284">Data Catalog</span></span> |<span data-ttu-id="89fcd-285">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-285">Yes</span></span> |[<span data-ttu-id="89fcd-286">Data Catalog REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-286">Data Catalog REST</span></span>](/rest/api/datacatalog) |[<span data-ttu-id="89fcd-287">Data Catalog Schema</span><span class="sxs-lookup"><span data-stu-id="89fcd-287">Data Catalog Schema</span></span>](https://github.com/Azure/azure-resource-manager-schemas/blob/master/schemas/2016-03-30/Microsoft.DataCatalog.json) |
-| <span data-ttu-id="89fcd-288">Data Factory</span><span class="sxs-lookup"><span data-stu-id="89fcd-288">Data Factory</span></span> |<span data-ttu-id="89fcd-289">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-289">Yes</span></span> |[<span data-ttu-id="89fcd-290">Data Factory REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-290">Data Factory REST</span></span>](/rest/api/datafactory) | |
-| <span data-ttu-id="89fcd-291">Data Lake Analytics</span><span class="sxs-lookup"><span data-stu-id="89fcd-291">Data Lake Analytics</span></span> |<span data-ttu-id="89fcd-292">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-292">Yes</span></span> | [<span data-ttu-id="89fcd-293">Data Lake REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-293">Data Lake REST</span></span>](/rest/api/datalakeanalytics) |[<span data-ttu-id="89fcd-294">Data Lake Analytics resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-294">Data Lake Analytics resources</span></span>](/azure/templates/microsoft.datalakeanalytics/accounts) |
-| <span data-ttu-id="89fcd-295">Data Lake Store</span><span class="sxs-lookup"><span data-stu-id="89fcd-295">Data Lake Store</span></span> |<span data-ttu-id="89fcd-296">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-296">Yes</span></span> |[<span data-ttu-id="89fcd-297">Data Lake Store REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-297">Data Lake Store REST</span></span>](/rest/api/datalakestore) |[<span data-ttu-id="89fcd-298">Data Lake Store resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-298">Data Lake Store resources</span></span>](/azure/templates/microsoft.datalakestore/accounts) |
-| <span data-ttu-id="89fcd-299">HDInsights</span><span class="sxs-lookup"><span data-stu-id="89fcd-299">HDInsights</span></span> |<span data-ttu-id="89fcd-300">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-300">Yes</span></span> |[<span data-ttu-id="89fcd-301">HDInsights REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-301">HDInsights REST</span></span>](/rest/api/hdinsight) | |
-| <span data-ttu-id="89fcd-302">Machine Learning</span><span class="sxs-lookup"><span data-stu-id="89fcd-302">Machine Learning</span></span> |<span data-ttu-id="89fcd-303">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-303">Yes</span></span> |[<span data-ttu-id="89fcd-304">Machine Learning REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-304">Machine Learning REST</span></span>](/rest/api/machinelearning) |[<span data-ttu-id="89fcd-305">Machine Learning resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-305">Machine Learning resources</span></span>](/azure/templates/microsoft.machinelearning/commitmentplans) |
-| <span data-ttu-id="89fcd-306">Stream Analytics</span><span class="sxs-lookup"><span data-stu-id="89fcd-306">Stream Analytics</span></span> |<span data-ttu-id="89fcd-307">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-307">Yes</span></span> |[<span data-ttu-id="89fcd-308">Steam Analytics REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-308">Steam Analytics REST</span></span>](/rest/api/streamanalytics) | |
-| <span data-ttu-id="89fcd-309">Power BI</span><span class="sxs-lookup"><span data-stu-id="89fcd-309">Power BI</span></span> |<span data-ttu-id="89fcd-310">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-310">Yes</span></span> |[<span data-ttu-id="89fcd-311">Power BI Embedded REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-311">Power BI Embedded REST</span></span>](/rest/api/powerbiembedded) |[<span data-ttu-id="89fcd-312">Power BI resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-312">Power BI resources</span></span>](/azure/templates/microsoft.powerbi/workspacecollections) |
-
-
-## <a name="internet-of-things"></a><span data-ttu-id="89fcd-313">Internet of Things</span><span class="sxs-lookup"><span data-stu-id="89fcd-313">Internet of Things</span></span>
-| <span data-ttu-id="89fcd-314">Service</span><span class="sxs-lookup"><span data-stu-id="89fcd-314">Service</span></span> | <span data-ttu-id="89fcd-315">Resource Manager Enabled</span><span class="sxs-lookup"><span data-stu-id="89fcd-315">Resource Manager Enabled</span></span> | <span data-ttu-id="89fcd-316">REST API</span><span class="sxs-lookup"><span data-stu-id="89fcd-316">REST API</span></span> | <span data-ttu-id="89fcd-317">Template format</span><span class="sxs-lookup"><span data-stu-id="89fcd-317">Template format</span></span> |
-| --- | --- | --- | --- |
-| <span data-ttu-id="89fcd-318">Event Hub</span><span class="sxs-lookup"><span data-stu-id="89fcd-318">Event Hub</span></span> |<span data-ttu-id="89fcd-319">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-319">Yes</span></span> |[<span data-ttu-id="89fcd-320">Event Hub REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-320">Event Hub REST</span></span>](/rest/api/eventhub) |[<span data-ttu-id="89fcd-321">Event Hub resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-321">Event Hub resources</span></span>](/azure/templates/microsoft.eventhub/namespaces) |
-| <span data-ttu-id="89fcd-322">IoTHubs</span><span class="sxs-lookup"><span data-stu-id="89fcd-322">IoTHubs</span></span> |<span data-ttu-id="89fcd-323">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-323">Yes</span></span> |[<span data-ttu-id="89fcd-324">IoT Hub REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-324">IoT Hub REST</span></span>](/rest/api/iothub) |[<span data-ttu-id="89fcd-325">IoT Hub resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-325">IoT Hub resources</span></span>](/azure/templates/microsoft.devices/iothubs) |
-| <span data-ttu-id="89fcd-326">Notification Hubs</span><span class="sxs-lookup"><span data-stu-id="89fcd-326">Notification Hubs</span></span> |<span data-ttu-id="89fcd-327">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-327">Yes</span></span> |[<span data-ttu-id="89fcd-328">Notification Hub REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-328">Notification Hub REST</span></span>](/rest/api/notificationhubs) |[<span data-ttu-id="89fcd-329">Notification Hub resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-329">Notification Hub resources</span></span>](/azure/templates/microsoft.notificationhubs/namespaces) |
-
-## <a name="media--cdn"></a><span data-ttu-id="89fcd-330">Media & CDN</span><span class="sxs-lookup"><span data-stu-id="89fcd-330">Media & CDN</span></span>
-| <span data-ttu-id="89fcd-331">Service</span><span class="sxs-lookup"><span data-stu-id="89fcd-331">Service</span></span> | <span data-ttu-id="89fcd-332">Resource Manager Enabled</span><span class="sxs-lookup"><span data-stu-id="89fcd-332">Resource Manager Enabled</span></span> | <span data-ttu-id="89fcd-333">REST API</span><span class="sxs-lookup"><span data-stu-id="89fcd-333">REST API</span></span> | <span data-ttu-id="89fcd-334">Template format</span><span class="sxs-lookup"><span data-stu-id="89fcd-334">Template format</span></span> |
-| --- | --- | --- | --- |
-| <span data-ttu-id="89fcd-335">CDN</span><span class="sxs-lookup"><span data-stu-id="89fcd-335">CDN</span></span> |<span data-ttu-id="89fcd-336">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-336">Yes</span></span> |[<span data-ttu-id="89fcd-337">CDN REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-337">CDN REST</span></span>](/rest/api/cdn) |[<span data-ttu-id="89fcd-338">CDN resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-338">CDN resources</span></span>](/azure/templates/microsoft.cdn/profiles) |
-| <span data-ttu-id="89fcd-339">Media Service</span><span class="sxs-lookup"><span data-stu-id="89fcd-339">Media Service</span></span> |<span data-ttu-id="89fcd-340">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-340">Yes</span></span> |[<span data-ttu-id="89fcd-341">Media Services REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-341">Media Services REST</span></span>](/rest/api/media) |[<span data-ttu-id="89fcd-342">Media resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-342">Media resources</span></span>](/azure/templates/microsoft.media/mediaservices) |
-
-## <a name="enterprise-integration"></a><span data-ttu-id="89fcd-343">Enterprise Integration</span><span class="sxs-lookup"><span data-stu-id="89fcd-343">Enterprise Integration</span></span>
-| <span data-ttu-id="89fcd-344">Service</span><span class="sxs-lookup"><span data-stu-id="89fcd-344">Service</span></span> | <span data-ttu-id="89fcd-345">Resource Manager Enabled</span><span class="sxs-lookup"><span data-stu-id="89fcd-345">Resource Manager Enabled</span></span> | <span data-ttu-id="89fcd-346">REST API</span><span class="sxs-lookup"><span data-stu-id="89fcd-346">REST API</span></span> | <span data-ttu-id="89fcd-347">Template format</span><span class="sxs-lookup"><span data-stu-id="89fcd-347">Template format</span></span> |
-| --- | --- | --- | --- |
-| <span data-ttu-id="89fcd-348">BizTalk Services</span><span class="sxs-lookup"><span data-stu-id="89fcd-348">BizTalk Services</span></span> |<span data-ttu-id="89fcd-349">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-349">Yes</span></span> | |[<span data-ttu-id="89fcd-350">BizTalk Schema</span><span class="sxs-lookup"><span data-stu-id="89fcd-350">BizTalk Schema</span></span>](https://github.com/Azure/azure-resource-manager-schemas/blob/master/schemas/2014-04-01/Microsoft.BizTalkServices.json) |
-| <span data-ttu-id="89fcd-351">Relay</span><span class="sxs-lookup"><span data-stu-id="89fcd-351">Relay</span></span> | <span data-ttu-id="89fcd-352">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-352">Yes</span></span> |  | [<span data-ttu-id="89fcd-353">Relay resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-353">Relay resources</span></span>](/azure/templates/microsoft.relay/namespaces) |
-| <span data-ttu-id="89fcd-354">Service Bus</span><span class="sxs-lookup"><span data-stu-id="89fcd-354">Service Bus</span></span> |<span data-ttu-id="89fcd-355">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-355">Yes</span></span> |[<span data-ttu-id="89fcd-356">Service Bus REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-356">Service Bus REST</span></span>](/rest/api/servicebus) |[<span data-ttu-id="89fcd-357">Service Bus resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-357">Service Bus resources</span></span>](/azure/templates/microsoft.servicebus/namespaces) |
-
-## <a name="identity--access-management"></a><span data-ttu-id="89fcd-358">Identity & Access Management</span><span class="sxs-lookup"><span data-stu-id="89fcd-358">Identity & Access Management</span></span>
-<span data-ttu-id="89fcd-359">Azure Active Directory works with Resource Manager to enable role-based access control for your subscription.</span><span class="sxs-lookup"><span data-stu-id="89fcd-359">Azure Active Directory works with Resource Manager to enable role-based access control for your subscription.</span></span> <span data-ttu-id="89fcd-360">To learn about using role-based access control and Azure Active Directory, see [Azure Role-based Access Control](../active-directory/role-based-access-control-configure.md).</span><span class="sxs-lookup"><span data-stu-id="89fcd-360">To learn about using role-based access control and Azure Active Directory, see [Azure Role-based Access Control](../active-directory/role-based-access-control-configure.md).</span></span>
-
-## <a name="developer-services"></a><span data-ttu-id="89fcd-361">Developer Services</span><span class="sxs-lookup"><span data-stu-id="89fcd-361">Developer Services</span></span>
-| <span data-ttu-id="89fcd-362">Service</span><span class="sxs-lookup"><span data-stu-id="89fcd-362">Service</span></span> | <span data-ttu-id="89fcd-363">Resource Manager Enabled</span><span class="sxs-lookup"><span data-stu-id="89fcd-363">Resource Manager Enabled</span></span> | <span data-ttu-id="89fcd-364">REST API</span><span class="sxs-lookup"><span data-stu-id="89fcd-364">REST API</span></span> | <span data-ttu-id="89fcd-365">Template format</span><span class="sxs-lookup"><span data-stu-id="89fcd-365">Template format</span></span> |
-| --- | --- | --- | --- |
-| <span data-ttu-id="89fcd-366">Monitor</span><span class="sxs-lookup"><span data-stu-id="89fcd-366">Monitor</span></span> |<span data-ttu-id="89fcd-367">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-367">Yes</span></span> |[<span data-ttu-id="89fcd-368">Monitor REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-368">Monitor REST</span></span>](/rest/api/monitor) |[<span data-ttu-id="89fcd-369">Insights resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-369">Insights resources</span></span>](/azure/templates/microsoft.insights/alertrules) |
-| <span data-ttu-id="89fcd-370">Bing Maps</span><span class="sxs-lookup"><span data-stu-id="89fcd-370">Bing Maps</span></span> |<span data-ttu-id="89fcd-371">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-371">Yes</span></span> | | |
-| <span data-ttu-id="89fcd-372">DevTest Labs</span><span class="sxs-lookup"><span data-stu-id="89fcd-372">DevTest Labs</span></span> |<span data-ttu-id="89fcd-373">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-373">Yes</span></span> | [<span data-ttu-id="89fcd-374">DevTest Labs REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-374">DevTest Labs REST</span></span>](/rest/api/dtl) |[<span data-ttu-id="89fcd-375">DevTest Labs resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-375">DevTest Labs resources</span></span>](/azure/templates/microsoft.devtestlab/labs) |
-| <span data-ttu-id="89fcd-376">Visual Studio account</span><span class="sxs-lookup"><span data-stu-id="89fcd-376">Visual Studio account</span></span> |<span data-ttu-id="89fcd-377">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-377">Yes</span></span> | |[<span data-ttu-id="89fcd-378">Visual Studio Schema</span><span class="sxs-lookup"><span data-stu-id="89fcd-378">Visual Studio Schema</span></span>](https://github.com/Azure/azure-resource-manager-schemas/blob/master/schemas/2014-02-26/microsoft.visualstudio.json) |
-
-## <a name="management-and-security"></a><span data-ttu-id="89fcd-379">Management and Security</span><span class="sxs-lookup"><span data-stu-id="89fcd-379">Management and Security</span></span>
-| <span data-ttu-id="89fcd-380">Service</span><span class="sxs-lookup"><span data-stu-id="89fcd-380">Service</span></span> | <span data-ttu-id="89fcd-381">Resource Manager Enabled</span><span class="sxs-lookup"><span data-stu-id="89fcd-381">Resource Manager Enabled</span></span> | <span data-ttu-id="89fcd-382">REST API</span><span class="sxs-lookup"><span data-stu-id="89fcd-382">REST API</span></span> | <span data-ttu-id="89fcd-383">Template format</span><span class="sxs-lookup"><span data-stu-id="89fcd-383">Template format</span></span> |
-| --- | --- | --- | --- |
-| <span data-ttu-id="89fcd-384">Advisor</span><span class="sxs-lookup"><span data-stu-id="89fcd-384">Advisor</span></span> | <span data-ttu-id="89fcd-385">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-385">Yes</span></span> | [<span data-ttu-id="89fcd-386">Advisor REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-386">Advisor REST</span></span>](/rest/api/advisor/) | - |
-| <span data-ttu-id="89fcd-387">Automation</span><span class="sxs-lookup"><span data-stu-id="89fcd-387">Automation</span></span> |<span data-ttu-id="89fcd-388">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-388">Yes</span></span> |[<span data-ttu-id="89fcd-389">Automation REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-389">Automation REST</span></span>](https://msdn.microsoft.com/library/azure/mt662285.aspx) |[<span data-ttu-id="89fcd-390">Automation resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-390">Automation resources</span></span>](/azure/templates/microsoft.automation/automationaccounts) |
-| <span data-ttu-id="89fcd-391">Billing</span><span class="sxs-lookup"><span data-stu-id="89fcd-391">Billing</span></span> | <span data-ttu-id="89fcd-392">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-392">Yes</span></span> | [<span data-ttu-id="89fcd-393">Billing REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-393">Billing REST</span></span>](/rest/api/billing/) | - |
-| <span data-ttu-id="89fcd-394">Key Vault</span><span class="sxs-lookup"><span data-stu-id="89fcd-394">Key Vault</span></span> |<span data-ttu-id="89fcd-395">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-395">Yes</span></span> |[<span data-ttu-id="89fcd-396">Key Vault REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-396">Key Vault REST</span></span>](/rest/api/keyvault) |[<span data-ttu-id="89fcd-397">Key vault resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-397">Key vault resources</span></span>](/azure/templates/microsoft.keyvault/vaults) |
-| <span data-ttu-id="89fcd-398">Operational Insights</span><span class="sxs-lookup"><span data-stu-id="89fcd-398">Operational Insights</span></span> |<span data-ttu-id="89fcd-399">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-399">Yes</span></span> | | |
-| <span data-ttu-id="89fcd-400">Recovery Service</span><span class="sxs-lookup"><span data-stu-id="89fcd-400">Recovery Service</span></span> |<span data-ttu-id="89fcd-401">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-401">Yes</span></span> |[<span data-ttu-id="89fcd-402">Recovery Services REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-402">Recovery Services REST</span></span>](/rest/api/recoveryservices) |[<span data-ttu-id="89fcd-403">Recovery Services resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-403">Recovery Services resources</span></span>](/azure/templates/microsoft.recoveryservices/vaults) |
-| <span data-ttu-id="89fcd-404">Scheduler</span><span class="sxs-lookup"><span data-stu-id="89fcd-404">Scheduler</span></span> |<span data-ttu-id="89fcd-405">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-405">Yes</span></span> |[<span data-ttu-id="89fcd-406">Scheduler REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-406">Scheduler REST</span></span>](/rest/api/scheduler) |[<span data-ttu-id="89fcd-407">Scheduler resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-407">Scheduler resources</span></span>](/azure/templates/microsoft.scheduler/jobcollections) |
-| <span data-ttu-id="89fcd-408">Security</span><span class="sxs-lookup"><span data-stu-id="89fcd-408">Security</span></span> |<span data-ttu-id="89fcd-409">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-409">Yes</span></span> |[<span data-ttu-id="89fcd-410">Security REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-410">Security REST</span></span>](https://msdn.microsoft.com/library/azure/mt704034.aspx) | |
-| <span data-ttu-id="89fcd-411">Server Management</span><span class="sxs-lookup"><span data-stu-id="89fcd-411">Server Management</span></span> | <span data-ttu-id="89fcd-412">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-412">Yes</span></span> | [<span data-ttu-id="89fcd-413">Server Management REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-413">Server Management REST</span></span>](/rest/api/servermanagement/) | [<span data-ttu-id="89fcd-414">Server Management resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-414">Server Management resources</span></span>](/azure/templates/microsoft.servermanagement/gateways) |
-
-## <a name="resource-manager"></a><span data-ttu-id="89fcd-415">Resource Manager</span><span class="sxs-lookup"><span data-stu-id="89fcd-415">Resource Manager</span></span>
-| <span data-ttu-id="89fcd-416">Feature</span><span class="sxs-lookup"><span data-stu-id="89fcd-416">Feature</span></span> | <span data-ttu-id="89fcd-417">Resource Manager Enabled</span><span class="sxs-lookup"><span data-stu-id="89fcd-417">Resource Manager Enabled</span></span> | <span data-ttu-id="89fcd-418">REST API</span><span class="sxs-lookup"><span data-stu-id="89fcd-418">REST API</span></span> | <span data-ttu-id="89fcd-419">Template format</span><span class="sxs-lookup"><span data-stu-id="89fcd-419">Template format</span></span> |
-| --- | --- | --- | --- | --- |
-| <span data-ttu-id="89fcd-420">Authorization</span><span class="sxs-lookup"><span data-stu-id="89fcd-420">Authorization</span></span> |<span data-ttu-id="89fcd-421">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-421">Yes</span></span> |[<span data-ttu-id="89fcd-422">Authorization REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-422">Authorization REST</span></span>](/rest/api/authorization) |[<span data-ttu-id="89fcd-423">Authorization resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-423">Authorization resources</span></span>](/azure/templates/microsoft.authorization/locks) |
-| <span data-ttu-id="89fcd-424">Resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-424">Resources</span></span> |<span data-ttu-id="89fcd-425">Yes</span><span class="sxs-lookup"><span data-stu-id="89fcd-425">Yes</span></span> |[<span data-ttu-id="89fcd-426">Resources REST</span><span class="sxs-lookup"><span data-stu-id="89fcd-426">Resources REST</span></span>](/rest/api/resources) |[<span data-ttu-id="89fcd-427">Deployment resources</span><span class="sxs-lookup"><span data-stu-id="89fcd-427">Deployment resources</span></span>](/azure/templates/microsoft.resources/deployments) |
-
-## <a name="resource-providers-and-types"></a><span data-ttu-id="89fcd-428">Resource providers and types</span><span class="sxs-lookup"><span data-stu-id="89fcd-428">Resource providers and types</span></span>
-<span data-ttu-id="89fcd-429">When deploying resources, you frequently need to retrieve information about the resource providers and types.</span><span class="sxs-lookup"><span data-stu-id="89fcd-429">When deploying resources, you frequently need to retrieve information about the resource providers and types.</span></span> <span data-ttu-id="89fcd-430">You can retrieve this information through REST API, Azure PowerShell, or Azure CLI.</span><span class="sxs-lookup"><span data-stu-id="89fcd-430">You can retrieve this information through REST API, Azure PowerShell, or Azure CLI.</span></span>
-
-<span data-ttu-id="89fcd-431">To work with a resource provider, that resource provider must be registered with your account.</span><span class="sxs-lookup"><span data-stu-id="89fcd-431">To work with a resource provider, that resource provider must be registered with your account.</span></span> <span data-ttu-id="89fcd-432">By default, many resource providers are automatically registered; however, you may need to manually register some resource providers.</span><span class="sxs-lookup"><span data-stu-id="89fcd-432">By default, many resource providers are automatically registered; however, you may need to manually register some resource providers.</span></span> <span data-ttu-id="89fcd-433">The examples in this section show how to get the registration status of a resource provider, and register the resource provider.</span><span class="sxs-lookup"><span data-stu-id="89fcd-433">The examples in this section show how to get the registration status of a resource provider, and register the resource provider.</span></span>
-
-### <a name="portal"></a><span data-ttu-id="89fcd-434">Portal</span><span class="sxs-lookup"><span data-stu-id="89fcd-434">Portal</span></span>
-<span data-ttu-id="89fcd-435">You can easily see a list of supported resources providers by selecting **Resource providers** from the subscription blade.</span><span class="sxs-lookup"><span data-stu-id="89fcd-435">You can easily see a list of supported resources providers by selecting **Resource providers** from the subscription blade.</span></span> <span data-ttu-id="89fcd-436">To register your subscription with a resource provider, select the **Register** link.</span><span class="sxs-lookup"><span data-stu-id="89fcd-436">To register your subscription with a resource provider, select the **Register** link.</span></span>
-   
-![list resource providers](https://docstestmedia1.blob.core.windows.net/azure-media/articles/azure-resource-manager/media/resource-manager-supported-services/view-resource-providers.png)
-
-### <a name="rest-api"></a><span data-ttu-id="89fcd-438">REST API</span><span class="sxs-lookup"><span data-stu-id="89fcd-438">REST API</span></span>
-<span data-ttu-id="89fcd-439">To get all the available resource providers, including their types, locations, API versions, and registration status, use the [List all resource providers](https://docs.microsoft.com/rest/api/resources/providers#Providers_List) operation.</span><span class="sxs-lookup"><span data-stu-id="89fcd-439">To get all the available resource providers, including their types, locations, API versions, and registration status, use the [List all resource providers](https://docs.microsoft.com/rest/api/resources/providers#Providers_List) operation.</span></span> <span data-ttu-id="89fcd-440">If you need to register a resource provider, see [Register a subscription with a resource provider](https://docs.microsoft.com/rest/api/resources/providers#Providers_Register).</span><span class="sxs-lookup"><span data-stu-id="89fcd-440">If you need to register a resource provider, see [Register a subscription with a resource provider](https://docs.microsoft.com/rest/api/resources/providers#Providers_Register).</span></span>
-
-### <a name="powershell"></a><span data-ttu-id="89fcd-441">PowerShell</span><span class="sxs-lookup"><span data-stu-id="89fcd-441">PowerShell</span></span>
-<span data-ttu-id="89fcd-442">The following example shows how to get all the available resource providers.</span><span class="sxs-lookup"><span data-stu-id="89fcd-442">The following example shows how to get all the available resource providers.</span></span>
+<span data-ttu-id="8d9fa-114">To see all resource providers in Azure, and the registration status for your subscription, use:</span><span class="sxs-lookup"><span data-stu-id="8d9fa-114">To see all resource providers in Azure, and the registration status for your subscription, use:</span></span>
 
 ```powershell
-Get-AzureRmResourceProvider -ListAvailable
+Get-AzureRmResourceProvider -ListAvailable | Select-Object ProviderNamespace, RegistrationState
 ```
 
-
-<span data-ttu-id="89fcd-443">The next example shows how to get the resource types for a particular resource provider.</span><span class="sxs-lookup"><span data-stu-id="89fcd-443">The next example shows how to get the resource types for a particular resource provider.</span></span>
+<span data-ttu-id="8d9fa-115">Which returns results similar to:</span><span class="sxs-lookup"><span data-stu-id="8d9fa-115">Which returns results similar to:</span></span>
 
 ```powershell
-(Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Web).ResourceTypes
+ProviderNamespace                RegistrationState
+-------------------------------- ------------------
+Microsoft.ClassicCompute         Registered
+Microsoft.ClassicNetwork         Registered
+Microsoft.ClassicStorage         Registered
+Microsoft.CognitiveServices      Registered
+...
 ```
 
-<span data-ttu-id="89fcd-444">To register a resource provider, provide the namespace:</span><span class="sxs-lookup"><span data-stu-id="89fcd-444">To register a resource provider, provide the namespace:</span></span>
+<span data-ttu-id="8d9fa-116">Registering a resource provider configures your subscription to work with the resource provider.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-116">Registering a resource provider configures your subscription to work with the resource provider.</span></span> <span data-ttu-id="8d9fa-117">The scope for registration is always the subscription.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-117">The scope for registration is always the subscription.</span></span> <span data-ttu-id="8d9fa-118">By default, many resource providers are automatically registered.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-118">By default, many resource providers are automatically registered.</span></span> <span data-ttu-id="8d9fa-119">However, you may need to manually register some resource providers.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-119">However, you may need to manually register some resource providers.</span></span> <span data-ttu-id="8d9fa-120">To register a resource provider, you must have permission to perform the `/register/action` operation for the resource provider.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-120">To register a resource provider, you must have permission to perform the `/register/action` operation for the resource provider.</span></span> <span data-ttu-id="8d9fa-121">This operation is included in the Contributor and Owner roles.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-121">This operation is included in the Contributor and Owner roles.</span></span>
 
 ```powershell
-Register-AzureRmResourceProvider -ProviderNamespace Microsoft.ApiManagement
+Register-AzureRmResourceProvider -ProviderNamespace Microsoft.Batch
 ```
 
-### <a name="azure-cli"></a><span data-ttu-id="89fcd-445">Azure CLI</span><span class="sxs-lookup"><span data-stu-id="89fcd-445">Azure CLI</span></span>
-<span data-ttu-id="89fcd-446">The following example shows how to get all the available resource providers.</span><span class="sxs-lookup"><span data-stu-id="89fcd-446">The following example shows how to get all the available resource providers.</span></span>
-
-```azurecli
-az provider list
-```
-
-<span data-ttu-id="89fcd-447">You can view the information for a particular resource provider with the following command:</span><span class="sxs-lookup"><span data-stu-id="89fcd-447">You can view the information for a particular resource provider with the following command:</span></span>
-
-```azurecli
-az provider show --namespace Microsoft.Web
-```
-
-<span data-ttu-id="89fcd-448">To register a resource provider, provide the namespace:</span><span class="sxs-lookup"><span data-stu-id="89fcd-448">To register a resource provider, provide the namespace:</span></span>
-
-```azurecli
-az provider register --namespace Microsoft.ServiceBus
-```
-
-## <a name="supported-regions"></a><span data-ttu-id="89fcd-449">Supported regions</span><span class="sxs-lookup"><span data-stu-id="89fcd-449">Supported regions</span></span>
-<span data-ttu-id="89fcd-450">When deploying resources, you typically need to specify a region for the resources.</span><span class="sxs-lookup"><span data-stu-id="89fcd-450">When deploying resources, you typically need to specify a region for the resources.</span></span> <span data-ttu-id="89fcd-451">Resource Manager is supported in all regions, but the resources you deploy might not be supported in all regions.</span><span class="sxs-lookup"><span data-stu-id="89fcd-451">Resource Manager is supported in all regions, but the resources you deploy might not be supported in all regions.</span></span> <span data-ttu-id="89fcd-452">In addition, there may be limitations on your subscription that prevent you from using some regions that support the resource.</span><span class="sxs-lookup"><span data-stu-id="89fcd-452">In addition, there may be limitations on your subscription that prevent you from using some regions that support the resource.</span></span> <span data-ttu-id="89fcd-453">These limitations may be related to tax issues for your home country, or the result of a policy placed by your subscription administrator to use only certain regions.</span><span class="sxs-lookup"><span data-stu-id="89fcd-453">These limitations may be related to tax issues for your home country, or the result of a policy placed by your subscription administrator to use only certain regions.</span></span> 
-
-<span data-ttu-id="89fcd-454">For a complete list of all supported regions for all Azure services, see [Services by region](https://azure.microsoft.com/regions/#services).</span><span class="sxs-lookup"><span data-stu-id="89fcd-454">For a complete list of all supported regions for all Azure services, see [Services by region](https://azure.microsoft.com/regions/#services).</span></span> <span data-ttu-id="89fcd-455">However, this list may include regions that your subscription does not support.</span><span class="sxs-lookup"><span data-stu-id="89fcd-455">However, this list may include regions that your subscription does not support.</span></span> <span data-ttu-id="89fcd-456">You can determine the regions for a particular resource type that your subscription supports through the portal, REST API, PowerShell, or Azure CLI.</span><span class="sxs-lookup"><span data-stu-id="89fcd-456">You can determine the regions for a particular resource type that your subscription supports through the portal, REST API, PowerShell, or Azure CLI.</span></span>
-
-### <a name="portal"></a><span data-ttu-id="89fcd-457">Portal</span><span class="sxs-lookup"><span data-stu-id="89fcd-457">Portal</span></span>
-<span data-ttu-id="89fcd-458">You can see the supported regions for a resource type through the following steps:</span><span class="sxs-lookup"><span data-stu-id="89fcd-458">You can see the supported regions for a resource type through the following steps:</span></span>
-
-1. <span data-ttu-id="89fcd-459">Select **More services** > **Resource Explorer**.</span><span class="sxs-lookup"><span data-stu-id="89fcd-459">Select **More services** > **Resource Explorer**.</span></span>
-   
-    ![resource explorer](https://docstestmedia1.blob.core.windows.net/azure-media/articles/azure-resource-manager/media/resource-manager-supported-services/select-resource-explorer.png)
-2. <span data-ttu-id="89fcd-461">Open the **Providers** node.</span><span class="sxs-lookup"><span data-stu-id="89fcd-461">Open the **Providers** node.</span></span>
-   
-    ![select providers](https://docstestmedia1.blob.core.windows.net/azure-media/articles/azure-resource-manager/media/resource-manager-supported-services/select-providers.png)
-3. <span data-ttu-id="89fcd-463">Select a resource provider, and view the supported regions and API versions.</span><span class="sxs-lookup"><span data-stu-id="89fcd-463">Select a resource provider, and view the supported regions and API versions.</span></span>
-   
-    ![view provider](https://docstestmedia1.blob.core.windows.net/azure-media/articles/azure-resource-manager/media/resource-manager-supported-services/view-provider.png)
-
-### <a name="rest-api"></a><span data-ttu-id="89fcd-465">REST API</span><span class="sxs-lookup"><span data-stu-id="89fcd-465">REST API</span></span>
-<span data-ttu-id="89fcd-466">To discover which regions are available for a particular resource type in your subscription, use the [List all resource providers](https://docs.microsoft.com/rest/api/resources/providers#Providers_List) operation.</span><span class="sxs-lookup"><span data-stu-id="89fcd-466">To discover which regions are available for a particular resource type in your subscription, use the [List all resource providers](https://docs.microsoft.com/rest/api/resources/providers#Providers_List) operation.</span></span> 
-
-### <a name="powershell"></a><span data-ttu-id="89fcd-467">PowerShell</span><span class="sxs-lookup"><span data-stu-id="89fcd-467">PowerShell</span></span>
-<span data-ttu-id="89fcd-468">The following example shows how to get the supported regions for web sites.</span><span class="sxs-lookup"><span data-stu-id="89fcd-468">The following example shows how to get the supported regions for web sites.</span></span>
+<span data-ttu-id="8d9fa-122">Which returns results similar to:</span><span class="sxs-lookup"><span data-stu-id="8d9fa-122">Which returns results similar to:</span></span>
 
 ```powershell
-((Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Web).ResourceTypes | Where-Object ResourceTypeName -eq sites).Locations
+ProviderNamespace : Microsoft.Batch
+RegistrationState : Registering
+ResourceTypes     : {batchAccounts, operations, locations, locations/quotas}
+Locations         : {West Europe, East US, East US 2, West US...}
 ```
 
-### <a name="azure-cli"></a><span data-ttu-id="89fcd-469">Azure CLI</span><span class="sxs-lookup"><span data-stu-id="89fcd-469">Azure CLI</span></span>
-<span data-ttu-id="89fcd-470">The following example show how to get the supported locations for web sits.</span><span class="sxs-lookup"><span data-stu-id="89fcd-470">The following example show how to get the supported locations for web sits.</span></span>
+<span data-ttu-id="8d9fa-123">You cannot unregister a resource provider when you still have resource types from that resource provider in your subscription.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-123">You cannot unregister a resource provider when you still have resource types from that resource provider in your subscription.</span></span>
 
-```azurecli
-az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].locations"
-```
-
-
-## <a name="supported-api-versions"></a><span data-ttu-id="89fcd-471">Supported API versions</span><span class="sxs-lookup"><span data-stu-id="89fcd-471">Supported API versions</span></span>
-<span data-ttu-id="89fcd-472">When you deploy a template, you must specify an API version to use for creating each resource.</span><span class="sxs-lookup"><span data-stu-id="89fcd-472">When you deploy a template, you must specify an API version to use for creating each resource.</span></span> <span data-ttu-id="89fcd-473">The API version corresponds to a version of REST API operations that are released by the resource provider.</span><span class="sxs-lookup"><span data-stu-id="89fcd-473">The API version corresponds to a version of REST API operations that are released by the resource provider.</span></span> <span data-ttu-id="89fcd-474">As a resource provider enables new features, it releases a new version of the REST API.</span><span class="sxs-lookup"><span data-stu-id="89fcd-474">As a resource provider enables new features, it releases a new version of the REST API.</span></span> <span data-ttu-id="89fcd-475">Therefore, the version of the API you specify in your template affects which properties you can specify in the template.</span><span class="sxs-lookup"><span data-stu-id="89fcd-475">Therefore, the version of the API you specify in your template affects which properties you can specify in the template.</span></span> <span data-ttu-id="89fcd-476">In general, you want to select the most recent API version when creating templates.</span><span class="sxs-lookup"><span data-stu-id="89fcd-476">In general, you want to select the most recent API version when creating templates.</span></span> <span data-ttu-id="89fcd-477">For existing templates, you can decide whether you want to continue using an earlier API version, or update your template for the latest version to take advantage of new features.</span><span class="sxs-lookup"><span data-stu-id="89fcd-477">For existing templates, you can decide whether you want to continue using an earlier API version, or update your template for the latest version to take advantage of new features.</span></span>
-
-### <a name="portal"></a><span data-ttu-id="89fcd-478">Portal</span><span class="sxs-lookup"><span data-stu-id="89fcd-478">Portal</span></span>
-<span data-ttu-id="89fcd-479">You determine the supported API versions in the same way you determined supported regions (shown previously).</span><span class="sxs-lookup"><span data-stu-id="89fcd-479">You determine the supported API versions in the same way you determined supported regions (shown previously).</span></span>
-
-### <a name="rest-api"></a><span data-ttu-id="89fcd-480">REST API</span><span class="sxs-lookup"><span data-stu-id="89fcd-480">REST API</span></span>
-<span data-ttu-id="89fcd-481">To discover which API versions are available for resource types, use the [List all resource providers](https://docs.microsoft.com/rest/api/resources/providers#Providers_List) operation.</span><span class="sxs-lookup"><span data-stu-id="89fcd-481">To discover which API versions are available for resource types, use the [List all resource providers](https://docs.microsoft.com/rest/api/resources/providers#Providers_List) operation.</span></span> 
-
-### <a name="powershell"></a><span data-ttu-id="89fcd-482">PowerShell</span><span class="sxs-lookup"><span data-stu-id="89fcd-482">PowerShell</span></span>
-<span data-ttu-id="89fcd-483">The following example shows how to get the available API versions for a particular resource type.</span><span class="sxs-lookup"><span data-stu-id="89fcd-483">The following example shows how to get the available API versions for a particular resource type.</span></span>
+<span data-ttu-id="8d9fa-124">To see information for a particular resource provider, use:</span><span class="sxs-lookup"><span data-stu-id="8d9fa-124">To see information for a particular resource provider, use:</span></span>
 
 ```powershell
-((Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Web).ResourceTypes | Where-Object ResourceTypeName -eq sites).ApiVersions
+Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Batch
 ```
 
-<span data-ttu-id="89fcd-484">The output is similar to:</span><span class="sxs-lookup"><span data-stu-id="89fcd-484">The output is similar to:</span></span>
+<span data-ttu-id="8d9fa-125">Which returns results similar to:</span><span class="sxs-lookup"><span data-stu-id="8d9fa-125">Which returns results similar to:</span></span>
 
 ```powershell
-2015-08-01
+{ProviderNamespace : Microsoft.Batch
+RegistrationState : Registered
+ResourceTypes     : {batchAccounts}
+Locations         : {West Europe, East US, East US 2, West US...}
+
+...
+```
+
+<span data-ttu-id="8d9fa-126">To see the resource types for a resource provider, use:</span><span class="sxs-lookup"><span data-stu-id="8d9fa-126">To see the resource types for a resource provider, use:</span></span>
+
+```powershell
+(Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Batch).ResourceTypes.ResourceTypeName
+```
+
+<span data-ttu-id="8d9fa-127">Which returns:</span><span class="sxs-lookup"><span data-stu-id="8d9fa-127">Which returns:</span></span>
+
+```powershell
+batchAccounts
+operations
+locations
+locations/quotas
+```
+
+<span data-ttu-id="8d9fa-128">The API version corresponds to a version of REST API operations that are released by the resource provider.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-128">The API version corresponds to a version of REST API operations that are released by the resource provider.</span></span> <span data-ttu-id="8d9fa-129">As a resource provider enables new features, it releases a new version of the REST API.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-129">As a resource provider enables new features, it releases a new version of the REST API.</span></span> 
+
+<span data-ttu-id="8d9fa-130">To get the available API versions for a resource type, use:</span><span class="sxs-lookup"><span data-stu-id="8d9fa-130">To get the available API versions for a resource type, use:</span></span>
+
+```powershell
+((Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Batch).ResourceTypes | Where-Object ResourceTypeName -eq batchAccounts).ApiVersions
+```
+
+<span data-ttu-id="8d9fa-131">Which returns:</span><span class="sxs-lookup"><span data-stu-id="8d9fa-131">Which returns:</span></span>
+
+```powershell
+2017-05-01
+2017-01-01
+2015-12-01
+2015-09-01
 2015-07-01
-2015-06-01
-2015-05-01
-2015-04-01
-2015-02-01
-2014-11-01
-2014-06-01
-2014-04-01-preview
-2014-04-01
 ```
 
-### <a name="azure-cli"></a><span data-ttu-id="89fcd-485">Azure CLI</span><span class="sxs-lookup"><span data-stu-id="89fcd-485">Azure CLI</span></span>
-<span data-ttu-id="89fcd-486">You get the available API versions for a resource provider with the following command:</span><span class="sxs-lookup"><span data-stu-id="89fcd-486">You get the available API versions for a resource provider with the following command:</span></span>
+<span data-ttu-id="8d9fa-132">Resource Manager is supported in all regions, but the resources you deploy might not be supported in all regions.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-132">Resource Manager is supported in all regions, but the resources you deploy might not be supported in all regions.</span></span> <span data-ttu-id="8d9fa-133">In addition, there may be limitations on your subscription that prevent you from using some regions that support the resource.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-133">In addition, there may be limitations on your subscription that prevent you from using some regions that support the resource.</span></span> 
+
+<span data-ttu-id="8d9fa-134">To get the supported locations for a resource type, use.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-134">To get the supported locations for a resource type, use.</span></span>
+
+```powershell
+((Get-AzureRmResourceProvider -ProviderNamespace Microsoft.Batch).ResourceTypes | Where-Object ResourceTypeName -eq batchAccounts).Locations
+```
+
+<span data-ttu-id="8d9fa-135">Which returns:</span><span class="sxs-lookup"><span data-stu-id="8d9fa-135">Which returns:</span></span>
+
+```powershell
+West Europe
+East US
+East US 2
+West US
+...
+```
+
+## <a name="azure-cli"></a><span data-ttu-id="8d9fa-136">Azure CLI</span><span class="sxs-lookup"><span data-stu-id="8d9fa-136">Azure CLI</span></span>
+<span data-ttu-id="8d9fa-137">To see all resource providers in Azure, and the registration status for your subscription, use:</span><span class="sxs-lookup"><span data-stu-id="8d9fa-137">To see all resource providers in Azure, and the registration status for your subscription, use:</span></span>
 
 ```azurecli
-az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].apiVersions"
+az provider list --query "[].{Provider:namespace, Status:registrationState}" --out table
 ```
 
-## <a name="next-steps"></a><span data-ttu-id="89fcd-487">Next steps</span><span class="sxs-lookup"><span data-stu-id="89fcd-487">Next steps</span></span>
-* <span data-ttu-id="89fcd-488">To learn about creating Resource Manager templates, see [Authoring Azure Resource Manager templates](resource-group-authoring-templates.md).</span><span class="sxs-lookup"><span data-stu-id="89fcd-488">To learn about creating Resource Manager templates, see [Authoring Azure Resource Manager templates](resource-group-authoring-templates.md).</span></span>
-* <span data-ttu-id="89fcd-489">To learn about deploying resources, see [Deploy an application with Azure Resource Manager template](resource-group-template-deploy.md).</span><span class="sxs-lookup"><span data-stu-id="89fcd-489">To learn about deploying resources, see [Deploy an application with Azure Resource Manager template](resource-group-template-deploy.md).</span></span>
+<span data-ttu-id="8d9fa-138">Which returns results similar to:</span><span class="sxs-lookup"><span data-stu-id="8d9fa-138">Which returns results similar to:</span></span>
 
+```azurecli
+Provider                         Status
+-------------------------------- ----------------
+Microsoft.ClassicCompute         Registered
+Microsoft.ClassicNetwork         Registered
+Microsoft.ClassicStorage         Registered
+Microsoft.CognitiveServices      Registered
+...
+```
 
+<span data-ttu-id="8d9fa-139">Registering a resource provider configures your subscription to work with the resource provider.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-139">Registering a resource provider configures your subscription to work with the resource provider.</span></span> <span data-ttu-id="8d9fa-140">The scope for registration is always the subscription.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-140">The scope for registration is always the subscription.</span></span> <span data-ttu-id="8d9fa-141">By default, many resource providers are automatically registered.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-141">By default, many resource providers are automatically registered.</span></span> <span data-ttu-id="8d9fa-142">However, you may need to manually register some resource providers.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-142">However, you may need to manually register some resource providers.</span></span> <span data-ttu-id="8d9fa-143">To register a resource provider, you must have permission to perform the `/register/action` operation for the resource provider.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-143">To register a resource provider, you must have permission to perform the `/register/action` operation for the resource provider.</span></span> <span data-ttu-id="8d9fa-144">This operation is included in the Contributor and Owner roles.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-144">This operation is included in the Contributor and Owner roles.</span></span>
 
+```azurecli
+az provider register --namespace Microsoft.Batch
+```
 
+<span data-ttu-id="8d9fa-145">Which returns a message that registration is on-going.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-145">Which returns a message that registration is on-going.</span></span>
+
+<span data-ttu-id="8d9fa-146">You cannot unregister a resource provider when you still have resource types from that resource provider in your subscription.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-146">You cannot unregister a resource provider when you still have resource types from that resource provider in your subscription.</span></span>
+
+<span data-ttu-id="8d9fa-147">To see information for a particular resource provider, use:</span><span class="sxs-lookup"><span data-stu-id="8d9fa-147">To see information for a particular resource provider, use:</span></span>
+
+```azurecli
+az provider show --namespace Microsoft.Batch
+```
+
+<span data-ttu-id="8d9fa-148">Which returns results similar to:</span><span class="sxs-lookup"><span data-stu-id="8d9fa-148">Which returns results similar to:</span></span>
+
+```azurecli
+{
+    "id": "/subscriptions/####-####/providers/Microsoft.Batch",
+    "namespace": "Microsoft.Batch",
+    "registrationsState": "Registering",
+    "resourceTypes:" [
+        ...
+    ]
+}
+```
+
+<span data-ttu-id="8d9fa-149">To see the resource types for a resource provider, use:</span><span class="sxs-lookup"><span data-stu-id="8d9fa-149">To see the resource types for a resource provider, use:</span></span>
+
+```azurecli
+az provider show --namespace Microsoft.Batch --query "resourceTypes[*].resourceType" --out table
+```
+
+<span data-ttu-id="8d9fa-150">Which returns:</span><span class="sxs-lookup"><span data-stu-id="8d9fa-150">Which returns:</span></span>
+
+```azurecli
+Result
+---------------
+batchAccounts
+operations
+locations
+locations/quotas
+```
+
+<span data-ttu-id="8d9fa-151">The API version corresponds to a version of REST API operations that are released by the resource provider.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-151">The API version corresponds to a version of REST API operations that are released by the resource provider.</span></span> <span data-ttu-id="8d9fa-152">As a resource provider enables new features, it releases a new version of the REST API.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-152">As a resource provider enables new features, it releases a new version of the REST API.</span></span> 
+
+<span data-ttu-id="8d9fa-153">To get the available API versions for a resource type, use:</span><span class="sxs-lookup"><span data-stu-id="8d9fa-153">To get the available API versions for a resource type, use:</span></span>
+
+```azurecli
+az provider show --namespace Microsoft.Batch --query "resourceTypes[?resourceType=='batchAccounts'].apiVersions | [0]" --out table
+```
+
+<span data-ttu-id="8d9fa-154">Which returns:</span><span class="sxs-lookup"><span data-stu-id="8d9fa-154">Which returns:</span></span>
+
+```azurecli
+Result
+---------------
+2017-05-01
+2017-01-01
+2015-12-01
+2015-09-01
+2015-07-01
+```
+
+<span data-ttu-id="8d9fa-155">Resource Manager is supported in all regions, but the resources you deploy might not be supported in all regions.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-155">Resource Manager is supported in all regions, but the resources you deploy might not be supported in all regions.</span></span> <span data-ttu-id="8d9fa-156">In addition, there may be limitations on your subscription that prevent you from using some regions that support the resource.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-156">In addition, there may be limitations on your subscription that prevent you from using some regions that support the resource.</span></span> 
+
+<span data-ttu-id="8d9fa-157">To get the supported locations for a resource type, use.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-157">To get the supported locations for a resource type, use.</span></span>
+
+```azurecli
+az provider show --namespace Microsoft.Batch --query "resourceTypes[?resourceType=='batchAccounts'].locations | [0]" --out table
+```
+
+<span data-ttu-id="8d9fa-158">Which returns:</span><span class="sxs-lookup"><span data-stu-id="8d9fa-158">Which returns:</span></span>
+
+```azurecli
+Result
+---------------
+West Europe
+East US
+East US 2
+West US
+...
+```
+
+## <a name="portal"></a><span data-ttu-id="8d9fa-159">Portal</span><span class="sxs-lookup"><span data-stu-id="8d9fa-159">Portal</span></span>
+
+<span data-ttu-id="8d9fa-160">To see all resource providers in Azure, and the registration status for your subscription, select **Subscriptions**.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-160">To see all resource providers in Azure, and the registration status for your subscription, select **Subscriptions**.</span></span>
+
+![select subscriptions](./media/resource-manager-supported-services/select-subscriptions.png)
+
+<span data-ttu-id="8d9fa-162">Choose the subscription to view.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-162">Choose the subscription to view.</span></span>
+
+![specify subscription](./media/resource-manager-supported-services/subscription.png)
+
+<span data-ttu-id="8d9fa-164">Select **Resource providers** and view the list of available resource providers.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-164">Select **Resource providers** and view the list of available resource providers.</span></span>
+
+![show resource providers](./media/resource-manager-supported-services/show-resource-providers.png)
+
+<span data-ttu-id="8d9fa-166">Registering a resource provider configures your subscription to work with the resource provider.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-166">Registering a resource provider configures your subscription to work with the resource provider.</span></span> <span data-ttu-id="8d9fa-167">The scope for registration is always the subscription.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-167">The scope for registration is always the subscription.</span></span> <span data-ttu-id="8d9fa-168">By default, many resource providers are automatically registered.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-168">By default, many resource providers are automatically registered.</span></span> <span data-ttu-id="8d9fa-169">However, you may need to manually register some resource providers.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-169">However, you may need to manually register some resource providers.</span></span> <span data-ttu-id="8d9fa-170">To register a resource provider, you must have permission to perform the `/register/action` operation for the resource provider.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-170">To register a resource provider, you must have permission to perform the `/register/action` operation for the resource provider.</span></span> <span data-ttu-id="8d9fa-171">This operation is included in the Contributor and Owner roles.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-171">This operation is included in the Contributor and Owner roles.</span></span> <span data-ttu-id="8d9fa-172">To register a resource provider, select **Register**.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-172">To register a resource provider, select **Register**.</span></span>
+
+![register resource provider](./media/resource-manager-supported-services/register-provider.png)
+
+<span data-ttu-id="8d9fa-174">You cannot unregister a resource provider when you still have resource types from that resource provider in your subscription.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-174">You cannot unregister a resource provider when you still have resource types from that resource provider in your subscription.</span></span>
+
+<span data-ttu-id="8d9fa-175">To see information for a particular resource provider, select **All services**.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-175">To see information for a particular resource provider, select **All services**.</span></span>
+
+![select All services](./media/resource-manager-supported-services/more-services.png)
+
+<span data-ttu-id="8d9fa-177">Search for **Resource Explorer** and select it from the available options.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-177">Search for **Resource Explorer** and select it from the available options.</span></span>
+
+![select resource explorer](./media/resource-manager-supported-services/select-resource-explorer.png)
+
+<span data-ttu-id="8d9fa-179">Select **Providers**.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-179">Select **Providers**.</span></span>
+
+![Select providers](./media/resource-manager-supported-services/select-providers.png)
+
+<span data-ttu-id="8d9fa-181">Select the resource provider and resource type that you want to view.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-181">Select the resource provider and resource type that you want to view.</span></span>
+
+![Select resource type](./media/resource-manager-supported-services/select-resource-type.png)
+
+<span data-ttu-id="8d9fa-183">Resource Manager is supported in all regions, but the resources you deploy might not be supported in all regions.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-183">Resource Manager is supported in all regions, but the resources you deploy might not be supported in all regions.</span></span> <span data-ttu-id="8d9fa-184">In addition, there may be limitations on your subscription that prevent you from using some regions that support the resource.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-184">In addition, there may be limitations on your subscription that prevent you from using some regions that support the resource.</span></span> <span data-ttu-id="8d9fa-185">The resource explorer displays valid locations for the resource type.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-185">The resource explorer displays valid locations for the resource type.</span></span>
+
+![Show locations](./media/resource-manager-supported-services/show-locations.png)
+
+<span data-ttu-id="8d9fa-187">The API version corresponds to a version of REST API operations that are released by the resource provider.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-187">The API version corresponds to a version of REST API operations that are released by the resource provider.</span></span> <span data-ttu-id="8d9fa-188">As a resource provider enables new features, it releases a new version of the REST API.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-188">As a resource provider enables new features, it releases a new version of the REST API.</span></span> <span data-ttu-id="8d9fa-189">The resource explorer displays valid API versions for the resource type.</span><span class="sxs-lookup"><span data-stu-id="8d9fa-189">The resource explorer displays valid API versions for the resource type.</span></span>
+
+![Show API versions](./media/resource-manager-supported-services/show-api-versions.png)
+
+## <a name="next-steps"></a><span data-ttu-id="8d9fa-191">Next steps</span><span class="sxs-lookup"><span data-stu-id="8d9fa-191">Next steps</span></span>
+* <span data-ttu-id="8d9fa-192">To learn about creating Resource Manager templates, see [Authoring Azure Resource Manager templates](resource-group-authoring-templates.md).</span><span class="sxs-lookup"><span data-stu-id="8d9fa-192">To learn about creating Resource Manager templates, see [Authoring Azure Resource Manager templates](resource-group-authoring-templates.md).</span></span>
+* <span data-ttu-id="8d9fa-193">To learn about deploying resources, see [Deploy an application with Azure Resource Manager template](resource-group-template-deploy.md).</span><span class="sxs-lookup"><span data-stu-id="8d9fa-193">To learn about deploying resources, see [Deploy an application with Azure Resource Manager template](resource-group-template-deploy.md).</span></span>
+* <span data-ttu-id="8d9fa-194">To view the operations for a resource provider, see [Azure REST API](/rest/api/).</span><span class="sxs-lookup"><span data-stu-id="8d9fa-194">To view the operations for a resource provider, see [Azure REST API](/rest/api/).</span></span>
 
