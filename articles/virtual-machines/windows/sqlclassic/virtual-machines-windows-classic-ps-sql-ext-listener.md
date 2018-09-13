@@ -4,7 +4,7 @@ description: This tutorial walks you through steps of creating an Always On Avai
 services: virtual-machines-windows
 documentationcenter: na
 author: MikeRayMSFT
-manager: jhubbard
+manager: craigg
 editor: ''
 tags: azure-service-management
 ms.assetid: a2453032-94ab-4775-b976-c74d24716728
@@ -13,14 +13,14 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows-sql-server
 ms.workload: iaas-sql-server
-ms.date: 11/28/2016
+ms.date: 05/31/2017
 ms.author: mikeray
-ms.openlocfilehash: d9138b17e54aa1c4bf1982b09d3d0ad10e936d4c
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 58ec400faee04f8624822bbcb5325fca7006c578
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44552069"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44778991"
 ---
 # <a name="configure-an-external-listener-for-always-on-availability-groups-in-azure"></a>Configure an external listener for Always On Availability Groups in Azure
 > [!div class="op_single_selector"]
@@ -95,7 +95,7 @@ Create the availability group listener in two steps. First, create the client ac
 [!INCLUDE [firewall](../../../../includes/virtual-machines-ag-listener-create-listener.md)]
 
 ### <a name="configure-the-cluster-resources-in-powershell"></a>Configure the cluster resources in PowerShell
-1. For external load balancing, you must obtain the public virtual IP address of the cloud service that contains your replicas. Log into the Azure classic portal. Navigate to the cloud service that contains your availability group VM. Open the **Dashboard** view.
+1. For external load balancing, you must obtain the public virtual IP address of the cloud service that contains your replicas. Log into the Azure portal. Navigate to the cloud service that contains your availability group VM. Open the **Dashboard** view.
 2. Note the address shown under **Public Virtual IP (VIP) Address**. If your solution spans VNets, repeat this step for each cloud service that contains a VM that hosts a replica.
 3. On one of the VMs, copy the PowerShell script below into a text editor and set the variables to the values you noted earlier.
    

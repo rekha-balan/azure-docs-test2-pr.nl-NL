@@ -2,26 +2,26 @@
 title: Deploy Virtual Machine Scale Set using Visual Studio | Microsoft Docs
 description: Deploy Virtual Machine Scale Sets using Visual Studio and a Resource Manager template
 services: virtual-machine-scale-sets
+ms.custom: H1Hack27Feb2017
+ms.workload: na
 documentationcenter: ''
-author: gbowerman
-manager: timlt
+author: gatneil
+manager: jeconnoc
 editor: ''
 tags: azure-resource-manager
 ms.assetid: ed0786b8-34b2-49a8-85b5-2a628128ead6
 ms.service: virtual-machine-scale-sets
-ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 03/13/2017
-ms.author: guybo
-ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: d364172368d5cc069cb1ae47eef0cdabb51d1087
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: negat
+ms.openlocfilehash: f0bd57836d6d54fe3e3460af27ebea4cffe3ee40
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44549111"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44780876"
 ---
 # <a name="how-to-create-a-virtual-machine-scale-set-with-visual-studio"></a>How to create a Virtual Machine Scale Set with Visual Studio
 This article shows you how to deploy an Azure Virtual Machine Scale Set using a Visual Studio Resource Group Deployment.
@@ -91,30 +91,19 @@ Once the deployment completes, you can view the new Virtual Machine Scale Set in
 
 ![Cloud Explorer][cloud_explorer]
 
- The portal provides the best way to visually manage your Azure infrastructure with a web browser, while Azure Resource Explorer provides an easy way to explorer and debug Azure resources, giving a window into the “instance view” and also showing PowerShell commands for the resources you are looking at. While Virtual Machine Scale Sets are in preview, the Resource Explorer shows the most detail for your Virtual Machine Scale Sets.
+ The portal provides the best way to visually manage your Azure infrastructure with a web browser, while Azure Resource Explorer provides an easy way to explore and debug Azure resources, giving a window into the "instance view" and also showing PowerShell commands for the resources you are looking at.
 
 ## <a name="next-steps"></a>Next steps
 Once you’ve successfully deployed Virtual Machine Scale Sets through Visual Studio, you can further customize your project to suit your application requirements. For example, configure auto-scale by adding an **Insights** resource, adding infrastructure to your Template (like standalone VMs), or deploying applications using the custom script extension. Good example templates can be found in the [Azure Quickstart Templates](https://github.com/Azure/azure-quickstart-templates) GitHub repository (search for "vmss").
 
-[file_new]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machine-scale-sets/media/virtual-machine-scale-sets-vs-create/1-FileNew.png
-[create_project]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machine-scale-sets/media/virtual-machine-scale-sets-vs-create/2-CreateProject.png
-[select_Template]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machine-scale-sets/media/virtual-machine-scale-sets-vs-create/3b-SelectTemplateLin.png
-[solution_explorer]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machine-scale-sets/media/virtual-machine-scale-sets-vs-create/4-SolutionExplorer.png
-[json_explorer]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machine-scale-sets/media/virtual-machine-scale-sets-vs-create/10-JsonExplorer.png
-[5deploy_Template]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machine-scale-sets/media/virtual-machine-scale-sets-vs-create/5-DeployTemplate.png
-[6deploy_Template]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machine-scale-sets/media/virtual-machine-scale-sets-vs-create/6-DeployTemplate.png
-[new_resource]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machine-scale-sets/media/virtual-machine-scale-sets-vs-create/7-NewResourceGroup.png
-[edit_parameters]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machine-scale-sets/media/virtual-machine-scale-sets-vs-create/8-EditParameter.png
-[output_window]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machine-scale-sets/media/virtual-machine-scale-sets-vs-create/9-Output.png
-[cloud_explorer]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machine-scale-sets/media/virtual-machine-scale-sets-vs-create/12-CloudExplorer.png
-
-
-
-
-
-
-
-
-
-
-
+[file_new]: ./media/virtual-machine-scale-sets-vs-create/1-FileNew.png
+[create_project]: ./media/virtual-machine-scale-sets-vs-create/2-CreateProject.png
+[select_Template]: ./media/virtual-machine-scale-sets-vs-create/3b-SelectTemplateLin.png
+[solution_explorer]: ./media/virtual-machine-scale-sets-vs-create/4-SolutionExplorer.png
+[json_explorer]: ./media/virtual-machine-scale-sets-vs-create/10-JsonExplorer.png
+[5deploy_Template]: ./media/virtual-machine-scale-sets-vs-create/5-DeployTemplate.png
+[6deploy_Template]: ./media/virtual-machine-scale-sets-vs-create/6-DeployTemplate.png
+[new_resource]: ./media/virtual-machine-scale-sets-vs-create/7-NewResourceGroup.png
+[edit_parameters]: ./media/virtual-machine-scale-sets-vs-create/8-EditParameter.png
+[output_window]: ./media/virtual-machine-scale-sets-vs-create/9-Output.png
+[cloud_explorer]: ./media/virtual-machine-scale-sets-vs-create/12-CloudExplorer.png

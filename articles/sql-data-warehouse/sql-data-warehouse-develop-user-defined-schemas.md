@@ -1,28 +1,27 @@
 ---
-title: User-defined schemas in SQL Data Warehouse | Microsoft Docs
-description: Tips for using Transact-SQL schemas in Azure SQL Data Warehouse for developing solutions.
+title: Using user-defined schemas in SQL Data Warehouse | Microsoft Docs
+description: Tips for using T-SQL user-defined schemas in Azure SQL Data Warehouse for developing solutions.
 services: sql-data-warehouse
-documentationcenter: NA
-author: jrowlandjones
-manager: jhubbard
-editor: ''
-ms.assetid: 52af5bd5-d5d3-4f9b-8704-06829fb924e3
+author: ronortloff
+manager: craigg
 ms.service: sql-data-warehouse
-ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: data-services
-ms.custom: t-sql
-ms.date: 10/31/2016
-ms.author: jrj;barbkess
-ms.openlocfilehash: dfb58956ad6637cf0f50b4c052ab98fb7c26139d
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.topic: conceptual
+ms.component: implement
+ms.date: 04/17/2018
+ms.author: rortloff
+ms.reviewer: igorstan
+ms.openlocfilehash: d46f41e75538fae230219068d3530b7181564ac0
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44550957"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44774351"
 ---
-# <a name="user-defined-schemas-in-sql-data-warehouse"></a>User-defined schemas in SQL Data Warehouse
+# <a name="using-user-defined-schemas-in-sql-data-warehouse"></a>Using user-defined schemas in SQL Data Warehouse
+Tips for using T-SQL user-defined schemas in Azure SQL Data Warehouse for developing solutions.
+
+## <a name="schemas-for-application-boundaries"></a>Schemas for application boundaries
+
 Traditional data warehouses often use separate databases to create application boundaries based on either workload, domain or security. For example, a traditional SQL Server data warehouse might include a staging database, a data warehouse database, and some data mart databases. In this topology each database operates as a workload and security boundary in the architecture.
 
 By contrast, SQL Data Warehouse runs the entire data warehouse workload within one database. Cross database joins are not permitted. Therefore SQL Data Warehouse expects all tables used by the warehouse to be stored within the one database.
@@ -122,13 +121,5 @@ FROM    [edw].customer
 > 
 
 ## <a name="next-steps"></a>Next steps
-For more development tips, see [development overview][development overview].
+For more development tips, see [development overview](sql-data-warehouse-overview-develop.md).
 
-<!--Image references-->
-
-<!--Article references-->
-[development overview]: sql-data-warehouse-overview-develop.md
-
-<!--MSDN references-->
-
-<!--Other Web references-->

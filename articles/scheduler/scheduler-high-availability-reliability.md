@@ -14,12 +14,12 @@ ms.devlang: dotnet
 ms.topic: article
 ms.date: 08/16/2016
 ms.author: deli
-ms.openlocfilehash: 96918da8303011569b5cc38ac19187793fe82bb3
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 7e7fe49de7814b6058468d630f8638720e5864f3
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44549115"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44775755"
 ---
 # <a name="scheduler-high-availability-and-reliability"></a>Scheduler High-Availability and Reliability
 ## <a name="azure-scheduler-high-availability"></a>Azure Scheduler High-Availability
@@ -77,8 +77,6 @@ To learn how to configure an alternate endpoint, refer to [errorAction](schedule
 
  [Azure Scheduler outbound authentication](scheduler-outbound-authentication.md)
 
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/scheduler/media/scheduler-high-availability-reliability/scheduler-high-availability-reliability-image1.png
+[1]: ./media/scheduler-high-availability-reliability/scheduler-high-availability-reliability-image1.png
 
-[2]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/scheduler/media/scheduler-high-availability-reliability/scheduler-high-availability-reliability-image2.png
-
-
+[2]: ./media/scheduler-high-availability-reliability/scheduler-high-availability-reliability-image2.png
