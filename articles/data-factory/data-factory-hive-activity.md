@@ -1,0 +1,246 @@
+---
+title: Transform data using Hive Activity - Azure | Microsoft Docs
+description: Learn how you can use the Hive Activity in an Azure data factory to run Hive queries on an on-demand/your own HDInsight cluster.
+services: data-factory
+documentationcenter: ''
+author: sharonlo101
+manager: jhubbard
+editor: monicar
+ms.assetid: 80083218-743e-4da8-bdd2-60d1c77b1227
+ms.service: data-factory
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 01/25/2017
+ms.author: shlo
+ms.openlocfilehash: e22f76f912e568f1ef0ae636a4b5c0ef24e8854c
+ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 08/02/2018
+ms.locfileid: "44555569"
+---
+# <a name="transform-data-using-hive-activity-in-azure-data-factory"></a><span data-ttu-id="20fba-103">Transform data using Hive Activity in Azure Data Factory</span><span class="sxs-lookup"><span data-stu-id="20fba-103">Transform data using Hive Activity in Azure Data Factory</span></span> 
+> [!div class="op_single_selector" title1="Transformation Activities"]
+> * [Hive Activity](data-factory-hive-activity.md) 
+> * [Pig Activity](data-factory-pig-activity.md)
+> * [MapReduce Activity](data-factory-map-reduce.md)
+> * [Hadoop Streaming Activity](data-factory-hadoop-streaming-activity.md)
+> * [Spark Activity](data-factory-spark.md)
+> * [Machine Learning Batch Execution Activity](data-factory-azure-ml-batch-execution-activity.md)
+> * [Machine Learning Update Resource Activity](data-factory-azure-ml-update-resource-activity.md)
+> * [Stored Procedure Activity](data-factory-stored-proc-activity.md)
+> * [Data Lake Analytics U-SQL Activity](data-factory-usql-activity.md)
+> * [.NET Custom Activity](data-factory-use-custom-activities.md)
+
+<span data-ttu-id="20fba-114">The HDInsight Hive activity in a Data Factory [pipeline](data-factory-create-pipelines.md) executes Hive queries on [your own](data-factory-compute-linked-services.md#azure-hdinsight-linked-service) or [on-demand](data-factory-compute-linked-services.md#azure-hdinsight-on-demand-linked-service) Windows/Linux-based HDInsight cluster.</span><span class="sxs-lookup"><span data-stu-id="20fba-114">The HDInsight Hive activity in a Data Factory [pipeline](data-factory-create-pipelines.md) executes Hive queries on [your own](data-factory-compute-linked-services.md#azure-hdinsight-linked-service) or [on-demand](data-factory-compute-linked-services.md#azure-hdinsight-on-demand-linked-service) Windows/Linux-based HDInsight cluster.</span></span> <span data-ttu-id="20fba-115">This article builds on the [data transformation activities](data-factory-data-transformation-activities.md) article, which presents a general overview of data transformation and the supported transformation activities.</span><span class="sxs-lookup"><span data-stu-id="20fba-115">This article builds on the [data transformation activities](data-factory-data-transformation-activities.md) article, which presents a general overview of data transformation and the supported transformation activities.</span></span>
+
+## <a name="syntax"></a><span data-ttu-id="20fba-116">Syntax</span><span class="sxs-lookup"><span data-stu-id="20fba-116">Syntax</span></span>
+
+```JSON
+{
+    "name": "Hive Activity",
+    "description": "description",
+    "type": "HDInsightHive",
+    "inputs": [
+      {
+        "name": "input tables"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "output tables"
+      }
+    ],
+    "linkedServiceName": "MyHDInsightLinkedService",
+    "typeProperties": {
+      "script": "Hive script",
+      "scriptPath": "<pathtotheHivescriptfileinAzureblobstorage>",
+      "defines": {
+        "param1": "param1Value"
+      }
+    },
+   "scheduler": {
+      "frequency": "Day",
+      "interval": 1
+    }
+}
+```
+## <a name="syntax-details"></a><span data-ttu-id="20fba-117">Syntax details</span><span class="sxs-lookup"><span data-stu-id="20fba-117">Syntax details</span></span>
+| <span data-ttu-id="20fba-118">Property</span><span class="sxs-lookup"><span data-stu-id="20fba-118">Property</span></span> | <span data-ttu-id="20fba-119">Description</span><span class="sxs-lookup"><span data-stu-id="20fba-119">Description</span></span> | <span data-ttu-id="20fba-120">Required</span><span class="sxs-lookup"><span data-stu-id="20fba-120">Required</span></span> |
+| --- | --- | --- |
+| <span data-ttu-id="20fba-121">name</span><span class="sxs-lookup"><span data-stu-id="20fba-121">name</span></span> |<span data-ttu-id="20fba-122">Name of the activity</span><span class="sxs-lookup"><span data-stu-id="20fba-122">Name of the activity</span></span> |<span data-ttu-id="20fba-123">Yes</span><span class="sxs-lookup"><span data-stu-id="20fba-123">Yes</span></span> |
+| <span data-ttu-id="20fba-124">description</span><span class="sxs-lookup"><span data-stu-id="20fba-124">description</span></span> |<span data-ttu-id="20fba-125">Text describing what the activity is used for</span><span class="sxs-lookup"><span data-stu-id="20fba-125">Text describing what the activity is used for</span></span> |<span data-ttu-id="20fba-126">No</span><span class="sxs-lookup"><span data-stu-id="20fba-126">No</span></span> |
+| <span data-ttu-id="20fba-127">type</span><span class="sxs-lookup"><span data-stu-id="20fba-127">type</span></span> |<span data-ttu-id="20fba-128">HDinsightHive</span><span class="sxs-lookup"><span data-stu-id="20fba-128">HDinsightHive</span></span> |<span data-ttu-id="20fba-129">Yes</span><span class="sxs-lookup"><span data-stu-id="20fba-129">Yes</span></span> |
+| <span data-ttu-id="20fba-130">inputs</span><span class="sxs-lookup"><span data-stu-id="20fba-130">inputs</span></span> |<span data-ttu-id="20fba-131">Inputs consumed by the Hive activity</span><span class="sxs-lookup"><span data-stu-id="20fba-131">Inputs consumed by the Hive activity</span></span> |<span data-ttu-id="20fba-132">No</span><span class="sxs-lookup"><span data-stu-id="20fba-132">No</span></span> |
+| <span data-ttu-id="20fba-133">outputs</span><span class="sxs-lookup"><span data-stu-id="20fba-133">outputs</span></span> |<span data-ttu-id="20fba-134">Outputs produced by the Hive activity</span><span class="sxs-lookup"><span data-stu-id="20fba-134">Outputs produced by the Hive activity</span></span> |<span data-ttu-id="20fba-135">Yes</span><span class="sxs-lookup"><span data-stu-id="20fba-135">Yes</span></span> |
+| <span data-ttu-id="20fba-136">linkedServiceName</span><span class="sxs-lookup"><span data-stu-id="20fba-136">linkedServiceName</span></span> |<span data-ttu-id="20fba-137">Reference to the HDInsight cluster registered as a linked service in Data Factory</span><span class="sxs-lookup"><span data-stu-id="20fba-137">Reference to the HDInsight cluster registered as a linked service in Data Factory</span></span> |<span data-ttu-id="20fba-138">Yes</span><span class="sxs-lookup"><span data-stu-id="20fba-138">Yes</span></span> |
+| <span data-ttu-id="20fba-139">script</span><span class="sxs-lookup"><span data-stu-id="20fba-139">script</span></span> |<span data-ttu-id="20fba-140">Specify the Hive script inline</span><span class="sxs-lookup"><span data-stu-id="20fba-140">Specify the Hive script inline</span></span> |<span data-ttu-id="20fba-141">No</span><span class="sxs-lookup"><span data-stu-id="20fba-141">No</span></span> |
+| <span data-ttu-id="20fba-142">script path</span><span class="sxs-lookup"><span data-stu-id="20fba-142">script path</span></span> |<span data-ttu-id="20fba-143">Store the Hive script in an Azure blob storage and provide the path to the file.</span><span class="sxs-lookup"><span data-stu-id="20fba-143">Store the Hive script in an Azure blob storage and provide the path to the file.</span></span> <span data-ttu-id="20fba-144">Use 'script' or 'scriptPath' property.</span><span class="sxs-lookup"><span data-stu-id="20fba-144">Use 'script' or 'scriptPath' property.</span></span> <span data-ttu-id="20fba-145">Both cannot be used together.</span><span class="sxs-lookup"><span data-stu-id="20fba-145">Both cannot be used together.</span></span> <span data-ttu-id="20fba-146">The file name is case-sensitive.</span><span class="sxs-lookup"><span data-stu-id="20fba-146">The file name is case-sensitive.</span></span> |<span data-ttu-id="20fba-147">No</span><span class="sxs-lookup"><span data-stu-id="20fba-147">No</span></span> |
+| <span data-ttu-id="20fba-148">defines</span><span class="sxs-lookup"><span data-stu-id="20fba-148">defines</span></span> |<span data-ttu-id="20fba-149">Specify parameters as key/value pairs for referencing within the Hive script using 'hiveconf'</span><span class="sxs-lookup"><span data-stu-id="20fba-149">Specify parameters as key/value pairs for referencing within the Hive script using 'hiveconf'</span></span> |<span data-ttu-id="20fba-150">No</span><span class="sxs-lookup"><span data-stu-id="20fba-150">No</span></span> |
+
+## <a name="example"></a><span data-ttu-id="20fba-151">Example</span><span class="sxs-lookup"><span data-stu-id="20fba-151">Example</span></span>
+<span data-ttu-id="20fba-152">Let’s consider an example of game logs analytics where you want to identify the time spent by users playing games launched by your company.</span><span class="sxs-lookup"><span data-stu-id="20fba-152">Let’s consider an example of game logs analytics where you want to identify the time spent by users playing games launched by your company.</span></span> 
+
+<span data-ttu-id="20fba-153">The following log is a sample game log, which is comma (`,`) separated and contains the following fields – ProfileID, SessionStart, Duration, SrcIPAddress, and GameType.</span><span class="sxs-lookup"><span data-stu-id="20fba-153">The following log is a sample game log, which is comma (`,`) separated and contains the following fields – ProfileID, SessionStart, Duration, SrcIPAddress, and GameType.</span></span>
+
+```
+1809,2014-05-04 12:04:25.3470000,14,221.117.223.75,CaptureFlag
+1703,2014-05-04 06:05:06.0090000,16,12.49.178.247,KingHill
+1703,2014-05-04 10:21:57.3290000,10,199.118.18.179,CaptureFlag
+1809,2014-05-04 05:24:22.2100000,23,192.84.66.141,KingHill
+.....
+```
+
+<span data-ttu-id="20fba-154">The **Hive script** to process this data:</span><span class="sxs-lookup"><span data-stu-id="20fba-154">The **Hive script** to process this data:</span></span>
+
+```
+DROP TABLE IF EXISTS HiveSampleIn; 
+CREATE EXTERNAL TABLE HiveSampleIn 
+(
+    ProfileID        string, 
+    SessionStart     string, 
+    Duration         int, 
+    SrcIPAddress     string, 
+    GameType         string
+) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LINES TERMINATED BY '10' STORED AS TEXTFILE LOCATION 'wasb://adfwalkthrough@<storageaccount>.blob.core.windows.net/samplein/'; 
+
+DROP TABLE IF EXISTS HiveSampleOut; 
+CREATE EXTERNAL TABLE HiveSampleOut 
+(    
+    ProfileID     string, 
+    Duration     int
+) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LINES TERMINATED BY '10' STORED AS TEXTFILE LOCATION 'wasb://adfwalkthrough@<storageaccount>.blob.core.windows.net/sampleout/';
+
+INSERT OVERWRITE TABLE HiveSampleOut
+Select 
+    ProfileID,
+    SUM(Duration)
+FROM HiveSampleIn Group by ProfileID
+```
+
+<span data-ttu-id="20fba-155">To execute this Hive script in a Data Factory pipeline, you need to do the following</span><span class="sxs-lookup"><span data-stu-id="20fba-155">To execute this Hive script in a Data Factory pipeline, you need to do the following</span></span>
+
+1. <span data-ttu-id="20fba-156">Create a linked service to register [your own HDInsight compute cluster](data-factory-compute-linked-services.md#azure-hdinsight-linked-service) or configure [on-demand HDInsight compute cluster](data-factory-compute-linked-services.md#azure-hdinsight-on-demand-linked-service).</span><span class="sxs-lookup"><span data-stu-id="20fba-156">Create a linked service to register [your own HDInsight compute cluster](data-factory-compute-linked-services.md#azure-hdinsight-linked-service) or configure [on-demand HDInsight compute cluster](data-factory-compute-linked-services.md#azure-hdinsight-on-demand-linked-service).</span></span> <span data-ttu-id="20fba-157">Let’s call this linked service “HDInsightLinkedService”.</span><span class="sxs-lookup"><span data-stu-id="20fba-157">Let’s call this linked service “HDInsightLinkedService”.</span></span>
+2. <span data-ttu-id="20fba-158">Create a [linked service](data-factory-azure-blob-connector.md) to configure the connection to Azure Blob storage hosting the data.</span><span class="sxs-lookup"><span data-stu-id="20fba-158">Create a [linked service](data-factory-azure-blob-connector.md) to configure the connection to Azure Blob storage hosting the data.</span></span> <span data-ttu-id="20fba-159">Let’s call this linked service “StorageLinkedService”</span><span class="sxs-lookup"><span data-stu-id="20fba-159">Let’s call this linked service “StorageLinkedService”</span></span>
+3. <span data-ttu-id="20fba-160">Create [datasets](data-factory-create-datasets.md) pointing to the input and the output data.</span><span class="sxs-lookup"><span data-stu-id="20fba-160">Create [datasets](data-factory-create-datasets.md) pointing to the input and the output data.</span></span> <span data-ttu-id="20fba-161">Let’s call the input dataset “HiveSampleIn” and the output dataset “HiveSampleOut”</span><span class="sxs-lookup"><span data-stu-id="20fba-161">Let’s call the input dataset “HiveSampleIn” and the output dataset “HiveSampleOut”</span></span>
+4. <span data-ttu-id="20fba-162">Copy the Hive query as a file to Azure Blob Storage configured in step #2.</span><span class="sxs-lookup"><span data-stu-id="20fba-162">Copy the Hive query as a file to Azure Blob Storage configured in step #2.</span></span> <span data-ttu-id="20fba-163">if the storage for hosting the data is different from the one hosting this query file, create a separate Azure Storage linked service and refer to it in the activity.</span><span class="sxs-lookup"><span data-stu-id="20fba-163">if the storage for hosting the data is different from the one hosting this query file, create a separate Azure Storage linked service and refer to it in the activity.</span></span> <span data-ttu-id="20fba-164">Use \*\*scriptPath \*\*to specify the path to hive query file and **scriptLinkedService** to specify the Azure storage that contains the script file.</span><span class="sxs-lookup"><span data-stu-id="20fba-164">Use \*\*scriptPath \*\*to specify the path to hive query file and **scriptLinkedService** to specify the Azure storage that contains the script file.</span></span> 
+   
+   > [!NOTE]
+   > You can also provide the Hive script inline in the activity definition by using the **script** property. We do not recommend this approach as all special characters in the script within the JSON document needs to be escaped and may cause debugging issues. The best practice is to follow step #4.
+   > 
+   > 
+5. <span data-ttu-id="20fba-168">Create a pipeline with the HDInsightHive activity.</span><span class="sxs-lookup"><span data-stu-id="20fba-168">Create a pipeline with the HDInsightHive activity.</span></span> <span data-ttu-id="20fba-169">The activity processes/transforms the data.</span><span class="sxs-lookup"><span data-stu-id="20fba-169">The activity processes/transforms the data.</span></span>
+
+    ```JSON   
+    {   
+        "name": "HiveActivitySamplePipeline",
+        "properties": {
+        "activities": [
+            {
+                "name": "HiveActivitySample",
+                "type": "HDInsightHive",
+                "inputs": [
+                {
+                    "name": "HiveSampleIn"
+                }
+                ],
+                "outputs": [
+                {
+                    "name": "HiveSampleOut"
+                }
+                ],
+                "linkedServiceName": "HDInsightLinkedService",
+                "typeproperties": {
+                    "scriptPath": "adfwalkthrough\\scripts\\samplehive.hql",
+                    "scriptLinkedService": "StorageLinkedService"
+                },
+                "scheduler": {
+                    "frequency": "Hour",
+                    "interval": 1
+                }
+            }
+            ]
+        }
+    }
+    ```
+6. <span data-ttu-id="20fba-170">Deploy the pipeline.</span><span class="sxs-lookup"><span data-stu-id="20fba-170">Deploy the pipeline.</span></span> <span data-ttu-id="20fba-171">See [Creating pipelines](data-factory-create-pipelines.md) article for details.</span><span class="sxs-lookup"><span data-stu-id="20fba-171">See [Creating pipelines](data-factory-create-pipelines.md) article for details.</span></span> 
+7. <span data-ttu-id="20fba-172">Monitor the pipeline using the data factory monitoring and management views.</span><span class="sxs-lookup"><span data-stu-id="20fba-172">Monitor the pipeline using the data factory monitoring and management views.</span></span> <span data-ttu-id="20fba-173">See [Monitoring and manage Data Factory pipelines](data-factory-monitor-manage-pipelines.md) article for details.</span><span class="sxs-lookup"><span data-stu-id="20fba-173">See [Monitoring and manage Data Factory pipelines](data-factory-monitor-manage-pipelines.md) article for details.</span></span> 
+
+## <a name="specifying-parameters-for-a-hive-script"></a><span data-ttu-id="20fba-174">Specifying parameters for a Hive script</span><span class="sxs-lookup"><span data-stu-id="20fba-174">Specifying parameters for a Hive script</span></span>
+<span data-ttu-id="20fba-175">In this example, game logs are ingested daily into Azure Blob Storage and are stored in a folder partitioned with date and time.</span><span class="sxs-lookup"><span data-stu-id="20fba-175">In this example, game logs are ingested daily into Azure Blob Storage and are stored in a folder partitioned with date and time.</span></span> <span data-ttu-id="20fba-176">You want to parameterize the Hive script and pass the input folder location dynamically during runtime and also produce the output partitioned with date and time.</span><span class="sxs-lookup"><span data-stu-id="20fba-176">You want to parameterize the Hive script and pass the input folder location dynamically during runtime and also produce the output partitioned with date and time.</span></span>
+
+<span data-ttu-id="20fba-177">To use parameterized Hive script, do the following</span><span class="sxs-lookup"><span data-stu-id="20fba-177">To use parameterized Hive script, do the following</span></span>
+
+* <span data-ttu-id="20fba-178">Define the parameters in **defines**.</span><span class="sxs-lookup"><span data-stu-id="20fba-178">Define the parameters in **defines**.</span></span>
+
+    ```JSON  
+    {
+        "name": "HiveActivitySamplePipeline",
+          "properties": {
+        "activities": [
+             {
+                "name": "HiveActivitySample",
+                "type": "HDInsightHive",
+                "inputs": [
+                      {
+                        "name": "HiveSampleIn"
+                      }
+                ],
+                "outputs": [
+                      {
+                        "name": "HiveSampleOut"
+                    }
+                ],
+                "linkedServiceName": "HDInsightLinkedService",
+                "typeproperties": {
+                      "scriptPath": "adfwalkthrough\\scripts\\samplehive.hql",
+                      "scriptLinkedService": "StorageLinkedService",
+                      "defines": {
+                        "Input": "$$Text.Format('wasb://adfwalkthrough@<storageaccountname>.blob.core.windows.net/samplein/yearno={0:yyyy}/monthno={0:%M}/dayno={0:%d}/', SliceStart)",
+                        "Output": "$$Text.Format('wasb://adfwalkthrough@<storageaccountname>.blob.core.windows.net/sampleout/yearno={0:yyyy}/monthno={0:%M}/dayno={0:%d}/', SliceStart)"
+                      },
+                       "scheduler": {
+                          "frequency": "Hour",
+                          "interval": 1
+                    }
+                }
+              }
+        ]
+      }
+    }
+    ```
+* <span data-ttu-id="20fba-179">In the Hive Script, refer to the parameter using **${hiveconf:parameterName}**.</span><span class="sxs-lookup"><span data-stu-id="20fba-179">In the Hive Script, refer to the parameter using **${hiveconf:parameterName}**.</span></span> 
+  
+    ```
+    DROP TABLE IF EXISTS HiveSampleIn; 
+    CREATE EXTERNAL TABLE HiveSampleIn 
+    (
+        ProfileID     string, 
+        SessionStart     string, 
+        Duration     int, 
+        SrcIPAddress     string, 
+        GameType     string
+    ) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LINES TERMINATED BY '10' STORED AS TEXTFILE LOCATION '${hiveconf:Input}'; 
+
+    DROP TABLE IF EXISTS HiveSampleOut; 
+    CREATE EXTERNAL TABLE HiveSampleOut 
+    (
+        ProfileID     string, 
+        Duration     int
+    ) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LINES TERMINATED BY '10' STORED AS TEXTFILE LOCATION '${hiveconf:Output}';
+
+    INSERT OVERWRITE TABLE HiveSampleOut
+    Select 
+        ProfileID,
+        SUM(Duration)
+    FROM HiveSampleIn Group by ProfileID
+    ```
+## <a name="see-also"></a><span data-ttu-id="20fba-180">See Also</span><span class="sxs-lookup"><span data-stu-id="20fba-180">See Also</span></span>
+* [<span data-ttu-id="20fba-181">Pig Activity</span><span class="sxs-lookup"><span data-stu-id="20fba-181">Pig Activity</span></span>](data-factory-pig-activity.md)
+* [<span data-ttu-id="20fba-182">MapReduce Activity</span><span class="sxs-lookup"><span data-stu-id="20fba-182">MapReduce Activity</span></span>](data-factory-map-reduce.md)
+* [<span data-ttu-id="20fba-183">Hadoop Streaming Activity</span><span class="sxs-lookup"><span data-stu-id="20fba-183">Hadoop Streaming Activity</span></span>](data-factory-hadoop-streaming-activity.md)
+* [<span data-ttu-id="20fba-184">Invoke Spark programs</span><span class="sxs-lookup"><span data-stu-id="20fba-184">Invoke Spark programs</span></span>](data-factory-spark.md)
+* [<span data-ttu-id="20fba-185">Invoke R scripts</span><span class="sxs-lookup"><span data-stu-id="20fba-185">Invoke R scripts</span></span>](https://github.com/Azure/Azure-DataFactory/tree/master/Samples/RunRScriptUsingADFSample)
+
