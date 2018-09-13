@@ -3,8 +3,8 @@ title: 'Azure AD Connect: Troubleshoot connectivity issues | Microsoft Docs'
 description: Explains how to troubleshoot connectivity issues with Azure AD Connect.
 services: active-directory
 documentationcenter: ''
-author: andkjell
-manager: femila
+author: billmath
+manager: mtillman
 editor: ''
 ms.assetid: 3aa41bb5-6fcb-49da-9747-e7a3bd780e64
 ms.service: active-directory
@@ -12,14 +12,15 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 02/08/2017
+ms.date: 07/18/2017
+ms.component: hybrid
 ms.author: billmath
-ms.openlocfilehash: 64ec261b3e65f0a3fb2a2a5ef6e14588248c76dc
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 793a65347552782c4a3482b29d10e4c94ef85663
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44661514"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44827437"
 ---
 # <a name="troubleshoot-connectivity-issues-with-azure-ad-connect"></a>Troubleshoot connectivity issues with Azure AD Connect
 This article explains how connectivity between Azure AD Connect and Azure AD works and how to troubleshoot connectivity issues. These issues are most likely to be seen in an environment with a proxy server.
@@ -30,7 +31,7 @@ Azure AD Connect is using Modern Authentication (using the ADAL library) for aut
 In this article, we show how Fabrikam connects to Azure AD through its proxy. The proxy server is named fabrikamproxy and is using port 8080.
 
 First we need to make sure [**machine.config**](active-directory-aadconnect-prerequisites.md#connectivity) is correctly configured.  
-![machineconfig](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnect-troubleshoot-connectivity/machineconfig.png)
+![machineconfig](./media/active-directory-aadconnect-troubleshoot-connectivity/machineconfig.png)
 
 > [!NOTE]
 > In some non-Microsoft blogs, it is documented that changes should be made to miiserver.exe.config instead. However, this file is overwritten on every upgrade so even if it works during initial install, the system stops working on first upgrade. For that reason, the recommendation is to update machine.config instead.
@@ -51,30 +52,30 @@ Of these URLs, the following table is the absolute bare minimum to be able to co
 | \*.microsoftonline.com |HTTPS/443 |Used to configure your Azure AD directory and import/export data. |
 
 ## <a name="errors-in-the-wizard"></a>Errors in the wizard
-The installation wizard is using two different security contexts. On the page **Connect to Azure AD**, it is using the currently signed in user. On the page **Configure**, it is changing to the [account running the service for the sync engine](active-directory-aadconnect-accounts-permissions.md#azure-ad-connect-sync-service-account). If there is an issue, it appears most likely already at the **Connect to Azure AD** page in the wizard since the proxy configuration is global.
+The installation wizard is using two different security contexts. On the page **Connect to Azure AD**, it is using the currently signed in user. On the page **Configure**, it is changing to the [account running the service for the sync engine](active-directory-aadconnect-accounts-permissions.md#adsync-service-account). If there is an issue, it appears most likely already at the **Connect to Azure AD** page in the wizard since the proxy configuration is global.
 
 The following issues are the most common errors you encounter in the installation wizard.
 
 ### <a name="the-installation-wizard-has-not-been-correctly-configured"></a>The installation wizard has not been correctly configured
 This error appears when the wizard itself cannot reach the proxy.  
-![nomachineconfig](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnect-troubleshoot-connectivity/nomachineconfig.png)
+![nomachineconfig](./media/active-directory-aadconnect-troubleshoot-connectivity/nomachineconfig.png)
 
 * If you see this error, verify the [machine.config](active-directory-aadconnect-prerequisites.md#connectivity) has been correctly configured.
 * If that looks correct, follow the steps in [Verify proxy connectivity](#verify-proxy-connectivity) to see if the issue is present outside the wizard as well.
 
 ### <a name="a-microsoft-account-is-used"></a>A Microsoft account is used
 If you use a **Microsoft account** rather than a **school or organization** account, you see a generic error.  
-![A Microsoft Account is used](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnect-troubleshoot-connectivity/unknownerror.png)
+![A Microsoft Account is used](./media/active-directory-aadconnect-troubleshoot-connectivity/unknownerror.png)
 
 ### <a name="the-mfa-endpoint-cannot-be-reached"></a>The MFA endpoint cannot be reached
 This error appears if the endpoint **https://secure.aadcdn.microsoftonline-p.com** cannot be reached and your global admin has MFA enabled.  
-![nomachineconfig](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnect-troubleshoot-connectivity/nomicrosoftonlinep.png)
+![nomachineconfig](./media/active-directory-aadconnect-troubleshoot-connectivity/nomicrosoftonlinep.png)
 
 * If you see this error, verify that the endpoint **secure.aadcdn.microsoftonline-p.com** has been added to the proxy.
 
 ### <a name="the-password-cannot-be-verified"></a>The password cannot be verified
 If the installation wizard is successful in connecting to Azure AD, but the password itself cannot be verified you see this error:  
-![badpassword](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnect-troubleshoot-connectivity/badpassword.png)
+![badpassword](./media/active-directory-aadconnect-troubleshoot-connectivity/badpassword.png)
 
 * Is the password a temporary password and must be changed? Is it actually the correct password? Try to sign in to https://login.microsoftonline.com (on another computer than the Azure AD Connect server) and verify the account is usable.
 
@@ -83,18 +84,21 @@ To verify if the Azure AD Connect server has actual connectivity with the Proxy 
 
 PowerShell uses the configuration in machine.config to contact the proxy. The settings in winhttp/netsh should not impact these cmdlets.
 
-If the proxy is correctly configured, you should get a success status: ![proxy200](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnect-troubleshoot-connectivity/invokewebrequest200.png)
+If the proxy is correctly configured, you should get a success status: ![proxy200](./media/active-directory-aadconnect-troubleshoot-connectivity/invokewebrequest200.png)
 
 If you receive **Unable to connect to the remote server**, then PowerShell is trying to make a direct call without using the proxy or DNS is not correctly configured. Make sure the **machine.config** file is correctly configured.
-![unabletoconnect](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnect-troubleshoot-connectivity/invokewebrequestunable.png)
+![unabletoconnect](./media/active-directory-aadconnect-troubleshoot-connectivity/invokewebrequestunable.png)
 
-If the proxy is not correctly configured, you get an error: ![proxy200](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnect-troubleshoot-connectivity/invokewebrequest403.png)
-![proxy407](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnect-troubleshoot-connectivity/invokewebrequest407.png)
+If the proxy is not correctly configured, you get an error: ![proxy200](./media/active-directory-aadconnect-troubleshoot-connectivity/invokewebrequest403.png)
+![proxy407](./media/active-directory-aadconnect-troubleshoot-connectivity/invokewebrequest407.png)
 
 | Error | Error Text | Comment |
 | --- | --- | --- |
 | 403 |Forbidden |The proxy has not been opened for the requested URL. Revisit the proxy configuration and make sure the [URLs](https://support.office.com/article/Office-365-URLs-and-IP-address-ranges-8548a211-3fe7-47cb-abb1-355ea5aa88a2) have been opened. |
 | 407 |Proxy Authentication Required |The proxy server required a sign-in and none was provided. If your proxy server requires authentication, make sure to have this setting configured in the machine.config. Also make sure you are using domain accounts for the user running the wizard and for the service account. |
+
+### <a name="proxy-idle-timeout-setting"></a>Proxy idle timeout setting
+When Azure AD Connect sends an export request to Azure AD, Azure AD can take up to 5 minutes to process the request before generating a response. This can happen especially if there are a number of group objects with large group memberships included in the same export request. Ensure the Proxy idle timeout is configured to be greater than 5 minutes. Otherwise, intermittent connectivity issue with Azure AD may be observed on the Azure AD Connect server.
 
 ## <a name="the-communication-pattern-between-azure-ad-connect-and-azure-ad"></a>The communication pattern between Azure AD Connect and Azure AD
 If you have followed all these preceding steps and still cannot connect, you might at this point start looking at network logs. This section is documenting a normal and successful connectivity pattern. It is also listing common red herrings that can be ignored when you are reading the network logs.
@@ -157,55 +161,43 @@ Network or proxy configuration issues. The network cannot be reached. See [Troub
 ### <a name="user-password-expired"></a>User Password Expired
 Your credentials have expired. Change your password.
 
-### <a name="authorizationfailure"></a>AuthorizationFailure
-Unknown issue.
+### <a name="authorization-failure"></a>Authorization Failure
+Failed to authorize user to perform action in Azure AD.
 
 ### <a name="authentication-cancelled"></a>Authentication Cancelled
 The multi-factor authentication (MFA) challenge was cancelled.
 
-### <a name="connecttomsonline"></a>ConnectToMSOnline
+### <a name="connect-to-ms-online-failed"></a>Connect To MS Online Failed
 Authentication was successful, but Azure AD PowerShell has an authentication problem.
 
-### <a name="azurerolemissing"></a>AzureRoleMissing
-Authentication was successful. You are not a global administrator.
+### <a name="azure-ad-global-admin-role-needed"></a>Azure AD Global Admin Role Needed
+User was authenticated successfully. However user is not assigned global admin role. This is [how you can assign global admin role](../users-groups-roles/directory-assign-admin-roles.md) to the user. 
 
-### <a name="privilegedidentitymanagement"></a>PrivilegedIdentityManagement
-Authentication was successful. Privileged identity management has been enabled and you are currently not a global administrator. For more information, see [Privileged Identity Management](../active-directory-privileged-identity-management-getting-started.md).
+### <a name="privileged-identity-management-enabled"></a>Privileged Identity Management Enabled
+Authentication was successful. Privileged identity management has been enabled and you are currently not a global administrator. For more information, see [Privileged Identity Management](../privileged-identity-management/pim-getting-started.md).
 
-### <a name="companyinfounavailable"></a>CompanyInfoUnavailable
+### <a name="company-information-unavailable"></a>Company Information Unavailable
 Authentication was successful. Could not retrieve company information from Azure AD.
 
-### <a name="retrievedomains"></a>RetrieveDomains
+### <a name="domain-information-unavailable"></a>Domain Information Unavailable
 Authentication was successful. Could not retrieve domain information from Azure AD.
 
-### <a name="unexpected-exception"></a>Unexpected exception
+### <a name="unspecified-authentication-failure"></a>Unspecified Authentication Failure
 Shown as Unexpected error in the installation wizard. Can happen if you try to use a **Microsoft Account** rather than a **school or organization account**.
 
 ## <a name="troubleshooting-steps-for-previous-releases"></a>Troubleshooting steps for previous releases.
 With releases starting with build number 1.1.105.0 (released February 2016), the sign-in assistant was retired. This section and the configuration should no longer be required, but is kept as reference.
 
 For the single-sign in assistant to work, winhttp must be configured. This configuration can be done with [**netsh**](active-directory-aadconnect-prerequisites.md#connectivity).  
-![netsh](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnect-troubleshoot-connectivity/netsh.png)
+![netsh](./media/active-directory-aadconnect-troubleshoot-connectivity/netsh.png)
 
 ### <a name="the-sign-in-assistant-has-not-been-correctly-configured"></a>The Sign-in assistant has not been correctly configured
 This error appears when the Sign-in assistant cannot reach the proxy or the proxy is not allowing the request.
-![nonetsh](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnect-troubleshoot-connectivity/nonetsh.png)
+![nonetsh](./media/active-directory-aadconnect-troubleshoot-connectivity/nonetsh.png)
 
 * If you see this error, look at the proxy configuration in [netsh](active-directory-aadconnect-prerequisites.md#connectivity) and verify it is correct.
-  ![netshshow](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnect-troubleshoot-connectivity/netshshow.png)
+  ![netshshow](./media/active-directory-aadconnect-troubleshoot-connectivity/netshshow.png)
 * If that looks correct, follow the steps in [Verify proxy connectivity](#verify-proxy-connectivity) to see if the issue is present outside the wizard as well.
 
 ## <a name="next-steps"></a>Next steps
 Learn more about [Integrating your on-premises identities with Azure Active Directory](active-directory-aadconnect.md).
-
-
-
-
-
-
-
-
-
-
-
-

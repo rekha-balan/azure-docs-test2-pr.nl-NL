@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/22/2017
 ms.author: kumud
-ms.openlocfilehash: f6f2182857d9d62c3b9b0a545c180947b735e84c
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 1ac4ec2775ca9f690f5adf4f939908f8cee3f715
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44556324"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44825149"
 ---
 # <a name="nested-traffic-manager-profiles"></a>Nested Traffic Manager profiles
 
@@ -45,7 +45,7 @@ The following diagram illustrates this example:
 
 In this configuration, traffic directed via the parent profile distributes traffic across regions normally. Within West Europe, the nested profile distributes traffic to the production and test endpoints according to the weights assigned.
 
-When the parent profile uses the 'Performance' traffic-routing method, each endpoint must be assigned a location. The location is assigned when you configure the endpoint. Choose the Azure region closest to your deployment. The Azure regions are the location values supported by the Internet Latency Table. For more information, see [Traffic Manager 'Performance' traffic-routing method](traffic-manager-routing-methods.md#performance-traffic-routing-method).
+When the parent profile uses the 'Performance' traffic-routing method, each endpoint must be assigned a location. The location is assigned when you configure the endpoint. Choose the Azure region closest to your deployment. The Azure regions are the location values supported by the Internet Latency Table. For more information, see [Traffic Manager 'Performance' traffic-routing method](traffic-manager-routing-methods.md#performance).
 
 ## <a name="example-2-endpoint-monitoring-in-nested-profiles"></a>Example 2: Endpoint monitoring in Nested Profiles
 
@@ -105,23 +105,13 @@ Learn more about [Traffic Manager profiles](traffic-manager-overview.md)
 Learn how to [create a Traffic Manager profile](traffic-manager-create-profile.md)
 
 <!--Image references-->
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/traffic-manager/media/traffic-manager-nested-profiles/figure-1.png
-[2]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/traffic-manager/media/traffic-manager-nested-profiles/figure-2.png
-[3]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/traffic-manager/media/traffic-manager-nested-profiles/figure-3.png
-[4]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/traffic-manager/media/traffic-manager-nested-profiles/figure-4.png
-[5]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/traffic-manager/media/traffic-manager-nested-profiles/figure-5.png
-[6]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/traffic-manager/media/traffic-manager-nested-profiles/figure-6.png
-[7]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/traffic-manager/media/traffic-manager-nested-profiles/figure-7.png
-[8]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/traffic-manager/media/traffic-manager-nested-profiles/figure-8.png
-[9]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/traffic-manager/media/traffic-manager-nested-profiles/figure-9.png
-[10]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/traffic-manager/media/traffic-manager-nested-profiles/figure-10.png
-
-
-
-
-
-
-
-
-
-
+[1]: ./media/traffic-manager-nested-profiles/figure-1.png
+[2]: ./media/traffic-manager-nested-profiles/figure-2.png
+[3]: ./media/traffic-manager-nested-profiles/figure-3.png
+[4]: ./media/traffic-manager-nested-profiles/figure-4.png
+[5]: ./media/traffic-manager-nested-profiles/figure-5.png
+[6]: ./media/traffic-manager-nested-profiles/figure-6.png
+[7]: ./media/traffic-manager-nested-profiles/figure-7.png
+[8]: ./media/traffic-manager-nested-profiles/figure-8.png
+[9]: ./media/traffic-manager-nested-profiles/figure-9.png
+[10]: ./media/traffic-manager-nested-profiles/figure-10.png

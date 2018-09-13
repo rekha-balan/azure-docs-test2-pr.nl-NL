@@ -1,10 +1,10 @@
 ---
-title: Node.js Getting Started Guide | Microsoft Docs
+title: Node.js Getting Started Guide
 description: Learn how to create a simple Node.js web application and deploy it to an Azure cloud service.
 services: cloud-services
 documentationcenter: nodejs
-author: rmcmurray
-manager: erikre
+author: jpconnock
+manager: timlt
 editor: ''
 ms.assetid: 50951a87-fed4-48e0-bcfa-453b9e50452e
 ms.service: cloud-services
@@ -12,14 +12,14 @@ ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: nodejs
 ms.topic: hero-article
-ms.date: 12/22/2016
-ms.author: robmcm
-ms.openlocfilehash: 53c4878bf85a899e86416f353e429d8860f131b8
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 08/17/2017
+ms.author: jeconnoc
+ms.openlocfilehash: 1a2dedaca44785634376b7b3b15579b96ee6ff5d
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44562982"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44809327"
 ---
 # <a name="build-and-deploy-a-nodejs-application-to-an-azure-cloud-service"></a>Build and deploy a Node.js application to an Azure Cloud Service
 
@@ -164,8 +164,8 @@ For more information, see the [Node.js Developer Center].
 
 <!-- URL List -->
 
-[Azure Websites, Cloud Services and Virtual Machines comparison]: ../app-service-web/choose-web-site-cloud-service-vm.md
-[using a lightweight web app]: ../app-service-web/app-service-web-get-started-nodejs.md
+[Azure Websites, Cloud Services and Virtual Machines comparison]: ../app-service/choose-web-site-cloud-service-vm.md
+[using a lightweight web app]: ../app-service/app-service-web-get-started-nodejs.md
 [Azure Powershell]: /powershell/azureps-cmdlets-docs
 [Azure SDK for .NET 2.7]: http://www.microsoft.com/en-us/download/details.aspx?id=48178
 [Connect PowerShell]: /powershell/azureps-cmdlets-docs#step-3-connect
@@ -175,17 +175,10 @@ For more information, see the [Node.js Developer Center].
 
 <!-- IMG List -->
 
-[The result of the New-AzureService helloworld command]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/cloud-services/media/cloud-services-nodejs-develop-deploy-app/node9.png
-[The output of the Add-AzureNodeWebRole command]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/cloud-services/media/cloud-services-nodejs-develop-deploy-app/node11.png
-[A web browser displaying the Hello World web page]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/cloud-services/media/cloud-services-nodejs-develop-deploy-app/node14.png
-[The output of the Publish-AzureService command]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/cloud-services/media/cloud-services-nodejs-develop-deploy-app/node19.png
-[A browser window displaying the hello world page; the URL indicates the page is hosted on Azure.]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/cloud-services/media/cloud-services-nodejs-develop-deploy-app/node21.png
-[The status of the Stop-AzureService command]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/cloud-services/media/cloud-services-nodejs-develop-deploy-app/node48.png
-[The status of the Remove-AzureService command]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/cloud-services/media/cloud-services-nodejs-develop-deploy-app/node49.png
-
-
-
-
-
-
-
+[The result of the New-AzureService helloworld command]: ./media/cloud-services-nodejs-develop-deploy-app/node9.png
+[The output of the Add-AzureNodeWebRole command]: ./media/cloud-services-nodejs-develop-deploy-app/node11.png
+[A web browser displaying the Hello World web page]: ./media/cloud-services-nodejs-develop-deploy-app/node14.png
+[The output of the Publish-AzureService command]: ./media/cloud-services-nodejs-develop-deploy-app/node19.png
+[A browser window displaying the hello world page; the URL indicates the page is hosted on Azure.]: ./media/cloud-services-nodejs-develop-deploy-app/node21.png
+[The status of the Stop-AzureService command]: ./media/cloud-services-nodejs-develop-deploy-app/node48.png
+[The status of the Remove-AzureService command]: ./media/cloud-services-nodejs-develop-deploy-app/node49.png

@@ -12,23 +12,21 @@ ms.devlang: na
 ms.topic: get-started-article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 10/10/2016
+ms.date: 05/02/2017
 ms.author: ganesr
-ms.openlocfilehash: e6bb46cd1f0156db461f8e5d7f229c158c3eabba
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 7f8386b518ada850fc03e23c5cae3b159b3b213e
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44550380"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44827905"
 ---
 # <a name="moving-expressroute-circuits-from-the-classic-to-the-resource-manager-deployment-model"></a>Moving ExpressRoute circuits from the classic to the Resource Manager deployment model
 This article provides an overview of what it means to move an Azure ExpressRoute circuit from the classic to the Azure Resource Manager deployment model.
 
-[!INCLUDE [vpn-gateway-sm-rm](../../includes/vpn-gateway-classic-rm-include.md)]
-
 You can use a single ExpressRoute circuit to connect to virtual networks that are deployed both in the classic and the Resource Manager deployment models. An ExpressRoute circuit, regardless of how it is created, can now link to virtual networks across both deployment models.
 
-![An ExpressRoute circuit that links to virtual networks across both deployment models](https://docstestmedia1.blob.core.windows.net/azure-media/articles/expressroute/media/expressroute-move/expressroute-move-1.png)
+![An ExpressRoute circuit that links to virtual networks across both deployment models](./media/expressroute-move/expressroute-move-1.png)
 
 ## <a name="expressroute-circuits-that-are-created-in-the-classic-deployment-model"></a>ExpressRoute circuits that are created in the classic deployment model
 ExpressRoute circuits that are created in the classic deployment model need to be moved to the Resource Manager deployment model first to enable connectivity to both the classic and the Resource Manager deployment models. There isn't connectivity loss or disruption when a connection is being moved. All circuit-to-virtual network links in the classic deployment model (within the same subscription and cross-subscription) are preserved.
@@ -88,11 +86,11 @@ This section describes what's supported for ExpressRoute circuits:
 * After an ExpressRoute circuit has been moved to the Resource Manager deployment model, you can manage the life cycle of the ExpressRoute circuit only by using the Resource Manager deployment model. This means that you can perform operations like adding/updating/deleting peerings, updating circuit properties (such as bandwidth, SKU, and billing type), and deleting circuits only in the Resource Manager deployment model.
 * The ExpressRoute circuit acts like a bridge between the classic and the Resource Manager deployment models. Traffic between virtual machines in virtual networks in the classic deployment model and those in virtual networks in the Resource Manager deployment model flows through ExpressRoute if both virtual networks are linked to the same ExpressRoute circuit.
 * Cross-subscription connectivity is supported in both the classic and the Resource Manager deployment models.
+* After you move an ExpressRoute circuit from the classic model to the Azure Resource Manager model, you can [migrate the virtual networks linked to the ExpressRoute circuit](expressroute-migration-classic-resource-manager.md).
 
 ## <a name="whats-not-supported"></a>What's not supported
 This section describes what's not supported for ExpressRoute circuits:
 
-* Moving circuit links, gateways, and virtual networks from the classic to the Resource Manager deployment model.
 * Managing the life cycle of an ExpressRoute circuit from the classic deployment model.
 * Role-Based Access Control (RBAC) support for the classic deployment model. You cannot perform RBAC controls to a circuit in the classic deployment model. Any administrator/coadministrator of the subscription can link or unlink virtual networks to the circuit.
 
@@ -100,11 +98,11 @@ This section describes what's not supported for ExpressRoute circuits:
 Follow the instructions that are described in [Move an ExpressRoute circuit from the classic to the Resource Manager deployment model](expressroute-howto-move-arm.md).
 
 ## <a name="next-steps"></a>Next steps
+* [Migrate the virtual networks linked to the ExpressRoute circuit from the classic model to the Azure Resource Manager model](expressroute-migration-classic-resource-manager.md)
 * For workflow information, see [ExpressRoute circuit provisioning workflows and circuit states](expressroute-workflows.md).
 * To configure your ExpressRoute connection:
   
   * [Create an ExpressRoute circuit](expressroute-howto-circuit-arm.md)
   * [Configure routing](expressroute-howto-routing-arm.md)
   * [Link a virtual network to an ExpressRoute circuit](expressroute-howto-linkvnet-arm.md)
-
 

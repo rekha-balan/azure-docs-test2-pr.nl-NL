@@ -3,8 +3,8 @@ title: 'Azure AD Connect sync: Technical concepts | Microsoft Docs'
 description: Explains the technical concepts of Azure AD Connect sync.
 services: active-directory
 documentationcenter: ''
-author: MarkusVi
-manager: femila
+author: billmath
+manager: mtillman
 editor: ''
 ms.assetid: 731cfeb3-beaf-4d02-aef4-b02a8f99fd11
 ms.service: active-directory
@@ -12,14 +12,15 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 01/24/2017
-ms.author: markvi;andkjell
-ms.openlocfilehash: 4261b2966aa776a98519e270487d54448c1c8e17
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 01/15/2018
+ms.component: hybrid
+ms.author: billmath
+ms.openlocfilehash: 4c7f1a0f1199daf9409f9ef3b4230e774321fe59
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44661522"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44826670"
 ---
 # <a name="azure-ad-connect-sync-technical-concepts"></a>Azure AD Connect sync: Technical Concepts
 This article is a summary of the topic [Understanding architecture](active-directory-aadconnectsync-technical-concepts.md).
@@ -28,7 +29,7 @@ Azure AD Connect sync builds upon a solid metadirectory synchronization platform
 The following sections introduce the concepts for metadirectory synchronization.
 Building upon MIIS, ILM, and FIM, the Azure Active Directory Sync Services provides the next platform for connecting to data sources, synchronizing data between data sources, as well as the provisioning and deprovisioning of identities.
 
-![Technical Concepts](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnectsync-technical-concepts/scenario.png)
+![Technical Concepts](./media/active-directory-aadconnectsync-technical-concepts/scenario.png)
 
 The following sections provide more details about the following aspects of the FIM Synchronization Service:
 
@@ -89,6 +90,4 @@ Whenever a rule determines that a new connector space object needs to be created
 * [Integrating your on-premises identities with Azure Active Directory](active-directory-aadconnect.md)
 
 <!--Image references-->
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadsync-technical-concepts/ic750598.png
-
-
+[1]: ./media/active-directory-aadsync-technical-concepts/ic750598.png

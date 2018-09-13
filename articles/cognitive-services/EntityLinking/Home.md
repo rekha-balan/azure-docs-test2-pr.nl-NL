@@ -5,16 +5,16 @@ services: cognitive-services
 author: DavidLiCIG
 manager: wkwok
 ms.service: cognitive-services
-ms.technology: entitylinking
+ms.component: entity-linking-intelligence
 ms.topic: article
 ms.date: 03/28/2016
 ms.author: davl
-ms.openlocfilehash: 77ab02a48cba1e3517aec315d92a51c35299ad1e
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 662295c42a421fe76892e6e5aac7b7e7178d6155
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44550710"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44800948"
 ---
 # <a name="entity-linking-intelligence-service-api"></a>Entity Linking Intelligence Service API
 
@@ -26,12 +26,11 @@ Sometimes in different contexts, a word might be used as a named entity, a verb,
 
 The illustration below shows an example of entity linking. Specifically, when using Wikipedia, the Entity Linking Intelligence Service detects all entities mentioned within the input text and links them to relevant reference points according to the page ID.
 
- ![Entity Linking Sample for Mars](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cognitive-services/EntityLinking/Images/EntityLinkingSample1.png)
+ ![Entity Linking Sample for Mars](./Images/EntityLinkingSample1.png)
  
 ## <a name="get-started"></a>Get Started
  
 To quickly go through the Entity Linking basic functionalities and subscription process, refer to our getting started tutorial.
 [Getting Started with Entity Linking API in C#](GettingStarted.md)
-
 
 

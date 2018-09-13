@@ -3,7 +3,7 @@ title: Create an Azure Internet-facing load balancer with IPv6 - PowerShell  | M
 description: Learn how to create an Internet facing load balancer with IPv6 using PowerShell for Resource Manager
 services: load-balancer
 documentationcenter: na
-author: kumudd
+author: KumudD
 manager: timlt
 tags: azure-resource-manager
 keywords: ipv6, azure load balancer, dual stack, public ip, native ipv6, mobile, iot
@@ -13,14 +13,14 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 01/23/2017
+ms.date: 09/25/2017
 ms.author: kumud
-ms.openlocfilehash: 0a088c92ade70e04c9daf73fa0bc836d146b96c8
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 1e369307fba815554b7a34fd430b2e259137c5d6
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44662550"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44824140"
 ---
 # <a name="get-started-creating-an-internet-facing-load-balancer-with-ipv6-using-powershell-for-resource-manager"></a>Get started creating an Internet facing load balancer with IPv6 using PowerShell for Resource Manager
 
@@ -29,13 +29,16 @@ ms.locfileid: "44662550"
 > * [Azure CLI](load-balancer-ipv6-internet-cli.md)
 > * [Template](load-balancer-ipv6-internet-template.md)
 
+
+
+
 An Azure load balancer is a Layer-4 (TCP, UDP) load balancer. The load balancer provides high availability by distributing incoming traffic among healthy service instances in cloud services or virtual machines in a load balancer set. Azure Load Balancer can also present those services on multiple ports, multiple IP addresses, or both.
 
 ## <a name="example-deployment-scenario"></a>Example deployment scenario
 
 The following diagram illustrates the load balancing solution being deployed in this article.
 
-![Load balancer scenario](https://docstestmedia1.blob.core.windows.net/azure-media/articles/load-balancer/media/load-balancer-ipv6-internet-ps/lb-ipv6-scenario.png)
+![Load balancer scenario](./media/load-balancer-ipv6-internet-ps/lb-ipv6-scenario.png)
 
 In this scenario you will create the following Azure resources:
 
@@ -66,7 +69,7 @@ Make sure you have the latest production version of the Azure Resource Manager m
 1. Sign into Azure
 
     ```powershell
-    Login-AzureRmAccount
+    Connect-AzureRmAccount
     ```
 
     Enter your credentials when prompted.
@@ -177,7 +180,7 @@ This example creates the following items:
 1. Get the Virtual Network and Virtual Network Subnet, where the NICs need to be created.
 
     ```powershell
-    $vnet = Get-AzureRmVirtualNetwork -Name NRPVNet -ResourceGroupName NRP-RG
+    $vnet = Get-AzureRmVirtualNetwork -Name VNet -ResourceGroupName NRP-RG
     $backendSubnet = Get-AzureRmVirtualNetworkSubnetConfig -Name LB-Subnet-BE -VirtualNetwork $vnet
     ```
 
@@ -235,4 +238,3 @@ For more information about creating a VM, see [Create and preconfigure a Windows
 [Configure a load balancer distribution mode](load-balancer-distribution-mode.md)
 
 [Configure idle TCP timeout settings for your load balancer](load-balancer-tcp-idle-timeout.md)
-

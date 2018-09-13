@@ -1,29 +1,28 @@
 ---
-title: Use labels to instrument queries in SQL Data Warehouse | Microsoft Docs
+title: Using labels to instrument queries in SQL Data Warehouse | Microsoft Docs
 description: Tips for using labels to instrument queries in Azure SQL Data Warehouse for developing solutions.
 services: sql-data-warehouse
-documentationcenter: NA
-author: jrowlandjones
-manager: jhubbard
-editor: ''
-ms.assetid: 44988de8-04c1-4fed-92be-e1935661a4e8
+author: ronortloff
+manager: craigg
 ms.service: sql-data-warehouse
-ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: data-services
-ms.custom: queries
-ms.date: 10/31/2016
-ms.author: jrj;barbkess
-ms.openlocfilehash: 9e75bbe528a427724a623305fbd45e2277e9d0af
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.topic: conceptual
+ms.component: implement
+ms.date: 04/17/2018
+ms.author: rortloff
+ms.reviewer: igorstan
+ms.openlocfilehash: 959fddfd24041a245f80b048eca4bef3cd612905
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44555322"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44827294"
 ---
-# <a name="use-labels-to-instrument-queries-in-sql-data-warehouse"></a>Use labels to instrument queries in SQL Data Warehouse
-SQL Data Warehouse supports a concept called query labels. Before going into any depth let's look at an example of one:
+# <a name="using-labels-to-instrument-queries-in-azure-sql-data-warehouse"></a>Using labels to instrument queries in Azure SQL Data Warehouse
+Tips for using labels to instrument queries in Azure SQL Data Warehouse for developing solutions.
+
+
+## <a name="what-are-labels"></a>What are labels?
+SQL Data Warehouse supports a concept called query labels. Before going into any depth, let's look at an example:
 
 ```sql
 SELECT *
@@ -32,11 +31,11 @@ OPTION (LABEL = 'My Query Label')
 ;
 ```
 
-This last line tags the string 'My Query Label' to the query. This is particularly helpful as the label is query-able through the DMVs. This provides us with a mechanism to track down problem queries and also to help identify progress through an ETL run.
+The last line tags the string 'My Query Label' to the query. This tag is particularly helpful since the label is query-able through the DMVs. Querying for labels provides a mechanism for locating problem queries and helping to identify progress through an ELT run.
 
-A good naming convention really helps here. For example something like ' PROJECT : PROCEDURE : STATEMENT : COMMENT' would help to uniquely identify the query in amongst all the code in source control.
+A good naming convention really helps. For example, starting the label with PROJECT, PROCEDURE, STATEMENT, or COMMENT helps to uniquely identify the query among all the code in source control.
 
-To search by label you can use the following query that uses the dynamic management views:
+The following query uses a dynamic management view to search by label.
 
 ```sql
 SELECT  *
@@ -46,18 +45,11 @@ WHERE   r.[label] = 'My Query Label'
 ```
 
 > [!NOTE]
-> It is essential that you wrap square brackets or double quotes around the word label when querying. Label is a reserved word and will caused an error if it has not been delimited.
+> It is essential to put square brackets or double quotes around the word label when querying. Label is a reserved word and causes an error when it is not delimited. 
 > 
 > 
 
 ## <a name="next-steps"></a>Next steps
-For more development tips, see [development overview][development overview].
+For more development tips, see [development overview](sql-data-warehouse-overview-develop.md).
 
-<!--Image references-->
 
-<!--Article references-->
-[development overview]: sql-data-warehouse-overview-develop.md
-
-<!--MSDN references-->
-
-<!--Other Web references-->

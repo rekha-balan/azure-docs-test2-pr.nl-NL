@@ -3,26 +3,22 @@ title: Testing Azure Functions | Microsoft Docs
 description: Test your Azure functions by using Postman, cURL, and Node.js.
 services: functions
 documentationcenter: na
-author: wesmc7777
-manager: erikre
-editor: ''
-tags: ''
+author: ggailey777
+manager: jeconnoc
 keywords: azure functions, functions, event processing, webhooks, dynamic compute, serverless architecture, testing
 ms.assetid: c00f3082-30d2-46b3-96ea-34faf2f15f77
-ms.service: functions
+ms.service: azure-functions
 ms.devlang: multiple
-ms.topic: article
-ms.tgt_pltfrm: multiple
-ms.workload: na
+ms.topic: conceptual
 ms.date: 02/02/2017
-ms.author: wesmc
+ms.author: glenga
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 62862600c670e38939fae1272943dbbac89f6800
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 1aa1c3a3c0dd4985662b5ceb4acd7250cf2d0186
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44563908"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44818290"
 ---
 # <a name="strategies-for-testing-your-code-in-azure-functions"></a>Strategies for testing your code in Azure Functions
 
@@ -34,9 +30,9 @@ This topic demonstrates the various ways to test functions, including using the 
 + Timer-triggered function
 + Testing application or framework
 
-All these testing methods use an HTTP trigger function that accepts input through either a query string parameter or the request body. You create this function in the first section.
+All these testing methods use an HTTP trigger function that accepts input through either a query string parameter or the request body. You create this function using the Azure portal in the first section.
 
-## <a name="create-a-function-for-testing"></a>Create a function for testing
+## <a name="create-a-simple-function-for-testing-using-the-azure-portal"></a>Create a simple function for testing using the Azure portal
 For most of this tutorial, we use a slightly modified version of the HttpTrigger JavaScript function template that is available when you create a function. If you need help creating a function, review this [tutorial](functions-create-first-azure-function.md). Choose the **HttpTrigger- JavaScript** template when creating the test function in the [Azure portal].
 
 The default function template is basically a "hello world" function that echoes back the name from the request body or query string parameter, `name=<your name>`.  We'll update the code to also allow you to provide the name and an address as JSON content in the request body. Then the function echoes these back to the client when available.   
@@ -101,7 +97,7 @@ Append the `name` parameter to the query string. Use an actual name for the `<En
 
 Paste the URL into your browser, and you should get a response similar to the following.
 
-![Screenshot of Chrome browser tab with test response](https://docstestmedia1.blob.core.windows.net/azure-media/articles/azure-functions/media/functions-test-a-function/browser-test.png)
+![Screenshot of Chrome browser tab with test response](./media/functions-test-a-function/browser-test.png)
 
 This example is the Chrome browser, which wraps the returned string in XML. Other browsers display just the string value.
 
@@ -143,7 +139,7 @@ To test the function with a request body in Postman:
 
 The following image shows testing the simple echo function example in this tutorial.
 
-![Screenshot of Postman user interface](https://docstestmedia1.blob.core.windows.net/azure-media/articles/azure-functions/media/functions-test-a-function/postman-test.png)
+![Screenshot of Postman user interface](./media/functions-test-a-function/postman-test.png)
 
 In the portal **Logs** window, output similar to the following is logged in executing the function:
 
@@ -174,7 +170,7 @@ This particular example requires a query string parameter, which can be passed a
 
 Run the command, and you see the following output of the function on the command line:
 
-![Screenshot of Command Prompt output](https://docstestmedia1.blob.core.windows.net/azure-media/articles/azure-functions/media/functions-test-a-function/curl-test.png)
+![Screenshot of Command Prompt output](./media/functions-test-a-function/curl-test.png)
 
 In the portal **Logs** window, output similar to the following is logged in executing the function:
 
@@ -196,7 +192,7 @@ You can test a blob trigger function by using [Azure Storage Explorer](http://st
 4. Run [Azure Storage Explorer](http://storageexplorer.com/), and connect to the blob container in the storage account being monitored.
 5. Click **Upload** to upload the text file.
 
-    ![Screenshot of Storage Explorer](https://docstestmedia1.blob.core.windows.net/azure-media/articles/azure-functions/media/functions-test-a-function/azure-storage-explorer-test.png)
+    ![Screenshot of Storage Explorer](./media/functions-test-a-function/azure-storage-explorer-test.png)
 
 The default blob trigger function code reports the processing of the blob in the logs:
 
@@ -234,7 +230,7 @@ In the portal **Logs** window, output similar to the following is logged in exec
 
 
 ### <a name="test-with-a-timer-trigger"></a>Test with a timer trigger
-Some functions can't be adequately tested with the tools mentioned previously. For example, consider a queue trigger function that runs when a message is dropped into [Azure Queue storage](../storage/storage-dotnet-how-to-use-queues.md). You can always write code to drop a message into your queue, and an example of this in a console project is provided later in this article. However, there is another approach you can use that tests functions directly.  
+Some functions can't be adequately tested with the tools mentioned previously. For example, consider a queue trigger function that runs when a message is dropped into [Azure Queue storage](../storage/queues/storage-dotnet-how-to-use-queues.md). You can always write code to drop a message into your queue, and an example of this in a console project is provided later in this article. However, there is another approach you can use that tests functions directly.  
 
 You can use a timer trigger configured with a queue output binding. That timer trigger code can then write the test messages to the queue. This section walks through an example.
 
@@ -378,11 +374,11 @@ In the portal **Logs** window, output similar to the following is logged in exec
 
 
 ### <a name="test-a-queue-trigger-function-with-code-c"></a>Test a queue trigger function with code: C# #
-We mentioned earlier that you can test a queue trigger by using code to drop a message in your queue. The following example code is based on the C# code presented in the [Getting started with Azure Queue storage](../storage/storage-dotnet-how-to-use-queues.md) tutorial. Code for other languages is also available from that link.
+We mentioned earlier that you can test a queue trigger by using code to drop a message in your queue. The following example code is based on the C# code presented in the [Getting started with Azure Queue storage](../storage/queues/storage-dotnet-how-to-use-queues.md) tutorial. Code for other languages is also available from that link.
 
 To test this code in a console app, you must:
 
-* [Configure your storage connection string in the app.config file](../storage/storage-dotnet-how-to-use-queues.md).
+* [Configure your storage connection string in the app.config file](../storage/queues/storage-dotnet-how-to-use-queues.md).
 * Pass a `name` and `address` as parameters to the app. For example, `C:\myQueueConsoleApp\test.exe "Wes testing queues" "in a console app"`. (This code accepts the name and address for a new user as command-line arguments during runtime.)
 
 Example C# code:
@@ -444,7 +440,3 @@ In the browser window for the queue function, you can see each message being pro
 <!-- URLs. -->
 
 [Azure portal]: https://portal.azure.com
-
-
-
-

@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 01/03/2017
 ms.author: jonor
-ms.openlocfilehash: fa6c1f39c80653f7558b030b6d7279348bd19226
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: ec29e6b250f927a3a4a94ffdf83d6c7c0e325722
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44550977"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44826046"
 ---
 # <a name="example-1--build-a-simple-dmz-using-nsgs-with-an-azure-resource-manager-template"></a>Example 1 – Build a simple DMZ using NSGs with an Azure Resource Manager template
 [Return to the Security Boundary Best Practices Page][HOME]
@@ -359,7 +359,7 @@ Once the template runs successfully, you can set up the web server and app serve
 * Test different traffic flows through this DMZ
 
 <!--Image References-->
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-network/media/virtual-networks-dmz-nsg-arm/example1design.png "Inbound DMZ with NSG"
+[1]: ./media/virtual-networks-dmz-nsg-arm/example1design.png "Inbound DMZ with NSG"
 
 <!--Link References-->
 [HOME]: ../best-practices-network-security.md

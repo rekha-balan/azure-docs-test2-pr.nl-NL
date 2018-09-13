@@ -3,7 +3,7 @@ title: Issue templates in Azure API Management | Microsoft Docs
 description: Learn how to customize the content of the Issue pages in the developer portal in Azure API Management.
 services: api-management
 documentationcenter: ''
-author: miaojiang
+author: vladvino
 manager: erikre
 editor: ''
 ms.assetid: 47da4bb2-426e-4e53-8fa7-214ee2e3ab37
@@ -14,12 +14,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/09/2017
 ms.author: apimpm
-ms.openlocfilehash: 8832a885bbb38cd2c487cf677bb2f7d28fff4e10
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 9d13a146e94328b8ac57dc1036676328a4bea9d9
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44670314"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44793356"
 ---
 # <a name="issue-templates-in-azure-api-management"></a>Issue templates in Azure API Management
 Azure API Management provides you the ability to customize the content of developer portal pages using a set of templates that configure their content. Using [DotLiquid](http://dotliquidmarkup.org/) syntax and the editor of your choice, such as [DotLiquid for Designers](https://github.com/dotliquid/dotliquid/wiki/DotLiquid-for-Designers), and a provided set of localized [String resources](api-management-template-resources.md#strings), [Glyph resources](api-management-template-resources.md#glyphs), and [Page controls](api-management-page-controls.md), you have great flexibility to configure the content of the pages as you see fit using these templates.  
@@ -34,7 +34,7 @@ Azure API Management provides you the ability to customize the content of develo
 ##  <a name="IssueList"></a> Issue list  
  The **Issue list** template allows you to customize the body of the issue list page in the developer portal.  
   
- ![Issue List Developer Portal](https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-issue-templates/apim-issue-list-developer-portal.png "APIM Issue List Developer Portal")  
+ ![Issue List Developer Portal](./media/api-management-issue-templates/APIM-Issue-List-Developer-Portal.png "APIM Issue List Developer Portal")  
   
 ### <a name="default-template"></a>Default template  
   

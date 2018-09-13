@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/16/2017
 ms.author: kumud
-ms.openlocfilehash: 2ba6fec699315e5a6139dfe26d994c58f78dd8ca
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 43bb407730594498cfe9c78810c4e9dfb17e4af4
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44661211"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44819967"
 ---
 # <a name="performance-considerations-for-traffic-manager"></a>Performance considerations for Traffic Manager
 
@@ -53,17 +53,17 @@ The tools on these sites measure DNS latencies and display the resolved IP addre
 
     One of the simplest tools is WebSitePulse. Enter the URL to see DNS resolution time, First Byte, Last Byte, and other performance statistics. You can choose from three different test locations. In this example, you see that the first execution shows that DNS lookup takes 0.204 sec.
 
-    ![pulse1](https://docstestmedia1.blob.core.windows.net/azure-media/articles/traffic-manager/media/traffic-manager-performance-considerations/traffic-manager-web-site-pulse.png)
+    ![pulse1](./media/traffic-manager-performance-considerations/traffic-manager-web-site-pulse.png)
 
     Because the results are cached, the second test for the same Traffic Manager endpoint the DNS lookup takes 0.002 sec.
 
-    ![pulse2](https://docstestmedia1.blob.core.windows.net/azure-media/articles/traffic-manager/media/traffic-manager-performance-considerations/traffic-manager-web-site-pulse2.png)
+    ![pulse2](./media/traffic-manager-performance-considerations/traffic-manager-web-site-pulse2.png)
 
 * [CA App Synthetic Monitor](https://asm.ca.com/en/checkit.php)
 
     Formerly known as the Watchmouse Check Website tool, this site show you the DNS resolution time from multiple geographic regions simultaneously. Enter the URL to see DNS resolution time, connection time, and speed from several geographic locations. Use this test to see which hosted service is returned for different locations around the world.
 
-    ![pulse1](https://docstestmedia1.blob.core.windows.net/azure-media/articles/traffic-manager/media/traffic-manager-performance-considerations/traffic-manager-web-site-watchmouse.png)
+    ![pulse1](./media/traffic-manager-performance-considerations/traffic-manager-web-site-watchmouse.png)
 
 * [Pingdom](http://tools.pingdom.com/)
 
@@ -85,8 +85,5 @@ The tools on these sites measure DNS latencies and display the resolved IP addre
 
 [Operations on Traffic Manager (REST API Reference)](http://go.microsoft.com/fwlink/?LinkId=313584)
 
-[Azure Traffic Manager Cmdlets](http://go.microsoft.com/fwlink/p/?LinkId=400769)
-
-
-
+[Azure Traffic Manager Cmdlets](https://docs.microsoft.com/powershell/module/azurerm.trafficmanager)
 

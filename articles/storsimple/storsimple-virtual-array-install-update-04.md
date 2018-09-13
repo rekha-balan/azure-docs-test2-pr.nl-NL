@@ -14,12 +14,12 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 02/07/2017
 ms.author: alkohli
-ms.openlocfilehash: a24df630a8157aa48338542751589810dcb018d3
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 3fb246b1515e7a637e6cff6499bf324c3f80dd45
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44548871"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44810172"
 ---
 # <a name="install-update-04-on-your-storsimple-virtual-array"></a>Install Update 0.4 on your StorSimple Virtual Array
 
@@ -56,7 +56,7 @@ Perform the following steps to download the software update from the Microsoft U
    
     The hotfix listing appears, for example, **StorSimple Virtual Array Update 0.4**.
    
-    ![Search catalog](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-install-update-04/download1.png)
+    ![Search catalog](./media/storsimple-virtual-array-install-update-04/download1.png)
 
 4. Click **Add**. The update is added to the basket.
 
@@ -76,26 +76,26 @@ Use this method to install updates on a device running GA or Update 0.1 software
 
 1. In the local web UI, go to **Maintenance** > **Software Update**.
    
-    ![update device](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-install-update/update1m.png)
+    ![update device](./media/storsimple-virtual-array-install-update/update1m.png)
 
 2. In **Update file path**, enter the file name for the update or the hotfix. You can also browse to the update or hotfix installation file if placed on a network share. Click **Apply**.
    
-    ![update device](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-install-update/update2m.png)
+    ![update device](./media/storsimple-virtual-array-install-update/update2m.png)
 
 3. A warning is displayed. Given this is a single node device, after the update is applied, the device restarts and there is downtime. Click the check icon.
    
-   ![update device](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-install-update/update3m.png)
+   ![update device](./media/storsimple-virtual-array-install-update/update3m.png)
 
 4. The update starts. After the device is successfully updated, it restarts. The local UI is not accessible in this duration.
    
-    ![update device](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-install-update/update5m.png)
+    ![update device](./media/storsimple-virtual-array-install-update/update5m.png)
 
 5. After the restart is complete, you are taken to the **Sign in** page. To verify that the device software has updated, in the local web UI, go to **Maintenance** > **Software Update**. The displayed software version should be **10.0.0.0.0.10289.0** for Update 0.4.
    
    > [!NOTE]
    > We report the software versions in a slightly different way in the local web UI and the Azure portal. For example, the local web UI reports **10.0.0.0.0.10289** and the Azure portal reports **10.0.10289.0** for the same version.
    
-    ![update device](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-install-update/update6m.png)
+    ![update device](./media/storsimple-virtual-array-install-update/update6m.png)
 
 ## <a name="use-the-azure-portal"></a>Use the Azure portal
 
@@ -109,10 +109,4 @@ After the installation is complete (as indicated by job status at 100 %), go to 
 ## <a name="next-steps"></a>Next steps
 
 Learn more about [administering your StorSimple Virtual Array](storsimple-ova-web-ui-admin.md).
-
-
-
-
-
-
 

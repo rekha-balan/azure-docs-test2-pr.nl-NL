@@ -1,346 +1,89 @@
 ---
-title: Learn how to use the SFTP connector in your logic apps | Microsoft Docs
-description: Create logic apps with Azure App service. Connect to SFTP API to send and receive files. You can perform various operations such as create, update, get or delete files.
+title: Connect to SFTP account from Azure Logic Apps | Microsoft Docs
+description: Automate tasks and workflows that monitor, create, manage, send, and receive files for an SFTP server by using Azure Logic Apps
 services: logic-apps
-documentationcenter: .net,nodejs,java
-author: msftman
-manager: erikre
-editor: ''
-tags: connectors
-ms.assetid: 697eb8b0-4a66-40c7-be7b-6aa6b131c7ad
 ms.service: logic-apps
-ms.devlang: multiple
+ms.suite: integration
+author: ecfan
+ms.author: estfan
+ms.reviewer: klam, LADocs
+ms.assetid: 697eb8b0-4a66-40c7-be7b-6aa6b131c7ad
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: integration
-ms.date: 07/20/2016
-ms.author: deonhe
-ms.openlocfilehash: 2977404fb408ea5301c88caa7ce6767a906ca9c7
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+tags: connectors
+ms.date: 08/24/2018
+ms.openlocfilehash: 8f430477883543aa8f87eb3fb0fb49ab31e2d723
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44552504"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44824863"
 ---
-# <a name="get-started-with-the-sftp-connector"></a>Get started with the SFTP connector
-Use the SFTP connector to access an SFTP account to send and receive files. You can perform various operations such as create, update, get or delete files.  
+# <a name="monitor-create-and-manage-sftp-files-by-using-azure-logic-apps"></a>Monitor, create, and manage SFTP files by using Azure Logic Apps
 
-To use [any connector](apis-list.md), you first need to create a logic app. You can get started by [creating a logic app now](../logic-apps/logic-apps-create-a-logic-app.md).
+With Azure Logic Apps and the SFTP connector, you can create automated tasks and workflows that monitor, create, send, and receive files through your account on an [SFTP](https://www.ssh.com/ssh/sftp/) server, along with other actions, for example:
+
+* Monitor when files are added or changed.
+* Get, create, copy, update, list, and delete files.
+* Get file content and metadata.
+* Extract archives to folders.
+
+You can use triggers that get responses from your SFTP server and make the output available to other actions. You can use actions in your logic apps to perform tasks with files on your SFTP server. You can also have other actions use the output from SFTP actions. For example, if you regularly retrieve files from your SFTP server, you can send email about those files and their content by using the Office 365 Outlook connector or Outlook.com connector.
+If you're new to logic apps, review [What is Azure Logic Apps?](../logic-apps/logic-apps-overview.md)
+
+## <a name="prerequisites"></a>Prerequisites
+
+* An Azure subscription. If you don't have an Azure subscription, <a href="https://azure.microsoft.com/free/" target="_blank">sign up for a free Azure account</a>. 
+
+* Your SFTP host server address and account credentials
+
+   Your credentials authorize your logic app to create  a connection and access your SFTP account.
+
+* Basic knowledge about [how to create logic apps](../logic-apps/quickstart-create-first-logic-app-workflow.md)
+
+* The logic app where you want to access your SFTP account. To start with an SFTP trigger, [create a blank logic app](../logic-apps/quickstart-create-first-logic-app-workflow.md). To use an SFTP action, start your logic app with another trigger, for example, the **Recurrence** trigger.
 
 ## <a name="connect-to-sftp"></a>Connect to SFTP
-Before your logic app can access any service, you first need to create a *connection* to the service. A [connection](connectors-overview.md) provides connectivity between a logic app and another service.  
-
-### <a name="create-a-connection-to-sftp"></a>Create a connection to SFTP
-> [!INCLUDE [Steps to create a connection to SFTP](../../includes/connectors-create-api-sftp.md)]
-> 
-> 
-
-## <a name="use-an-sftp-trigger"></a>Use an SFTP trigger
-A trigger is an event that can be used to start the workflow defined in a logic app. [Learn more about triggers](../logic-apps/logic-apps-what-are-logic-apps.md#logic-app-concepts).  
-
-In this example, I will show you how to use the **SFTP - When a file is added or modified** trigger to initiate a logic app workflow when a file is added to, or modified on, an SFTP server. In the example, you will also learn how to add a condition that checks the contents of the new or modified file and make a decision to extract the file if its contents indicate that it  should be extracted before using the contents. Finally, you will learn how to add an action to extract the contents of a file and place the extracted contents in a folder on the SFTP server. 
-
-In an enterprise example, you could use this trigger to monitor an SFTP folder for new files that represent orders from customers.  You could then use an SFTP connector action such as **Get file content** to get the contents of the order for further processing and storage in your orders database.
-
-> [!INCLUDE [Steps to create an SFTP trigger](../../includes/connectors-create-api-sftp-trigger.md)]
-> 
-> 
-
-## <a name="add-a-condition"></a>Add a condition
-> [!INCLUDE [Steps to add a condition](../../includes/connectors-create-api-sftp-condition.md)]
-> 
-> 
-
-## <a name="use-an-sftp-action"></a>Use an SFTP action
-An action is an operation carried out by the workflow defined in a logic app. [Learn more about actions](../logic-apps/logic-apps-what-are-logic-apps.md#logic-app-concepts).  
-
-> [!INCLUDE [Steps to create an SFTP action](../../includes/connectors-create-api-sftp-action.md)]
-> 
-> 
-
-## <a name="technical-details"></a>Technical Details
-Here are the details about the triggers, actions and responses that this connection supports:
-
-## <a name="sftp-triggers"></a>SFTP triggers
-SFTP has the following trigger(s):  
-
-| Trigger | Description |
-| --- | --- |
-| [When a file is added or modified](connectors-create-api-sftp.md#when-a-file-is-added-or-modified) |This operation triggers a flow when a file is added or modified in a folder. |
-
-## <a name="sftp-actions"></a>SFTP actions
-SFTP has the following actions:
-
-| Action | Description |
-| --- | --- |
-| [Get file metadata](connectors-create-api-sftp.md#get-file-metadata) |This operation gets file metadata using the file id. |
-| [Update file](connectors-create-api-sftp.md#update-file) |This operation updates the file content. |
-| [Delete file](connectors-create-api-sftp.md#delete-file) |This operation deletes a file. |
-| [Get file metadata using path](connectors-create-api-sftp.md#get-file-metadata-using-path) |This operation gets file metadata using the file path. |
-| [Get file content using path](connectors-create-api-sftp.md#get-file-content-using-path) |This operation gets file contents using the file path. |
-| [Get file content](connectors-create-api-sftp.md#get-file-content) |This operation gets file contents using the file id. |
-| [Create file](connectors-create-api-sftp.md#create-file) |This operation uploads a file to an SFTP server. |
-| [Copy file](connectors-create-api-sftp.md#copy-file) |This operation copies a file to an SFTP server. |
-| [List files in folder](connectors-create-api-sftp.md#list-files-in-folder) |This operation gets files contained in a folder. |
-| [List files in root folder](connectors-create-api-sftp.md#list-files-in-root-folder) |This operation gets the files in the root folder. |
-| [Extract folder](connectors-create-api-sftp.md#extract-folder) |This operation extracts an archive file into a folder (example: .zip). |
-
-### <a name="action-details"></a>Action details
-Here are the details for the actions and triggers for this connector, along with their responses:
-
-### <a name="get-file-metadata"></a>Get file metadata
-This operation gets file metadata using the file id. 
-
-| Property Name | Display Name | Description |
-| --- | --- | --- |
-| id* |File |Specify the file |
-
-An * indicates that a property is required
-
-#### <a name="output-details"></a>Output Details
-BlobMetadata
-
-| Property Name | Data Type |
-| --- | --- | --- |
-| Id |string |
-| Name |string |
-| DisplayName |string |
-| Path |string |
-| LastModified |string |
-| Size |integer |
-| MediaType |string |
-| IsFolder |boolean |
-| ETag |string |
-| FileLocator |string |
-
-### <a name="update-file"></a>Update file
-This operation updates the file content. 
-
-| Property Name | Display Name | Description |
-| --- | --- | --- |
-| id* |File |Specify the file |
-| body* |File content |Content of the file to update |
-
-An * indicates that a property is required
-
-#### <a name="output-details"></a>Output Details
-BlobMetadata
-
-| Property Name | Data Type |
-| --- | --- | --- |
-| Id |string |
-| Name |string |
-| DisplayName |string |
-| Path |string |
-| LastModified |string |
-| Size |integer |
-| MediaType |string |
-| IsFolder |boolean |
-| ETag |string |
-| FileLocator |string |
-
-### <a name="delete-file"></a>Delete file
-This operation deletes a file. 
-
-| Property Name | Display Name | Description |
-| --- | --- | --- |
-| id* |File |Specify the file |
-
-An * indicates that a property is required
-
-### <a name="get-file-metadata-using-path"></a>Get file metadata using path
-This operation gets file metadata using the file path. 
-
-| Property Name | Display Name | Description |
-| --- | --- | --- |
-| path* |File path |Unique path of the file |
-
-An * indicates that a property is required
-
-#### <a name="output-details"></a>Output Details
-BlobMetadata
-
-| Property Name | Data Type |
-| --- | --- | --- |
-| Id |string |
-| Name |string |
-| DisplayName |string |
-| Path |string |
-| LastModified |string |
-| Size |integer |
-| MediaType |string |
-| IsFolder |boolean |
-| ETag |string |
-| FileLocator |string |
-
-### <a name="get-file-content-using-path"></a>Get file content using path
-This operation gets file contents using the file path. 
-
-| Property Name | Display Name | Description |
-| --- | --- | --- |
-| path* |File path |Unique path of the file |
-
-An * indicates that a property is required
-
-### <a name="get-file-content"></a>Get file content
-This operation gets file contents using the file id. 
-
-| Property Name | Display Name | Description |
-| --- | --- | --- |
-| id* |File |Specify the file |
-
-An * indicates that a property is required
-
-### <a name="create-file"></a>Create file
-This operation uploads a file to an SFTP server. 
-
-| Property Name | Display Name | Description |
-| --- | --- | --- |
-| folderPath* |Folder path |Unique path of the folder |
-| name* |File name |Name of the file |
-| body* |File content |Content of the file to create |
-
-An * indicates that a property is required
-
-#### <a name="output-details"></a>Output Details
-BlobMetadata
-
-|  | Property Name | Data Type |
-| --- | --- | --- |
-| Id |string | |
-| Name |string | |
-| DisplayName |string | |
-| Path |string | |
-| LastModified |string | |
-| Size |integer | |
-| MediaType |string | |
-| IsFolder |boolean | |
-| ETag |string | |
-| FileLocator |string | |
-
-### <a name="copy-file"></a>Copy file
-This operation copies a file to an SFTP server. 
-
-| Property Name | Display Name | Description |
-| --- | --- | --- |
-| source* |Source file path |Path to the source file |
-| destination* |Destination file path |Path to the destination file, including file name |
-| overwrite |Overwrite? |Overwrites the destination file if set to 'true' |
-
-An * indicates that a property is required
-
-#### <a name="output-details"></a>Output Details
-BlobMetadata
-
-| Property Name | Data Type |
-| --- | --- | --- |
-| Id |string |
-| Name |string |
-| DisplayName |string |
-| Path |string |
-| LastModified |string |
-| Size |integer |
-| MediaType |string |
-| IsFolder |boolean |
-| ETag |string |
-| FileLocator |string |
-
-### <a name="when-a-file-is-added-or-modified"></a>When a file is added or modified
-This operation triggers a flow when a file is added or modified in a folder. 
-
-| Property Name | Display Name | Description |
-| --- | --- | --- |
-| folderId* |Folder |Specify a folder |
-
-An * indicates that a property is required
-
-### <a name="list-files-in-folder"></a>List files in folder
-This operation gets files contained in a folder. 
-
-| Property Name | Display Name | Description |
-| --- | --- | --- |
-| id* |Folder |Specify the folder |
-
-An * indicates that a property is required
-
-#### <a name="output-details"></a>Output Details
-BlobMetadata
-
-| Property Name | Data Type |
-| --- | --- | --- |
-| Id |string |
-| Name |string |
-| DisplayName |string |
-| Path |string |
-| LastModified |string |
-| Size |integer |
-| MediaType |string |
-| IsFolder |boolean |
-| ETag |string |
-| FileLocator |string |
-
-### <a name="list-files-in-root-folder"></a>List files in root folder
-This operation gets the files in the root folder. 
-
-There are no parameters for this call
-
-#### <a name="output-details"></a>Output Details
-BlobMetadata
-
-| Property Name | Data Type |
-| --- | --- | --- |
-| Id |string |
-| Name |string |
-| DisplayName |string |
-| Path |string |
-| LastModified |string |
-| Size |integer |
-| MediaType |string |
-| IsFolder |boolean |
-| ETag |string |
-| FileLocator |string |
-
-### <a name="extract-folder"></a>Extract folder
-This operation extracts an archive file into a folder (example: .zip). 
-
-| Property Name | Display Name | Description |
-| --- | --- | --- |
-| source* |Source archive file path |Path to the archive file |
-| destination* |Destination folder path |Path to the destination folder |
-| overwrite |Overwrite? |Overwrites the destination files if set to 'true' |
-
-An * indicates that a property is required
-
-#### <a name="output-details"></a>Output Details
-BlobMetadata
-
-| Property Name | Data Type |
-| --- | --- | --- |
-| Id |string |
-| Name |string |
-| DisplayName |string |
-| Path |string |
-| LastModified |string |
-| Size |integer |
-| MediaType |string |
-| IsFolder |boolean |
-| ETag |string |
-| FileLocator |string |
-
-## <a name="http-responses"></a>HTTP responses
-The actions and triggers above can return one or more of the following HTTP status codes: 
-
-| Name | Description |
-| --- | --- |
-| 200 |OK |
-| 202 |Accepted |
-| 400 |Bad Request |
-| 401 |Unauthorized |
-| 403 |Forbidden |
-| 404 |Not Found |
-| 500 |Internal Server Error. Unknown error occurred. |
-| default |Operation Failed. |
-
-## <a name="next-steps"></a>Next Steps
-[Create a logic app](../logic-apps/logic-apps-create-a-logic-app.md)
 
+[!INCLUDE [Create connection general intro](../../includes/connectors-create-connection-general-intro.md)]
+
+1. Sign in to the [Azure portal](https://portal.azure.com), and open your logic app in Logic App Designer, if not open already.
+
+1. For blank logic apps, in the search box, enter "sftp" as your filter. Under the triggers list, select the trigger you want. 
+
+   -or-
+
+   For existing logic apps, under the last step where you want to add an action, choose **New step**. 
+   In the search box, enter "sftp" as your filter. 
+   Under the actions list, select the action you want.
+
+   To add an action between steps, move your pointer over the arrow between steps. 
+   Choose the plus sign (**+**) that appears, and then select **Add an action**.
+
+1. Provide the necessary details for your connection, and then choose **Create**.
+
+1. Provide the necessary details for your selected trigger or action and continue building your logic app's workflow.
+
+## <a name="examples"></a>Examples
+
+### <a name="sftp-trigger-when-a-file-is-added-or-modified"></a>SFTP trigger: When a file is added or modified
+
+This trigger starts a logic app workflow when the trigger detects when a file is added or changed on an SFTP server. So for example, you can add a condition that checks the file's content and decides whether to get that content, based on whether that content meets a specified condition. Finally, you can add an action that gets the file's content, and put that content in a folder on the SFTP server. 
+
+**Enterprise example**: You can use this trigger to monitor an SFTP folder for new files that represent customer orders. You can then use an SFTP action such as **Get file content**, so you can get the order's contents for further processing and store that order in an orders database.
+
+### <a name="sftp-action-get-content"></a>SFTP action: Get content
+
+This action gets the content from a file on an SFTP server. So for example, you can add the trigger from the previous example and a condition that the file's content must meet. If the condition is true, the action that gets the content can run. 
+
+## <a name="connector-reference"></a>Connector reference
+
+For technical details about triggers, actions, and limits, which are described by the connector's OpenAPI (formerly Swagger) description, review the connector's [reference page](/connectors/sftpconnector/).
+
+## <a name="get-support"></a>Get support
+
+* For questions, visit the [Azure Logic Apps forum](https://social.msdn.microsoft.com/Forums/en-US/home?forum=azurelogicapps).
+* To submit or vote on feature ideas, visit the [Logic Apps user feedback site](http://aka.ms/logicapps-wish).
+
+## <a name="next-steps"></a>Next steps
+
+* Learn about other [Logic Apps connectors](../connectors/apis-list.md)

@@ -1,47 +1,59 @@
 ---
-title: Connect with the Azure Government portal | Microsoft Docs
-description: Information on managing your subscription in Azure Government by connecting via the portal
+title: Create a web app with the Azure Government portal | Microsoft Docs
+description: This quickstart shows how to connect to Azure Government and create a web app in Azure Government using portal
 services: azure-government
 cloud: gov
 documentationcenter: ''
 author: smichelotti
 manager: liki
-ms.assetid: 5570f764-ce19-491b-852d-968fb0f17f7a
 ms.service: azure-government
 ms.devlang: na
-ms.topic: article
+ms.topic: quickstart
 ms.tgt_pltfrm: na
 ms.workload: azure-government
-ms.date: 02/13/2017
+ms.date: 08/09/2018
 ms.author: stemi
-ms.openlocfilehash: 09b61fd135b142fc02112c9dba6b5b78a070a751
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 433ce0ba60d8a552bc77d1867e5322178f27757f
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44564370"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44801260"
 ---
-<!--
-# Managing and connecting to your subscription in Azure Government
-(possible move to Dev Guide) Azure Government has unique URLs and endpoints for managing your environment. It is important to use the right connections to manage your environment through the portal or PowerShell. Once you are connected to the Azure Government environment, the normal operations for managing a service works if the component has been deployed.
--->
-# <a name="connecting-with-the-azure-government-portal"></a>Connecting with the Azure Government Portal
+# <a name="quickstart-connect-to-azure-government-using-portal"></a>Quickstart: Connect to Azure Government using portal
 
-The portal is the primary way that most people connect to Azure Government.  To connect, browse to the portal at [https://portal.azure.us](https://portal.azure.us).  The legacy version of the Azure portal can be accessed via [https://manage.windowsazure.us](https://manage.windowsazure.us).
+Microsoft Azure Government delivers a dedicated cloud with world-class security and compliance, enabling US government agencies and their partners to transform their workloads to the cloud. To manage your Azure Government cloud workloads and applications you can connect to the Azure Government using different tools, as described in the following video.  
 
-Subscriptions can be created for your account by connecting to [https://account.windowsazure.us](https://account.windowsazure.us).
+This quickstart shows how to use the Azure Government portal to access and start managing resources in Azure Government. The Azure Government portal is the primary way most people will connect to their Azure Government environment.
 
-Once you log in, you should see "Microsoft Azure Government" in the upper left of the main navigation bar.
+> [!VIDEO https://www.youtube.com/embed/Q3kx4cmRkCA]
 
+If you don't have an Azure Government subscription, create a [free account](https://azure.microsoft.com/global-infrastructure/government/request/) before you begin.
 
-![Figure 1: Azure Government Portal](https://docstestmedia1.blob.core.windows.net/azure-media/articles/azure-government/media/azure-gov-portal-home-figure1.png)
-<p align="center">Figure 1: Azure Government Portal</p>
+## <a name="prerequisites"></a>Prerequisites
 
+* Review [Guidance for developers](documentation-government-developer-guide.md).<br/> This article discusses Azure Government's unique URLs and endpoints for managing your environment. You must know about these endpoints in order to connect to Azure Government. 
+* Review [Compare Azure Government and global Azure](compare-azure-government-global-azure.md) and click on a service of interest to see variations between Azure Government and global Azure.
 
+## <a name="sign-in-to-azure-government"></a>Sign in to Azure Government
 
-### <a name="next-steps"></a>Next steps
-For more information about Azure Government, see the following resources:
+To connect, browse to the portal at [https://portal.azure.us](https://portal.azure.us). 
 
-* [Connect to Azure Government with PowerShell](documentation-government-get-started-connect-with-ps.md)
-* [Connect to Azure Government with Azure CLI](documentation-government-get-started-connect-with-cli.md)
+Sign in using your Azure Government credentials. Once you sign it, you should see "Microsoft Azure Government" in the upper left of the main navigation bar.
 
+![Azure Government Portal](./media/connect-with-portal/azure-gov-portal.png)
+
+## <a name="check-out-service-health"></a>Check out Service health
+
+You can take a look at Azure Government regions and their health status by clicking on **Sevice Health**.
+
+Currently, you can choose from 6 available government-only datacenter regions.
+
+![Azure Government Portal](./media/connect-with-portal/connect-with-portal.png)
+
+## <a name="next-steps"></a>Next steps
+
+This quickstart showed you how to use portal to connect to Azure Government. Once you are connected to Azure Government, you may want to explore Azure services. Make sure you check out the variations, described in [Compare Azure Government and global Azure](compare-azure-government-global-azure.md). To learn more about Azure services continue to the Azure documentation.
+
+> [!div class="nextstepaction"]
+> [Azure documentation](https://docs.microsoft.com/azure/).

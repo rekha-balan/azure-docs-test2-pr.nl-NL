@@ -14,16 +14,16 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/22/2017
 ms.author: kumud
-ms.openlocfilehash: af8137de4be532465930524aab8db6bf1cf57dff
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 45fa209b4417ce8b65d1fa4f2f59ff6c2d50f3a4
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44554464"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44793720"
 ---
 # <a name="countryregion-hierarchy-used-by-azure-traffic-manager-for-geographic-traffic-routing-method"></a>Country/Region hierarchy used by Azure Traffic Manager for geographic traffic routing method
 
-This article lists the countries and regions used by the **Geographic**  traffic routing method in Azure Traffic Manager. You can also obtain this information programmatically by calling the [Azure Traffic Manager’s REST API](https://docs.microsoft.com/rest/api/trafficmanager/).  
+This article lists the countries and regions used by the **Geographic**  traffic routing method in Azure Traffic Manager. You can also obtain this information programmatically by calling the [Azure Traffic Manager’s REST API](https://docs.microsoft.com/rest/api/trafficmanager/). 
 
 - WORLD(World)
 
@@ -66,14 +66,6 @@ This article lists the countries and regions used by the **Geographic**  traffic
         - FR(France)
 
         - GB(United Kingdom)
-
-            - GB-ENG(England)
-
-            - GB-NIR(Northern Ireland)
-
-            - GB-SCT(Scotland)
-
-            - GB-WLS(Wales)
 
         - GG(Guernsey)
 
@@ -701,7 +693,4 @@ This article lists the countries and regions used by the **Geographic**  traffic
 
 ## <a name="next-steps"></a>Next steps
 
-- Learn more about [Geographic traffic routing method in Azure Traffic Manager](traffic-manager-routing-methods.md#geographic-traffic-routing-method).
-
-
-
+- Learn more about [Geographic traffic routing method in Azure Traffic Manager](traffic-manager-routing-methods.md#geographic).

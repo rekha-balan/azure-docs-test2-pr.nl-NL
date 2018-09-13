@@ -3,8 +3,8 @@ title: Azure AD Connect sync service features and configuration | Microsoft Docs
 description: Describes service side features for Azure AD Connect sync service.
 services: active-directory
 documentationcenter: ''
-author: andkjell
-manager: femila
+author: billmath
+manager: mtillman
 editor: ''
 ms.assetid: 213aab20-0a61-434a-9545-c4637628da81
 ms.service: active-directory
@@ -12,14 +12,15 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 02/08/2017
+ms.date: 06/25/2018
+ms.component: hybrid
 ms.author: billmath
-ms.openlocfilehash: 07bd2eaba717fb51ca67ee81a25faad2dda0f59a
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: f721c371687addfe48d753e7289df78c2be1f3c7
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44554502"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44804796"
 ---
 # <a name="azure-ad-connect-sync-service-features"></a>Azure AD Connect sync service features
 The synchronization feature of Azure AD Connect has two components:
@@ -29,10 +30,10 @@ The synchronization feature of Azure AD Connect has two components:
 
 This topic explains how the following features of the **Azure AD Connect sync service** work and how you can configure them using Windows PowerShell.
 
-These settings are configured by the [Azure Active Directory Module for Windows PowerShell](http://aka.ms/aadposh). Download and install it separately from Azure AD Connect. The cmdlets documented in this topic were introduced in the [2016 March release (build 9031.1)](http://social.technet.microsoft.com/wiki/contents/articles/28552.microsoft-azure-active-directory-powershell-module-version-release-history.aspx#Version_9031_1). If you do not have the cmdlets documented in this topic or they do not produce the same result, then make sure you run the latest version.
+These settings are configured by the [Azure Active Directory Module for Windows PowerShell](https://aka.ms/aadposh). Download and install it separately from Azure AD Connect. The cmdlets documented in this topic were introduced in the [2016 March release (build 9031.1)](http://social.technet.microsoft.com/wiki/contents/articles/28552.microsoft-azure-active-directory-powershell-module-version-release-history.aspx#Version_9031_1). If you do not have the cmdlets documented in this topic or they do not produce the same result, then make sure you run the latest version.
 
 To see the configuration in your Azure AD directory, run `Get-MsolDirSyncFeatures`.  
-![Get-MsolDirSyncFeatures result](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnectsyncservice-features/getmsoldirsyncfeatures.png)
+![Get-MsolDirSyncFeatures result](./media/active-directory-aadconnectsyncservice-features/getmsoldirsyncfeatures.png)
 
 Many of these settings can only be changed by Azure AD Connect.
 
@@ -57,7 +58,8 @@ The following settings are configured by Azure AD Connect and cannot be modified
 | DeviceWriteback |[Azure AD Connect: Enabling device writeback](active-directory-aadconnect-feature-device-writeback.md) |
 | DirectoryExtensions |[Azure AD Connect sync: Directory extensions](active-directory-aadconnectsync-feature-directory-extensions.md) |
 | [DuplicateProxyAddressResiliency<br/>DuplicateUPNResiliency](#duplicate-attribute-resiliency) |Allows an attribute to be quarantined when it is a duplicate of another object rather than failing the entire object during export. |
-| PasswordSync |[Implementing password synchronization with Azure AD Connect sync](active-directory-aadconnectsync-implement-password-synchronization.md) |
+| Password Hash Sync |[Implementing password hash synchronization with Azure AD Connect sync](active-directory-aadconnectsync-implement-password-hash-synchronization.md) |
+|Pass-through Authentication|[User sign-in with Azure Active Directory Pass-through Authentication](active-directory-aadconnect-pass-through-authentication.md)|
 | UnifiedGroupWriteback |[Preview: Group writeback](active-directory-aadconnect-feature-preview.md#group-writeback) |
 | UserWriteback |Not currently supported. |
 
@@ -89,7 +91,7 @@ Historically, updates to the UserPrincipalName attribute using the sync service 
 
 For more details, see [User names in Office 365, Azure, or Intune don't match the on-premises UPN or alternate login ID](https://support.microsoft.com/kb/2523192).
 
-Enabling this feature allows the sync engine to update the userPrincipalName when it is changed on-premises and you use password sync. If you use federation, this feature is not supported.
+Enabling this feature allows the sync engine to update the userPrincipalName when it is changed on-premises and you use password hash sync. If you use federation, this feature is not supported.
 
 This feature is on by default for newly created Azure AD directories. You can see if this feature is enabled for you by running:  
 
@@ -108,5 +110,4 @@ After enabling this feature, existing userPrincipalName values will remain as-is
 ## <a name="see-also"></a>See also
 * [Azure AD Connect sync](active-directory-aadconnectsync-whatis.md)
 * [Integrating your on-premises identities with Azure Active Directory](active-directory-aadconnect.md).
-
 

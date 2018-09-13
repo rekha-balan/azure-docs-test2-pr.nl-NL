@@ -5,17 +5,15 @@ services: cognitive-services
 author: swhite-msft
 manager: ehansen
 ms.service: cognitive-services
-ms.technology: bing-image-search
+ms.component: bing-image-search
 ms.topic: article
-ms.date: 04/27/2017
+ms.date: 05/15/2018
 ms.author: scottwhi
-ms.openlocfilehash: 107f35149c09460a9b3f74ba4dafbdceb72d0f40
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 68f97615fb6dbb02150d36f42308c480e610f6aa
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44671080"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44793330"
 ---
-# <a name="bing-search-api-use-and-display-requirements"></a>Bing Search API Use and Display Requirements
-
 [!INCLUDE [cognitive-services-bing-use-and-display-requirements](../../../includes/cognitive-services-bing-use-and-display-requirements.md)]

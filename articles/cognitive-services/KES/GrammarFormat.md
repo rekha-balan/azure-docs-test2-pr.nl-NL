@@ -5,16 +5,16 @@ services: cognitive-services
 author: bojunehsu
 manager: stesp
 ms.service: cognitive-services
-ms.technology: kes
+ms.component: knowledge-exploration
 ms.topic: article
 ms.date: 03/26/2016
 ms.author: paulhsu
-ms.openlocfilehash: f347f991b8c64f1cd7674dd5ddab55fa9586a4bc
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: b64025be2f5a9708162da475c1f037d7f253d2c6
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44663058"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44819460"
 ---
 # <a name="grammar-format"></a>Grammar Format
 The grammar is an XML file that specifies the weighted set of natural language queries that the service can interpret, as well as how these natural language queries are translated into semantic query expressions.  The grammar syntax is based on [SRGS](http://www.w3.org/TR/speech-grammar/), a W3C standard for speech recognition grammars, with extensions to support data index integration and semantic functions.
@@ -60,7 +60,7 @@ When an `item` element is not a child of a `one-of` element, it can specify repe
 <item repeat="1-" repeat-logprob="-10">...</item>
 ```
 
-When `item` elements appear as children of a `one-of` element, they define the set of expansion alternatives.  In this usage, the optional `logprob` attribute specifies the relative log probability among the different choices.  Given a probability *p* between 0 and 1, the corresponding log probability can be computed as log(*p*), where log() is the the natural log function.  If not specified, `logprob` defaults to 0, which does not alter the interpretation probability.  Note that log probability is always a negative floating-point value or 0.
+When `item` elements appear as children of a `one-of` element, they define the set of expansion alternatives.  In this usage, the optional `logprob` attribute specifies the relative log probability among the different choices.  Given a probability *p* between 0 and 1, the corresponding log probability can be computed as log(*p*), where log() is the natural log function.  If not specified, `logprob` defaults to 0, which does not alter the interpretation probability.  Note that log probability is always a negative floating-point value or 0.
 
 ```xml
 <one-of>

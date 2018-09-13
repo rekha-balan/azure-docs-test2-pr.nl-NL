@@ -2,24 +2,22 @@
 title: Configure an Azure cloud service project with Visual Studio | Microsoft Docs
 description: Learn how to configure an Azure cloud service project in Visual Studio, depending on your requirements for that project.
 services: visual-studio-online
-documentationcenter: na
-author: TomArcher
+author: ghogen
 manager: douge
-editor: ''
-ms.assetid: 609d6965-05cc-47b1-82dc-c76a92d4f295
-ms.service: multiple
-ms.devlang: dotnet
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: multiple
+assetId: 609d6965-05cc-47b1-82dc-c76a92d4f295
+ms.prod: visual-studio-dev15
+ms.technology: vs-azure
+ms.custom: vs-azure
+ms.workload: azure-vs
+ms.topic: conceptual
 ms.date: 03/06/2017
-ms.author: tarcher
-ms.openlocfilehash: 9cef73c9657868ba8acc66a2558d3f4129415532
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: ghogen
+ms.openlocfilehash: 0e2e03f7a492f5018b99145a63bb1b7432d3e0b3
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44550250"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44825708"
 ---
 # <a name="configure-an-azure-cloud-service-project-with-visual-studio"></a>Configure an Azure cloud service project with Visual Studio
 You can configure an Azure cloud service project, depending on your requirements for that project. You can set properties for the project for the following categories:
@@ -35,7 +33,7 @@ You can configure an Azure cloud service project, depending on your requirements
    
 1. In the project's properties page, select the **Development** tab.
 
-    ![Project properties menu](https://docstestmedia1.blob.core.windows.net/azure-media/articles/media/vs-azure-tools-configuring-an-azure-project/solution-explorer-project-properties-menu.png)
+    ![Project properties menu](./media/vs-azure-tools-configuring-an-azure-project/solution-explorer-project-properties-menu.png)
 
 1. Set **Prompt before deleting an existing deployment** to **True**. This setting helps to ensure you don't accidentally delete an existing deployment in Azure
 
@@ -51,5 +49,4 @@ You can configure an Azure cloud service project, depending on your requirements
 
 ## <a name="next-steps"></a>Next steps
 - [Configure an Azure project using multiple service configurations](vs-azure-tools-multiple-services-project-configurations.md)
-
 

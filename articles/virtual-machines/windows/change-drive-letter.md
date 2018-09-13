@@ -4,7 +4,7 @@ description: 'Describes how to change drive letters for a Windows VM so that you
 services: virtual-machines-windows
 documentationcenter: ''
 author: cynthn
-manager: timlt
+manager: jeconnoc
 editor: ''
 tags: azure-resource-manager,azure-service-management
 ms.assetid: 0867a931-0055-4e31-8403-9b38a3eeb904
@@ -13,14 +13,14 @@ ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-windows
 ms.devlang: na
 ms.topic: article
-ms.date: 09/27/2016
+ms.date: 01/02/2018
 ms.author: cynthn
-ms.openlocfilehash: af2661e831d8926abb61afd999cf53fb07b2186e
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 209d2b10efaae8aaf4cec1a8eaea6c9d4858a12f
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44548869"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44808794"
 ---
 # <a name="use-the-d-drive-as-a-data-drive-on-a-windows-vm"></a>Use the D: drive as a data drive on a Windows VM
 If your application needs to use the D drive to store data, follow these instructions to use a different drive letter for the temporary disk. Never use the temporary disk to store data that you need to keep.
@@ -29,13 +29,8 @@ If you resize or **Stop (Deallocate)** a virtual machine, this may trigger place
 
 For more information about how Azure uses the temporary disk, see [Understanding the temporary drive on Microsoft Azure Virtual Machines](https://blogs.msdn.microsoft.com/mast/2013/12/06/understanding-the-temporary-drive-on-windows-azure-virtual-machines/)
 
-[!INCLUDE [learn-about-deployment-models](../../../includes/learn-about-deployment-models-both-include.md)]
-
 ## <a name="attach-the-data-disk"></a>Attach the data disk
-First, you'll need to attach the data disk to the virtual machine. 
-
-* To use the portal, see [How to attach a data disk in the Azure portal](attach-disk-portal.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
-* To use the classic portal, see [How to attach a data disk to a Windows virtual machine](classic/attach-disk.md?toc=%2fazure%2fvirtual-machines%2fwindows%2fclassic%2ftoc.json). 
+First, you'll need to attach the data disk to the virtual machine. To do this using the portal, see [How to attach a managed data disk in the Azure portal](attach-managed-disk-portal.md).
 
 ## <a name="temporarily-move-pagefilesys-to-c-drive"></a>Temporarily move pagefile.sys to C drive
 1. Connect to the virtual machine. 
@@ -69,5 +64,5 @@ First, you'll need to attach the data disk to the virtual machine.
 9. Restart the virtual machine.
 
 ## <a name="next-steps"></a>Next steps
-* You can increase the storage available to your virtual machine by [attaching a additional data disk](attach-disk-portal.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+* You can increase the storage available to your virtual machine by [attaching a additional data disk](attach-managed-disk-portal.md).
 

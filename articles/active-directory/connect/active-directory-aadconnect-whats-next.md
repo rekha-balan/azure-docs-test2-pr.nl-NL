@@ -4,7 +4,7 @@ description: Learn how to extend the default configuration and operational tasks
 services: active-directory
 documentationcenter: ''
 author: billmath
-manager: femila
+manager: mtillman
 editor: curtand
 ms.assetid: c18bee36-aebf-4281-b8fc-3fe14116f1a5
 ms.service: active-directory
@@ -12,14 +12,15 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 02/08/2017
+ms.date: 07/12/2017
+ms.component: hybrid
 ms.author: billmath
-ms.openlocfilehash: e53bcecd67cdfd0ae53cfc9f244c06a8d5bae5dc
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: f8b73e70606adc2b1fa593745b3ac426c679f417
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44670442"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44814215"
 ---
 # <a name="next-steps-and-how-to-manage-azure-ad-connect"></a>Next steps and how to manage Azure AD Connect
 Use the operational procedures in this article to customize Azure Active Directory (Azure AD) Connect to meet your organization's needs and requirements.  
@@ -49,12 +50,12 @@ Use the Azure portal to check the status of a synchronization.
 4. At the top of the directory page, select **Directory Integration**.
 5. Under **integration with local active directory**, note the last sync time.
 
-<center>![Directory sync time](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnect-whats-next/verify.png)</center>
+<center>![Directory sync time](./media/active-directory-aadconnect-whats-next/verify.png)</center>
 
 ## <a name="start-a-scheduled-synchronization-task"></a>Start a scheduled synchronization task
 If you need to run a synchronization task, you can do this by running through the Azure AD Connect wizard again.  You need to provide your Azure AD credentials.  In the wizard, select the **Customize synchronization options** task, and click **Next** to move through the wizard. At the end, ensure that the **Start the synchronization process as soon as the initial configuration completes** box is selected.
 
-<center>![Start synchronization](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnect-whats-next/startsynch.png)</center>
+<center>![Start synchronization](./media/active-directory-aadconnect-whats-next/startsynch.png)</center>
 
 For more information on the Azure AD Connect sync Scheduler, see [Azure AD Connect Scheduler](active-directory-aadconnectsync-feature-scheduler.md).
 
@@ -63,7 +64,7 @@ After your initial installation of Azure AD Connect, you can always start the wi
 
 The following table provides a summary of these tasks and a brief description of each task.
 
-![List of additional tasks](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnect-whats-next/addtasks.png)
+![List of additional tasks](./media/active-directory-aadconnect-whats-next/addtasks.png)
 
 | Additional task | Description |
 | --- | --- |
@@ -73,6 +74,3 @@ The following table provides a summary of these tasks and a brief description of
 
 ## <a name="next-steps"></a>Next steps
 Learn more about [integrating your on-premises identities with Azure Active Directory](active-directory-aadconnect.md).
-
-
-

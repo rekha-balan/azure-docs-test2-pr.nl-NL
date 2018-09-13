@@ -1,6 +1,6 @@
 ---
-title: Install Endpoint Protection in Azure Security Center | Microsoft Docs
-description: This document shows you how to implement the Azure Security Center recommendation **Install Endpoint Protection**.
+title: Manage endpoint protection issues with Azure Security Center | Microsoft Docs
+description: Learn how to manage endpoint protection issues in Azure Security Center.
 services: security-center
 documentationcenter: na
 author: TerryLanfear
@@ -9,45 +9,100 @@ editor: ''
 ms.assetid: 1599ad5f-d810-421d-aafc-892e831b403f
 ms.service: security-center
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 11/23/2016
+ms.date: 10/23/2017
 ms.author: terrylan
-ms.openlocfilehash: a93c6d4bb4638803913d9dfba39cfba382e71d50
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: a3ac23f3874b85da9c0641264ca6f9c55a7b0515
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44549210"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44798257"
 ---
-# <a name="install-endpoint-protection-in-azure-security-center"></a>Install Endpoint Protection in Azure Security Center
-Azure Security Center will recommend that you provision an antimalware program to your Azure virtual machines (VMs) if antimalware is not already enabled. This recommendation applies to Windows VMs only. Presently, this recommendation checks for the presence of either Windows Defender or TrendMicro Deep Security. Additional endpoint protection solutions are planned to be added in the future.
+# <a name="manage-endpoint-protection-issues-with-azure-security-center"></a>Manage endpoint protection issues with Azure Security Center
+Azure Security Center monitors the status of antimalware protection and reports this under the Endpoint protection issues blade. Security Center highlights issues, such as detected threats and insufficient protection, which can make your virtual machines (VMs) and computers vulnerable to antimalware threats. By using the information under **Endpoint protection issues**, you can identify a plan to address any issues identified.
 
-> [!NOTE]
-> This document introduces the service by using an example deployment.  This is not a step-by-step guide.
->
->
+Security Center reports the following endpoint protection issues:
+
+- Endpoint protection not installed on Azure VMs – A supported antimalware solution is not installed on these Azure VMs.
+- Endpoint protection not installed on non-Azure computers – A supported antimalware is not installed on these non-Azure computers.
+- Endpoint protection health:
+
+   - Signature out of date – An antimalware solution is installed on these VMs and computers, but the solution does not have the latest antimalware signatures.
+   - No real time protection – An antimalware solution is installed on these VMs and computers, but it is not configured for real-time protection.   The service may be disabled or Security Center may be unable to obtain the status because the solution is not supported. See [partner integration](security-center-partner-integration.md) for a list of supported solutions.
+   - Not reporting – An antimalware solution is installed but not reporting data.
+   - Unknown –  An antimalware solution is installed but its status is unknown or reporting an unknown error.
+
+   > [!NOTE]
+   > See [Integrate security solutions](security-center-partner-integration.md#integrated-azure-security-solutions) for a list of endpoint protection security solutions integrated with Security Center.
+   >
+   >
 
 ## <a name="implement-the-recommendation"></a>Implement the recommendation
-1. In the **Recommendations** blade, select **Install Endpoint Protection**.
-   ![Select Install Endpoint Protection][1]
-2. The **Install Endpoint Protection** blade opens displaying a list of VMs without antimalware enabled. Select from the list the VMs that you want to install antimalware on and click **Install on VMs**.
-   ![Select VMs to install antimalware on][2]
-3. The **Select Endpoint Protection** blade opens to allow you to select the antimalware solution you want to use. In this example, let's select **Microsoft Antimalware**.
-   ![Select Endpoint Protection][3]
-4. Additional information about the antimalware solution is displayed. Select **Create**.
-   ![Create antimalware solution][4]
-5. Enter the required configuration settings on the **Add Extension** blade, and then select **OK**. To learn more about the configuration settings, see [Default and Custom Antimalware Configuration](../security/azure-security-antimalware.md#default-and-custom-antimalware-configuration).
+Endpoint protection issues is presented as a recommendation in Security Center.  If your environment is vulnerable to antimalware threats, this recommendation will be displayed under **Recommendations** and under **Compute**. To see the **Endpoint protection issues dashboard**, you need to follow the Compute workflow.
 
-[Microsoft Antimalware](../security/azure-security-antimalware.md) is now active on the selected VMs.
+In this example, we will use **Compute**.  We will look at how to install antimalware on Azure VMs and on non-Azure computers.
 
-## <a name="see-also"></a>See also
-This article showed you how to implement the Security Center recommendation "Install Endpoint Protection." To learn more about enabling an antimalware program in Azure, see the following:
+## <a name="install-antimalware-on-azure-vms"></a>Install antimalware on Azure VMs
 
-* [Microsoft Antimalware for Cloud Services and Virtual Machines](../security/azure-security-antimalware.md) -- Learn how to deploy Microsoft antimalware.
+1. Select **Compute** under the Security Center main menu or **Overview**.
 
-To learn more about Security Center, see the following:
+   ![Select Compute][1]
+
+2. Under **Compute**, select **Endpoint protection issues**. The **Endpoint protection issues** dashboard opens.
+
+   ![Select Endpoint protection issues][2]
+
+   The top of the dashboard provides:
+
+   - Installed endpoint protection providers - Lists the different providers identified by Security Center.
+   - Installed endpoint protection health state - Shows the health state of VMs and computers that have an endpoint protection solution installed. The chart shows the number of VMs and computers that are healthy and the number with insufficient protection.
+   - Malware detected – Shows the number of VMs and computers where Security Center is reporting detected malware.
+   - Attacked computers – Shows the number of VMs and computers where Security Center is reporting attacks by malwares.
+
+   At the bottom of the dashboard there is a list of endpoint protection issues which includes the following information:  
+
+   - **TOTAL** -  The number of VMs and computers impacted by the issue.
+   - A bar aggregating the number of VMs and computers impacted by the issue. The colors in the bar identify priority:
+
+      - Red - High priority and should be addressed immediately
+      - Orange - Medium priority and should be addressed as soon as possible
+
+3. Select **Endpoint protection not installed on Azure VMs**.
+
+   ![Select Endpoint protection not installed on Azure VMs][3]
+
+4. Under **Endpoint protection not installed on Azure VMs** is a list of Azure VMs that do not have antimalware installed.  You can choose to install antimalware on all VMs in the list or select individual VMs to install antimalware on by clicking on the specific VM.
+5. Under **Select Endpoint protection**, select the endpoint protection solution you want to use. In this example, select **Microsoft Antimalware**.
+6. Additional information about the endpoint protection solution is displayed. Select **Create**.
+
+## <a name="install-antimalware-on-non-azure-computers"></a>Install antimalware on non-Azure computers
+
+1. Go back to **Endpoint protection issues** and select **Endpoint protection not installed on non-Azure computers**.
+
+   ![Select Endpoint protection not installed on non-Azure computers][4]
+
+2. Under **Endpoint protection not installed on non-Azure computers**, select a workspace. A Log Analytics search query filtered to the workspace opens and lists computers missing antimalware. Select a computer from the list for more information.
+
+   ![Log Analytics search][5]
+
+Another search result opens with information filtered only for that computer.
+
+  ![Log Analytics search][6]
+
+> [!NOTE]
+> We recommend that endpoint protection be provisioned for all VMs and computers to help identify and remove viruses, spyware, and other malicious software.
+>
+>
+
+## <a name="next-steps"></a>Next steps
+This article showed you how to implement the Security Center recommendation "Install Endpoint Protection." To learn more about enabling Microsoft Antimalware in Azure, see the following document:
+
+* [Microsoft Antimalware for Cloud Services and Virtual Machines](../security/azure-security-antimalware.md) -- Learn how to deploy Microsoft Antimalware.
+
+To learn more about Security Center, see the following documents:
 
 * [Setting security policies in Azure Security Center](security-center-policies.md) -- Learn how to configure security policies.
 * [Managing security recommendations in Azure Security Center](security-center-recommendations.md) -- Learn how recommendations help you protect your Azure resources.
@@ -58,11 +113,9 @@ To learn more about Security Center, see the following:
 * [Azure Security blog](http://blogs.msdn.com/b/azuresecurity/) -- Find blog posts about Azure security and compliance.
 
 <!--Image references-->
-[1]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/security-center/media/security-center-install-endpoint-protection/select-install-endpoint-protection.png
-[2]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/security-center/media/security-center-install-endpoint-protection/install-endpoint-protection-blade.png
-[3]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/security-center/media/security-center-install-endpoint-protection/select-endpoint-protection.png
-[4]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/security-center/media/security-center-install-endpoint-protection/create-antimalware-solution.png
-
-
-
-
+[1]:./media/security-center-install-endpoint-protection/compute.png
+[2]:./media/security-center-install-endpoint-protection/endpoint-protection-issues.png
+[3]:./media/security-center-install-endpoint-protection/install-endpoint-protection.png
+[4]:./media/security-center-install-endpoint-protection/endpoint-protection-issues-computers.png
+[5]:./media/security-center-install-endpoint-protection/log-search.png
+[6]:./media/security-center-install-endpoint-protection/info-filtered-to-computer.png

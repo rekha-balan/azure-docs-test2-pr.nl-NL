@@ -4,7 +4,7 @@ description: Learn how to optimize MySQL running on an Azure virtual machine (VM
 services: virtual-machines-linux
 documentationcenter: ''
 author: NingKuang
-manager: timlt
+manager: jeconnoc
 editor: ''
 tags: azure-service-management
 ms.assetid: 0c1c7fc5-a528-4d84-b65d-2df225f2233f
@@ -13,20 +13,21 @@ ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
 ms.devlang: na
 ms.topic: article
-ms.date: 12/15/2015
+ms.date: 05/31/2017
 ms.author: ningk
-ms.openlocfilehash: 91fbac8ffd6542deaf3961e9ce6beca979cd8b34
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 447532452a848c88fd927f42e4263cef4742dd89
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44549769"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44798127"
 ---
 # <a name="optimize-mysql-performance-on-azure-linux-vms"></a>Optimize MySQL Performance on Azure Linux VMs
 There are many factors that affect MySQL performance on Azure, both in virtual hardware selection and software configuration. This article focuses on optimizing performance through storage, system, and database configurations.
 
 > [!IMPORTANT]
 > Azure has two different deployment models for creating and working with resources: [Azure Resource Manager](../../../resource-manager-deployment-model.md) and classic. This article covers using the classic deployment model. Microsoft recommends that most new deployments use the Resource Manager model. For information about Linux VM optimizations with the Resource Manager model, see [Optimize your Linux VM on Azure](../optimization.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
+> [!INCLUDE [virtual-machines-common-classic-createportal](../../../../includes/virtual-machines-classic-portal.md)]
 
 ## <a name="utilize-raid-on-an-azure-virtual-machine"></a>Utilize RAID on an Azure virtual machine
 Storage is the key factor that affects database performance in cloud environments. Compared to a single disk, RAID can provide faster access via concurrency. For more information, see [Standard RAID levels](http://en.wikipedia.org/wiki/Standard_RAID_levels).   
@@ -42,27 +43,22 @@ There are limits on how many disks you can add for different virtual machine typ
 This article assumes you have already created a Linux virtual machine and have MYSQL installed and configured. For more information on getting started, see How to install MySQL on Azure.  
 
 ### <a name="set-up-raid-on-azure"></a>Set up RAID on Azure
-The following steps show how to create RAID on Azure by using the Azure classic portal. You can also set up RAID by using Windows PowerShell scripts.
+The following steps show how to create RAID on Azure by using the Azure portal. You can also set up RAID by using Windows PowerShell scripts.
 In this example, we will configure RAID 0 with four disks.  
 
 #### <a name="add-a-data-disk-to-your-virtual-machine"></a>Add a data disk to your virtual machine
-On the virtual machines page of the Azure classic portal, click the virtual machine to which you want to add a data disk. In this example, the virtual machine is mysqlnode1.  
+In the Azure portal, go to the dashboard and select the virtual machine to which you want to add a data disk. In this example, the virtual machine is mysqlnode1.  
 
-![Virtual machines][1]
+<!--![Virtual machines][1]-->
 
-On the page for the virtual machine, click **Dashboard**.  
+Click **Disks** and then click **Attach New**.
 
-![Virtual machine dashboard][2]
+![Virtual machines add disk](media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-Disks-option.png)
 
-In the taskbar, click **Attach**.
+Create a new 500 GB disk. Make sure that **Host Cache Preference** is set to **None**.  When you're finished, click **OK**.
 
-![Virtual machine taskbar][3]
+![Attach empty disk](media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-attach-empty-disk.png)
 
-And then click **Attach empty disk**.  
-
-![Attach empty disk][4]
-
-For data disks, the **Host Cache Preference** should be set to **None**.  
 
 This adds one empty disk into your virtual machine. Repeat this step three more times so that you have four data disks for RAID.  
 
@@ -334,31 +330,18 @@ For more detailed [optimization configuration parameters](http://dev.mysql.com/d
 | Disk |10 GB/disk |
 | OS |Ubuntu 14.04.1 LTS |
 
-[1]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-01.png
-[2]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-02.png
-[3]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-03.png
-[4]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-04.png
-[5]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-05.png
-[6]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-06.png
-[7]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-07.png
-[8]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-08.png
-[9]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-09.png
-[10]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-10.png
-[11]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-11.png
-[12]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-12.png
-[13]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-13.png
-[14]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-14.png
-
-
-
-
-
-
-
-
-
-
-
-
-
+[1]:media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-01.png
+[2]:media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-02.png
+[3]:media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-03.png
+[4]:media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-04.png
+[5]:media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-05.png
+[6]:media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-06.png
+[7]:media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-07.png
+[8]:media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-08.png
+[9]:media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-09.png
+[10]:media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-10.png
+[11]:media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-11.png
+[12]:media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-12.png
+[13]:media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-13.png
+[14]:media/optimize-mysql/virtual-machines-linux-optimize-mysql-perf-14.png
 

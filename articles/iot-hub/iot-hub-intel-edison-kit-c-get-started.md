@@ -1,39 +1,33 @@
 ---
 title: Intel Edison to cloud (C) - Connect Intel Edison to Azure IoT Hub | Microsoft Docs
-description: Connect Intel Edison to Azure IoT Hub for Intel Edison to send data to the Azure cloud.
-services: iot-hub
-documentationcenter: ''
-author: shizn
-manager: timtl
-tags: ''
+description: Learn how to setup and connect Intel Edison to Azure IoT Hub for Intel Edison to send data to the Azure cloud platform in this tutorial.
+author: rangv
+manager: ''
 keywords: azure iot intel edison, intel edison iot hub, intel edison send data to cloud, intel edison to cloud
-ms.assetid: 4885fa2c-c2ee-4253-b37f-ccd55f92b006
 ms.service: iot-hub
+services: iot-hub
 ms.devlang: c
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 4/17/2017
-ms.author: xshi
-ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 3aba8d683da018703edc925c11a0420b297ac9fb
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.topic: conceptual
+ms.date: 4/11/2018
+ms.author: rangv
+ms.openlocfilehash: 0138b44141bb64671ed2feb522c4b7fa14cab696
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44671811"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44798010"
 ---
 # <a name="connect-intel-edison-to-azure-iot-hub-c"></a>Connect Intel Edison to Azure IoT Hub (C)
 
 [!INCLUDE [iot-hub-get-started-device-selector](../../includes/iot-hub-get-started-device-selector.md)]
 
-In this tutorial, you begin by learning the basics of working with Intel Edison. You then learn how to seamlessly connect your devices to the cloud by using [Azure IoT Hub](iot-hub-what-is-iot-hub.md).
+In this tutorial, you begin by learning the basics of working with Intel Edison. You then learn how to seamlessly connect your devices to the cloud by using [Azure IoT Hub](about-iot-hub.md).
 
 Don't have a kit yet? Start [here](https://azure.microsoft.com/develop/iot/starter-kits)
 
 ## <a name="what-you-do"></a>What you do
 
-* Setup Intel Edison and and Grove modules.
+* Setup Intel Edison and Grove modules.
 * Create an IoT hub.
 * Register a device for Edison in your IoT hub.
 * Run a sample application on Edison to send sensor data to your IoT hub.
@@ -49,7 +43,7 @@ Connect Intel Edison to an IoT hub that you create. Then you run a sample applic
 
 ## <a name="what-you-need"></a>What you need
 
-![What you need](https://docstestmedia1.blob.core.windows.net/azure-media/articles/iot-hub/media/iot-hub-intel-edison-kit-c-get-started/0_kit.png)
+![What you need](media/iot-hub-intel-edison-kit-c-get-started/0_kit.png)
 
 * The Intel Edison board
 * Arduino expansion board
@@ -84,35 +78,35 @@ This section contains steps to attach your Intel® Edison module to your expansi
 
 2. Press down on the module just below the words `What will you make?` until you feel a snap.
 
-   ![assemble board 2](https://docstestmedia1.blob.core.windows.net/azure-media/articles/iot-hub/media/iot-hub-intel-edison-kit-c-get-started/1_assemble_board2.jpg)
+   ![assemble board 2](media/iot-hub-intel-edison-kit-c-get-started/1_assemble_board2.jpg)
 
 3. Use the two hex nuts (included in the package) to secure the module to the expansion board.
 
-   ![assemble board 3](https://docstestmedia1.blob.core.windows.net/azure-media/articles/iot-hub/media/iot-hub-intel-edison-kit-c-get-started/2_assemble_board3.jpg)
+   ![assemble board 3](media/iot-hub-intel-edison-kit-c-get-started/2_assemble_board3.jpg)
 
 4. Insert a screw in one of the four corner holes on the expansion board. Twist and tighten one of the white plastic spacers onto the screw.
 
-   ![assemble board 4](https://docstestmedia1.blob.core.windows.net/azure-media/articles/iot-hub/media/iot-hub-intel-edison-kit-c-get-started/3_assemble_board4.jpg)
+   ![assemble board 4](media/iot-hub-intel-edison-kit-c-get-started/3_assemble_board4.jpg)
 
 5. Repeat for the other three corner spacers.
 
-   ![assemble board 5](https://docstestmedia1.blob.core.windows.net/azure-media/articles/iot-hub/media/iot-hub-intel-edison-kit-c-get-started/4_assemble_board5.jpg)
+   ![assemble board 5](media/iot-hub-intel-edison-kit-c-get-started/4_assemble_board5.jpg)
 
 Now your board is assembled.
 
-   ![assembled board](https://docstestmedia1.blob.core.windows.net/azure-media/articles/iot-hub/media/iot-hub-intel-edison-kit-c-get-started/5_assembled_board.jpg)
+   ![assembled board](media/iot-hub-intel-edison-kit-c-get-started/5_assembled_board.jpg)
 
 ### <a name="connect-the-grove-base-shield-and-the-temperature-sensor"></a>Connect the Grove Base Shield and the temperature sensor
 
 1. Place the Grove Base Shield on to your board. Make sure all pins are tightly plugged into your board.
    
-   ![Grove Base Shield](https://docstestmedia1.blob.core.windows.net/azure-media/articles/iot-hub/media/iot-hub-intel-edison-kit-c-get-started/6_grove_base_sheild.jpg)
+   ![Grove Base Shield](media/iot-hub-intel-edison-kit-c-get-started/6_grove_base_sheild.jpg)
 
 2. Use Grove Cable to connect Grove temperature sensor onto the Grove Base Shield **A0** port.
 
-   ![Connect to temperature sensor](https://docstestmedia1.blob.core.windows.net/azure-media/articles/iot-hub/media/iot-hub-intel-edison-kit-c-get-started/7_temperature_sensor.jpg)
+   ![Connect to temperature sensor](media/iot-hub-intel-edison-kit-c-get-started/7_temperature_sensor.jpg)
    
-   ![Edison and sensor connection](https://docstestmedia1.blob.core.windows.net/azure-media/articles/iot-hub/media/iot-hub-intel-edison-kit-c-get-started/16_edion_sensor.png)
+   ![Edison and sensor connection](media/iot-hub-intel-edison-kit-c-get-started/16_edion_sensor.png)
 
 Now your sensor is ready.
 
@@ -120,7 +114,7 @@ Now your sensor is ready.
 
 1. Plug in the power supply.
 
-   ![Plug in power supply](https://docstestmedia1.blob.core.windows.net/azure-media/articles/iot-hub/media/iot-hub-intel-edison-kit-c-get-started/8_plug_power.jpg)
+   ![Plug in power supply](media/iot-hub-intel-edison-kit-c-get-started/8_plug_power.jpg)
 
 2. A green LED(labeled DS1 on the Arduino* expansion board) should light up and stay lit.
 
@@ -133,15 +127,15 @@ Now your sensor is ready.
 
 1. Toggle down the microswitch towards the two micro USB ports, so that Edison is in device mode. For differences between device mode and host mode, please reference [here](https://software.intel.com/en-us/node/628233#usb-device-mode-vs-usb-host-mode).
 
-   ![Toggle down the microswitch](https://docstestmedia1.blob.core.windows.net/azure-media/articles/iot-hub/media/iot-hub-intel-edison-kit-c-get-started/9_toggle_down_microswitch.jpg)
+   ![Toggle down the microswitch](media/iot-hub-intel-edison-kit-c-get-started/9_toggle_down_microswitch.jpg)
 
 2. Plug the micro USB cable into the top micro USB port.
 
-   ![Top micro USB port](https://docstestmedia1.blob.core.windows.net/azure-media/articles/iot-hub/media/iot-hub-intel-edison-kit-c-get-started/10_top_usbport.jpg)
+   ![Top micro USB port](media/iot-hub-intel-edison-kit-c-get-started/10_top_usbport.jpg)
 
 3. Plug the other end of USB cable into your computer.
 
-   ![Computer USB](https://docstestmedia1.blob.core.windows.net/azure-media/articles/iot-hub/media/iot-hub-intel-edison-kit-c-get-started/11_computer_usb.jpg)
+   ![Computer USB](media/iot-hub-intel-edison-kit-c-get-started/11_computer_usb.jpg)
 
 4. You will know that your board is fully initialized when your computer mounts a new drive (much like inserting a SD card into your computer).
 
@@ -171,7 +165,7 @@ Get the latest configuration tool from [this link](https://software.intel.com/en
 > [!NOTE]
 > Make sure that Edison is connected to the same network as your computer. Your computer connects to your Edison by using the IP address.
 
-   ![Connect to temperature sensor](https://docstestmedia1.blob.core.windows.net/azure-media/articles/iot-hub/media/iot-hub-intel-edison-kit-c-get-started/12_configuration_tool.png)
+   ![Connect to temperature sensor](media/iot-hub-intel-edison-kit-c-get-started/12_configuration_tool.png)
 
 Congratulations! You've successfully configured Edison.
 
@@ -181,7 +175,7 @@ Congratulations! You've successfully configured Edison.
 
 1. Use one of the following SSH clients from your host computer to connect to your Intel Edison. The IP address is from the configuration tool and the password is the one you've set in that tool.
     - [PuTTY](http://www.putty.org/) for Windows.
-    - The built-in SSH client on Ubuntu or macOS.
+    - The built-in SSH client on Ubuntu or macOS (run `ssh root@"the IP address"`).
 
 2. Clone the sample client app to your device. 
    
@@ -206,7 +200,7 @@ Congratulations! You've successfully configured Edison.
    nano config.h
    ```
 
-   ![Config file](https://docstestmedia1.blob.core.windows.net/azure-media/articles/iot-hub/media/iot-hub-intel-edison-kit-c-get-started/13_configure_file.png)
+   ![Config file](media/iot-hub-intel-edison-kit-c-get-started/13_configure_file.png)
 
    There are two macros in this file you can configurate. The first one is `INTERVAL`, which defines the time interval between two messages that send to cloud. The second one `SIMULATED_DATA`,which is a Boolean value for whether to use simulated sensor data or not.
 
@@ -221,7 +215,7 @@ Congratulations! You've successfully configured Edison.
    ```bash
    cmake . && make
    ```
-   ![Build output](https://docstestmedia1.blob.core.windows.net/azure-media/articles/iot-hub/media/iot-hub-intel-edison-kit-c-get-started/14_build_output.png)
+   ![Build output](media/iot-hub-intel-edison-kit-c-get-started/14_build_output.png)
 
 1. Run the sample application by running the following command:
 
@@ -234,26 +228,10 @@ Congratulations! You've successfully configured Edison.
 
 You should see the following output that shows the sensor data and the messages that are sent to your IoT hub.
 
-![Output - sensor data sent from Intel Edison to your IoT hub](https://docstestmedia1.blob.core.windows.net/azure-media/articles/iot-hub/media/iot-hub-intel-edison-kit-c-get-started/15_message_sent.png)
+![Output - sensor data sent from Intel Edison to your IoT hub](media/iot-hub-intel-edison-kit-c-get-started/15_message_sent.png)
 
 ## <a name="next-steps"></a>Next steps
 
 You’ve run a sample application to collect sensor data and send it to your IoT hub.
 
 [!INCLUDE [iot-hub-get-started-next-steps](../../includes/iot-hub-get-started-next-steps.md)]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

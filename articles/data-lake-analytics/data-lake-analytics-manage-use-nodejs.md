@@ -1,33 +1,27 @@
 ---
-title: Manage Azure Data Lake Analytics using Azure SDK for Node.js | Microsoft Docs
-description: Learn how to manage Data Lake Analytics accounts, data sources, jobs and users using Azure SDK for Node.js
+title: Manage Azure Data Lake Analytics using Azure SDK for Node.js
+description: This article describes how to use the Azure SDK for Node.js to manage Data Lake Analytics accounts, data sources, jobs & users.
 services: data-lake-analytics
-documentationcenter: ''
-author: edmacauley
-manager: jhubbard
-editor: cgronlun
-ms.assetid: 9de1bcf4-b15b-4d0b-9284-8889ecf0c438
 ms.service: data-lake-analytics
-ms.devlang: na
-ms.topic: get-started-article
-ms.tgt_pltfrm: na
-ms.workload: big-data
+author: saveenr
+ms.author: saveenr
+ms.reviewer: jasonwhowell
+ms.assetid: 9de1bcf4-b15b-4d0b-9284-8889ecf0c438
+ms.topic: conceptual
 ms.date: 12/05/2016
-ms.author: edmaca
-ms.openlocfilehash: e6440522ced33a48925cfabc64da055b8700b253
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 0603a60ea73d47dd6107ee80afc5c776ff8c83bc
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44662268"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44824114"
 ---
 # <a name="manage-azure-data-lake-analytics-using-azure-sdk-for-nodejs"></a>Manage Azure Data Lake Analytics using Azure SDK for Node.js
 [!INCLUDE [manage-selector](../../includes/data-lake-analytics-selector-manage.md)]
 
-The Azure SDK for Node.js can be used for managing Azure Data Lake Analytics accounts, jobs and catalogs. To see management topic using other tools, click the tab select above.
+This article describes how to manage Azure Data Lake Analytics accounts, data sources, users, and jobs using an app written using the Azure SDK for Node.js. 
 
-Right now it supports:
-
+The following versions are supported:
 * **Node.js version: 0.10.0 or higher**
 * **REST API version for Account: 2015-10-01-preview**
 * **REST API version for Catalog: 2015-10-01-preview**
@@ -35,8 +29,8 @@ Right now it supports:
 
 ## <a name="features"></a>Features
 * Account management: create, get, list, update, and delete.
-* Job management: submit, get, list, cancel.
-* Catalog management: get, list, create (secrets), update (secrets), delete (secrets).
+* Job management: submit, get, list, and cancel.
+* Catalog management: get and list.
 
 ## <a name="how-to-install"></a>How to Install
 ```bash

@@ -1,26 +1,19 @@
 ---
-title: Configure OS patching schedule for Linux-based HDInsight clusters -Azure | Microsoft Docs
+title: Configure OS patching schedule for Linux-based HDInsight clusters - Azure
 description: Learn how to configure OS patching schedule for Linux-based HDInsight clusters.
 services: hdinsight
-documentationcenter: ''
-author: bprakash
-manager: asadk
-editor: bprakash
-ms.assetid: ''
+author: omidm1
+ms.author: omidm
 ms.service: hdinsight
 ms.custom: hdinsightactive
-ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: big-data
+ms.topic: conceptual
 ms.date: 03/21/2017
-ms.author: bhanupr
-ms.openlocfilehash: 73f688377c59e378eac653d597df37ddaf19fa48
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 8bde1e8846dbaee957e2498ea4fae0c5cf79a913
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44552909"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44791211"
 ---
 # <a name="os-patching-for-hdinsight"></a>OS patching for HDInsight 
 As a managed Hadoop service, HDInsight takes care of patching the OS of the underlying VMs used by HDInsight clusters. As of August 1, 2016, we have changed the guest OS patching policy for Linux-based HDInsight clusters (version 3.4 or greater). The goal of the new policy is to significantly reduce the number of reboots due to patching. The new policy will continue to patch virtual machines (VMs) on Linux clusters every Monday or Thursday starting at 12AM UTC in a staggered fashion across nodes in any given cluster. However, any given VM will only reboot at most once every 30 days due to guest OS patching. In addition, the first reboot for a newly created cluster will not happen sooner than 30 days from the cluster creation date. Patches will be effective once the VMs are rebooted.
@@ -66,7 +59,7 @@ If you apply the script as part of the cluster creation process, it is persisted
 
 ## <a name="next-steps"></a>Next steps
 
-For specific steps on using the script action, see the following sections in the [Customize Linuz-based HDInsight clusters using script action](hdinsight-hadoop-customize-cluster-linux.md):
+For specific steps on using the script action, see the following sections in the [Customize Linux-based HDInsight clusters using script action](hdinsight-hadoop-customize-cluster-linux.md):
 
 * [Use a script action during cluster creation](hdinsight-hadoop-customize-cluster-linux.md#use-a-script-action-during-cluster-creation)
 * [Apply a script action to a running cluster](hdinsight-hadoop-customize-cluster-linux.md#apply-a-script-action-to-a-running-cluster)

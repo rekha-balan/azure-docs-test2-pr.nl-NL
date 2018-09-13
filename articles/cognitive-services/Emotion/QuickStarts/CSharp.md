@@ -1,35 +1,48 @@
 ---
 title: Emotion API C# quick start | Microsoft Docs
-description: Get information and a code sample to help you quickly get started using the Emotion API with C# in Cognitive Services.
+description: Get information and a code sample to help you quickly get started by using the Emotion API with C# in Cognitive Services.
 services: cognitive-services
-author: v-royhar
-manager: yutkuo
+author: anrothMSFT
+manager: corncar
 ms.service: cognitive-services
-ms.technology: emotion
+ms.component: emotion-api
 ms.topic: article
-ms.date: 02/20/2017
+ms.date: 11/02/2017
 ms.author: anroth
-ms.openlocfilehash: 019c5a0396cbc064c4ddfba4dd8f5ea19d12ca2a
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 89735ae54395447e3cb421f45db3d6b99001ecd6
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44540906"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44801143"
 ---
-# <a name="emotion-api-c-quick-start"></a>Emotion API C# Quick Start
-This article provides information and a code sample to help you quickly get started using the [Emotion API Recognize method](https://dev.projectoxford.ai/docs/services/5639d931ca73072154c1ce89/operations/563b31ea778daf121cc3a5fa) with C# to recognize the emotions expressed by one or more people in an image. 
+# <a name="emotion-api-c-quick-start"></a>Emotion API C# quick start
+
+> [!IMPORTANT]
+> The Video API Preview ended on October 30, 2017. To easily extract insights from videos, try the new [Video Indexer API Preview](https://azure.microsoft.com/services/cognitive-services/video-indexer/). You also can use it to enhance content discovery experiences, such as search results, by detecting spoken words, faces, characters, and emotions. To learn more, see the [Video Indexer Preview](https://docs.microsoft.com/azure/cognitive-services/video-indexer/video-indexer-overview) overview.
+
+This article provides information and a code sample to help you quickly get started by using the [Emotion API Recognize method](https://westus.dev.cognitive.microsoft.com/docs/services/5639d931ca73072154c1ce89/operations/563b31ea778daf121cc3a5fa) with C#. You can use it to recognize the emotions expressed by one or more people in an image. 
 
 ## <a name="prerequisites"></a>Prerequisites
-* Get the Microsoft Cognitive Emotion API Windows SDK [here](https://www.nuget.org/packages/Microsoft.ProjectOxford.Emotion/)
-* Get your free Subscription Key [here](https://www.microsoft.com/cognitive-services/en-us/sign-up)
+* Get the Cognitive Services [Emotion API Windows SDK](https://www.nuget.org/packages/Microsoft.ProjectOxford.Emotion/).
+* Get your free [subscription key](https://azure.microsoft.com/try/cognitive-services/).
 
-## <a name="emotion-recognition-c-example-request"></a>Emotion Recognition C# Example Request
+## <a name="emotion-recognition-c-example-request"></a>Emotion recognition C# example request
 
-```c#
+Create a new Console solution in Visual Studio, and then replace Program.cs with the following code. Change the `string uri` to use the region where you obtained your subscription keys. Replace the **Ocp-Apim-Subscription-Key** value with your valid subscription key. To find the subscription key, go to the Azure portal. On the navigation pane on the left, under the **Keys** section, browse to your Emotion API resource. Similarly, you can get the proper connect URI in the **Overview** panel for your resource listed under **Endpoint**.
+
+![Your API resource keys](../../media/emotion-api/keys.png)
+
+To process the response of your request, use a library like `Newtonsoft.Json`. This way you can handle a JSON string as a series of manageable objects called Tokens. To add this library to your package, right-click your project in Solution Explorer and select **Manage Nuget Packages**. Then search for **Newtonsoft**. The first result should be **Newtonsoft.Json**. Select **Install**. You can now reference this library in your application.
+
+![Install Newtonsoft.Json](../../media/emotion-api/newtonsoft-nuget.png)
+
+```csharp
 using System;
 using System.IO;
 using System.Net.Http.Headers;
 using System.Net.Http;
+using Newtonsoft.Json.Linq;
 
 namespace CSHttpClientSample
 {
@@ -43,7 +56,7 @@ namespace CSHttpClientSample
             MakeRequest(imageFilePath);
 
             Console.WriteLine("\n\n\nWait for the result below, then hit ENTER to exit...\n\n\n");
-            Console.ReadLine();
+            Console.ReadLine(); // wait for ENTER to exit program
         }
 
         static byte[] GetImageAsByteArray(string imageFilePath)
@@ -57,9 +70,12 @@ namespace CSHttpClientSample
         {
             var client = new HttpClient();
 
-            // Request headers
-            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "40d7576afa7e4f82b38315516d55cb5e");
+            // Request headers - replace this example key with your valid key.
+            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "<your-subscription-key>"); // 
 
+            // NOTE: You must use the same region in your REST call as you used to obtain your subscription keys.
+            //   For example, if you obtained your subscription keys from westcentralus, replace "westus" in the 
+            //   URI below with "westcentralus".
             string uri = "https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognize?";
             HttpResponseMessage response;
             string responseContent;
@@ -76,17 +92,39 @@ namespace CSHttpClientSample
                 responseContent = response.Content.ReadAsStringAsync().Result;
             }
 
-            //A peak at the JSON response.
+            // A peek at the raw JSON response.
             Console.WriteLine(responseContent);
+
+            // Processing the JSON into manageable objects.
+            JToken rootToken = JArray.Parse(responseContent).First;
+
+            // First token is always the faceRectangle identified by the API.
+            JToken faceRectangleToken = rootToken.First;
+
+            // Second token is all emotion scores.
+            JToken scoresToken = rootToken.Last;
+
+            // Show all face rectangle dimensions
+            JEnumerable<JToken> faceRectangleSizeList = faceRectangleToken.First.Children();
+            foreach (var size in faceRectangleSizeList) {
+                Console.WriteLine(size);
+            }
+
+            // Show all scores
+            JEnumerable<JToken> scoreList = scoresToken.First.Children();
+            foreach (var score in scoreList) {
+                Console.WriteLine(score);
+            }
         }
     }
 }
 ```
 
-## <a name="recognize-emotions-sample-response"></a>Recognize Emotions Sample Response
-A successful call returns an array of face entries and their associated emotion scores, ranked by face rectangle size in descending order. An empty response indicates that no faces were detected. An emotion entry contains the following fields:
-* faceRectangle - Rectangle location of face in the image.
-* scores - Emotion scores for each face in the image. 
+## <a name="recognize-emotions-sample-response"></a>Recognize emotions sample response
+A successful call returns an array of face entries and their associated emotion scores. They are ranked by face rectangle size in descending order. An empty response indicates that no faces were detected. An emotion entry contains the following fields:
+
+* faceRectangle: Rectangle location of face in the image
+* scores: Emotion scores for each face in the image 
 
 ```json
 application/json 

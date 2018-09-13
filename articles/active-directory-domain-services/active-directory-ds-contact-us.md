@@ -4,22 +4,23 @@ description: Contact the Azure AD Domain Services product team
 services: active-directory-ds
 documentationcenter: ''
 author: mahesh-unnikrishnan
-manager: stevenpo
+manager: mtillman
 editor: curtand
 ms.assetid: 662362c3-1a5e-4e94-ae09-8e4254443697
-ms.service: active-directory-ds
+ms.service: active-directory
+ms.component: domain-services
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 03/06/2017
+ms.topic: conceptual
+ms.date: 08/23/2017
 ms.author: maheshu
-ms.openlocfilehash: f964d67573c86850dbc90f94bc977a9699545b39
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: eda5d76e46ddb9cfcee9ee7554f31ee432938358
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44552992"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44827359"
 ---
 # <a name="azure-ad-domain-services---contact-us"></a>Azure AD Domain Services - Contact Us
 ## <a name="contact-the-product-team"></a>Contact the product team
@@ -29,7 +30,7 @@ You may email us at: [Azure AD Domain Services Feedback](mailto:aaddsfb@microsof
 
 Ensure that you include the following, so we can investigate the issue.
 
-* The **tenant ID** for your Azure AD directory. The tenant ID is the GUID you notice in the browser's address bar when you navigate to the page from where you enable AAD Domain Services for your directory.
+* The **tenant ID/directory ID** for your Azure AD directory. The tenant ID is the GUID you see in the directory ID field on the [Properties page for your directory](https://ms.portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Properties)
 * The **DNS domain name** you've configured for your AAD Domain Services managed domain.
 
 ## <a name="provide-feedback"></a>Provide Feedback

@@ -3,22 +3,22 @@ title: Explore .NET trace logs in Application Insights
 description: Search logs generated with Trace, NLog, or Log4Net.
 services: application-insights
 documentationcenter: .net
-author: alancameronwills
-manager: douge
+author: mrbullwinkle
+manager: carmonm
 ms.assetid: 0c2a084f-6e71-467b-a6aa-4ab222f17153
 ms.service: application-insights
 ms.workload: tbd
 ms.tgt_pltfrm: ibiza
 ms.devlang: na
-ms.topic: article
-ms.date: 07/21/2016
-ms.author: awills
-ms.openlocfilehash: e222d1eb0986794e1db0c47d0b2475f3da4e1950
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.topic: conceptual
+ms.date: 05/03/2017
+ms.author: mbullwin
+ms.openlocfilehash: b1cd2e8d7649de48f34efb0c7d839e17906a29bf
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44554354"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44819291"
 ---
 # <a name="explore-net-trace-logs-in-application-insights"></a>Explore .NET trace logs in Application Insights
 If you use NLog, log4Net or System.Diagnostics.Trace for diagnostic tracing in your ASP.NET application, you can have your logs sent to [Azure Application Insights][start], where you can explore and search them. Your logs will be merged with the other telemetry coming from your application, so that you can identify the traces associated with servicing each user request, and correlate them with other events and exception reports.
@@ -48,7 +48,6 @@ If you're using System.Diagnostics.Trace, you need to add an entry to web.config
      </system.diagnostics>
    </configuration>
 ```
-
 ## <a name="configure-application-insights-to-collect-logs"></a>Configure Application Insights to collect logs
 **[Add Application Insights to your project](app-insights-asp-net.md)** if you haven't done that yet. You'll see an option to include the log collector.
 
@@ -62,11 +61,11 @@ Use this method if your project type isn't supported by the Application Insights
 1. If you plan to use log4Net or NLog, install it in your project.
 2. In Solution Explorer, right-click your project and choose **Manage NuGet Packages**.
 3. Search for "Application Insights"
-
-    ![Get the prerelease version of the appropriate adapter](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-asp-net-trace-logs/appinsights-36nuget.png)
 4. Select the appropriate package - one of:
 
    * Microsoft.ApplicationInsights.TraceListener (to capture System.Diagnostics.Trace calls)
+   * Microsoft.ApplicationInsights.EventSourceListener (to capture EventSource events)
+   * Microsoft.ApplicationInsights.EtwCollector (to capture ETW events)
    * Microsoft.ApplicationInsights.NLogTarget
    * Microsoft.ApplicationInsights.Log4NetAppender
 
@@ -81,6 +80,54 @@ If you prefer log4net or NLog:
 
     logger.Warn("Slow response - database01");
 
+## <a name="using-eventsource-events"></a>Using EventSource events
+You can configure [System.Diagnostics.Tracing.EventSource](https://msdn.microsoft.com/library/system.diagnostics.tracing.eventsource.aspx) events to be sent to Application Insights as traces. First, install the `Microsoft.ApplicationInsights.EventSourceListener` NuGet package. Then edit `TelemetryModules` section of the [ApplicationInsights.config](app-insights-configuration-with-applicationinsights-config.md) file.
+
+```xml
+    <Add Type="Microsoft.ApplicationInsights.EventSourceListener.EventSourceTelemetryModule, Microsoft.ApplicationInsights.EventSourceListener">
+      <Sources>
+        <Add Name="MyCompany" Level="Verbose" />
+      </Sources>
+    </Add>
+```
+
+For each source, you can set the following parameters:
+ * `Name` specifies the name of the EventSource to collect.
+ * `Level` specifies the logging level to collect. Can be one of `Critical`, `Error`, `Informational`, `LogAlways`, `Verbose`, `Warning`.
+ * `Keywords` (Optional) specifies the integer value of keywords combinations to use.
+
+## <a name="using-diagnosticsource-events"></a>Using DiagnosticSource events
+You can configure [System.Diagnostics.DiagnosticSource](https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md) events to be sent to Application Insights as traces. First, install the [`Microsoft.ApplicationInsights.DiagnosticSourceListener`](https://www.nuget.org/packages/Microsoft.ApplicationInsights.DiagnosticSourceListener) NuGet package. Then edit the `TelemetryModules` section of the [ApplicationInsights.config](app-insights-configuration-with-applicationinsights-config.md) file.
+
+```xml
+    <Add Type="Microsoft.ApplicationInsights.DiagnosticSourceListener.DiagnosticSourceTelemetryModule, Microsoft.ApplicationInsights.DiagnosticSourceListener">
+      <Sources>
+        <Add Name="MyDiagnosticSourceName" />
+      </Sources>
+    </Add>
+```
+
+For each DiagnosticSource you want to trace, add an entry with the `Name` attribute  set to the name of your DiagnosticSource.
+
+## <a name="using-etw-events"></a>Using ETW events
+You can configure ETW events to be sent to Application Insights as traces. First, install the `Microsoft.ApplicationInsights.EtwCollector` NuGet package. Then edit `TelemetryModules` section of the [ApplicationInsights.config](app-insights-configuration-with-applicationinsights-config.md) file.
+
+> [!NOTE] 
+> ETW events can only be collected if the process hosting the SDK is running under an identity that is a member of "Performance Log Users" or Administrators.
+
+```xml
+    <Add Type="Microsoft.ApplicationInsights.EtwCollector.EtwCollectorTelemetryModule, Microsoft.ApplicationInsights.EtwCollector">
+      <Sources>
+        <Add ProviderName="MyCompanyEventSourceName" Level="Verbose" />
+      </Sources>
+    </Add>
+```
+
+For each source, you can set the following parameters:
+ * `ProviderName` is the name of the ETW provider to collect.
+ * `ProviderGuid` specifies the GUID of the ETW provider to collect, can be used instead of `ProviderName`.
+ * `Level` sets the logging level to collect. Can be one of `Critical`, `Error`, `Informational`, `LogAlways`, `Verbose`, `Warning`.
+ * `Keywords` (Optional) sets the integer value of keyword combinations to use.
 
 ## <a name="using-the-trace-api-directly"></a>Using the Trace API directly
 You can call the Application Insights trace API directly. The logging adapters use this API.
@@ -106,9 +153,9 @@ Run your app, either in debug mode or deploy it live.
 
 In your app's overview blade in [the Application Insights portal][portal], choose [Search][diagnostic].
 
-![In Application Insights, choose Search](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-asp-net-trace-logs/020-diagnostic-search.png)
+![In Application Insights, choose Search](./media/app-insights-asp-net-trace-logs/020-diagnostic-search.png)
 
-![Search](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-asp-net-trace-logs/10-diagnostics.png)
+![Search](./media/app-insights-asp-net-trace-logs/10-diagnostics.png)
 
 You can, for example:
 
@@ -149,7 +196,7 @@ In Solution Explorer, right-click `ApplicationInsights.config` and choose **Upda
 It can sometimes take a while for all the events and requests to get through the pipeline.
 
 ### <a name="limits"></a>How much data is retained?
-Up to 500 events per second from each application. Events are retained for seven days.
+Several factors impact the amount of data retained. See the [limits](app-insights-api-custom-events-metrics.md#limits) section of the customer event metrics page for more information. 
 
 ### <a name="im-not-seeing-some-of-the-log-entries-that-i-expect"></a>I'm not seeing some of the log entries that I expect
 If your application sends a lot of data and you are using the Application Insights SDK for ASP.NET version 2.0.0-beta3 or later, the adaptive sampling feature may operate and send only a percentage of your telemetry. [Learn more about sampling.](app-insights-sampling.md)
@@ -166,6 +213,3 @@ If your application sends a lot of data and you are using the Application Insigh
 [portal]: https://portal.azure.com/
 [qna]: app-insights-troubleshoot-faq.md
 [start]: app-insights-overview.md
-
-
-

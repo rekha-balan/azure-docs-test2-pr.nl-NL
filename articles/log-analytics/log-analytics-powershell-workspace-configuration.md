@@ -11,18 +11,19 @@ ms.service: log-analytics
 ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: powershell
-ms.topic: article
+ms.topic: conceptual
 ms.date: 11/21/2016
 ms.author: richrund
-ms.openlocfilehash: b8ebf6a2b3c8d2e5b173e429f39c9836e7d214ac
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.component: na
+ms.openlocfilehash: 6dcf3a5b26dc3c7e69721b2abb8a7d58767866d6
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44550778"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44800272"
 ---
 # <a name="manage-log-analytics-using-powershell"></a>Manage Log Analytics using PowerShell
-You can use the [Log Analytics PowerShell cmdlets](https://msdn.microsoft.com/library/mt188224\(v=azure.300\).aspx) to perform various functions in Log Analytics from a command line or as part of a script.  Examples of the tasks you can perform with PowerShell include:
+You can use the [Log Analytics PowerShell cmdlets](https://docs.microsoft.com/powershell/module/azurerm.operationalinsights/) to perform various functions in Log Analytics from a command line or as part of a script.  Examples of the tasks you can perform with PowerShell include:
 
 * Create a workspace
 * Add or remove a solution
@@ -36,7 +37,7 @@ You can use the [Log Analytics PowerShell cmdlets](https://msdn.microsoft.com/li
 * Add the log analytics agent to an Azure virtual machine
 * Configure log analytics to index data collected using Azure diagnostics
 
-This article provides two code samples that illustrate some of the functions that you can perform from PowerShell.  You can refer to the [Log Analytics PowerShell cmdlet reference](https://msdn.microsoft.com/library/mt188224\(v=azure.300\).aspx) for other functions.
+This article provides two code samples that illustrate some of the functions that you can perform from PowerShell.  You can refer to the [Log Analytics PowerShell cmdlet reference](https://docs.microsoft.com/powershell/module/azurerm.operationalinsights/) for other functions.
 
 > [!NOTE]
 > Log Analytics was previously called Operational Insights, which is why it is the name used in the cmdlets.
@@ -146,7 +147,7 @@ foreach ($solution in $Solutions) {
     Set-AzureRmOperationalInsightsIntelligencePack -ResourceGroupName $ResourceGroup -WorkspaceName $WorkspaceName -IntelligencePackName $solution -Enabled $true
 }
 
-#List enabled solutions
+# List enabled solutions
 (Get-AzureRmOperationalInsightsIntelligencePacks -ResourceGroupName $ResourceGroup -WorkspaceName $WorkspaceName).Where({($_.enabled -eq $true)})
 
 # Import Saved Searches
@@ -213,7 +214,7 @@ For agentless monitoring of Azure resources, the resources need to have Azure di
 
 For the details of the available metrics, refer to [supported metrics with Azure Monitor](../monitoring-and-diagnostics/monitoring-supported-metrics.md).
 
-For the details of the available logs, refer to [supported services and schema for diagnostic logs](../monitoring-and-diagnostics/monitoring-overview-of-diagnostic-logs.md#supported-services-and-schema-for-diagnostic-logs).
+For the details of the available logs, refer to [supported services and schema for diagnostic logs](../monitoring-and-diagnostics/monitoring-diagnostic-logs-schema.md).
 
 ```
 $workspaceId = "/subscriptions/d2e37fee-1234-40b2-5678-0b2199de3b50/resourcegroups/oi-default-east-us/providers/microsoft.operationalinsights/workspaces/rollingbaskets"
@@ -265,5 +266,5 @@ You can also use the preceding script to collect logs from storage accounts in d
 
 
 ## <a name="next-steps"></a>Next steps
-* [Review Log Analytics PowerShell cmdlets](https://msdn.microsoft.com/library/mt188224\(v=azure.300\).aspx) for additional information on using PowerShell for configuration of Log Analytics.
+* [Review Log Analytics PowerShell cmdlets](https://docs.microsoft.com/powershell/module/azurerm.operationalinsights/) for additional information on using PowerShell for configuration of Log Analytics.
 

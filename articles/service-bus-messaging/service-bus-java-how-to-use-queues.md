@@ -3,7 +3,7 @@ title: How to use Azure Service Bus queues with Java | Microsoft Docs
 description: Learn how to use Service Bus queues in Azure. Code samples written in Java.
 services: service-bus-messaging
 documentationcenter: java
-author: sethmanheim
+author: spelluru
 manager: timlt
 ms.assetid: f701439c-553e-402c-94a7-64400f997d59
 ms.service: service-bus-messaging
@@ -11,16 +11,16 @@ ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: Java
 ms.topic: article
-ms.date: 01/11/2017
-ms.author: sethm
-ms.openlocfilehash: de57d1bcdf4c28f664d6054c4ad9e7cfb312c89a
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 08/10/2017
+ms.author: spelluru
+ms.openlocfilehash: e4099c8228e9434276242a3c49ebcb4fc2e995b2
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44670718"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44819382"
 ---
-# <a name="how-to-use-service-bus-queues"></a>How to use Service Bus queues
+# <a name="how-to-use-service-bus-queues-with-java"></a>How to use Service Bus queues with Java
 [!INCLUDE [service-bus-selector-queues](../../includes/service-bus-selector-queues.md)]
 
 This article describes how to use Service Bus queues. The samples are written in Java and use the [Azure SDK for Java][Azure SDK for Java]. The scenarios covered include **creating queues**, **sending and receiving messages**, and **deleting queues**.
@@ -32,7 +32,7 @@ This article describes how to use Service Bus queues. The samples are written in
 ## <a name="configure-your-application-to-use-service-bus"></a>Configure your application to use Service Bus
 Make sure you have installed the [Azure SDK for Java][Azure SDK for Java] before building this sample. If you are using Eclipse, you can install the [Azure Toolkit for Eclipse][Azure Toolkit for Eclipse] that includes the Azure SDK for Java. You can then add the **Microsoft Azure Libraries for Java** to your project:
 
-![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-bus-messaging/media/service-bus-java-how-to-use-queues/eclipselibs.png)
+![](./media/service-bus-java-how-to-use-queues/eclipselibs.png)
 
 Add the following `import` statements to the top of the Java file:
 
@@ -47,7 +47,7 @@ import javax.xml.datatype.*;
 ## <a name="create-a-queue"></a>Create a queue
 Management operations for Service Bus queues can be performed via the **ServiceBusContract** class. A **ServiceBusContract** object is constructed with an appropriate configuration that encapsulates the SAS token with permissions to manage it, and the **ServiceBusContract** class is the sole point of communication with Azure.
 
-The **ServiceBusService** class provides methods to create, enumerate, and delete queues. The example below shows how a **ServiceBusService** object can be used to create a queue named "TestQueue", with a namespace named "HowToSample":
+The **ServiceBusService** class provides methods to create, enumerate, and delete queues. The example below shows how a **ServiceBusService** object can be used to create a queue named `TestQueue`, with a namespace named `HowToSample`:
 
 ```java
 Configuration config =
@@ -72,7 +72,7 @@ catch (ServiceException e)
 }
 ```
 
-There are methods on **QueueInfo** that allow properties of the queue to be tuned (for example: to set the default time-to-live (TTL) value to be applied to messages sent to the queue). The following example shows how to create a queue named `TestQueue` with a maximum size of 5GB:
+There are methods on `QueueInfo` that allow properties of the queue to be tuned (for example: to set the default time-to-live (TTL) value to be applied to messages sent to the queue). The following example shows how to create a queue named `TestQueue` with a maximum size of 5GB:
 
 ````java
 long maxSizeInMegabytes = 5120;
@@ -81,7 +81,7 @@ queueInfo.setMaxSizeInMegabytes(maxSizeInMegabytes);
 CreateQueueResult result = service.createQueue(queueInfo);
 ````
 
-Note that you can use the **listQueues** method on **ServiceBusContract** objects to check if a queue with a specified name already exists within a service namespace.
+Note that you can use the `listQueues` method on **ServiceBusContract** objects to check if a queue with a specified name already exists within a service namespace.
 
 ## <a name="send-messages-to-a-queue"></a>Send messages to a queue
 To send a message to a Service Bus queue, your application obtains a **ServiceBusContract** object. The following code shows how to send a message for the `TestQueue` queue previously created in the `HowToSample` namespace:
@@ -100,7 +100,7 @@ catch (ServiceException e)
 }
 ```
 
-Messages sent to, and received from Service Bus queues are instances of the [BrokeredMessage][BrokeredMessage] class. [BrokeredMessage][BrokeredMessage] objects have a set of standard properties (such as [Label](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.brokeredmessage#Microsoft_ServiceBus_Messaging_BrokeredMessage_Label) and [TimeToLive](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.brokeredmessage#Microsoft_ServiceBus_Messaging_BrokeredMessage_TimeToLive)), a dictionary that is used to hold custom application-specific properties, and a body of arbitrary application data. An application can set the body of the message by passing any serializable object into the constructor of the [BrokeredMessage][BrokeredMessage], and the appropriate serializer will then be used to serialize the object. Alternatively, you can provide a **java.IO.InputStream** object.
+Messages sent to, and received from Service Bus queues are instances of the [BrokeredMessage][BrokeredMessage] class. [BrokeredMessage][BrokeredMessage] objects have a set of standard properties (such as [Label](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage.label#Microsoft_ServiceBus_Messaging_BrokeredMessage_Label) and [TimeToLive](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage.timetolive#Microsoft_ServiceBus_Messaging_BrokeredMessage_TimeToLive)), a dictionary that is used to hold custom application-specific properties, and a body of arbitrary application data. An application can set the body of the message by passing any serializable object into the constructor of the [BrokeredMessage][BrokeredMessage], and the appropriate serializer will then be used to serialize the object. Alternatively, you can provide a **java.IO.InputStream** object.
 
 The following example demonstrates how to send five test messages to the `TestQueue` **MessageSender** we obtained in the previous code snippet:
 
@@ -126,7 +126,7 @@ Because Service Bus will have marked the message as being consumed, then when th
 
 In **PeekLock** mode, receive becomes a two stage operation, which makes it possible to support applications that cannot tolerate missing messages. When Service Bus receives a request, it finds the next message to be consumed, locks it to prevent other consumers receiving it, and then returns it to the application. After the application finishes processing the message (or stores it reliably for future processing), it completes the second stage of the receive process by calling **Delete** on the received message. When Service Bus sees the **Delete** call, it will mark the message as being consumed and remove it from the queue.
 
-The following example demonstrates how messages can be received and processed using **PeekLock** mode (not the default mode). The example below does an infinite loop and processes messages as they arrive into our "TestQueue":
+The following example demonstrates how messages can be received and processed using **PeekLock** mode (not the default mode). The example below does an infinite loop and processes messages as they arrive into our `TestQueue`:
 
 ```java
 try
@@ -182,11 +182,11 @@ catch (Exception e) {
 ```
 
 ## <a name="how-to-handle-application-crashes-and-unreadable-messages"></a>How to handle application crashes and unreadable messages
-Service Bus provides functionality to help you gracefully recover from errors in your application or difficulties processing a message. If a receiver application is unable to process the message for some reason, then it can call the **unlockMessage** method on the received message (instead of the **deleteMessage** method). This will cause Service Bus to unlock the message within the queue and make it available to be received again, either by the same consuming application or by another consuming application.
+Service Bus provides functionality to help you gracefully recover from errors in your application or difficulties processing a message. If a receiver application is unable to process the message for some reason, then it can call the **unlockMessage** method on the received message (instead of the **deleteMessage** method). This causes Service Bus to unlock the message within the queue and make it available to be received again, either by the same consuming application or by another consuming application.
 
-There is also a timeout associated with a message locked within the queue, and if the application fails to process the message before the lock timeout expires (e.g., if the application crashes), then Service Bus will unlock the message automatically and make it available to be received again.
+There is also a timeout associated with a message locked within the queue, and if the application fails to process the message before the lock timeout expires (for example, if the application crashes), then Service Bus unlocks the message automatically and makes it available to be received again.
 
-In the event that the application crashes after processing the message but before the **deleteMessage** request is issued, then the message will be redelivered to the application when it restarts. This is often called **At Least Once Processing**, that is, each message will be processed at least once but in certain situations the same message may be redelivered. If the scenario cannot tolerate duplicate processing, then application developers should add additional logic to their application to handle duplicate message delivery. This is often achieved using the **getMessageId** method of the message, which will remain constant across delivery attempts.
+In the event that the application crashes after processing the message but before the **deleteMessage** request is issued, then the message is redelivered to the application when it restarts. This is often called *At Least Once Processing*; that is, each message is processed at least once but in certain situations the same message may be redelivered. If the scenario cannot tolerate duplicate processing, then application developers should add additional logic to their application to handle duplicate message delivery. This is often achieved using the **getMessageId** method of the message, which remains constant across delivery attempts.
 
 ## <a name="next-steps"></a>Next Steps
 Now that you've learned the basics of Service Bus queues, see [Queues, topics, and subscriptions][Queues, topics, and subscriptions] for more information.
@@ -197,4 +197,3 @@ For more information, see the [Java Developer Center](https://azure.microsoft.co
 [Azure Toolkit for Eclipse]: https://msdn.microsoft.com/library/azure/hh694271.aspx
 [Queues, topics, and subscriptions]: service-bus-queues-topics-subscriptions.md
 [BrokeredMessage]: /dotnet/api/microsoft.servicebus.messaging.brokeredmessage
-

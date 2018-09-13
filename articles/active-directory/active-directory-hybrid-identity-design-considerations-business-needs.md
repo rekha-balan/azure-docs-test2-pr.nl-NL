@@ -1,10 +1,10 @@
 ---
-title: Azure Active Directory hybrid identity design considerations - determine identity requirements | Microsoft Docs
+title: Identity requirements for hybrid cloud identity design Azure | Microsoft Docs
 description: Identify the company’s business needs that will lead you to define the requirements for the hybrid identity design.
 documentationcenter: ''
 services: active-directory
 author: billmath
-manager: femila
+manager: mtillman
 editor: ''
 ms.assetid: de690978-84ef-41ad-9dfe-785722d343a1
 ms.service: active-directory
@@ -12,21 +12,23 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 03/21/2017
+ms.date: 06/27/2018
+ms.component: hybrid
 ms.author: billmath
-ms.openlocfilehash: 297b7d889e7a6ef10540f6c0a6b9e141f973da48
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.custom: seohack1
+ms.openlocfilehash: a641464e04421b90de15cd953bb8a0fbf9b687d3
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44540785"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44818407"
 ---
 # <a name="determine-identity-requirements-for-your-hybrid-identity-solution"></a>Determine identity requirements for your hybrid identity solution
 The first step in designing a hybrid identity solution is to determine the requirements for the business organization that will be leveraging this solution.  Hybrid identity starts as a supporting role (it supports all other cloud solutions by providing authentication) and goes on to provide new and interesting capabilities that unlock new workloads for users.  These workloads or services that you wish to adopt for your users will dictate the requirements for the hybrid identity design.  These services and workloads need to leverage hybrid identity both on-premises and in the cloud.  
 
 You need to go over these key aspects of the business to understand what it is a requirement now and what the company plans for the future. If you don’t have the visibility of the long term strategy for hybrid identity design, chances are that your solution will not be scalable as the business needs grow and change.   T he diagram below shows an example of a hybrid identity architecture and the workloads that are being unlocked for users. This is just an example of all the new possibilities that can be unlocked and delivered with a solid hybrid identity strategy. 
 
-Some components that are part of the hybrid identity architecture ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/media/hybrid-id-design-considerations/hybrid-identity-architechture.png)
+Some components that are part of the hybrid identity architecture ![](./media/hybrid-id-design-considerations/hybrid-identity-architechture.png)
 
 ## <a name="determine-business-needs"></a>Determine business needs
 Each company will have different requirements, even if these companies are part of the same industry, the real business requirements might vary. You can still leverage best practices from the industry, but ultimately it is the company’s business needs that will lead you to define the requirements for the hybrid identity design. 
@@ -56,7 +58,7 @@ You also need to be aware of the cloud services that your company might have. Pe
 * Is this integration currently in production or is it a pilot?
 
 > [!NOTE]
-> If you don’t have an accurate mapping of all your apps and cloud services, you can use the Cloud App Discovery tool. This tool can provide your IT department with visibility into all your organization’s business and consumer cloud apps. That makes it easier than ever to discover shadow IT in your organization, including details on usage patterns and any users accessing your cloud applications. To get started see [Cloud app discovery](active-directory-cloudappdiscovery-whatis.md).
+> Cloud Discovery analyzes your traffic logs against Microsoft Cloud App Security's cloud app catalog of over 16,000 cloud apps that are ranked and scored based on more than 70 risk factors, to provide you with ongoing visibility into cloud use, Shadow IT, and the risk Shadow IT poses into your organization.To get started see [Set up Cloud Discovery](/cloud-app-security/set-up-cloud-discovery).
 > 
 > 
 
@@ -109,5 +111,4 @@ You also have to evaluate the user requirements. This evaluation is important to
 
 ## <a name="see-also"></a>See also
 [Design considerations overview](active-directory-hybrid-identity-design-considerations-overview.md)
-
 

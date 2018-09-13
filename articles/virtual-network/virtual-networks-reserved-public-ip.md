@@ -3,8 +3,8 @@ title: Manage Azure reserved IP addresses (Classic) - PowerShell | Microsoft Doc
 description: Understand reserved IP addresses (Classic) and how to manage them using PowerShell.
 services: virtual-network
 documentationcenter: na
-author: jimdial
-manager: carmonm
+author: genlin
+manager: cshepard
 editor: tysonn
 ms.assetid: 34652a55-3ab8-4c2d-8fb2-43684033b191
 ms.service: virtual-network
@@ -13,13 +13,13 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/10/2016
-ms.author: jdial
-ms.openlocfilehash: 12811b5cbfc6072075395d8542b79d10d2873286
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: genli
+ms.openlocfilehash: 25fe3c5361ff58f8d62d5d083b7a69f517d2a267
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44550578"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44809080"
 ---
 # <a name="reserved-ip-addresses-classic"></a>Reserved IP addresses (Classic)
 
@@ -27,7 +27,6 @@ ms.locfileid: "44550578"
 > * [Azure portal](virtual-network-deploy-static-pip-arm-portal.md)
 > * [PowerShell](virtual-network-deploy-static-pip-arm-ps.md)
 > * [Azure CLI](virtual-network-deploy-static-pip-arm-cli.md)
-> * [Template](virtual-network-deploy-static-pip-arm-template.md)
 > * [PowerShell (Classic)](virtual-networks-reserved-public-ip.md)
 
 IP addresses in Azure fall into two categories: dynamic and reserved. Public IP addresses managed by Azure are dynamic by default. That means that the IP address used for a given cloud service (VIP) or to access a VM or role instance directly (ILPIP) can change from time to time, when resources are shut down or stopped (deallocated).
@@ -58,7 +57,7 @@ To learn more about IP addresses in Azure, read the [IP addresses](virtual-netwo
 
 ## <a name="manage-reserved-vips"></a>Manage reserved VIPs
 
-Ensure you have installed and configured PowerShell by completing the steps in the [Install and configure PowerShell](/powershell/azureps-cmdlets-docs) article. 
+Ensure you have installed and configured PowerShell by completing the steps in the [Install and configure PowerShell](/powershell/azure/overview) article. 
 
 Before you can use reserved IPs, you must add it to your subscription. To create a reserved IP from the pool of public IP addresses available in the *Central US* location, run the following command:
 

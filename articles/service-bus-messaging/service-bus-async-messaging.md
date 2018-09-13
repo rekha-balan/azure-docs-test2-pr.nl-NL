@@ -3,7 +3,7 @@ title: Service Bus asynchronous messaging | Microsoft Docs
 description: Description of Azure Service Bus asynchronous messaging.
 services: service-bus-messaging
 documentationcenter: na
-author: sethmanheim
+author: spelluru
 manager: timlt
 editor: ''
 ms.assetid: f1435549-e1f2-40cb-a280-64ea07b39fc7
@@ -12,14 +12,14 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 04/19/2017
-ms.author: sethm
-ms.openlocfilehash: 95d6f295ba145a55fe4ed3fc7c6f627c9d419a3c
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 01/30/2018
+ms.author: spelluru
+ms.openlocfilehash: 8b345656c9cb4cabd86581ccd04f74311fe0ce04
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44554132"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44809392"
 ---
 # <a name="asynchronous-messaging-patterns-and-high-availability"></a>Asynchronous messaging patterns and high availability
 

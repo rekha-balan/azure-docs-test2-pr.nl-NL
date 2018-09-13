@@ -14,12 +14,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/23/2017
 ms.author: mazha
-ms.openlocfilehash: 71d08e5675cad7dab9797b80bc218e28b95ee032
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 2dfbc046674b2da692f30c945aee3ea25ae524eb
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44551259"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44826735"
 ---
 # <a name="analyze-usage-statistics-with-azure-cdn-advanced-http-reports"></a>Analyze usage statistics with Azure CDN advanced HTTP reports
 ## <a name="overview"></a>Overview
@@ -30,12 +30,12 @@ This document explains advanced HTTP reporting in Microsoft Azure CDN. These rep
 ## <a name="accessing-advanced-http-reports"></a>Accessing advanced HTTP reports
 1. From the CDN profile blade, click the **Manage** button.
    
-    ![CDN profile blade manage button](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-advanced-http-reports/cdn-manage-btn.png)
+    ![CDN profile blade manage button](./media/cdn-advanced-http-reports/cdn-manage-btn.png)
    
     The CDN management portal opens.
 2. Hover over the **Analytics** tab, then hover over the **Advanced HTTP Reports** flyout.  Click on **HTTP Large Platform**.
    
-    ![CDN management portal - Advanced Reports menu](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-advanced-http-reports/cdn-advanced-reports.png)
+    ![CDN management portal - Advanced Reports menu](./media/cdn-advanced-http-reports/cdn-advanced-reports.png)
    
     Report options are displayed.
 
@@ -204,6 +204,4 @@ Directly below the bar chart, the following information will be listed for the t
 * [Real-time stats in Microsoft Azure CDN](cdn-real-time-stats.md)
 * [Overriding default HTTP behavior using the rules engine](cdn-rules-engine.md)
 * [Analyze Edge Performance](cdn-edge-performance.md)
-
-
 

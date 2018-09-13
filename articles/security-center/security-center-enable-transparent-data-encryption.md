@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: e4be8a0e-2118-4ee9-a266-69e52d9f7f8e
 ms.service: security-center
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 02/02/2017
 ms.author: terrylan
-ms.openlocfilehash: c3dee017cfe6ed3355840d5f9fa784150742b1ae
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 13e47de8ff25451f7d4185927477d524d519ce2a
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44563062"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44805433"
 ---
 # <a name="enable-transparent-data-encryption-in-azure-security-center"></a>Enable Transparent Data Encryption in Azure Security Center
 Azure Security Center will recommend that you enable Transparent Data Encryption (TDE) on SQL databases if TDE is not already enabled. TDE protects your data and helps you meet compliance requirements by encrypting your database, associated backups, and transaction log files at rest, without requiring changes to your application. To learn more see [Transparent Data Encryption with Azure SQL Database](https://msdn.microsoft.com/library/dn948096).
@@ -60,11 +60,7 @@ To learn more about Security Center, see the following:
 * [Azure Security blog](http://blogs.msdn.com/b/azuresecurity/) -- Get the latest Azure security news and information.
 
 <!--Image references-->
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/security-center/media/security-center-enable-tde-on-sql-databases/enable-tde.png
-[2]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/security-center/media/security-center-enable-tde-on-sql-databases/transparent-data-encryption-blade.png
-[3]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/security-center/media/security-center-enable-tde-on-sql-databases/turn-on-tde.png
-[4]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/security-center/media/security-center-enable-tde-on-sql-databases/encrypted.png
-
-
-
-
+[1]: ./media/security-center-enable-tde-on-sql-databases/enable-tde.png
+[2]:./media/security-center-enable-tde-on-sql-databases/transparent-data-encryption-blade.png
+[3]: ./media/security-center-enable-tde-on-sql-databases/turn-on-tde.png
+[4]: ./media/security-center-enable-tde-on-sql-databases/encrypted.png

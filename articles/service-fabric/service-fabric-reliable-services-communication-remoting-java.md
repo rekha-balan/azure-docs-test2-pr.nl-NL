@@ -1,6 +1,6 @@
 ---
-title: Service remoting in Azure Service Fabric | Microsoft Docs
-description: Service Fabric remoting allows clients and services to communicate with services by using a remote procedure call.
+title: Service remoting using Java in Azure Service Fabric | Microsoft Docs
+description: Service Fabric remoting allows clients and services to communicate with Java services by using a remote procedure call.
 services: service-fabric
 documentationcenter: java
 author: PavanKunapareddyMSFT
@@ -8,26 +8,26 @@ manager: timlt
 ms.assetid: ''
 ms.service: service-fabric
 ms.devlang: java
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: required
-ms.date: 03/09/2017
+ms.date: 06/30/2017
 ms.author: pakunapa
-ms.openlocfilehash: 11e300b3b1d0433bd4790332593ada2d3eede883
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 5135884352308eb31ef7a080078255f016bd6e10
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44555384"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44826527"
 ---
-# <a name="service-remoting-with-reliable-services"></a>Service remoting with Reliable Services
+# <a name="service-remoting-in-java-with-reliable-services"></a>Service remoting in Java with Reliable Services
 > [!div class="op_single_selector"]
 > * [C# on Windows](service-fabric-reliable-services-communication-remoting.md)
 > * [Java on Linux](service-fabric-reliable-services-communication-remoting-java.md)
 >
 >
 
-The Reliable Services framework provides a remoting mechanism to quickly and easily set up remote procedure call for services.
+For services that aren't tied to a particular communication protocol or stack, such as WebAPI, Windows Communication Foundation (WCF), or others, the Reliable Services framework provides a remoting mechanism to quickly and easily set up remote procedure calls for services.  This article discusses how to set up remote procedure calls for services written with Java.
 
 ## <a name="set-up-remoting-on-a-service"></a>Set up remoting on a service
 Setting up remoting for a service is done in two simple steps:
@@ -87,5 +87,22 @@ CompletableFuture<String> message = helloWorldClient.helloWorldAsync();
 
 The remoting framework propagates exceptions thrown at the service to the client. So exception-handling logic at the client by using `ServiceProxyBase` can directly handle exceptions that the service throws.
 
+## <a name="service-proxy-lifetime"></a>Service Proxy Lifetime
+ServiceProxy creation is a lightweight operation, so you can create as many as you need. Service Proxy instances can be reused as long as they are needed. If a remote procedure call throws an Exception, you can still reuse the same proxy instance. Each ServiceProxy contains a communication client used to send messages over the wire. While invoking remote calls, internal checks are performed to determine if the communication client is valid. Based on the results of those checks, the communication client is recreated if needed. Therefore, if an exception occurs, you do not need to recreate `ServiceProxy`.
+
+### <a name="serviceproxyfactory-lifetime"></a>ServiceProxyFactory Lifetime
+[FabricServiceProxyFactory](https://docs.microsoft.com/java/api/microsoft.servicefabric.services.remoting.client._fabric_service_proxy_factory) is a factory that creates proxy for different remoting interfaces. If you use API `ServiceProxyBase.create` for creating proxy, then framework creates a `FabricServiceProxyFactory`.
+It is useful to create one manually when you need to override [ServiceRemotingClientFactory](https://docs.microsoft.com/java/api/microsoft.servicefabric.services.remoting.client._service_remoting_client_factory) properties.
+Factory is an expensive operation. `FabricServiceProxyFactory` maintains cache of communication clients.
+Best practice is to cache `FabricServiceProxyFactory` for as long as possible.
+
+## <a name="remoting-exception-handling"></a>Remoting Exception Handling
+All the remote exception thrown by service API, are sent back to the client either as RuntimeException or FabricException.
+
+ServiceProxy does handle all Failover Exception for the service partition it  is created for. It re-resolves the endpoints if there is Failover Exceptions(Non-Transient Exceptions) and retries the call with the correct endpoint. Number of retries for failover Exception is indefinite.
+In case of TransientExceptions, it only retries the call.
+
+Default retry parameters are provied by [OperationRetrySettings]. (https://docs.microsoft.com/java/api/microsoft.servicefabric.services.communication.client._operation_retry_settings) You can configure these values by passing OperationRetrySettings object to ServiceProxyFactory constructor.
+
 ## <a name="next-steps"></a>Next steps
-* [Securing communication for Reliable Services](service-fabric-reliable-services-secure-communication.md)
+* [Securing communication for Reliable Services](service-fabric-reliable-services-secure-communication-java.md)

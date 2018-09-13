@@ -3,8 +3,8 @@ title: 'Azure AD Connect sync: Understanding the architecture | Microsoft Docs'
 description: This topic describes the architecture of Azure AD Connect sync and explains the terms used.
 services: active-directory
 documentationcenter: ''
-author: andkjell
-manager: femila
+author: billmath
+manager: mtillman
 editor: ''
 ms.assetid: 465bcbe9-3bdd-4769-a8ca-f8905abf426d
 ms.service: active-directory
@@ -12,14 +12,15 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 02/08/2017
+ms.date: 07/13/2017
+ms.component: hybrid
 ms.author: billmath
-ms.openlocfilehash: 3581f4cc0e4f83791591275d78b6f431229c1787
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 079dfe772e6c189c0e81ea7af16d11a1c40f3ebe
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44552708"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44828152"
 ---
 # <a name="azure-ad-connect-sync-understanding-the-architecture"></a>Azure AD Connect sync: Understanding the architecture
 This topic covers the basic architecture for Azure AD Connect sync. In many aspects, it is similar to its predecessors MIIS 2003, ILM 2007, and FIM 2010. Azure AD Connect sync is the evolution of these technologies. If you are familiar with any of these earlier technologies, the content of this topic will be familiar to you as well. If you are new to synchronization, then this topic is for you. It is however not a requirement to know the details of this topic to be successful in making customizations to Azure AD Connect sync (called sync engine in this topic).
@@ -34,7 +35,7 @@ The sync engine encapsulates interaction with a connected data source within a m
 
 Connectors make API calls to exchange identity information (both read and write) with a connected data source. It is also possible to add a custom Connector using the extensible connectivity framework. The following illustration shows how a Connector connects a connected data source to the sync engine.
 
-![Arch1](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnectsync-understanding-architecture/arch1.png)
+![Arch1](./media/active-directory-aadconnectsync-understanding-architecture/arch1.png)
 
 Data can flow in either direction, but it cannot flow in both directions simultaneously. In other words, a Connector can be configured to allow data to flow from the connected data source to sync engine or from sync engine to the connected data source, but only one of those operations can occur at any one time for one object and attribute. The direction can be different for different objects and for different attributes.
 
@@ -60,7 +61,7 @@ The **metaverse** is a storage area that contains the aggregated identity inform
 
 The following illustration shows the connector space namespace and the metaverse namespace within the sync engine.
 
-![Arch2](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnectsync-understanding-architecture/arch2.png)
+![Arch2](./media/active-directory-aadconnectsync-understanding-architecture/arch2.png)
 
 ## <a name="sync-engine-identity-objects"></a>Sync engine identity objects
 The objects in the sync engine are representations of either objects in the connected data source or the integrated view that sync engine has of those objects. Every sync engine object must have a globally unique identifier (GUID). GUIDs provide data integrity and express relationships between objects.
@@ -95,13 +96,13 @@ A staging object can be an import object or an export object. The sync engine cr
 
 The following illustration shows an import object that represents an object in the connected data source.
 
-![Arch3](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnectsync-understanding-architecture/arch3.png)
+![Arch3](./media/active-directory-aadconnectsync-understanding-architecture/arch3.png)
 
 The sync engine creates an export object by using object information in the metaverse. Export objects are exported to the connected data source during the next communication session. From the perspective of the sync engine, export objects do not exist in the connected data source yet. Therefore, the anchor attribute for an export object is not available. After it receives the object from sync engine, the connected data source creates a unique value for the anchor attribute of the object.
 
 The following illustration shows how an export object is created by using identity information in the metaverse.
 
-![Arch4](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnectsync-understanding-architecture/arch4.png)
+![Arch4](./media/active-directory-aadconnectsync-understanding-architecture/arch4.png)
 
 The sync engine confirms the export of the object by reimporting the object from the connected data source. Export objects become import objects when sync engine receives them during the next import from that connected data source.
 
@@ -130,7 +131,7 @@ When a staging object becomes a joined object during synchronization, attributes
 
 A single connector space object can be linked to only one metaverse object. However, each metaverse object can be linked to multiple connector space objects in the same or in different connector spaces, as shown in the following illustration.
 
-![Arch5](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnectsync-understanding-architecture/arch5.png)
+![Arch5](./media/active-directory-aadconnectsync-understanding-architecture/arch5.png)
 
 The linked relationship between the staging object and a metaverse object is persistent and can be removed only by rules that you specify.
 
@@ -155,7 +156,7 @@ During the export process, sync engine pushes out changes that are staged on sta
 
 The following illustration shows where each of the processes occurs as identity information flows from one connected data source to another.
 
-![Arch6](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnectsync-understanding-architecture/arch6.png)
+![Arch6](./media/active-directory-aadconnectsync-understanding-architecture/arch6.png)
 
 ### <a name="import-process"></a>Import process
 During the import process, sync engine evaluates updates to identity information. Sync engine compares the identity information received from the connected data source with the identity information about a staging object and determines whether the staging object requires updates. If it is necessary to update the staging object with new data, the staging object is flagged as pending import.
@@ -250,7 +251,7 @@ For example, a process in the connected data source could change the object’s 
 
 The sync engine stores export and import status information about each staging object. If values of the attributes that are specified in the attribute inclusion list have changed since the last export, the storage of import and export status enables sync engine to react appropriately. Sync engine uses the import process to confirm attribute values that have been exported to the connected data source. A comparison between the imported and exported information, as shown in the following illustration, enables sync engine to determine whether the export was successful or if it needs to be repeated.
 
-![Arch7](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnectsync-understanding-architecture/arch7.png)
+![Arch7](./media/active-directory-aadconnectsync-understanding-architecture/arch7.png)
 
 For example, if sync engine exports attribute C, which has a value of 5, to a connected data source, it stores C=5 in its export status memory. Each additional export on this object results in an attempt to export C=5 to the connected data source again because sync engine assumes that this value has not been persistently applied to the object (that is, unless a different value was imported recently from the connected data source). The export memory is cleared when C=5 is received during an import operation on the object.
 
@@ -258,11 +259,4 @@ For example, if sync engine exports attribute C, which has a value of 5, to a co
 Learn more about the [Azure AD Connect sync](active-directory-aadconnectsync-whatis.md) configuration.
 
 Learn more about [Integrating your on-premises identities with Azure Active Directory](active-directory-aadconnect.md).
-
-
-
-
-
-
-
 

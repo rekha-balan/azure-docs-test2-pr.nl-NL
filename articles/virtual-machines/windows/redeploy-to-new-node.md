@@ -3,23 +3,23 @@ title: Redeploy Windows virtual machines in Azure | Microsoft Docs
 description: How to redeploy Windows virtual machines in Azure to mitigate RDP connection issues.
 services: virtual-machines-windows
 documentationcenter: virtual-machines
-author: iainfoulds
-manager: timlt
+author: genlin
+manager: jeconnoc
 tags: azure-resource-manager,top-support-issue
 ms.assetid: 0ee456ee-4595-4a14-8916-72c9110fc8bd
 ms.service: virtual-machines-windows
 ms.devlang: na
-ms.topic: support-article
+ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
-ms.date: 12/16/2016
-ms.author: iainfou
-ms.openlocfilehash: f09e91521a015891268467a1b8730a6ec835066e
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 05/11/2018
+ms.author: genli
+ms.openlocfilehash: d19e5001e4f488eafd26cd25b89ce8954271e514
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44555708"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44808098"
 ---
 # <a name="redeploy-windows-virtual-machine-to-new-azure-node"></a>Redeploy Windows virtual machine to new Azure node
 If you have been facing difficulties troubleshooting Remote Desktop (RDP) connection or application access to Windows-based Azure virtual machine (VM), redeploying the VM may help. When you redeploy a VM, it moves the VM to a new node within the Azure infrastructure and then powers it back on, retaining all your configuration options and associated resources. This article shows you how to redeploy a VM using Azure PowerShell or the Azure portal.
@@ -29,7 +29,7 @@ If you have been facing difficulties troubleshooting Remote Desktop (RDP) connec
 
 
 ## <a name="using-azure-powershell"></a>Using Azure PowerShell
-Make sure you have the latest Azure PowerShell 1.x installed on your machine. For more information, see [How to install and configure Azure PowerShell](/powershell/azureps-cmdlets-docs).
+Make sure you have the latest Azure PowerShell 1.x installed on your machine. For more information, see [How to install and configure Azure PowerShell](/powershell/azure/overview).
 
 The following example deploys the VM named `myVM` in the resource group named `myResourceGroup`:
 

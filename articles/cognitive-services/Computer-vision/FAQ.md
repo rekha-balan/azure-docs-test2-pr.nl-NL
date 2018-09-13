@@ -2,19 +2,19 @@
 title: FAQs for the Computer Vision API | Microsoft Docs
 description: Get answers to frequently asked questions about the Computer Vision API in Microsoft Cognitive Services.
 services: cognitive-services
-author: JuliaNik
-manager: ytkuo
+author: KellyDF
+manager: corncar
 ms.service: cognitive-services
-ms.technology: computer-vision
+ms.component: computer-vision
 ms.topic: article
 ms.date: 01/26/2017
-ms.author: juliakuz
-ms.openlocfilehash: 6d7d7fcf6c75dcd4d791d84183e8eb60691fe1de
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: kefre
+ms.openlocfilehash: 5c862dd2fb26a005f4e785673a4e9358ecf9286f
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44549421"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44793850"
 ---
 # <a name="computer-vision-api-frequently-asked-questions"></a>Computer Vision API Frequently Asked Questions
 ### <a name="if-you-cant-find-answers-to-your-questions-in-this-faq-try-asking-the-computer-vision-api-community-on-stackoverflowhttpsstackoverflowcomquestionstaggedproject-oxfordormicrosoft-cognitive-or-contact-help-and-support-on-uservoicehttpscognitiveuservoicecom"></a>If you can't find answers to your questions in this FAQ, try asking the Computer Vision API community on [StackOverflow](https://stackoverflow.com/questions/tagged/project-oxford+or+microsoft-cognitive) or contact [Help and Support on UserVoice](https://cognitive.uservoice.com/)
@@ -29,7 +29,7 @@ ms.locfileid: "44549421"
 
 **Question**: *Can Computer Vision be used locally without an internet connection?*
 
-**Answer**: We currently do not offer an on-premise or local solution.
+**Answer**: We currently do not offer an on-premises or local solution.
 
 -----
 

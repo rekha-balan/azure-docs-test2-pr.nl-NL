@@ -14,16 +14,16 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 11/16/2016
 ms.author: alkohli
-ms.openlocfilehash: 5182a8d621ab415ce7b360f4990c1dbd66087440
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: a178e8880bcbcada9d66eaacf5ccbdb7c55957cb
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44551173"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44797802"
 ---
 # <a name="safely-install-and-operate-your-storsimple-device"></a>Safely install and operate your StorSimple device
-![Warning Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740879.png)
-![Read Safety Notice Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740885.png) **READ SAFETY AND HEALTH INFORMATION**
+![Warning Icon](./media/storsimple-safety/IC740879.png)
+![Read Safety Notice Icon](./media/storsimple-safety/IC740885.png) **READ SAFETY AND HEALTH INFORMATION**
 
 Read all the safety and health information in this article that applies to your Microsoft Azure StorSimple device. Keep all the printed guides shipped with your StorSimple device for future reference. Failure to follow instructions and properly set up, use, and care for this product can increase the risk of serious injury or death, or damage to the device or devices. A [downloadable version of this guide](http://www.microsoft.com/download/details.aspx?id=44233) is also available.
 
@@ -32,18 +32,18 @@ Here are the icons that you will find when you review the safety precautions to 
 
 | Icon | Description |
 |:--- |:--- |
-| ![Danger Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740879.png) **DANGER!** |Indicates a hazardous situation that, if not avoided, will result in death or serious injury. This signal word is to be limited to the most extreme situations. |
-| ![Warning Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740879.png) **WARNING!** |Indicates a hazardous situation that, if not avoided, could result in death or serious injury. |
-| ![Warning Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740879.png) **CAUTION!** |Indicates a hazardous situation that, if not avoided, could result in minor or moderate injury. |
-| ![Notice Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740881.png) **NOTICE:** |Indicates information considered important, but not hazard-related. |
-| ![Electrical Shock Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740882.png) **Electrical Shock Hazard** |High voltage |
-| ![Heavy Weight Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740883.png) **Heavy Weight** | |
-| ![No User Serviceable Parts Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740879.png) **No User Serviceable Parts** |Do not access unless properly trained. |
-| ![Read Safety Notice Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740885.png)**Read All Instructions First** | |
-| ![Tip Hazard Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740886.png) **Tip Hazard** | |
+| ![Danger Icon](./media/storsimple-safety/IC740879.png) **DANGER!** |Indicates a hazardous situation that, if not avoided, will result in death or serious injury. This signal word is to be limited to the most extreme situations. |
+| ![Warning Icon](./media/storsimple-safety/IC740879.png) **WARNING!** |Indicates a hazardous situation that, if not avoided, could result in death or serious injury. |
+| ![Warning Icon](./media/storsimple-safety/IC740879.png) **CAUTION!** |Indicates a hazardous situation that, if not avoided, could result in minor or moderate injury. |
+| ![Notice Icon](./media/storsimple-safety/IC740881.png) **NOTICE:** |Indicates information considered important, but not hazard-related. |
+| ![Electrical Shock Icon](./media/storsimple-safety/IC740882.png) **Electrical Shock Hazard** |High voltage |
+| ![Heavy Weight Icon](./media/storsimple-safety/IC740883.png) **Heavy Weight** | |
+| ![No User Serviceable Parts Icon](./media/storsimple-safety/IC740879.png) **No User Serviceable Parts** |Do not access unless properly trained. |
+| ![Read Safety Notice Icon](./media/storsimple-safety/IC740885.png)**Read All Instructions First** | |
+| ![Tip Hazard Icon](./media/storsimple-safety/IC740886.png) **Tip Hazard** | |
 
 ## <a name="handling-precautions"></a>Handling precautions
-![Warning Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740879.png) ![Heavy Weight Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740883.png) **WARNING!** 
+![Warning Icon](./media/storsimple-safety/IC740879.png) ![Heavy Weight Icon](./media/storsimple-safety/IC740883.png) **WARNING!** 
 
 To reduce the risk of injury:
 
@@ -52,7 +52,7 @@ To reduce the risk of injury:
 * Do not lift the enclosure by the handles on the Power and Cooling Modules (PCMs) located at the rear of the unit. These are not designed to take the weight.
 
 ## <a name="connection-precautions"></a>Connection precautions
-![Warning Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740879.png) ![Electrical Shock Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740882.png) **WARNING!**
+![Warning Icon](./media/storsimple-safety/IC740879.png) ![Electrical Shock Icon](./media/storsimple-safety/IC740882.png) **WARNING!**
 
 To reduce the likelihood of injury, electrical shock, or death:
 
@@ -62,7 +62,7 @@ To reduce the likelihood of injury, electrical shock, or death:
 * Ensure that the power connection is always disconnected prior to the removal of a PCM from the enclosure.
 * Given that the plug on the power supply cord is the main disconnect device, ensure that the socket outlets are located near the equipment and are easily accessible.
 
-![Warning Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740879.png) ![Electrical Shock Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740882.png) **WARNING!**
+![Warning Icon](./media/storsimple-safety/IC740879.png) ![Electrical Shock Icon](./media/storsimple-safety/IC740882.png) **WARNING!**
 
 To reduce the likelihood of overheating or fire from the electrical connections:
 
@@ -71,7 +71,7 @@ To reduce the likelihood of overheating or fire from the electrical connections:
 * To comply with applicable safety, emission, and thermal requirements, no covers should be removed and all bays must be populated with plug-in modules or drive blanks.
 * Ensure that the equipment is used in a manner specified by the manufacturer. If this equipment is used in a manner not specified by the manufacturer, the protection provided by the equipment may be impaired.
 
-![Notice Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740881.png) **NOTICE:**
+![Notice Icon](./media/storsimple-safety/IC740881.png) **NOTICE:**
 
 For the proper operation of your equipment and to prevent product damage:
 
@@ -82,7 +82,7 @@ For the proper operation of your equipment and to prevent product damage:
 ## <a name="rack-system-precautions"></a>Rack system precautions
 The following safety requirements must be considered when you mount the device in a rack cabinet.
 
-![Warning Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740879.png) ![Tip Hazard Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740886.png) **WARNING!**
+![Warning Icon](./media/storsimple-safety/IC740879.png) ![Tip Hazard Icon](./media/storsimple-safety/IC740886.png) **WARNING!**
 
 To reduce the likelihood of injury from a tip over:
 
@@ -90,7 +90,7 @@ To reduce the likelihood of injury from a tip over:
 * When loading a rack, fill the rack from the bottom up and empty from the top down.
 * Do not slide more than one enclosure out of the rack at a time to avoid the danger of the rack toppling over.
 
-![Warning Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740879.png) ![Electrical Shock Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740882.png) **WARNING!**
+![Warning Icon](./media/storsimple-safety/IC740879.png) ![Electrical Shock Icon](./media/storsimple-safety/IC740882.png) **WARNING!**
 
 To reduce the likelihood of injury, electrical shock, or death:
 
@@ -99,7 +99,7 @@ To reduce the likelihood of injury, electrical shock, or death:
 * The design of the electrical distribution system must take into consideration the total ground leakage current from all power supplies in all enclosures. Note that each power supply in each enclosure has a ground leakage current of 1.0 mA maximum at 60 Hz, 264 volts. The rack may require labeling with “HIGH LEAKAGE CURRENT. Ground (earth) connection is essential before connecting a supply.”
 * The rack, when configured with the enclosures, must meet the safety requirements of UL 60950-1 and IEC 60950-1/EN 60950-1.
 
-![Notice Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740881.png) **NOTICE:**
+![Notice Icon](./media/storsimple-safety/IC740881.png) **NOTICE:**
 
 For the proper cooling of your rack system:
 
@@ -109,13 +109,13 @@ For the proper cooling of your rack system:
 ## <a name="power-cooling-module-pcm-precautions"></a>Power Cooling Module (PCM) precautions
 The device is designed to operate with two PCMs. Each of the PCMs has a power supply and a dual-axis fan. During a critical condition, the system allows for a failure of one power supply while continuing normal operations. Two PCMs (and hence power supplies) must always be installed. A single PCM does not provide redundant power. Therefore, the failure of even one PCM can result in downtime or possible data loss.
 
-![Warning Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740879.png) ![Electrical Shock Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740882.png) **WARNING!**
+![Warning Icon](./media/storsimple-safety/IC740879.png) ![Electrical Shock Icon](./media/storsimple-safety/IC740882.png) **WARNING!**
 
 To reduce the likelihood of injury, electrical shock, or death:
 
 * Do not remove the covers from the PCM. There is a danger of electric shock inside. To return the PCM and obtain a replacement, [contact Microsoft Support](storsimple-contact-microsoft-support.md).
 
-![Notice Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740881.png) **NOTICE:**
+![Notice Icon](./media/storsimple-safety/IC740881.png) **NOTICE:**
 
 For the proper operation of your equipment and to prevent product damage:
 
@@ -123,7 +123,7 @@ For the proper operation of your equipment and to prevent product damage:
 * Do not remove a PCM unless a replacement can be installed immediately. The enclosure must not be operated without all modules in place.
 
 ## <a name="electrostatic-discharge-esd-precautions"></a>Electrostatic discharge (ESD) precautions
-![Notice Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740881.png) **NOTICE:**
+![Notice Icon](./media/storsimple-safety/IC740881.png) **NOTICE:**
 
 Observe the following ESD-related precautions.
 
@@ -135,7 +135,7 @@ Observe the following ESD-related precautions.
 ## <a name="battery-disposal-precautions"></a>Battery disposal precautions
 The power supply uses a special battery to protect the contents of memory during temporary, short-term power outages. The battery is seated in the PCM. Keep the following information in mind about the battery.
 
-![Warning Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740879.png) **WARNING!**
+![Warning Icon](./media/storsimple-safety/IC740879.png) **WARNING!**
 
 To reduce the risk of shorts, fire, explosion, injury, or death:
 
@@ -143,7 +143,7 @@ To reduce the risk of shorts, fire, explosion, injury, or death:
 * Do not disassemble, crush, or heat above 60 degrees Celsius (140 degrees Fahrenheit) or incinerate. Replace the PCM battery with a supplied battery only. Use of another battery may present a risk of fire or explosion.
 * Use protective end caps on the batteries if these are removed from the power supply.
 
-![Notice Icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-safety/IC740881.png) **NOTICE:**
+![Notice Icon](./media/storsimple-safety/IC740881.png) **NOTICE:**
 
 When shipping or otherwise transporting the batteries by air, follow the IATA Lithium Battery Guidance document available at [http://www.iata.org/whatwedo/cargo/dgr/Pages/lithium-batteries.aspx](http://www.iata.org/whatwedo/cargo/dgr/Pages/lithium-batteries.aspx)
 
@@ -152,33 +152,4 @@ After you have reviewed these safety notices, the next steps are to unpack, rack
 ## <a name="next-steps"></a>Next steps
 * For an 8100 device, go to [Install your StorSimple 8100 device](storsimple-8100-hardware-installation.md).
 * For an 8600 device, go to [Install your StorSimple 8600 device](storsimple-8600-hardware-installation.md).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

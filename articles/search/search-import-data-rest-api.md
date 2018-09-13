@@ -1,26 +1,20 @@
 ---
-title: Data upload in Azure Search using the REST API | Microsoft Docs
+title: Upload data (REST API - Azure Search) | Microsoft Docs
 description: Learn how to upload data to an index in Azure Search using the REST API.
+author: brjohnstmsft
+manager: jlembicz
+ms.author: brjohnst
 services: search
-documentationcenter: ''
-author: ashmaka
-manager: jhubbard
-editor: ''
-tags: ''
-ms.assetid: 8d0749fb-6e08-4a17-8cd3-1a215138abc6
 ms.service: search
 ms.devlang: rest-api
-ms.workload: search
-ms.topic: get-started-article
-ms.tgt_pltfrm: na
-ms.date: 12/08/2016
-ms.author: ashmaka
-ms.openlocfilehash: 7c1c14055507d77dfcefe87694167ca5a2fcfb97
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.topic: quickstart
+ms.date: 04/20/2018
+ms.openlocfilehash: 53b20c9db7efe1f8876eec7c0167dc151aa38786
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44563046"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44805095"
 ---
 # <a name="upload-data-to-azure-search-using-the-rest-api"></a>Upload data to Azure Search using the REST API
 > [!div class="op_single_selector"]
@@ -67,9 +61,9 @@ Each JSON object in the "value" array represents a document to be indexed. Each 
 Now that you have gathered the necessary field values for your index actions, you are ready to construct the actual HTTP request and JSON request body to import your data.
 
 #### <a name="request-and-request-headers"></a>Request and Request Headers
-In the URL, you will need to provide your service name, index name ("hotels" in this case), as well as the proper API version (the current API version is `2016-09-01` at the time of publishing this document). You will need to define the `Content-Type` and `api-key` request headers. For the latter, use one of your service's admin keys.
+In the URL, you will need to provide your service name, index name ("hotels" in this case), as well as the proper API version (the current API version is `2017-11-11` at the time of publishing this document). You will need to define the `Content-Type` and `api-key` request headers. For the latter, use one of your service's admin keys.
 
-    POST https://[search service].search.windows.net/indexes/hotels/docs/index?api-version=2016-09-01
+    POST https://[search service].search.windows.net/indexes/hotels/docs/index?api-version=2017-11-11
     Content-Type: application/json
     api-key: [admin key]
 
