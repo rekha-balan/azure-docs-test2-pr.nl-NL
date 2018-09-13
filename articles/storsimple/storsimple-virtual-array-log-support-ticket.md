@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 11/21/2016
 ms.author: manuaery
-ms.openlocfilehash: cb6c206516bfa51b8009282f67af57cee98b5e38
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 658afbc178814389fefd7941e2ca030741bd08e8
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44554150"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44829062"
 ---
 # <a name="use-the-storsimple-device-manager-service-to-log-a-support-request-for-the-storsimple-virtual-array"></a>Use the StorSimple Device Manager service to log a Support request for the StorSimple Virtual Array
 
@@ -35,7 +35,7 @@ Depending upon your [support plan](https://azure.microsoft.com/support/plans/), 
 
 1. Go to your StorSimple Device Manager service. In the service summary blade settings, go to **SUPPORT + TROUBLESHOOTING** section and then click **New support request**.
    
-    ![New support request](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-log-support-ticket/log-support-ticket1.png)
+    ![New support request](./media/storsimple-virtual-array-log-support-ticket/log-support-ticket1.png)
 
 2. In the **Basics** blade, do the following:
 
@@ -49,11 +49,11 @@ Depending upon your [support plan](https://azure.microsoft.com/support/plans/), 
 
 3. In **Step 2**, choose the **Severity** and specify if the issue is related to the array or the StorSimple Device Manager service. Also, choose a **Category** for this issue and provide more **Details** about the issue.
    
-    ![New support request](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-log-support-ticket/log-support-ticket2.png)
+    ![New support request](./media/storsimple-virtual-array-log-support-ticket/log-support-ticket2.png)
 
 4. In **Step 3**, provide your contact information. Microsoft Support will use this information to reach out to you for further information, diagnosis, and resolution.
    
-    ![New support request](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-log-support-ticket/log-support-ticket3.png)
+    ![New support request](./media/storsimple-virtual-array-log-support-ticket/log-support-ticket3.png)
 
 ## <a name="manage-a-support-request"></a>Manage a support request
 
@@ -63,13 +63,9 @@ After creating a support ticket, you can manage the lifecycle of the ticket from
 
 To get to the help and support page, navigate to **Browse > Help + support**.
 
-![Manage support requests](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-log-support-ticket/manage-support-tickets.png)
+![Manage support requests](./media/storsimple-virtual-array-log-support-ticket/manage-support-tickets.png)
 
 ## <a name="next-steps"></a>Next steps
 
 Learn how to [diagnose and solve problems related to your StorSimple Virtual array](storsimple-virtual-array-diagnose-problems.md)
-
-
-
-
 

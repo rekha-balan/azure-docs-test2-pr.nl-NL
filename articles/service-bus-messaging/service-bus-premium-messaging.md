@@ -1,5 +1,5 @@
 ---
-title: Service Bus Premium and Standard Messaging pricing tiers overview | Microsoft Docs
+title: Azure Service Bus Premium and Standard Messaging pricing tiers overview | Microsoft Docs
 description: Service Bus Premium and Standard Messaging tiers
 services: service-bus-messaging
 documentationcenter: .net
@@ -12,20 +12,20 @@ ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: get-started-article
-ms.date: 04/19/2017
-ms.author: darosa;sethm;jotaub
-ms.openlocfilehash: f65fb616fc7bd190df35377249300a317bd6bcc3
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 04/30/2018
+ms.author: spelluru
+ms.openlocfilehash: 8e53cc5487a64fbd0c3a9ca26fc405756f09ce71
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44662614"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44829205"
 ---
 # <a name="service-bus-premium-and-standard-messaging-tiers"></a>Service Bus Premium and Standard messaging tiers
 
 Service Bus Messaging, which includes entities such as queues and topics, combines enterprise messaging capabilities with rich publish-subscribe semantics at cloud scale. Service Bus Messaging is used as the communication backbone for many sophisticated cloud solutions.
 
-The *Premium* tier of Service Bus Messaging addresses common customer requests around scale, performance, and availability for mission-critical applications. Although the feature sets are nearly identical, these two tiers of Service Bus Messaging are designed to serve different use cases.
+The *Premium* tier of Service Bus Messaging addresses common customer requests around scale, performance, and availability for mission-critical applications. The Premium tier is recommended for production scenarios. Although the feature sets are nearly identical, these two tiers of Service Bus Messaging are designed to serve different use cases.
 
 Some high-level differences are highlighted in the following table.
 
@@ -47,31 +47,31 @@ The following sections discuss a few differences between Premium and Standard me
 
 ### <a name="partitioned-queues-and-topics"></a>Partitioned queues and topics
 
-Partitioned queues and topics are supported in Premium Messaging, but they do not function the same way as in the Standard and Basic tiers of Service Bus Messaging. Premium Messaging does not use SQL as a data store and no longer has the possible resource competition associated with a shared platform. As a result, partitioning is not necessary for performance. Additionally, the partition count has been changed from 16 partitions in Standard Messaging to 2 partitions in Premium. Having two partitions ensures availability and is a more appropriate number for the Premium runtime environment. For more information about partitioning, see [Partitioned queues and topics](service-bus-partitioning.md).
+Partitioned queues and topics are not supported in Premium Messaging. For more information about partitioning, see [Partitioned queues and topics](service-bus-partitioning.md).
 
 ### <a name="express-entities"></a>Express entities
 
-Because Premium Messaging runs in a completely isolated run-time environment, express entities are not supported in Premium namespaces. For more information about the express feature, see the [QueueDescription.EnableExpress](/dotnet/api/microsoft.servicebus.messaging.queuedescription.enableexpress?view=azureservicebus-4.0.0#Microsoft_ServiceBus_Messaging_QueueDescription_EnableExpress) property.
+Because Premium messaging runs in a completely isolated run-time environment, express entities are not supported in Premium namespaces. For more information about the express feature, see the [QueueDescription.EnableExpress](/dotnet/api/microsoft.servicebus.messaging.queuedescription.enableexpress#Microsoft_ServiceBus_Messaging_QueueDescription_EnableExpress) property.
+
+If you have code running under Standard messaging and want to port it to the Premium tier, make sure the [EnableExpress](/dotnet/api/microsoft.servicebus.messaging.queuedescription.enableexpress#Microsoft_ServiceBus_Messaging_QueueDescription_EnableExpress) property is set to **false** (the default value).
 
 ## <a name="get-started-with-premium-messaging"></a>Get started with Premium Messaging
 
-Getting started with Premium Messaging is straightforward and the process is similar to that of Standard Messaging. Begin by [creating a namespace](service-bus-create-namespace-portal.md). Make sure you select **Premium** under **Pricing tier**.
+Getting started with Premium Messaging is straightforward and the process is similar to that of Standard Messaging. Begin by [creating a namespace](service-bus-create-namespace-portal.md) in the [Azure portal](https://portal.azure.com). Make sure you select **Premium** under **Pricing tier**. Click **View full pricing details** to see more information about each tier.
 
 ![create-premium-namespace][create-premium-namespace]
 
-You can also create [Premium namespaces using Azure Resource Manager templates](https://azure.microsoft.com/en-us/resources/templates/101-servicebus-pn-ar/).
-
+You can also create [Premium namespaces using Azure Resource Manager templates](https://azure.microsoft.com/resources/templates/101-servicebus-pn-ar/).
 
 ## <a name="next-steps"></a>Next steps
 
-To learn more about Service Bus Messaging, see the following topics.
+To learn more about Service Bus Messaging, see the following links:
 
 * [Introducing Azure Service Bus Premium Messaging (blog post)](http://azure.microsoft.com/blog/introducing-azure-service-bus-premium-messaging/)
 * [Introducing Azure Service Bus Premium Messaging (Channel9)](https://channel9.msdn.com/Blogs/Subscribe/Introducing-Azure-Service-Bus-Premium-Messaging)
 * [Service Bus Messaging overview](service-bus-messaging-overview.md)
-* [How to use Service Bus queues](service-bus-dotnet-get-started-with-queues.md)
+* [Get started with Service Bus queues](service-bus-dotnet-get-started-with-queues.md)
 
 <!--Image references-->
 
-[create-premium-namespace]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-bus-messaging/media/service-bus-premium-messaging/select-premium-tier.png
-
+[create-premium-namespace]: ./media/service-bus-premium-messaging/select-premium-tier.png
