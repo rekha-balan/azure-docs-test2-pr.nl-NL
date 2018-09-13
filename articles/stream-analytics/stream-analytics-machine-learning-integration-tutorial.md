@@ -1,174 +1,260 @@
 ---
-title: Azure Stream Analytics and Machine Learning integration | Microsoft Docs
-description: How to use a user-defined function and Machine Learning in a Stream Analytics job
-keywords: ''
-documentationcenter: ''
+title: Azure Stream Analytics integration with Azure Machine Learning
+description: This article describes how to quickly set up a simple Azure Stream Analytics job that integrates Azure Machine Learning, using a user defined function.
 services: stream-analytics
-author: jeffstokes72
-manager: jhubbard
-editor: cgronlun
-ms.assetid: cfced01f-ccaa-4bc6-81e2-c03d1470a7a2
+author: jasonwhowell
+ms.author: jasonh
+manager: kfile
+ms.reviewer: jasonh
 ms.service: stream-analytics
-ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: data-services
-ms.date: 03/28/2017
-ms.author: jeffstok
-ms.openlocfilehash: 17d47adbeb32940f0e9e6b0e5705be9107f34bdb
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.topic: conceptual
+ms.date: 04/16/2018
+ms.openlocfilehash: 63648dfe02a0b5ed00d0a7206a6aabbe200f94c4
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44549752"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44781019"
 ---
-# <a name="sentiment-analysis-by-using-azure-stream-analytics-and-azure-machine-learning"></a><span data-ttu-id="728d0-103">Sentiment analysis by using Azure Stream Analytics and Azure Machine Learning</span><span class="sxs-lookup"><span data-stu-id="728d0-103">Sentiment analysis by using Azure Stream Analytics and Azure Machine Learning</span></span>
-<span data-ttu-id="728d0-104">This article is designed to help you quickly set up a simple Azure Stream Analytics job, with Azure Machine Learning integration.</span><span class="sxs-lookup"><span data-stu-id="728d0-104">This article is designed to help you quickly set up a simple Azure Stream Analytics job, with Azure Machine Learning integration.</span></span> <span data-ttu-id="728d0-105">We will use a sentiment analytics Machine Learning model from the Cortana Intelligence Gallery to analyze streaming text data, and determine the sentiment score in real time.</span><span class="sxs-lookup"><span data-stu-id="728d0-105">We will use a sentiment analytics Machine Learning model from the Cortana Intelligence Gallery to analyze streaming text data, and determine the sentiment score in real time.</span></span> <span data-ttu-id="728d0-106">The information in this article can help you understand scenarios such as real-time sentiment analytics on streaming Twitter data, analyze records of customer chats with support staff, and evaluate comments on forums, blogs, and videos, in addition to many other real-time, predictive scoring scenarios.</span><span class="sxs-lookup"><span data-stu-id="728d0-106">The information in this article can help you understand scenarios such as real-time sentiment analytics on streaming Twitter data, analyze records of customer chats with support staff, and evaluate comments on forums, blogs, and videos, in addition to many other real-time, predictive scoring scenarios.</span></span>
+# <a name="performing-sentiment-analysis-by-using-azure-stream-analytics-and-azure-machine-learning"></a><span data-ttu-id="c61aa-103">Performing sentiment analysis by using Azure Stream Analytics and Azure Machine Learning</span><span class="sxs-lookup"><span data-stu-id="c61aa-103">Performing sentiment analysis by using Azure Stream Analytics and Azure Machine Learning</span></span>
+<span data-ttu-id="c61aa-104">This article describes how to quickly set up a simple Azure Stream Analytics job that integrates Azure Machine Learning.</span><span class="sxs-lookup"><span data-stu-id="c61aa-104">This article describes how to quickly set up a simple Azure Stream Analytics job that integrates Azure Machine Learning.</span></span> <span data-ttu-id="c61aa-105">You use a Machine Learning sentiment analytics model from the Cortana Intelligence Gallery to analyze streaming text data and determine the sentiment score in real time.</span><span class="sxs-lookup"><span data-stu-id="c61aa-105">You use a Machine Learning sentiment analytics model from the Cortana Intelligence Gallery to analyze streaming text data and determine the sentiment score in real time.</span></span> <span data-ttu-id="c61aa-106">Using the Cortana Intelligence Suite lets you accomplish this task without worrying about the intricacies of building a sentiment analytics model.</span><span class="sxs-lookup"><span data-stu-id="c61aa-106">Using the Cortana Intelligence Suite lets you accomplish this task without worrying about the intricacies of building a sentiment analytics model.</span></span>
 
-<span data-ttu-id="728d0-107">This article offers a sample CSV file with text as input in Azure Blob storage, shown in the following image.</span><span class="sxs-lookup"><span data-stu-id="728d0-107">This article offers a sample CSV file with text as input in Azure Blob storage, shown in the following image.</span></span> <span data-ttu-id="728d0-108">The job applies the sentiment analytics model as a user-defined function (UDF) on the sample text data from the blob store.</span><span class="sxs-lookup"><span data-stu-id="728d0-108">The job applies the sentiment analytics model as a user-defined function (UDF) on the sample text data from the blob store.</span></span> <span data-ttu-id="728d0-109">The end result is placed in the same blob store in another CSV file.</span><span class="sxs-lookup"><span data-stu-id="728d0-109">The end result is placed in the same blob store in another CSV file.</span></span> 
+<span data-ttu-id="c61aa-107">You can apply what you learn from this article to scenarios such as these:</span><span class="sxs-lookup"><span data-stu-id="c61aa-107">You can apply what you learn from this article to scenarios such as these:</span></span>
 
-![Stream Analytics Machine Learning](https://docstestmedia1.blob.core.windows.net/azure-media/articles/stream-analytics/media/stream-analytics-machine-learning-integration-tutorial/stream-analytics-machine-learning-integration-tutorial-figure-2.png)  
+* <span data-ttu-id="c61aa-108">Analyzing real-time sentiment on streaming Twitter data.</span><span class="sxs-lookup"><span data-stu-id="c61aa-108">Analyzing real-time sentiment on streaming Twitter data.</span></span>
+* <span data-ttu-id="c61aa-109">Analyzing records of customer chats with support staff.</span><span class="sxs-lookup"><span data-stu-id="c61aa-109">Analyzing records of customer chats with support staff.</span></span>
+* <span data-ttu-id="c61aa-110">Evaluating comments on forums, blogs, and videos.</span><span class="sxs-lookup"><span data-stu-id="c61aa-110">Evaluating comments on forums, blogs, and videos.</span></span> 
+* <span data-ttu-id="c61aa-111">Many other real-time, predictive scoring scenarios.</span><span class="sxs-lookup"><span data-stu-id="c61aa-111">Many other real-time, predictive scoring scenarios.</span></span>
 
-<span data-ttu-id="728d0-111">The following image demonstrates this configuration.</span><span class="sxs-lookup"><span data-stu-id="728d0-111">The following image demonstrates this configuration.</span></span> <span data-ttu-id="728d0-112">For a more realistic scenario, you can replace Blob storage with streaming Twitter data from an Azure Event Hubs input.</span><span class="sxs-lookup"><span data-stu-id="728d0-112">For a more realistic scenario, you can replace Blob storage with streaming Twitter data from an Azure Event Hubs input.</span></span> <span data-ttu-id="728d0-113">Additionally, you could build a [Microsoft Power BI](https://powerbi.microsoft.com/) real-time visualization of the aggregate sentiment.</span><span class="sxs-lookup"><span data-stu-id="728d0-113">Additionally, you could build a [Microsoft Power BI](https://powerbi.microsoft.com/) real-time visualization of the aggregate sentiment.</span></span>    
+<span data-ttu-id="c61aa-112">In a real-world scenario, you would get the data directly from a Twitter data stream.</span><span class="sxs-lookup"><span data-stu-id="c61aa-112">In a real-world scenario, you would get the data directly from a Twitter data stream.</span></span> <span data-ttu-id="c61aa-113">To simplify the tutorial, it's written so that the Streaming Analytics job gets tweets from a CSV file in Azure Blob storage.</span><span class="sxs-lookup"><span data-stu-id="c61aa-113">To simplify the tutorial, it's written so that the Streaming Analytics job gets tweets from a CSV file in Azure Blob storage.</span></span> <span data-ttu-id="c61aa-114">You can create your own CSV file, or you can use a sample CSV file, as shown in the following image:</span><span class="sxs-lookup"><span data-stu-id="c61aa-114">You can create your own CSV file, or you can use a sample CSV file, as shown in the following image:</span></span>
 
-![Stream Analytics Machine Learning](https://docstestmedia1.blob.core.windows.net/azure-media/articles/stream-analytics/media/stream-analytics-machine-learning-integration-tutorial/stream-analytics-machine-learning-integration-tutorial-figure-1.png)  
+![sample tweets in a CSV file](./media/stream-analytics-machine-learning-integration-tutorial/stream-analytics-machine-learning-integration-tutorial-figure-2.png)  
 
-## <a name="prerequisites"></a><span data-ttu-id="728d0-115">Prerequisites</span><span class="sxs-lookup"><span data-stu-id="728d0-115">Prerequisites</span></span>
-<span data-ttu-id="728d0-116">The prerequisites for completing the tasks that are demonstrated in this article are as follows:</span><span class="sxs-lookup"><span data-stu-id="728d0-116">The prerequisites for completing the tasks that are demonstrated in this article are as follows:</span></span>
+<span data-ttu-id="c61aa-116">The Streaming Analytics job that you create applies the sentiment analytics model as a user-defined function (UDF) on the sample text data from the blob store.</span><span class="sxs-lookup"><span data-stu-id="c61aa-116">The Streaming Analytics job that you create applies the sentiment analytics model as a user-defined function (UDF) on the sample text data from the blob store.</span></span> <span data-ttu-id="c61aa-117">The output (the result of the sentiment analysis) is written to the same blob store in a different CSV file.</span><span class="sxs-lookup"><span data-stu-id="c61aa-117">The output (the result of the sentiment analysis) is written to the same blob store in a different CSV file.</span></span> 
 
-* <span data-ttu-id="728d0-117">An active Azure subscription.</span><span class="sxs-lookup"><span data-stu-id="728d0-117">An active Azure subscription.</span></span>
-* <span data-ttu-id="728d0-118">A CSV file with some data in it.</span><span class="sxs-lookup"><span data-stu-id="728d0-118">A CSV file with some data in it.</span></span> <span data-ttu-id="728d0-119">You can download the file shown in Figure 1 from [GitHub](https://github.com/Azure/azure-stream-analytics/blob/master/Sample Data/sampleinput.csv), or you can create your own file.</span><span class="sxs-lookup"><span data-stu-id="728d0-119">You can download the file shown in Figure 1 from [GitHub](https://github.com/Azure/azure-stream-analytics/blob/master/Sample Data/sampleinput.csv), or you can create your own file.</span></span> <span data-ttu-id="728d0-120">For this article, we assume that you use the one provided for download on GitHub.</span><span class="sxs-lookup"><span data-stu-id="728d0-120">For this article, we assume that you use the one provided for download on GitHub.</span></span>
+<span data-ttu-id="c61aa-118">The following figure demonstrates this configuration.</span><span class="sxs-lookup"><span data-stu-id="c61aa-118">The following figure demonstrates this configuration.</span></span> <span data-ttu-id="c61aa-119">As noted, for a more realistic scenario, you can replace blob storage with streaming Twitter data from an Azure Event Hubs input.</span><span class="sxs-lookup"><span data-stu-id="c61aa-119">As noted, for a more realistic scenario, you can replace blob storage with streaming Twitter data from an Azure Event Hubs input.</span></span> <span data-ttu-id="c61aa-120">Additionally, you could build a [Microsoft Power BI](https://powerbi.microsoft.com/) real-time visualization of the aggregate sentiment.</span><span class="sxs-lookup"><span data-stu-id="c61aa-120">Additionally, you could build a [Microsoft Power BI](https://powerbi.microsoft.com/) real-time visualization of the aggregate sentiment.</span></span>    
 
-<span data-ttu-id="728d0-121">At a high level, to complete the tasks demonstrated in this article, you'll do the following:</span><span class="sxs-lookup"><span data-stu-id="728d0-121">At a high level, to complete the tasks demonstrated in this article, you'll do the following:</span></span>
+![Stream Analytics Machine Learning integration overview](./media/stream-analytics-machine-learning-integration-tutorial/stream-analytics-machine-learning-integration-tutorial-figure-1.png)  
 
-1. <span data-ttu-id="728d0-122">Upload the CSV input file to Azure Blob storage.</span><span class="sxs-lookup"><span data-stu-id="728d0-122">Upload the CSV input file to Azure Blob storage.</span></span>
-2. <span data-ttu-id="728d0-123">Add a sentiment analytics model from the Cortana Intelligence Gallery to your Azure Machine Learning workspace.</span><span class="sxs-lookup"><span data-stu-id="728d0-123">Add a sentiment analytics model from the Cortana Intelligence Gallery to your Azure Machine Learning workspace.</span></span>
-3. <span data-ttu-id="728d0-124">Deploy this model as a web service in the Machine Learning workspace.</span><span class="sxs-lookup"><span data-stu-id="728d0-124">Deploy this model as a web service in the Machine Learning workspace.</span></span>
-4. <span data-ttu-id="728d0-125">Create a Stream Analytics job that calls this web service as a function, to determine sentiment for the text input.</span><span class="sxs-lookup"><span data-stu-id="728d0-125">Create a Stream Analytics job that calls this web service as a function, to determine sentiment for the text input.</span></span>
-5. <span data-ttu-id="728d0-126">Start the Stream Analytics job and observe the output.</span><span class="sxs-lookup"><span data-stu-id="728d0-126">Start the Stream Analytics job and observe the output.</span></span>
+## <a name="prerequisites"></a><span data-ttu-id="c61aa-122">Prerequisites</span><span class="sxs-lookup"><span data-stu-id="c61aa-122">Prerequisites</span></span>
+<span data-ttu-id="c61aa-123">Before you start, make sure you have the following:</span><span class="sxs-lookup"><span data-stu-id="c61aa-123">Before you start, make sure you have the following:</span></span>
 
-## <a name="create-a-storage-blob-and-upload-the-csv-input-file"></a><span data-ttu-id="728d0-127">Create a storage blob and upload the CSV input file</span><span class="sxs-lookup"><span data-stu-id="728d0-127">Create a storage blob and upload the CSV input file</span></span>
-<span data-ttu-id="728d0-128">For this step, you can use any CSV file, such as the one already specified as available for download on GitHub.</span><span class="sxs-lookup"><span data-stu-id="728d0-128">For this step, you can use any CSV file, such as the one already specified as available for download on GitHub.</span></span> <span data-ttu-id="728d0-129">Uploading the csv file is simple as it is an option included in creating a storage blob.</span><span class="sxs-lookup"><span data-stu-id="728d0-129">Uploading the csv file is simple as it is an option included in creating a storage blob.</span></span>
+* <span data-ttu-id="c61aa-124">An active Azure subscription.</span><span class="sxs-lookup"><span data-stu-id="c61aa-124">An active Azure subscription.</span></span>
+* <span data-ttu-id="c61aa-125">A CSV file with some data in it.</span><span class="sxs-lookup"><span data-stu-id="c61aa-125">A CSV file with some data in it.</span></span> <span data-ttu-id="c61aa-126">You can download the file shown earlier from [GitHub](https://github.com/Azure/azure-stream-analytics/blob/master/Sample%20Data/sampleinput.csv), or you can create your own file.</span><span class="sxs-lookup"><span data-stu-id="c61aa-126">You can download the file shown earlier from [GitHub](https://github.com/Azure/azure-stream-analytics/blob/master/Sample%20Data/sampleinput.csv), or you can create your own file.</span></span> <span data-ttu-id="c61aa-127">For this article, it is assumed that you're using the file from GitHub.</span><span class="sxs-lookup"><span data-stu-id="c61aa-127">For this article, it is assumed that you're using the file from GitHub.</span></span>
 
-<span data-ttu-id="728d0-130">For our tutorial, create a new storage account by clicking **New** and then searching for 'storage account' and then selecting the resulting icon for storage account and providing details for the creation of the account.</span><span class="sxs-lookup"><span data-stu-id="728d0-130">For our tutorial, create a new storage account by clicking **New** and then searching for 'storage account' and then selecting the resulting icon for storage account and providing details for the creation of the account.</span></span> <span data-ttu-id="728d0-131">Provide a **Name** (azuresamldemosa in my example), create or use an existing **Resource group** and specify a **Location** (for location, it is important that all the resources created in this demo all use the same location if possible).</span><span class="sxs-lookup"><span data-stu-id="728d0-131">Provide a **Name** (azuresamldemosa in my example), create or use an existing **Resource group** and specify a **Location** (for location, it is important that all the resources created in this demo all use the same location if possible).</span></span>
+<span data-ttu-id="c61aa-128">At a high level, to complete the tasks demonstrated in this article, you do the following:</span><span class="sxs-lookup"><span data-stu-id="c61aa-128">At a high level, to complete the tasks demonstrated in this article, you do the following:</span></span>
 
-![create storage account](https://docstestmedia1.blob.core.windows.net/azure-media/articles/stream-analytics/media/stream-analytics-machine-learning-integration-tutorial/create-sa.png)
+1. <span data-ttu-id="c61aa-129">Create an Azure storage account and a blob storage container, and upload a CSV-formatted input file to the container.</span><span class="sxs-lookup"><span data-stu-id="c61aa-129">Create an Azure storage account and a blob storage container, and upload a CSV-formatted input file to the container.</span></span>
+3. <span data-ttu-id="c61aa-130">Add a sentiment analytics model from the Cortana Intelligence Gallery to your Azure Machine Learning workspace and deploy this model as a web service in the Machine Learning workspace.</span><span class="sxs-lookup"><span data-stu-id="c61aa-130">Add a sentiment analytics model from the Cortana Intelligence Gallery to your Azure Machine Learning workspace and deploy this model as a web service in the Machine Learning workspace.</span></span>
+5. <span data-ttu-id="c61aa-131">Create a Stream Analytics job that calls this web service as a function in order to determine sentiment for the text input.</span><span class="sxs-lookup"><span data-stu-id="c61aa-131">Create a Stream Analytics job that calls this web service as a function in order to determine sentiment for the text input.</span></span>
+6. <span data-ttu-id="c61aa-132">Start the Stream Analytics job and check the output.</span><span class="sxs-lookup"><span data-stu-id="c61aa-132">Start the Stream Analytics job and check the output.</span></span>
 
-<span data-ttu-id="728d0-133">Once that is completed you can click on Blob service and create a blob container.</span><span class="sxs-lookup"><span data-stu-id="728d0-133">Once that is completed you can click on Blob service and create a blob container.</span></span>
+## <a name="create-a-storage-container-and-upload-the-csv-input-file"></a><span data-ttu-id="c61aa-133">Create a storage container and upload the CSV input file</span><span class="sxs-lookup"><span data-stu-id="c61aa-133">Create a storage container and upload the CSV input file</span></span>
+<span data-ttu-id="c61aa-134">For this step, you can use any CSV file, such as the one available from GitHub.</span><span class="sxs-lookup"><span data-stu-id="c61aa-134">For this step, you can use any CSV file, such as the one available from GitHub.</span></span>
 
-![create blob container](https://docstestmedia1.blob.core.windows.net/azure-media/articles/stream-analytics/media/stream-analytics-machine-learning-integration-tutorial/create-sa2.png)
+1. <span data-ttu-id="c61aa-135">In the Azure portal, click **Create a resource** > **Storage** > **Storage account**.</span><span class="sxs-lookup"><span data-stu-id="c61aa-135">In the Azure portal, click **Create a resource** > **Storage** > **Storage account**.</span></span>
 
-<span data-ttu-id="728d0-135">Then provide a **Name** for the container (azuresamldemoblob in my example) and verify the **Access type** is set to 'blob'.</span><span class="sxs-lookup"><span data-stu-id="728d0-135">Then provide a **Name** for the container (azuresamldemoblob in my example) and verify the **Access type** is set to 'blob'.</span></span>
+2. <span data-ttu-id="c61aa-136">Provide a name (`samldemo` in the example).</span><span class="sxs-lookup"><span data-stu-id="c61aa-136">Provide a name (`samldemo` in the example).</span></span> <span data-ttu-id="c61aa-137">The name can use only lowercase letters and numbers, and it must be unique across Azure.</span><span class="sxs-lookup"><span data-stu-id="c61aa-137">The name can use only lowercase letters and numbers, and it must be unique across Azure.</span></span> 
 
-![create blob access type](https://docstestmedia1.blob.core.windows.net/azure-media/articles/stream-analytics/media/stream-analytics-machine-learning-integration-tutorial/create-sa3.png)
+3. <span data-ttu-id="c61aa-138">Specify an existing resource group and specify a location.</span><span class="sxs-lookup"><span data-stu-id="c61aa-138">Specify an existing resource group and specify a location.</span></span> <span data-ttu-id="c61aa-139">For location, we recommend that all the resources created in this tutorial use the same location.</span><span class="sxs-lookup"><span data-stu-id="c61aa-139">For location, we recommend that all the resources created in this tutorial use the same location.</span></span>
 
-<span data-ttu-id="728d0-137">Now we can populate the blob with our data.</span><span class="sxs-lookup"><span data-stu-id="728d0-137">Now we can populate the blob with our data.</span></span> <span data-ttu-id="728d0-138">Select **Files** and then select the file on your local drive that you downloaded from GitHub.</span><span class="sxs-lookup"><span data-stu-id="728d0-138">Select **Files** and then select the file on your local drive that you downloaded from GitHub.</span></span> <span data-ttu-id="728d0-139">I selected Block blob and 4 MB as a size these should be fine for this demonstration.</span><span class="sxs-lookup"><span data-stu-id="728d0-139">I selected Block blob and 4 MB as a size these should be fine for this demonstration.</span></span> <span data-ttu-id="728d0-140">Then select **Upload** and the portal will create a blob with the text sample for you.</span><span class="sxs-lookup"><span data-stu-id="728d0-140">Then select **Upload** and the portal will create a blob with the text sample for you.</span></span>
+    ![provide storage account details](./media/stream-analytics-machine-learning-integration-tutorial/create-sa1.png)
 
-![create blob upload file](https://docstestmedia1.blob.core.windows.net/azure-media/articles/stream-analytics/media/stream-analytics-machine-learning-integration-tutorial/create-sa4.png)
+4. <span data-ttu-id="c61aa-141">In the Azure portal, select the storage account.</span><span class="sxs-lookup"><span data-stu-id="c61aa-141">In the Azure portal, select the storage account.</span></span> <span data-ttu-id="c61aa-142">In the storage account blade, click **Containers** and then click **+&nbsp;Container** to create blob storage.</span><span class="sxs-lookup"><span data-stu-id="c61aa-142">In the storage account blade, click **Containers** and then click **+&nbsp;Container** to create blob storage.</span></span>
 
-<span data-ttu-id="728d0-142">Now that the sample data is in a blob it is time to enable the sentiment analysis model in Cortana Intelligence Gallery.</span><span class="sxs-lookup"><span data-stu-id="728d0-142">Now that the sample data is in a blob it is time to enable the sentiment analysis model in Cortana Intelligence Gallery.</span></span>
+    ![create blob container](./media/stream-analytics-machine-learning-integration-tutorial/create-sa2.png)
 
-## <a name="add-the-sentiment-analytics-model-from-the-cortana-intelligence-gallery"></a><span data-ttu-id="728d0-143">Add the sentiment analytics model from the Cortana Intelligence Gallery</span><span class="sxs-lookup"><span data-stu-id="728d0-143">Add the sentiment analytics model from the Cortana Intelligence Gallery</span></span>
-1. <span data-ttu-id="728d0-144">Download the [predictive sentiment analytics model](https://gallery.cortanaintelligence.com/Experiment/Predictive-Mini-Twitter-sentiment-analysis-Experiment-1) from the Cortana Intelligence Gallery.</span><span class="sxs-lookup"><span data-stu-id="728d0-144">Download the [predictive sentiment analytics model](https://gallery.cortanaintelligence.com/Experiment/Predictive-Mini-Twitter-sentiment-analysis-Experiment-1) from the Cortana Intelligence Gallery.</span></span>  
-2. <span data-ttu-id="728d0-145">In Machine Learning Studio, select **Open in Studio**.</span><span class="sxs-lookup"><span data-stu-id="728d0-145">In Machine Learning Studio, select **Open in Studio**.</span></span>  
+5. <span data-ttu-id="c61aa-144">Provide a name for the container (`azuresamldemoblob` in the example) and verify that **Access type** is set to **Blob**.</span><span class="sxs-lookup"><span data-stu-id="c61aa-144">Provide a name for the container (`azuresamldemoblob` in the example) and verify that **Access type** is set to **Blob**.</span></span> <span data-ttu-id="c61aa-145">When you're done, click **OK**.</span><span class="sxs-lookup"><span data-stu-id="c61aa-145">When you're done, click **OK**.</span></span>
+
+    ![specify blob container details](./media/stream-analytics-machine-learning-integration-tutorial/create-sa3.png)
+
+6. <span data-ttu-id="c61aa-147">In the **Containers** blade, select the new container, which opens the blade for that container.</span><span class="sxs-lookup"><span data-stu-id="c61aa-147">In the **Containers** blade, select the new container, which opens the blade for that container.</span></span>
+
+7. <span data-ttu-id="c61aa-148">Click **Upload**.</span><span class="sxs-lookup"><span data-stu-id="c61aa-148">Click **Upload**.</span></span>
+
+    !['Upload' button for a container](./media/stream-analytics-machine-learning-integration-tutorial/create-sa-upload-button.png)
+
+8. <span data-ttu-id="c61aa-150">In the **Upload blob** blade, upload the **sampleinput.csv** file that you downloaded earlier.</span><span class="sxs-lookup"><span data-stu-id="c61aa-150">In the **Upload blob** blade, upload the **sampleinput.csv** file that you downloaded earlier.</span></span> <span data-ttu-id="c61aa-151">For **Blob type**, select **Block blob** and set the block size to 4 MB, which is sufficient for this tutorial.</span><span class="sxs-lookup"><span data-stu-id="c61aa-151">For **Blob type**, select **Block blob** and set the block size to 4 MB, which is sufficient for this tutorial.</span></span>
+
+9. <span data-ttu-id="c61aa-152">Click the **Upload** button at the bottom of the blade.</span><span class="sxs-lookup"><span data-stu-id="c61aa-152">Click the **Upload** button at the bottom of the blade.</span></span>
+
+## <a name="add-the-sentiment-analytics-model-from-the-cortana-intelligence-gallery"></a><span data-ttu-id="c61aa-153">Add the sentiment analytics model from the Cortana Intelligence Gallery</span><span class="sxs-lookup"><span data-stu-id="c61aa-153">Add the sentiment analytics model from the Cortana Intelligence Gallery</span></span>
+
+<span data-ttu-id="c61aa-154">Now that the sample data is in a blob, you can enable the sentiment analysis model in Cortana Intelligence Gallery.</span><span class="sxs-lookup"><span data-stu-id="c61aa-154">Now that the sample data is in a blob, you can enable the sentiment analysis model in Cortana Intelligence Gallery.</span></span>
+
+1. <span data-ttu-id="c61aa-155">Go to the [predictive sentiment analytics model](https://gallery.cortanaintelligence.com/Experiment/Predictive-Mini-Twitter-sentiment-analysis-Experiment-1) page in the Cortana Intelligence Gallery.</span><span class="sxs-lookup"><span data-stu-id="c61aa-155">Go to the [predictive sentiment analytics model](https://gallery.cortanaintelligence.com/Experiment/Predictive-Mini-Twitter-sentiment-analysis-Experiment-1) page in the Cortana Intelligence Gallery.</span></span>  
+
+2. <span data-ttu-id="c61aa-156">Click **Open in Studio**.</span><span class="sxs-lookup"><span data-stu-id="c61aa-156">Click **Open in Studio**.</span></span>  
    
-   ![Stream Analytics Machine Learning, open Machine Learning Studio](https://docstestmedia1.blob.core.windows.net/azure-media/articles/stream-analytics/media/stream-analytics-machine-learning-integration-tutorial/stream-analytics-machine-learning-integration-tutorial-open-ml-studio.png)  
+   ![Stream Analytics Machine Learning, open Machine Learning Studio](./media/stream-analytics-machine-learning-integration-tutorial/stream-analytics-machine-learning-integration-tutorial-open-ml-studio.png)  
 
-3. <span data-ttu-id="728d0-147">Sign in to go to the workspace.</span><span class="sxs-lookup"><span data-stu-id="728d0-147">Sign in to go to the workspace.</span></span> <span data-ttu-id="728d0-148">Select the location that best suits your own location.</span><span class="sxs-lookup"><span data-stu-id="728d0-148">Select the location that best suits your own location.</span></span>
-4. <span data-ttu-id="728d0-149">Click **Run** at the bottom of the page.</span><span class="sxs-lookup"><span data-stu-id="728d0-149">Click **Run** at the bottom of the page.</span></span>  
-5. <span data-ttu-id="728d0-150">After the process runs successfully, select **Deploy Web Service**.</span><span class="sxs-lookup"><span data-stu-id="728d0-150">After the process runs successfully, select **Deploy Web Service**.</span></span>
-6. <span data-ttu-id="728d0-151">The sentiment analytics model is ready to use.</span><span class="sxs-lookup"><span data-stu-id="728d0-151">The sentiment analytics model is ready to use.</span></span> <span data-ttu-id="728d0-152">To validate, select the **Test** button and provide text input, such as, “I love Microsoft.”</span><span class="sxs-lookup"><span data-stu-id="728d0-152">To validate, select the **Test** button and provide text input, such as, “I love Microsoft.”</span></span> <span data-ttu-id="728d0-153">The test should return a result similar to the following:</span><span class="sxs-lookup"><span data-stu-id="728d0-153">The test should return a result similar to the following:</span></span>
+3. <span data-ttu-id="c61aa-158">Sign in to go to the workspace.</span><span class="sxs-lookup"><span data-stu-id="c61aa-158">Sign in to go to the workspace.</span></span> <span data-ttu-id="c61aa-159">Select a location.</span><span class="sxs-lookup"><span data-stu-id="c61aa-159">Select a location.</span></span>
 
-`'Predictive Mini Twitter sentiment analysis Experiment' test returned ["4","0.715057671070099"]...`  
+4. <span data-ttu-id="c61aa-160">Click **Run** at the bottom of the page.</span><span class="sxs-lookup"><span data-stu-id="c61aa-160">Click **Run** at the bottom of the page.</span></span> <span data-ttu-id="c61aa-161">The process runs, which takes about a minute.</span><span class="sxs-lookup"><span data-stu-id="c61aa-161">The process runs, which takes about a minute.</span></span>
 
-![Stream Analytics Machine Learning, analysis data](https://docstestmedia1.blob.core.windows.net/azure-media/articles/stream-analytics/media/stream-analytics-machine-learning-integration-tutorial/stream-analytics-machine-learning-integration-tutorial-analysis-data.png)  
+   ![run experiment in Machine Learning Studio](./media/stream-analytics-machine-learning-integration-tutorial/stream-analytics-machine-learning-run-experiment.png)  
 
-<span data-ttu-id="728d0-155">In the **Apps** column, select the link for **Excel 2010 or earlier workbook** to get your API key and the URL that you’ll need later to set up the Stream Analytics job.</span><span class="sxs-lookup"><span data-stu-id="728d0-155">In the **Apps** column, select the link for **Excel 2010 or earlier workbook** to get your API key and the URL that you’ll need later to set up the Stream Analytics job.</span></span> <span data-ttu-id="728d0-156">(This step is required only to use a Machine Learning model from another Azure account workspace.</span><span class="sxs-lookup"><span data-stu-id="728d0-156">(This step is required only to use a Machine Learning model from another Azure account workspace.</span></span> <span data-ttu-id="728d0-157">This article assumes this is the case, to address that scenario.)</span><span class="sxs-lookup"><span data-stu-id="728d0-157">This article assumes this is the case, to address that scenario.)</span></span>  
+5. <span data-ttu-id="c61aa-163">After the process has run successfully, select **Deploy Web Service** at the bottom of the page.</span><span class="sxs-lookup"><span data-stu-id="c61aa-163">After the process has run successfully, select **Deploy Web Service** at the bottom of the page.</span></span>
 
-<span data-ttu-id="728d0-158">Note the web service URL and access key from the downloaded Excel file, as shown below:</span><span class="sxs-lookup"><span data-stu-id="728d0-158">Note the web service URL and access key from the downloaded Excel file, as shown below:</span></span>  
+   ![deploy experiment in Machine Learning Studio as a web service](./media/stream-analytics-machine-learning-integration-tutorial/stream-analytics-machine-learning-deploy-web-service.png)  
 
-![Stream Analytics Machine Learning, quick glance](https://docstestmedia1.blob.core.windows.net/azure-media/articles/stream-analytics/media/stream-analytics-machine-learning-integration-tutorial/stream-analytics-machine-learning-integration-tutorial-quick-glance.png)  
+6. <span data-ttu-id="c61aa-165">To validate that the sentiment analytics model is ready to use, click the **Test** button.</span><span class="sxs-lookup"><span data-stu-id="c61aa-165">To validate that the sentiment analytics model is ready to use, click the **Test** button.</span></span> <span data-ttu-id="c61aa-166">Provide text input such as "I love Microsoft".</span><span class="sxs-lookup"><span data-stu-id="c61aa-166">Provide text input such as "I love Microsoft".</span></span> 
 
-## <a name="create-a-stream-analytics-job-that-uses-the-machine-learning-model"></a><span data-ttu-id="728d0-160">Create a Stream Analytics job that uses the Machine Learning model</span><span class="sxs-lookup"><span data-stu-id="728d0-160">Create a Stream Analytics job that uses the Machine Learning model</span></span>
-1. <span data-ttu-id="728d0-161">Go to the [Azure portal](https://portal.azure.com).</span><span class="sxs-lookup"><span data-stu-id="728d0-161">Go to the [Azure portal](https://portal.azure.com).</span></span>  
-2. <span data-ttu-id="728d0-162">Click **New** > **Intelligence + analytics** > **Stream Analytics**.</span><span class="sxs-lookup"><span data-stu-id="728d0-162">Click **New** > **Intelligence + analytics** > **Stream Analytics**.</span></span> <span data-ttu-id="728d0-163">Enter a name for your job in **Job name**, specify an existing resource group or create a new one as required, and enter the appropriate location for the job in the **Location** field.</span><span class="sxs-lookup"><span data-stu-id="728d0-163">Enter a name for your job in **Job name**, specify an existing resource group or create a new one as required, and enter the appropriate location for the job in the **Location** field.</span></span>    
+   ![test experiment in Machine Learning Studio](./media/stream-analytics-machine-learning-integration-tutorial/stream-analytics-machine-learning-test.png)  
+
+    <span data-ttu-id="c61aa-168">If the test works, you see a result similar to the following example:</span><span class="sxs-lookup"><span data-stu-id="c61aa-168">If the test works, you see a result similar to the following example:</span></span>
+
+   ![test results in Machine Learning Studio](./media/stream-analytics-machine-learning-integration-tutorial/stream-analytics-machine-learning-test-results.png)  
+
+7. <span data-ttu-id="c61aa-170">In the **Apps** column, click the **Excel 2010 or earlier workbook** link to download an Excel workbook.</span><span class="sxs-lookup"><span data-stu-id="c61aa-170">In the **Apps** column, click the **Excel 2010 or earlier workbook** link to download an Excel workbook.</span></span> <span data-ttu-id="c61aa-171">The workbook contains the API key and the URL that you need later to set up the Stream Analytics job.</span><span class="sxs-lookup"><span data-stu-id="c61aa-171">The workbook contains the API key and the URL that you need later to set up the Stream Analytics job.</span></span>
+
+    ![Stream Analytics Machine Learning, quick glance](./media/stream-analytics-machine-learning-integration-tutorial/stream-analytics-machine-learning-integration-tutorial-quick-glance.png)  
+
+
+## <a name="create-a-stream-analytics-job-that-uses-the-machine-learning-model"></a><span data-ttu-id="c61aa-173">Create a Stream Analytics job that uses the Machine Learning model</span><span class="sxs-lookup"><span data-stu-id="c61aa-173">Create a Stream Analytics job that uses the Machine Learning model</span></span>
+
+<span data-ttu-id="c61aa-174">You can now create a Stream Analytics job that reads the sample tweets from the CSV file in blob storage.</span><span class="sxs-lookup"><span data-stu-id="c61aa-174">You can now create a Stream Analytics job that reads the sample tweets from the CSV file in blob storage.</span></span> 
+
+### <a name="create-the-job"></a><span data-ttu-id="c61aa-175">Create the job</span><span class="sxs-lookup"><span data-stu-id="c61aa-175">Create the job</span></span>
+
+1. <span data-ttu-id="c61aa-176">Go to the [Azure portal](https://portal.azure.com).</span><span class="sxs-lookup"><span data-stu-id="c61aa-176">Go to the [Azure portal](https://portal.azure.com).</span></span>  
+
+2. <span data-ttu-id="c61aa-177">Click **Create a resource** > **Internet of Things** > **Stream Analytics job**.</span><span class="sxs-lookup"><span data-stu-id="c61aa-177">Click **Create a resource** > **Internet of Things** > **Stream Analytics job**.</span></span> 
+
+3. <span data-ttu-id="c61aa-178">Name the job `azure-sa-ml-demo`, specify a subscription, specify an existing resource group or create a new one, and select the location for the job.</span><span class="sxs-lookup"><span data-stu-id="c61aa-178">Name the job `azure-sa-ml-demo`, specify a subscription, specify an existing resource group or create a new one, and select the location for the job.</span></span>
+
+   ![specify settings for new Stream Analytics job](./media/stream-analytics-machine-learning-integration-tutorial/create-job-1.png)
    
-   ![create job](https://docstestmedia1.blob.core.windows.net/azure-media/articles/stream-analytics/media/stream-analytics-machine-learning-integration-tutorial/create-job-1.png)
-   
-3. <span data-ttu-id="728d0-165">After the job is created, on the **Inputs** tab, select **Add an Input**.</span><span class="sxs-lookup"><span data-stu-id="728d0-165">After the job is created, on the **Inputs** tab, select **Add an Input**.</span></span>  
-   
-   ![Stream Analytics Machine Learning, add Machine Learning input](https://docstestmedia1.blob.core.windows.net/azure-media/articles/stream-analytics/media/stream-analytics-machine-learning-integration-tutorial/create-job-add-input.png)  
 
-4. <span data-ttu-id="728d0-167">Select **Add** and then specify an **Input alias**, select **Data stream**, **Blob Storage** as the input, and then select **Next**.</span><span class="sxs-lookup"><span data-stu-id="728d0-167">Select **Add** and then specify an **Input alias**, select **Data stream**, **Blob Storage** as the input, and then select **Next**.</span></span>  
-5. <span data-ttu-id="728d0-168">On the **Blob Storage Settings** page of the wizard, provide the storage account blob container name you defined earlier when you uploaded the data.</span><span class="sxs-lookup"><span data-stu-id="728d0-168">On the **Blob Storage Settings** page of the wizard, provide the storage account blob container name you defined earlier when you uploaded the data.</span></span> <span data-ttu-id="728d0-169">Click **Next**.</span><span class="sxs-lookup"><span data-stu-id="728d0-169">Click **Next**.</span></span> <span data-ttu-id="728d0-170">For **Event Serialization Format**, select **CSV**.</span><span class="sxs-lookup"><span data-stu-id="728d0-170">For **Event Serialization Format**, select **CSV**.</span></span> <span data-ttu-id="728d0-171">Accept the default values for the rest of the **Serialization settings** page.</span><span class="sxs-lookup"><span data-stu-id="728d0-171">Accept the default values for the rest of the **Serialization settings** page.</span></span> <span data-ttu-id="728d0-172">Click **OK**.</span><span class="sxs-lookup"><span data-stu-id="728d0-172">Click **OK**.</span></span>  
-   
-   ![add input blob container](https://docstestmedia1.blob.core.windows.net/azure-media/articles/stream-analytics/media/stream-analytics-machine-learning-integration-tutorial/create-job-add-input-blob.png)
+### <a name="configure-the-job-input"></a><span data-ttu-id="c61aa-180">Configure the job input</span><span class="sxs-lookup"><span data-stu-id="c61aa-180">Configure the job input</span></span>
+<span data-ttu-id="c61aa-181">The job gets its input from the CSV file that you uploaded earlier to blob storage.</span><span class="sxs-lookup"><span data-stu-id="c61aa-181">The job gets its input from the CSV file that you uploaded earlier to blob storage.</span></span>
 
-6. <span data-ttu-id="728d0-174">On the **Outputs** tab, select **Add an Output**.</span><span class="sxs-lookup"><span data-stu-id="728d0-174">On the **Outputs** tab, select **Add an Output**.</span></span>  
-   
-   ![Stream Analytics Machine Learning, add output](https://docstestmedia1.blob.core.windows.net/azure-media/articles/stream-analytics/media/stream-analytics-machine-learning-integration-tutorial/create-output.png)  
+1. <span data-ttu-id="c61aa-182">After the job has been created, under **Job Topology** in the job blade, click the **Inputs** option.</span><span class="sxs-lookup"><span data-stu-id="c61aa-182">After the job has been created, under **Job Topology** in the job blade, click the **Inputs** option.</span></span>    
 
-7. <span data-ttu-id="728d0-176">Click **Blob Storage**, and then enter the same parameters, except for the container.</span><span class="sxs-lookup"><span data-stu-id="728d0-176">Click **Blob Storage**, and then enter the same parameters, except for the container.</span></span> <span data-ttu-id="728d0-177">The value for **Input** was configured to read from the container named “test” where the **CSV** file was uploaded.</span><span class="sxs-lookup"><span data-stu-id="728d0-177">The value for **Input** was configured to read from the container named “test” where the **CSV** file was uploaded.</span></span> <span data-ttu-id="728d0-178">For **Output**, enter “testoutput”.</span><span class="sxs-lookup"><span data-stu-id="728d0-178">For **Output**, enter “testoutput”.</span></span>
-8. <span data-ttu-id="728d0-179">Validate that the output’s **Serialization settings** are set to **CSV**, and then select the **OK** button.</span><span class="sxs-lookup"><span data-stu-id="728d0-179">Validate that the output’s **Serialization settings** are set to **CSV**, and then select the **OK** button.</span></span>
-   
-   ![Stream Analytics Machine Learning, add output](https://docstestmedia1.blob.core.windows.net/azure-media/articles/stream-analytics/media/stream-analytics-machine-learning-integration-tutorial/create-output2.png) 
+2. <span data-ttu-id="c61aa-183">In the **Inputs** blade, click **Add Stream Input** >**Blob storage**</span><span class="sxs-lookup"><span data-stu-id="c61aa-183">In the **Inputs** blade, click **Add Stream Input** >**Blob storage**</span></span>
 
-9. <span data-ttu-id="728d0-181">On the **Functions** tab, select **Add a Machine Learning Function**.</span><span class="sxs-lookup"><span data-stu-id="728d0-181">On the **Functions** tab, select **Add a Machine Learning Function**.</span></span>  
-   
-   ![Stream Analytics Machine Learning, add Machine Learning function](https://docstestmedia1.blob.core.windows.net/azure-media/articles/stream-analytics/media/stream-analytics-machine-learning-integration-tutorial/add-function.png)  
+3. <span data-ttu-id="c61aa-184">Fill out the **Blob Storage** blade with these values:</span><span class="sxs-lookup"><span data-stu-id="c61aa-184">Fill out the **Blob Storage** blade with these values:</span></span>
 
-10. <span data-ttu-id="728d0-183">On the **Machine Learning Web Service Settings** page, locate the Machine Learning workspace, web service, and default endpoint.</span><span class="sxs-lookup"><span data-stu-id="728d0-183">On the **Machine Learning Web Service Settings** page, locate the Machine Learning workspace, web service, and default endpoint.</span></span> <span data-ttu-id="728d0-184">For this article, apply the settings manually to gain familiarity with configuring a web service for any workspace, as long as you know the URL and have the API key.</span><span class="sxs-lookup"><span data-stu-id="728d0-184">For this article, apply the settings manually to gain familiarity with configuring a web service for any workspace, as long as you know the URL and have the API key.</span></span> <span data-ttu-id="728d0-185">Enter the endpoint **URL** and **API key**.</span><span class="sxs-lookup"><span data-stu-id="728d0-185">Enter the endpoint **URL** and **API key**.</span></span> <span data-ttu-id="728d0-186">Click **OK**.</span><span class="sxs-lookup"><span data-stu-id="728d0-186">Click **OK**.</span></span> <span data-ttu-id="728d0-187">Note that the **Function Alias** is 'sentiment'.</span><span class="sxs-lookup"><span data-stu-id="728d0-187">Note that the **Function Alias** is 'sentiment'.</span></span>  
+   
+   |<span data-ttu-id="c61aa-185">Field</span><span class="sxs-lookup"><span data-stu-id="c61aa-185">Field</span></span>  |<span data-ttu-id="c61aa-186">Value</span><span class="sxs-lookup"><span data-stu-id="c61aa-186">Value</span></span>  |
+   |---------|---------|
+   |<span data-ttu-id="c61aa-187">**Input alias**</span><span class="sxs-lookup"><span data-stu-id="c61aa-187">**Input alias**</span></span> | <span data-ttu-id="c61aa-188">Use the name `datainput` and select **Select blob storage from your subscription**</span><span class="sxs-lookup"><span data-stu-id="c61aa-188">Use the name `datainput` and select **Select blob storage from your subscription**</span></span>       |
+   |<span data-ttu-id="c61aa-189">**Storage account**</span><span class="sxs-lookup"><span data-stu-id="c61aa-189">**Storage account**</span></span>  |  <span data-ttu-id="c61aa-190">Select the storage account you created earlier.</span><span class="sxs-lookup"><span data-stu-id="c61aa-190">Select the storage account you created earlier.</span></span>  |
+   |<span data-ttu-id="c61aa-191">**Container**</span><span class="sxs-lookup"><span data-stu-id="c61aa-191">**Container**</span></span>  | <span data-ttu-id="c61aa-192">Select the container you created earlier (`azuresamldemoblob`)</span><span class="sxs-lookup"><span data-stu-id="c61aa-192">Select the container you created earlier (`azuresamldemoblob`)</span></span>        |
+   |<span data-ttu-id="c61aa-193">**Event serialization format**</span><span class="sxs-lookup"><span data-stu-id="c61aa-193">**Event serialization format**</span></span>  |  <span data-ttu-id="c61aa-194">Select **CSV**</span><span class="sxs-lookup"><span data-stu-id="c61aa-194">Select **CSV**</span></span>       |
+
+   ![Settings for new job input](./media/stream-analytics-machine-learning-integration-tutorial/stream-analytics-create-sa-input-new-portal.png)
+
+4. <span data-ttu-id="c61aa-196">Click **Save**.</span><span class="sxs-lookup"><span data-stu-id="c61aa-196">Click **Save**.</span></span>
+
+### <a name="configure-the-job-output"></a><span data-ttu-id="c61aa-197">Configure the job output</span><span class="sxs-lookup"><span data-stu-id="c61aa-197">Configure the job output</span></span>
+<span data-ttu-id="c61aa-198">The job sends results to the same blob storage where it gets input.</span><span class="sxs-lookup"><span data-stu-id="c61aa-198">The job sends results to the same blob storage where it gets input.</span></span> 
+
+1. <span data-ttu-id="c61aa-199">Under **Job Topology** in the job blade, click the **Outputs** option.</span><span class="sxs-lookup"><span data-stu-id="c61aa-199">Under **Job Topology** in the job blade, click the **Outputs** option.</span></span>  
+
+2. <span data-ttu-id="c61aa-200">In the **Outputs** blade, click **Add** >**Blob storage**, and then add an output with the alias `datamloutput`.</span><span class="sxs-lookup"><span data-stu-id="c61aa-200">In the **Outputs** blade, click **Add** >**Blob storage**, and then add an output with the alias `datamloutput`.</span></span> 
+
+3. <span data-ttu-id="c61aa-201">Fill out the **Blob Storage** blade with these values:</span><span class="sxs-lookup"><span data-stu-id="c61aa-201">Fill out the **Blob Storage** blade with these values:</span></span>
+
+   |<span data-ttu-id="c61aa-202">Field</span><span class="sxs-lookup"><span data-stu-id="c61aa-202">Field</span></span>  |<span data-ttu-id="c61aa-203">Value</span><span class="sxs-lookup"><span data-stu-id="c61aa-203">Value</span></span>  |
+   |---------|---------|
+   |<span data-ttu-id="c61aa-204">**Output alias**</span><span class="sxs-lookup"><span data-stu-id="c61aa-204">**Output alias**</span></span> | <span data-ttu-id="c61aa-205">Use the name `datamloutput` and select **Select blob storage from your subscription**</span><span class="sxs-lookup"><span data-stu-id="c61aa-205">Use the name `datamloutput` and select **Select blob storage from your subscription**</span></span>       |
+   |<span data-ttu-id="c61aa-206">**Storage account**</span><span class="sxs-lookup"><span data-stu-id="c61aa-206">**Storage account**</span></span>  |  <span data-ttu-id="c61aa-207">Select the storage account you created earlier.</span><span class="sxs-lookup"><span data-stu-id="c61aa-207">Select the storage account you created earlier.</span></span>  |
+   |<span data-ttu-id="c61aa-208">**Container**</span><span class="sxs-lookup"><span data-stu-id="c61aa-208">**Container**</span></span>  | <span data-ttu-id="c61aa-209">Select the container you created earlier (`azuresamldemoblob`)</span><span class="sxs-lookup"><span data-stu-id="c61aa-209">Select the container you created earlier (`azuresamldemoblob`)</span></span>        |
+   |<span data-ttu-id="c61aa-210">**Event serialization format**</span><span class="sxs-lookup"><span data-stu-id="c61aa-210">**Event serialization format**</span></span>  |  <span data-ttu-id="c61aa-211">Select **CSV**</span><span class="sxs-lookup"><span data-stu-id="c61aa-211">Select **CSV**</span></span>       |
+
+   ![Settings for new job output](./media/stream-analytics-machine-learning-integration-tutorial/create-output2.png) 
+
+4. <span data-ttu-id="c61aa-213">Click **Save**.</span><span class="sxs-lookup"><span data-stu-id="c61aa-213">Click **Save**.</span></span>   
+
+
+### <a name="add-the-machine-learning-function"></a><span data-ttu-id="c61aa-214">Add the Machine Learning function</span><span class="sxs-lookup"><span data-stu-id="c61aa-214">Add the Machine Learning function</span></span> 
+<span data-ttu-id="c61aa-215">Earlier you published a Machine Learning model to a web service.</span><span class="sxs-lookup"><span data-stu-id="c61aa-215">Earlier you published a Machine Learning model to a web service.</span></span> <span data-ttu-id="c61aa-216">In this scenario, when the Stream Analysis job runs, it sends each sample tweet from the input to the web service for sentiment analysis.</span><span class="sxs-lookup"><span data-stu-id="c61aa-216">In this scenario, when the Stream Analysis job runs, it sends each sample tweet from the input to the web service for sentiment analysis.</span></span> <span data-ttu-id="c61aa-217">The Machine Learning web service returns a sentiment (`positive`, `neutral`, or `negative`) and a probability of the tweet being positive.</span><span class="sxs-lookup"><span data-stu-id="c61aa-217">The Machine Learning web service returns a sentiment (`positive`, `neutral`, or `negative`) and a probability of the tweet being positive.</span></span> 
+
+<span data-ttu-id="c61aa-218">In this section of the tutorial, you define a function in the Stream Analysis job.</span><span class="sxs-lookup"><span data-stu-id="c61aa-218">In this section of the tutorial, you define a function in the Stream Analysis job.</span></span> <span data-ttu-id="c61aa-219">The function can be invoked to send a tweet to the web service and get the response back.</span><span class="sxs-lookup"><span data-stu-id="c61aa-219">The function can be invoked to send a tweet to the web service and get the response back.</span></span> 
+
+1. <span data-ttu-id="c61aa-220">Make sure you have the web service URL and API key that you downloaded earlier in the Excel workbook.</span><span class="sxs-lookup"><span data-stu-id="c61aa-220">Make sure you have the web service URL and API key that you downloaded earlier in the Excel workbook.</span></span>
+
+2. <span data-ttu-id="c61aa-221">Navigate to your job blade > **Functions** > **+ Add** > **AzureML**</span><span class="sxs-lookup"><span data-stu-id="c61aa-221">Navigate to your job blade > **Functions** > **+ Add** > **AzureML**</span></span>
+
+3. <span data-ttu-id="c61aa-222">Fill out the **Azure Machine Learning function** blade with these values:</span><span class="sxs-lookup"><span data-stu-id="c61aa-222">Fill out the **Azure Machine Learning function** blade with these values:</span></span>
+
+   |<span data-ttu-id="c61aa-223">Field</span><span class="sxs-lookup"><span data-stu-id="c61aa-223">Field</span></span>  |<span data-ttu-id="c61aa-224">Value</span><span class="sxs-lookup"><span data-stu-id="c61aa-224">Value</span></span>  |
+   |---------|---------|
+   | <span data-ttu-id="c61aa-225">**Function alias**</span><span class="sxs-lookup"><span data-stu-id="c61aa-225">**Function alias**</span></span> | <span data-ttu-id="c61aa-226">Use the name `sentiment` and select **Provide Azure Machine Learning function settings manually** which gives you an option to enter the URL and key.</span><span class="sxs-lookup"><span data-stu-id="c61aa-226">Use the name `sentiment` and select **Provide Azure Machine Learning function settings manually** which gives you an option to enter the URL and key.</span></span>      |
+   | <span data-ttu-id="c61aa-227">**URL**</span><span class="sxs-lookup"><span data-stu-id="c61aa-227">**URL**</span></span>| <span data-ttu-id="c61aa-228">Paste the web service URL.</span><span class="sxs-lookup"><span data-stu-id="c61aa-228">Paste the web service URL.</span></span>|
+   |<span data-ttu-id="c61aa-229">**Key**</span><span class="sxs-lookup"><span data-stu-id="c61aa-229">**Key**</span></span> | <span data-ttu-id="c61aa-230">Paste the API key.</span><span class="sxs-lookup"><span data-stu-id="c61aa-230">Paste the API key.</span></span> |
+  
+   ![Settings for adding a Machine Learning function to the Stream Analytics job](./media/stream-analytics-machine-learning-integration-tutorial/add-function.png)  
     
-    ![Stream Analytics Machine Learning, Machine Learning web service](https://docstestmedia1.blob.core.windows.net/azure-media/articles/stream-analytics/media/stream-analytics-machine-learning-integration-tutorial/add-function-endpoints.png)    
+4. <span data-ttu-id="c61aa-232">Click **Save**.</span><span class="sxs-lookup"><span data-stu-id="c61aa-232">Click **Save**.</span></span>
 
-11. <span data-ttu-id="728d0-189">On the **Query** tab, modify the query as follows:</span><span class="sxs-lookup"><span data-stu-id="728d0-189">On the **Query** tab, modify the query as follows:</span></span>    
-    
+### <a name="create-a-query-to-transform-the-data"></a><span data-ttu-id="c61aa-233">Create a query to transform the data</span><span class="sxs-lookup"><span data-stu-id="c61aa-233">Create a query to transform the data</span></span>
+
+<span data-ttu-id="c61aa-234">Stream Analytics uses a declarative, SQL-based query to examine the input and process it.</span><span class="sxs-lookup"><span data-stu-id="c61aa-234">Stream Analytics uses a declarative, SQL-based query to examine the input and process it.</span></span> <span data-ttu-id="c61aa-235">In this section, you create a query that reads each tweet from input and then invokes the Machine Learning function to perform sentiment analysis.</span><span class="sxs-lookup"><span data-stu-id="c61aa-235">In this section, you create a query that reads each tweet from input and then invokes the Machine Learning function to perform sentiment analysis.</span></span> <span data-ttu-id="c61aa-236">The query then sends the result to the output that you defined (blob storage).</span><span class="sxs-lookup"><span data-stu-id="c61aa-236">The query then sends the result to the output that you defined (blob storage).</span></span>
+
+1. <span data-ttu-id="c61aa-237">Return to the job overview blade.</span><span class="sxs-lookup"><span data-stu-id="c61aa-237">Return to the job overview blade.</span></span>
+
+2.  <span data-ttu-id="c61aa-238">Under **Job Topology**, click the **Query** box.</span><span class="sxs-lookup"><span data-stu-id="c61aa-238">Under **Job Topology**, click the **Query** box.</span></span>
+
+3. <span data-ttu-id="c61aa-239">Enter the following query:</span><span class="sxs-lookup"><span data-stu-id="c61aa-239">Enter the following query:</span></span>
+
     ```
     WITH sentiment AS (  
-      SELECT text, sentiment(text) as result from datainput  
+    SELECT text, sentiment(text) as result 
+    FROM datainput  
     )  
-    
-    Select text, result.[Scored Labels]  
-    Into testoutput  
-    From sentiment  
+
+    SELECT text, result.[Score]  
+    INTO datamloutput
+    FROM sentiment  
     ```    
 
-12. <span data-ttu-id="728d0-190">Click **Save** to save the query.</span><span class="sxs-lookup"><span data-stu-id="728d0-190">Click **Save** to save the query.</span></span>
+    <span data-ttu-id="c61aa-240">The query invokes the function you created earlier (`sentiment`) in order to perform sentiment analysis on each tweet in the input.</span><span class="sxs-lookup"><span data-stu-id="c61aa-240">The query invokes the function you created earlier (`sentiment`) in order to perform sentiment analysis on each tweet in the input.</span></span> 
 
-## <a name="start-the-stream-analytics-job-and-observe-the-output"></a><span data-ttu-id="728d0-191">Start the Stream Analytics job and observe the output</span><span class="sxs-lookup"><span data-stu-id="728d0-191">Start the Stream Analytics job and observe the output</span></span>
-1. <span data-ttu-id="728d0-192">Click **Start** at the top of the job page.</span><span class="sxs-lookup"><span data-stu-id="728d0-192">Click **Start** at the top of the job page.</span></span>
-2. <span data-ttu-id="728d0-193">On the **Start Query Dialog**, select **Custom Time**, and then select one day prior to when you uploaded the CSV to Blob storage.</span><span class="sxs-lookup"><span data-stu-id="728d0-193">On the **Start Query Dialog**, select **Custom Time**, and then select one day prior to when you uploaded the CSV to Blob storage.</span></span> <span data-ttu-id="728d0-194">Click **OK**.</span><span class="sxs-lookup"><span data-stu-id="728d0-194">Click **OK**.</span></span>  
-3. <span data-ttu-id="728d0-195">Go to the Blob storage by using the tool you used to upload the CSV file, for example, Visual Studio.</span><span class="sxs-lookup"><span data-stu-id="728d0-195">Go to the Blob storage by using the tool you used to upload the CSV file, for example, Visual Studio.</span></span>
-4. <span data-ttu-id="728d0-196">A few minutes after the job is started, the output container is created and a CSV file is uploaded to it.</span><span class="sxs-lookup"><span data-stu-id="728d0-196">A few minutes after the job is started, the output container is created and a CSV file is uploaded to it.</span></span>  
-5. <span data-ttu-id="728d0-197">Open the file in the default CSV editor.</span><span class="sxs-lookup"><span data-stu-id="728d0-197">Open the file in the default CSV editor.</span></span> <span data-ttu-id="728d0-198">Something similar to the following should be displayed:</span><span class="sxs-lookup"><span data-stu-id="728d0-198">Something similar to the following should be displayed:</span></span>  
+4. <span data-ttu-id="c61aa-241">Click **Save** to save the query.</span><span class="sxs-lookup"><span data-stu-id="c61aa-241">Click **Save** to save the query.</span></span>
+
+
+## <a name="start-the-stream-analytics-job-and-check-the-output"></a><span data-ttu-id="c61aa-242">Start the Stream Analytics job and check the output</span><span class="sxs-lookup"><span data-stu-id="c61aa-242">Start the Stream Analytics job and check the output</span></span>
+
+<span data-ttu-id="c61aa-243">You can now start the Stream Analytics job.</span><span class="sxs-lookup"><span data-stu-id="c61aa-243">You can now start the Stream Analytics job.</span></span>
+
+### <a name="start-the-job"></a><span data-ttu-id="c61aa-244">Start the job</span><span class="sxs-lookup"><span data-stu-id="c61aa-244">Start the job</span></span>
+1. <span data-ttu-id="c61aa-245">Return to the job overview blade.</span><span class="sxs-lookup"><span data-stu-id="c61aa-245">Return to the job overview blade.</span></span>
+
+2. <span data-ttu-id="c61aa-246">Click **Start** at the top of the blade.</span><span class="sxs-lookup"><span data-stu-id="c61aa-246">Click **Start** at the top of the blade.</span></span>
+
+3. <span data-ttu-id="c61aa-247">In the **Start job**, select **Custom**, and then select one day prior to when you uploaded the CSV file to blob storage.</span><span class="sxs-lookup"><span data-stu-id="c61aa-247">In the **Start job**, select **Custom**, and then select one day prior to when you uploaded the CSV file to blob storage.</span></span> <span data-ttu-id="c61aa-248">When you're done, click **Start**.</span><span class="sxs-lookup"><span data-stu-id="c61aa-248">When you're done, click **Start**.</span></span>  
+
+
+### <a name="check-the-output"></a><span data-ttu-id="c61aa-249">Check the output</span><span class="sxs-lookup"><span data-stu-id="c61aa-249">Check the output</span></span>
+1. <span data-ttu-id="c61aa-250">Let the job run for a few minutes until you see activity in the **Monitoring** box.</span><span class="sxs-lookup"><span data-stu-id="c61aa-250">Let the job run for a few minutes until you see activity in the **Monitoring** box.</span></span> 
+
+2. <span data-ttu-id="c61aa-251">If you have a tool that you normally use to examine the contents of blob storage, use that tool to examine the `azuresamldemoblob` container.</span><span class="sxs-lookup"><span data-stu-id="c61aa-251">If you have a tool that you normally use to examine the contents of blob storage, use that tool to examine the `azuresamldemoblob` container.</span></span> <span data-ttu-id="c61aa-252">Alternatively, do the following steps in the Azure portal:</span><span class="sxs-lookup"><span data-stu-id="c61aa-252">Alternatively, do the following steps in the Azure portal:</span></span>
+
+    1. <span data-ttu-id="c61aa-253">In the portal, find the `samldemo` storage account, and within the account, find the `azuresamldemoblob` container.</span><span class="sxs-lookup"><span data-stu-id="c61aa-253">In the portal, find the `samldemo` storage account, and within the account, find the `azuresamldemoblob` container.</span></span> <span data-ttu-id="c61aa-254">You see two files in the container: the file that contains the sample tweets and a CSV file generated by the Stream Analytics job.</span><span class="sxs-lookup"><span data-stu-id="c61aa-254">You see two files in the container: the file that contains the sample tweets and a CSV file generated by the Stream Analytics job.</span></span>
+    2. <span data-ttu-id="c61aa-255">Right-click the generated file and then select **Download**.</span><span class="sxs-lookup"><span data-stu-id="c61aa-255">Right-click the generated file and then select **Download**.</span></span> 
+
+   ![Download CSV job output from Blob storage](./media/stream-analytics-machine-learning-integration-tutorial/download-output-csv-file.png)  
+
+3. <span data-ttu-id="c61aa-257">Open the generated CSV file.</span><span class="sxs-lookup"><span data-stu-id="c61aa-257">Open the generated CSV file.</span></span> <span data-ttu-id="c61aa-258">You see something like the following example:</span><span class="sxs-lookup"><span data-stu-id="c61aa-258">You see something like the following example:</span></span>  
    
-   ![Stream Analytics Machine Learning, CSV view](https://docstestmedia1.blob.core.windows.net/azure-media/articles/stream-analytics/media/stream-analytics-machine-learning-integration-tutorial/stream-analytics-machine-learning-integration-tutorial-csv-view.png)  
-
-## <a name="conclusion"></a><span data-ttu-id="728d0-200">Conclusion</span><span class="sxs-lookup"><span data-stu-id="728d0-200">Conclusion</span></span>
-<span data-ttu-id="728d0-201">This article demonstrates how to create a Stream Analytics job that reads streaming text data and applies sentiment analytics to the data in real time.</span><span class="sxs-lookup"><span data-stu-id="728d0-201">This article demonstrates how to create a Stream Analytics job that reads streaming text data and applies sentiment analytics to the data in real time.</span></span> <span data-ttu-id="728d0-202">You can accomplish all of this without needing to worry about the intricacies of building a sentiment analytics model.</span><span class="sxs-lookup"><span data-stu-id="728d0-202">You can accomplish all of this without needing to worry about the intricacies of building a sentiment analytics model.</span></span> <span data-ttu-id="728d0-203">This is one of the advantages of the Cortana Intelligence Suite.</span><span class="sxs-lookup"><span data-stu-id="728d0-203">This is one of the advantages of the Cortana Intelligence Suite.</span></span>
-
-<span data-ttu-id="728d0-204">You also can view Azure Machine Learning function-related metrics.</span><span class="sxs-lookup"><span data-stu-id="728d0-204">You also can view Azure Machine Learning function-related metrics.</span></span> <span data-ttu-id="728d0-205">To do this, select the **Monitor** tab. Three function-related metrics are displayed.</span><span class="sxs-lookup"><span data-stu-id="728d0-205">To do this, select the **Monitor** tab. Three function-related metrics are displayed.</span></span>  
-
-* <span data-ttu-id="728d0-206">**Function Requests** indicates the number of requests sent to a Machine Learning web service.</span><span class="sxs-lookup"><span data-stu-id="728d0-206">**Function Requests** indicates the number of requests sent to a Machine Learning web service.</span></span>  
-* <span data-ttu-id="728d0-207">**Function Events** indicates the number of events in the request.</span><span class="sxs-lookup"><span data-stu-id="728d0-207">**Function Events** indicates the number of events in the request.</span></span> <span data-ttu-id="728d0-208">By default, each request to a Machine Learning web service contains up to 1,000 events.</span><span class="sxs-lookup"><span data-stu-id="728d0-208">By default, each request to a Machine Learning web service contains up to 1,000 events.</span></span>  
-  
-    ![Stream Analytics Machine Learning, Machine Learning monitor view](https://docstestmedia1.blob.core.windows.net/azure-media/articles/stream-analytics/media/stream-analytics-machine-learning-integration-tutorial/job-monitor.png)  
+   ![Stream Analytics Machine Learning, CSV view](./media/stream-analytics-machine-learning-integration-tutorial/stream-analytics-machine-learning-integration-tutorial-csv-view.png)  
 
 
+### <a name="view-metrics"></a><span data-ttu-id="c61aa-260">View metrics</span><span class="sxs-lookup"><span data-stu-id="c61aa-260">View metrics</span></span>
+<span data-ttu-id="c61aa-261">You also can view Azure Machine Learning function-related metrics.</span><span class="sxs-lookup"><span data-stu-id="c61aa-261">You also can view Azure Machine Learning function-related metrics.</span></span> <span data-ttu-id="c61aa-262">The following function-related metrics are displayed in the **Monitoring** box in the job blade:</span><span class="sxs-lookup"><span data-stu-id="c61aa-262">The following function-related metrics are displayed in the **Monitoring** box in the job blade:</span></span>
+
+* <span data-ttu-id="c61aa-263">**Function Requests** indicates the number of requests sent to a Machine Learning web service.</span><span class="sxs-lookup"><span data-stu-id="c61aa-263">**Function Requests** indicates the number of requests sent to a Machine Learning web service.</span></span>  
+* <span data-ttu-id="c61aa-264">**Function Events** indicates the number of events in the request.</span><span class="sxs-lookup"><span data-stu-id="c61aa-264">**Function Events** indicates the number of events in the request.</span></span> <span data-ttu-id="c61aa-265">By default, each request to a Machine Learning web service contains up to 1,000 events.</span><span class="sxs-lookup"><span data-stu-id="c61aa-265">By default, each request to a Machine Learning web service contains up to 1,000 events.</span></span>  
 
 
+## <a name="next-steps"></a><span data-ttu-id="c61aa-266">Next steps</span><span class="sxs-lookup"><span data-stu-id="c61aa-266">Next steps</span></span>
 
-
-
-
-
-
-
-
-
-
-
-
+* [<span data-ttu-id="c61aa-267">Introduction to Azure Stream Analytics</span><span class="sxs-lookup"><span data-stu-id="c61aa-267">Introduction to Azure Stream Analytics</span></span>](stream-analytics-introduction.md)
+* [<span data-ttu-id="c61aa-268">Azure Stream Analytics Query Language Reference</span><span class="sxs-lookup"><span data-stu-id="c61aa-268">Azure Stream Analytics Query Language Reference</span></span>](https://msdn.microsoft.com/library/azure/dn834998.aspx)
+* [<span data-ttu-id="c61aa-269">Integrate REST API and Machine Learning</span><span class="sxs-lookup"><span data-stu-id="c61aa-269">Integrate REST API and Machine Learning</span></span>](stream-analytics-how-to-configure-azure-machine-learning-endpoints-in-stream-analytics.md)
+* [<span data-ttu-id="c61aa-270">Azure Stream Analytics Management REST API Reference</span><span class="sxs-lookup"><span data-stu-id="c61aa-270">Azure Stream Analytics Management REST API Reference</span></span>](https://msdn.microsoft.com/library/azure/dn835031.aspx)
 
 
 

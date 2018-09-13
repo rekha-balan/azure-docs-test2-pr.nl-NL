@@ -1,10 +1,10 @@
 ---
-title: Convert a Linux VM in Azure from unmanaged to managed disks | Microsoft Docs
-description: How to convert a VM from unmanaged disks to Azure managed disks using the Azure CLI 2.0
+title: Convert a Linux virtual machine in Azure from unmanaged disks to managed disks - Azure Managed Disks  | Microsoft Docs
+description: How to convert a Linux VM from unmanaged disks to managed disks by using Azure CLI 2.0 in the Resource Manager deployment model
 services: virtual-machines-linux
 documentationcenter: ''
-author: iainfoulds
-manager: timlt
+author: roygara
+manager: jeconnoc
 editor: ''
 tags: azure-resource-manager
 ms.assetid: ''
@@ -13,89 +13,89 @@ ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
 ms.devlang: azurecli
 ms.topic: article
-ms.date: 02/09/2017
-ms.author: iainfou
-ms.openlocfilehash: 1174a3f4295b272b0a0fb5c6b790bb59b53ff63a
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 12/15/2017
+ms.author: rogarana
+ms.openlocfilehash: 8a7abc7d3a209f036862233c8f38fcac7cfc26f5
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44564667"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44788910"
 ---
-# <a name="how-to-convert-a-linux-vm-from-unmanaged-disks-to-azure-managed-disks"></a><span data-ttu-id="dbebd-103">How to convert a Linux VM from unmanaged disks to Azure Managed Disks</span><span class="sxs-lookup"><span data-stu-id="dbebd-103">How to convert a Linux VM from unmanaged disks to Azure Managed Disks</span></span>
+# <a name="convert-a-linux-virtual-machine-from-unmanaged-disks-to-managed-disks"></a><span data-ttu-id="ad3f4-103">Convert a Linux virtual machine from unmanaged disks to managed disks</span><span class="sxs-lookup"><span data-stu-id="ad3f4-103">Convert a Linux virtual machine from unmanaged disks to managed disks</span></span>
 
-<span data-ttu-id="dbebd-104">If you have existing Linux VMs in Azure that use unmanaged disks in storage accounts and you want those VMs to be able to take advantage of managed disks, you can convert the VMs.</span><span class="sxs-lookup"><span data-stu-id="dbebd-104">If you have existing Linux VMs in Azure that use unmanaged disks in storage accounts and you want those VMs to be able to take advantage of managed disks, you can convert the VMs.</span></span> <span data-ttu-id="dbebd-105">This process converts both the OS disk and any attached data disks.</span><span class="sxs-lookup"><span data-stu-id="dbebd-105">This process converts both the OS disk and any attached data disks.</span></span> <span data-ttu-id="dbebd-106">The conversion process requires a restart of the VM, so schedule the migration of your VMs during a pre-existing maintenance window.</span><span class="sxs-lookup"><span data-stu-id="dbebd-106">The conversion process requires a restart of the VM, so schedule the migration of your VMs during a pre-existing maintenance window.</span></span> <span data-ttu-id="dbebd-107">The migration process is not reversible.</span><span class="sxs-lookup"><span data-stu-id="dbebd-107">The migration process is not reversible.</span></span> <span data-ttu-id="dbebd-108">Be sure to test the migration process by migrating a test virtual machine before performing the migration in production.</span><span class="sxs-lookup"><span data-stu-id="dbebd-108">Be sure to test the migration process by migrating a test virtual machine before performing the migration in production.</span></span>
+<span data-ttu-id="ad3f4-104">If you have existing Linux virtual machines (VMs) that use unmanaged disks, you can convert the VMs to use [Azure Managed Disks](../linux/managed-disks-overview.md).</span><span class="sxs-lookup"><span data-stu-id="ad3f4-104">If you have existing Linux virtual machines (VMs) that use unmanaged disks, you can convert the VMs to use [Azure Managed Disks](../linux/managed-disks-overview.md).</span></span> <span data-ttu-id="ad3f4-105">This process converts both the OS disk and any attached data disks.</span><span class="sxs-lookup"><span data-stu-id="ad3f4-105">This process converts both the OS disk and any attached data disks.</span></span>
 
-> [!IMPORTANT]
-> <span data-ttu-id="dbebd-109">During the conversion, you deallocate the VM.</span><span class="sxs-lookup"><span data-stu-id="dbebd-109">During the conversion, you deallocate the VM.</span></span> <span data-ttu-id="dbebd-110">The VM receives a new IP address when it is started after the conversion.</span><span class="sxs-lookup"><span data-stu-id="dbebd-110">The VM receives a new IP address when it is started after the conversion.</span></span> <span data-ttu-id="dbebd-111">If you have a dependency on a fixed IP, use a reserved IP.</span><span class="sxs-lookup"><span data-stu-id="dbebd-111">If you have a dependency on a fixed IP, use a reserved IP.</span></span>
+<span data-ttu-id="ad3f4-106">This article shows you how to convert VMs by using the Azure CLI.</span><span class="sxs-lookup"><span data-stu-id="ad3f4-106">This article shows you how to convert VMs by using the Azure CLI.</span></span> <span data-ttu-id="ad3f4-107">If you need to install or upgrade it, see [Install Azure CLI 2.0](/cli/azure/install-azure-cli).</span><span class="sxs-lookup"><span data-stu-id="ad3f4-107">If you need to install or upgrade it, see [Install Azure CLI 2.0](/cli/azure/install-azure-cli).</span></span> 
 
-<span data-ttu-id="dbebd-112">You cannot convert an unmanaged disk into a managed disk if the unmanaged disk is in a storage account that is, or at any time has been, encrypted using [Azure Storage Service Encryption (SSE)](../../storage/storage-service-encryption.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).</span><span class="sxs-lookup"><span data-stu-id="dbebd-112">You cannot convert an unmanaged disk into a managed disk if the unmanaged disk is in a storage account that is, or at any time has been, encrypted using [Azure Storage Service Encryption (SSE)](../../storage/storage-service-encryption.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).</span></span> <span data-ttu-id="dbebd-113">The following steps detail how to convert unmanaged disks that are, or have been, in an encrypted storage account:</span><span class="sxs-lookup"><span data-stu-id="dbebd-113">The following steps detail how to convert unmanaged disks that are, or have been, in an encrypted storage account:</span></span>
+## <a name="before-you-begin"></a><span data-ttu-id="ad3f4-108">Before you begin</span><span class="sxs-lookup"><span data-stu-id="ad3f4-108">Before you begin</span></span>
+* <span data-ttu-id="ad3f4-109">Review [the FAQ about migration to Managed Disks](faq-for-disks.md#migrate-to-managed-disks).</span><span class="sxs-lookup"><span data-stu-id="ad3f4-109">Review [the FAQ about migration to Managed Disks](faq-for-disks.md#migrate-to-managed-disks).</span></span>
 
-- <span data-ttu-id="dbebd-114">Copy the virtual hard disk (VHD) with [az storage blob copy start](/cli/azure/storage/blob/copy#start) to a storage account that has never been enabled for Azure Storage Service Encryption.</span><span class="sxs-lookup"><span data-stu-id="dbebd-114">Copy the virtual hard disk (VHD) with [az storage blob copy start](/cli/azure/storage/blob/copy#start) to a storage account that has never been enabled for Azure Storage Service Encryption.</span></span>
-- <span data-ttu-id="dbebd-115">Create a VM that uses managed disks and specify that VHD file during creation with [az vm create](/cli/azure/vm#create), or</span><span class="sxs-lookup"><span data-stu-id="dbebd-115">Create a VM that uses managed disks and specify that VHD file during creation with [az vm create](/cli/azure/vm#create), or</span></span>
-- <span data-ttu-id="dbebd-116">Attach the copied VHD with [az vm disk attach](/cli/azure/vm/disk#attach) to a running VM with managed disks.</span><span class="sxs-lookup"><span data-stu-id="dbebd-116">Attach the copied VHD with [az vm disk attach](/cli/azure/vm/disk#attach) to a running VM with managed disks.</span></span>
+[!INCLUDE [virtual-machines-common-convert-disks-considerations](../../../includes/virtual-machines-common-convert-disks-considerations.md)]
 
-## <a name="convert-vm-to-azure-managed-disks"></a><span data-ttu-id="dbebd-117">Convert VM to Azure Managed Disks</span><span class="sxs-lookup"><span data-stu-id="dbebd-117">Convert VM to Azure Managed Disks</span></span>
-<span data-ttu-id="dbebd-118">This section covers how to convert your existing Azure VMs from unmanaged disks to managed disks.</span><span class="sxs-lookup"><span data-stu-id="dbebd-118">This section covers how to convert your existing Azure VMs from unmanaged disks to managed disks.</span></span> <span data-ttu-id="dbebd-119">You can use this process to convert from Premium (SDD) unmanaged disks to Premium managed disks, or from standard (HDD) unmanaged disks to standard managed disks.</span><span class="sxs-lookup"><span data-stu-id="dbebd-119">You can use this process to convert from Premium (SDD) unmanaged disks to Premium managed disks, or from standard (HDD) unmanaged disks to standard managed disks.</span></span>
 
-> [!IMPORTANT]
-> <span data-ttu-id="dbebd-120">After performing the following procedure, there is a single block blob that remains in the default vhds container.</span><span class="sxs-lookup"><span data-stu-id="dbebd-120">After performing the following procedure, there is a single block blob that remains in the default vhds container.</span></span> <span data-ttu-id="dbebd-121">The name of the file is “VMName.xxxxxxx.status”.</span><span class="sxs-lookup"><span data-stu-id="dbebd-121">The name of the file is “VMName.xxxxxxx.status”.</span></span> <span data-ttu-id="dbebd-122">Do not delete this remaining status object.</span><span class="sxs-lookup"><span data-stu-id="dbebd-122">Do not delete this remaining status object.</span></span> <span data-ttu-id="dbebd-123">Future work should address this issue.</span><span class="sxs-lookup"><span data-stu-id="dbebd-123">Future work should address this issue.</span></span>
+## <a name="convert-single-instance-vms"></a><span data-ttu-id="ad3f4-110">Convert single-instance VMs</span><span class="sxs-lookup"><span data-stu-id="ad3f4-110">Convert single-instance VMs</span></span>
+<span data-ttu-id="ad3f4-111">This section covers how to convert single-instance Azure VMs from unmanaged disks to managed disks.</span><span class="sxs-lookup"><span data-stu-id="ad3f4-111">This section covers how to convert single-instance Azure VMs from unmanaged disks to managed disks.</span></span> <span data-ttu-id="ad3f4-112">(If your VMs are in an availability set, see the next section.) You can use this process to convert the VMs from premium (SSD) unmanaged disks to premium managed disks, or from standard (HDD) unmanaged disks to standard managed disks.</span><span class="sxs-lookup"><span data-stu-id="ad3f4-112">(If your VMs are in an availability set, see the next section.) You can use this process to convert the VMs from premium (SSD) unmanaged disks to premium managed disks, or from standard (HDD) unmanaged disks to standard managed disks.</span></span>
 
-1. <span data-ttu-id="dbebd-124">Deallocate the VM with [az vm deallocate](/cli/azure/vm#deallocate).</span><span class="sxs-lookup"><span data-stu-id="dbebd-124">Deallocate the VM with [az vm deallocate](/cli/azure/vm#deallocate).</span></span> <span data-ttu-id="dbebd-125">The following example deallocates the VM named `myVM` in the resource group named `myResourceGroup`:</span><span class="sxs-lookup"><span data-stu-id="dbebd-125">The following example deallocates the VM named `myVM` in the resource group named `myResourceGroup`:</span></span>
+1. <span data-ttu-id="ad3f4-113">Deallocate the VM by using [az vm deallocate](/cli/azure/vm#az_vm_deallocate).</span><span class="sxs-lookup"><span data-stu-id="ad3f4-113">Deallocate the VM by using [az vm deallocate](/cli/azure/vm#az_vm_deallocate).</span></span> <span data-ttu-id="ad3f4-114">The following example deallocates the VM named `myVM` in the resource group named `myResourceGroup`:</span><span class="sxs-lookup"><span data-stu-id="ad3f4-114">The following example deallocates the VM named `myVM` in the resource group named `myResourceGroup`:</span></span>
 
     ```azurecli
     az vm deallocate --resource-group myResourceGroup --name myVM
     ```
 
-2. <span data-ttu-id="dbebd-126">Convert the VM to managed disks with [az vm convert](/cli/azure/vm#convert).</span><span class="sxs-lookup"><span data-stu-id="dbebd-126">Convert the VM to managed disks with [az vm convert](/cli/azure/vm#convert).</span></span> <span data-ttu-id="dbebd-127">The following process converts the VM named `myVM` including the OS disk and any data disks:</span><span class="sxs-lookup"><span data-stu-id="dbebd-127">The following process converts the VM named `myVM` including the OS disk and any data disks:</span></span>
+2. <span data-ttu-id="ad3f4-115">Convert the VM to managed disks by using [az vm convert](/cli/azure/vm#az_vm_convert).</span><span class="sxs-lookup"><span data-stu-id="ad3f4-115">Convert the VM to managed disks by using [az vm convert](/cli/azure/vm#az_vm_convert).</span></span> <span data-ttu-id="ad3f4-116">The following process converts the VM named `myVM`, including the OS disk and any data disks:</span><span class="sxs-lookup"><span data-stu-id="ad3f4-116">The following process converts the VM named `myVM`, including the OS disk and any data disks:</span></span>
 
     ```azurecli
     az vm convert --resource-group myResourceGroup --name myVM
     ```
 
-3. <span data-ttu-id="dbebd-128">Start the VM after the conversion to managed disks with [az vm start](/cli/azure/vm#start).</span><span class="sxs-lookup"><span data-stu-id="dbebd-128">Start the VM after the conversion to managed disks with [az vm start](/cli/azure/vm#start).</span></span> <span data-ttu-id="dbebd-129">The following example starts the VM named `myVM` in the resource group named `myResourceGroup`.</span><span class="sxs-lookup"><span data-stu-id="dbebd-129">The following example starts the VM named `myVM` in the resource group named `myResourceGroup`.</span></span>
+3. <span data-ttu-id="ad3f4-117">Start the VM after the conversion to managed disks by using [az vm start](/cli/azure/vm#az_vm_start).</span><span class="sxs-lookup"><span data-stu-id="ad3f4-117">Start the VM after the conversion to managed disks by using [az vm start](/cli/azure/vm#az_vm_start).</span></span> <span data-ttu-id="ad3f4-118">The following example starts the VM named `myVM` in the resource group named `myResourceGroup`.</span><span class="sxs-lookup"><span data-stu-id="ad3f4-118">The following example starts the VM named `myVM` in the resource group named `myResourceGroup`.</span></span>
 
     ```azurecli
     az vm start --resource-group myResourceGroup --name myVM
     ```
 
-## <a name="convert-vm-in-an-availability-set-to-managed-disks"></a><span data-ttu-id="dbebd-130">Convert VM in an availability set to managed disks</span><span class="sxs-lookup"><span data-stu-id="dbebd-130">Convert VM in an availability set to managed disks</span></span>
+## <a name="convert-vms-in-an-availability-set"></a><span data-ttu-id="ad3f4-119">Convert VMs in an availability set</span><span class="sxs-lookup"><span data-stu-id="ad3f4-119">Convert VMs in an availability set</span></span>
 
-<span data-ttu-id="dbebd-131">If the VMs that you want to convert to managed disks are in an availability set, you first need to convert the availability set to a managed availability set.</span><span class="sxs-lookup"><span data-stu-id="dbebd-131">If the VMs that you want to convert to managed disks are in an availability set, you first need to convert the availability set to a managed availability set.</span></span>
+<span data-ttu-id="ad3f4-120">If the VMs that you want to convert to managed disks are in an availability set, you first need to convert the availability set to a managed availability set.</span><span class="sxs-lookup"><span data-stu-id="ad3f4-120">If the VMs that you want to convert to managed disks are in an availability set, you first need to convert the availability set to a managed availability set.</span></span>
 
-<span data-ttu-id="dbebd-132">All VMs in the availability set must be deallocated before you convert the availability set.</span><span class="sxs-lookup"><span data-stu-id="dbebd-132">All VMs in the availability set must be deallocated before you convert the availability set.</span></span> <span data-ttu-id="dbebd-133">Plan to convert all VMs to managed disks once the availability itself has been converted to a managed availability set.</span><span class="sxs-lookup"><span data-stu-id="dbebd-133">Plan to convert all VMs to managed disks once the availability itself has been converted to a managed availability set.</span></span> <span data-ttu-id="dbebd-134">You can then start all the VMs and continue operating as normal.</span><span class="sxs-lookup"><span data-stu-id="dbebd-134">You can then start all the VMs and continue operating as normal.</span></span>
+<span data-ttu-id="ad3f4-121">All VMs in the availability set must be deallocated before you convert the availability set.</span><span class="sxs-lookup"><span data-stu-id="ad3f4-121">All VMs in the availability set must be deallocated before you convert the availability set.</span></span> <span data-ttu-id="ad3f4-122">Plan to convert all VMs to managed disks after the availability set itself has been converted to a managed availability set.</span><span class="sxs-lookup"><span data-stu-id="ad3f4-122">Plan to convert all VMs to managed disks after the availability set itself has been converted to a managed availability set.</span></span> <span data-ttu-id="ad3f4-123">Then, start all the VMs and continue operating as normal.</span><span class="sxs-lookup"><span data-stu-id="ad3f4-123">Then, start all the VMs and continue operating as normal.</span></span>
 
-1. <span data-ttu-id="dbebd-135">List all VMs in an availability set with [az vm availability-set list](/cli/azure/vm/availability-set#list).</span><span class="sxs-lookup"><span data-stu-id="dbebd-135">List all VMs in an availability set with [az vm availability-set list](/cli/azure/vm/availability-set#list).</span></span> <span data-ttu-id="dbebd-136">The following example lists all VMs in the availability set named `myAvailabilitySet` in the resource group named `myResourceGroup`:</span><span class="sxs-lookup"><span data-stu-id="dbebd-136">The following example lists all VMs in the availability set named `myAvailabilitySet` in the resource group named `myResourceGroup`:</span></span>
+1. <span data-ttu-id="ad3f4-124">List all VMs in an availability set by using [az vm availability-set list](/cli/azure/vm/availability-set#az_vm_availability_set_list).</span><span class="sxs-lookup"><span data-stu-id="ad3f4-124">List all VMs in an availability set by using [az vm availability-set list](/cli/azure/vm/availability-set#az_vm_availability_set_list).</span></span> <span data-ttu-id="ad3f4-125">The following example lists all VMs in the availability set named `myAvailabilitySet` in the resource group named `myResourceGroup`:</span><span class="sxs-lookup"><span data-stu-id="ad3f4-125">The following example lists all VMs in the availability set named `myAvailabilitySet` in the resource group named `myResourceGroup`:</span></span>
 
     ```azurecli
-    az vm availability-set show --resource-group myResourceGroup \
-        --name myAvailabilitySet --query [virtualMachines[*].id] --output table
+    az vm availability-set show \
+        --resource-group myResourceGroup \
+        --name myAvailabilitySet \
+        --query [virtualMachines[*].id] \
+        --output table
     ```
 
-2. <span data-ttu-id="dbebd-137">Deallocate all the VMs with [az vm deallocate](/cli/azure/vm#deallocate).</span><span class="sxs-lookup"><span data-stu-id="dbebd-137">Deallocate all the VMs with [az vm deallocate](/cli/azure/vm#deallocate).</span></span> <span data-ttu-id="dbebd-138">The following example deallocates the VM named `myVM` in the resource group named `myResourceGroup`:</span><span class="sxs-lookup"><span data-stu-id="dbebd-138">The following example deallocates the VM named `myVM` in the resource group named `myResourceGroup`:</span></span>
+2. <span data-ttu-id="ad3f4-126">Deallocate all the VMs by using [az vm deallocate](/cli/azure/vm#az_vm_deallocate).</span><span class="sxs-lookup"><span data-stu-id="ad3f4-126">Deallocate all the VMs by using [az vm deallocate](/cli/azure/vm#az_vm_deallocate).</span></span> <span data-ttu-id="ad3f4-127">The following example deallocates the VM named `myVM` in the resource group named `myResourceGroup`:</span><span class="sxs-lookup"><span data-stu-id="ad3f4-127">The following example deallocates the VM named `myVM` in the resource group named `myResourceGroup`:</span></span>
 
     ```azurecli
     az vm deallocate --resource-group myResourceGroup --name myVM
     ```
 
-3. <span data-ttu-id="dbebd-139">Convert the availability set with [az vm availability-set convert](/cli/azure/vm/availability-set#convert).</span><span class="sxs-lookup"><span data-stu-id="dbebd-139">Convert the availability set with [az vm availability-set convert](/cli/azure/vm/availability-set#convert).</span></span> <span data-ttu-id="dbebd-140">The following example converts the availability set named `myAvailabilitySet` in the resource group named `myResourceGroup`:</span><span class="sxs-lookup"><span data-stu-id="dbebd-140">The following example converts the availability set named `myAvailabilitySet` in the resource group named `myResourceGroup`:</span></span>
+3. <span data-ttu-id="ad3f4-128">Convert the availability set by using [az vm availability-set convert](/cli/azure/vm/availability-set#az_vm_availability_set_convert).</span><span class="sxs-lookup"><span data-stu-id="ad3f4-128">Convert the availability set by using [az vm availability-set convert](/cli/azure/vm/availability-set#az_vm_availability_set_convert).</span></span> <span data-ttu-id="ad3f4-129">The following example converts the availability set named `myAvailabilitySet` in the resource group named `myResourceGroup`:</span><span class="sxs-lookup"><span data-stu-id="ad3f4-129">The following example converts the availability set named `myAvailabilitySet` in the resource group named `myResourceGroup`:</span></span>
 
     ```azurecli
-    az vm availability-set convert --resource-group myResourceGroup \
+    az vm availability-set convert \
+        --resource-group myResourceGroup \
         --name myAvailabilitySet
     ```
 
-4. <span data-ttu-id="dbebd-141">Convert all the VMs to managed disks with [az vm convert](/cli/azure/vm#convert).</span><span class="sxs-lookup"><span data-stu-id="dbebd-141">Convert all the VMs to managed disks with [az vm convert](/cli/azure/vm#convert).</span></span> <span data-ttu-id="dbebd-142">The following process converts the VM named `myVM` including the OS disk and any data disks:</span><span class="sxs-lookup"><span data-stu-id="dbebd-142">The following process converts the VM named `myVM` including the OS disk and any data disks:</span></span>
+4. <span data-ttu-id="ad3f4-130">Convert all the VMs to managed disks by using [az vm convert](/cli/azure/vm#az_vm_convert).</span><span class="sxs-lookup"><span data-stu-id="ad3f4-130">Convert all the VMs to managed disks by using [az vm convert](/cli/azure/vm#az_vm_convert).</span></span> <span data-ttu-id="ad3f4-131">The following process converts the VM named `myVM`, including the OS disk and any data disks:</span><span class="sxs-lookup"><span data-stu-id="ad3f4-131">The following process converts the VM named `myVM`, including the OS disk and any data disks:</span></span>
 
     ```azurecli
     az vm convert --resource-group myResourceGroup --name myVM
     ```
 
-5. <span data-ttu-id="dbebd-143">Start all the VMs after the conversion to managed disks with [az vm start](/cli/azure/vm#start).</span><span class="sxs-lookup"><span data-stu-id="dbebd-143">Start all the VMs after the conversion to managed disks with [az vm start](/cli/azure/vm#start).</span></span> <span data-ttu-id="dbebd-144">The following example starts the VM named `myVM` in the resource group named `myResourceGroup`.</span><span class="sxs-lookup"><span data-stu-id="dbebd-144">The following example starts the VM named `myVM` in the resource group named `myResourceGroup`.</span></span>
+5. <span data-ttu-id="ad3f4-132">Start all the VMs after the conversion to managed disks by using [az vm start](/cli/azure/vm#az_vm_start).</span><span class="sxs-lookup"><span data-stu-id="ad3f4-132">Start all the VMs after the conversion to managed disks by using [az vm start](/cli/azure/vm#az_vm_start).</span></span> <span data-ttu-id="ad3f4-133">The following example starts the VM named `myVM` in the resource group named `myResourceGroup`:</span><span class="sxs-lookup"><span data-stu-id="ad3f4-133">The following example starts the VM named `myVM` in the resource group named `myResourceGroup`:</span></span>
 
     ```azurecli
     az vm start --resource-group myResourceGroup --name myVM
     ```
 
-## <a name="next-steps"></a><span data-ttu-id="dbebd-145">Next steps</span><span class="sxs-lookup"><span data-stu-id="dbebd-145">Next steps</span></span>
-<span data-ttu-id="dbebd-146">For more information about storage options, see [Azure Managed Disks overview](../../storage/storage-managed-disks-overview.md)</span><span class="sxs-lookup"><span data-stu-id="dbebd-146">For more information about storage options, see [Azure Managed Disks overview](../../storage/storage-managed-disks-overview.md)</span></span>
+## <a name="next-steps"></a><span data-ttu-id="ad3f4-134">Next steps</span><span class="sxs-lookup"><span data-stu-id="ad3f4-134">Next steps</span></span>
+<span data-ttu-id="ad3f4-135">For more information about storage options, see [Azure Managed Disks overview](../windows/managed-disks-overview.md).</span><span class="sxs-lookup"><span data-stu-id="ad3f4-135">For more information about storage options, see [Azure Managed Disks overview](../windows/managed-disks-overview.md).</span></span>

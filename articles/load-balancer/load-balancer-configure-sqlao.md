@@ -1,9 +1,9 @@
 ---
-title: Configure Load balancer for SQL always on | Microsoft Docs
-description: Configure Load balancer to work with SQL always on and how to leverage powershell to create load balancer for the SQL implementation
+title: Configure Load Balancer for SQL Server Always On | Microsoft Docs
+description: Configure Load Balancer to work with SQL Server Always On, and learn how to use PowerShell to create a load balancer for the SQL Server implementation
 services: load-balancer
 documentationcenter: na
-author: kumudd
+author: KumudD
 manager: timlt
 ms.assetid: d7bc3790-47d3-4e95-887c-c533011e4afd
 ms.service: load-balancer
@@ -11,41 +11,41 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 10/24/2016
+ms.date: 09/25/2017
 ms.author: kumud
-ms.openlocfilehash: 8d126181d91a79f447e8313cc82a335a5b94710e
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: a0c2345b47b9103ac6a7ae998f13a12332e3907e
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44553996"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44797672"
 ---
-# <a name="configure-load-balancer-for-sql-always-on"></a><span data-ttu-id="3c9c4-103">Configure load balancer for SQL always on</span><span class="sxs-lookup"><span data-stu-id="3c9c4-103">Configure load balancer for SQL always on</span></span>
+# <a name="configure-a-load-balancer-for-sql-server-always-on"></a><span data-ttu-id="cc6c0-103">Configure a load balancer for SQL Server Always On</span><span class="sxs-lookup"><span data-stu-id="cc6c0-103">Configure a load balancer for SQL Server Always On</span></span>
 
-<span data-ttu-id="3c9c4-104">SQL Server AlwaysOn Availability Groups can now be run with ILB.</span><span class="sxs-lookup"><span data-stu-id="3c9c4-104">SQL Server AlwaysOn Availability Groups can now be run with ILB.</span></span> <span data-ttu-id="3c9c4-105">Availability Group is SQL Server's flagship solution for high availability and disaster recovery.</span><span class="sxs-lookup"><span data-stu-id="3c9c4-105">Availability Group is SQL Server's flagship solution for high availability and disaster recovery.</span></span> <span data-ttu-id="3c9c4-106">The Availability Group Listener allows client applications to seamlessly connect to the primary replica, irrespective of the number of the replicas in the configuration.</span><span class="sxs-lookup"><span data-stu-id="3c9c4-106">The Availability Group Listener allows client applications to seamlessly connect to the primary replica, irrespective of the number of the replicas in the configuration.</span></span>
 
-<span data-ttu-id="3c9c4-107">The listener (DNS) name is mapped to a load-balanced IP address and Azure's load balancer directs the incoming traffic to only the primary server in the replica set.</span><span class="sxs-lookup"><span data-stu-id="3c9c4-107">The listener (DNS) name is mapped to a load-balanced IP address and Azure's load balancer directs the incoming traffic to only the primary server in the replica set.</span></span>
 
-<span data-ttu-id="3c9c4-108">You can use ILB support for SQL Server AlwaysOn (listener) endpoints.</span><span class="sxs-lookup"><span data-stu-id="3c9c4-108">You can use ILB support for SQL Server AlwaysOn (listener) endpoints.</span></span> <span data-ttu-id="3c9c4-109">You now have control over the accessibility of the listener and can choose the load-balanced IP address from a specific subnet in your Virtual Network (VNet).</span><span class="sxs-lookup"><span data-stu-id="3c9c4-109">You now have control over the accessibility of the listener and can choose the load-balanced IP address from a specific subnet in your Virtual Network (VNet).</span></span>
+<span data-ttu-id="cc6c0-104">SQL Server Always On availability groups now can run with an internal load balancer.</span><span class="sxs-lookup"><span data-stu-id="cc6c0-104">SQL Server Always On availability groups now can run with an internal load balancer.</span></span> <span data-ttu-id="cc6c0-105">An availability group is SQL Server's flagship solution for high availability and disaster recovery.</span><span class="sxs-lookup"><span data-stu-id="cc6c0-105">An availability group is SQL Server's flagship solution for high availability and disaster recovery.</span></span> <span data-ttu-id="cc6c0-106">The availability group listener allows client applications to seamlessly connect to the primary replica, irrespective of the number of replicas in the configuration.</span><span class="sxs-lookup"><span data-stu-id="cc6c0-106">The availability group listener allows client applications to seamlessly connect to the primary replica, irrespective of the number of replicas in the configuration.</span></span>
 
-<span data-ttu-id="3c9c4-110">By using ILB on the listener, the SQL server endpoint (e.g. Server=tcp:ListenerName,1433;Database=DatabaseName) is accessible only by:</span><span class="sxs-lookup"><span data-stu-id="3c9c4-110">By using ILB on the listener, the SQL server endpoint (e.g. Server=tcp:ListenerName,1433;Database=DatabaseName) is accessible only by:</span></span>
+<span data-ttu-id="cc6c0-107">The listener (DNS) name is mapped to a load-balanced IP address.</span><span class="sxs-lookup"><span data-stu-id="cc6c0-107">The listener (DNS) name is mapped to a load-balanced IP address.</span></span> <span data-ttu-id="cc6c0-108">Azure Load Balancer directs the incoming traffic to only the primary server in the replica set.</span><span class="sxs-lookup"><span data-stu-id="cc6c0-108">Azure Load Balancer directs the incoming traffic to only the primary server in the replica set.</span></span>
 
-* <span data-ttu-id="3c9c4-111">Services and VMs in the same Virtual network</span><span class="sxs-lookup"><span data-stu-id="3c9c4-111">Services and VMs in the same Virtual network</span></span>
-* <span data-ttu-id="3c9c4-112">Services and VMs from connected on-premises network</span><span class="sxs-lookup"><span data-stu-id="3c9c4-112">Services and VMs from connected on-premises network</span></span>
-* <span data-ttu-id="3c9c4-113">Services and VMs from interconnected VNets</span><span class="sxs-lookup"><span data-stu-id="3c9c4-113">Services and VMs from interconnected VNets</span></span>
+<span data-ttu-id="cc6c0-109">You can use internal load balancer support for SQL Server Always On (listener) endpoints.</span><span class="sxs-lookup"><span data-stu-id="cc6c0-109">You can use internal load balancer support for SQL Server Always On (listener) endpoints.</span></span> <span data-ttu-id="cc6c0-110">You now have control over the accessibility of the listener.</span><span class="sxs-lookup"><span data-stu-id="cc6c0-110">You now have control over the accessibility of the listener.</span></span> <span data-ttu-id="cc6c0-111">You can choose the load-balanced IP address from a specific subnet in your virtual network.</span><span class="sxs-lookup"><span data-stu-id="cc6c0-111">You can choose the load-balanced IP address from a specific subnet in your virtual network.</span></span>
 
-![ILB_SQLAO_NewPic](https://docstestmedia1.blob.core.windows.net/azure-media/articles/load-balancer/media/load-balancer-configure-sqlao/sqlao1.png)
+<span data-ttu-id="cc6c0-112">By using an internal load balancer on the listener, the SQL Server endpoint (for example, Server=tcp:ListenerName,1433;Database=DatabaseName) is accessible only by:</span><span class="sxs-lookup"><span data-stu-id="cc6c0-112">By using an internal load balancer on the listener, the SQL Server endpoint (for example, Server=tcp:ListenerName,1433;Database=DatabaseName) is accessible only by:</span></span>
 
-<span data-ttu-id="3c9c4-115">Figure 1 - SQL AlwaysOn configured with Internet-facing load balancer</span><span class="sxs-lookup"><span data-stu-id="3c9c4-115">Figure 1 - SQL AlwaysOn configured with Internet-facing load balancer</span></span>
+* <span data-ttu-id="cc6c0-113">Services and VMs in the same virtual network.</span><span class="sxs-lookup"><span data-stu-id="cc6c0-113">Services and VMs in the same virtual network.</span></span>
+* <span data-ttu-id="cc6c0-114">Services and VMs from connected on-premises networks.</span><span class="sxs-lookup"><span data-stu-id="cc6c0-114">Services and VMs from connected on-premises networks.</span></span>
+* <span data-ttu-id="cc6c0-115">Services and VMs from interconnected virtual networks.</span><span class="sxs-lookup"><span data-stu-id="cc6c0-115">Services and VMs from interconnected virtual networks.</span></span>
 
-## <a name="add-internal-load-balancer-to-the-service"></a><span data-ttu-id="3c9c4-116">Add Internal Load Balancer to the service</span><span class="sxs-lookup"><span data-stu-id="3c9c4-116">Add Internal Load Balancer to the service</span></span>
+![Internal load balancer SQL Server Always On](./media/load-balancer-configure-sqlao/sqlao1.png)
 
-1. <span data-ttu-id="3c9c4-117">In the following example, we will configure a Virtual network that contains a subnet  called 'Subnet-1':</span><span class="sxs-lookup"><span data-stu-id="3c9c4-117">In the following example, we will configure a Virtual network that contains a subnet  called 'Subnet-1':</span></span>
+## <a name="add-an-internal-load-balancer-to-the-service"></a><span data-ttu-id="cc6c0-117">Add an internal load balancer to the service</span><span class="sxs-lookup"><span data-stu-id="cc6c0-117">Add an internal load balancer to the service</span></span>
+
+1. <span data-ttu-id="cc6c0-118">In the following example, you configure a virtual network that contains a subnet called 'Subnet-1':</span><span class="sxs-lookup"><span data-stu-id="cc6c0-118">In the following example, you configure a virtual network that contains a subnet called 'Subnet-1':</span></span>
 
     ```powershell
     Add-AzureInternalLoadBalancer -InternalLoadBalancerName ILB_SQL_AO -SubnetName Subnet-1 -ServiceName SqlSvc
     ```
-2. <span data-ttu-id="3c9c4-118">Add load balanced endpoints for ILB on each VM</span><span class="sxs-lookup"><span data-stu-id="3c9c4-118">Add load balanced endpoints for ILB on each VM</span></span>
+2. <span data-ttu-id="cc6c0-119">Add load-balanced endpoints for an internal load balancer on each VM.</span><span class="sxs-lookup"><span data-stu-id="cc6c0-119">Add load-balanced endpoints for an internal load balancer on each VM.</span></span>
 
     ```powershell
     Get-AzureVM -ServiceName SqlSvc -Name sqlsvc1 | Add-AzureEndpoint -Name "LisEUep" -LBSetName "ILBSet1" -Protocol tcp -LocalPort 1433 -PublicPort 1433 -ProbePort 59999 -ProbeProtocol tcp -ProbeIntervalInSeconds 10 -
@@ -54,16 +54,12 @@ ms.locfileid: "44553996"
     Get-AzureVM -ServiceName SqlSvc -Name sqlsvc2 | Add-AzureEndpoint -Name "LisEUep" -LBSetName "ILBSet1" -Protocol tcp -LocalPort 1433 -PublicPort 1433 -ProbePort 59999 -ProbeProtocol tcp -ProbeIntervalInSeconds 10 -DirectServerReturn $true -InternalLoadBalancerName ILB_SQL_AO | Update-AzureVM
     ```
 
-    <span data-ttu-id="3c9c4-119">In the example above, you have 2 VM's called "sqlsvc1" and "sqlsvc2" running in the cloud service "Sqlsvc".</span><span class="sxs-lookup"><span data-stu-id="3c9c4-119">In the example above, you have 2 VM's called "sqlsvc1" and "sqlsvc2" running in the cloud service "Sqlsvc".</span></span> <span data-ttu-id="3c9c4-120">After creating the ILB with `DirectServerReturn` switch, you add load balanced endpoints to the ILB to allow SQL to configure the listeners for the availability groups.</span><span class="sxs-lookup"><span data-stu-id="3c9c4-120">After creating the ILB with `DirectServerReturn` switch, you add load balanced endpoints to the ILB to allow SQL to configure the listeners for the availability groups.</span></span>
+    <span data-ttu-id="cc6c0-120">In the previous example, you have two VMs called "sqlsvc1" and "sqlsvc2" that run in the cloud service "Sqlsvc".</span><span class="sxs-lookup"><span data-stu-id="cc6c0-120">In the previous example, you have two VMs called "sqlsvc1" and "sqlsvc2" that run in the cloud service "Sqlsvc".</span></span> <span data-ttu-id="cc6c0-121">After you create the internal load balancer with the `DirectServerReturn` switch, you add load-balanced endpoints to the internal load balancer.</span><span class="sxs-lookup"><span data-stu-id="cc6c0-121">After you create the internal load balancer with the `DirectServerReturn` switch, you add load-balanced endpoints to the internal load balancer.</span></span> <span data-ttu-id="cc6c0-122">The load-balanced endpoints allow SQL Server to configure the listeners for the availability groups.</span><span class="sxs-lookup"><span data-stu-id="cc6c0-122">The load-balanced endpoints allow SQL Server to configure the listeners for the availability groups.</span></span>
 
-<span data-ttu-id="3c9c4-121">For more information about SQL AlwaysOn, see [Configure an internal load balancer for an AlwaysOn availability group in Azure](../virtual-machines/windows/sql/virtual-machines-windows-portal-sql-alwayson-int-listener.md).</span><span class="sxs-lookup"><span data-stu-id="3c9c4-121">For more information about SQL AlwaysOn, see [Configure an internal load balancer for an AlwaysOn availability group in Azure](../virtual-machines/windows/sql/virtual-machines-windows-portal-sql-alwayson-int-listener.md).</span></span>
+<span data-ttu-id="cc6c0-123">For more information about SQL Server Always On, see [Configure an internal load balancer for an Always On availability group in Azure](../virtual-machines/windows/sql/virtual-machines-windows-portal-sql-alwayson-int-listener.md).</span><span class="sxs-lookup"><span data-stu-id="cc6c0-123">For more information about SQL Server Always On, see [Configure an internal load balancer for an Always On availability group in Azure](../virtual-machines/windows/sql/virtual-machines-windows-portal-sql-alwayson-int-listener.md).</span></span>
 
-## <a name="see-also"></a><span data-ttu-id="3c9c4-122">See Also</span><span class="sxs-lookup"><span data-stu-id="3c9c4-122">See Also</span></span>
-[<span data-ttu-id="3c9c4-123">Get started configuring an Internet facing load balancer</span><span class="sxs-lookup"><span data-stu-id="3c9c4-123">Get started configuring an Internet facing load balancer</span></span>](load-balancer-get-started-internet-arm-ps.md)
-
-[<span data-ttu-id="3c9c4-124">Get started configuring an Internal load balancer</span><span class="sxs-lookup"><span data-stu-id="3c9c4-124">Get started configuring an Internal load balancer</span></span>](load-balancer-get-started-ilb-arm-ps.md)
-
-[<span data-ttu-id="3c9c4-125">Configure a Load balancer distribution mode</span><span class="sxs-lookup"><span data-stu-id="3c9c4-125">Configure a Load balancer distribution mode</span></span>](load-balancer-distribution-mode.md)
-
-[<span data-ttu-id="3c9c4-126">Configure idle TCP timeout settings for your load balancer</span><span class="sxs-lookup"><span data-stu-id="3c9c4-126">Configure idle TCP timeout settings for your load balancer</span></span>](load-balancer-tcp-idle-timeout.md)
-
+## <a name="see-also"></a><span data-ttu-id="cc6c0-124">See also</span><span class="sxs-lookup"><span data-stu-id="cc6c0-124">See also</span></span>
+* [<span data-ttu-id="cc6c0-125">Get started configuring a public load balancer</span><span class="sxs-lookup"><span data-stu-id="cc6c0-125">Get started configuring a public load balancer</span></span>](load-balancer-get-started-internet-arm-ps.md)
+* [<span data-ttu-id="cc6c0-126">Get started configuring an internal load balancer</span><span class="sxs-lookup"><span data-stu-id="cc6c0-126">Get started configuring an internal load balancer</span></span>](load-balancer-get-started-ilb-arm-ps.md)
+* [<span data-ttu-id="cc6c0-127">Configure a load balancer distribution mode</span><span class="sxs-lookup"><span data-stu-id="cc6c0-127">Configure a load balancer distribution mode</span></span>](load-balancer-distribution-mode.md)
+* [<span data-ttu-id="cc6c0-128">Configure idle TCP timeout settings for your load balancer</span><span class="sxs-lookup"><span data-stu-id="cc6c0-128">Configure idle TCP timeout settings for your load balancer</span></span>](load-balancer-tcp-idle-timeout.md)

@@ -1,45 +1,58 @@
 ---
-title: Create a highly available app in Azure using Virtual Machine Scale Sets | Microsoft Docs
-description: Create and deploy a highly available application on Linux VMs using a virtual machine scale set and the Azure CLI.
+title: Tutorial - Create a virtual machine scale set for Linux in Azure | Microsoft Docs
+description: In this tutorial, you learn how to use the Azure CLI 2.0 to create and deploy a highly available application on Linux VMs using a virtual machine scale set
 services: virtual-machine-scale-sets
 documentationcenter: ''
-author: Thraka
-manager: timlt
+author: cynthn
+manager: jeconnoc
 editor: ''
-tags: ''
+tags: azure-resource-manager
 ms.assetid: ''
 ms.service: virtual-machine-scale-sets
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: na
 ms.devlang: azurecli
-ms.topic: article
-ms.date: 04/05/2017
-ms.author: adegeo
-ms.openlocfilehash: 0630debe6439e7e576a64bc1d4abc8005bda9414
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.topic: tutorial
+ms.date: 06/01/2018
+ms.author: cynthn
+ms.custom: mvc
+ms.openlocfilehash: b8e25934dfd1bfa9d94d3452044443e7a5002534
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44564453"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44773142"
 ---
-# <a name="create-a-highly-available-application-on-linux-with-virtual-machine-scale-sets"></a><span data-ttu-id="b6c19-103">Create a highly available application on Linux with Virtual Machine Scale Sets</span><span class="sxs-lookup"><span data-stu-id="b6c19-103">Create a highly available application on Linux with Virtual Machine Scale Sets</span></span>
-<span data-ttu-id="b6c19-104">This tutorial shows you how to create a highly available application in a virtual machine scale set.</span><span class="sxs-lookup"><span data-stu-id="b6c19-104">This tutorial shows you how to create a highly available application in a virtual machine scale set.</span></span> <span data-ttu-id="b6c19-105">You also learn how to automate the configuration of the virtual machines in the scale set.</span><span class="sxs-lookup"><span data-stu-id="b6c19-105">You also learn how to automate the configuration of the virtual machines in the scale set.</span></span> 
+# <a name="tutorial-create-a-virtual-machine-scale-set-and-deploy-a-highly-available-app-on-linux-with-the-azure-cli-20"></a><span data-ttu-id="4b608-103">Tutorial: Create a virtual machine scale set and deploy a highly available app on Linux with the Azure CLI 2.0</span><span class="sxs-lookup"><span data-stu-id="4b608-103">Tutorial: Create a virtual machine scale set and deploy a highly available app on Linux with the Azure CLI 2.0</span></span>
+
+<span data-ttu-id="4b608-104">A virtual machine scale set allows you to deploy and manage a set of identical, auto-scaling virtual machines.</span><span class="sxs-lookup"><span data-stu-id="4b608-104">A virtual machine scale set allows you to deploy and manage a set of identical, auto-scaling virtual machines.</span></span> <span data-ttu-id="4b608-105">You can scale the number of VMs in the scale set manually, or define rules to autoscale based on resource usage such as CPU, memory demand, or network traffic.</span><span class="sxs-lookup"><span data-stu-id="4b608-105">You can scale the number of VMs in the scale set manually, or define rules to autoscale based on resource usage such as CPU, memory demand, or network traffic.</span></span> <span data-ttu-id="4b608-106">In this tutorial, you deploy a virtual machine scale set in Azure.</span><span class="sxs-lookup"><span data-stu-id="4b608-106">In this tutorial, you deploy a virtual machine scale set in Azure.</span></span> <span data-ttu-id="4b608-107">You learn how to:</span><span class="sxs-lookup"><span data-stu-id="4b608-107">You learn how to:</span></span>
+
+> [!div class="checklist"]
+> * <span data-ttu-id="4b608-108">Use cloud-init to create an app to scale</span><span class="sxs-lookup"><span data-stu-id="4b608-108">Use cloud-init to create an app to scale</span></span>
+> * <span data-ttu-id="4b608-109">Create a virtual machine scale set</span><span class="sxs-lookup"><span data-stu-id="4b608-109">Create a virtual machine scale set</span></span>
+> * <span data-ttu-id="4b608-110">Increase or decrease the number of instances in a scale set</span><span class="sxs-lookup"><span data-stu-id="4b608-110">Increase or decrease the number of instances in a scale set</span></span>
+> * <span data-ttu-id="4b608-111">Create autoscale rules</span><span class="sxs-lookup"><span data-stu-id="4b608-111">Create autoscale rules</span></span>
+> * <span data-ttu-id="4b608-112">View connection info for scale set instances</span><span class="sxs-lookup"><span data-stu-id="4b608-112">View connection info for scale set instances</span></span>
+> * <span data-ttu-id="4b608-113">Use data disks in a scale set</span><span class="sxs-lookup"><span data-stu-id="4b608-113">Use data disks in a scale set</span></span>
+
+[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
+
+<span data-ttu-id="4b608-114">If you choose to install and use the CLI locally, this tutorial requires that you are running the Azure CLI version 2.0.30 or later.</span><span class="sxs-lookup"><span data-stu-id="4b608-114">If you choose to install and use the CLI locally, this tutorial requires that you are running the Azure CLI version 2.0.30 or later.</span></span> <span data-ttu-id="4b608-115">Run `az --version` to find the version.</span><span class="sxs-lookup"><span data-stu-id="4b608-115">Run `az --version` to find the version.</span></span> <span data-ttu-id="4b608-116">If you need to install or upgrade, see [Install Azure CLI 2.0]( /cli/azure/install-azure-cli).</span><span class="sxs-lookup"><span data-stu-id="4b608-116">If you need to install or upgrade, see [Install Azure CLI 2.0]( /cli/azure/install-azure-cli).</span></span>
+
+## <a name="scale-set-overview"></a><span data-ttu-id="4b608-117">Scale Set overview</span><span class="sxs-lookup"><span data-stu-id="4b608-117">Scale Set overview</span></span>
+<span data-ttu-id="4b608-118">A virtual machine scale set allows you to deploy and manage a set of identical, auto-scaling virtual machines.</span><span class="sxs-lookup"><span data-stu-id="4b608-118">A virtual machine scale set allows you to deploy and manage a set of identical, auto-scaling virtual machines.</span></span> <span data-ttu-id="4b608-119">VMs in a scale set are distributed across logic fault and update domains in one or more *placement groups*.</span><span class="sxs-lookup"><span data-stu-id="4b608-119">VMs in a scale set are distributed across logic fault and update domains in one or more *placement groups*.</span></span> <span data-ttu-id="4b608-120">These are groups of similarly configured VMs, similar to [availability sets](tutorial-availability-sets.md).</span><span class="sxs-lookup"><span data-stu-id="4b608-120">These are groups of similarly configured VMs, similar to [availability sets](tutorial-availability-sets.md).</span></span>
+
+<span data-ttu-id="4b608-121">VMs are created as needed in a scale set.</span><span class="sxs-lookup"><span data-stu-id="4b608-121">VMs are created as needed in a scale set.</span></span> <span data-ttu-id="4b608-122">You define autoscale rules to control how and when VMs are added or removed from the scale set.</span><span class="sxs-lookup"><span data-stu-id="4b608-122">You define autoscale rules to control how and when VMs are added or removed from the scale set.</span></span> <span data-ttu-id="4b608-123">These rules can be triggered based on metrics such as CPU load, memory usage, or network traffic.</span><span class="sxs-lookup"><span data-stu-id="4b608-123">These rules can be triggered based on metrics such as CPU load, memory usage, or network traffic.</span></span>
+
+<span data-ttu-id="4b608-124">Scale sets support up to 1,000 VMs when you use an Azure platform image.</span><span class="sxs-lookup"><span data-stu-id="4b608-124">Scale sets support up to 1,000 VMs when you use an Azure platform image.</span></span> <span data-ttu-id="4b608-125">For workloads with significant installation or VM customization requirements, you may wish to [Create a custom VM image](tutorial-custom-images.md).</span><span class="sxs-lookup"><span data-stu-id="4b608-125">For workloads with significant installation or VM customization requirements, you may wish to [Create a custom VM image](tutorial-custom-images.md).</span></span> <span data-ttu-id="4b608-126">You can create up to 300 VMs in a scale set when using a custom image.</span><span class="sxs-lookup"><span data-stu-id="4b608-126">You can create up to 300 VMs in a scale set when using a custom image.</span></span>
 
 
-## <a name="step-1---create-a-resource-group"></a><span data-ttu-id="b6c19-106">Step 1 - Create a resource group</span><span class="sxs-lookup"><span data-stu-id="b6c19-106">Step 1 - Create a resource group</span></span>
-<span data-ttu-id="b6c19-107">To complete this tutorial, make sure that you have installed the latest [Azure CLI 2.0](/cli/azure/install-azure-cli).</span><span class="sxs-lookup"><span data-stu-id="b6c19-107">To complete this tutorial, make sure that you have installed the latest [Azure CLI 2.0](/cli/azure/install-azure-cli).</span></span> <span data-ttu-id="b6c19-108">If you are not already logged in to your Azure subscription, log in with [az login](/cli/azure/#login) and follow the on-screen directions.</span><span class="sxs-lookup"><span data-stu-id="b6c19-108">If you are not already logged in to your Azure subscription, log in with [az login](/cli/azure/#login) and follow the on-screen directions.</span></span>
+## <a name="create-an-app-to-scale"></a><span data-ttu-id="4b608-127">Create an app to scale</span><span class="sxs-lookup"><span data-stu-id="4b608-127">Create an app to scale</span></span>
+<span data-ttu-id="4b608-128">For production use, you may wish to [Create a custom VM image](tutorial-custom-images.md) that includes your application installed and configured.</span><span class="sxs-lookup"><span data-stu-id="4b608-128">For production use, you may wish to [Create a custom VM image](tutorial-custom-images.md) that includes your application installed and configured.</span></span> <span data-ttu-id="4b608-129">For this tutorial, lets customize the VMs on first boot to quickly see a scale set in action.</span><span class="sxs-lookup"><span data-stu-id="4b608-129">For this tutorial, lets customize the VMs on first boot to quickly see a scale set in action.</span></span>
 
-<span data-ttu-id="b6c19-109">Create a resource group with [az group create](/cli/azure/group#create).</span><span class="sxs-lookup"><span data-stu-id="b6c19-109">Create a resource group with [az group create](/cli/azure/group#create).</span></span> <span data-ttu-id="b6c19-110">The following example creates a resource group named `myResourceGroupVMSS` in the `westus` location:</span><span class="sxs-lookup"><span data-stu-id="b6c19-110">The following example creates a resource group named `myResourceGroupVMSS` in the `westus` location:</span></span>
+<span data-ttu-id="4b608-130">In a previous tutorial, you learned [How to customize a Linux virtual machine on first boot](tutorial-automate-vm-deployment.md) with cloud-init.</span><span class="sxs-lookup"><span data-stu-id="4b608-130">In a previous tutorial, you learned [How to customize a Linux virtual machine on first boot](tutorial-automate-vm-deployment.md) with cloud-init.</span></span> <span data-ttu-id="4b608-131">You can use the same cloud-init configuration file to install NGINX and run a simple 'Hello World' Node.js app.</span><span class="sxs-lookup"><span data-stu-id="4b608-131">You can use the same cloud-init configuration file to install NGINX and run a simple 'Hello World' Node.js app.</span></span>
 
-```azurecli
-az group create --name myResourceGroupVMSS --location westus
-```
-
-
-## <a name="step-2---define-your-app"></a><span data-ttu-id="b6c19-111">Step 2 - Define your app</span><span class="sxs-lookup"><span data-stu-id="b6c19-111">Step 2 - Define your app</span></span>
-<span data-ttu-id="b6c19-112">You use the same **cloud-init** config from the tutorial where you created a highly available, load balanced app.</span><span class="sxs-lookup"><span data-stu-id="b6c19-112">You use the same **cloud-init** config from the tutorial where you created a highly available, load balanced app.</span></span> <span data-ttu-id="b6c19-113">For more information about using **cloud-init**, see [Use cloud-init to customize a Linux VM during creation](using-cloud-init.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).</span><span class="sxs-lookup"><span data-stu-id="b6c19-113">For more information about using **cloud-init**, see [Use cloud-init to customize a Linux VM during creation](using-cloud-init.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).</span></span>
-
-<span data-ttu-id="b6c19-114">Create a file named `cloud-init.txt` and paste the following configuration:</span><span class="sxs-lookup"><span data-stu-id="b6c19-114">Create a file named `cloud-init.txt` and paste the following configuration:</span></span>
+<span data-ttu-id="4b608-132">In your current shell, create a file named *cloud-init.txt* and paste the following configuration.</span><span class="sxs-lookup"><span data-stu-id="4b608-132">In your current shell, create a file named *cloud-init.txt* and paste the following configuration.</span></span> <span data-ttu-id="4b608-133">For example, create the file in the Cloud Shell not on your local machine.</span><span class="sxs-lookup"><span data-stu-id="4b608-133">For example, create the file in the Cloud Shell not on your local machine.</span></span> <span data-ttu-id="4b608-134">Enter `sensible-editor cloud-init.txt` to create the file and see a list of available editors.</span><span class="sxs-lookup"><span data-stu-id="4b608-134">Enter `sensible-editor cloud-init.txt` to create the file and see a list of available editors.</span></span> <span data-ttu-id="4b608-135">Make sure that the whole cloud-init file is copied correctly, especially the first line:</span><span class="sxs-lookup"><span data-stu-id="4b608-135">Make sure that the whole cloud-init file is copied correctly, especially the first line:</span></span>
 
 ```yaml
 #cloud-config
@@ -76,7 +89,7 @@ write_files:
         console.log('Hello world app listening on port 3000!')
       })
 runcmd:
-  - nginx -s reload
+  - service nginx restart
   - cd "/home/azureuser/myapp"
   - npm init
   - npm install express -y
@@ -84,33 +97,37 @@ runcmd:
 ```
 
 
-## <a name="step-3---create-scale-set"></a><span data-ttu-id="b6c19-115">Step 3 - Create scale set</span><span class="sxs-lookup"><span data-stu-id="b6c19-115">Step 3 - Create scale set</span></span>
-<span data-ttu-id="b6c19-116">A virtual machine scale set allows you to deploy and manage a set of identical, auto-scaling virtual machines.</span><span class="sxs-lookup"><span data-stu-id="b6c19-116">A virtual machine scale set allows you to deploy and manage a set of identical, auto-scaling virtual machines.</span></span> <span data-ttu-id="b6c19-117">Scale sets use the same components as you learned about in the tutorial to [Build a highly available app on Azure](tutorial-load-balance-nodejs.md).</span><span class="sxs-lookup"><span data-stu-id="b6c19-117">Scale sets use the same components as you learned about in the tutorial to [Build a highly available app on Azure](tutorial-load-balance-nodejs.md).</span></span> <span data-ttu-id="b6c19-118">These components include as availability sets, fault and update domains, and load balancers.</span><span class="sxs-lookup"><span data-stu-id="b6c19-118">These components include as availability sets, fault and update domains, and load balancers.</span></span>
+## <a name="create-a-scale-set"></a><span data-ttu-id="4b608-136">Create a scale set</span><span class="sxs-lookup"><span data-stu-id="4b608-136">Create a scale set</span></span>
+<span data-ttu-id="4b608-137">Before you can create a scale set, create a resource group with [az group create](/cli/azure/group#az-group-create).</span><span class="sxs-lookup"><span data-stu-id="4b608-137">Before you can create a scale set, create a resource group with [az group create](/cli/azure/group#az-group-create).</span></span> <span data-ttu-id="4b608-138">The following example creates a resource group named *myResourceGroupScaleSet* in the *eastus* location:</span><span class="sxs-lookup"><span data-stu-id="4b608-138">The following example creates a resource group named *myResourceGroupScaleSet* in the *eastus* location:</span></span>
 
-<span data-ttu-id="b6c19-119">With a scale set, these resources are created and managed for you.</span><span class="sxs-lookup"><span data-stu-id="b6c19-119">With a scale set, these resources are created and managed for you.</span></span> <span data-ttu-id="b6c19-120">The number of VMs in your scale set can automatically increase or decrease based on defined rules.</span><span class="sxs-lookup"><span data-stu-id="b6c19-120">The number of VMs in your scale set can automatically increase or decrease based on defined rules.</span></span> <span data-ttu-id="b6c19-121">You can [use a custom image](capture-image.md) as the source for your virtual machine, or configure the VMs during deployment with **cloud-init** as in this tutorial.</span><span class="sxs-lookup"><span data-stu-id="b6c19-121">You can [use a custom image](capture-image.md) as the source for your virtual machine, or configure the VMs during deployment with **cloud-init** as in this tutorial.</span></span>
+```azurecli-interactive
+az group create --name myResourceGroupScaleSet --location eastus
+```
 
-<span data-ttu-id="b6c19-122">Create a virtual machine scale set with [az vmss create](/cli/azure/vmss#create).</span><span class="sxs-lookup"><span data-stu-id="b6c19-122">Create a virtual machine scale set with [az vmss create](/cli/azure/vmss#create).</span></span> <span data-ttu-id="b6c19-123">The following example creates a scale set named `myScaleSet`:</span><span class="sxs-lookup"><span data-stu-id="b6c19-123">The following example creates a scale set named `myScaleSet`:</span></span>
+<span data-ttu-id="4b608-139">Now create a virtual machine scale set with [az vmss create](/cli/azure/vmss#az-vmss-create).</span><span class="sxs-lookup"><span data-stu-id="4b608-139">Now create a virtual machine scale set with [az vmss create](/cli/azure/vmss#az-vmss-create).</span></span> <span data-ttu-id="4b608-140">The following example creates a scale set named *myScaleSet*, uses the cloud-init file to customize the VM, and generates SSH keys if they do not exist:</span><span class="sxs-lookup"><span data-stu-id="4b608-140">The following example creates a scale set named *myScaleSet*, uses the cloud-init file to customize the VM, and generates SSH keys if they do not exist:</span></span>
 
-```azurecli
+```azurecli-interactive
 az vmss create \
-  --resource-group myResourceGroupVMSS \
+  --resource-group myResourceGroupScaleSet \
   --name myScaleSet \
-  --image Canonical:UbuntuServer:14.04.4-LTS:latest \
+  --image UbuntuLTS \
   --upgrade-policy-mode automatic \
   --custom-data cloud-init.txt \
   --admin-username azureuser \
-  --generate-ssh-keys      
+  --generate-ssh-keys
 ```
 
-<span data-ttu-id="b6c19-124">It takes a few minutes to create and configure all the scale set resources and VMs.</span><span class="sxs-lookup"><span data-stu-id="b6c19-124">It takes a few minutes to create and configure all the scale set resources and VMs.</span></span>
+<span data-ttu-id="4b608-141">It takes a few minutes to create and configure all the scale set resources and VMs.</span><span class="sxs-lookup"><span data-stu-id="4b608-141">It takes a few minutes to create and configure all the scale set resources and VMs.</span></span> <span data-ttu-id="4b608-142">There are background tasks that continue to run after the Azure CLI returns you to the prompt.</span><span class="sxs-lookup"><span data-stu-id="4b608-142">There are background tasks that continue to run after the Azure CLI returns you to the prompt.</span></span> <span data-ttu-id="4b608-143">It may be another couple of minutes before you can access the app.</span><span class="sxs-lookup"><span data-stu-id="4b608-143">It may be another couple of minutes before you can access the app.</span></span>
 
 
-## <a name="step-4---configure-firewall"></a><span data-ttu-id="b6c19-125">Step 4 - Configure firewall</span><span class="sxs-lookup"><span data-stu-id="b6c19-125">Step 4 - Configure firewall</span></span>
-<span data-ttu-id="b6c19-126">A load balancer was created automatically as part of the virtual machine scale set.</span><span class="sxs-lookup"><span data-stu-id="b6c19-126">A load balancer was created automatically as part of the virtual machine scale set.</span></span> <span data-ttu-id="b6c19-127">The load balancer distributes traffic across a set of defined VMs using load balancer rules.</span><span class="sxs-lookup"><span data-stu-id="b6c19-127">The load balancer distributes traffic across a set of defined VMs using load balancer rules.</span></span> <span data-ttu-id="b6c19-128">To allow traffic to reach the web app, create a rule with [az network lb probe create](/cli/azure/network/lb/probe#create).</span><span class="sxs-lookup"><span data-stu-id="b6c19-128">To allow traffic to reach the web app, create a rule with [az network lb probe create](/cli/azure/network/lb/probe#create).</span></span> <span data-ttu-id="b6c19-129">The following example creates a rule named `myLoadBalancerRuleWeb`:</span><span class="sxs-lookup"><span data-stu-id="b6c19-129">The following example creates a rule named `myLoadBalancerRuleWeb`:</span></span>
+## <a name="allow-web-traffic"></a><span data-ttu-id="4b608-144">Allow web traffic</span><span class="sxs-lookup"><span data-stu-id="4b608-144">Allow web traffic</span></span>
+<span data-ttu-id="4b608-145">A load balancer was created automatically as part of the virtual machine scale set.</span><span class="sxs-lookup"><span data-stu-id="4b608-145">A load balancer was created automatically as part of the virtual machine scale set.</span></span> <span data-ttu-id="4b608-146">The load balancer distributes traffic across a set of defined VMs using load balancer rules.</span><span class="sxs-lookup"><span data-stu-id="4b608-146">The load balancer distributes traffic across a set of defined VMs using load balancer rules.</span></span> <span data-ttu-id="4b608-147">You can learn more about load balancer concepts and configuration in the next tutorial, [How to load balance virtual machines in Azure](tutorial-load-balancer.md).</span><span class="sxs-lookup"><span data-stu-id="4b608-147">You can learn more about load balancer concepts and configuration in the next tutorial, [How to load balance virtual machines in Azure](tutorial-load-balancer.md).</span></span>
 
-```azurecli
+<span data-ttu-id="4b608-148">To allow traffic to reach the web app, create a rule with [az network lb rule create](/cli/azure/network/lb/rule#az-network-lb-rule-create).</span><span class="sxs-lookup"><span data-stu-id="4b608-148">To allow traffic to reach the web app, create a rule with [az network lb rule create](/cli/azure/network/lb/rule#az-network-lb-rule-create).</span></span> <span data-ttu-id="4b608-149">The following example creates a rule named *myLoadBalancerRuleWeb*:</span><span class="sxs-lookup"><span data-stu-id="4b608-149">The following example creates a rule named *myLoadBalancerRuleWeb*:</span></span>
+
+```azurecli-interactive
 az network lb rule create \
-  --resource-group myResourceGroupVMSS \
+  --resource-group myResourceGroupScaleSet \
   --name myLoadBalancerRuleWeb \
   --lb-name myScaleSetLB \
   --backend-pool-name myScaleSetLBBEPool \
@@ -120,56 +137,131 @@ az network lb rule create \
   --protocol tcp
 ```
 
-## <a name="step-5---test-your-app"></a><span data-ttu-id="b6c19-130">Step 5 - Test your app</span><span class="sxs-lookup"><span data-stu-id="b6c19-130">Step 5 - Test your app</span></span>
-<span data-ttu-id="b6c19-131">Obtain the public IP address of your load balancer with [az network public-ip show](/cli/azure/network/public-ip#show).</span><span class="sxs-lookup"><span data-stu-id="b6c19-131">Obtain the public IP address of your load balancer with [az network public-ip show](/cli/azure/network/public-ip#show).</span></span> <span data-ttu-id="b6c19-132">The following example obtains the IP address for `myScaleSetLBPublicIP` created as part of the scale set:</span><span class="sxs-lookup"><span data-stu-id="b6c19-132">The following example obtains the IP address for `myScaleSetLBPublicIP` created as part of the scale set:</span></span>
+## <a name="test-your-app"></a><span data-ttu-id="4b608-150">Test your app</span><span class="sxs-lookup"><span data-stu-id="4b608-150">Test your app</span></span>
+<span data-ttu-id="4b608-151">To see your Node.js app on the web, obtain the public IP address of your load balancer with [az network public-ip show](/cli/azure/network/public-ip#az-network-public-ip-show).</span><span class="sxs-lookup"><span data-stu-id="4b608-151">To see your Node.js app on the web, obtain the public IP address of your load balancer with [az network public-ip show](/cli/azure/network/public-ip#az-network-public-ip-show).</span></span> <span data-ttu-id="4b608-152">The following example obtains the IP address for *myScaleSetLBPublicIP* created as part of the scale set:</span><span class="sxs-lookup"><span data-stu-id="4b608-152">The following example obtains the IP address for *myScaleSetLBPublicIP* created as part of the scale set:</span></span>
 
-```azurecli
+```azurecli-interactive
 az network public-ip show \
-    --resource-group myResourceGroupVMSS \
+    --resource-group myResourceGroupScaleSet \
     --name myScaleSetLBPublicIP \
     --query [ipAddress] \
     --output tsv
 ```
 
-<span data-ttu-id="b6c19-133">Enter the public IP address in to a web browser.</span><span class="sxs-lookup"><span data-stu-id="b6c19-133">Enter the public IP address in to a web browser.</span></span> <span data-ttu-id="b6c19-134">The app is displayed, including the hostname of the VM that the load balancer distributed traffic to:</span><span class="sxs-lookup"><span data-stu-id="b6c19-134">The app is displayed, including the hostname of the VM that the load balancer distributed traffic to:</span></span>
+<span data-ttu-id="4b608-153">Enter the public IP address in to a web browser.</span><span class="sxs-lookup"><span data-stu-id="4b608-153">Enter the public IP address in to a web browser.</span></span> <span data-ttu-id="4b608-154">The app is displayed, including the hostname of the VM that the load balancer distributed traffic to:</span><span class="sxs-lookup"><span data-stu-id="4b608-154">The app is displayed, including the hostname of the VM that the load balancer distributed traffic to:</span></span>
 
-![Running Node.js app](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/media/tutorial-load-balance-nodejs/running-nodejs-app.png)
+![Running Node.js app](./media/tutorial-create-vmss/running-nodejs-app.png)
 
-<span data-ttu-id="b6c19-136">Force-refresh your web browser to see the load balancer distribute traffic across all the VMs in the scale set running your app.</span><span class="sxs-lookup"><span data-stu-id="b6c19-136">Force-refresh your web browser to see the load balancer distribute traffic across all the VMs in the scale set running your app.</span></span>
+<span data-ttu-id="4b608-156">To see the scale set in action, you can force-refresh your web browser to see the load balancer distribute traffic across all the VMs running your app.</span><span class="sxs-lookup"><span data-stu-id="4b608-156">To see the scale set in action, you can force-refresh your web browser to see the load balancer distribute traffic across all the VMs running your app.</span></span>
 
 
-## <a name="step-6---management-tasks"></a><span data-ttu-id="b6c19-137">Step 6 - Management tasks</span><span class="sxs-lookup"><span data-stu-id="b6c19-137">Step 6 - Management tasks</span></span>
-<span data-ttu-id="b6c19-138">Throughout the lifecycle of the scale set, you may need to run one or more management tasks.</span><span class="sxs-lookup"><span data-stu-id="b6c19-138">Throughout the lifecycle of the scale set, you may need to run one or more management tasks.</span></span> <span data-ttu-id="b6c19-139">Additionally, you may want to create scripts that automate various lifecycle-tasks.</span><span class="sxs-lookup"><span data-stu-id="b6c19-139">Additionally, you may want to create scripts that automate various lifecycle-tasks.</span></span> <span data-ttu-id="b6c19-140">The Azure CLI 2.0 provides a quick way to do those tasks.</span><span class="sxs-lookup"><span data-stu-id="b6c19-140">The Azure CLI 2.0 provides a quick way to do those tasks.</span></span> <span data-ttu-id="b6c19-141">Here are a few common tasks.</span><span class="sxs-lookup"><span data-stu-id="b6c19-141">Here are a few common tasks.</span></span>
+## <a name="management-tasks"></a><span data-ttu-id="4b608-157">Management tasks</span><span class="sxs-lookup"><span data-stu-id="4b608-157">Management tasks</span></span>
+<span data-ttu-id="4b608-158">Throughout the lifecycle of the scale set, you may need to run one or more management tasks.</span><span class="sxs-lookup"><span data-stu-id="4b608-158">Throughout the lifecycle of the scale set, you may need to run one or more management tasks.</span></span> <span data-ttu-id="4b608-159">Additionally, you may want to create scripts that automate various lifecycle-tasks.</span><span class="sxs-lookup"><span data-stu-id="4b608-159">Additionally, you may want to create scripts that automate various lifecycle-tasks.</span></span> <span data-ttu-id="4b608-160">The Azure CLI 2.0 provides a quick way to do those tasks.</span><span class="sxs-lookup"><span data-stu-id="4b608-160">The Azure CLI 2.0 provides a quick way to do those tasks.</span></span> <span data-ttu-id="4b608-161">Here are a few common tasks.</span><span class="sxs-lookup"><span data-stu-id="4b608-161">Here are a few common tasks.</span></span>
 
-### <a name="increase-or-decrease-vm-instances"></a><span data-ttu-id="b6c19-142">Increase or decrease VM instances</span><span class="sxs-lookup"><span data-stu-id="b6c19-142">Increase or decrease VM instances</span></span>
-<span data-ttu-id="b6c19-143">You can manually increase or decrease the number of virtual machines in the scale set with [az vmss scale](/cli/azure/vmss#scale).</span><span class="sxs-lookup"><span data-stu-id="b6c19-143">You can manually increase or decrease the number of virtual machines in the scale set with [az vmss scale](/cli/azure/vmss#scale).</span></span> <span data-ttu-id="b6c19-144">The following example increases the number of VMs in your scale set to `5`:</span><span class="sxs-lookup"><span data-stu-id="b6c19-144">The following example increases the number of VMs in your scale set to `5`:</span></span>
+### <a name="view-vms-in-a-scale-set"></a><span data-ttu-id="4b608-162">View VMs in a scale set</span><span class="sxs-lookup"><span data-stu-id="4b608-162">View VMs in a scale set</span></span>
+<span data-ttu-id="4b608-163">To view a list of VMs running in your scale set, use [az vmss list-instances](/cli/azure/vmss#az-vmss-list-instances) as follows:</span><span class="sxs-lookup"><span data-stu-id="4b608-163">To view a list of VMs running in your scale set, use [az vmss list-instances](/cli/azure/vmss#az-vmss-list-instances) as follows:</span></span>
 
-```azurecli
-az vmss scale --resource-group myResourceGroupVMSS --name myScaleSet --new-capacity 5
+```azurecli-interactive
+az vmss list-instances \
+  --resource-group myResourceGroupScaleSet \
+  --name myScaleSet \
+  --output table
 ```
 
-<span data-ttu-id="b6c19-145">Autoscale rules let you define how to scale up or down the number of VMs in your scale set in response to demand such as network traffic or CPU usage.</span><span class="sxs-lookup"><span data-stu-id="b6c19-145">Autoscale rules let you define how to scale up or down the number of VMs in your scale set in response to demand such as network traffic or CPU usage.</span></span> <span data-ttu-id="b6c19-146">Currently, these rules cannot be set in Azure CLI 2.0.</span><span class="sxs-lookup"><span data-stu-id="b6c19-146">Currently, these rules cannot be set in Azure CLI 2.0.</span></span> <span data-ttu-id="b6c19-147">Use the [Azure portal](https://portal.azure.com) to configure autoscale.</span><span class="sxs-lookup"><span data-stu-id="b6c19-147">Use the [Azure portal](https://portal.azure.com) to configure autoscale.</span></span>
+<span data-ttu-id="4b608-164">The output is similar to the following example:</span><span class="sxs-lookup"><span data-stu-id="4b608-164">The output is similar to the following example:</span></span>
 
-### <a name="get-connection-info"></a><span data-ttu-id="b6c19-148">Get connection info</span><span class="sxs-lookup"><span data-stu-id="b6c19-148">Get connection info</span></span>
-<span data-ttu-id="b6c19-149">To obtain connection information about the VMs in your scale sets, use [az vmss list-instance-connection-info](/cli/azure/vmss#list-instance-connection-info).</span><span class="sxs-lookup"><span data-stu-id="b6c19-149">To obtain connection information about the VMs in your scale sets, use [az vmss list-instance-connection-info](/cli/azure/vmss#list-instance-connection-info).</span></span> <span data-ttu-id="b6c19-150">This command outputs the public IP address and ports for each VM that allows you to connect with SSH:</span><span class="sxs-lookup"><span data-stu-id="b6c19-150">This command outputs the public IP address and ports for each VM that allows you to connect with SSH:</span></span>
-
-```azurecli
-az vmss list-instance-connection-info --resource-group myResourceGroupVMSS --name myScaleSet
-```
-
-### <a name="delete-resource-group"></a><span data-ttu-id="b6c19-151">Delete resource group</span><span class="sxs-lookup"><span data-stu-id="b6c19-151">Delete resource group</span></span>
-<span data-ttu-id="b6c19-152">Deleting a resource group also deletes all resources contained within.</span><span class="sxs-lookup"><span data-stu-id="b6c19-152">Deleting a resource group also deletes all resources contained within.</span></span>
-
-```azurecli
-az group delete --name myResourceGroupVMSS
+```bash
+  InstanceId  LatestModelApplied    Location    Name          ProvisioningState    ResourceGroup            VmId
+------------  --------------------  ----------  ------------  -------------------  -----------------------  ------------------------------------
+           1  True                  eastus      myScaleSet_1  Succeeded            MYRESOURCEGROUPSCALESET  c72ddc34-6c41-4a53-b89e-dd24f27b30ab
+           3  True                  eastus      myScaleSet_3  Succeeded            MYRESOURCEGROUPSCALESET  44266022-65c3-49c5-92dd-88ffa64f95da
 ```
 
 
-## <a name="next-steps"></a><span data-ttu-id="b6c19-153">Next steps</span><span class="sxs-lookup"><span data-stu-id="b6c19-153">Next steps</span></span>
-<span data-ttu-id="b6c19-154">In this tutorial, we defined the web app with **cloud-init** and configured each VM during deployment.</span><span class="sxs-lookup"><span data-stu-id="b6c19-154">In this tutorial, we defined the web app with **cloud-init** and configured each VM during deployment.</span></span> <span data-ttu-id="b6c19-155">For information on capturing a VM to use as the source image in your scale set, see [How to generalize and capture a Linux virtual machine](capture-image.md).</span><span class="sxs-lookup"><span data-stu-id="b6c19-155">For information on capturing a VM to use as the source image in your scale set, see [How to generalize and capture a Linux virtual machine](capture-image.md).</span></span>
+### <a name="manually-increase-or-decrease-vm-instances"></a><span data-ttu-id="4b608-165">Manually increase or decrease VM instances</span><span class="sxs-lookup"><span data-stu-id="4b608-165">Manually increase or decrease VM instances</span></span>
+<span data-ttu-id="4b608-166">To see the number of instances you currently have in a scale set, use [az vmss show](/cli/azure/vmss#az-vmss-show) and query on *sku.capacity*:</span><span class="sxs-lookup"><span data-stu-id="4b608-166">To see the number of instances you currently have in a scale set, use [az vmss show](/cli/azure/vmss#az-vmss-show) and query on *sku.capacity*:</span></span>
 
-<span data-ttu-id="b6c19-156">To learn more about some of the virtual machine scale set features introduced in this tutorial, see the following information:</span><span class="sxs-lookup"><span data-stu-id="b6c19-156">To learn more about some of the virtual machine scale set features introduced in this tutorial, see the following information:</span></span>
+```azurecli-interactive
+az vmss show \
+    --resource-group myResourceGroupScaleSet \
+    --name myScaleSet \
+    --query [sku.capacity] \
+    --output table
+```
 
-- [<span data-ttu-id="b6c19-157">Azure Virtual Machine Scale Sets overview</span><span class="sxs-lookup"><span data-stu-id="b6c19-157">Azure Virtual Machine Scale Sets overview</span></span>](../../virtual-machine-scale-sets/virtual-machine-scale-sets-overview.md)
-- [<span data-ttu-id="b6c19-158">Azure Load Balancer overview</span><span class="sxs-lookup"><span data-stu-id="b6c19-158">Azure Load Balancer overview</span></span>](../../load-balancer/load-balancer-overview.md)
-- [<span data-ttu-id="b6c19-159">Control network traffic flow with network security groups</span><span class="sxs-lookup"><span data-stu-id="b6c19-159">Control network traffic flow with network security groups</span></span>](../../virtual-network/virtual-networks-nsg.md)
+<span data-ttu-id="4b608-167">You can then manually increase or decrease the number of virtual machines in the scale set with [az vmss scale](/cli/azure/vmss#az-vmss-scale).</span><span class="sxs-lookup"><span data-stu-id="4b608-167">You can then manually increase or decrease the number of virtual machines in the scale set with [az vmss scale](/cli/azure/vmss#az-vmss-scale).</span></span> <span data-ttu-id="4b608-168">The following example sets the number of VMs in your scale set to *3*:</span><span class="sxs-lookup"><span data-stu-id="4b608-168">The following example sets the number of VMs in your scale set to *3*:</span></span>
+
+```azurecli-interactive
+az vmss scale \
+    --resource-group myResourceGroupScaleSet \
+    --name myScaleSet \
+    --new-capacity 3
+```
+
+### <a name="get-connection-info"></a><span data-ttu-id="4b608-169">Get connection info</span><span class="sxs-lookup"><span data-stu-id="4b608-169">Get connection info</span></span>
+<span data-ttu-id="4b608-170">To obtain connection information about the VMs in your scale sets, use [az vmss list-instance-connection-info](/cli/azure/vmss#az-vmss-list-instance-connection-info).</span><span class="sxs-lookup"><span data-stu-id="4b608-170">To obtain connection information about the VMs in your scale sets, use [az vmss list-instance-connection-info](/cli/azure/vmss#az-vmss-list-instance-connection-info).</span></span> <span data-ttu-id="4b608-171">This command outputs the public IP address and port for each VM that allows you to connect with SSH:</span><span class="sxs-lookup"><span data-stu-id="4b608-171">This command outputs the public IP address and port for each VM that allows you to connect with SSH:</span></span>
+
+```azurecli-interactive
+az vmss list-instance-connection-info \
+    --resource-group myResourceGroupScaleSet \
+    --name myScaleSet
+```
+
+
+## <a name="use-data-disks-with-scale-sets"></a><span data-ttu-id="4b608-172">Use data disks with scale sets</span><span class="sxs-lookup"><span data-stu-id="4b608-172">Use data disks with scale sets</span></span>
+<span data-ttu-id="4b608-173">You can create and use data disks with scale sets.</span><span class="sxs-lookup"><span data-stu-id="4b608-173">You can create and use data disks with scale sets.</span></span> <span data-ttu-id="4b608-174">In a previous tutorial, you learned how to [Manage Azure disks](tutorial-manage-disks.md) that outlines the best practices and performance improvements for building apps on data disks rather than the OS disk.</span><span class="sxs-lookup"><span data-stu-id="4b608-174">In a previous tutorial, you learned how to [Manage Azure disks](tutorial-manage-disks.md) that outlines the best practices and performance improvements for building apps on data disks rather than the OS disk.</span></span>
+
+### <a name="create-scale-set-with-data-disks"></a><span data-ttu-id="4b608-175">Create scale set with data disks</span><span class="sxs-lookup"><span data-stu-id="4b608-175">Create scale set with data disks</span></span>
+<span data-ttu-id="4b608-176">To create a scale set and attach data disks, add the `--data-disk-sizes-gb` parameter to the [az vmss create](/cli/azure/vmss#az-vmss-create) command.</span><span class="sxs-lookup"><span data-stu-id="4b608-176">To create a scale set and attach data disks, add the `--data-disk-sizes-gb` parameter to the [az vmss create](/cli/azure/vmss#az-vmss-create) command.</span></span> <span data-ttu-id="4b608-177">The following example creates a scale set with *50*Gb data disks attached to each instance:</span><span class="sxs-lookup"><span data-stu-id="4b608-177">The following example creates a scale set with *50*Gb data disks attached to each instance:</span></span>
+
+```azurecli-interactive
+az vmss create \
+    --resource-group myResourceGroupScaleSet \
+    --name myScaleSetDisks \
+    --image UbuntuLTS \
+    --upgrade-policy-mode automatic \
+    --custom-data cloud-init.txt \
+    --admin-username azureuser \
+    --generate-ssh-keys \
+    --data-disk-sizes-gb 50
+```
+
+<span data-ttu-id="4b608-178">When instances are removed from a scale set, any attached data disks are also removed.</span><span class="sxs-lookup"><span data-stu-id="4b608-178">When instances are removed from a scale set, any attached data disks are also removed.</span></span>
+
+### <a name="add-data-disks"></a><span data-ttu-id="4b608-179">Add data disks</span><span class="sxs-lookup"><span data-stu-id="4b608-179">Add data disks</span></span>
+<span data-ttu-id="4b608-180">To add a data disk to instances in your scale set, use [az vmss disk attach](/cli/azure/vmss/disk#az-vmss-disk-attach).</span><span class="sxs-lookup"><span data-stu-id="4b608-180">To add a data disk to instances in your scale set, use [az vmss disk attach](/cli/azure/vmss/disk#az-vmss-disk-attach).</span></span> <span data-ttu-id="4b608-181">The following example adds a *50*Gb disk to each instance:</span><span class="sxs-lookup"><span data-stu-id="4b608-181">The following example adds a *50*Gb disk to each instance:</span></span>
+
+```azurecli-interactive
+az vmss disk attach \
+    --resource-group myResourceGroupScaleSet \
+    --name myScaleSet \
+    --size-gb 50 \
+    --lun 2
+```
+
+### <a name="detach-data-disks"></a><span data-ttu-id="4b608-182">Detach data disks</span><span class="sxs-lookup"><span data-stu-id="4b608-182">Detach data disks</span></span>
+<span data-ttu-id="4b608-183">To remove a data disk to instances in your scale set, use [az vmss disk detach](/cli/azure/vmss/disk#az-vmss-disk-detach).</span><span class="sxs-lookup"><span data-stu-id="4b608-183">To remove a data disk to instances in your scale set, use [az vmss disk detach](/cli/azure/vmss/disk#az-vmss-disk-detach).</span></span> <span data-ttu-id="4b608-184">The following example removes the data disk at LUN *2* from each instance:</span><span class="sxs-lookup"><span data-stu-id="4b608-184">The following example removes the data disk at LUN *2* from each instance:</span></span>
+
+```azurecli-interactive
+az vmss disk detach \
+    --resource-group myResourceGroupScaleSet \
+    --name myScaleSet \
+    --lun 2
+```
+
+
+## <a name="next-steps"></a><span data-ttu-id="4b608-185">Next steps</span><span class="sxs-lookup"><span data-stu-id="4b608-185">Next steps</span></span>
+<span data-ttu-id="4b608-186">In this tutorial, you created a virtual machine scale set.</span><span class="sxs-lookup"><span data-stu-id="4b608-186">In this tutorial, you created a virtual machine scale set.</span></span> <span data-ttu-id="4b608-187">You learned how to:</span><span class="sxs-lookup"><span data-stu-id="4b608-187">You learned how to:</span></span>
+
+> [!div class="checklist"]
+> * <span data-ttu-id="4b608-188">Use cloud-init to create an app to scale</span><span class="sxs-lookup"><span data-stu-id="4b608-188">Use cloud-init to create an app to scale</span></span>
+> * <span data-ttu-id="4b608-189">Create a virtual machine scale set</span><span class="sxs-lookup"><span data-stu-id="4b608-189">Create a virtual machine scale set</span></span>
+> * <span data-ttu-id="4b608-190">Increase or decrease the number of instances in a scale set</span><span class="sxs-lookup"><span data-stu-id="4b608-190">Increase or decrease the number of instances in a scale set</span></span>
+> * <span data-ttu-id="4b608-191">Create autoscale rules</span><span class="sxs-lookup"><span data-stu-id="4b608-191">Create autoscale rules</span></span>
+> * <span data-ttu-id="4b608-192">View connection info for scale set instances</span><span class="sxs-lookup"><span data-stu-id="4b608-192">View connection info for scale set instances</span></span>
+> * <span data-ttu-id="4b608-193">Use data disks in a scale set</span><span class="sxs-lookup"><span data-stu-id="4b608-193">Use data disks in a scale set</span></span>
+
+<span data-ttu-id="4b608-194">Advance to the next tutorial to learn more about load balancing concepts for virtual machines.</span><span class="sxs-lookup"><span data-stu-id="4b608-194">Advance to the next tutorial to learn more about load balancing concepts for virtual machines.</span></span>
+
+> [!div class="nextstepaction"]
+> [<span data-ttu-id="4b608-195">Load balance virtual machines</span><span class="sxs-lookup"><span data-stu-id="4b608-195">Load balance virtual machines</span></span>](tutorial-load-balancer.md)

@@ -1,9 +1,9 @@
 ---
-title: Create a copy of an Azure Managed Disk for back up | Microsoft Docs
-description: Learn how to create a copy of an Azure Managed Disk to use for back up or troubleshooting disk issues.
+title: Create a snapshot of a VHD in Azure | Microsoft Docs
+description: Learn how to create a copy of an Azure VM to use as a back up or for troubleshooting issues.
 documentationcenter: ''
-author: cwatsonMSFT
-manager: timlt
+author: cynthn
+manager: jeconnoc
 editor: ''
 tags: azure-resource-manager
 ms.assetid: 15eb778e-fc07-45ef-bdc8-9090193a6d20
@@ -12,75 +12,79 @@ ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-windows
 ms.devlang: na
 ms.topic: article
-ms.date: 2/9/2017
-ms.author: cwatson
-ms.openlocfilehash: a759502172de07412268e139e8e31d61e1e7d46f
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 04/10/2018
+ms.author: cynthn
+ms.openlocfilehash: 7cd7cd05b5a23b64d811d6ae9ffd9784cf67bf15
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44669991"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44804627"
 ---
-# <a name="create-a-copy-of-a-vhd-stored-as-an-azure-managed-disk-by-using-managed-snapshots"></a><span data-ttu-id="d5cfe-103">Create a copy of a VHD stored as an Azure Managed Disk by using Managed Snapshots</span><span class="sxs-lookup"><span data-stu-id="d5cfe-103">Create a copy of a VHD stored as an Azure Managed Disk by using Managed Snapshots</span></span>
-<span data-ttu-id="d5cfe-104">Take a snapshot of a Managed Disk for backup or create a Managed Disk from the snapshot and attach it to a test virtual machine to troubleshoot.</span><span class="sxs-lookup"><span data-stu-id="d5cfe-104">Take a snapshot of a Managed Disk for backup or create a Managed Disk from the snapshot and attach it to a test virtual machine to troubleshoot.</span></span> <span data-ttu-id="d5cfe-105">A Managed Snapshot is a full point-in-time copy of a VM Managed Disk.</span><span class="sxs-lookup"><span data-stu-id="d5cfe-105">A Managed Snapshot is a full point-in-time copy of a VM Managed Disk.</span></span> <span data-ttu-id="d5cfe-106">It creates a read-only copy of your VHD and, by default, stores it as a Standard Managed Disk.</span><span class="sxs-lookup"><span data-stu-id="d5cfe-106">It creates a read-only copy of your VHD and, by default, stores it as a Standard Managed Disk.</span></span> <span data-ttu-id="d5cfe-107">For more information about Managed Disks, see [Azure Managed Disks overview](../../storage/storage-managed-disks-overview.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)</span><span class="sxs-lookup"><span data-stu-id="d5cfe-107">For more information about Managed Disks, see [Azure Managed Disks overview](../../storage/storage-managed-disks-overview.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)</span></span>
+# <a name="create-a-snapshot"></a><span data-ttu-id="b0a49-103">Create a snapshot</span><span class="sxs-lookup"><span data-stu-id="b0a49-103">Create a snapshot</span></span>
 
-<span data-ttu-id="d5cfe-108">For information about pricing, see [Azure Storage Pricing](https://azure.microsoft.com/pricing/details/managed-disks/).</span><span class="sxs-lookup"><span data-stu-id="d5cfe-108">For information about pricing, see [Azure Storage Pricing](https://azure.microsoft.com/pricing/details/managed-disks/).</span></span> 
+<span data-ttu-id="b0a49-104">Take a snapshot of an OS or data disk VHD for backup or to troubleshoot VM issues.</span><span class="sxs-lookup"><span data-stu-id="b0a49-104">Take a snapshot of an OS or data disk VHD for backup or to troubleshoot VM issues.</span></span> <span data-ttu-id="b0a49-105">A snapshot is a full, read-only copy of a VHD.</span><span class="sxs-lookup"><span data-stu-id="b0a49-105">A snapshot is a full, read-only copy of a VHD.</span></span> 
 
-## <a name="before-you-begin"></a><span data-ttu-id="d5cfe-109">Before you begin</span><span class="sxs-lookup"><span data-stu-id="d5cfe-109">Before you begin</span></span>
-<span data-ttu-id="d5cfe-110">If you use PowerShell, make sure that you have the latest version of the AzureRM.Compute PowerShell module.</span><span class="sxs-lookup"><span data-stu-id="d5cfe-110">If you use PowerShell, make sure that you have the latest version of the AzureRM.Compute PowerShell module.</span></span> <span data-ttu-id="d5cfe-111">Run the following command to install it.</span><span class="sxs-lookup"><span data-stu-id="d5cfe-111">Run the following command to install it.</span></span>
+## <a name="use-azure-portal-to-take-a-snapshot"></a><span data-ttu-id="b0a49-106">Use Azure portal to take a snapshot</span><span class="sxs-lookup"><span data-stu-id="b0a49-106">Use Azure portal to take a snapshot</span></span> 
 
-```
-Install-Module AzureRM.Compute -RequiredVersion 2.6.0
-```
-<span data-ttu-id="d5cfe-112">For more information, see [Azure PowerShell Versioning](https://docs.microsoft.com/powershell/azureps-cmdlets-docs/#azure-powershell-versioning).</span><span class="sxs-lookup"><span data-stu-id="d5cfe-112">For more information, see [Azure PowerShell Versioning](https://docs.microsoft.com/powershell/azureps-cmdlets-docs/#azure-powershell-versioning).</span></span>
+1. <span data-ttu-id="b0a49-107">Sign in to the [Azure portal](https://portal.azure.com).</span><span class="sxs-lookup"><span data-stu-id="b0a49-107">Sign in to the [Azure portal](https://portal.azure.com).</span></span>
+2. <span data-ttu-id="b0a49-108">Starting in the upper left, click **Create a resource** and search for **snapshot**.</span><span class="sxs-lookup"><span data-stu-id="b0a49-108">Starting in the upper left, click **Create a resource** and search for **snapshot**.</span></span>
+3. <span data-ttu-id="b0a49-109">In the Snapshot blade, click **Create**.</span><span class="sxs-lookup"><span data-stu-id="b0a49-109">In the Snapshot blade, click **Create**.</span></span>
+4. <span data-ttu-id="b0a49-110">Enter a **Name** for the snapshot.</span><span class="sxs-lookup"><span data-stu-id="b0a49-110">Enter a **Name** for the snapshot.</span></span>
+5. <span data-ttu-id="b0a49-111">Select an existing [Resource group](../../azure-resource-manager/resource-group-overview.md#resource-groups) or type the name for a new one.</span><span class="sxs-lookup"><span data-stu-id="b0a49-111">Select an existing [Resource group](../../azure-resource-manager/resource-group-overview.md#resource-groups) or type the name for a new one.</span></span> 
+6. <span data-ttu-id="b0a49-112">Select an Azure datacenter Location.</span><span class="sxs-lookup"><span data-stu-id="b0a49-112">Select an Azure datacenter Location.</span></span>  
+7. <span data-ttu-id="b0a49-113">For **Source disk**, select the Managed Disk to snapshot.</span><span class="sxs-lookup"><span data-stu-id="b0a49-113">For **Source disk**, select the Managed Disk to snapshot.</span></span>
+8. <span data-ttu-id="b0a49-114">Select the **Account type** to use to store the snapshot.</span><span class="sxs-lookup"><span data-stu-id="b0a49-114">Select the **Account type** to use to store the snapshot.</span></span> <span data-ttu-id="b0a49-115">We recommend **Standard_LRS** unless you need it stored on a high performing disk.</span><span class="sxs-lookup"><span data-stu-id="b0a49-115">We recommend **Standard_LRS** unless you need it stored on a high performing disk.</span></span>
+9. <span data-ttu-id="b0a49-116">Click **Create**.</span><span class="sxs-lookup"><span data-stu-id="b0a49-116">Click **Create**.</span></span>
 
-## <a name="copy-the-vhd-with-a-snapshot"></a><span data-ttu-id="d5cfe-113">Copy the VHD with a snapshot</span><span class="sxs-lookup"><span data-stu-id="d5cfe-113">Copy the VHD with a snapshot</span></span>
-<span data-ttu-id="d5cfe-114">Use either the Azure portal or PowerShell to take a snapshot of the Managed Disk.</span><span class="sxs-lookup"><span data-stu-id="d5cfe-114">Use either the Azure portal or PowerShell to take a snapshot of the Managed Disk.</span></span>
+## <a name="use-powershell-to-take-a-snapshot"></a><span data-ttu-id="b0a49-117">Use PowerShell to take a snapshot</span><span class="sxs-lookup"><span data-stu-id="b0a49-117">Use PowerShell to take a snapshot</span></span>
 
-### <a name="use-azure-portal-to-take-a-snapshot"></a><span data-ttu-id="d5cfe-115">Use Azure portal to take a snapshot</span><span class="sxs-lookup"><span data-stu-id="d5cfe-115">Use Azure portal to take a snapshot</span></span> 
+<span data-ttu-id="b0a49-118">The following steps show you how to get the VHD disk to be copied, create the snapshot configurations, and take a snapshot of the disk by using the [New-AzureRmSnapshot](/powershell/module/azurerm.compute/new-azurermsnapshot) cmdlet.</span><span class="sxs-lookup"><span data-stu-id="b0a49-118">The following steps show you how to get the VHD disk to be copied, create the snapshot configurations, and take a snapshot of the disk by using the [New-AzureRmSnapshot](/powershell/module/azurerm.compute/new-azurermsnapshot) cmdlet.</span></span> 
 
-1. <span data-ttu-id="d5cfe-116">Sign in to the [Azure portal](https://portal.azure.com).</span><span class="sxs-lookup"><span data-stu-id="d5cfe-116">Sign in to the [Azure portal](https://portal.azure.com).</span></span>
-2. <span data-ttu-id="d5cfe-117">Starting in the upper left, click **New** and search for **snapshot**.</span><span class="sxs-lookup"><span data-stu-id="d5cfe-117">Starting in the upper left, click **New** and search for **snapshot**.</span></span>
-3. <span data-ttu-id="d5cfe-118">In the Snapshot blade, click **Create**.</span><span class="sxs-lookup"><span data-stu-id="d5cfe-118">In the Snapshot blade, click **Create**.</span></span>
-4. <span data-ttu-id="d5cfe-119">Enter a **Name** for the snapshot.</span><span class="sxs-lookup"><span data-stu-id="d5cfe-119">Enter a **Name** for the snapshot.</span></span>
-5. <span data-ttu-id="d5cfe-120">Select an existing [Resource group](../../azure-resource-manager/resource-group-overview.md#resource-groups) or type the name for a new one.</span><span class="sxs-lookup"><span data-stu-id="d5cfe-120">Select an existing [Resource group](../../azure-resource-manager/resource-group-overview.md#resource-groups) or type the name for a new one.</span></span> 
-6. <span data-ttu-id="d5cfe-121">Select an Azure datacenter Location.</span><span class="sxs-lookup"><span data-stu-id="d5cfe-121">Select an Azure datacenter Location.</span></span>  
-7. <span data-ttu-id="d5cfe-122">For **Source disk**, select the Managed Disk to snapshot.</span><span class="sxs-lookup"><span data-stu-id="d5cfe-122">For **Source disk**, select the Managed Disk to snapshot.</span></span>
-8. <span data-ttu-id="d5cfe-123">Select the **Account type** to use to store the snapshot.</span><span class="sxs-lookup"><span data-stu-id="d5cfe-123">Select the **Account type** to use to store the snapshot.</span></span> <span data-ttu-id="d5cfe-124">We recommend **Standard_LRS** unless you need it stored on a high performing disk.</span><span class="sxs-lookup"><span data-stu-id="d5cfe-124">We recommend **Standard_LRS** unless you need it stored on a high performing disk.</span></span>
-9. <span data-ttu-id="d5cfe-125">Click **Create**.</span><span class="sxs-lookup"><span data-stu-id="d5cfe-125">Click **Create**.</span></span>
+<span data-ttu-id="b0a49-119">Before you begin, make sure that you have the latest version of the AzureRM.Compute PowerShell module.</span><span class="sxs-lookup"><span data-stu-id="b0a49-119">Before you begin, make sure that you have the latest version of the AzureRM.Compute PowerShell module.</span></span> <span data-ttu-id="b0a49-120">This article requires the AzureRM module version 5.7.0 or later.</span><span class="sxs-lookup"><span data-stu-id="b0a49-120">This article requires the AzureRM module version 5.7.0 or later.</span></span> <span data-ttu-id="b0a49-121">Run `Get-Module -ListAvailable AzureRM` to find the version.</span><span class="sxs-lookup"><span data-stu-id="b0a49-121">Run `Get-Module -ListAvailable AzureRM` to find the version.</span></span> <span data-ttu-id="b0a49-122">If you need to upgrade, see [Install Azure PowerShell module](/powershell/azure/install-azurerm-ps).</span><span class="sxs-lookup"><span data-stu-id="b0a49-122">If you need to upgrade, see [Install Azure PowerShell module](/powershell/azure/install-azurerm-ps).</span></span> <span data-ttu-id="b0a49-123">If you are running PowerShell locally, you also need to run `Connect-AzureRmAccount` to create a connection with Azure.</span><span class="sxs-lookup"><span data-stu-id="b0a49-123">If you are running PowerShell locally, you also need to run `Connect-AzureRmAccount` to create a connection with Azure.</span></span>
 
-### <a name="use-powershell-to-take-a-snapshot"></a><span data-ttu-id="d5cfe-126">Use PowerShell to take a snapshot</span><span class="sxs-lookup"><span data-stu-id="d5cfe-126">Use PowerShell to take a snapshot</span></span>
-<span data-ttu-id="d5cfe-127">The following steps show you how to get the VHD disk to be copied, create the snapshot configurations, and take a snapshot of the disk by using the New-AzureRmSnapshot cmdlet<!--Add link to cmdlet when available-->.</span><span class="sxs-lookup"><span data-stu-id="d5cfe-127">The following steps show you how to get the VHD disk to be copied, create the snapshot configurations, and take a snapshot of the disk by using the New-AzureRmSnapshot cmdlet<!--Add link to cmdlet when available-->.</span></span> 
+<span data-ttu-id="b0a49-124">Set some parameters.</span><span class="sxs-lookup"><span data-stu-id="b0a49-124">Set some parameters.</span></span> 
 
-1. <span data-ttu-id="d5cfe-128">Set some parameters.</span><span class="sxs-lookup"><span data-stu-id="d5cfe-128">Set some parameters.</span></span> 
-
- ```powershell
+ ```azurepowershell-interactive
 $resourceGroupName = 'myResourceGroup' 
-$location = 'southeastasia' 
-$dataDiskName = 'ContosoMD_datadisk1' 
-$snapshotName = 'ContosoMD_datadisk1_snapshot1'  
+$location = 'eastus' 
+$vmName = 'myVM'
+$snapshotName = 'mySnapshot'  
 ```
-  <span data-ttu-id="d5cfe-129">Replace the parameter values:</span><span class="sxs-lookup"><span data-stu-id="d5cfe-129">Replace the parameter values:</span></span>
-  -  <span data-ttu-id="d5cfe-130">"myResourceGroup" with the VM's resource group.</span><span class="sxs-lookup"><span data-stu-id="d5cfe-130">"myResourceGroup" with the VM's resource group.</span></span>
-  -  <span data-ttu-id="d5cfe-131">"southeastasia" with the geographic location where you want your Managed Snapshot stored.</span><span class="sxs-lookup"><span data-stu-id="d5cfe-131">"southeastasia" with the geographic location where you want your Managed Snapshot stored.</span></span> <!---How do you look these up? -->
-  -  <span data-ttu-id="d5cfe-132">"ContosoMD_datadisk1" with the name of the VHD disk that you want to copy.</span><span class="sxs-lookup"><span data-stu-id="d5cfe-132">"ContosoMD_datadisk1" with the name of the VHD disk that you want to copy.</span></span>
-  -  <span data-ttu-id="d5cfe-133">"ContosoMD_datadisk1_snapshot1" with the name you want to use for the new snapshot.</span><span class="sxs-lookup"><span data-stu-id="d5cfe-133">"ContosoMD_datadisk1_snapshot1" with the name you want to use for the new snapshot.</span></span>
 
-2. <span data-ttu-id="d5cfe-134">Get the VHD disk to be copied.</span><span class="sxs-lookup"><span data-stu-id="d5cfe-134">Get the VHD disk to be copied.</span></span>
+<span data-ttu-id="b0a49-125">Get the VM.</span><span class="sxs-lookup"><span data-stu-id="b0a49-125">Get the VM.</span></span>
 
- ```powershell
-$disk = Get-AzureRmDisk -ResourceGroupName $resourceGroupName -DiskName $dataDiskName 
+ ```azurepowershell-interactive
+$vm = get-azurermvm `
+   -ResourceGroupName $resourceGroupName `
+   -Name $vmName
 ```
-3. <span data-ttu-id="d5cfe-135">Create the snapshot configurations.</span><span class="sxs-lookup"><span data-stu-id="d5cfe-135">Create the snapshot configurations.</span></span> 
 
- ```powershell
-$snapshot =  New-AzureRmSnapshotConfig -SourceUri $disk.Id -CreateOption Copy -Location $location 
+<span data-ttu-id="b0a49-126">Create the snapshot configuration.</span><span class="sxs-lookup"><span data-stu-id="b0a49-126">Create the snapshot configuration.</span></span> <span data-ttu-id="b0a49-127">In this example, we are going to snapshot the OS disk.</span><span class="sxs-lookup"><span data-stu-id="b0a49-127">In this example, we are going to snapshot the OS disk.</span></span>
+
+ ```azurepowershell-interactive
+$snapshot =  New-AzureRmSnapshotConfig `
+   -SourceUri $vm.StorageProfile.OsDisk.ManagedDisk.Id `
+   -Location $location `
+   -CreateOption copy
 ```
-4. <span data-ttu-id="d5cfe-136">Take the snapshot.</span><span class="sxs-lookup"><span data-stu-id="d5cfe-136">Take the snapshot.</span></span>
+   
+> [!NOTE]
+> <span data-ttu-id="b0a49-128">If you would like to store your snapshot in zone-resilient storage, you need to create it in a region that supports [availability zones](../../availability-zones/az-overview.md) and include the `-SkuName Standard_ZRS` parameter.</span><span class="sxs-lookup"><span data-stu-id="b0a49-128">If you would like to store your snapshot in zone-resilient storage, you need to create it in a region that supports [availability zones](../../availability-zones/az-overview.md) and include the `-SkuName Standard_ZRS` parameter.</span></span>   
 
- ```powershell
-New-AzureRmSnapshot -Snapshot $snapshot -SnapshotName $snapshotName -ResourceGroupName $resourceGroupName 
+   
+<span data-ttu-id="b0a49-129">Take the snapshot.</span><span class="sxs-lookup"><span data-stu-id="b0a49-129">Take the snapshot.</span></span>
+
+```azurepowershell-interactive
+New-AzureRmSnapshot `
+   -Snapshot $snapshot `
+   -SnapshotName $snapshotName `
+   -ResourceGroupName $resourceGroupName 
 ```
-<span data-ttu-id="d5cfe-137">If you plan to use the snapshot to create a Managed Disk and attach it a VM that needs to be high performing, use the parameter `-AccountType Premium_LRS` with the New-AzureRmSnapshot command.</span><span class="sxs-lookup"><span data-stu-id="d5cfe-137">If you plan to use the snapshot to create a Managed Disk and attach it a VM that needs to be high performing, use the parameter `-AccountType Premium_LRS` with the New-AzureRmSnapshot command.</span></span> <span data-ttu-id="d5cfe-138">The parameter creates the snapshot so that it's stored as a Premium Managed Disk.</span><span class="sxs-lookup"><span data-stu-id="d5cfe-138">The parameter creates the snapshot so that it's stored as a Premium Managed Disk.</span></span> <span data-ttu-id="d5cfe-139">Premium Managed Disks are more expensive than Standard.</span><span class="sxs-lookup"><span data-stu-id="d5cfe-139">Premium Managed Disks are more expensive than Standard.</span></span> <span data-ttu-id="d5cfe-140">So be sure you really need Premium before using that parameter.</span><span class="sxs-lookup"><span data-stu-id="d5cfe-140">So be sure you really need Premium before using that parameter.</span></span>
 
 
+
+
+## <a name="next-steps"></a><span data-ttu-id="b0a49-130">Next steps</span><span class="sxs-lookup"><span data-stu-id="b0a49-130">Next steps</span></span>
+
+<span data-ttu-id="b0a49-131">Create a virtual machine from a snapshot by creating a managed disk from a snapshot and then attaching the new managed disk as the OS disk.</span><span class="sxs-lookup"><span data-stu-id="b0a49-131">Create a virtual machine from a snapshot by creating a managed disk from a snapshot and then attaching the new managed disk as the OS disk.</span></span> <span data-ttu-id="b0a49-132">For more information, see the [Create a VM from a snapshot](./../scripts/virtual-machines-windows-powershell-sample-create-vm-from-snapshot.md?toc=%2fpowershell%2fmodule%2ftoc.json) sample.</span><span class="sxs-lookup"><span data-stu-id="b0a49-132">For more information, see the [Create a VM from a snapshot](./../scripts/virtual-machines-windows-powershell-sample-create-vm-from-snapshot.md?toc=%2fpowershell%2fmodule%2ftoc.json) sample.</span></span>

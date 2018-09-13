@@ -1,366 +1,377 @@
 ---
 title: Connectors for Azure Logic Apps | Microsoft Docs
-description: Choose from Microsoft-managed connectors to build and create logic apps
+description: Automate workflows with connectors for Azure Logic Apps, including built-in, managed, on-premises, integration account, and enterprise connectors
 services: logic-apps
-documentationcenter: ''
-author: MandiOhlinger
-manager: anneta
-editor: ''
-tags: connectors
-ms.assetid: f1f1fd50-b7f9-4d13-824a-39678619aa7a
 ms.service: logic-apps
-ms.workload: integration
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: get-started-article
-ms.date: 01/27/2017
-ms.author: mandia
-ms.openlocfilehash: 5bb6e3f5ceb0b49e14bedc7f1899cb7387c05ffc
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+author: ecfan
+ms.author: estfan
+ms.reviewer: klam, LADocs
+ms.suite: integration
+ms.topic: article
+ms.date: 08/23/2018
+ms.openlocfilehash: 6b31882ec3916e60ac7dc7b8117328176abef1b4
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44563267"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44791315"
 ---
-# <a name="connectors-list"></a><span data-ttu-id="c51ca-103">Connectors list</span><span class="sxs-lookup"><span data-stu-id="c51ca-103">Connectors list</span></span>
-<span data-ttu-id="c51ca-104">Select a connector to learn how to build workflows quickly.</span><span class="sxs-lookup"><span data-stu-id="c51ca-104">Select a connector to learn how to build workflows quickly.</span></span>
+# <a name="connectors-for-azure-logic-apps"></a><span data-ttu-id="2ddb8-103">Connectors for Azure Logic Apps</span><span class="sxs-lookup"><span data-stu-id="2ddb8-103">Connectors for Azure Logic Apps</span></span>
 
-## <a name="standard-connectors"></a><span data-ttu-id="c51ca-105">Standard connectors</span><span class="sxs-lookup"><span data-stu-id="c51ca-105">Standard connectors</span></span>
+<span data-ttu-id="2ddb8-104">Connectors play an integral part when you create automated workflows with Azure Logic Apps.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-104">Connectors play an integral part when you create automated workflows with Azure Logic Apps.</span></span> <span data-ttu-id="2ddb8-105">By using connectors in your logic apps, you expand the capabilities for your on-premises and cloud apps to perform tasks with the data that you create and already have.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-105">By using connectors in your logic apps, you expand the capabilities for your on-premises and cloud apps to perform tasks with the data that you create and already have.</span></span> 
 
-| <span data-ttu-id="c51ca-106">Connectors</span><span class="sxs-lookup"><span data-stu-id="c51ca-106">Connectors</span></span> |  |  |  |
-| --- | --- | --- | --- |
-|<span data-ttu-id="c51ca-107">[![API Icon][API/Web-Appicon]<br/> **API/Web App**][API/Web-Appdoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-107">[![API Icon][API/Web-Appicon]<br/> **API/Web App**][API/Web-Appdoc]</span></span>|<span data-ttu-id="c51ca-108">![API Icon][appFiguresicon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-108">![API Icon][appFiguresicon]</span></span><br/><span data-ttu-id="c51ca-109">**appFigures**</span><span class="sxs-lookup"><span data-stu-id="c51ca-109">**appFigures**</span></span>|<span data-ttu-id="c51ca-110">![API Icon][Asanaicon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-110">![API Icon][Asanaicon]</span></span><br/><span data-ttu-id="c51ca-111">**Asana**</span><span class="sxs-lookup"><span data-stu-id="c51ca-111">**Asana**</span></span>|<span data-ttu-id="c51ca-112">![API Icon][Azure-Automation-icon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-112">![API Icon][Azure-Automation-icon]</span></span><br/><span data-ttu-id="c51ca-113">**Azure Automation**</span><span class="sxs-lookup"><span data-stu-id="c51ca-113">**Azure Automation**</span></span>|
-|<span data-ttu-id="c51ca-114">[![API Icon][AzureBlobStorageicon]<br/>**Azure Blob<br/>Storage**][AzureBlobStoragedoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-114">[![API Icon][AzureBlobStorageicon]<br/>**Azure Blob<br/>Storage**][AzureBlobStoragedoc]</span></span>|<span data-ttu-id="c51ca-115">![API Icon][Azure-Data-Lake-icon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-115">![API Icon][Azure-Data-Lake-icon]</span></span><br/><span data-ttu-id="c51ca-116">**Azure Data<br/>Lake**</span><span class="sxs-lookup"><span data-stu-id="c51ca-116">**Azure Data<br/>Lake**</span></span>|<span data-ttu-id="c51ca-117">![API Icon][Azure-DocumentDBicon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-117">![API Icon][Azure-DocumentDBicon]</span></span><br/><span data-ttu-id="c51ca-118">**Azure DocumentDB**</span><span class="sxs-lookup"><span data-stu-id="c51ca-118">**Azure DocumentDB**</span></span>|<span data-ttu-id="c51ca-119">[![API Icon][Azure-Functionsicon]<br/>**Azure<br/>Functions**][Azure-Functionsdoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-119">[![API Icon][Azure-Functionsicon]<br/>**Azure<br/>Functions**][Azure-Functionsdoc]</span></span>|
-|<span data-ttu-id="c51ca-120">![API Icon][Azure-MLicon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-120">![API Icon][Azure-MLicon]</span></span><br/><span data-ttu-id="c51ca-121">**Azure ML**</span><span class="sxs-lookup"><span data-stu-id="c51ca-121">**Azure ML**</span></span>|<span data-ttu-id="c51ca-122">![API Icon][Azure-Resource-Manager-icon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-122">![API Icon][Azure-Resource-Manager-icon]</span></span><br/><span data-ttu-id="c51ca-123">**Azure Resource<br/>Manager**</span><span class="sxs-lookup"><span data-stu-id="c51ca-123">**Azure Resource<br/>Manager**</span></span>|<span data-ttu-id="c51ca-124">![API Icon][Azure-Queues-icon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-124">![API Icon][Azure-Queues-icon]</span></span><br/><span data-ttu-id="c51ca-125">**Azure Queues**</span><span class="sxs-lookup"><span data-stu-id="c51ca-125">**Azure Queues**</span></span>|<span data-ttu-id="c51ca-126">![API Icon][Basecamp-3icon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-126">![API Icon][Basecamp-3icon]</span></span><br/><span data-ttu-id="c51ca-127">**Basecamp 3**</span><span class="sxs-lookup"><span data-stu-id="c51ca-127">**Basecamp 3**</span></span>|
-|<span data-ttu-id="c51ca-128">![API Icon][Bitbucket-icon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-128">![API Icon][Bitbucket-icon]</span></span><br/><span data-ttu-id="c51ca-129">**Bitbucket**</span><span class="sxs-lookup"><span data-stu-id="c51ca-129">**Bitbucket**</span></span>|<span data-ttu-id="c51ca-130">![API Icon][Bitlyicon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-130">![API Icon][Bitlyicon]</span></span><br/><span data-ttu-id="c51ca-131">**Bitly**</span><span class="sxs-lookup"><span data-stu-id="c51ca-131">**Bitly**</span></span>|<span data-ttu-id="c51ca-132">![API Icon][BizTalk-Servericon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-132">![API Icon][BizTalk-Servericon]</span></span><br/><span data-ttu-id="c51ca-133">**BizTalk Server**</span><span class="sxs-lookup"><span data-stu-id="c51ca-133">**BizTalk Server**</span></span>|<span data-ttu-id="c51ca-134">![API Icon][Bloggericon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-134">![API Icon][Bloggericon]</span></span><br/><span data-ttu-id="c51ca-135">**Blogger**</span><span class="sxs-lookup"><span data-stu-id="c51ca-135">**Blogger**</span></span>|
-|<span data-ttu-id="c51ca-136">[![API Icon][Boxicon]<br/>**Box**][boxDoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-136">[![API Icon][Boxicon]<br/>**Box**][boxDoc]</span></span>|<span data-ttu-id="c51ca-137">![API Icon][Campfireicon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-137">![API Icon][Campfireicon]</span></span><br/><span data-ttu-id="c51ca-138">**Campfire**</span><span class="sxs-lookup"><span data-stu-id="c51ca-138">**Campfire**</span></span>|<span data-ttu-id="c51ca-139">![API Icon][Cognitive-Services-Text-Analyticsicon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-139">![API Icon][Cognitive-Services-Text-Analyticsicon]</span></span><br/><span data-ttu-id="c51ca-140">**Cognitive Services<br/>Text Analytics**</span><span class="sxs-lookup"><span data-stu-id="c51ca-140">**Cognitive Services<br/>Text Analytics**</span></span>|<span data-ttu-id="c51ca-141">![API Icon][Common-Data-Serviceicon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-141">![API Icon][Common-Data-Serviceicon]</span></span><br/><span data-ttu-id="c51ca-142">**Common Data<br/>Service**</span><span class="sxs-lookup"><span data-stu-id="c51ca-142">**Common Data<br/>Service**</span></span>|
-|<span data-ttu-id="c51ca-143">[![API Icon][DB2icon]<br/>**DB2**][db2doc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-143">[![API Icon][DB2icon]<br/>**DB2**][db2doc]</span></span>|<span data-ttu-id="c51ca-144">[![API Icon][Delayicon]<br/>**Delay**][Delaydoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-144">[![API Icon][Delayicon]<br/>**Delay**][Delaydoc]</span></span>|<span data-ttu-id="c51ca-145">[![API Icon][Dropboxicon]<br/>**Dropbox**][dropboxdoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-145">[![API Icon][Dropboxicon]<br/>**Dropbox**][dropboxdoc]</span></span>|<span data-ttu-id="c51ca-146">[![API Icon][Dynamics-365icon]<br/>**Dynamics 365**][Dynamics-365doc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-146">[![API Icon][Dynamics-365icon]<br/>**Dynamics 365**][Dynamics-365doc]</span></span>|
-|<span data-ttu-id="c51ca-147">![API Icon][Dynamics-365-for-Financialsicon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-147">![API Icon][Dynamics-365-for-Financialsicon]</span></span><br/><span data-ttu-id="c51ca-148">**Dynamics 365<br/>for Financials**</span><span class="sxs-lookup"><span data-stu-id="c51ca-148">**Dynamics 365<br/>for Financials**</span></span>|<span data-ttu-id="c51ca-149">![API Icon][Dynamics-365-for-Operationsicon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-149">![API Icon][Dynamics-365-for-Operationsicon]</span></span><br/><span data-ttu-id="c51ca-150">**Dynamics 365<br/>for Operations**</span><span class="sxs-lookup"><span data-stu-id="c51ca-150">**Dynamics 365<br/>for Operations**</span></span>|<span data-ttu-id="c51ca-151">![API Icon][Easy-Redmineicon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-151">![API Icon][Easy-Redmineicon]</span></span><br/><span data-ttu-id="c51ca-152">**Easy Redmine**</span><span class="sxs-lookup"><span data-stu-id="c51ca-152">**Easy Redmine**</span></span>|<span data-ttu-id="c51ca-153">[![API Icon][Event-hubs-icon]<br/>**Event Hubs**][event-hubs-doc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-153">[![API Icon][Event-hubs-icon]<br/>**Event Hubs**][event-hubs-doc]</span></span>|
-|<span data-ttu-id="c51ca-154">[![API Icon][Facebookicon]<br/>**Facebook**][Facebookdoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-154">[![API Icon][Facebookicon]<br/>**Facebook**][Facebookdoc]</span></span>|<span data-ttu-id="c51ca-155">[![API Icon][FileSystemIcon]<br/>**File System**][FileSystemdoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-155">[![API Icon][FileSystemIcon]<br/>**File System**][FileSystemdoc]</span></span>|<span data-ttu-id="c51ca-156">[![API Icon][FTPicon]<br/>**FTP**][FTPdoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-156">[![API Icon][FTPicon]<br/>**FTP**][FTPdoc]</span></span>|<span data-ttu-id="c51ca-157">![API Icon][GitHubicon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-157">![API Icon][GitHubicon]</span></span><br/><span data-ttu-id="c51ca-158">**GitHub**</span><span class="sxs-lookup"><span data-stu-id="c51ca-158">**GitHub**</span></span>|
-|<span data-ttu-id="c51ca-159">![API Icon][Google-Calendaricon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-159">![API Icon][Google-Calendaricon]</span></span><br/><span data-ttu-id="c51ca-160">**Google Calendar**</span><span class="sxs-lookup"><span data-stu-id="c51ca-160">**Google Calendar**</span></span>|<span data-ttu-id="c51ca-161">[![API Icon][Google-Driveicon]<br/>**Google Drive**][Google-Drivedoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-161">[![API Icon][Google-Driveicon]<br/>**Google Drive**][Google-Drivedoc]</span></span>|<span data-ttu-id="c51ca-162">![API Icon][Google-Sheetsicon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-162">![API Icon][Google-Sheetsicon]</span></span><br/><span data-ttu-id="c51ca-163">**Google Sheets**</span><span class="sxs-lookup"><span data-stu-id="c51ca-163">**Google Sheets**</span></span>|<span data-ttu-id="c51ca-164">![API Icon][Google-Tasksicon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-164">![API Icon][Google-Tasksicon]</span></span><br/><span data-ttu-id="c51ca-165">**Google Tasks**</span><span class="sxs-lookup"><span data-stu-id="c51ca-165">**Google Tasks**</span></span>|
-|<span data-ttu-id="c51ca-166">![API Icon][HipChaticon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-166">![API Icon][HipChaticon]</span></span><br/><span data-ttu-id="c51ca-167">**HipChat**</span><span class="sxs-lookup"><span data-stu-id="c51ca-167">**HipChat**</span></span>|<span data-ttu-id="c51ca-168">[![API Icon][HTTPicon]<br/>**HTTP**][HTTPdoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-168">[![API Icon][HTTPicon]<br/>**HTTP**][HTTPdoc]</span></span>|<span data-ttu-id="c51ca-169">[![API Icon][HTTP-Swaggericon]<br/>**HTTP Swagger**][http-swaggerdoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-169">[![API Icon][HTTP-Swaggericon]<br/>**HTTP Swagger**][http-swaggerdoc]</span></span>|<span data-ttu-id="c51ca-170">[![API Icon][HTTP-Requesticon]<br/>**HTTP<br/>Request**][HTTP-Requestdoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-170">[![API Icon][HTTP-Requesticon]<br/>**HTTP<br/>Request**][HTTP-Requestdoc]</span></span>|
-|<span data-ttu-id="c51ca-171">[![API Icon][HTTP-Responseicon]<br/>**HTTP<br/>Response**][HTTP-Responsedoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-171">[![API Icon][HTTP-Responseicon]<br/>**HTTP<br/>Response**][HTTP-Responsedoc]</span></span>|<span data-ttu-id="c51ca-172">[![API Icon][Informixicon]<br/>**Informix**][Informixdoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-172">[![API Icon][Informixicon]<br/>**Informix**][Informixdoc]</span></span>|<span data-ttu-id="c51ca-173">![API Icon][Insightlyicon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-173">![API Icon][Insightlyicon]</span></span><br/><span data-ttu-id="c51ca-174">**Insightly**</span><span class="sxs-lookup"><span data-stu-id="c51ca-174">**Insightly**</span></span>|<span data-ttu-id="c51ca-175">![API Icon][Instagramicon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-175">![API Icon][Instagramicon]</span></span><br/><span data-ttu-id="c51ca-176">**Instagram**</span><span class="sxs-lookup"><span data-stu-id="c51ca-176">**Instagram**</span></span>|
-|<span data-ttu-id="c51ca-177">![API Icon][Instapapericon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-177">![API Icon][Instapapericon]</span></span><br/><span data-ttu-id="c51ca-178">**Instapaper**</span><span class="sxs-lookup"><span data-stu-id="c51ca-178">**Instapaper**</span></span>|<span data-ttu-id="c51ca-179">![API Icon][JIRAicon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-179">![API Icon][JIRAicon]</span></span><br/><span data-ttu-id="c51ca-180">**JIRA**</span><span class="sxs-lookup"><span data-stu-id="c51ca-180">**JIRA**</span></span>|<span data-ttu-id="c51ca-181">[![API Icon][MailChimpicon]<br/>**MailChimp**][MailChimpdoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-181">[![API Icon][MailChimpicon]<br/>**MailChimp**][MailChimpdoc]</span></span>|<span data-ttu-id="c51ca-182">![API Icon][Mandrillicon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-182">![API Icon][Mandrillicon]</span></span><br/><span data-ttu-id="c51ca-183">**Mandrill**</span><span class="sxs-lookup"><span data-stu-id="c51ca-183">**Mandrill**</span></span>|
-|<span data-ttu-id="c51ca-184">[![API Icon][Microsoft-Translatoricon]<br/>**Microsoft<br/>Translator**][Microsoft-Translatordoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-184">[![API Icon][Microsoft-Translatoricon]<br/>**Microsoft<br/>Translator**][Microsoft-Translatordoc]</span></span>|<span data-ttu-id="c51ca-185">[![API Icon][Nested-Logic-Appicon]<br/>**Nested<br/>Logic App**][Nested-Logic-Appdoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-185">[![API Icon][Nested-Logic-Appicon]<br/>**Nested<br/>Logic App**][Nested-Logic-Appdoc]</span></span>|<span data-ttu-id="c51ca-186">[![API Icon][Office-365-Outlookicon]<br/>**Office 365<br/>Outlook**][office365-outlookdoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-186">[![API Icon][Office-365-Outlookicon]<br/>**Office 365<br/>Outlook**][office365-outlookdoc]</span></span>|<span data-ttu-id="c51ca-187">[![API Icon][Office-365-Usersicon]][office365-usersdoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-187">[![API Icon][Office-365-Usersicon]][office365-usersdoc]</span></span><br/><span data-ttu-id="c51ca-188">**Office 365<br/>Users**</span><span class="sxs-lookup"><span data-stu-id="c51ca-188">**Office 365<br/>Users**</span></span>|
-|<span data-ttu-id="c51ca-189">[![API Icon][Office-365-Videoicon]<br/>**Office 365<br/>Video**][office365-videodoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-189">[![API Icon][Office-365-Videoicon]<br/>**Office 365<br/>Video**][office365-videodoc]</span></span>|<span data-ttu-id="c51ca-190">[![API Icon][OneDriveicon]<br/>**OneDrive**][OneDrivedoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-190">[![API Icon][OneDriveicon]<br/>**OneDrive**][OneDrivedoc]</span></span>|<span data-ttu-id="c51ca-191">[![API Icon][OneDrive-for-Businessicon]<br/>**OneDrive for<br/>Business**][OneDrive-for-Businessdoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-191">[![API Icon][OneDrive-for-Businessicon]<br/>**OneDrive for<br/>Business**][OneDrive-for-Businessdoc]</span></span>|<span data-ttu-id="c51ca-192">[![API Icon][Oracle-DB-icon]<br/>**Oracle DB**][oracle-db-doc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-192">[![API Icon][Oracle-DB-icon]<br/>**Oracle DB**][oracle-db-doc]</span></span>|
-|<span data-ttu-id="c51ca-193">[![API Icon][Outlook.comicon]<br/>**Outlook.com**][Outlook.comdoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-193">[![API Icon][Outlook.comicon]<br/>**Outlook.com**][Outlook.comdoc]</span></span>|<span data-ttu-id="c51ca-194">![API Icon][PagerDutyicon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-194">![API Icon][PagerDutyicon]</span></span><br/><span data-ttu-id="c51ca-195">**PagerDuty**</span><span class="sxs-lookup"><span data-stu-id="c51ca-195">**PagerDuty**</span></span>|<span data-ttu-id="c51ca-196">![API Icon][Pinteresticon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-196">![API Icon][Pinteresticon]</span></span><br/><span data-ttu-id="c51ca-197">**Pinterest**</span><span class="sxs-lookup"><span data-stu-id="c51ca-197">**Pinterest**</span></span>|<span data-ttu-id="c51ca-198">[![API Icon][Project-Onlineicon]<br/>**Project Online**][Project-Onlinedoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-198">[![API Icon][Project-Onlineicon]<br/>**Project Online**][Project-Onlinedoc]</span></span>|
-|<span data-ttu-id="c51ca-199">[![API Icon][Queryicon]<br/>**Query**][Querydoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-199">[![API Icon][Queryicon]<br/>**Query**][Querydoc]</span></span>|<span data-ttu-id="c51ca-200">[![API Icon][Recurrenceicon]<br/>**Recurrence**][Recurrencedoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-200">[![API Icon][Recurrenceicon]<br/>**Recurrence**][Recurrencedoc]</span></span>|<span data-ttu-id="c51ca-201">![API Icon][Redmineicon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-201">![API Icon][Redmineicon]</span></span><br/><span data-ttu-id="c51ca-202">**Redmine**</span><span class="sxs-lookup"><span data-stu-id="c51ca-202">**Redmine**</span></span>|<span data-ttu-id="c51ca-203">[![API Icon][RSSicon]<br/>**RSS**][RSSdoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-203">[![API Icon][RSSicon]<br/>**RSS**][RSSdoc]</span></span>|
-|<span data-ttu-id="c51ca-204">[![API Icon][Salesforceicon]<br/>**Salesforce**][Salesforcedoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-204">[![API Icon][Salesforceicon]<br/>**Salesforce**][Salesforcedoc]</span></span>|<span data-ttu-id="c51ca-205">[![API Icon][SendGridicon]<br/>**SendGrid**][SendGriddoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-205">[![API Icon][SendGridicon]<br/>**SendGrid**][SendGriddoc]</span></span>|<span data-ttu-id="c51ca-206">[![API Icon][Service-Busicon]<br/>**Service Bus**][Service-Busdoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-206">[![API Icon][Service-Busicon]<br/>**Service Bus**][Service-Busdoc]</span></span>|<span data-ttu-id="c51ca-207">[![API Icon][SFTPicon]<br/>**SFTP**][SFTPdoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-207">[![API Icon][SFTPicon]<br/>**SFTP**][SFTPdoc]</span></span>|
-|<span data-ttu-id="c51ca-208">[![API Icon][SharePointicon]<br/>**SharePoint**][SharePointdoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-208">[![API Icon][SharePointicon]<br/>**SharePoint**][SharePointdoc]</span></span>|<span data-ttu-id="c51ca-209">[![API Icon][Slackicon]<br/>**Slack**][Slackdoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-209">[![API Icon][Slackicon]<br/>**Slack**][Slackdoc]</span></span>|<span data-ttu-id="c51ca-210">![API Icon][Smartsheeticon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-210">![API Icon][Smartsheeticon]</span></span><br/><span data-ttu-id="c51ca-211">**Smartsheet**</span><span class="sxs-lookup"><span data-stu-id="c51ca-211">**Smartsheet**</span></span>|<span data-ttu-id="c51ca-212">[![API Icon][SMTPicon]<br/>**SMTP**][SMTPdoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-212">[![API Icon][SMTPicon]<br/>**SMTP**][SMTPdoc]</span></span>|
-|<span data-ttu-id="c51ca-213">![API Icon][SparkPosticon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-213">![API Icon][SparkPosticon]</span></span><br/><span data-ttu-id="c51ca-214">**SparkPost**</span><span class="sxs-lookup"><span data-stu-id="c51ca-214">**SparkPost**</span></span>|<span data-ttu-id="c51ca-215">[![API Icon][SQL-Servericon]<br/>**SQL Server**][SQL-Serverdoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-215">[![API Icon][SQL-Servericon]<br/>**SQL Server**][SQL-Serverdoc]</span></span>|<span data-ttu-id="c51ca-216">![API Icon][Todoisticon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-216">![API Icon][Todoisticon]</span></span><br/><span data-ttu-id="c51ca-217">**Todoist**</span><span class="sxs-lookup"><span data-stu-id="c51ca-217">**Todoist**</span></span>|<span data-ttu-id="c51ca-218">[![API Icon][Trelloicon]<br/>**Trello**][Trellodoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-218">[![API Icon][Trelloicon]<br/>**Trello**][Trellodoc]</span></span>|
-|<span data-ttu-id="c51ca-219">[![API Icon][Twilioicon]<br/>**Twilio**][Twiliodoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-219">[![API Icon][Twilioicon]<br/>**Twilio**][Twiliodoc]</span></span>|<span data-ttu-id="c51ca-220">[![API Icon][Twittericon]<br/>**Twitter**][Twitterdoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-220">[![API Icon][Twittericon]<br/>**Twitter**][Twitterdoc]</span></span>|<span data-ttu-id="c51ca-221">![API Icon][Vimeoicon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-221">![API Icon][Vimeoicon]</span></span><br/><span data-ttu-id="c51ca-222">**Vimeo**</span><span class="sxs-lookup"><span data-stu-id="c51ca-222">**Vimeo**</span></span>|<span data-ttu-id="c51ca-223">![API Icon][Visual-Studio-Team-Servicesicon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-223">![API Icon][Visual-Studio-Team-Servicesicon]</span></span><br/><span data-ttu-id="c51ca-224">**Visual Studio<br/>Team Services**</span><span class="sxs-lookup"><span data-stu-id="c51ca-224">**Visual Studio<br/>Team Services**</span></span>|
-|<span data-ttu-id="c51ca-225">[![API Icon][Webhookicon]<br/>**Webhook**][Webhookdoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-225">[![API Icon][Webhookicon]<br/>**Webhook**][Webhookdoc]</span></span>|<span data-ttu-id="c51ca-226">![API Icon][WordPressicon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-226">![API Icon][WordPressicon]</span></span><br/><span data-ttu-id="c51ca-227">**WordPress**</span><span class="sxs-lookup"><span data-stu-id="c51ca-227">**WordPress**</span></span>|<span data-ttu-id="c51ca-228">[![API Icon][Wunderlisticon]<br/>**Wunderlist**][Wunderlistdoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-228">[![API Icon][Wunderlisticon]<br/>**Wunderlist**][Wunderlistdoc]</span></span>|<span data-ttu-id="c51ca-229">[![API Icon][Yammericon]<br/>**Yammer**][Yammerdoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-229">[![API Icon][Yammericon]<br/>**Yammer**][Yammerdoc]</span></span>|
-|<span data-ttu-id="c51ca-230">![API Icon][YouTubeicon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-230">![API Icon][YouTubeicon]</span></span><br/><span data-ttu-id="c51ca-231">**YouTube**</span><span class="sxs-lookup"><span data-stu-id="c51ca-231">**YouTube**</span></span>|
+<span data-ttu-id="2ddb8-106">While Logic Apps offers [~200+ connectors](https://docs.microsoft.com/connectors), this article describes popular and more commonly used connectors that are successfully used by thousands of apps and millions of executions for processing data and information.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-106">While Logic Apps offers [~200+ connectors](https://docs.microsoft.com/connectors), this article describes popular and more commonly used connectors that are successfully used by thousands of apps and millions of executions for processing data and information.</span></span> <span data-ttu-id="2ddb8-107">Connectors are available as either built-ins or managed connectors.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-107">Connectors are available as either built-ins or managed connectors.</span></span> 
 
-> [!TIP]
-> <span data-ttu-id="c51ca-232">If you want to get started with Azure Logic Apps before signing up for an Azure account, go to [Try Logic Apps](https://tryappservice.azure.com/?appservice=logic).</span><span class="sxs-lookup"><span data-stu-id="c51ca-232">If you want to get started with Azure Logic Apps before signing up for an Azure account, go to [Try Logic Apps](https://tryappservice.azure.com/?appservice=logic).</span></span> <span data-ttu-id="c51ca-233">You can immediately create a short-lived starter logic app in App Service.</span><span class="sxs-lookup"><span data-stu-id="c51ca-233">You can immediately create a short-lived starter logic app in App Service.</span></span> <span data-ttu-id="c51ca-234">No credit cards required, no commitments.</span><span class="sxs-lookup"><span data-stu-id="c51ca-234">No credit cards required, no commitments.</span></span>
+> [!NOTE]
+> <span data-ttu-id="2ddb8-108">For the full list of connectors and each connector's reference information, such as actions, any triggers, and limits, you can find the full list under the [Connectors overview](https://docs.microsoft.com/connectors).</span><span class="sxs-lookup"><span data-stu-id="2ddb8-108">For the full list of connectors and each connector's reference information, such as actions, any triggers, and limits, you can find the full list under the [Connectors overview](https://docs.microsoft.com/connectors).</span></span>
 
-## <a name="integration-account-connectors"></a><span data-ttu-id="c51ca-235">Integration account connectors</span><span class="sxs-lookup"><span data-stu-id="c51ca-235">Integration account connectors</span></span> 
+* <span data-ttu-id="2ddb8-109">[**Built-ins**](#built-ins): These built-in actions and triggers help you create logic apps that run on custom schedules, communicate with other endpoints, receive and respond to requests, and call Azure functions, Azure API Apps (Web Apps), your own APIs managed and published with Azure API Management, and nested logic apps that can receive requests.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-109">[**Built-ins**](#built-ins): These built-in actions and triggers help you create logic apps that run on custom schedules, communicate with other endpoints, receive and respond to requests, and call Azure functions, Azure API Apps (Web Apps), your own APIs managed and published with Azure API Management, and nested logic apps that can receive requests.</span></span> <span data-ttu-id="2ddb8-110">You can also use built-in actions that help you organize and control your logic app's workflow, and also work with data.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-110">You can also use built-in actions that help you organize and control your logic app's workflow, and also work with data.</span></span>
 
-| <span data-ttu-id="c51ca-236">Integration account</span><span class="sxs-lookup"><span data-stu-id="c51ca-236">Integration account</span></span><br/><span data-ttu-id="c51ca-237">connectors</span><span class="sxs-lookup"><span data-stu-id="c51ca-237">connectors</span></span> |  |  |  |
-| --- | --- | --- | --- |
-| <span data-ttu-id="c51ca-238">[![API Icon][xmlvalidateicon]<br/>**XML <br/>validation**][xmlvalidatedoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-238">[![API Icon][xmlvalidateicon]<br/>**XML <br/>validation**][xmlvalidatedoc]</span></span> |<span data-ttu-id="c51ca-239">[![API Icon][xmltransformicon]<br/>**XML<br/> transform**][xmltransformdoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-239">[![API Icon][xmltransformicon]<br/>**XML<br/> transform**][xmltransformdoc]</span></span> |<span data-ttu-id="c51ca-240">[![API Icon][flatfileicon]<br/>**Flat file</br> encoding**][flatfiledoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-240">[![API Icon][flatfileicon]<br/>**Flat file</br> encoding**][flatfiledoc]</span></span> |<span data-ttu-id="c51ca-241">[![API Icon][flatfiledecodeicon]<br/>**Flat file</br> decoding**][flatfiledecodedoc]</span><span class="sxs-lookup"><span data-stu-id="c51ca-241">[![API Icon][flatfiledecodeicon]<br/>**Flat file</br> decoding**][flatfiledecodedoc]</span></span> |
-| <span data-ttu-id="c51ca-242">[![API Icon][as2icon]<br/>**AS2</br> decoding**][as2decode]</span><span class="sxs-lookup"><span data-stu-id="c51ca-242">[![API Icon][as2icon]<br/>**AS2</br> decoding**][as2decode]</span></span> |<span data-ttu-id="c51ca-243">[![API Icon][as2icon]<br/>**AS2</br> encoding**][as2encode]</span><span class="sxs-lookup"><span data-stu-id="c51ca-243">[![API Icon][as2icon]<br/>**AS2</br> encoding**][as2encode]</span></span> |<span data-ttu-id="c51ca-244">[![API Icon][x12icon]<br/>**X12</br> decoding**][x12decode]</span><span class="sxs-lookup"><span data-stu-id="c51ca-244">[![API Icon][x12icon]<br/>**X12</br> decoding**][x12decode]</span></span> |<span data-ttu-id="c51ca-245">[![API Icon][x12icon]<br/>**X12</br> encoding**][x12encode]</span><span class="sxs-lookup"><span data-stu-id="c51ca-245">[![API Icon][x12icon]<br/>**X12</br> encoding**][x12encode]</span></span> |
-| <span data-ttu-id="c51ca-246">[![API Icon][x12icon]<br/>**EDIFACT</br> decoding**][EDIFACTdecode]</span><span class="sxs-lookup"><span data-stu-id="c51ca-246">[![API Icon][x12icon]<br/>**EDIFACT</br> decoding**][EDIFACTdecode]</span></span> |<span data-ttu-id="c51ca-247">[![API Icon][x12icon]<br/>**EDIFACT</br> encoding**][EDIFACTencode]</span><span class="sxs-lookup"><span data-stu-id="c51ca-247">[![API Icon][x12icon]<br/>**EDIFACT</br> encoding**][EDIFACTencode]</span></span> | | |
+* <span data-ttu-id="2ddb8-111">**Managed connectors**: These connectors provide triggers and actions for accessing other services and systems.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-111">**Managed connectors**: These connectors provide triggers and actions for accessing other services and systems.</span></span> <span data-ttu-id="2ddb8-112">Some connectors require that you first create connections that are managed by Azure Logic Apps.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-112">Some connectors require that you first create connections that are managed by Azure Logic Apps.</span></span> <span data-ttu-id="2ddb8-113">Managed connectors are organized into these groups:</span><span class="sxs-lookup"><span data-stu-id="2ddb8-113">Managed connectors are organized into these groups:</span></span>
 
-## <a name="enterprise-connectors"></a><span data-ttu-id="c51ca-248">Enterprise connectors</span><span class="sxs-lookup"><span data-stu-id="c51ca-248">Enterprise connectors</span></span>
+  |   |   |
+  |---|---|
+  | [<span data-ttu-id="2ddb8-114">**Managed API connectors**</span><span class="sxs-lookup"><span data-stu-id="2ddb8-114">**Managed API connectors**</span></span>](#managed-api-connectors) | <span data-ttu-id="2ddb8-115">Create logic apps that use services such as Azure Blob Storage, Office 365, Dynamics, Power BI, OneDrive, Salesforce, SharePoint Online, and many more.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-115">Create logic apps that use services such as Azure Blob Storage, Office 365, Dynamics, Power BI, OneDrive, Salesforce, SharePoint Online, and many more.</span></span> | 
+  | [<span data-ttu-id="2ddb8-116">**On-premises connectors**</span><span class="sxs-lookup"><span data-stu-id="2ddb8-116">**On-premises connectors**</span></span>](#on-premises-connectors) | <span data-ttu-id="2ddb8-117">After you install and set up the [on-premises data gateway][gateway-doc], these connectors help your logic apps access on-premises systems such as SQL Server, SharePoint Server, Oracle DB, file shares, and others.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-117">After you install and set up the [on-premises data gateway][gateway-doc], these connectors help your logic apps access on-premises systems such as SQL Server, SharePoint Server, Oracle DB, file shares, and others.</span></span> | 
+  | [<span data-ttu-id="2ddb8-118">**Integration account connectors**</span><span class="sxs-lookup"><span data-stu-id="2ddb8-118">**Integration account connectors**</span></span>](#integration-account-connectors) | <span data-ttu-id="2ddb8-119">Available when you create and pay for an integration account, these connectors transform and validate XML, encode and decode flat files, and process business-to-business (B2B) messages with AS2, EDIFACT, and X12 protocols.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-119">Available when you create and pay for an integration account, these connectors transform and validate XML, encode and decode flat files, and process business-to-business (B2B) messages with AS2, EDIFACT, and X12 protocols.</span></span> | 
+  | [<span data-ttu-id="2ddb8-120">**Enterprise connectors**</span><span class="sxs-lookup"><span data-stu-id="2ddb8-120">**Enterprise connectors**</span></span>](#enterprise-connectors) | <span data-ttu-id="2ddb8-121">Provide access to enterprise systems such as SAP and IBM MQ for an additional cost.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-121">Provide access to enterprise systems such as SAP and IBM MQ for an additional cost.</span></span> |
+  ||| 
 
-<span data-ttu-id="c51ca-249">To create logic apps for B2B scenarios that include EAI and EDI, include these enterprise connectors.</span><span class="sxs-lookup"><span data-stu-id="c51ca-249">To create logic apps for B2B scenarios that include EAI and EDI, include these enterprise connectors.</span></span>
+  <span data-ttu-id="2ddb8-122">For example, if you're using Microsoft BizTalk Server, your logic apps can connect to and communicate with your BizTalk Server by using the [BizTalk Server connector](#on-premises-connectors).</span><span class="sxs-lookup"><span data-stu-id="2ddb8-122">For example, if you're using Microsoft BizTalk Server, your logic apps can connect to and communicate with your BizTalk Server by using the [BizTalk Server connector](#on-premises-connectors).</span></span> 
+  <span data-ttu-id="2ddb8-123">You can then extend or perform BizTalk-like operations in your logic apps by using the [integration account connectors](#integration-account-connectors).</span><span class="sxs-lookup"><span data-stu-id="2ddb8-123">You can then extend or perform BizTalk-like operations in your logic apps by using the [integration account connectors](#integration-account-connectors).</span></span> 
 
-| <span data-ttu-id="c51ca-250">Enterprise</span><span class="sxs-lookup"><span data-stu-id="c51ca-250">Enterprise</span></span><br/><span data-ttu-id="c51ca-251">connectors</span><span class="sxs-lookup"><span data-stu-id="c51ca-251">connectors</span></span> |  |
-| --- | --- |
-|<span data-ttu-id="c51ca-252">![API Icon][MQicon]</span><span class="sxs-lookup"><span data-stu-id="c51ca-252">![API Icon][MQicon]</span></span><br/><span data-ttu-id="c51ca-253">**MQ**</span><span class="sxs-lookup"><span data-stu-id="c51ca-253">**MQ**</span></span>|<span data-ttu-id="c51ca-254">[![API Icon][SAPicon]<br/>**SAP**][sapconnector]</span><span class="sxs-lookup"><span data-stu-id="c51ca-254">[![API Icon][SAPicon]<br/>**SAP**][sapconnector]</span></span>|
+> [!NOTE] 
+> <span data-ttu-id="2ddb8-124">For the full list of connectors and each connector's reference information, such as actions and any triggers, which are defined by a Swagger description, plus any limits, you can find the full list under the [Connectors overview](/connectors/).</span><span class="sxs-lookup"><span data-stu-id="2ddb8-124">For the full list of connectors and each connector's reference information, such as actions and any triggers, which are defined by a Swagger description, plus any limits, you can find the full list under the [Connectors overview](/connectors/).</span></span> <span data-ttu-id="2ddb8-125">For pricing information, see [Logic Apps pricing details](https://azure.microsoft.com/pricing/details/logic-apps/) and the [Logic Apps pricing model](../logic-apps/logic-apps-pricing.md).</span><span class="sxs-lookup"><span data-stu-id="2ddb8-125">For pricing information, see [Logic Apps pricing details](https://azure.microsoft.com/pricing/details/logic-apps/) and the [Logic Apps pricing model](../logic-apps/logic-apps-pricing.md).</span></span> 
 
-## <a name="connectors-as-triggers"></a><span data-ttu-id="c51ca-255">Connectors as triggers</span><span class="sxs-lookup"><span data-stu-id="c51ca-255">Connectors as triggers</span></span>
+<a name="built-ins"></a>
 
-<span data-ttu-id="c51ca-256">Some connectors provide triggers that can notify your app when specific events happen.</span><span class="sxs-lookup"><span data-stu-id="c51ca-256">Some connectors provide triggers that can notify your app when specific events happen.</span></span> <span data-ttu-id="c51ca-257">For example, the FTP connector has the OnUpdatedFile trigger that notifies your app when a file is updated.</span><span class="sxs-lookup"><span data-stu-id="c51ca-257">For example, the FTP connector has the OnUpdatedFile trigger that notifies your app when a file is updated.</span></span> <span data-ttu-id="c51ca-258">You can build a logic app, PowerApp, or Flow that listens to this trigger and performs an action whenever the trigger fires.</span><span class="sxs-lookup"><span data-stu-id="c51ca-258">You can build a logic app, PowerApp, or Flow that listens to this trigger and performs an action whenever the trigger fires.</span></span>
+## <a name="built-ins"></a><span data-ttu-id="2ddb8-126">Built-ins</span><span class="sxs-lookup"><span data-stu-id="2ddb8-126">Built-ins</span></span>
 
-<span data-ttu-id="c51ca-259">There are two types of triggers:</span><span class="sxs-lookup"><span data-stu-id="c51ca-259">There are two types of triggers:</span></span>  
+<span data-ttu-id="2ddb8-127">Logic Apps provides built-in triggers and actions so you can create schedule-based workflows, help your logic apps communicate with other apps and services, control the workflow through your logic apps, and manage or manipulate data.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-127">Logic Apps provides built-in triggers and actions so you can create schedule-based workflows, help your logic apps communicate with other apps and services, control the workflow through your logic apps, and manage or manipulate data.</span></span> 
 
-* <span data-ttu-id="c51ca-260">*Poll triggers*: These triggers poll your service at a specified frequency to check for new data.</span><span class="sxs-lookup"><span data-stu-id="c51ca-260">*Poll triggers*: These triggers poll your service at a specified frequency to check for new data.</span></span> <span data-ttu-id="c51ca-261">When new data is available, a new instance of your app runs with the data as input.</span><span class="sxs-lookup"><span data-stu-id="c51ca-261">When new data is available, a new instance of your app runs with the data as input.</span></span> <span data-ttu-id="c51ca-262">To prevent the same data from being consumed multiple times, the trigger might clean up data that has been read and passed to your app.</span><span class="sxs-lookup"><span data-stu-id="c51ca-262">To prevent the same data from being consumed multiple times, the trigger might clean up data that has been read and passed to your app.</span></span>
+|   |   |   |   | 
+|---|---|---|---| 
+| <span data-ttu-id="2ddb8-128">[![API icon][schedule-icon]<br/>**Schedule**][recurrence-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-128">[![API icon][schedule-icon]<br/>**Schedule**][recurrence-doc]</span></span> | <span data-ttu-id="2ddb8-129">- Run your logic app on a specified schedule, ranging from basic to complex recurrences, with the **Recurrence** trigger.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-129">- Run your logic app on a specified schedule, ranging from basic to complex recurrences, with the **Recurrence** trigger.</span></span> <p><span data-ttu-id="2ddb8-130">- Pause your logic app for a specified duration with the **Delay** action.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-130">- Pause your logic app for a specified duration with the **Delay** action.</span></span> <p><span data-ttu-id="2ddb8-131">- Pause your logic app until the specified date and time with the **Delay until** action.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-131">- Pause your logic app until the specified date and time with the **Delay until** action.</span></span> | <span data-ttu-id="2ddb8-132">[![API icon][http-icon]<br/>**HTTP**][http-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-132">[![API icon][http-icon]<br/>**HTTP**][http-doc]</span></span> | <span data-ttu-id="2ddb8-133">Communicate with any endpoint over HTTP with both triggers and actions for HTTP, HTTP + Swagger, and HTTP + Webhook.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-133">Communicate with any endpoint over HTTP with both triggers and actions for HTTP, HTTP + Swagger, and HTTP + Webhook.</span></span> | 
+| <span data-ttu-id="2ddb8-134">[![API icon][http-request-icon]<br/>**Request**][http-request-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-134">[![API icon][http-request-icon]<br/>**Request**][http-request-doc]</span></span> | <span data-ttu-id="2ddb8-135">- Make your logic app callable from other apps or services, trigger on Event Grid resource events, or trigger on responses to Azure Security Center alerts with the **Request** trigger.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-135">- Make your logic app callable from other apps or services, trigger on Event Grid resource events, or trigger on responses to Azure Security Center alerts with the **Request** trigger.</span></span> <p><span data-ttu-id="2ddb8-136">- Send responses to an app or service with the **Response** action.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-136">- Send responses to an app or service with the **Response** action.</span></span> | <span data-ttu-id="2ddb8-137">[![API icon][batch-icon]<br/>**Batch**][batch-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-137">[![API icon][batch-icon]<br/>**Batch**][batch-doc]</span></span> | <span data-ttu-id="2ddb8-138">- Process messages in batches with the **Batch messages** trigger.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-138">- Process messages in batches with the **Batch messages** trigger.</span></span> <p><span data-ttu-id="2ddb8-139">- Call logic apps that have existing batch triggers with the **Send messages to batch** action.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-139">- Call logic apps that have existing batch triggers with the **Send messages to batch** action.</span></span> | 
+| <span data-ttu-id="2ddb8-140">[![API icon][azure-functions-icon]<br/>**Azure Functions**][azure-functions-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-140">[![API icon][azure-functions-icon]<br/>**Azure Functions**][azure-functions-doc]</span></span> | <span data-ttu-id="2ddb8-141">Call Azure functions that run custom code snippets (C# or Node.js) from your logic apps.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-141">Call Azure functions that run custom code snippets (C# or Node.js) from your logic apps.</span></span> | <span data-ttu-id="2ddb8-142">[![API icon][azure-api-management-icon]</br>**Azure API Management**][azure-api-management-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-142">[![API icon][azure-api-management-icon]</br>**Azure API Management**][azure-api-management-doc]</span></span> | <span data-ttu-id="2ddb8-143">Call triggers and actions defined by your own APIs that you manage and publish with Azure API Management.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-143">Call triggers and actions defined by your own APIs that you manage and publish with Azure API Management.</span></span> | 
+| <span data-ttu-id="2ddb8-144">[![API icon][azure-app-services-icon]<br/>**Azure App Services**][azure-app-services-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-144">[![API icon][azure-app-services-icon]<br/>**Azure App Services**][azure-app-services-doc]</span></span> | <span data-ttu-id="2ddb8-145">Call Azure API Apps, or Web Apps, hosted on Azure App Service.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-145">Call Azure API Apps, or Web Apps, hosted on Azure App Service.</span></span> <span data-ttu-id="2ddb8-146">The triggers and actions defined by these apps appear like any other first-class triggers and actions when Swagger is included.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-146">The triggers and actions defined by these apps appear like any other first-class triggers and actions when Swagger is included.</span></span> | <span data-ttu-id="2ddb8-147">[![API icon][azure-logic-apps-icon]<br/>**Azure<br/>Logic Apps**][nested-logic-app-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-147">[![API icon][azure-logic-apps-icon]<br/>**Azure<br/>Logic Apps**][nested-logic-app-doc]</span></span> | <span data-ttu-id="2ddb8-148">Call other logic apps that start with a Request trigger.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-148">Call other logic apps that start with a Request trigger.</span></span> | 
+||||| 
 
-* <span data-ttu-id="c51ca-263">*Push triggers*: These triggers listen for data on an endpoint or for an event to happen, then triggers a new instance of your app.</span><span class="sxs-lookup"><span data-stu-id="c51ca-263">*Push triggers*: These triggers listen for data on an endpoint or for an event to happen, then triggers a new instance of your app.</span></span> <span data-ttu-id="c51ca-264">The Twitter connector is one such example.</span><span class="sxs-lookup"><span data-stu-id="c51ca-264">The Twitter connector is one such example.</span></span>
+### <a name="control-workflow"></a><span data-ttu-id="2ddb8-149">Control workflow</span><span class="sxs-lookup"><span data-stu-id="2ddb8-149">Control workflow</span></span>
 
-## <a name="connectors-as-actions"></a><span data-ttu-id="c51ca-265">Connectors as actions</span><span class="sxs-lookup"><span data-stu-id="c51ca-265">Connectors as actions</span></span>
+<span data-ttu-id="2ddb8-150">Here are built-in actions for structuring and controlling the actions in your logic app's workflow:</span><span class="sxs-lookup"><span data-stu-id="2ddb8-150">Here are built-in actions for structuring and controlling the actions in your logic app's workflow:</span></span>
 
-<span data-ttu-id="c51ca-266">Connectors also provide actions that you can use in your app's workflow.</span><span class="sxs-lookup"><span data-stu-id="c51ca-266">Connectors also provide actions that you can use in your app's workflow.</span></span> <span data-ttu-id="c51ca-267">For example, your app can look up data that you can then use when running your app.</span><span class="sxs-lookup"><span data-stu-id="c51ca-267">For example, your app can look up data that you can then use when running your app.</span></span> <span data-ttu-id="c51ca-268">More specifically, you can look up customer data from a SQL database when processing an order.</span><span class="sxs-lookup"><span data-stu-id="c51ca-268">More specifically, you can look up customer data from a SQL database when processing an order.</span></span> <span data-ttu-id="c51ca-269">Or, you might need to write, update, or delete data in a destination table.</span><span class="sxs-lookup"><span data-stu-id="c51ca-269">Or, you might need to write, update, or delete data in a destination table.</span></span> <span data-ttu-id="c51ca-270">Actions map to operations that are defined in the Swagger metadata.</span><span class="sxs-lookup"><span data-stu-id="c51ca-270">Actions map to operations that are defined in the Swagger metadata.</span></span>
+|   |   |   |   | 
+|---|---|---|---| 
+| <span data-ttu-id="2ddb8-151">[![Built-in Icon][condition-icon]<br/>**Condition**][condition-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-151">[![Built-in Icon][condition-icon]<br/>**Condition**][condition-doc]</span></span> | <span data-ttu-id="2ddb8-152">Evaluate a condition and run different actions based on whether the condition is true or false.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-152">Evaluate a condition and run different actions based on whether the condition is true or false.</span></span> | <span data-ttu-id="2ddb8-153">[![Built-in Icon][for-each-icon]</br>**For each**][for-each-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-153">[![Built-in Icon][for-each-icon]</br>**For each**][for-each-doc]</span></span> | <span data-ttu-id="2ddb8-154">Perform the same actions on every item in an array.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-154">Perform the same actions on every item in an array.</span></span> | 
+| <span data-ttu-id="2ddb8-155">[![Built-in Icon][scope-icon]<br/>**Scope**][scope-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-155">[![Built-in Icon][scope-icon]<br/>**Scope**][scope-doc]</span></span> | <span data-ttu-id="2ddb8-156">Group actions into *scopes*, which get their own status after the actions in the scope finish running.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-156">Group actions into *scopes*, which get their own status after the actions in the scope finish running.</span></span> | <span data-ttu-id="2ddb8-157">[![Built-in Icon][switch-icon]</br>**Switch**][switch-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-157">[![Built-in Icon][switch-icon]</br>**Switch**][switch-doc]</span></span> | <span data-ttu-id="2ddb8-158">Group actions into *cases*, which are assigned unique values except for the default case.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-158">Group actions into *cases*, which are assigned unique values except for the default case.</span></span> <span data-ttu-id="2ddb8-159">Run only that case whose assigned value matches the result from an expression, object, or token.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-159">Run only that case whose assigned value matches the result from an expression, object, or token.</span></span> <span data-ttu-id="2ddb8-160">If no matches exist, run the default case.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-160">If no matches exist, run the default case.</span></span> | 
+| <span data-ttu-id="2ddb8-161">[![Built-in Icon][terminate-icon]<br/>**Terminate**][terminate-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-161">[![Built-in Icon][terminate-icon]<br/>**Terminate**][terminate-doc]</span></span> | <span data-ttu-id="2ddb8-162">Stop an actively running logic app workflow.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-162">Stop an actively running logic app workflow.</span></span> | <span data-ttu-id="2ddb8-163">[![Built-in Icon][until-icon]<br/>**Until**][until-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-163">[![Built-in Icon][until-icon]<br/>**Until**][until-doc]</span></span> | <span data-ttu-id="2ddb8-164">Repeat actions until the specified condition is true or some state has changed.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-164">Repeat actions until the specified condition is true or some state has changed.</span></span> | 
+||||| 
 
-## <a name="custom-connectors-and-certification-for-microsoft-azure"></a><span data-ttu-id="c51ca-271">Custom connectors and certification for Microsoft Azure</span><span class="sxs-lookup"><span data-stu-id="c51ca-271">Custom connectors and certification for Microsoft Azure</span></span>
+### <a name="manage-or-manipulate-data"></a><span data-ttu-id="2ddb8-165">Manage or manipulate data</span><span class="sxs-lookup"><span data-stu-id="2ddb8-165">Manage or manipulate data</span></span>
 
-<span data-ttu-id="c51ca-272">To call into APIs that run custom code or aren't available as connectors, you can [extend the Logic Apps platform](../logic-apps/logic-apps-create-api-app.md) by creating REST-based API Apps as custom connectors.</span><span class="sxs-lookup"><span data-stu-id="c51ca-272">To call into APIs that run custom code or aren't available as connectors, you can [extend the Logic Apps platform](../logic-apps/logic-apps-create-api-app.md) by creating REST-based API Apps as custom connectors.</span></span> <span data-ttu-id="c51ca-273">If you want to make your custom API Apps public and available to use in Azure, submit your nominations to the [Microsoft Azure Certified program](https://azure.microsoft.com/marketplace/programs/certified/logic-apps/).</span><span class="sxs-lookup"><span data-stu-id="c51ca-273">If you want to make your custom API Apps public and available to use in Azure, submit your nominations to the [Microsoft Azure Certified program](https://azure.microsoft.com/marketplace/programs/certified/logic-apps/).</span></span>
+<span data-ttu-id="2ddb8-166">Here are built-in actions for working with data outputs and their formats:</span><span class="sxs-lookup"><span data-stu-id="2ddb8-166">Here are built-in actions for working with data outputs and their formats:</span></span>  
 
-## <a name="get-help"></a><span data-ttu-id="c51ca-274">Get help</span><span class="sxs-lookup"><span data-stu-id="c51ca-274">Get help</span></span>
+|   |   | 
+|---|---| 
+| <span data-ttu-id="2ddb8-167">![Built-in Icon][data-operations-icon]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-167">![Built-in Icon][data-operations-icon]</span></span><br/><span data-ttu-id="2ddb8-168">**Data Operations**</span><span class="sxs-lookup"><span data-stu-id="2ddb8-168">**Data Operations**</span></span> | <span data-ttu-id="2ddb8-169">Perform operations with data:</span><span class="sxs-lookup"><span data-stu-id="2ddb8-169">Perform operations with data:</span></span> <p><span data-ttu-id="2ddb8-170">- **Compose**: Create a single output from multiple inputs with various types.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-170">- **Compose**: Create a single output from multiple inputs with various types.</span></span> <br><span data-ttu-id="2ddb8-171">- **Create CSV table**: Create a comma-separated-value (CSV) table from an array with JSON objects.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-171">- **Create CSV table**: Create a comma-separated-value (CSV) table from an array with JSON objects.</span></span> <br><span data-ttu-id="2ddb8-172">- **Create HTML table**: Create an HTML table from an array with JSON objects.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-172">- **Create HTML table**: Create an HTML table from an array with JSON objects.</span></span> <br><span data-ttu-id="2ddb8-173">- **Filter array**: Create an array from items in another array that meet your criteria.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-173">- **Filter array**: Create an array from items in another array that meet your criteria.</span></span> <br><span data-ttu-id="2ddb8-174">- **Join**: Create a string from all items in an array and separate those items with the specified delimiter.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-174">- **Join**: Create a string from all items in an array and separate those items with the specified delimiter.</span></span> <br><span data-ttu-id="2ddb8-175">- **Parse JSON**: Create user-friendly tokens from properties and their values in JSON content so you can use those properties in your workflow.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-175">- **Parse JSON**: Create user-friendly tokens from properties and their values in JSON content so you can use those properties in your workflow.</span></span> <br><span data-ttu-id="2ddb8-176">- **Select**: Create an array with JSON objects by transforming items or values in another array and mapping those items to specified properties.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-176">- **Select**: Create an array with JSON objects by transforming items or values in another array and mapping those items to specified properties.</span></span> | 
+| <span data-ttu-id="2ddb8-177">![Built-in Icon][date-time-icon]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-177">![Built-in Icon][date-time-icon]</span></span><br/><span data-ttu-id="2ddb8-178">**Date Time**</span><span class="sxs-lookup"><span data-stu-id="2ddb8-178">**Date Time**</span></span> | <span data-ttu-id="2ddb8-179">Perform operations with timestamps:</span><span class="sxs-lookup"><span data-stu-id="2ddb8-179">Perform operations with timestamps:</span></span> <p><span data-ttu-id="2ddb8-180">- **Add to time**: Add the specified number of units to a timestamp.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-180">- **Add to time**: Add the specified number of units to a timestamp.</span></span> <br><span data-ttu-id="2ddb8-181">- **Convert time zone**: Convert a timestamp from the source time zone to the target time zone.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-181">- **Convert time zone**: Convert a timestamp from the source time zone to the target time zone.</span></span> <br><span data-ttu-id="2ddb8-182">- **Current time**: Return the current timestamp as a string.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-182">- **Current time**: Return the current timestamp as a string.</span></span> <br><span data-ttu-id="2ddb8-183">- **Get future time**: Return the current timestamp plus the specified time units.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-183">- **Get future time**: Return the current timestamp plus the specified time units.</span></span> <br><span data-ttu-id="2ddb8-184">- **Get past time**: Return the current timestamp minus the specified time units.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-184">- **Get past time**: Return the current timestamp minus the specified time units.</span></span> <br><span data-ttu-id="2ddb8-185">- **Subtract from time**: Subtract a number of time units from a timestamp.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-185">- **Subtract from time**: Subtract a number of time units from a timestamp.</span></span> |
+| <span data-ttu-id="2ddb8-186">[![Built-in Icon][variables-icon]<br/>**Variables**][variables-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-186">[![Built-in Icon][variables-icon]<br/>**Variables**][variables-doc]</span></span> | <span data-ttu-id="2ddb8-187">Perform operations with variables:</span><span class="sxs-lookup"><span data-stu-id="2ddb8-187">Perform operations with variables:</span></span> <p><span data-ttu-id="2ddb8-188">- **Append to array variable**: Insert a value as the last item in an array stored by a variable.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-188">- **Append to array variable**: Insert a value as the last item in an array stored by a variable.</span></span> <br><span data-ttu-id="2ddb8-189">- **Append to string variable**: Insert a value as the last character in a string stored by a variable.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-189">- **Append to string variable**: Insert a value as the last character in a string stored by a variable.</span></span> <br><span data-ttu-id="2ddb8-190">- **Decrement variable**: Decrease a variable by a constant value.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-190">- **Decrement variable**: Decrease a variable by a constant value.</span></span> <br><span data-ttu-id="2ddb8-191">- **Increment variable**: Increase a variable by a constant value.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-191">- **Increment variable**: Increase a variable by a constant value.</span></span> <br><span data-ttu-id="2ddb8-192">- **Initialize variable**: Create a variable and declare its data type and initial value.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-192">- **Initialize variable**: Create a variable and declare its data type and initial value.</span></span> <br><span data-ttu-id="2ddb8-193">- **Set variable**: Assign a different value to an existing variable.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-193">- **Set variable**: Assign a different value to an existing variable.</span></span> |
+|  |  | 
 
-<span data-ttu-id="c51ca-275">To ask questions, answer questions, and see what other Azure Logic Apps users are doing, visit the [Azure Logic Apps forum](https://social.msdn.microsoft.com/Forums/en-US/home?forum=azurelogicapps).</span><span class="sxs-lookup"><span data-stu-id="c51ca-275">To ask questions, answer questions, and see what other Azure Logic Apps users are doing, visit the [Azure Logic Apps forum](https://social.msdn.microsoft.com/Forums/en-US/home?forum=azurelogicapps).</span></span>
+<a name="managed-api-connectors"></a>
 
-<span data-ttu-id="c51ca-276">To help improve Logic Apps and connectors, vote on or submit ideas at the [Logic Apps user feedback site](http://aka.ms/logicapps-wish).</span><span class="sxs-lookup"><span data-stu-id="c51ca-276">To help improve Logic Apps and connectors, vote on or submit ideas at the [Logic Apps user feedback site](http://aka.ms/logicapps-wish).</span></span>
+## <a name="managed-api-connectors"></a><span data-ttu-id="2ddb8-194">Managed API connectors</span><span class="sxs-lookup"><span data-stu-id="2ddb8-194">Managed API connectors</span></span>
 
-## <a name="next-steps"></a><span data-ttu-id="c51ca-277">Next steps</span><span class="sxs-lookup"><span data-stu-id="c51ca-277">Next steps</span></span>
-* [<span data-ttu-id="c51ca-278">Create your first logic app</span><span class="sxs-lookup"><span data-stu-id="c51ca-278">Create your first logic app</span></span>](../logic-apps/logic-apps-create-a-logic-app.md)
-* [<span data-ttu-id="c51ca-279">Create custom APIs for logic apps</span><span class="sxs-lookup"><span data-stu-id="c51ca-279">Create custom APIs for logic apps</span></span>](../logic-apps/logic-apps-create-api-app.md)
-* [<span data-ttu-id="c51ca-280">Monitor your logic apps</span><span class="sxs-lookup"><span data-stu-id="c51ca-280">Monitor your logic apps</span></span>](../logic-apps/logic-apps-monitor-your-logic-apps.md)
+<span data-ttu-id="2ddb8-195">Here are the more popular connectors for automating tasks, processes, and workflows with these services or systems:</span><span class="sxs-lookup"><span data-stu-id="2ddb8-195">Here are the more popular connectors for automating tasks, processes, and workflows with these services or systems:</span></span>
 
-<!--Connectors Documentation-->
-[api/web-appdoc]: ../logic-apps/logic-apps-custom-hosted-api.md "Integrate logic apps with App Service API Apps"
-[azureblobstoragedoc]: ./connectors-create-api-azureblobstorage.md "Manage files in your blob container with Azure blob storage connector"
-[azure-functionsdoc]: ../logic-apps/logic-apps-azure-functions.md "Integrate logic apps with Azure Functions."
-[boxDoc]: ./connectors-create-api-box.md "Connect to Box. Upload, get, delete, list your files, and more"
-[db2doc]: ./connectors-create-api-db2.md "Connect to IBM DB2 in the cloud or on-premises. Update a row, get a table, and more"
-[delaydoc]: ./connectors-native-delay.md "Perform delayed actions"
-[dropboxdoc]: ./connectors-create-api-dropbox.md "Connect to Dropbox. Upload, get, delete, list your files, and more"
-[Dynamics-365doc]: ./connectors-create-api-crmonline.md "Connect to Dynamics CRM Online so you can work with CRM Online data"
-[event-hubs-doc]: ./connectors-create-api-azure-event-hubs.md "Connect to Azure Event Hubs. Receive and send events between logic apps and Event Hubs"
-[facebookdoc]: ./connectors-create-api-facebook.md "Connect to Facebook. Post to a timeline, get a page feed, and more"
-[filesystemdoc]: ../logic-apps/logic-apps-using-file-connector.md "Connect to an on-premises file system"
-[ftpdoc]: ./connectors-create-api-ftp.md "Connect to an FTP / FTPS server for FTP tasks, like uploading, getting, deleting files, and more"
-[githubdoc]: ./connectors-create-api-github.md "Connect to GitHub and track issues"
-[google-drivedoc]: ./connectors-create-api-googledrive.md "Connect to GoogleDrive so you can work with your data"
-[google-sheetsdoc]: ./connectors-create-api-googlesheet.md "Connect to Google Sheets so you can can modify your sheets"
-[google-tasksdoc]: ./connectors-create-api-googletasks.md "Connects to Google Tasks so you can manage your tasks"
-[google-calendardoc]: ./connectors-create-api-googlecalendar.md "Connects to Google Calendar and can manage calendar."
-[httpdoc]: ./connectors-native-http.md "Make HTTP calls with the HTTP connector"
-[http-requestdoc]: ./connectors-native-reqres.md "Add actions for HTTP requests and responses to your logic apps"
-[http-responsedoc]: ./connectors-native-reqres.md "Add actions for HTTP requests and responses to your logic apps"
-[http-swaggerdoc]: ./connectors-native-http-swagger.md "Make HTTP calls with HTTP + Swagger connector"
-[informixdoc]: ./connectors-create-api-informix.md "Connect to Informix in the cloud or on-premises. Read a row, list the tables, and more"
-[instagramdoc]: ./connectors-create-api-instagram.md "Connect to Instagram. Trigger or act on events"
-[mailchimpdoc]: ./connectors-create-api-mailchimp.md "Connect to your MailChimp account. Manage and automate mails"
-[mandrilldoc]: ./connectors-create-api-mandrill.md "Connect to Mandrill for communication"
-[microsoft-translatordoc]: ./connectors-create-api-microsofttranslator.md "Connect to Microsoft Translator. Translate text, detect languages, and more" 
-[nested-logic-appdoc]: ../logic-apps/logic-apps-http-endpoint.md "Integrate logic apps with nested workflows"
-[office365-outlookdoc]: ./connectors-create-api-office365-outlook.md "Connect to your Office 365 account. Send and receive emails, manage your calendar and contacts, and more"
-[office365-usersdoc]: ./connectors-create-api-office365-users.md 
-[office365-videodoc]: ./connectors-create-api-office365-video.md "Get video info, video lists and channels, and playback URLs for Office 365 videos"
-[onedrivedoc]: ./connectors-create-api-onedrive.md "Connect to your personal Microsoft OneDrive. Upload, delete, list files, and more"
-[onedrive-for-businessdoc]: ./connectors-create-api-onedriveforbusiness.md "Connect to your business Microsoft OneDrive. Upload, delete, list your files, and more"
+|   |   |   |   | 
+|---|---|---|---| 
+| <span data-ttu-id="2ddb8-196">[![API icon][azure-service-bus-icon]<br/>**Azure Service Bus**][azure-service-bus-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-196">[![API icon][azure-service-bus-icon]<br/>**Azure Service Bus**][azure-service-bus-doc]</span></span> | <span data-ttu-id="2ddb8-197">Manage asynchronous messages, sessions, and topic subscriptions with the most commonly used connector in Logic Apps.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-197">Manage asynchronous messages, sessions, and topic subscriptions with the most commonly used connector in Logic Apps.</span></span> | <span data-ttu-id="2ddb8-198">[![API icon][sql-server-icon]<br/>**SQL Server**][sql-server-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-198">[![API icon][sql-server-icon]<br/>**SQL Server**][sql-server-doc]</span></span> | <span data-ttu-id="2ddb8-199">Connect to your SQL Server on premises or an Azure SQL Database in the cloud so you can manage records, run stored procedures, or perform queries.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-199">Connect to your SQL Server on premises or an Azure SQL Database in the cloud so you can manage records, run stored procedures, or perform queries.</span></span> | 
+| <span data-ttu-id="2ddb8-200">[![API icon][office-365-outlook-icon]<br/>**Office 365<br/>Outlook**][office-365-outlook-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-200">[![API icon][office-365-outlook-icon]<br/>**Office 365<br/>Outlook**][office-365-outlook-doc]</span></span> | <span data-ttu-id="2ddb8-201">Connect to your Office 365 email account so you can create and manage emails, tasks, calendar events and meetings, contacts, requests, and more.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-201">Connect to your Office 365 email account so you can create and manage emails, tasks, calendar events and meetings, contacts, requests, and more.</span></span> | <span data-ttu-id="2ddb8-202">[![API icon][azure-blob-storage-icon]<br/>**Azure Blob<br/>Storage**][azure-blob-storage-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-202">[![API icon][azure-blob-storage-icon]<br/>**Azure Blob<br/>Storage**][azure-blob-storage-doc]</span></span> | <span data-ttu-id="2ddb8-203">Connect to your storage account so you can create and manage blob content.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-203">Connect to your storage account so you can create and manage blob content.</span></span> | 
+| <span data-ttu-id="2ddb8-204">[![API icon][sftp-icon]<br/>**SFTP**][sftp-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-204">[![API icon][sftp-icon]<br/>**SFTP**][sftp-doc]</span></span> | <span data-ttu-id="2ddb8-205">Connect to SFTP servers you can access from the internet so you can work with your files and folders.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-205">Connect to SFTP servers you can access from the internet so you can work with your files and folders.</span></span> | <span data-ttu-id="2ddb8-206">[![API icon][sharepoint-online-icon]<br/>**SharePoint<br/>Online**][sharepoint-online-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-206">[![API icon][sharepoint-online-icon]<br/>**SharePoint<br/>Online**][sharepoint-online-doc]</span></span> | <span data-ttu-id="2ddb8-207">Connect to SharePoint Online so you can manage files, attachments, folders, and more.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-207">Connect to SharePoint Online so you can manage files, attachments, folders, and more.</span></span> | 
+| <span data-ttu-id="2ddb8-208">[![API icon][dynamics-365-icon]<br/>**Dynamics 365<br/>CRM Online**][dynamics-365-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-208">[![API icon][dynamics-365-icon]<br/>**Dynamics 365<br/>CRM Online**][dynamics-365-doc]</span></span> | <span data-ttu-id="2ddb8-209">Connect to your Dynamics 365 account so you can create and manage records, items, and more.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-209">Connect to your Dynamics 365 account so you can create and manage records, items, and more.</span></span> | <span data-ttu-id="2ddb8-210">[![API icon][ftp-icon]<br/>**FTP**][ftp-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-210">[![API icon][ftp-icon]<br/>**FTP**][ftp-doc]</span></span> | <span data-ttu-id="2ddb8-211">Connect to FTP servers you can access from the internet so you can work with your files and folders.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-211">Connect to FTP servers you can access from the internet so you can work with your files and folders.</span></span> | 
+| <span data-ttu-id="2ddb8-212">[![API icon][salesforce-icon]<br/>**Salesforce**][salesforce-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-212">[![API icon][salesforce-icon]<br/>**Salesforce**][salesforce-doc]</span></span> | <span data-ttu-id="2ddb8-213">Connect to your Salesforce account so you can create and manage items such as records, jobs, objects, and more.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-213">Connect to your Salesforce account so you can create and manage items such as records, jobs, objects, and more.</span></span> | <span data-ttu-id="2ddb8-214">[![API icon][twitter-icon]<br/>**Twitter**][twitter-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-214">[![API icon][twitter-icon]<br/>**Twitter**][twitter-doc]</span></span> | <span data-ttu-id="2ddb8-215">Connect to your Twitter account so you can manage tweets, followers, your timeline, and more.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-215">Connect to your Twitter account so you can manage tweets, followers, your timeline, and more.</span></span> <span data-ttu-id="2ddb8-216">Save your tweets to SQL, Excel, or SharePoint.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-216">Save your tweets to SQL, Excel, or SharePoint.</span></span> | 
+| <span data-ttu-id="2ddb8-217">[![API icon][azure-event-hubs-icon]<br/>**Azure Event Hubs**][azure-event-hubs-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-217">[![API icon][azure-event-hubs-icon]<br/>**Azure Event Hubs**][azure-event-hubs-doc]</span></span> | <span data-ttu-id="2ddb8-218">Consume and publish events through an Event Hub.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-218">Consume and publish events through an Event Hub.</span></span> <span data-ttu-id="2ddb8-219">For example, get output from your logic app with Event Hubs, and then send that output to a real-time analytics provider.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-219">For example, get output from your logic app with Event Hubs, and then send that output to a real-time analytics provider.</span></span> | <span data-ttu-id="2ddb8-220">[![API icon][azure-event-grid-icon]<br/>**Azure Event**</br>**Grid**][azure-event-grid-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-220">[![API icon][azure-event-grid-icon]<br/>**Azure Event**</br>**Grid**][azure-event-grid-doc]</span></span> | <span data-ttu-id="2ddb8-221">Monitor events published by an Event Grid, for example, when Azure resources or third-party resources change.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-221">Monitor events published by an Event Grid, for example, when Azure resources or third-party resources change.</span></span> | 
+||||| 
+
+<a name="on-premises-connectors"></a>
+
+## <a name="on-premises-connectors"></a><span data-ttu-id="2ddb8-222">On-premises connectors</span><span class="sxs-lookup"><span data-stu-id="2ddb8-222">On-premises connectors</span></span> 
+
+<span data-ttu-id="2ddb8-223">Here are some commonly used connectors that provide access to data and resources in on-premises systems.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-223">Here are some commonly used connectors that provide access to data and resources in on-premises systems.</span></span> <span data-ttu-id="2ddb8-224">Before you can create a connection to an on-premises system, you must first [download, install, and set up an on-premises data gateway][gateway-doc].</span><span class="sxs-lookup"><span data-stu-id="2ddb8-224">Before you can create a connection to an on-premises system, you must first [download, install, and set up an on-premises data gateway][gateway-doc].</span></span> <span data-ttu-id="2ddb8-225">This gateway provides a secure communication channel without having to set up the necessary network infrastructure.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-225">This gateway provides a secure communication channel without having to set up the necessary network infrastructure.</span></span> 
+
+|   |   |   |   |   | 
+|---|---|---|---|---| 
+| <span data-ttu-id="2ddb8-226">![API icon][biztalk-server-icon]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-226">![API icon][biztalk-server-icon]</span></span><br/><span data-ttu-id="2ddb8-227">**BizTalk**</span><span class="sxs-lookup"><span data-stu-id="2ddb8-227">**BizTalk**</span></span></br> <span data-ttu-id="2ddb8-228">**Server**</span><span class="sxs-lookup"><span data-stu-id="2ddb8-228">**Server**</span></span> | <span data-ttu-id="2ddb8-229">[![API icon][file-system-icon]<br/>**File</br> System**][file-system-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-229">[![API icon][file-system-icon]<br/>**File</br> System**][file-system-doc]</span></span> | <span data-ttu-id="2ddb8-230">[![API icon][ibm-db2-icon]<br/>**IBM DB2**][ibm-db2-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-230">[![API icon][ibm-db2-icon]<br/>**IBM DB2**][ibm-db2-doc]</span></span> | <span data-ttu-id="2ddb8-231">[![API icon][ibm-informix-icon]<br/>**IBM**</br> **Informix**][ibm-informix-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-231">[![API icon][ibm-informix-icon]<br/>**IBM**</br> **Informix**][ibm-informix-doc]</span></span> | <span data-ttu-id="2ddb8-232">![API icon][mysql-icon]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-232">![API icon][mysql-icon]</span></span><br/><span data-ttu-id="2ddb8-233">**MySQL**</span><span class="sxs-lookup"><span data-stu-id="2ddb8-233">**MySQL**</span></span> | 
+| <span data-ttu-id="2ddb8-234">[![API icon][oracle-db-icon]<br/>**Oracle DB**][oracle-db-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-234">[![API icon][oracle-db-icon]<br/>**Oracle DB**][oracle-db-doc]</span></span> | <span data-ttu-id="2ddb8-235">![API icon][postgre-sql-icon]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-235">![API icon][postgre-sql-icon]</span></span><br/><span data-ttu-id="2ddb8-236">**PostgreSQL**</span><span class="sxs-lookup"><span data-stu-id="2ddb8-236">**PostgreSQL**</span></span> | <span data-ttu-id="2ddb8-237">[![API icon][sharepoint-server-icon]<br/>**SharePoint</br> Server**][sharepoint-server-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-237">[![API icon][sharepoint-server-icon]<br/>**SharePoint</br> Server**][sharepoint-server-doc]</span></span> | <span data-ttu-id="2ddb8-238">[![API icon][sql-server-icon]<br/>**SQL</br> Server**][sql-server-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-238">[![API icon][sql-server-icon]<br/>**SQL</br> Server**][sql-server-doc]</span></span> | <span data-ttu-id="2ddb8-239">![API icon][teradata-icon]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-239">![API icon][teradata-icon]</span></span><br/><span data-ttu-id="2ddb8-240">**Teradata**</span><span class="sxs-lookup"><span data-stu-id="2ddb8-240">**Teradata**</span></span> | 
+||||| 
+
+<a name="integration-account-connectors"></a>
+
+## <a name="integration-account-connectors"></a><span data-ttu-id="2ddb8-241">Integration account connectors</span><span class="sxs-lookup"><span data-stu-id="2ddb8-241">Integration account connectors</span></span> 
+
+<span data-ttu-id="2ddb8-242">Here are connectors for building business-to-business (B2B) solutions with your logic apps when you create and pay for an [integration account](../logic-apps/logic-apps-enterprise-integration-create-integration-account.md), which is available through the Enterprise Integration Pack (EIP) in Azure.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-242">Here are connectors for building business-to-business (B2B) solutions with your logic apps when you create and pay for an [integration account](../logic-apps/logic-apps-enterprise-integration-create-integration-account.md), which is available through the Enterprise Integration Pack (EIP) in Azure.</span></span> <span data-ttu-id="2ddb8-243">With this account, you can create and store B2B artifacts such as trading partners, agreements, maps, schemas, certificates, and so on.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-243">With this account, you can create and store B2B artifacts such as trading partners, agreements, maps, schemas, certificates, and so on.</span></span> <span data-ttu-id="2ddb8-244">To use these artifacts, associate your logic apps with your integration account.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-244">To use these artifacts, associate your logic apps with your integration account.</span></span> <span data-ttu-id="2ddb8-245">If you currently use BizTalk Server, these connectors might seem familiar already.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-245">If you currently use BizTalk Server, these connectors might seem familiar already.</span></span>
+
+|   |   |   |   | 
+|---|---|---|---| 
+| <span data-ttu-id="2ddb8-246">[![API icon][as2-icon]<br/>**AS2</br> decoding**][as2-decode-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-246">[![API icon][as2-icon]<br/>**AS2</br> decoding**][as2-decode-doc]</span></span> | <span data-ttu-id="2ddb8-247">[![API icon][as2-icon]<br/>**AS2</br> encoding**][as2-encode-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-247">[![API icon][as2-icon]<br/>**AS2</br> encoding**][as2-encode-doc]</span></span> | <span data-ttu-id="2ddb8-248">[![API icon][edifact-icon]<br/>**EDIFACT</br> decoding**][edifact-decode-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-248">[![API icon][edifact-icon]<br/>**EDIFACT</br> decoding**][edifact-decode-doc]</span></span> | <span data-ttu-id="2ddb8-249">[![API icon][edifact-icon]<br/>**EDIFACT</br> encoding**][edifact-encode-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-249">[![API icon][edifact-icon]<br/>**EDIFACT</br> encoding**][edifact-encode-doc]</span></span> | 
+| <span data-ttu-id="2ddb8-250">[![API icon][flat-file-decode-icon]<br/>**Flat file</br> decoding**][flat-file-decode-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-250">[![API icon][flat-file-decode-icon]<br/>**Flat file</br> decoding**][flat-file-decode-doc]</span></span> | <span data-ttu-id="2ddb8-251">[![API icon][flat-file-encode-icon]<br/>**Flat file</br> encoding**][flat-file-encode-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-251">[![API icon][flat-file-encode-icon]<br/>**Flat file</br> encoding**][flat-file-encode-doc]</span></span> | <span data-ttu-id="2ddb8-252">[![API icon][integration-account-icon]<br/>**Integration<br/>account**][integration-account-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-252">[![API icon][integration-account-icon]<br/>**Integration<br/>account**][integration-account-doc]</span></span> | <span data-ttu-id="2ddb8-253">[![API icon][liquid-icon]<br/>**Liquid**</br>**transforms**][json-liquid-transform-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-253">[![API icon][liquid-icon]<br/>**Liquid**</br>**transforms**][json-liquid-transform-doc]</span></span> | 
+| <span data-ttu-id="2ddb8-254">[![API icon][x12-icon]<br/>**X12</br> decoding**][x12-decode-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-254">[![API icon][x12-icon]<br/>**X12</br> decoding**][x12-decode-doc]</span></span> | <span data-ttu-id="2ddb8-255">[![API icon][x12-icon]<br/>**X12</br> encoding**][x12-encode-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-255">[![API icon][x12-icon]<br/>**X12</br> encoding**][x12-encode-doc]</span></span> | <span data-ttu-id="2ddb8-256">[![API icon][xml-transform-icon]<br/>**XML**</br>**transforms**][xml-transform-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-256">[![API icon][xml-transform-icon]<br/>**XML**</br>**transforms**][xml-transform-doc]</span></span> | <span data-ttu-id="2ddb8-257">[![API icon][xml-validate-icon]<br/>**XML <br/>validation**][xml-validate-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-257">[![API icon][xml-validate-icon]<br/>**XML <br/>validation**][xml-validate-doc]</span></span> |  
+||||| 
+
+<a name="enterprise-connectors"></a>
+
+## <a name="enterprise-connectors"></a><span data-ttu-id="2ddb8-258">Enterprise connectors</span><span class="sxs-lookup"><span data-stu-id="2ddb8-258">Enterprise connectors</span></span>
+
+<span data-ttu-id="2ddb8-259">Your logic apps can access enterprise systems, such as SAP and IBM MQ:</span><span class="sxs-lookup"><span data-stu-id="2ddb8-259">Your logic apps can access enterprise systems, such as SAP and IBM MQ:</span></span>
+
+|   |   | 
+|---|---| 
+| <span data-ttu-id="2ddb8-260">[![API icon][ibm-mq-icon]<br/>**IBM MQ**][ibm-mq-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-260">[![API icon][ibm-mq-icon]<br/>**IBM MQ**][ibm-mq-doc]</span></span> | <span data-ttu-id="2ddb8-261">[![API icon][sap-icon]<br/>**SAP**][sap-connector-doc]</span><span class="sxs-lookup"><span data-stu-id="2ddb8-261">[![API icon][sap-icon]<br/>**SAP**][sap-connector-doc]</span></span> |
+||| 
+
+## <a name="more-about-triggers-and-actions"></a><span data-ttu-id="2ddb8-262">More about triggers and actions</span><span class="sxs-lookup"><span data-stu-id="2ddb8-262">More about triggers and actions</span></span>
+
+<span data-ttu-id="2ddb8-263">Some connectors provide *triggers* that notify your logic app when specific events happen.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-263">Some connectors provide *triggers* that notify your logic app when specific events happen.</span></span> <span data-ttu-id="2ddb8-264">So when these events happen, the trigger creates and runs an instance of your logic app.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-264">So when these events happen, the trigger creates and runs an instance of your logic app.</span></span> <span data-ttu-id="2ddb8-265">For example, the FTP connector provides a "When a file is added or modified" trigger that starts your logic app when a file gets updated.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-265">For example, the FTP connector provides a "When a file is added or modified" trigger that starts your logic app when a file gets updated.</span></span> 
+
+<span data-ttu-id="2ddb8-266">Logic Apps provides these kinds of triggers:</span><span class="sxs-lookup"><span data-stu-id="2ddb8-266">Logic Apps provides these kinds of triggers:</span></span>  
+
+* <span data-ttu-id="2ddb8-267">*Polling triggers*: These triggers poll your service at a specified frequency and checks for new data.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-267">*Polling triggers*: These triggers poll your service at a specified frequency and checks for new data.</span></span> 
+
+  <span data-ttu-id="2ddb8-268">When new data is available, a new instance of your logic app gets created and runs with the data that's passed in as input.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-268">When new data is available, a new instance of your logic app gets created and runs with the data that's passed in as input.</span></span> 
+
+* <span data-ttu-id="2ddb8-269">*Push triggers*: These triggers listen for new data at an endpoint or for an event to happen, which creates and runs new instance of your logic app.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-269">*Push triggers*: These triggers listen for new data at an endpoint or for an event to happen, which creates and runs new instance of your logic app.</span></span>
+
+* <span data-ttu-id="2ddb8-270">*Recurrence trigger*: This trigger creates and runs an instance of your logic app based on a specified schedule.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-270">*Recurrence trigger*: This trigger creates and runs an instance of your logic app based on a specified schedule.</span></span>
+
+<span data-ttu-id="2ddb8-271">Connectors also provide *actions* that perform tasks in your logic app's workflow.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-271">Connectors also provide *actions* that perform tasks in your logic app's workflow.</span></span> <span data-ttu-id="2ddb8-272">For example, your logic app can read data and use this data in later steps of your logic app.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-272">For example, your logic app can read data and use this data in later steps of your logic app.</span></span> <span data-ttu-id="2ddb8-273">More specifically, your logic app can find customer data from a SQL database, and process this data later in your logic app's workflow.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-273">More specifically, your logic app can find customer data from a SQL database, and process this data later in your logic app's workflow.</span></span> 
+
+<span data-ttu-id="2ddb8-274">For more about triggers and actions, see the [Connectors overview](connectors-overview.md).</span><span class="sxs-lookup"><span data-stu-id="2ddb8-274">For more about triggers and actions, see the [Connectors overview](connectors-overview.md).</span></span> 
+
+## <a name="custom-apis-and-connectors"></a><span data-ttu-id="2ddb8-275">Custom APIs and connectors</span><span class="sxs-lookup"><span data-stu-id="2ddb8-275">Custom APIs and connectors</span></span> 
+
+<span data-ttu-id="2ddb8-276">To call APIs that run custom code or aren't available as connectors, you can extend the Logic Apps platform by [creating custom API Apps](../logic-apps/logic-apps-create-api-app.md).</span><span class="sxs-lookup"><span data-stu-id="2ddb8-276">To call APIs that run custom code or aren't available as connectors, you can extend the Logic Apps platform by [creating custom API Apps](../logic-apps/logic-apps-create-api-app.md).</span></span> <span data-ttu-id="2ddb8-277">You can also [create custom connectors](../logic-apps/custom-connector-overview.md) for *any* REST or SOAP-based APIs, which make those APIs available to any logic app in your Azure subscription.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-277">You can also [create custom connectors](../logic-apps/custom-connector-overview.md) for *any* REST or SOAP-based APIs, which make those APIs available to any logic app in your Azure subscription.</span></span>
+<span data-ttu-id="2ddb8-278">To make custom API Apps or connectors public for anyone to use in Azure, you can [submit connectors for Microsoft certification](../logic-apps/custom-connector-submit-certification.md).</span><span class="sxs-lookup"><span data-stu-id="2ddb8-278">To make custom API Apps or connectors public for anyone to use in Azure, you can [submit connectors for Microsoft certification](../logic-apps/custom-connector-submit-certification.md).</span></span>
+
+## <a name="get-support"></a><span data-ttu-id="2ddb8-279">Get support</span><span class="sxs-lookup"><span data-stu-id="2ddb8-279">Get support</span></span>
+
+* <span data-ttu-id="2ddb8-280">For questions, visit the [Azure Logic Apps forum](https://social.msdn.microsoft.com/Forums/en-US/home?forum=azurelogicapps).</span><span class="sxs-lookup"><span data-stu-id="2ddb8-280">For questions, visit the [Azure Logic Apps forum](https://social.msdn.microsoft.com/Forums/en-US/home?forum=azurelogicapps).</span></span>
+
+* <span data-ttu-id="2ddb8-281">To submit or vote on ideas for Azure Logic Apps and connectors, visit the [Logic Apps user feedback site](http://aka.ms/logicapps-wish).</span><span class="sxs-lookup"><span data-stu-id="2ddb8-281">To submit or vote on ideas for Azure Logic Apps and connectors, visit the [Logic Apps user feedback site](http://aka.ms/logicapps-wish).</span></span>
+
+* <span data-ttu-id="2ddb8-282">Are the docs missing articles or details you think are important?</span><span class="sxs-lookup"><span data-stu-id="2ddb8-282">Are the docs missing articles or details you think are important?</span></span> <span data-ttu-id="2ddb8-283">If yes, you can help by adding to the existing articles or by writing your own.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-283">If yes, you can help by adding to the existing articles or by writing your own.</span></span> <span data-ttu-id="2ddb8-284">The documentation is open source and hosted on GitHub.</span><span class="sxs-lookup"><span data-stu-id="2ddb8-284">The documentation is open source and hosted on GitHub.</span></span> <span data-ttu-id="2ddb8-285">Get started at the Azure documentation's [GitHub repository](https://github.com/Microsoft/azure-docs).</span><span class="sxs-lookup"><span data-stu-id="2ddb8-285">Get started at the Azure documentation's [GitHub repository](https://github.com/Microsoft/azure-docs).</span></span> 
+
+## <a name="next-steps"></a><span data-ttu-id="2ddb8-286">Next steps</span><span class="sxs-lookup"><span data-stu-id="2ddb8-286">Next steps</span></span>
+
+* <span data-ttu-id="2ddb8-287">Find the [connectors' full list](https://docs.microsoft.com/connectors)</span><span class="sxs-lookup"><span data-stu-id="2ddb8-287">Find the [connectors' full list](https://docs.microsoft.com/connectors)</span></span>
+* [<span data-ttu-id="2ddb8-288">Create your first logic app</span><span class="sxs-lookup"><span data-stu-id="2ddb8-288">Create your first logic app</span></span>](../logic-apps/quickstart-create-first-logic-app-workflow.md)
+* [<span data-ttu-id="2ddb8-289">Create custom connectors for logic apps</span><span class="sxs-lookup"><span data-stu-id="2ddb8-289">Create custom connectors for logic apps</span></span>](https://docs.microsoft.com/connectors/custom-connectors/)
+* [<span data-ttu-id="2ddb8-290">Create custom APIs for logic apps</span><span class="sxs-lookup"><span data-stu-id="2ddb8-290">Create custom APIs for logic apps</span></span>](../logic-apps/logic-apps-create-api-app.md)
+
+<!--Misc doc links-->
+[gateway-doc]: ../logic-apps/logic-apps-gateway-connection.md "Connect to data sources on-premises from logic apps with on-premises data gateway"
+
+<!--Built-ins doc links-->
+[azure-functions-doc]: ../logic-apps/logic-apps-azure-functions.md "Integrate logic apps with Azure Functions"
+[azure-api-management-doc]: ../api-management/get-started-create-service-instance.md "Create an Azure API Management service instance for managing and publishing your APIs"
+[azure-app-services-doc]: ../logic-apps/logic-apps-custom-hosted-api.md "Integrate logic apps with App Service API Apps"
+[azure-service-bus-doc]: ./connectors-create-api-servicebus.md "Send messages from Service Bus Queues and Topics and receive messages from Service Bus Queues and Subscriptions"
+[batch-doc]: ../logic-apps/logic-apps-batch-process-send-receive-messages.md "Process messages in groups, or as batches"
+[condition-doc]: ../logic-apps/logic-apps-control-flow-conditional-statement.md "Evaluate a condition and run different actions based on whether the condition is true or false"
+[delay-doc]: ./connectors-native-delay.md "Perform delayed actions"
+[for-each-doc]: ../logic-apps/logic-apps-control-flow-loops.md#foreach-loop "Perform the same actions on every item in an array"
+[http-doc]: ./connectors-native-http.md "Make HTTP calls with the HTTP connector"
+[http-request-doc]: ./connectors-native-reqres.md "Add actions for HTTP requests and responses to your logic apps"
+[http-response-doc]: ./connectors-native-reqres.md "Add actions for HTTP requests and responses to your logic apps"
+[http-swagger-doc]: ./connectors-native-http-swagger.md "Make HTTP calls with HTTP + Swagger connector"
+[http-webook-doc]: ./connectors-native-webhook.md "Add HTTP webhook actions and triggers to your logic apps"
+[nested-logic-app-doc]: ../logic-apps/logic-apps-http-endpoint.md "Integrate logic apps with nested workflows"
+[query-doc]: ./connectors-native-query.md "Select and filter arrays with the Query action"
+[recurrence-doc]:  ./connectors-native-recurrence.md "Trigger recurring actions for logic apps"
+[scope-doc]: ../logic-apps/logic-apps-control-flow-run-steps-group-scopes.md "Organize actions into groups, which get their own status after the actions in group finish running" 
+[switch-doc]: ../logic-apps/logic-apps-control-flow-switch-statement.md "Organize actions into cases, which are assigned unique values. Run only the case whose value matches the result from an expression, object, or token. If no matches exist, run the default case"
+[terminate-doc]: ../logic-apps/logic-apps-workflow-actions-triggers.md#terminate-action "Stop or cancel an actively running workflow for your logic app"
+[until-doc]: ../logic-apps/logic-apps-control-flow-loops.md#until-loop "Repeat actions until the specified condition is true or some state has changed"
+[variables-doc]: ../logic-apps/logic-apps-create-variables-store-values.md "Perform operations with variables, such as initialize, set, increment, decrement, and append to string or array variable"
+
+<!--Managed API doc links-->
+[azure-blob-storage-doc]: ./connectors-create-api-azureblobstorage.md "Manage files in your blob container with Azure blob storage connector"
+[azure-event-grid-doc]: ../event-grid/monitor-virtual-machine-changes-event-grid-logic-app.md " Monitor events published by an Event Grid, for example, when Azure resources or third-party resources change"
+[azure-event-hubs-doc]: ./connectors-create-api-azure-event-hubs.md "Connect to Azure Event Hubs. Receive and send events between logic apps and Event Hubs"
+[box-doc]: ./connectors-create-api-box.md "Connect to Box. Upload, get, delete, list your files, and more"
+[dropbox-doc]: ./connectors-create-api-dropbox.md "Connect to Dropbox. Upload, get, delete, list your files, and more"
+[dynamics-365-doc]: ./connectors-create-api-crmonline.md "Connect to Dynamics CRM Online so you can work with CRM Online data"
+[facebook-doc]: ./connectors-create-api-facebook.md "Connect to Facebook. Post to a timeline, get a page feed, and more"
+[file-system-doc]: ../logic-apps/logic-apps-using-file-connector.md "Connect to an on-premises file system"
+[ftp-doc]: ./connectors-create-api-ftp.md "Connect to an FTP / FTPS server for FTP tasks, like uploading, getting, deleting files, and more"
+[github-doc]: ./connectors-create-api-github.md "Connect to GitHub and track issues"
+[google-calendar-doc]: ./connectors-create-api-googlecalendar.md "Connects to Google Calendar and can manage calendar."
+[google-drive-doc]: ./connectors-create-api-googledrive.md "Connect to GoogleDrive so you can work with your data"
+[google-sheets-doc]: ./connectors-create-api-googlesheet.md "Connect to Google Sheets so you can modify your sheets"
+[google-tasks-doc]: ./connectors-create-api-googletasks.md "Connects to Google Tasks so you can manage your tasks"
+[ibm-db2-doc]: ./connectors-create-api-db2.md "Connect to IBM DB2 in the cloud or on-premises. Update a row, get a table, and more"
+[ibm-informix-doc]: ./connectors-create-api-informix.md "Connect to Informix in the cloud or on-premises. Read a row, list the tables, and more"
+[ibm-mq-doc]: ./connectors-create-api-mq.md "Connect to IBM MQ on-premises or in Azure to send and receive messages"
+[instagram-doc]: ./connectors-create-api-instagram.md "Connect to Instagram. Trigger or act on events"
+[mailchimp-doc]: ./connectors-create-api-mailchimp.md "Connect to your MailChimp account. Manage and automate mails"
+[mandrill-doc]: ./connectors-create-api-mandrill.md "Connect to Mandrill for communication"
+[microsoft-translator-doc]: ./connectors-create-api-microsofttranslator.md "Connect to Microsoft Translator. Translate text, detect languages, and more" 
+[office-365-outlook-doc]: ./connectors-create-api-office365-outlook.md "Connect to your Office 365 account. Send and receive emails, manage your calendar and contacts, and more"
+[office-365-users-doc]: ./connectors-create-api-office365-users.md 
+[office-365-video-doc]: ./connectors-create-api-office365-video.md "Get video info, video lists and channels, and playback URLs for Office 365 videos"
+[onedrive-doc]: ./connectors-create-api-onedrive.md "Connect to your personal Microsoft OneDrive. Upload, delete, list files, and more"
+[onedrive-for-business-doc]: ./connectors-create-api-onedriveforbusiness.md "Connect to your business Microsoft OneDrive. Upload, delete, list your files, and more"
 [oracle-db-doc]: ./connectors-create-api-oracledatabase.md "Connect to an Oracle database to add, insert, delete rows, and more"
-[outlook.comdoc]: ./connectors-create-api-outlook.md "Connect to your Outlook mailbox. Manage your email, calendars, contacts, and more"
-[project-onlinedoc]: ./connectors-create-api-projectonline.md "Connect to Microsoft Project Online. Manage your projects, tasks, resources, and more"
-[querydoc]: ./connectors-native-query.md "Select and filter arrays with the Query action"
-[recurrencedoc]:  ./connectors-native-recurrence.md "Trigger recurring actions for logic apps"
-[rssdoc]: ./connectors-create-api-rss.md "Publish and retrieve feed items, trigger operations when a new item is published to an RSS feed."
-[salesforcedoc]: ./connectors-create-api-salesforce.md "Connect to your Salesforce account. Manage accounts, leads, opportunities, and more"
-[sendgriddoc]: ./connectors-create-api-sendgrid.md "Connect to SendGrid. Send email and manage receipient lists"
-[service-busdoc]: ./connectors-create-api-servicebus.md "Send messages from Service Bus Queues and Topics and receive messages from Service Bus Queues and Subscriptions."
-[sftpdoc]: ./connectors-create-api-sftp.md "Connect to your SFTP account. Upload, get, delete files, and more"
-[sharepointdoc]: ./connectors-create-api-sharepointonline.md "Connect to SharePoint Online. Manage documents, list items, and more"
-[slackdoc]: ./connectors-create-api-slack.md "Connect to Slack and post messages to Slack channels"
-[smtpdoc]: ./connectors-create-api-smtp.md "Connect to a SMTP server and send email with attachments"
-[sparkpostdoc]: ./connectors-create-api-sparkpost.md "Connects to SparkPost for communication"
-[sql-serverdoc]: ./connectors-create-api-sqlazure.md "Connect to Azure SQL Database or SQL server. Create, update, get, and delete entries in a SQL database table."
-[trellodoc]: ./connectors-create-api-trello.md "Connect to Trello. Manage your projects and organize anything with anyone"
-[twiliodoc]: ./connectors-create-api-twilio.md "Connect to Twilio. Send and get messages, get available numbers, manage incoming phone numbers, and more"
-[twitterdoc]: ./connectors-create-api-twitter.md "Connect to Twitter. Get timelines, post tweets, and more"
-[webhookdoc]: ./connectors-native-webhook.md "Add Webhook actions and triggers to your logic apps"
-[wunderlistdoc]: ./connectors-create-api-wunderlist.md "Connect to Wunderlist. Manage your tasks and to-do lists, keep your life in sync, and more"
-[yammerdoc]: ./connectors-create-api-yammer.md "Connect to Yammer. Post messages, get new messages, and more"
-[youtubedoc]: ./connectors-create-api-youtube.md "Connect to YouTube. Manage your videos and channels"
-
-[as2doc]: ../logic-apps/logic-apps-enterprise-integration-as2.md "Learn about enterprise integration AS2."
-[x12doc]: ../logic-apps/logic-apps-enterprise-integration-x12.md "Learn about enterprise integration X12"
-[flatfiledoc]:../logic-apps/logic-apps-enterprise-integration-flatfile.md "Learn about enterprise integration flat file."
-[flatfiledecodedoc]:../logic-apps/logic-apps-enterprise-integration-flatfile.md "Learn about enterprise integration flat file."
-[xmlvalidatedoc]: ../logic-apps/logic-apps-enterprise-integration-xml-validation.md "Learn about enterprise integration XML validation."
-[xmltransformdoc]: ../logic-apps/logic-apps-enterprise-integration-transform.md "Learn about enterprise integration transforms."
-[as2decode]: ../logic-apps/logic-apps-enterprise-integration-as2-decode.md "Learn about enterprise integration AS2 decode"
-[as2encode]:../logic-apps/logic-apps-enterprise-integration-as2-encode.md "Learn about enterprise integration AS2 encode"
-[X12decode]: ../logic-apps/logic-apps-enterprise-integration-X12-decode.md "Learn about enterprise integration X12 decode"
-[X12encode]: ../logic-apps/logic-apps-enterprise-integration-X12-encode.md "Learn about enterprise integration X12 encode"
-[EDIFACTdecode]: ../logic-apps/logic-apps-enterprise-integration-EDIFACT-decode.md "Learn about enterprise integration EDIFACT decode"
-[EDIFACTencode]: ../logic-apps/logic-apps-enterprise-integration-EDIFACT-encode.md "Learn about enterprise integration EDIFACT encode"
-
-[sapconnector]: ../logic-apps/logic-apps-using-sap-connector.md "Connect to an on-premises SAP system"
-
-<!--Icon references-->
-[appFiguresicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/appfigures.png
-[Asanaicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/asana.png
-[Azure-Automation-icon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/azure-automation.png
-[AzureBlobStorageicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/azureblob.png
-[Azure-Data-Lake-icon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/azure-data-lake.png
-[Azure-DocumentDBicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/azure-documentdb.png
-[Azure-MLicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/azureml.png
-[Azure-Resource-Manager-icon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/azure-resource-manager.png
-[Azure-Queues-icon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/azure-queues.png
-[Basecamp-3icon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/basecamp.png
-[Bitbucket-icon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/bitbucket.png
-[Bitlyicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/bitly.png
-[BizTalk-Servericon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/biztalk.png
-[Bloggericon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/blogger.png
-[Boxicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/box.png
-[Campfireicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/campfire.png
-[Cognitive-Services-Text-Analyticsicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/cognitiveservicestextanalytics.png
-[DB2icon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/db2.png
-[Dropboxicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/dropbox.png
-[Dynamics-365icon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/dynamicscrmonline.png
-[Dynamics-365-for-Financialsicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/madeira.png
-[Dynamics-365-for-Operationsicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/dynamicsax.png
-[Easy-Redmineicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/easyredmine.png
-[Event-Hubs-icon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/eventhubs.png
-[Facebookicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/facebook.png
-[FTPicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/ftp.png
-[GitHubicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/github.png
-[Google-Calendaricon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/googlecalendar.png
-[Google-Driveicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/googledrive.png
-[Google-Sheetsicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/googlesheet.png
-[Google-Tasksicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/googletasks.png
-[HideKeyicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/hidekey.png
-[HipChaticon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/hipchat.png
-[Informixicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/informix.png
-[Insightlyicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/insightly.png
-[Instagramicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/instagram.png
-[Instapapericon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/instapaper.png
-[JIRAicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/jira.png
-[MailChimpicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/mailchimp.png
-[Mandrillicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/mandrill.png
-[Microsoft-Translatoricon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/microsofttranslator.png
-[MQicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/mq.png
-[Office-365-Outlookicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/office365.png
-[Office-365-Usersicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/office365users.png
-[Office-365-Videoicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/office365video.png
-[OneDriveicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/onedrive.png
-[OneDrive-for-Businessicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/onedriveforbusiness.png
-[Oracle-DB-icon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/oracle-db.png
-[Outlook.comicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/outlook.png
-[PagerDutyicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/pagerduty.png
-[Pinteresticon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/pinterest.png
-[Project-Onlineicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/projectonline.png
-[Redmineicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/redmine.png
-[RSSicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/rss.png
-[Common-Data-Serviceicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/runtimeservice.png
-[Salesforceicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/salesforce.png
-[SAPicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/sap.png
-[SendGridicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/sendgrid.png
-[Service-Busicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/servicebus.png
-[SFTPicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/sftp.png
-[SharePointicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/sharepointonline.png
-[Slackicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/slack.png
-[Smartsheeticon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/smartsheet.png
-[SMTPicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/smtp.png
-[SparkPosticon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/sparkpost.png
-[SQL-Servericon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/sql.png
-[Todoisticon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/todoist.png
-[Trelloicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/trello.png
-[Twilioicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/twilio.png
-[Twittericon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/twitter.png
-[Vimeoicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/vimeo.png
-[Visual-Studio-Team-Servicesicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/visualstudioteamservices.png
-[WordPressicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/wordpress.png
-[Wunderlisticon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/wunderlist.png
-[Yammericon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/yammer.png
-[YouTubeicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/youtube.png
-
-<!-- Primitive Icons -->
-[API/Web-Appicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/api.png
-[Azure-Functionsicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/function.png
-[Delayicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/delay.png
-[FileSystemIcon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/filesystem.png
-[HTTPicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/http.png
-[HTTP-Requesticon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/request.png
-[HTTP-Responseicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/response.png
-[HTTP-Swaggericon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/http_swagger.png
-[Nested-Logic-Appicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/workflow.png
-[Recurrenceicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/recurrence.png
-[Queryicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/query.png
-[Webhookicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/webhook.png
-
-<!-- EIP Icons -->
-[as2icon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/as2new.png
-[x12icon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/x12new.png
-[flatfileicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/flatfileencoding.png
-[flatfiledecodeicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/flatfiledecoding.png
-[xmlvalidateicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/xmlvalidation.png
-[xmltransformicon]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/apis-list/xsltransform.png
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+[outlook.com-doc]: ./connectors-create-api-outlook.md "Connect to your Outlook mailbox. Manage your email, calendars, contacts, and more"
+[project-online-doc]: ./connectors-create-api-projectonline.md "Connect to Microsoft Project Online. Manage your projects, tasks, resources, and more"
+[rss-doc]: ./connectors-create-api-rss.md "Publish and retrieve feed items, trigger operations when a new item is published to an RSS feed."
+[salesforce-doc]: ./connectors-create-api-salesforce.md "Connect to your Salesforce account. Manage accounts, leads, opportunities, and more"
+[sap-connector-doc]: ../logic-apps/logic-apps-using-sap-connector.md "Connect to an on-premises SAP system"
+[sendgrid-doc]: ./connectors-create-api-sendgrid.md "Connect to SendGrid. Send email and manage recipient lists"
+[sftp-doc]: ./connectors-create-api-sftp.md "Connect to your SFTP account. Upload, get, delete files, and more"
+[sharepoint-server-doc]: ./connectors-create-api-sharepointserver.md "Connect to SharePoint on-premises server. Manage documents, list items, and more"
+[sharepoint-online-doc]: ./connectors-create-api-sharepointonline.md "Connect to SharePoint Online. Manage documents, list items, and more"
+[slack-doc]: ./connectors-create-api-slack.md "Connect to Slack and post messages to Slack channels"
+[smtp-doc]: ./connectors-create-api-smtp.md "Connect to an SMTP server and send email with attachments"
+[sparkpost-doc]: ./connectors-create-api-sparkpost.md "Connects to SparkPost for communication"
+[sql-server-doc]: ./connectors-create-api-sqlazure.md "Connect to Azure SQL Database or SQL Server. Create, update, get, and delete entries in a SQL database table."
+[trello-doc]: ./connectors-create-api-trello.md "Connect to Trello. Manage your projects and organize anything with anyone"
+[twilio-doc]: ./connectors-create-api-twilio.md "Connect to Twilio. Send and get messages, get available numbers, manage incoming phone numbers, and more"
+[twitter-doc]: ./connectors-create-api-twitter.md "Connect to Twitter. Get timelines, post tweets, and more"
+[wunderlist-doc]: ./connectors-create-api-wunderlist.md "Connect to Wunderlist. Manage your tasks and to-do lists, keep your life in sync, and more"
+[yammer-doc]: ./connectors-create-api-yammer.md "Connect to Yammer. Post messages, get new messages, and more"
+[youtube-doc]: ./connectors-create-api-youtube.md "Connect to YouTube. Manage your videos and channels"
+
+<!--Enterprise Intregation Pack doc links-->
+[as2-doc]: ../logic-apps/logic-apps-enterprise-integration-as2.md "Learn about enterprise integration AS2."
+[as2-decode-doc]: ../logic-apps/logic-apps-enterprise-integration-as2-decode.md "Learn about enterprise integration AS2 decode"
+[as2-encode-doc]:../logic-apps/logic-apps-enterprise-integration-as2-encode.md "Learn about enterprise integration AS2 encode"
+[edifact-decode-doc]: ../logic-apps/logic-apps-enterprise-integration-EDIFACT-decode.md "Learn about enterprise integration EDIFACT decode"
+[edifact-encode-doc]: ../logic-apps/logic-apps-enterprise-integration-EDIFACT-encode.md "Learn about enterprise integration EDIFACT encode"
+[flat-file-decode-doc]:../logic-apps/logic-apps-enterprise-integration-flatfile.md "Learn about enterprise integration flat file."
+[flat-file-encode-doc]:../logic-apps/logic-apps-enterprise-integration-flatfile.md "Learn about enterprise integration flat file."
+[integration-account-doc]: ../logic-apps/logic-apps-enterprise-integration-metadata.md "Look up schemas, maps, partners, and more in your integration account"
+[json-liquid-transform-doc]: ../logic-apps/logic-apps-enterprise-integration-liquid-transform.md "Learn about JSON transformations with Liquid"
+[x12-doc]: ../logic-apps/logic-apps-enterprise-integration-x12.md "Learn about enterprise integration X12"
+[x12-decode-doc]: ../logic-apps/logic-apps-enterprise-integration-X12-decode.md "Learn about enterprise integration X12 decode"
+[x12-encode-doc]: ../logic-apps/logic-apps-enterprise-integration-X12-encode.md "Learn about enterprise integration X12 encode"
+[xml-transform-doc]: ../logic-apps/logic-apps-enterprise-integration-transform.md "Learn about enterprise integration transforms."
+[xml-validate-doc]: ../logic-apps/logic-apps-enterprise-integration-xml-validation.md "Learn about enterprise integration XML validation."
+
+<!-- Built-ins icons -->
+[azure-api-management-icon]: ./media/apis-list/azure-api-management.png
+[azure-app-services-icon]: ./media/apis-list/azure-app-services.png
+[azure-functions-icon]: ./media/apis-list/azure-functions.png
+[azure-logic-apps-icon]: ./media/apis-list/azure-logic-apps.png
+[batch-icon]: ./media/apis-list/batch.png
+[condition-icon]: ./media/apis-list/condition.png
+[data-operations-icon]: ./media/apis-list/data-operations.png
+[date-time-icon]: ./media/apis-list/date-time.png
+[for-each-icon]: ./media/apis-list/for-each-loop.png
+[http-icon]: ./media/apis-list/http.png
+[http-request-icon]: ./media/apis-list/request.png
+[http-response-icon]: ./media/apis-list/response.png
+[http-swagger-icon]: ./media/apis-list/http-swagger.png
+[http-webhook-icon]: ./media/apis-list/http-webhook.png
+[schedule-icon]: ./media/apis-list/recurrence.png
+[scope-icon]: ./media/apis-list/scope.png
+[switch-icon]: ./media/apis-list/switch.png
+[terminate-icon]: ./media/apis-list/terminate.png
+[until-icon]: ./media/apis-list/until.png
+[variables-icon]: ./media/apis-list/variables.png
+
+<!--Managed API icons-->
+[appfigures-icon]: ./media/apis-list/appfigures.png
+[asana-icon]: ./media/apis-list/asana.png
+[azure-automation-icon]: ./media/apis-list/azure-automation.png
+[azure-blob-storage-icon]: ./media/apis-list/azure-blob-storage.png
+[azure-cognitive-services-text-analytics-icon]: ./media/apis-list/azure-cognitive-services-text-analytics.png
+[azure-data-lake-icon]: ./media/apis-list/azure-data-lake.png
+[azure-document-db-icon]: ./media/apis-list/azure-document-db.png
+[azure-event-grid-icon]: ./media/apis-list/azure-event-grid.png
+[azure-event-grid-publish-icon]: ./media/apis-list/azure-event-grid-publish.png
+[azure-event-hubs-icon]: ./media/apis-list/azure-event-hubs.png
+[azure-ml-icon]: ./media/apis-list/azure-ml.png
+[azure-queues-icon]: ./media/apis-list/azure-queues.png
+[azure-resource-manager-icon]: ./media/apis-list/azure-resource-manager.png
+[azure-service-bus-icon]: ./media/apis-list/azure-service-bus.png
+[basecamp-3-icon]: ./media/apis-list/basecamp.png
+[bitbucket-icon]: ./media/apis-list/bitbucket.png
+[bitly-icon]: ./media/apis-list/bitly.png
+[biztalk-server-icon]: ./media/apis-list/biztalk.png
+[blogger-icon]: ./media/apis-list/blogger.png
+[box-icon]: ./media/apis-list/box.png
+[campfire-icon]: ./media/apis-list/campfire.png
+[common-data-service-icon]: ./media/apis-list/common-data-service.png
+[dropbox-icon]: ./media/apis-list/dropbox.png
+[dynamics-365-icon]: ./media/apis-list/dynamics-crm-online.png
+[dynamics-365-financials-icon]: ./media/apis-list/dynamics-365-financials.png
+[dynamics-365-operations-icon]: ./media/apis-list/dynamics-365-operations.png
+[easy-redmine-icon]: ./media/apis-list/easyredmine.png
+[facebook-icon]: ./media/apis-list/facebook.png
+[file-system-icon]: ./media/apis-list/file-system.png
+[ftp-icon]: ./media/apis-list/ftp.png
+[github-icon]: ./media/apis-list/github.png
+[google-calendar-icon]: ./media/apis-list/google-calendar.png
+[google-drive-icon]: ./media/apis-list/google-drive.png
+[google-sheets-icon]: ./media/apis-list/google-sheet.png
+[google-tasks-icon]: ./media/apis-list/google-tasks.png
+[hipchat-icon]: ./media/apis-list/hipchat.png
+[ibm-db2-icon]: ./media/apis-list/ibm-db2.png
+[ibm-informix-icon]: ./media/apis-list/ibm-informix.png
+[ibm-mq-icon]: ./media/apis-list/ibm-mq.png
+[insightly-icon]: ./media/apis-list/insightly.png
+[instagram-icon]: ./media/apis-list/instagram.png
+[instapaper-icon]: ./media/apis-list/instapaper.png
+[jira-icon]: ./media/apis-list/jira.png
+[mailchimp-icon]: ./media/apis-list/mailchimp.png
+[mandrill-icon]: ./media/apis-list/mandrill.png
+[microsoft-translator-icon]: ./media/apis-list/microsoft-translator.png
+[mysql-icon]: ./media/apis-list/mysql.png
+[office-365-outlook-icon]: ./media/apis-list/office-365.png
+[office-365-users-icon]: ./media/apis-list/office-365-users.png
+[office-365-video-icon]: ./media/apis-list/office-365-video.png
+[onedrive-icon]: ./media/apis-list/onedrive.png
+[onedrive-for-business-icon]: ./media/apis-list/onedrive-business.png
+[oracle-db-icon]: ./media/apis-list/oracle-db.png
+[outlook.com-icon]: ./media/apis-list/outlook.png
+[pagerduty-icon]: ./media/apis-list/pagerduty.png
+[pinterest-icon]: ./media/apis-list/pinterest.png
+[postgre-sql-icon]: ./media/apis-list/postgre-sql.png
+[project-online-icon]: ./media/apis-list/projecton-line.png
+[redmine-icon]: ./media/apis-list/redmine.png
+[rss-icon]: ./media/apis-list/rss.png
+[salesforce-icon]: ./media/apis-list/salesforce.png
+[sap-icon]: ./media/apis-list/sap.png
+[send-grid-icon]: ./media/apis-list/sendgrid.png
+[sftp-icon]: ./media/apis-list/sftp.png
+[sharepoint-online-icon]: ./media/apis-list/sharepoint-online.png
+[sharepoint-server-icon]: ./media/apis-list/sharepoint-server.png
+[slack-icon]: ./media/apis-list/slack.png
+[smartsheet-icon]: ./media/apis-list/smartsheet.png
+[smtp-icon]: ./media/apis-list/smtp.png
+[sparkpost-icon]: ./media/apis-list/sparkpost.png
+[sql-server-icon]: ./media/apis-list/sql.png
+[teradata-icon]: ./media/apis-list/teradata.png
+[todoist-icon]: ./media/apis-list/todoist.png
+[trello-icon]: ./media/apis-list/trello.png
+[twilio-icon]: ./media/apis-list/twilio.png
+[twitter-icon]: ./media/apis-list/twitter.png
+[vimeo-icon]: ./media/apis-list/vimeo.png
+[visual-studio-team-services-icon]: ./media/apis-list/visual-studio-team-services.png
+[wordpress-icon]: ./media/apis-list/wordpress.png
+[wunderlist-icon]: ./media/apis-list/wunderlist.png
+[yammer-icon]: ./media/apis-list/yammer.png
+[youtube-icon]: ./media/apis-list/youtube.png
+
+<!-- Enterprise Integration Pack icons -->
+[as2-icon]: ./media/apis-list/as2.png
+[edifact-icon]: ./media/apis-list/edifact.png
+[flat-file-encode-icon]: ./media/apis-list/flat-file-encoding.png
+[flat-file-decode-icon]: ./media/apis-list/flat-file-decoding.png
+[integration-account-icon]: ./media/apis-list/integration-account.png
+[liquid-icon]: ./media/apis-list/liquid-transform.png
+[x12-icon]: ./media/apis-list/x12.png
+[xml-validate-icon]: ./media/apis-list/xml-validation.png
+[xml-transform-icon]: ./media/apis-list/xsl-transform.png

@@ -1,10 +1,10 @@
 ---
-title: Use cloud-init to customize a Linux VM | Microsoft Docs
-description: How to use cloud-init to customize a Linux VM during creation with the Azure CLI 2.0 Preview
+title: Overview of cloud-init support for Linux virtual machines in Azure | Microsoft Docs
+description: Overview of cloud-init capabilities in Microsoft Azure
 services: virtual-machines-linux
 documentationcenter: ''
-author: iainfoulds
-manager: timlt
+author: rickstercdn
+manager: jeconnoc
 editor: ''
 tags: azure-resource-manager
 ms.assetid: 195c22cd-4629-4582-9ee3-9749493f1d72
@@ -13,221 +13,91 @@ ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
 ms.devlang: azurecli
 ms.topic: article
-ms.date: 02/10/2017
-ms.author: iainfou
-ms.openlocfilehash: a5891444757f45ba4d6223a4fbd17aad61931418
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 11/29/2017
+ms.author: rclaus
+ms.openlocfilehash: 40431cb9acbe85232f511d36d69172b55413987d
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44549232"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44775027"
 ---
-# <a name="use-cloud-init-to-customize-a-linux-vm-during-creation"></a><span data-ttu-id="fe376-103">Use cloud-init to customize a Linux VM during creation</span><span class="sxs-lookup"><span data-stu-id="fe376-103">Use cloud-init to customize a Linux VM during creation</span></span>
-<span data-ttu-id="fe376-104">This article shows you how to make a cloud-init script to set the hostname, update installed packages, and manage user accounts with the Azure CLI 2.0.</span><span class="sxs-lookup"><span data-stu-id="fe376-104">This article shows you how to make a cloud-init script to set the hostname, update installed packages, and manage user accounts with the Azure CLI 2.0.</span></span>  <span data-ttu-id="fe376-105">The cloud-init scripts are called when you create a VM from Azure CLI.</span><span class="sxs-lookup"><span data-stu-id="fe376-105">The cloud-init scripts are called when you create a VM from Azure CLI.</span></span>  <span data-ttu-id="fe376-106">You can also perform these steps with the [Azure CLI 1.0](using-cloud-init-nodejs.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).</span><span class="sxs-lookup"><span data-stu-id="fe376-106">You can also perform these steps with the [Azure CLI 1.0](using-cloud-init-nodejs.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).</span></span>
+# <a name="cloud-init-support-for-virtual-machines-in-azure"></a><span data-ttu-id="efa71-103">Cloud-init support for virtual machines in Azure</span><span class="sxs-lookup"><span data-stu-id="efa71-103">Cloud-init support for virtual machines in Azure</span></span>
+<span data-ttu-id="efa71-104">This article explains the support that exists for [cloud-init](https://cloudinit.readthedocs.io) to configure a virtual machine (VM) or virtual machine scale sets (VMSS) at provisioning time in Azure.</span><span class="sxs-lookup"><span data-stu-id="efa71-104">This article explains the support that exists for [cloud-init](https://cloudinit.readthedocs.io) to configure a virtual machine (VM) or virtual machine scale sets (VMSS) at provisioning time in Azure.</span></span> <span data-ttu-id="efa71-105">These cloud-init scripts run on first boot once the resources have been provisioned by Azure.</span><span class="sxs-lookup"><span data-stu-id="efa71-105">These cloud-init scripts run on first boot once the resources have been provisioned by Azure.</span></span>  
 
-## <a name="quick-commands"></a><span data-ttu-id="fe376-107">Quick commands</span><span class="sxs-lookup"><span data-stu-id="fe376-107">Quick commands</span></span>
-<span data-ttu-id="fe376-108">Create a cloud-init.txt script that sets the hostname, updates all packages, and adds a sudo user to Linux.</span><span class="sxs-lookup"><span data-stu-id="fe376-108">Create a cloud-init.txt script that sets the hostname, updates all packages, and adds a sudo user to Linux.</span></span>
+## <a name="cloud-init-overview"></a><span data-ttu-id="efa71-106">Cloud-init overview</span><span class="sxs-lookup"><span data-stu-id="efa71-106">Cloud-init overview</span></span>
+<span data-ttu-id="efa71-107">[Cloud-init](https://cloudinit.readthedocs.io) is a widely used approach to customize a Linux VM as it boots for the first time.</span><span class="sxs-lookup"><span data-stu-id="efa71-107">[Cloud-init](https://cloudinit.readthedocs.io) is a widely used approach to customize a Linux VM as it boots for the first time.</span></span> <span data-ttu-id="efa71-108">You can use cloud-init to install packages and write files, or to configure users and security.</span><span class="sxs-lookup"><span data-stu-id="efa71-108">You can use cloud-init to install packages and write files, or to configure users and security.</span></span> <span data-ttu-id="efa71-109">Because cloud-init is called during the initial boot process, there are no additional steps or required agents to apply your configuration.</span><span class="sxs-lookup"><span data-stu-id="efa71-109">Because cloud-init is called during the initial boot process, there are no additional steps or required agents to apply your configuration.</span></span>  <span data-ttu-id="efa71-110">For more information on how to properly format your `#cloud-config` files, see the [cloud-init documentation site](http://cloudinit.readthedocs.io/en/latest/topics/format.html#cloud-config-data).</span><span class="sxs-lookup"><span data-stu-id="efa71-110">For more information on how to properly format your `#cloud-config` files, see the [cloud-init documentation site](http://cloudinit.readthedocs.io/en/latest/topics/format.html#cloud-config-data).</span></span>  <span data-ttu-id="efa71-111">`#cloud-config` files are text files encoded in base64.</span><span class="sxs-lookup"><span data-stu-id="efa71-111">`#cloud-config` files are text files encoded in base64.</span></span>
 
-```sh
+<span data-ttu-id="efa71-112">Cloud-init also works across distributions.</span><span class="sxs-lookup"><span data-stu-id="efa71-112">Cloud-init also works across distributions.</span></span> <span data-ttu-id="efa71-113">For example, you don't use **apt-get install** or **yum install** to install a package.</span><span class="sxs-lookup"><span data-stu-id="efa71-113">For example, you don't use **apt-get install** or **yum install** to install a package.</span></span> <span data-ttu-id="efa71-114">Instead you can define a list of packages to install.</span><span class="sxs-lookup"><span data-stu-id="efa71-114">Instead you can define a list of packages to install.</span></span> <span data-ttu-id="efa71-115">Cloud-init automatically uses the native package management tool for the distro you select.</span><span class="sxs-lookup"><span data-stu-id="efa71-115">Cloud-init automatically uses the native package management tool for the distro you select.</span></span>
+
+ <span data-ttu-id="efa71-116">We are actively working with our endorsed Linux distro partners in order to have cloud-init enabled images available in the Azure marketplace.</span><span class="sxs-lookup"><span data-stu-id="efa71-116">We are actively working with our endorsed Linux distro partners in order to have cloud-init enabled images available in the Azure marketplace.</span></span> <span data-ttu-id="efa71-117">These images will make your cloud-init deployments and configurations work seamlessly with VMs and VM Scale Sets (VMSS).</span><span class="sxs-lookup"><span data-stu-id="efa71-117">These images will make your cloud-init deployments and configurations work seamlessly with VMs and VM Scale Sets (VMSS).</span></span> <span data-ttu-id="efa71-118">The following table outlines the current cloud-init enabled images availability on the Azure platform:</span><span class="sxs-lookup"><span data-stu-id="efa71-118">The following table outlines the current cloud-init enabled images availability on the Azure platform:</span></span>
+
+| <span data-ttu-id="efa71-119">Publisher</span><span class="sxs-lookup"><span data-stu-id="efa71-119">Publisher</span></span> | <span data-ttu-id="efa71-120">Offer</span><span class="sxs-lookup"><span data-stu-id="efa71-120">Offer</span></span> | <span data-ttu-id="efa71-121">SKU</span><span class="sxs-lookup"><span data-stu-id="efa71-121">SKU</span></span> | <span data-ttu-id="efa71-122">Version</span><span class="sxs-lookup"><span data-stu-id="efa71-122">Version</span></span> | <span data-ttu-id="efa71-123">cloud-init ready</span><span class="sxs-lookup"><span data-stu-id="efa71-123">cloud-init ready</span></span> |
+|:--- |:--- |:--- |:--- |:--- |
+|<span data-ttu-id="efa71-124">Canonical</span><span class="sxs-lookup"><span data-stu-id="efa71-124">Canonical</span></span> |<span data-ttu-id="efa71-125">UbuntuServer</span><span class="sxs-lookup"><span data-stu-id="efa71-125">UbuntuServer</span></span> |<span data-ttu-id="efa71-126">18.04-LTS</span><span class="sxs-lookup"><span data-stu-id="efa71-126">18.04-LTS</span></span> |<span data-ttu-id="efa71-127">latest</span><span class="sxs-lookup"><span data-stu-id="efa71-127">latest</span></span> |<span data-ttu-id="efa71-128">yes</span><span class="sxs-lookup"><span data-stu-id="efa71-128">yes</span></span> | 
+|<span data-ttu-id="efa71-129">Canonical</span><span class="sxs-lookup"><span data-stu-id="efa71-129">Canonical</span></span> |<span data-ttu-id="efa71-130">UbuntuServer</span><span class="sxs-lookup"><span data-stu-id="efa71-130">UbuntuServer</span></span> |<span data-ttu-id="efa71-131">17.10</span><span class="sxs-lookup"><span data-stu-id="efa71-131">17.10</span></span> |<span data-ttu-id="efa71-132">latest</span><span class="sxs-lookup"><span data-stu-id="efa71-132">latest</span></span> |<span data-ttu-id="efa71-133">yes</span><span class="sxs-lookup"><span data-stu-id="efa71-133">yes</span></span> | 
+|<span data-ttu-id="efa71-134">Canonical</span><span class="sxs-lookup"><span data-stu-id="efa71-134">Canonical</span></span> |<span data-ttu-id="efa71-135">UbuntuServer</span><span class="sxs-lookup"><span data-stu-id="efa71-135">UbuntuServer</span></span> |<span data-ttu-id="efa71-136">16.04-LTS</span><span class="sxs-lookup"><span data-stu-id="efa71-136">16.04-LTS</span></span> |<span data-ttu-id="efa71-137">latest</span><span class="sxs-lookup"><span data-stu-id="efa71-137">latest</span></span> |<span data-ttu-id="efa71-138">yes</span><span class="sxs-lookup"><span data-stu-id="efa71-138">yes</span></span> | 
+|<span data-ttu-id="efa71-139">Canonical</span><span class="sxs-lookup"><span data-stu-id="efa71-139">Canonical</span></span> |<span data-ttu-id="efa71-140">UbuntuServer</span><span class="sxs-lookup"><span data-stu-id="efa71-140">UbuntuServer</span></span> |<span data-ttu-id="efa71-141">14.04.5-LTS</span><span class="sxs-lookup"><span data-stu-id="efa71-141">14.04.5-LTS</span></span> |<span data-ttu-id="efa71-142">latest</span><span class="sxs-lookup"><span data-stu-id="efa71-142">latest</span></span> |<span data-ttu-id="efa71-143">yes</span><span class="sxs-lookup"><span data-stu-id="efa71-143">yes</span></span> |
+|<span data-ttu-id="efa71-144">CoreOS</span><span class="sxs-lookup"><span data-stu-id="efa71-144">CoreOS</span></span> |<span data-ttu-id="efa71-145">CoreOS</span><span class="sxs-lookup"><span data-stu-id="efa71-145">CoreOS</span></span> |<span data-ttu-id="efa71-146">Stable</span><span class="sxs-lookup"><span data-stu-id="efa71-146">Stable</span></span> |<span data-ttu-id="efa71-147">latest</span><span class="sxs-lookup"><span data-stu-id="efa71-147">latest</span></span> |<span data-ttu-id="efa71-148">yes</span><span class="sxs-lookup"><span data-stu-id="efa71-148">yes</span></span> |
+|<span data-ttu-id="efa71-149">OpenLogic</span><span class="sxs-lookup"><span data-stu-id="efa71-149">OpenLogic</span></span> |<span data-ttu-id="efa71-150">CentOS</span><span class="sxs-lookup"><span data-stu-id="efa71-150">CentOS</span></span> |<span data-ttu-id="efa71-151">7-CI</span><span class="sxs-lookup"><span data-stu-id="efa71-151">7-CI</span></span> |<span data-ttu-id="efa71-152">latest</span><span class="sxs-lookup"><span data-stu-id="efa71-152">latest</span></span> |<span data-ttu-id="efa71-153">preview</span><span class="sxs-lookup"><span data-stu-id="efa71-153">preview</span></span> |
+|<span data-ttu-id="efa71-154">RedHat</span><span class="sxs-lookup"><span data-stu-id="efa71-154">RedHat</span></span> |<span data-ttu-id="efa71-155">RHEL</span><span class="sxs-lookup"><span data-stu-id="efa71-155">RHEL</span></span> |<span data-ttu-id="efa71-156">7-RAW-CI</span><span class="sxs-lookup"><span data-stu-id="efa71-156">7-RAW-CI</span></span> |<span data-ttu-id="efa71-157">latest</span><span class="sxs-lookup"><span data-stu-id="efa71-157">latest</span></span> |<span data-ttu-id="efa71-158">preview</span><span class="sxs-lookup"><span data-stu-id="efa71-158">preview</span></span> |
+
+<span data-ttu-id="efa71-159">Currently Azure Stack does not support the provisioning of RHEL 7.4 and CentOS 7.4 using cloud-init.</span><span class="sxs-lookup"><span data-stu-id="efa71-159">Currently Azure Stack does not support the provisioning of RHEL 7.4 and CentOS 7.4 using cloud-init.</span></span>
+
+## <a name="what-is-the-difference-between-cloud-init-and-the-linux-agent-wala"></a><span data-ttu-id="efa71-160">What is the difference between cloud-init and the Linux Agent (WALA)?</span><span class="sxs-lookup"><span data-stu-id="efa71-160">What is the difference between cloud-init and the Linux Agent (WALA)?</span></span>
+<span data-ttu-id="efa71-161">WALA is an Azure platform-specific agent used to provision and configure VMs, and handle Azure extensions.</span><span class="sxs-lookup"><span data-stu-id="efa71-161">WALA is an Azure platform-specific agent used to provision and configure VMs, and handle Azure extensions.</span></span> <span data-ttu-id="efa71-162">We are enhancing the task of configuring VMs to use cloud-init instead of the Linux Agent in order to allow existing cloud-init customers to use their current cloud-init scripts.</span><span class="sxs-lookup"><span data-stu-id="efa71-162">We are enhancing the task of configuring VMs to use cloud-init instead of the Linux Agent in order to allow existing cloud-init customers to use their current cloud-init scripts.</span></span>  <span data-ttu-id="efa71-163">If you have existing investments in cloud-init scripts for configuring Linux systems, there are **no additional settings required** to enable them.</span><span class="sxs-lookup"><span data-stu-id="efa71-163">If you have existing investments in cloud-init scripts for configuring Linux systems, there are **no additional settings required** to enable them.</span></span> 
+
+<span data-ttu-id="efa71-164">If you do not include the Azure CLI `--custom-data` switch at provisioning time, WALA takes the minimal VM provisioning parameters required to provision the VM and complete the deployment with the defaults.</span><span class="sxs-lookup"><span data-stu-id="efa71-164">If you do not include the Azure CLI `--custom-data` switch at provisioning time, WALA takes the minimal VM provisioning parameters required to provision the VM and complete the deployment with the defaults.</span></span>  <span data-ttu-id="efa71-165">If you reference the cloud-init `--custom-data` switch, whatever is contained in your custom data (individual settings or full script) overrides the WALA defaults.</span><span class="sxs-lookup"><span data-stu-id="efa71-165">If you reference the cloud-init `--custom-data` switch, whatever is contained in your custom data (individual settings or full script) overrides the WALA defaults.</span></span> 
+
+<span data-ttu-id="efa71-166">WALA configurations of VMs are time-constrained to work within the maximum VM provisioning time.</span><span class="sxs-lookup"><span data-stu-id="efa71-166">WALA configurations of VMs are time-constrained to work within the maximum VM provisioning time.</span></span>  <span data-ttu-id="efa71-167">Cloud-init configurations applied to VMs do not have time constraints and will not cause a deployment to fail by timing out.</span><span class="sxs-lookup"><span data-stu-id="efa71-167">Cloud-init configurations applied to VMs do not have time constraints and will not cause a deployment to fail by timing out.</span></span> 
+
+## <a name="deploying-a-cloud-init-enabled-virtual-machine"></a><span data-ttu-id="efa71-168">Deploying a cloud-init enabled Virtual Machine</span><span class="sxs-lookup"><span data-stu-id="efa71-168">Deploying a cloud-init enabled Virtual Machine</span></span>
+<span data-ttu-id="efa71-169">Deploying a cloud-init enabled virtual machine is as simple as referencing a cloud-init enabled distribution during deployment.</span><span class="sxs-lookup"><span data-stu-id="efa71-169">Deploying a cloud-init enabled virtual machine is as simple as referencing a cloud-init enabled distribution during deployment.</span></span>  <span data-ttu-id="efa71-170">Linux distribution maintainers have to choose to enable and integrate cloud-init into their base Azure published images.</span><span class="sxs-lookup"><span data-stu-id="efa71-170">Linux distribution maintainers have to choose to enable and integrate cloud-init into their base Azure published images.</span></span> <span data-ttu-id="efa71-171">Once you have confirmed the image you want to deploy is cloud-init enabled, you can use the Azure CLI to deploy the image.</span><span class="sxs-lookup"><span data-stu-id="efa71-171">Once you have confirmed the image you want to deploy is cloud-init enabled, you can use the Azure CLI to deploy the image.</span></span> 
+
+<span data-ttu-id="efa71-172">The first step in deploying this image is to create a resource group with the [az group create](/cli/azure/group#az_group_create) command.</span><span class="sxs-lookup"><span data-stu-id="efa71-172">The first step in deploying this image is to create a resource group with the [az group create](/cli/azure/group#az_group_create) command.</span></span> <span data-ttu-id="efa71-173">An Azure resource group is a logical container into which Azure resources are deployed and managed.</span><span class="sxs-lookup"><span data-stu-id="efa71-173">An Azure resource group is a logical container into which Azure resources are deployed and managed.</span></span> 
+
+<span data-ttu-id="efa71-174">The following example creates a resource group named *myResourceGroup* in the *eastus* location.</span><span class="sxs-lookup"><span data-stu-id="efa71-174">The following example creates a resource group named *myResourceGroup* in the *eastus* location.</span></span>
+
+```azurecli-interactive 
+az group create --name myResourceGroup --location eastus
+```
+<span data-ttu-id="efa71-175">The next step is to create a file in your current shell, named *cloud-init.txt* and paste the following configuration.</span><span class="sxs-lookup"><span data-stu-id="efa71-175">The next step is to create a file in your current shell, named *cloud-init.txt* and paste the following configuration.</span></span> <span data-ttu-id="efa71-176">For this example, create the file in the Cloud Shell not on your local machine.</span><span class="sxs-lookup"><span data-stu-id="efa71-176">For this example, create the file in the Cloud Shell not on your local machine.</span></span> <span data-ttu-id="efa71-177">You can use any editor you wish.</span><span class="sxs-lookup"><span data-stu-id="efa71-177">You can use any editor you wish.</span></span> <span data-ttu-id="efa71-178">Enter `sensible-editor cloud-init.txt` to create the file and see a list of available editors.</span><span class="sxs-lookup"><span data-stu-id="efa71-178">Enter `sensible-editor cloud-init.txt` to create the file and see a list of available editors.</span></span> <span data-ttu-id="efa71-179">Choose #1 to use the **nano** editor.</span><span class="sxs-lookup"><span data-stu-id="efa71-179">Choose #1 to use the **nano** editor.</span></span> <span data-ttu-id="efa71-180">Make sure that the whole cloud-init file is copied correctly, especially the first line:</span><span class="sxs-lookup"><span data-stu-id="efa71-180">Make sure that the whole cloud-init file is copied correctly, especially the first line:</span></span>
+
+```yaml
 #cloud-config
-hostname: myVMhostname
-apt_upgrade: true
-users:
-  - name: myNewAdminUser
-    groups: sudo
-    shell: /bin/bash
-    sudo: ['ALL=(ALL) NOPASSWD:ALL']
-    ssh-authorized-keys:
-      - ssh-rsa AAAAB3<snip>==myAdminUser@myVM
+package_upgrade: true
+packages:
+  - httpd
 ```
+<span data-ttu-id="efa71-181">Press `ctrl-X` to exit the file, type `y` to save the file and press `enter` to confirm the file name on exit.</span><span class="sxs-lookup"><span data-stu-id="efa71-181">Press `ctrl-X` to exit the file, type `y` to save the file and press `enter` to confirm the file name on exit.</span></span>
 
-<span data-ttu-id="fe376-109">Create a resource group to launch VMs into with [az group create](/cli/azure/group#create).</span><span class="sxs-lookup"><span data-stu-id="fe376-109">Create a resource group to launch VMs into with [az group create](/cli/azure/group#create).</span></span> <span data-ttu-id="fe376-110">The following example creates the resource group named `myResourceGroup`:</span><span class="sxs-lookup"><span data-stu-id="fe376-110">The following example creates the resource group named `myResourceGroup`:</span></span>
+<span data-ttu-id="efa71-182">The final step is to create a VM with the [az vm create](/cli/azure/vm#az_vm_create) command.</span><span class="sxs-lookup"><span data-stu-id="efa71-182">The final step is to create a VM with the [az vm create](/cli/azure/vm#az_vm_create) command.</span></span> 
 
-```azurecli
-az group create --name myResourceGroup --location westus
-```
+<span data-ttu-id="efa71-183">The following example creates a VM named *centos74* and creates SSH keys if they do not already exist in a default key location.</span><span class="sxs-lookup"><span data-stu-id="efa71-183">The following example creates a VM named *centos74* and creates SSH keys if they do not already exist in a default key location.</span></span> <span data-ttu-id="efa71-184">To use a specific set of keys, use the `--ssh-key-value` option.</span><span class="sxs-lookup"><span data-stu-id="efa71-184">To use a specific set of keys, use the `--ssh-key-value` option.</span></span>  <span data-ttu-id="efa71-185">Use the `--custom-data` parameter to pass in your cloud-init config file.</span><span class="sxs-lookup"><span data-stu-id="efa71-185">Use the `--custom-data` parameter to pass in your cloud-init config file.</span></span> <span data-ttu-id="efa71-186">Provide the full path to the *cloud-init.txt* config if you saved the file outside of your present working directory.</span><span class="sxs-lookup"><span data-stu-id="efa71-186">Provide the full path to the *cloud-init.txt* config if you saved the file outside of your present working directory.</span></span> <span data-ttu-id="efa71-187">The following example creates a VM named *centos74*:</span><span class="sxs-lookup"><span data-stu-id="efa71-187">The following example creates a VM named *centos74*:</span></span>
 
-<span data-ttu-id="fe376-111">Create a Linux VM with [az vm create](/cli/azure/vm#create) using cloud-init to configure it during boot.</span><span class="sxs-lookup"><span data-stu-id="fe376-111">Create a Linux VM with [az vm create](/cli/azure/vm#create) using cloud-init to configure it during boot.</span></span>
-
-```azurecli
+```azurecli-interactive 
 az vm create \
-    --resource-group myResourceGroup \
-    --name myVM \
-    --image UbuntuLTS \
-    --admin-username azureuser \
-    --ssh-key-value ~/.ssh/id_rsa.pub \
-    --custom-data cloud-init.txt
+  --resource-group myResourceGroup \
+  --name centos74 \
+  --image OpenLogic:CentOS:7-CI:latest \
+  --custom-data cloud-init.txt \
+  --generate-ssh-keys 
 ```
 
-## <a name="detailed-walkthrough"></a><span data-ttu-id="fe376-112">Detailed walkthrough</span><span class="sxs-lookup"><span data-stu-id="fe376-112">Detailed walkthrough</span></span>
-### <a name="introduction"></a><span data-ttu-id="fe376-113">Introduction</span><span class="sxs-lookup"><span data-stu-id="fe376-113">Introduction</span></span>
-<span data-ttu-id="fe376-114">When you launch a new Linux VM, you are getting a standard Linux VM with nothing customized or ready for your needs.</span><span class="sxs-lookup"><span data-stu-id="fe376-114">When you launch a new Linux VM, you are getting a standard Linux VM with nothing customized or ready for your needs.</span></span> <span data-ttu-id="fe376-115">[Cloud-init](https://cloudinit.readthedocs.org) is a standard way to inject a script or configuration settings into that Linux VM as it is booting up for the first time.</span><span class="sxs-lookup"><span data-stu-id="fe376-115">[Cloud-init](https://cloudinit.readthedocs.org) is a standard way to inject a script or configuration settings into that Linux VM as it is booting up for the first time.</span></span>
+<span data-ttu-id="efa71-188">When the VM has been created, the Azure CLI shows information specific to your deployment.</span><span class="sxs-lookup"><span data-stu-id="efa71-188">When the VM has been created, the Azure CLI shows information specific to your deployment.</span></span> <span data-ttu-id="efa71-189">Take note of the `publicIpAddress`.</span><span class="sxs-lookup"><span data-stu-id="efa71-189">Take note of the `publicIpAddress`.</span></span> <span data-ttu-id="efa71-190">This address is used to access the VM.</span><span class="sxs-lookup"><span data-stu-id="efa71-190">This address is used to access the VM.</span></span>  <span data-ttu-id="efa71-191">It takes some time for the VM to be created, the packages to install, and the app to start.</span><span class="sxs-lookup"><span data-stu-id="efa71-191">It takes some time for the VM to be created, the packages to install, and the app to start.</span></span> <span data-ttu-id="efa71-192">There are background tasks that continue to run after the Azure CLI returns you to the prompt.</span><span class="sxs-lookup"><span data-stu-id="efa71-192">There are background tasks that continue to run after the Azure CLI returns you to the prompt.</span></span> <span data-ttu-id="efa71-193">You can SSH into the VM and use the steps outlined in the Troubleshooting section to view the cloud-init logs.</span><span class="sxs-lookup"><span data-stu-id="efa71-193">You can SSH into the VM and use the steps outlined in the Troubleshooting section to view the cloud-init logs.</span></span> 
 
-<span data-ttu-id="fe376-116">On Azure, there are a three different ways to make changes onto a Linux VM as it is being deployed or booted.</span><span class="sxs-lookup"><span data-stu-id="fe376-116">On Azure, there are a three different ways to make changes onto a Linux VM as it is being deployed or booted.</span></span>
-
-* <span data-ttu-id="fe376-117">Inject scripts using cloud-init.</span><span class="sxs-lookup"><span data-stu-id="fe376-117">Inject scripts using cloud-init.</span></span>
-* <span data-ttu-id="fe376-118">Inject scripts using the Azure [VMAccess Extension](using-vmaccess-extension.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).</span><span class="sxs-lookup"><span data-stu-id="fe376-118">Inject scripts using the Azure [VMAccess Extension](using-vmaccess-extension.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).</span></span>
-* <span data-ttu-id="fe376-119">An Azure template using cloud-init.</span><span class="sxs-lookup"><span data-stu-id="fe376-119">An Azure template using cloud-init.</span></span>
-* <span data-ttu-id="fe376-120">An Azure template using [CustomScriptExtention](extensions-customscript.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).</span><span class="sxs-lookup"><span data-stu-id="fe376-120">An Azure template using [CustomScriptExtention](extensions-customscript.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).</span></span>
-
-<span data-ttu-id="fe376-121">To inject scripts at any time after boot:</span><span class="sxs-lookup"><span data-stu-id="fe376-121">To inject scripts at any time after boot:</span></span>
-
-* <span data-ttu-id="fe376-122">SSH to run commands directly</span><span class="sxs-lookup"><span data-stu-id="fe376-122">SSH to run commands directly</span></span>
-* <span data-ttu-id="fe376-123">Inject scripts using the Azure [VMAccess Extension](using-vmaccess-extension.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json), either imperatively or in an Azure template</span><span class="sxs-lookup"><span data-stu-id="fe376-123">Inject scripts using the Azure [VMAccess Extension](using-vmaccess-extension.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json), either imperatively or in an Azure template</span></span>
-* <span data-ttu-id="fe376-124">Configuration management tools like Ansible, Salt, Chef, and Puppet.</span><span class="sxs-lookup"><span data-stu-id="fe376-124">Configuration management tools like Ansible, Salt, Chef, and Puppet.</span></span>
+## <a name="troubleshooting-cloud-init"></a><span data-ttu-id="efa71-194">Troubleshooting cloud-init</span><span class="sxs-lookup"><span data-stu-id="efa71-194">Troubleshooting cloud-init</span></span>
+<span data-ttu-id="efa71-195">Once the VM has been provisioned, cloud-init will run through all the modules and script defined in `--custom-data` in order to configure the VM.</span><span class="sxs-lookup"><span data-stu-id="efa71-195">Once the VM has been provisioned, cloud-init will run through all the modules and script defined in `--custom-data` in order to configure the VM.</span></span>  <span data-ttu-id="efa71-196">If you need to troubleshoot any errors or omissions from the configuration, you need to search for the module name (`disk_setup` or `runcmd` for example) in the cloud-init log - located in **/var/log/cloud-init.log**.</span><span class="sxs-lookup"><span data-stu-id="efa71-196">If you need to troubleshoot any errors or omissions from the configuration, you need to search for the module name (`disk_setup` or `runcmd` for example) in the cloud-init log - located in **/var/log/cloud-init.log**.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="fe376-125">: VMAccess Extension executes a script as root in the same way using SSH can.</span><span class="sxs-lookup"><span data-stu-id="fe376-125">: VMAccess Extension executes a script as root in the same way using SSH can.</span></span>  <span data-ttu-id="fe376-126">However, using the VM extension enables several features that Azure offers that can be useful depending upon your scenario.</span><span class="sxs-lookup"><span data-stu-id="fe376-126">However, using the VM extension enables several features that Azure offers that can be useful depending upon your scenario.</span></span>
-> 
-> 
+> <span data-ttu-id="efa71-197">Not every module failure results in a fatal cloud-init overall configuration failure.</span><span class="sxs-lookup"><span data-stu-id="efa71-197">Not every module failure results in a fatal cloud-init overall configuration failure.</span></span> <span data-ttu-id="efa71-198">For example, using the `runcmd` module, if the script fails, cloud-init will still report provisioning succeeded because the runcmd module executed.</span><span class="sxs-lookup"><span data-stu-id="efa71-198">For example, using the `runcmd` module, if the script fails, cloud-init will still report provisioning succeeded because the runcmd module executed.</span></span>
 
-## <a name="cloud-init-availability-on-azure-vm-quick-create-image-aliases"></a><span data-ttu-id="fe376-127">Cloud-init availability on Azure VM quick-create image aliases:</span><span class="sxs-lookup"><span data-stu-id="fe376-127">Cloud-init availability on Azure VM quick-create image aliases:</span></span>
-| <span data-ttu-id="fe376-128">Alias</span><span class="sxs-lookup"><span data-stu-id="fe376-128">Alias</span></span> | <span data-ttu-id="fe376-129">Publisher</span><span class="sxs-lookup"><span data-stu-id="fe376-129">Publisher</span></span> | <span data-ttu-id="fe376-130">Offer</span><span class="sxs-lookup"><span data-stu-id="fe376-130">Offer</span></span> | <span data-ttu-id="fe376-131">SKU</span><span class="sxs-lookup"><span data-stu-id="fe376-131">SKU</span></span> | <span data-ttu-id="fe376-132">Version</span><span class="sxs-lookup"><span data-stu-id="fe376-132">Version</span></span> | <span data-ttu-id="fe376-133">cloud-init</span><span class="sxs-lookup"><span data-stu-id="fe376-133">cloud-init</span></span> |
-|:--- |:--- |:--- |:--- |:--- |:--- |
-| <span data-ttu-id="fe376-134">CentOS</span><span class="sxs-lookup"><span data-stu-id="fe376-134">CentOS</span></span> |<span data-ttu-id="fe376-135">OpenLogic</span><span class="sxs-lookup"><span data-stu-id="fe376-135">OpenLogic</span></span> |<span data-ttu-id="fe376-136">Centos</span><span class="sxs-lookup"><span data-stu-id="fe376-136">Centos</span></span> |<span data-ttu-id="fe376-137">7.2</span><span class="sxs-lookup"><span data-stu-id="fe376-137">7.2</span></span> |<span data-ttu-id="fe376-138">latest</span><span class="sxs-lookup"><span data-stu-id="fe376-138">latest</span></span> |<span data-ttu-id="fe376-139">no</span><span class="sxs-lookup"><span data-stu-id="fe376-139">no</span></span> |
-| <span data-ttu-id="fe376-140">CoreOS</span><span class="sxs-lookup"><span data-stu-id="fe376-140">CoreOS</span></span> |<span data-ttu-id="fe376-141">CoreOS</span><span class="sxs-lookup"><span data-stu-id="fe376-141">CoreOS</span></span> |<span data-ttu-id="fe376-142">CoreOS</span><span class="sxs-lookup"><span data-stu-id="fe376-142">CoreOS</span></span> |<span data-ttu-id="fe376-143">Stable</span><span class="sxs-lookup"><span data-stu-id="fe376-143">Stable</span></span> |<span data-ttu-id="fe376-144">latest</span><span class="sxs-lookup"><span data-stu-id="fe376-144">latest</span></span> |<span data-ttu-id="fe376-145">yes</span><span class="sxs-lookup"><span data-stu-id="fe376-145">yes</span></span> |
-| <span data-ttu-id="fe376-146">Debian</span><span class="sxs-lookup"><span data-stu-id="fe376-146">Debian</span></span> |<span data-ttu-id="fe376-147">credativ</span><span class="sxs-lookup"><span data-stu-id="fe376-147">credativ</span></span> |<span data-ttu-id="fe376-148">Debian</span><span class="sxs-lookup"><span data-stu-id="fe376-148">Debian</span></span> |<span data-ttu-id="fe376-149">8</span><span class="sxs-lookup"><span data-stu-id="fe376-149">8</span></span> |<span data-ttu-id="fe376-150">latest</span><span class="sxs-lookup"><span data-stu-id="fe376-150">latest</span></span> |<span data-ttu-id="fe376-151">no</span><span class="sxs-lookup"><span data-stu-id="fe376-151">no</span></span> |
-| <span data-ttu-id="fe376-152">openSUSE</span><span class="sxs-lookup"><span data-stu-id="fe376-152">openSUSE</span></span> |<span data-ttu-id="fe376-153">SUSE</span><span class="sxs-lookup"><span data-stu-id="fe376-153">SUSE</span></span> |<span data-ttu-id="fe376-154">openSUSE</span><span class="sxs-lookup"><span data-stu-id="fe376-154">openSUSE</span></span> |<span data-ttu-id="fe376-155">13.2</span><span class="sxs-lookup"><span data-stu-id="fe376-155">13.2</span></span> |<span data-ttu-id="fe376-156">latest</span><span class="sxs-lookup"><span data-stu-id="fe376-156">latest</span></span> |<span data-ttu-id="fe376-157">no</span><span class="sxs-lookup"><span data-stu-id="fe376-157">no</span></span> |
-| <span data-ttu-id="fe376-158">RHEL</span><span class="sxs-lookup"><span data-stu-id="fe376-158">RHEL</span></span> |<span data-ttu-id="fe376-159">Redhat</span><span class="sxs-lookup"><span data-stu-id="fe376-159">Redhat</span></span> |<span data-ttu-id="fe376-160">RHEL</span><span class="sxs-lookup"><span data-stu-id="fe376-160">RHEL</span></span> |<span data-ttu-id="fe376-161">7.2</span><span class="sxs-lookup"><span data-stu-id="fe376-161">7.2</span></span> |<span data-ttu-id="fe376-162">latest</span><span class="sxs-lookup"><span data-stu-id="fe376-162">latest</span></span> |<span data-ttu-id="fe376-163">no</span><span class="sxs-lookup"><span data-stu-id="fe376-163">no</span></span> |
-| <span data-ttu-id="fe376-164">UbuntuLTS</span><span class="sxs-lookup"><span data-stu-id="fe376-164">UbuntuLTS</span></span> |<span data-ttu-id="fe376-165">Canonical</span><span class="sxs-lookup"><span data-stu-id="fe376-165">Canonical</span></span> |<span data-ttu-id="fe376-166">UbuntuServer</span><span class="sxs-lookup"><span data-stu-id="fe376-166">UbuntuServer</span></span> |<span data-ttu-id="fe376-167">14.04.4-LTS</span><span class="sxs-lookup"><span data-stu-id="fe376-167">14.04.4-LTS</span></span> |<span data-ttu-id="fe376-168">latest</span><span class="sxs-lookup"><span data-stu-id="fe376-168">latest</span></span> |<span data-ttu-id="fe376-169">yes</span><span class="sxs-lookup"><span data-stu-id="fe376-169">yes</span></span> |
+<span data-ttu-id="efa71-199">For more details of cloud-init logging, refer to the [cloud-init documentation](http://cloudinit.readthedocs.io/en/latest/topics/logging.html)</span><span class="sxs-lookup"><span data-stu-id="efa71-199">For more details of cloud-init logging, refer to the [cloud-init documentation](http://cloudinit.readthedocs.io/en/latest/topics/logging.html)</span></span> 
 
-<span data-ttu-id="fe376-170">Microsoft is working with our partners to get cloud-init included and working in the images that they provide to Azure.</span><span class="sxs-lookup"><span data-stu-id="fe376-170">Microsoft is working with our partners to get cloud-init included and working in the images that they provide to Azure.</span></span>
-
-## <a name="add-a-cloud-init-script-to-the-vm-creation-with-the-azure-cli"></a><span data-ttu-id="fe376-171">Add a cloud-init script to the VM creation with the Azure CLI</span><span class="sxs-lookup"><span data-stu-id="fe376-171">Add a cloud-init script to the VM creation with the Azure CLI</span></span>
-<span data-ttu-id="fe376-172">To launch a cloud-init script when creating a VM in Azure, specify the cloud-init file using the Azure CLI `--custom-data` switch.</span><span class="sxs-lookup"><span data-stu-id="fe376-172">To launch a cloud-init script when creating a VM in Azure, specify the cloud-init file using the Azure CLI `--custom-data` switch.</span></span>
-
-<span data-ttu-id="fe376-173">Create a resource group to launch VMs into.</span><span class="sxs-lookup"><span data-stu-id="fe376-173">Create a resource group to launch VMs into.</span></span>
-
-<span data-ttu-id="fe376-174">Create a resource group to launch VMs into with [az group create](/cli/azure/group#create).</span><span class="sxs-lookup"><span data-stu-id="fe376-174">Create a resource group to launch VMs into with [az group create](/cli/azure/group#create).</span></span> <span data-ttu-id="fe376-175">The following example creates the resource group named `myResourceGroup`:</span><span class="sxs-lookup"><span data-stu-id="fe376-175">The following example creates the resource group named `myResourceGroup`:</span></span>
-
-```azurecli
-az group create --name myResourceGroup --location westus
-```
-
-<span data-ttu-id="fe376-176">Create a Linux VM with [az vm create](/cli/azure/vm#create) using cloud-init to configure it during boot.</span><span class="sxs-lookup"><span data-stu-id="fe376-176">Create a Linux VM with [az vm create](/cli/azure/vm#create) using cloud-init to configure it during boot.</span></span>
-
-```azurecli
-az vm create \
-    --resource-group myResourceGroup \
-    --name myVM \
-    --image UbuntuLTS \
-    --admin-username azureuser \
-    --ssh-key-value ~/.ssh/id_rsa.pub \
-    --custom-data cloud-init.txt
-```
-
-## <a name="create-a-cloud-init-script-to-set-the-hostname-of-a-linux-vm"></a><span data-ttu-id="fe376-177">Create a cloud-init script to set the hostname of a Linux VM</span><span class="sxs-lookup"><span data-stu-id="fe376-177">Create a cloud-init script to set the hostname of a Linux VM</span></span>
-<span data-ttu-id="fe376-178">One of the simplest and most important settings for any Linux VM would be the hostname.</span><span class="sxs-lookup"><span data-stu-id="fe376-178">One of the simplest and most important settings for any Linux VM would be the hostname.</span></span> <span data-ttu-id="fe376-179">We can easily set this using cloud-init with this script.</span><span class="sxs-lookup"><span data-stu-id="fe376-179">We can easily set this using cloud-init with this script.</span></span>  
-
-### <a name="example-cloud-init-script-named-cloudconfighostnametxt"></a><span data-ttu-id="fe376-180">Example cloud-init script named `cloud_config_hostname.txt`.</span><span class="sxs-lookup"><span data-stu-id="fe376-180">Example cloud-init script named `cloud_config_hostname.txt`.</span></span>
-```sh
-#cloud-config
-hostname: myservername
-```
-
-<span data-ttu-id="fe376-181">During the initial startup of the VM, this cloud-init script sets the hostname to `myservername`.</span><span class="sxs-lookup"><span data-stu-id="fe376-181">During the initial startup of the VM, this cloud-init script sets the hostname to `myservername`.</span></span> <span data-ttu-id="fe376-182">Create a Linux VM with [az vm create](/cli/azure/vm#create) using cloud-init to configure it during boot.</span><span class="sxs-lookup"><span data-stu-id="fe376-182">Create a Linux VM with [az vm create](/cli/azure/vm#create) using cloud-init to configure it during boot.</span></span>
-
-```azurecli
-az vm create \
-    --resource-group myResourceGroup \
-    --name myVM \
-    --image UbuntuLTS \
-    --admin-username azureuser \
-    --ssh-key-value ~/.ssh/id_rsa.pub \
-    --custom-data cloud-init.txt
-```
-
-<span data-ttu-id="fe376-183">Login and verify the hostname of the new VM.</span><span class="sxs-lookup"><span data-stu-id="fe376-183">Login and verify the hostname of the new VM.</span></span>
-
-```bash
-ssh myVM
-hostname
-myservername
-```
-
-## <a name="create-a-cloud-init-script-to-update-linux"></a><span data-ttu-id="fe376-184">Create a cloud-init script to update Linux</span><span class="sxs-lookup"><span data-stu-id="fe376-184">Create a cloud-init script to update Linux</span></span>
-<span data-ttu-id="fe376-185">For security, you want your Ubuntu VM to update on the first boot.</span><span class="sxs-lookup"><span data-stu-id="fe376-185">For security, you want your Ubuntu VM to update on the first boot.</span></span>  <span data-ttu-id="fe376-186">Using cloud-init we can do that with the follow script, depending on the Linux distribution you are using.</span><span class="sxs-lookup"><span data-stu-id="fe376-186">Using cloud-init we can do that with the follow script, depending on the Linux distribution you are using.</span></span>
-
-### <a name="example-cloud-init-script-cloudconfigaptupgradetxt-for-the-debian-family"></a><span data-ttu-id="fe376-187">Example cloud-init script `cloud_config_apt_upgrade.txt` for the Debian Family</span><span class="sxs-lookup"><span data-stu-id="fe376-187">Example cloud-init script `cloud_config_apt_upgrade.txt` for the Debian Family</span></span>
-```sh
-#cloud-config
-apt_upgrade: true
-```
-
-<span data-ttu-id="fe376-188">After Linux has booted, all the installed packages are updated via `apt-get`.</span><span class="sxs-lookup"><span data-stu-id="fe376-188">After Linux has booted, all the installed packages are updated via `apt-get`.</span></span> <span data-ttu-id="fe376-189">Create a Linux VM with [az vm create](/cli/azure/vm#create) using cloud-init to configure it during boot.</span><span class="sxs-lookup"><span data-stu-id="fe376-189">Create a Linux VM with [az vm create](/cli/azure/vm#create) using cloud-init to configure it during boot.</span></span>
-
-```azurecli
-az vm create \
-    --resource-group myResourceGroup \
-    --name myVM \
-    --image UbuntuLTS \
-    --admin-username azureuser \
-    --ssh-key-value ~/.ssh/id_rsa.pub \
-    --custom-data cloud_config_apt_upgrade.txt
-```
-
-<span data-ttu-id="fe376-190">Login and verify all packages are updated.</span><span class="sxs-lookup"><span data-stu-id="fe376-190">Login and verify all packages are updated.</span></span>
-
-```bash
-ssh myUbuntuVM
-sudo apt-get upgrade
-Reading package lists... Done
-Building dependency tree
-Reading state information... Done
-Calculating upgrade... Done
-The following packages have been kept back:
-  linux-generic linux-headers-generic linux-image-generic
-0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
-```
-
-## <a name="create-a-cloud-init-script-to-add-a-user-to-linux"></a><span data-ttu-id="fe376-191">Create a cloud-init script to add a user to Linux</span><span class="sxs-lookup"><span data-stu-id="fe376-191">Create a cloud-init script to add a user to Linux</span></span>
-<span data-ttu-id="fe376-192">One of the first tasks on any new Linux VM is to add a user for yourself or to avoid using `root`.</span><span class="sxs-lookup"><span data-stu-id="fe376-192">One of the first tasks on any new Linux VM is to add a user for yourself or to avoid using `root`.</span></span> <span data-ttu-id="fe376-193">SSH keys are best practice for security and for usability and they are added to the `~/.ssh/authorized_keys` file with this cloud-init script.</span><span class="sxs-lookup"><span data-stu-id="fe376-193">SSH keys are best practice for security and for usability and they are added to the `~/.ssh/authorized_keys` file with this cloud-init script.</span></span>
-
-### <a name="example-cloud-init-script-cloudconfigadduserstxt-for-debian-family"></a><span data-ttu-id="fe376-194">Example cloud-init script `cloud_config_add_users.txt` for Debian Family</span><span class="sxs-lookup"><span data-stu-id="fe376-194">Example cloud-init script `cloud_config_add_users.txt` for Debian Family</span></span>
-```sh
-#cloud-config
-users:
-  - name: myCloudInitAddedAdminUser
-    groups: sudo
-    shell: /bin/bash
-    sudo: ['ALL=(ALL) NOPASSWD:ALL']
-    ssh-authorized-keys:
-      - ssh-rsa AAAAB3<snip>==myAdminUser@myUbuntuVM
-```
-
-<span data-ttu-id="fe376-195">After Linux has booted, all the listed users are created and added to the sudo group.</span><span class="sxs-lookup"><span data-stu-id="fe376-195">After Linux has booted, all the listed users are created and added to the sudo group.</span></span> <span data-ttu-id="fe376-196">Create a Linux VM with [az vm create](/cli/azure/vm#create) using cloud-init to configure it during boot.</span><span class="sxs-lookup"><span data-stu-id="fe376-196">Create a Linux VM with [az vm create](/cli/azure/vm#create) using cloud-init to configure it during boot.</span></span>
-
-```azurecli
-az vm create \
-    --resource-group myResourceGroup \
-    --name myVM \
-    --image UbuntuLTS \
-    --admin-username azureuser \
-    --ssh-key-value ~/.ssh/id_rsa.pub \
-    --custom-data cloud_config_add_users.txt
-```
-
-<span data-ttu-id="fe376-197">Login and verify the newly created user.</span><span class="sxs-lookup"><span data-stu-id="fe376-197">Login and verify the newly created user.</span></span>
-
-```bash
-ssh myVM
-cat /etc/group
-```
-
-<span data-ttu-id="fe376-198">Output</span><span class="sxs-lookup"><span data-stu-id="fe376-198">Output</span></span>
-
-```bash
-root:x:0:
-<snip />
-sudo:x:27:myCloudInitAddedAdminUser
-<snip />
-myCloudInitAddedAdminUser:x:1000:
-```
-
-## <a name="next-steps"></a><span data-ttu-id="fe376-199">Next steps</span><span class="sxs-lookup"><span data-stu-id="fe376-199">Next steps</span></span>
-<span data-ttu-id="fe376-200">Cloud-init is becoming one standard way to modify your Linux VM on boot.</span><span class="sxs-lookup"><span data-stu-id="fe376-200">Cloud-init is becoming one standard way to modify your Linux VM on boot.</span></span> <span data-ttu-id="fe376-201">Azure also has VM extensions, which allow you to modify your LinuxVM on boot or while it is running.</span><span class="sxs-lookup"><span data-stu-id="fe376-201">Azure also has VM extensions, which allow you to modify your LinuxVM on boot or while it is running.</span></span> <span data-ttu-id="fe376-202">For example, you can use the Azure VMAccessExtension to reset SSH or user information while the VM is running.</span><span class="sxs-lookup"><span data-stu-id="fe376-202">For example, you can use the Azure VMAccessExtension to reset SSH or user information while the VM is running.</span></span> <span data-ttu-id="fe376-203">With cloud-init, you would need a reboot to reset the password.</span><span class="sxs-lookup"><span data-stu-id="fe376-203">With cloud-init, you would need a reboot to reset the password.</span></span>
-
-[<span data-ttu-id="fe376-204">About virtual machine extensions and features</span><span class="sxs-lookup"><span data-stu-id="fe376-204">About virtual machine extensions and features</span></span>](../windows/extensions-features.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
-
-[<span data-ttu-id="fe376-205">Manage users, SSH, and check or repair disks on Azure Linux VMs using the VMAccess Extension</span><span class="sxs-lookup"><span data-stu-id="fe376-205">Manage users, SSH, and check or repair disks on Azure Linux VMs using the VMAccess Extension</span></span>](using-vmaccess-extension.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
-
+## <a name="next-steps"></a><span data-ttu-id="efa71-200">Next steps</span><span class="sxs-lookup"><span data-stu-id="efa71-200">Next steps</span></span>
+<span data-ttu-id="efa71-201">For cloud-init examples of configuration changes, see the following documents:</span><span class="sxs-lookup"><span data-stu-id="efa71-201">For cloud-init examples of configuration changes, see the following documents:</span></span>
+ 
+- [<span data-ttu-id="efa71-202">Add an additional Linux user to a VM</span><span class="sxs-lookup"><span data-stu-id="efa71-202">Add an additional Linux user to a VM</span></span>](cloudinit-add-user.md)
+- [<span data-ttu-id="efa71-203">Run a package manager to update existing packages on first boot</span><span class="sxs-lookup"><span data-stu-id="efa71-203">Run a package manager to update existing packages on first boot</span></span>](cloudinit-update-vm.md)
+- [<span data-ttu-id="efa71-204">Change VM local hostname</span><span class="sxs-lookup"><span data-stu-id="efa71-204">Change VM local hostname</span></span>](cloudinit-update-vm-hostname.md) 
+- [<span data-ttu-id="efa71-205">Install an application package, update configuration files and inject keys</span><span class="sxs-lookup"><span data-stu-id="efa71-205">Install an application package, update configuration files and inject keys</span></span>](tutorial-automate-vm-deployment.md)

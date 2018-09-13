@@ -1,62 +1,65 @@
 ---
-title: Azure PowerShell Script-Restore a SQL database | Microsoft Docs
-description: Azure PowerShell Script Sample - Restore a SQL database using PowerShell
+title: PowerShell example-restore-backup-Azure SQL database | Microsoft Docs
+description: Azure PowerShell example script to restore an Azure SQL database from geo-redundant backups
 services: sql-database
 documentationcenter: sql-database
-author: janeng
-manager: jstrauss
+author: CarlRabeler
+manager: craigg
 editor: carlrab
 tags: azure-service-management
 ms.assetid: ''
 ms.service: sql-database
-ms.custom: sample
+ms.custom: business continuity, mvc
 ms.devlang: PowerShell
-ms.topic: article
+ms.topic: sample
 ms.tgt_pltfrm: sql-database
 ms.workload: database
-ms.date: 03/07/2017
-ms.author: janeng
-ms.openlocfilehash: c9aad737b76666921ca60cd1e6b3bd86adb1904c
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 09/07/2018
+ms.author: carlrab
+ms.openlocfilehash: fdce110c0349afa138bf547287a08ecb0e25915d
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44556453"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44780824"
 ---
-# <a name="restore-a-sql-database-using-powershell"></a><span data-ttu-id="c1a58-103">Restore a SQL database using PowerShell</span><span class="sxs-lookup"><span data-stu-id="c1a58-103">Restore a SQL database using PowerShell</span></span>
+# <a name="use-powershell-to-restore-an-azure-sql-database-from-backups"></a><span data-ttu-id="5dc13-103">Use PowerShell to restore an Azure SQL database from backups</span><span class="sxs-lookup"><span data-stu-id="5dc13-103">Use PowerShell to restore an Azure SQL database from backups</span></span>
 
-<span data-ttu-id="c1a58-104">This sample PowerShell script restores an Azure SQL database from a geo-redundant backup and restores a deleted database to the latest backup.</span><span class="sxs-lookup"><span data-stu-id="c1a58-104">This sample PowerShell script restores an Azure SQL database from a geo-redundant backup and restores a deleted database to the latest backup.</span></span>  
+<span data-ttu-id="5dc13-104">This PowerShell script example restores an Azure SQL database from a geo-redundant backup, restores a deleted Azure SQL database to its latest backup, and restores an Azure SQL database to a specific point in time.</span><span class="sxs-lookup"><span data-stu-id="5dc13-104">This PowerShell script example restores an Azure SQL database from a geo-redundant backup, restores a deleted Azure SQL database to its latest backup, and restores an Azure SQL database to a specific point in time.</span></span>  
 
-[!INCLUDE [sample-powershell-install](../../../includes/sample-powershell-install-no-ssh.md)]
+[!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
+[!INCLUDE [cloud-shell-powershell.md](../../../includes/cloud-shell-powershell.md)]
 
-## <a name="sample-script"></a><span data-ttu-id="c1a58-105">Sample script</span><span class="sxs-lookup"><span data-stu-id="c1a58-105">Sample script</span></span>
+<span data-ttu-id="5dc13-105">If you choose to install and use the PowerShell locally, this tutorial requires the Azure PowerShell module version 5.7.0 or later.</span><span class="sxs-lookup"><span data-stu-id="5dc13-105">If you choose to install and use the PowerShell locally, this tutorial requires the Azure PowerShell module version 5.7.0 or later.</span></span> <span data-ttu-id="5dc13-106">Run `Get-Module -ListAvailable AzureRM` to find the version.</span><span class="sxs-lookup"><span data-stu-id="5dc13-106">Run `Get-Module -ListAvailable AzureRM` to find the version.</span></span> <span data-ttu-id="5dc13-107">If you need to upgrade, see [Install Azure PowerShell module](/powershell/azure/install-azurerm-ps).</span><span class="sxs-lookup"><span data-stu-id="5dc13-107">If you need to upgrade, see [Install Azure PowerShell module](/powershell/azure/install-azurerm-ps).</span></span> <span data-ttu-id="5dc13-108">If you are running PowerShell locally, you also need to run `Connect-AzureRmAccount` to create a connection with Azure.</span><span class="sxs-lookup"><span data-stu-id="5dc13-108">If you are running PowerShell locally, you also need to run `Connect-AzureRmAccount` to create a connection with Azure.</span></span>
 
-[!code-powershell[main](../../../powershell_scripts/sql-database/restore-database/restore-database.ps1 "Create SQL Database")]
+## <a name="sample-script"></a><span data-ttu-id="5dc13-109">Sample script</span><span class="sxs-lookup"><span data-stu-id="5dc13-109">Sample script</span></span>
 
-## <a name="clean-up-deployment"></a><span data-ttu-id="c1a58-106">Clean up deployment</span><span class="sxs-lookup"><span data-stu-id="c1a58-106">Clean up deployment</span></span>
+[!code-powershell-interactive[main](../../../powershell_scripts/sql-database/restore-database/restore-database.ps1?highlight=17-18 "Create SQL Database")]
 
-<span data-ttu-id="c1a58-107">After the script sample has been run, the following command can be used to remove the resource group and all resources associated with it.</span><span class="sxs-lookup"><span data-stu-id="c1a58-107">After the script sample has been run, the following command can be used to remove the resource group and all resources associated with it.</span></span>
+## <a name="clean-up-deployment"></a><span data-ttu-id="5dc13-110">Clean up deployment</span><span class="sxs-lookup"><span data-stu-id="5dc13-110">Clean up deployment</span></span>
+
+<span data-ttu-id="5dc13-111">After the script sample has been run, the following command can be used to remove the resource group and all resources associated with it.</span><span class="sxs-lookup"><span data-stu-id="5dc13-111">After the script sample has been run, the following command can be used to remove the resource group and all resources associated with it.</span></span>
 
 ```powershell
-Remove-AzureRmResourceGroup -ResourceGroupName "myResourceGroup"
+Remove-AzureRmResourceGroup -ResourceGroupName $resourcegroupname
 ```
 
-## <a name="script-explanation"></a><span data-ttu-id="c1a58-108">Script explanation</span><span class="sxs-lookup"><span data-stu-id="c1a58-108">Script explanation</span></span>
+## <a name="script-explanation"></a><span data-ttu-id="5dc13-112">Script explanation</span><span class="sxs-lookup"><span data-stu-id="5dc13-112">Script explanation</span></span>
 
-<span data-ttu-id="c1a58-109">This script uses the following commands.</span><span class="sxs-lookup"><span data-stu-id="c1a58-109">This script uses the following commands.</span></span> <span data-ttu-id="c1a58-110">Each command in the table links to command specific documentation.</span><span class="sxs-lookup"><span data-stu-id="c1a58-110">Each command in the table links to command specific documentation.</span></span>
+<span data-ttu-id="5dc13-113">This script uses the following commands.</span><span class="sxs-lookup"><span data-stu-id="5dc13-113">This script uses the following commands.</span></span> <span data-ttu-id="5dc13-114">Each command in the table links to command specific documentation.</span><span class="sxs-lookup"><span data-stu-id="5dc13-114">Each command in the table links to command specific documentation.</span></span>
 
-| <span data-ttu-id="c1a58-111">Command</span><span class="sxs-lookup"><span data-stu-id="c1a58-111">Command</span></span> | <span data-ttu-id="c1a58-112">Notes</span><span class="sxs-lookup"><span data-stu-id="c1a58-112">Notes</span></span> |
+| <span data-ttu-id="5dc13-115">Command</span><span class="sxs-lookup"><span data-stu-id="5dc13-115">Command</span></span> | <span data-ttu-id="5dc13-116">Notes</span><span class="sxs-lookup"><span data-stu-id="5dc13-116">Notes</span></span> |
 |---|---|
-| [<span data-ttu-id="c1a58-113">New-AzureRmResourceGroup</span><span class="sxs-lookup"><span data-stu-id="c1a58-113">New-AzureRmResourceGroup</span></span>](https://docs.microsoft.com/powershell/resourcemanager/azurerm.resources/v3.5.0/new-azurermresourcegroup) | <span data-ttu-id="c1a58-114">Creates a resource group in which all resources are stored.</span><span class="sxs-lookup"><span data-stu-id="c1a58-114">Creates a resource group in which all resources are stored.</span></span> | [<span data-ttu-id="c1a58-115">New-AzureRmSqlServer</span><span class="sxs-lookup"><span data-stu-id="c1a58-115">New-AzureRmSqlServer</span></span>](https://docs.microsoft.com/powershell/resourcemanager/azurerm.sql/v2.5.0/new-azurermsqlserver) | <span data-ttu-id="c1a58-116">Creates a logical server that hosts a database or elastic pool.</span><span class="sxs-lookup"><span data-stu-id="c1a58-116">Creates a logical server that hosts a database or elastic pool.</span></span> | 
-| [<span data-ttu-id="c1a58-117">New-AzureRmSqlDatabase</span><span class="sxs-lookup"><span data-stu-id="c1a58-117">New-AzureRmSqlDatabase</span></span>](https://docs.microsoft.com/powershell/resourcemanager/azurerm.sql/v2.5.0/new-azurermsqldatabase) | <span data-ttu-id="c1a58-118">Creates a database in a logical server as a single or a pooled database.</span><span class="sxs-lookup"><span data-stu-id="c1a58-118">Creates a database in a logical server as a single or a pooled database.</span></span> |
-[<span data-ttu-id="c1a58-119">Get-AzureRmSqlDatabaseGeoBackup</span><span class="sxs-lookup"><span data-stu-id="c1a58-119">Get-AzureRmSqlDatabaseGeoBackup</span></span>](https://docs.microsoft.com/powershell/resourcemanager/azurerm.sql/v2.5.0/get-azurermsqldatabasegeobackup) | <span data-ttu-id="c1a58-120">Gets a geo-redundant backup of a database.</span><span class="sxs-lookup"><span data-stu-id="c1a58-120">Gets a geo-redundant backup of a database.</span></span> |
-| [<span data-ttu-id="c1a58-121">Restore-AzureRmSqlDatabase</span><span class="sxs-lookup"><span data-stu-id="c1a58-121">Restore-AzureRmSqlDatabase</span></span>](https://docs.microsoft.com/powershell/resourcemanager/azurerm.sql/v2.5.0/restore-azurermsqldatabase) | <span data-ttu-id="c1a58-122">Restores a SQL database.</span><span class="sxs-lookup"><span data-stu-id="c1a58-122">Restores a SQL database.</span></span> |
-|[<span data-ttu-id="c1a58-123">Remove-AzureRmSqlDatabase</span><span class="sxs-lookup"><span data-stu-id="c1a58-123">Remove-AzureRmSqlDatabase</span></span>](https://docs.microsoft.com/powershell/resourcemanager/azurerm.sql/v2.5.0/remove-azurermsqldatabase) | <span data-ttu-id="c1a58-124">Removes an Azure SQL database.</span><span class="sxs-lookup"><span data-stu-id="c1a58-124">Removes an Azure SQL database.</span></span> |
-| [<span data-ttu-id="c1a58-125">Get-AzureRmSqlDeletedDatabaseBackup</span><span class="sxs-lookup"><span data-stu-id="c1a58-125">Get-AzureRmSqlDeletedDatabaseBackup</span></span>](https://docs.microsoft.com/powershell/resourcemanager/azurerm.sql/v2.5.0/get-azurermsqldeleteddatabasebackup) | <span data-ttu-id="c1a58-126">Gets a deleted database that you can restore.</span><span class="sxs-lookup"><span data-stu-id="c1a58-126">Gets a deleted database that you can restore.</span></span> |
-| [<span data-ttu-id="c1a58-127">Remove-AzureRmResourceGroup</span><span class="sxs-lookup"><span data-stu-id="c1a58-127">Remove-AzureRmResourceGroup</span></span>](https://docs.microsoft.com/powershell/resourcemanager/azurerm.resources/v3.2.0/remove-azurermresourcegroup) | <span data-ttu-id="c1a58-128">Deletes a resource group including all nested resources.</span><span class="sxs-lookup"><span data-stu-id="c1a58-128">Deletes a resource group including all nested resources.</span></span> |
+| [<span data-ttu-id="5dc13-117">New-AzureRmResourceGroup</span><span class="sxs-lookup"><span data-stu-id="5dc13-117">New-AzureRmResourceGroup</span></span>](https://docs.microsoft.com/powershell/module/azurerm.resources/new-azurermresourcegroup) | <span data-ttu-id="5dc13-118">Creates a resource group in which all resources are stored.</span><span class="sxs-lookup"><span data-stu-id="5dc13-118">Creates a resource group in which all resources are stored.</span></span> | [<span data-ttu-id="5dc13-119">New-AzureRmSqlServer</span><span class="sxs-lookup"><span data-stu-id="5dc13-119">New-AzureRmSqlServer</span></span>](/powershell/module/azurerm.sql/new-azurermsqlserver) | <span data-ttu-id="5dc13-120">Creates a logical server that hosts a database or elastic pool.</span><span class="sxs-lookup"><span data-stu-id="5dc13-120">Creates a logical server that hosts a database or elastic pool.</span></span> | 
+| [<span data-ttu-id="5dc13-121">New-AzureRmSqlDatabase</span><span class="sxs-lookup"><span data-stu-id="5dc13-121">New-AzureRmSqlDatabase</span></span>](/powershell/module/azurerm.sql/new-azurermsqldatabase) | <span data-ttu-id="5dc13-122">Creates a database in a logical server as a single or a pooled database.</span><span class="sxs-lookup"><span data-stu-id="5dc13-122">Creates a database in a logical server as a single or a pooled database.</span></span> |
+[<span data-ttu-id="5dc13-123">Get-AzureRmSqlDatabaseGeoBackup</span><span class="sxs-lookup"><span data-stu-id="5dc13-123">Get-AzureRmSqlDatabaseGeoBackup</span></span>](/powershell/module/azurerm.sql/get-azurermsqldatabasegeobackup) | <span data-ttu-id="5dc13-124">Gets a geo-redundant backup of a database.</span><span class="sxs-lookup"><span data-stu-id="5dc13-124">Gets a geo-redundant backup of a database.</span></span> |
+| [<span data-ttu-id="5dc13-125">Restore-AzureRmSqlDatabase</span><span class="sxs-lookup"><span data-stu-id="5dc13-125">Restore-AzureRmSqlDatabase</span></span>](/powershell/module/azurerm.sql/restore-azurermsqldatabase) | <span data-ttu-id="5dc13-126">Restores a SQL database.</span><span class="sxs-lookup"><span data-stu-id="5dc13-126">Restores a SQL database.</span></span> |
+|[<span data-ttu-id="5dc13-127">Remove-AzureRmSqlDatabase</span><span class="sxs-lookup"><span data-stu-id="5dc13-127">Remove-AzureRmSqlDatabase</span></span>](/powershell/module/azurerm.sql/remove-azurermsqldatabase) | <span data-ttu-id="5dc13-128">Removes an Azure SQL database.</span><span class="sxs-lookup"><span data-stu-id="5dc13-128">Removes an Azure SQL database.</span></span> |
+| [<span data-ttu-id="5dc13-129">Get-AzureRmSqlDeletedDatabaseBackup</span><span class="sxs-lookup"><span data-stu-id="5dc13-129">Get-AzureRmSqlDeletedDatabaseBackup</span></span>](/powershell/module/azurerm.sql/get-azurermsqldeleteddatabasebackup) | <span data-ttu-id="5dc13-130">Gets a deleted database that you can restore.</span><span class="sxs-lookup"><span data-stu-id="5dc13-130">Gets a deleted database that you can restore.</span></span> |
+| [<span data-ttu-id="5dc13-131">Remove-AzureRmResourceGroup</span><span class="sxs-lookup"><span data-stu-id="5dc13-131">Remove-AzureRmResourceGroup</span></span>](/powershell/module/azurerm.resources/remove-azurermresourcegroup) | <span data-ttu-id="5dc13-132">Deletes a resource group including all nested resources.</span><span class="sxs-lookup"><span data-stu-id="5dc13-132">Deletes a resource group including all nested resources.</span></span> |
 
-## <a name="next-steps"></a><span data-ttu-id="c1a58-129">Next steps</span><span class="sxs-lookup"><span data-stu-id="c1a58-129">Next steps</span></span>
+## <a name="next-steps"></a><span data-ttu-id="5dc13-133">Next steps</span><span class="sxs-lookup"><span data-stu-id="5dc13-133">Next steps</span></span>
 
-<span data-ttu-id="c1a58-130">For more information on the Azure PowerShell, see [Azure PowerShell documentation](https://docs.microsoft.com/powershell/).</span><span class="sxs-lookup"><span data-stu-id="c1a58-130">For more information on the Azure PowerShell, see [Azure PowerShell documentation](https://docs.microsoft.com/powershell/).</span></span>
+<span data-ttu-id="5dc13-134">For more information on the Azure PowerShell, see [Azure PowerShell documentation](/powershell/azure/overview).</span><span class="sxs-lookup"><span data-stu-id="5dc13-134">For more information on the Azure PowerShell, see [Azure PowerShell documentation](/powershell/azure/overview).</span></span>
 
-<span data-ttu-id="c1a58-131">Additional SQL Database PowerShell script samples can be found in the [Azure SQL Database PowerShell scripts](../sql-database-powershell-samples.md).</span><span class="sxs-lookup"><span data-stu-id="c1a58-131">Additional SQL Database PowerShell script samples can be found in the [Azure SQL Database PowerShell scripts](../sql-database-powershell-samples.md).</span></span>
+<span data-ttu-id="5dc13-135">Additional SQL Database PowerShell script samples can be found in the [Azure SQL Database PowerShell scripts](../sql-database-powershell-samples.md).</span><span class="sxs-lookup"><span data-stu-id="5dc13-135">Additional SQL Database PowerShell script samples can be found in the [Azure SQL Database PowerShell scripts](../sql-database-powershell-samples.md).</span></span>

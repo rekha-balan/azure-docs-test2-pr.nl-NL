@@ -1,0 +1,69 @@
+---
+title: Training videos for Azure Cost Management | Microsoft Docs
+description: The training videos for Azure Cost Management walk you through getting started and using its features.
+services: cost-management
+keywords: ''
+author: bandersmsft
+ms.author: banders
+ms.date: 04/26/2018
+ms.topic: conceptual
+ms.service: cost-management
+manager: dougeby
+ms.openlocfilehash: 197eac4b6904bbbf55e7233e113e64e3af528b3e
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44870915"
+---
+# <a name="cost-management-training-videos"></a><span data-ttu-id="8c99c-103">Cost Management training videos</span><span class="sxs-lookup"><span data-stu-id="8c99c-103">Cost Management training videos</span></span>
+
+<span data-ttu-id="8c99c-104">The following videos provide demonstrations to walk you through getting started with Cost Management and using its features.</span><span class="sxs-lookup"><span data-stu-id="8c99c-104">The following videos provide demonstrations to walk you through getting started with Cost Management and using its features.</span></span> <span data-ttu-id="8c99c-105">Cost Management supports multi-cloud cost tracking and optimization including Microsoft Azure, Amazon Web Services, and Google Cloud Platform.</span><span class="sxs-lookup"><span data-stu-id="8c99c-105">Cost Management supports multi-cloud cost tracking and optimization including Microsoft Azure, Amazon Web Services, and Google Cloud Platform.</span></span>
+
+[<span data-ttu-id="8c99c-106">Introduction to Azure Cost Management</span><span class="sxs-lookup"><span data-stu-id="8c99c-106">Introduction to Azure Cost Management</span></span>](https://youtu.be/NWIRny6Wpsk)
+
+>[!VIDEO https://www.youtube.com/embed/NWIRny6Wpsk]
+
+[<span data-ttu-id="8c99c-107">Analyzing your cloud billing data vs. time with Azure Cost Management</span><span class="sxs-lookup"><span data-stu-id="8c99c-107">Analyzing your cloud billing data vs. time with Azure Cost Management</span></span>](https://youtu.be/7LsVPHglM0g)
+
+>[!VIDEO https://www.youtube.com/embed/7LsVPHglM0g]
+
+[<span data-ttu-id="8c99c-108">Adding Users to Azure Cost Management</span><span class="sxs-lookup"><span data-stu-id="8c99c-108">Adding Users to Azure Cost Management</span></span>](https://youtu.be/Nzn7GLahx30)
+
+>[!VIDEO https://www.youtube.com/embed/Nzn7GLahx30?ecver=1]
+
+[<span data-ttu-id="8c99c-109">Creating a Cost Entity Hierarchy in Azure Cost Management</span><span class="sxs-lookup"><span data-stu-id="8c99c-109">Creating a Cost Entity Hierarchy in Azure Cost Management</span></span>](https://youtu.be/dAd9G7u0FmU)
+
+>[!VIDEO https://www.youtube.com/embed/dAd9G7u0FmU?ecver=1]
+
+[<span data-ttu-id="8c99c-110">Optimizing VM Size in Azure Cost Management</span><span class="sxs-lookup"><span data-stu-id="8c99c-110">Optimizing VM Size in Azure Cost Management</span></span>](https://youtu.be/1xaZBNmV704)
+
+>[!VIDEO https://www.youtube.com/embed/1xaZBNmV704?ecver=1]
+
+[<span data-ttu-id="8c99c-111">Defining a Cost Allocation Model in Azure Cost Management</span><span class="sxs-lookup"><span data-stu-id="8c99c-111">Defining a Cost Allocation Model in Azure Cost Management</span></span>](https://youtu.be/FJzof_agKHY)
+
+>[!VIDEO https://www.youtube.com/embed/FJzof_agKHY?ecver=1]
+
+[<span data-ttu-id="8c99c-112">Defining Custom Charges in Azure Cost Management</span><span class="sxs-lookup"><span data-stu-id="8c99c-112">Defining Custom Charges in Azure Cost Management</span></span>](https://youtu.be/3HcgkGPQjXE)
+
+>[!VIDEO https://www.youtube.com/embed/3HcgkGPQjXE?ecver=1]
+
+[<span data-ttu-id="8c99c-113">How to Find Your EA Enrollment ID and API Key for use in Azure Cost Management</span><span class="sxs-lookup"><span data-stu-id="8c99c-113">How to Find Your EA Enrollment ID and API Key for use in Azure Cost Management</span></span>](https://youtu.be/u_phLs_udig)
+
+>[!VIDEO https://www.youtube.com/embed/u_phLs_udig?ecver=1]
+
+[<span data-ttu-id="8c99c-114">Finding your Directory GUID and Rate ID for use in Azure Cost Management</span><span class="sxs-lookup"><span data-stu-id="8c99c-114">Finding your Directory GUID and Rate ID for use in Azure Cost Management</span></span>](https://youtu.be/PaRjnyaNGMI)
+
+>[!VIDEO https://www.youtube.com/embed/PaRjnyaNGMI?ecver=1]
+
+[<span data-ttu-id="8c99c-115">Assigning Accounts and Subscriptions to Cost Entities in Azure Cost Management</span><span class="sxs-lookup"><span data-stu-id="8c99c-115">Assigning Accounts and Subscriptions to Cost Entities in Azure Cost Management</span></span>](https://youtu.be/d9uTWSdoQYo)
+
+>[!VIDEO https://www.youtube.com/embed/d9uTWSdoQYo?ecver=1]
+
+[<span data-ttu-id="8c99c-116">Connecting to Azure Resource Manager with Azure Cost Management</span><span class="sxs-lookup"><span data-stu-id="8c99c-116">Connecting to Azure Resource Manager with Azure Cost Management</span></span>](https://youtu.be/oCIwvfBB6kk)
+
+>[!VIDEO https://www.youtube.com/embed/oCIwvfBB6kk?ecver=1]
+
+[<span data-ttu-id="8c99c-117">Analyzing your cloud billing data with Azure Cost Management</span><span class="sxs-lookup"><span data-stu-id="8c99c-117">Analyzing your cloud billing data with Azure Cost Management</span></span>](https://youtu.be/G0pvI3iLH-Y)
+
+>[!VIDEO https://www.youtube.com/embed/G0pvI3iLH-Y?ecver=1]

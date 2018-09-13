@@ -1,9 +1,9 @@
 ---
-title: Introduction to flow logging for Network Security Groups with Azure Network Watcher | Microsoft Docs
-description: This page explains how to use NSG flow logs a feature of Azure Network Watcher
+title: Introduction to flow logging for network security groups with Azure Network Watcher | Microsoft Docs
+description: This article explains how to use the NSG flow logs feature of Azure Network Watcher.
 services: network-watcher
 documentationcenter: na
-author: georgewallace
+author: jimdial
 manager: timlt
 editor: ''
 ms.assetid: 47d91341-16f1-45ac-85a5-e5a640f5d59e
@@ -13,62 +13,61 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
-ms.author: gwallace
-ms.openlocfilehash: 3bf9a5b34c27f4943f28e47b8287397e4d90d866
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: jdial
+ms.openlocfilehash: ae4edb82fa5e192a30d297dae82199bb7efca0c2
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44553083"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44809548"
 ---
-# <a name="introduction-to-flow-logging-for-network-security-groups"></a><span data-ttu-id="2cbde-103">Introduction to flow logging for Network Security Groups</span><span class="sxs-lookup"><span data-stu-id="2cbde-103">Introduction to flow logging for Network Security Groups</span></span>
+# <a name="introduction-to-flow-logging-for-network-security-groups"></a><span data-ttu-id="529de-103">Introduction to flow logging for network security groups</span><span class="sxs-lookup"><span data-stu-id="529de-103">Introduction to flow logging for network security groups</span></span>
 
-<span data-ttu-id="2cbde-104">Network Security Group flow logs are a feature of Network Watcher that allows you to view information about ingress and egress IP traffic through a Network Security Group.</span><span class="sxs-lookup"><span data-stu-id="2cbde-104">Network Security Group flow logs are a feature of Network Watcher that allows you to view information about ingress and egress IP traffic through a Network Security Group.</span></span> <span data-ttu-id="2cbde-105">These flow logs are written in json format and show outbound and inbound flows on a per rule basis, the NIC the flow applies to, 5-tuple information about the flow (Source/Destination IP, Source/Destination Port, Protocol), and if the traffic was allowed or denied.</span><span class="sxs-lookup"><span data-stu-id="2cbde-105">These flow logs are written in json format and show outbound and inbound flows on a per rule basis, the NIC the flow applies to, 5-tuple information about the flow (Source/Destination IP, Source/Destination Port, Protocol), and if the traffic was allowed or denied.</span></span>
+<span data-ttu-id="529de-104">Network security group (NSG) flow logs are a feature of Network Watcher that allows you to view information about ingress and egress IP traffic through an NSG.</span><span class="sxs-lookup"><span data-stu-id="529de-104">Network security group (NSG) flow logs are a feature of Network Watcher that allows you to view information about ingress and egress IP traffic through an NSG.</span></span> <span data-ttu-id="529de-105">Flow logs are written in json format, and show outbound and inbound flows on a per rule basis, the network interface (NIC) the flow applies to, 5-tuple information about the flow (Source/destination IP, source/destination port, and protocol), and if the traffic was allowed or denied.</span><span class="sxs-lookup"><span data-stu-id="529de-105">Flow logs are written in json format, and show outbound and inbound flows on a per rule basis, the network interface (NIC) the flow applies to, 5-tuple information about the flow (Source/destination IP, source/destination port, and protocol), and if the traffic was allowed or denied.</span></span>
 
-![flow logs overview][1]
+![flow logs overview](./media/network-watcher-nsg-flow-logging-overview/figure1.png)
 
-<span data-ttu-id="2cbde-107">While flow logs target Network Security Groups, they are not displayed the same as the other logs.</span><span class="sxs-lookup"><span data-stu-id="2cbde-107">While flow logs target Network Security Groups, they are not displayed the same as the other logs.</span></span> <span data-ttu-id="2cbde-108">Flow logs are stored only within a storage account and following the logging path as shown in the following example:</span><span class="sxs-lookup"><span data-stu-id="2cbde-108">Flow logs are stored only within a storage account and following the logging path as shown in the following example:</span></span>
+<span data-ttu-id="529de-107">While flow logs target NSGs, they are not displayed the same as the other logs.</span><span class="sxs-lookup"><span data-stu-id="529de-107">While flow logs target NSGs, they are not displayed the same as the other logs.</span></span> <span data-ttu-id="529de-108">Flow logs are stored only within a storage account and follow the logging path shown in the following example:</span><span class="sxs-lookup"><span data-stu-id="529de-108">Flow logs are stored only within a storage account and follow the logging path shown in the following example:</span></span>
 
 ```
-https://{storageAccountName}.blob.core.windows.net/insights-logs-networksecuritygroupflowevent/resourceId%3D/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.network/networksecuritygroups/{nsgName}/{year}/{month}/{day}/PT1H.json
+https://{storageAccountName}.blob.core.windows.net/insights-logs-networksecuritygroupflowevent/resourceId=/SUBSCRIPTIONS/{subscriptionID}/RESOURCEGROUPS/{resourceGroupName}/PROVIDERS/MICROSOFT.NETWORK/NETWORKSECURITYGROUPS/{nsgName}/y={year}/m={month}/d={day}/h={hour}/m=00/macAddress={macAddress}/PT1H.json
 ```
 
-<span data-ttu-id="2cbde-109">The same retention policies as seen on other logs apply to flow logs.</span><span class="sxs-lookup"><span data-stu-id="2cbde-109">The same retention policies as seen on other logs apply to flow logs.</span></span> <span data-ttu-id="2cbde-110">Logs have a retention policy that can be set from 1 day to 365 days.</span><span class="sxs-lookup"><span data-stu-id="2cbde-110">Logs have a retention policy that can be set from 1 day to 365 days.</span></span> <span data-ttu-id="2cbde-111">If a retention policy is not set, the logs are maintained forever.</span><span class="sxs-lookup"><span data-stu-id="2cbde-111">If a retention policy is not set, the logs are maintained forever.</span></span>
+<span data-ttu-id="529de-109">The same retention policies seen for other logs apply to flow logs.</span><span class="sxs-lookup"><span data-stu-id="529de-109">The same retention policies seen for other logs apply to flow logs.</span></span> <span data-ttu-id="529de-110">You can set log retention policy from 1 day to 2147483647 days.</span><span class="sxs-lookup"><span data-stu-id="529de-110">You can set log retention policy from 1 day to 2147483647 days.</span></span> <span data-ttu-id="529de-111">If a retention policy is not set, the logs are maintained forever.</span><span class="sxs-lookup"><span data-stu-id="529de-111">If a retention policy is not set, the logs are maintained forever.</span></span>
 
-## <a name="log-file"></a><span data-ttu-id="2cbde-112">Log file</span><span class="sxs-lookup"><span data-stu-id="2cbde-112">Log file</span></span>
+## <a name="log-file"></a><span data-ttu-id="529de-112">Log file</span><span class="sxs-lookup"><span data-stu-id="529de-112">Log file</span></span>
 
-<span data-ttu-id="2cbde-113">Flow logs have multiple properties.</span><span class="sxs-lookup"><span data-stu-id="2cbde-113">Flow logs have multiple properties.</span></span> <span data-ttu-id="2cbde-114">The following list is a listing of the properties that are returned within the NSG flow log:</span><span class="sxs-lookup"><span data-stu-id="2cbde-114">The following list is a listing of the properties that are returned within the NSG flow log:</span></span>
+<span data-ttu-id="529de-113">Flow logs include the following properties:</span><span class="sxs-lookup"><span data-stu-id="529de-113">Flow logs include the following properties:</span></span>
 
-* <span data-ttu-id="2cbde-115">**time** - Time when the event was logged</span><span class="sxs-lookup"><span data-stu-id="2cbde-115">**time** - Time when the event was logged</span></span>
-* <span data-ttu-id="2cbde-116">**systemId** - Network Security Group resource Id.</span><span class="sxs-lookup"><span data-stu-id="2cbde-116">**systemId** - Network Security Group resource Id.</span></span>
-* <span data-ttu-id="2cbde-117">**category** - The category of the event, this is always be NetworkSecurityGroupFlowEvent</span><span class="sxs-lookup"><span data-stu-id="2cbde-117">**category** - The category of the event, this is always be NetworkSecurityGroupFlowEvent</span></span>
-* <span data-ttu-id="2cbde-118">**resourceid** - The resource Id of the NSG</span><span class="sxs-lookup"><span data-stu-id="2cbde-118">**resourceid** - The resource Id of the NSG</span></span>
-* <span data-ttu-id="2cbde-119">**operationName** - Always NetworkSecurityGroupFlowEvents</span><span class="sxs-lookup"><span data-stu-id="2cbde-119">**operationName** - Always NetworkSecurityGroupFlowEvents</span></span>
-* <span data-ttu-id="2cbde-120">**properties** - A collection of properties of the flow</span><span class="sxs-lookup"><span data-stu-id="2cbde-120">**properties** - A collection of properties of the flow</span></span>
-    * <span data-ttu-id="2cbde-121">**Version** - Version number of the Flow Log event schema</span><span class="sxs-lookup"><span data-stu-id="2cbde-121">**Version** - Version number of the Flow Log event schema</span></span>
-    * <span data-ttu-id="2cbde-122">**flows** - A collection of flows.</span><span class="sxs-lookup"><span data-stu-id="2cbde-122">**flows** - A collection of flows.</span></span> <span data-ttu-id="2cbde-123">This property has multiple entries for different rules</span><span class="sxs-lookup"><span data-stu-id="2cbde-123">This property has multiple entries for different rules</span></span>
-        * <span data-ttu-id="2cbde-124">**rule** - Rule for which the flows are listed</span><span class="sxs-lookup"><span data-stu-id="2cbde-124">**rule** - Rule for which the flows are listed</span></span>
-            * <span data-ttu-id="2cbde-125">**flows** - a collection of flows</span><span class="sxs-lookup"><span data-stu-id="2cbde-125">**flows** - a collection of flows</span></span>
-                * <span data-ttu-id="2cbde-126">**mac** - The MAC address of the NIC for the VM where the flow was collected</span><span class="sxs-lookup"><span data-stu-id="2cbde-126">**mac** - The MAC address of the NIC for the VM where the flow was collected</span></span>
-                * <span data-ttu-id="2cbde-127">**flowTuples** - A string that contains multiple properties for the flow tuple in comma-separated format</span><span class="sxs-lookup"><span data-stu-id="2cbde-127">**flowTuples** - A string that contains multiple properties for the flow tuple in comma-separated format</span></span>
-                    * <span data-ttu-id="2cbde-128">**Time Stamp** - This value is the time stamp of when the flow occurred in UNIX EPOCH format</span><span class="sxs-lookup"><span data-stu-id="2cbde-128">**Time Stamp** - This value is the time stamp of when the flow occurred in UNIX EPOCH format</span></span>
-                    * <span data-ttu-id="2cbde-129">**Source IP** - The source IP</span><span class="sxs-lookup"><span data-stu-id="2cbde-129">**Source IP** - The source IP</span></span>
-                    * <span data-ttu-id="2cbde-130">**Destination IP** - The destination IP</span><span class="sxs-lookup"><span data-stu-id="2cbde-130">**Destination IP** - The destination IP</span></span>
-                    * <span data-ttu-id="2cbde-131">**Source Port** - The source port</span><span class="sxs-lookup"><span data-stu-id="2cbde-131">**Source Port** - The source port</span></span>
-                    * <span data-ttu-id="2cbde-132">**Destination Port** - The destination Port</span><span class="sxs-lookup"><span data-stu-id="2cbde-132">**Destination Port** - The destination Port</span></span>
-                    * <span data-ttu-id="2cbde-133">**Protocol** - The protocol of the flow.</span><span class="sxs-lookup"><span data-stu-id="2cbde-133">**Protocol** - The protocol of the flow.</span></span> <span data-ttu-id="2cbde-134">Valid values are **T** for TCP and **U** for UDP</span><span class="sxs-lookup"><span data-stu-id="2cbde-134">Valid values are **T** for TCP and **U** for UDP</span></span>
-                    * <span data-ttu-id="2cbde-135">**Traffic Flow** - The direction of the traffic flow.</span><span class="sxs-lookup"><span data-stu-id="2cbde-135">**Traffic Flow** - The direction of the traffic flow.</span></span> <span data-ttu-id="2cbde-136">Valid values are **I** for inbound and **O** for outbound.</span><span class="sxs-lookup"><span data-stu-id="2cbde-136">Valid values are **I** for inbound and **O** for outbound.</span></span>
-                    * <span data-ttu-id="2cbde-137">**Traffic** - Whether traffic was allowed or denied.</span><span class="sxs-lookup"><span data-stu-id="2cbde-137">**Traffic** - Whether traffic was allowed or denied.</span></span> <span data-ttu-id="2cbde-138">Valid values are **A** for allowed and **D** for denied.</span><span class="sxs-lookup"><span data-stu-id="2cbde-138">Valid values are **A** for allowed and **D** for denied.</span></span>
+* <span data-ttu-id="529de-114">**time** - Time when the event was logged</span><span class="sxs-lookup"><span data-stu-id="529de-114">**time** - Time when the event was logged</span></span>
+* <span data-ttu-id="529de-115">**systemId** - Network Security Group resource Id.</span><span class="sxs-lookup"><span data-stu-id="529de-115">**systemId** - Network Security Group resource Id.</span></span>
+* <span data-ttu-id="529de-116">**category** - The category of the event.</span><span class="sxs-lookup"><span data-stu-id="529de-116">**category** - The category of the event.</span></span> <span data-ttu-id="529de-117">The category is always **NetworkSecurityGroupFlowEvent**</span><span class="sxs-lookup"><span data-stu-id="529de-117">The category is always **NetworkSecurityGroupFlowEvent**</span></span>
+* <span data-ttu-id="529de-118">**resourceid** - The resource Id of the NSG</span><span class="sxs-lookup"><span data-stu-id="529de-118">**resourceid** - The resource Id of the NSG</span></span>
+* <span data-ttu-id="529de-119">**operationName** - Always NetworkSecurityGroupFlowEvents</span><span class="sxs-lookup"><span data-stu-id="529de-119">**operationName** - Always NetworkSecurityGroupFlowEvents</span></span>
+* <span data-ttu-id="529de-120">**properties** - A collection of properties of the flow</span><span class="sxs-lookup"><span data-stu-id="529de-120">**properties** - A collection of properties of the flow</span></span>
+    * <span data-ttu-id="529de-121">**Version** - Version number of the Flow Log event schema</span><span class="sxs-lookup"><span data-stu-id="529de-121">**Version** - Version number of the Flow Log event schema</span></span>
+    * <span data-ttu-id="529de-122">**flows** - A collection of flows.</span><span class="sxs-lookup"><span data-stu-id="529de-122">**flows** - A collection of flows.</span></span> <span data-ttu-id="529de-123">This property has multiple entries for different rules</span><span class="sxs-lookup"><span data-stu-id="529de-123">This property has multiple entries for different rules</span></span>
+        * <span data-ttu-id="529de-124">**rule** - Rule for which the flows are listed</span><span class="sxs-lookup"><span data-stu-id="529de-124">**rule** - Rule for which the flows are listed</span></span>
+            * <span data-ttu-id="529de-125">**flows** - a collection of flows</span><span class="sxs-lookup"><span data-stu-id="529de-125">**flows** - a collection of flows</span></span>
+                * <span data-ttu-id="529de-126">**mac** - The MAC address of the NIC for the VM where the flow was collected</span><span class="sxs-lookup"><span data-stu-id="529de-126">**mac** - The MAC address of the NIC for the VM where the flow was collected</span></span>
+                * <span data-ttu-id="529de-127">**flowTuples** - A string that contains multiple properties for the flow tuple in comma-separated format</span><span class="sxs-lookup"><span data-stu-id="529de-127">**flowTuples** - A string that contains multiple properties for the flow tuple in comma-separated format</span></span>
+                    * <span data-ttu-id="529de-128">**Time Stamp** - This value is the time stamp of when the flow occurred in UNIX EPOCH format</span><span class="sxs-lookup"><span data-stu-id="529de-128">**Time Stamp** - This value is the time stamp of when the flow occurred in UNIX EPOCH format</span></span>
+                    * <span data-ttu-id="529de-129">**Source IP** - The source IP</span><span class="sxs-lookup"><span data-stu-id="529de-129">**Source IP** - The source IP</span></span>
+                    * <span data-ttu-id="529de-130">**Destination IP** - The destination IP</span><span class="sxs-lookup"><span data-stu-id="529de-130">**Destination IP** - The destination IP</span></span>
+                    * <span data-ttu-id="529de-131">**Source Port** - The source port</span><span class="sxs-lookup"><span data-stu-id="529de-131">**Source Port** - The source port</span></span>
+                    * <span data-ttu-id="529de-132">**Destination Port** - The destination Port</span><span class="sxs-lookup"><span data-stu-id="529de-132">**Destination Port** - The destination Port</span></span>
+                    * <span data-ttu-id="529de-133">**Protocol** - The protocol of the flow.</span><span class="sxs-lookup"><span data-stu-id="529de-133">**Protocol** - The protocol of the flow.</span></span> <span data-ttu-id="529de-134">Valid values are **T** for TCP and **U** for UDP</span><span class="sxs-lookup"><span data-stu-id="529de-134">Valid values are **T** for TCP and **U** for UDP</span></span>
+                    * <span data-ttu-id="529de-135">**Traffic Flow** - The direction of the traffic flow.</span><span class="sxs-lookup"><span data-stu-id="529de-135">**Traffic Flow** - The direction of the traffic flow.</span></span> <span data-ttu-id="529de-136">Valid values are **I** for inbound and **O** for outbound.</span><span class="sxs-lookup"><span data-stu-id="529de-136">Valid values are **I** for inbound and **O** for outbound.</span></span>
+                    * <span data-ttu-id="529de-137">**Traffic** - Whether traffic was allowed or denied.</span><span class="sxs-lookup"><span data-stu-id="529de-137">**Traffic** - Whether traffic was allowed or denied.</span></span> <span data-ttu-id="529de-138">Valid values are **A** for allowed and **D** for denied.</span><span class="sxs-lookup"><span data-stu-id="529de-138">Valid values are **A** for allowed and **D** for denied.</span></span>
 
-
-<span data-ttu-id="2cbde-139">The following is an example of a Flow log.</span><span class="sxs-lookup"><span data-stu-id="2cbde-139">The following is an example of a Flow log.</span></span> <span data-ttu-id="2cbde-140">As you can see there are multiple records that follow the property list described in the preceding section.</span><span class="sxs-lookup"><span data-stu-id="2cbde-140">As you can see there are multiple records that follow the property list described in the preceding section.</span></span> 
+<span data-ttu-id="529de-139">The text that follows is an example of a flow log.</span><span class="sxs-lookup"><span data-stu-id="529de-139">The text that follows is an example of a flow log.</span></span> <span data-ttu-id="529de-140">As you can see, there are multiple records that follow the property list described in the preceding section.</span><span class="sxs-lookup"><span data-stu-id="529de-140">As you can see, there are multiple records that follow the property list described in the preceding section.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="2cbde-141">Values in the flowTuples property are a comma-separated list.</span><span class="sxs-lookup"><span data-stu-id="2cbde-141">Values in the flowTuples property are a comma-separated list.</span></span>
+> <span data-ttu-id="529de-141">Values in the \**flowTuples* property are a comma-separated list.</span><span class="sxs-lookup"><span data-stu-id="529de-141">Values in the \**flowTuples* property are a comma-separated list.</span></span>
  
 ```json
 {
-    "records": 
+    "records":
     [
         
         {
@@ -101,15 +100,8 @@ https://{storageAccountName}.blob.core.windows.net/insights-logs-networksecurity
         ...
 ```
 
-## <a name="next-steps"></a><span data-ttu-id="2cbde-142">Next steps</span><span class="sxs-lookup"><span data-stu-id="2cbde-142">Next steps</span></span>
+## <a name="next-steps"></a><span data-ttu-id="529de-142">Next steps</span><span class="sxs-lookup"><span data-stu-id="529de-142">Next steps</span></span>
 
-<span data-ttu-id="2cbde-143">Learn how to enable Flow logs by visiting [Enabling Flow logging](network-watcher-nsg-flow-logging-portal.md).</span><span class="sxs-lookup"><span data-stu-id="2cbde-143">Learn how to enable Flow logs by visiting [Enabling Flow logging](network-watcher-nsg-flow-logging-portal.md).</span></span>
-
-<span data-ttu-id="2cbde-144">Learn about NSG logging by visiting [Log analytics for network security groups (NSGs)](../virtual-network/virtual-network-nsg-manage-log.md).</span><span class="sxs-lookup"><span data-stu-id="2cbde-144">Learn about NSG logging by visiting [Log analytics for network security groups (NSGs)](../virtual-network/virtual-network-nsg-manage-log.md).</span></span>
-
-<span data-ttu-id="2cbde-145">Find out if traffic is allowed or denied on a VM by visiting [Verify traffic with IP flow verify](network-watcher-check-ip-flow-verify-portal.md)</span><span class="sxs-lookup"><span data-stu-id="2cbde-145">Find out if traffic is allowed or denied on a VM by visiting [Verify traffic with IP flow verify](network-watcher-check-ip-flow-verify-portal.md)</span></span>
-
-<!-- Image references -->
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/network-watcher/media/network-watcher-nsg-flow-logging-overview/figure1.png
-
-
+- <span data-ttu-id="529de-143">To learn how to enable flow logs, see [Enabling NSG flow logging](network-watcher-nsg-flow-logging-portal.md).</span><span class="sxs-lookup"><span data-stu-id="529de-143">To learn how to enable flow logs, see [Enabling NSG flow logging](network-watcher-nsg-flow-logging-portal.md).</span></span>
+- <span data-ttu-id="529de-144">To learn more about NSG logging, see [Log analytics for network security groups (NSGs)](../virtual-network/virtual-network-nsg-manage-log.md?toc=%2fazure%2fnetwork-watcher%2ftoc.json).</span><span class="sxs-lookup"><span data-stu-id="529de-144">To learn more about NSG logging, see [Log analytics for network security groups (NSGs)](../virtual-network/virtual-network-nsg-manage-log.md?toc=%2fazure%2fnetwork-watcher%2ftoc.json).</span></span>
+- <span data-ttu-id="529de-145">To determine whether traffic is allowed or denied to or from a VM, see [Diagnose a VM network traffic filter problem](diagnose-vm-network-traffic-filtering-problem.md)</span><span class="sxs-lookup"><span data-stu-id="529de-145">To determine whether traffic is allowed or denied to or from a VM, see [Diagnose a VM network traffic filter problem](diagnose-vm-network-traffic-filtering-problem.md)</span></span>

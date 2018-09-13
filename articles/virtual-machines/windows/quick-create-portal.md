@@ -1,107 +1,100 @@
 ---
-title: Azure Quick Start - Create Windows VM Portal | Microsoft Docs
-description: Azure Quick Start - Create Windows VM Portal
+title: Quickstart - Create a Windows VM in the Azure portal | Microsoft Docs
+description: In this quickstart, you learn how to use the Azure portal to create a Windows virtual machine
 services: virtual-machines-windows
 documentationcenter: virtual-machines
-author: neilpeterson
-manager: timlt
+author: cynthn
+manager: jeconnoc
 editor: tysonn
 tags: azure-resource-manager
 ms.assetid: ''
 ms.service: virtual-machines-windows
 ms.devlang: na
-ms.topic: hero-article
+ms.topic: quickstart
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
-ms.date: 04/13/2017
-ms.author: nepeters
-ms.openlocfilehash: a8008475ec6ee39a91a9c93c835ca5e4dcc3fa91
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 07/03/2018
+ms.author: cynthn
+ms.custom: mvc
+ms.openlocfilehash: 808619949947f200668d0db6c0576093ce5598f8
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44564424"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44809639"
 ---
-# <a name="create-a-windows-virtual-machine-with-the-azure-portal"></a><span data-ttu-id="00ee3-103">Create a Windows virtual machine with the Azure portal</span><span class="sxs-lookup"><span data-stu-id="00ee3-103">Create a Windows virtual machine with the Azure portal</span></span>
+# <a name="quickstart-create-a-windows-virtual-machine-in-the-azure-portal"></a><span data-ttu-id="47b5f-103">Quickstart: Create a Windows virtual machine in the Azure portal</span><span class="sxs-lookup"><span data-stu-id="47b5f-103">Quickstart: Create a Windows virtual machine in the Azure portal</span></span>
 
-<span data-ttu-id="00ee3-104">Azure virtual machines can be created through the Azure portal.</span><span class="sxs-lookup"><span data-stu-id="00ee3-104">Azure virtual machines can be created through the Azure portal.</span></span> <span data-ttu-id="00ee3-105">This method provides a browser-based user interface for creating and configuring virtual machines and all related resources.</span><span class="sxs-lookup"><span data-stu-id="00ee3-105">This method provides a browser-based user interface for creating and configuring virtual machines and all related resources.</span></span> <span data-ttu-id="00ee3-106">This Quickstart steps through creating a virtual machine using the Azure portal.</span><span class="sxs-lookup"><span data-stu-id="00ee3-106">This Quickstart steps through creating a virtual machine using the Azure portal.</span></span> <span data-ttu-id="00ee3-107">Once deployment is complete, we connect to the server and install IIS.</span><span class="sxs-lookup"><span data-stu-id="00ee3-107">Once deployment is complete, we connect to the server and install IIS.</span></span>
+<span data-ttu-id="47b5f-104">Azure virtual machines (VMs) can be created through the Azure portal.</span><span class="sxs-lookup"><span data-stu-id="47b5f-104">Azure virtual machines (VMs) can be created through the Azure portal.</span></span> <span data-ttu-id="47b5f-105">This method provides a browser-based user interface to create VMs and their associated resources.</span><span class="sxs-lookup"><span data-stu-id="47b5f-105">This method provides a browser-based user interface to create VMs and their associated resources.</span></span> <span data-ttu-id="47b5f-106">This quickstart shows you how to use the Azure portal to deploy a virtual machine (VM) in Azure that runs Windows Server 2016.</span><span class="sxs-lookup"><span data-stu-id="47b5f-106">This quickstart shows you how to use the Azure portal to deploy a virtual machine (VM) in Azure that runs Windows Server 2016.</span></span> <span data-ttu-id="47b5f-107">To see your VM in action, you then RDP to the VM and install the IIS web server.</span><span class="sxs-lookup"><span data-stu-id="47b5f-107">To see your VM in action, you then RDP to the VM and install the IIS web server.</span></span>
 
-<span data-ttu-id="00ee3-108">If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/en-us/free/?WT.mc_id=A261C142F) before you begin.</span><span class="sxs-lookup"><span data-stu-id="00ee3-108">If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/en-us/free/?WT.mc_id=A261C142F) before you begin.</span></span>
+<span data-ttu-id="47b5f-108">If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.</span><span class="sxs-lookup"><span data-stu-id="47b5f-108">If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.</span></span>
 
-## <a name="log-in-to-azure"></a><span data-ttu-id="00ee3-109">Log in to Azure</span><span class="sxs-lookup"><span data-stu-id="00ee3-109">Log in to Azure</span></span>
+## <a name="sign-in-to-azure"></a><span data-ttu-id="47b5f-109">Sign in to Azure</span><span class="sxs-lookup"><span data-stu-id="47b5f-109">Sign in to Azure</span></span>
 
-<span data-ttu-id="00ee3-110">Log in to the Azure portal at http://portal.azure.com.</span><span class="sxs-lookup"><span data-stu-id="00ee3-110">Log in to the Azure portal at http://portal.azure.com.</span></span>
+<span data-ttu-id="47b5f-110">Sign in to the Azure portal at https://portal.azure.com.</span><span class="sxs-lookup"><span data-stu-id="47b5f-110">Sign in to the Azure portal at https://portal.azure.com.</span></span>
 
-## <a name="create-virtual-machine"></a><span data-ttu-id="00ee3-111">Create virtual machine</span><span class="sxs-lookup"><span data-stu-id="00ee3-111">Create virtual machine</span></span>
+## <a name="create-virtual-machine"></a><span data-ttu-id="47b5f-111">Create virtual machine</span><span class="sxs-lookup"><span data-stu-id="47b5f-111">Create virtual machine</span></span>
 
-2. <span data-ttu-id="00ee3-112">Click the **New** button found on the upper left-hand corner of the Azure portal.</span><span class="sxs-lookup"><span data-stu-id="00ee3-112">Click the **New** button found on the upper left-hand corner of the Azure portal.</span></span>
+1. <span data-ttu-id="47b5f-112">Choose **Create a resource** in the upper left-hand corner of the Azure portal.</span><span class="sxs-lookup"><span data-stu-id="47b5f-112">Choose **Create a resource** in the upper left-hand corner of the Azure portal.</span></span>
 
-3. <span data-ttu-id="00ee3-113">Select **Compute** from the **New** blade, select **Windows Server 2016 Datacenter** from the **Compute** blade, and then click the **Create** button.</span><span class="sxs-lookup"><span data-stu-id="00ee3-113">Select **Compute** from the **New** blade, select **Windows Server 2016 Datacenter** from the **Compute** blade, and then click the **Create** button.</span></span>
+2. <span data-ttu-id="47b5f-113">In the search box above the list of Azure Marketplace resources, search for and select **Windows Server 2016 Datacenter**, then choose **Create**.</span><span class="sxs-lookup"><span data-stu-id="47b5f-113">In the search box above the list of Azure Marketplace resources, search for and select **Windows Server 2016 Datacenter**, then choose **Create**.</span></span>
 
-4. <span data-ttu-id="00ee3-114">Fill out the virtual machine **Basics** form.</span><span class="sxs-lookup"><span data-stu-id="00ee3-114">Fill out the virtual machine **Basics** form.</span></span> <span data-ttu-id="00ee3-115">The user name and password entered here is used to log in to the virtual machine.</span><span class="sxs-lookup"><span data-stu-id="00ee3-115">The user name and password entered here is used to log in to the virtual machine.</span></span> <span data-ttu-id="00ee3-116">For **Resource group**, create a new one.</span><span class="sxs-lookup"><span data-stu-id="00ee3-116">For **Resource group**, create a new one.</span></span> <span data-ttu-id="00ee3-117">A resource group is a logical container into which Azure resources are created and collectively managed.</span><span class="sxs-lookup"><span data-stu-id="00ee3-117">A resource group is a logical container into which Azure resources are created and collectively managed.</span></span> <span data-ttu-id="00ee3-118">When complete, click **OK**.</span><span class="sxs-lookup"><span data-stu-id="00ee3-118">When complete, click **OK**.</span></span>
+3. <span data-ttu-id="47b5f-114">Provide a VM name, such as *myVM*, leave the disk type as *SSD*, then provide a username, such as *azureuser*.</span><span class="sxs-lookup"><span data-stu-id="47b5f-114">Provide a VM name, such as *myVM*, leave the disk type as *SSD*, then provide a username, such as *azureuser*.</span></span> <span data-ttu-id="47b5f-115">The password must be at least 12 characters long and meet the [defined complexity requirements](faq.md#what-are-the-password-requirements-when-creating-a-vm).</span><span class="sxs-lookup"><span data-stu-id="47b5f-115">The password must be at least 12 characters long and meet the [defined complexity requirements](faq.md#what-are-the-password-requirements-when-creating-a-vm).</span></span>
 
-    ![Enter basic information about your VM in the portal blade](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/media/quick-create-portal/create-windows-vm-portal-basic-blade.png)  
+    ![Enter basic information about your VM in the portal blade](./media/quick-create-portal/create-windows-vm-portal-basic-blade.png)
 
-5. <span data-ttu-id="00ee3-120">Choose a size for the VM.</span><span class="sxs-lookup"><span data-stu-id="00ee3-120">Choose a size for the VM.</span></span> <span data-ttu-id="00ee3-121">To see more sizes, select **View all** or change the **Supported disk type** filter.</span><span class="sxs-lookup"><span data-stu-id="00ee3-121">To see more sizes, select **View all** or change the **Supported disk type** filter.</span></span> 
+5. <span data-ttu-id="47b5f-117">Choose to **Create new** resource group, then provide a name, such as *myResourceGroup*.</span><span class="sxs-lookup"><span data-stu-id="47b5f-117">Choose to **Create new** resource group, then provide a name, such as *myResourceGroup*.</span></span> <span data-ttu-id="47b5f-118">Choose your **Location**, then select **OK**.</span><span class="sxs-lookup"><span data-stu-id="47b5f-118">Choose your **Location**, then select **OK**.</span></span>
 
-    ![Screenshot that shows VM sizes](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/media/quick-create-portal/create-windows-vm-portal-sizes.png)  
+4. <span data-ttu-id="47b5f-119">Select a size for the VM.</span><span class="sxs-lookup"><span data-stu-id="47b5f-119">Select a size for the VM.</span></span> <span data-ttu-id="47b5f-120">You can filter by *Compute type* or *Disk type*, for example.</span><span class="sxs-lookup"><span data-stu-id="47b5f-120">You can filter by *Compute type* or *Disk type*, for example.</span></span> <span data-ttu-id="47b5f-121">A suggested VM size is *D2s_v3*.</span><span class="sxs-lookup"><span data-stu-id="47b5f-121">A suggested VM size is *D2s_v3*.</span></span> <span data-ttu-id="47b5f-122">Click **Select** after you have chosen a size.</span><span class="sxs-lookup"><span data-stu-id="47b5f-122">Click **Select** after you have chosen a size.</span></span>
 
-6. <span data-ttu-id="00ee3-123">On the settings blade, select **Yes** under **Use managed disks**, keep the defaults for the rest of the settings, and click **OK**.</span><span class="sxs-lookup"><span data-stu-id="00ee3-123">On the settings blade, select **Yes** under **Use managed disks**, keep the defaults for the rest of the settings, and click **OK**.</span></span>
+    ![Screenshot that shows VM sizes](./media/quick-create-portal/create-windows-vm-portal-sizes.png)
 
-7. <span data-ttu-id="00ee3-124">On the summary page, click **Ok** to start the virtual machine deployment.</span><span class="sxs-lookup"><span data-stu-id="00ee3-124">On the summary page, click **Ok** to start the virtual machine deployment.</span></span>
+5. <span data-ttu-id="47b5f-124">On the **Settings** page, in **Network** > **Network Security Group** > **Select public inbound ports**, select **HTTP** and **RDP (3389)** from the drop-down.</span><span class="sxs-lookup"><span data-stu-id="47b5f-124">On the **Settings** page, in **Network** > **Network Security Group** > **Select public inbound ports**, select **HTTP** and **RDP (3389)** from the drop-down.</span></span> <span data-ttu-id="47b5f-125">Leave the rest of the defaults and select **OK**.</span><span class="sxs-lookup"><span data-stu-id="47b5f-125">Leave the rest of the defaults and select **OK**.</span></span>
 
-8. <span data-ttu-id="00ee3-125">To monitor deployment status, click the virtual machine.</span><span class="sxs-lookup"><span data-stu-id="00ee3-125">To monitor deployment status, click the virtual machine.</span></span> <span data-ttu-id="00ee3-126">The VM can be found on the Azure portal dashboard, or by selecting **Virtual Machines** from the left-hand menu.</span><span class="sxs-lookup"><span data-stu-id="00ee3-126">The VM can be found on the Azure portal dashboard, or by selecting **Virtual Machines** from the left-hand menu.</span></span> <span data-ttu-id="00ee3-127">When the VM has been created, the status changes from **Deploying** to **Running**.</span><span class="sxs-lookup"><span data-stu-id="00ee3-127">When the VM has been created, the status changes from **Deploying** to **Running**.</span></span>
+6. <span data-ttu-id="47b5f-126">On the summary page, select **Create** to start the VM deployment.</span><span class="sxs-lookup"><span data-stu-id="47b5f-126">On the summary page, select **Create** to start the VM deployment.</span></span>
 
-## <a name="open-port-80-for-web-traffic"></a><span data-ttu-id="00ee3-128">Open port 80 for web traffic</span><span class="sxs-lookup"><span data-stu-id="00ee3-128">Open port 80 for web traffic</span></span> 
+7. <span data-ttu-id="47b5f-127">The VM is pinned to the Azure portal dashboard.</span><span class="sxs-lookup"><span data-stu-id="47b5f-127">The VM is pinned to the Azure portal dashboard.</span></span> <span data-ttu-id="47b5f-128">Once the deployment has completed, the VM summary automatically opens.</span><span class="sxs-lookup"><span data-stu-id="47b5f-128">Once the deployment has completed, the VM summary automatically opens.</span></span>
 
-<span data-ttu-id="00ee3-129">To allow traffic for IIS, you need to open port 80 to web traffic.</span><span class="sxs-lookup"><span data-stu-id="00ee3-129">To allow traffic for IIS, you need to open port 80 to web traffic.</span></span> <span data-ttu-id="00ee3-130">This step walks you through creating a network security group (NSG) rule to allow inbound connections on port 80.</span><span class="sxs-lookup"><span data-stu-id="00ee3-130">This step walks you through creating a network security group (NSG) rule to allow inbound connections on port 80.</span></span>
+## <a name="connect-to-virtual-machine"></a><span data-ttu-id="47b5f-129">Connect to virtual machine</span><span class="sxs-lookup"><span data-stu-id="47b5f-129">Connect to virtual machine</span></span>
 
-1. <span data-ttu-id="00ee3-131">On the blade for the virtual machine, in the **Essentials** section, click the name of the **Resource group**.</span><span class="sxs-lookup"><span data-stu-id="00ee3-131">On the blade for the virtual machine, in the **Essentials** section, click the name of the **Resource group**.</span></span>
-2. <span data-ttu-id="00ee3-132">In the blade for the resource group, click the **Network security group** in the list of resources.</span><span class="sxs-lookup"><span data-stu-id="00ee3-132">In the blade for the resource group, click the **Network security group** in the list of resources.</span></span> <span data-ttu-id="00ee3-133">The NSG name should be the VM name with -nsg appended to the end.</span><span class="sxs-lookup"><span data-stu-id="00ee3-133">The NSG name should be the VM name with -nsg appended to the end.</span></span>
-3. <span data-ttu-id="00ee3-134">Click the **Inbound Security Rule** heading to open the list of inbound rules.</span><span class="sxs-lookup"><span data-stu-id="00ee3-134">Click the **Inbound Security Rule** heading to open the list of inbound rules.</span></span> <span data-ttu-id="00ee3-135">You should see a rule for RDP already in the list.</span><span class="sxs-lookup"><span data-stu-id="00ee3-135">You should see a rule for RDP already in the list.</span></span>
-4. <span data-ttu-id="00ee3-136">Click **+ Add** to open the **Add inbound security rule** blade.</span><span class="sxs-lookup"><span data-stu-id="00ee3-136">Click **+ Add** to open the **Add inbound security rule** blade.</span></span>
-5. <span data-ttu-id="00ee3-137">In **Name**, type **IIS**.</span><span class="sxs-lookup"><span data-stu-id="00ee3-137">In **Name**, type **IIS**.</span></span> <span data-ttu-id="00ee3-138">Make sure **Port range** is set to 80 and **Action** is set to **Allow**.</span><span class="sxs-lookup"><span data-stu-id="00ee3-138">Make sure **Port range** is set to 80 and **Action** is set to **Allow**.</span></span> <span data-ttu-id="00ee3-139">Click **OK**.</span><span class="sxs-lookup"><span data-stu-id="00ee3-139">Click **OK**.</span></span>
+<span data-ttu-id="47b5f-130">Create a remote desktop connection to the virtual machine.</span><span class="sxs-lookup"><span data-stu-id="47b5f-130">Create a remote desktop connection to the virtual machine.</span></span> <span data-ttu-id="47b5f-131">These directions tell you how to connect to your VM from a Windows computer.</span><span class="sxs-lookup"><span data-stu-id="47b5f-131">These directions tell you how to connect to your VM from a Windows computer.</span></span> <span data-ttu-id="47b5f-132">On a Mac, you need an RDP client such as this [Remote Desktop Client](https://itunes.apple.com/us/app/microsoft-remote-desktop/id715768417?mt=12) from the Mac App Store.</span><span class="sxs-lookup"><span data-stu-id="47b5f-132">On a Mac, you need an RDP client such as this [Remote Desktop Client](https://itunes.apple.com/us/app/microsoft-remote-desktop/id715768417?mt=12) from the Mac App Store.</span></span>
 
+1. <span data-ttu-id="47b5f-133">Click the **Connect** button on the virtual machine properties page.</span><span class="sxs-lookup"><span data-stu-id="47b5f-133">Click the **Connect** button on the virtual machine properties page.</span></span> 
 
-## <a name="connect-to-virtual-machine"></a><span data-ttu-id="00ee3-140">Connect to virtual machine</span><span class="sxs-lookup"><span data-stu-id="00ee3-140">Connect to virtual machine</span></span>
+    ![Connect to an Azure VM from the portal](./media/quick-create-portal/quick-create-portal/portal-quick-start-9.png)
+    
+2. <span data-ttu-id="47b5f-135">In the **Connect to virtual machine** page, keep the default options to connect by DNS name over port 3389 and click **Download RDP file**.</span><span class="sxs-lookup"><span data-stu-id="47b5f-135">In the **Connect to virtual machine** page, keep the default options to connect by DNS name over port 3389 and click **Download RDP file**.</span></span>
 
-<span data-ttu-id="00ee3-141">After the deployment has completed, create a remote desktop connection to the virtual machine.</span><span class="sxs-lookup"><span data-stu-id="00ee3-141">After the deployment has completed, create a remote desktop connection to the virtual machine.</span></span>
+2. <span data-ttu-id="47b5f-136">Open the downloaded RDP file and click **Connect** when prompted.</span><span class="sxs-lookup"><span data-stu-id="47b5f-136">Open the downloaded RDP file and click **Connect** when prompted.</span></span> 
 
-1. <span data-ttu-id="00ee3-142">Click the **Connect** button on the virtual machine blade.</span><span class="sxs-lookup"><span data-stu-id="00ee3-142">Click the **Connect** button on the virtual machine blade.</span></span> <span data-ttu-id="00ee3-143">A Remote Desktop Protocol file (.rdp file) is created and downloaded.</span><span class="sxs-lookup"><span data-stu-id="00ee3-143">A Remote Desktop Protocol file (.rdp file) is created and downloaded.</span></span>
+3. <span data-ttu-id="47b5f-137">In the **Windows Security** window, select **More choices** and then **Use a different account**.</span><span class="sxs-lookup"><span data-stu-id="47b5f-137">In the **Windows Security** window, select **More choices** and then **Use a different account**.</span></span> <span data-ttu-id="47b5f-138">Type the username as *vmname*\\*username*, enter password you created for the virtual machine, and then click **OK**.</span><span class="sxs-lookup"><span data-stu-id="47b5f-138">Type the username as *vmname*\\*username*, enter password you created for the virtual machine, and then click **OK**.</span></span>
 
-    ![Portal 9](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/media/quick-create-portal/quick-create-portal/portal-quick-start-9.png) 
+4. <span data-ttu-id="47b5f-139">You may receive a certificate warning during the sign-in process.</span><span class="sxs-lookup"><span data-stu-id="47b5f-139">You may receive a certificate warning during the sign-in process.</span></span> <span data-ttu-id="47b5f-140">Click **Yes** or **Continue** to create the connection.</span><span class="sxs-lookup"><span data-stu-id="47b5f-140">Click **Yes** or **Continue** to create the connection.</span></span>
 
-2. <span data-ttu-id="00ee3-145">To connect to your VM, open the downloaded RDP file.</span><span class="sxs-lookup"><span data-stu-id="00ee3-145">To connect to your VM, open the downloaded RDP file.</span></span> <span data-ttu-id="00ee3-146">If prompted, click **Connect**.</span><span class="sxs-lookup"><span data-stu-id="00ee3-146">If prompted, click **Connect**.</span></span> <span data-ttu-id="00ee3-147">On a Mac, you need an RDP client such as this [Remote Desktop Client](https://itunes.apple.com/us/app/microsoft-remote-desktop/id715768417?mt=12) from the Mac App Store.</span><span class="sxs-lookup"><span data-stu-id="00ee3-147">On a Mac, you need an RDP client such as this [Remote Desktop Client](https://itunes.apple.com/us/app/microsoft-remote-desktop/id715768417?mt=12) from the Mac App Store.</span></span>
+## <a name="install-web-server"></a><span data-ttu-id="47b5f-141">Install web server</span><span class="sxs-lookup"><span data-stu-id="47b5f-141">Install web server</span></span>
 
-3. <span data-ttu-id="00ee3-148">Enter the user name and password you specified when creating the virtual machine, then click **Ok**.</span><span class="sxs-lookup"><span data-stu-id="00ee3-148">Enter the user name and password you specified when creating the virtual machine, then click **Ok**.</span></span>
-
-4. <span data-ttu-id="00ee3-149">You may receive a certificate warning during the sign-in process.</span><span class="sxs-lookup"><span data-stu-id="00ee3-149">You may receive a certificate warning during the sign-in process.</span></span> <span data-ttu-id="00ee3-150">Click **Yes** or **Continue** to proceed with the connection.</span><span class="sxs-lookup"><span data-stu-id="00ee3-150">Click **Yes** or **Continue** to proceed with the connection.</span></span>
-
-
-## <a name="install-iis-using-powershell"></a><span data-ttu-id="00ee3-151">Install IIS using PowerShell</span><span class="sxs-lookup"><span data-stu-id="00ee3-151">Install IIS using PowerShell</span></span>
-
-<span data-ttu-id="00ee3-152">On the virtual machine, open a PowerShell prompt and run the following command to install IIS and enable the local firewall rule to allow web traffic:</span><span class="sxs-lookup"><span data-stu-id="00ee3-152">On the virtual machine, open a PowerShell prompt and run the following command to install IIS and enable the local firewall rule to allow web traffic:</span></span>
+<span data-ttu-id="47b5f-142">To see your VM in action, install the IIS web server.</span><span class="sxs-lookup"><span data-stu-id="47b5f-142">To see your VM in action, install the IIS web server.</span></span> <span data-ttu-id="47b5f-143">Open a PowerShell prompt on the VM and run the following command:</span><span class="sxs-lookup"><span data-stu-id="47b5f-143">Open a PowerShell prompt on the VM and run the following command:</span></span>
 
 ```powershell
 Install-WindowsFeature -name Web-Server -IncludeManagementTools
 ```
 
-## <a name="view-the-iis-welcome-page"></a><span data-ttu-id="00ee3-153">View the IIS welcome page</span><span class="sxs-lookup"><span data-stu-id="00ee3-153">View the IIS welcome page</span></span>
-
-<span data-ttu-id="00ee3-154">With IIS installed and port 80 now open on your VM from the Internet, you can use a web browser of your choice to view the default IIS welcome page.</span><span class="sxs-lookup"><span data-stu-id="00ee3-154">With IIS installed and port 80 now open on your VM from the Internet, you can use a web browser of your choice to view the default IIS welcome page.</span></span> <span data-ttu-id="00ee3-155">Get the **Public IP address** from the blade for the VM and use it to visit the default web page.</span><span class="sxs-lookup"><span data-stu-id="00ee3-155">Get the **Public IP address** from the blade for the VM and use it to visit the default web page.</span></span> 
-
-![IIS default site](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/media/quick-create-powershell/default-iis-website.png) 
-
-## <a name="delete-virtual-machine"></a><span data-ttu-id="00ee3-157">Delete virtual machine</span><span class="sxs-lookup"><span data-stu-id="00ee3-157">Delete virtual machine</span></span>
-
-<span data-ttu-id="00ee3-158">When no longer needed, delete the resource group, virtual machine, and all related resources.</span><span class="sxs-lookup"><span data-stu-id="00ee3-158">When no longer needed, delete the resource group, virtual machine, and all related resources.</span></span> <span data-ttu-id="00ee3-159">To do so, select the resource group from the virtual machine blade and click **Delete**.</span><span class="sxs-lookup"><span data-stu-id="00ee3-159">To do so, select the resource group from the virtual machine blade and click **Delete**.</span></span>
-
-## <a name="next-steps"></a><span data-ttu-id="00ee3-160">Next steps</span><span class="sxs-lookup"><span data-stu-id="00ee3-160">Next steps</span></span>
-
-[<span data-ttu-id="00ee3-161">Install a role and configure firewall tutorial</span><span class="sxs-lookup"><span data-stu-id="00ee3-161">Install a role and configure firewall tutorial</span></span>](hero-role.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
-
-[<span data-ttu-id="00ee3-162">Explore VM deployment CLI samples</span><span class="sxs-lookup"><span data-stu-id="00ee3-162">Explore VM deployment CLI samples</span></span>](cli-samples.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+<span data-ttu-id="47b5f-144">When done, close the RDP connection to the VM.</span><span class="sxs-lookup"><span data-stu-id="47b5f-144">When done, close the RDP connection to the VM.</span></span>
 
 
+## <a name="view-the-iis-welcome-page"></a><span data-ttu-id="47b5f-145">View the IIS welcome page</span><span class="sxs-lookup"><span data-stu-id="47b5f-145">View the IIS welcome page</span></span>
 
+<span data-ttu-id="47b5f-146">In the portal, select the VM and in the overview of the VM, use the **Click to copy** button to the right of the IP address to copy it and paste it into a browser tab. The default IIS welcome page will open, and should look like this:</span><span class="sxs-lookup"><span data-stu-id="47b5f-146">In the portal, select the VM and in the overview of the VM, use the **Click to copy** button to the right of the IP address to copy it and paste it into a browser tab. The default IIS welcome page will open, and should look like this:</span></span>
 
+![IIS default site](./media/quick-create-powershell/default-iis-website.png)
+
+## <a name="clean-up-resources"></a><span data-ttu-id="47b5f-148">Clean up resources</span><span class="sxs-lookup"><span data-stu-id="47b5f-148">Clean up resources</span></span>
+
+<span data-ttu-id="47b5f-149">When no longer needed, you can delete the resource group, virtual machine, and all related resources.</span><span class="sxs-lookup"><span data-stu-id="47b5f-149">When no longer needed, you can delete the resource group, virtual machine, and all related resources.</span></span> <span data-ttu-id="47b5f-150">To do so, select the resource group for the virtual machine, select **Delete**, then confirm the name of the resource group to delete.</span><span class="sxs-lookup"><span data-stu-id="47b5f-150">To do so, select the resource group for the virtual machine, select **Delete**, then confirm the name of the resource group to delete.</span></span>
+
+## <a name="next-steps"></a><span data-ttu-id="47b5f-151">Next steps</span><span class="sxs-lookup"><span data-stu-id="47b5f-151">Next steps</span></span>
+
+<span data-ttu-id="47b5f-152">In this quickstart, you deployed a simple virtual machine, open a network port for web traffic, and installed a basic web server.</span><span class="sxs-lookup"><span data-stu-id="47b5f-152">In this quickstart, you deployed a simple virtual machine, open a network port for web traffic, and installed a basic web server.</span></span> <span data-ttu-id="47b5f-153">To learn more about Azure virtual machines, continue to the tutorial for Windows VMs.</span><span class="sxs-lookup"><span data-stu-id="47b5f-153">To learn more about Azure virtual machines, continue to the tutorial for Windows VMs.</span></span>
+
+> [!div class="nextstepaction"]
+> [<span data-ttu-id="47b5f-154">Azure Windows virtual machine tutorials</span><span class="sxs-lookup"><span data-stu-id="47b5f-154">Azure Windows virtual machine tutorials</span></span>](./tutorial-manage-vm.md)

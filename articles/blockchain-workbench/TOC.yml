@@ -1,0 +1,77 @@
+items:
+- name: Azure Blockchain Workbench (public preview)
+  href: index.yml
+- name: Overview
+  items:
+  - name: About Azure Blockchain Workbench
+    href: blockchain-workbench-overview.md
+  expanded: true
+- name: Concepts
+  items:
+  - name: Architecture
+    href: blockchain-workbench-architecture.md
+  - name: Integration patterns
+    href: blockchain-workbench-integration-patterns.md
+- name: How-to guides
+  items:
+  - name: Deploy Workbench
+    href: blockchain-workbench-deploy.md
+  - name: Create blockchain app
+    href: blockchain-workbench-create-app.md
+  - name: Manage Workbench users
+    href: blockchain-workbench-manage-users.md
+  - name: Use blockchain app
+    href: blockchain-workbench-use.md
+  - name: Use Workbench API
+    href: blockchain-workbench-use-API.md
+  - name: Troubleshoot apps
+    href: blockchain-workbench-troubleshooting.md
+  - name: Use Workbench data
+    items:
+    - name: Configure DB firewall
+      href: blockchain-workbench-database-firewall.md
+    - name: Get DB details
+      href: blockchain-workbench-getdb-details.md
+    - name: Use data in Excel
+      href: blockchain-workbench-data-excel.md
+    - name: Use data in Power BI
+      href: blockchain-workbench-data-powerbi.md
+    - name: Use data in SQL Management Studio
+      href: blockchain-workbench-data-sql-management-studio.md
+  expanded: true
+- name: Reference
+  items:
+  - name: Configuration
+    href: blockchain-workbench-configuration-overview.md
+  - name: Database views
+    href: blockchain-workbench-database-views.md
+  - name: Messaging API
+    href: blockchain-workbench-messages-overview.md
+  - name: REST API
+    href: https://docs.microsoft.com/rest/api/azure-blockchain-workbench
+- name: Resources
+  items:
+  - name: Blog
+    href: https://azure.microsoft.com/blog/topics/blockchain/
+  - name: Code samples
+    href: https://github.com/Azure-Samples/blockchain
+  - name: Community
+    href: https://techcommunity.microsoft.com/t5/Blockchain/bd-p/AzureBlockchain
+  - name: Forum
+    href: https://aka.ms/workbenchforum
+  - name: Product feedback
+    href: https://aka.ms/blockchainuservoice
+- name: Ethereum Proof-of-Authority Consortium
+  href: ethereum-poa-deployment.md
+- name: Solution templates
+  items:
+  - name: Ethereum Proof-of-Work Consortium
+    href: ethereum-deployment-guide.md
+  - name: Hyperledger Fabric Consortium
+    href: hyperledger-fabric-single-member-blockchain.md
+ms.openlocfilehash: e7611d00bb8fd15fc3f6a2e2fd587069ab133f70
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44865937"
