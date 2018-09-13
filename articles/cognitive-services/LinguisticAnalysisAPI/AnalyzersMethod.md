@@ -5,41 +5,41 @@ services: cognitive-services
 author: RichardSunMS
 manager: wkwok
 ms.service: cognitive-services
-ms.technology: linguistic-analysis-api
+ms.component: linguistic-analysis
 ms.topic: article
 ms.date: 06/30/2016
 ms.author: lesun
-ms.openlocfilehash: da74b5fbbb9726805def9cedd297fc1fa5944d75
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 3fc243a0da77c5bae9009929f2b82e1353347752
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44540964"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44815924"
 ---
-# <a name="analyzers-method"></a><span data-ttu-id="f7dbb-103">Analyzers Method</span><span class="sxs-lookup"><span data-stu-id="f7dbb-103">Analyzers Method</span></span>
+# <a name="analyzers-method"></a><span data-ttu-id="57644-103">Analyzers Method</span><span class="sxs-lookup"><span data-stu-id="57644-103">Analyzers Method</span></span>
 
-<span data-ttu-id="f7dbb-104">The **analyzers** REST API provides a list of analyzers currently supported by the service.</span><span class="sxs-lookup"><span data-stu-id="f7dbb-104">The **analyzers** REST API provides a list of analyzers currently supported by the service.</span></span>
-<span data-ttu-id="f7dbb-105">The response includes their [names](Analyzer-Names.md) and the languages supported by each (such as "en" for English).</span><span class="sxs-lookup"><span data-stu-id="f7dbb-105">The response includes their [names](Analyzer-Names.md) and the languages supported by each (such as "en" for English).</span></span>
+<span data-ttu-id="57644-104">The **analyzers** REST API provides a list of analyzers currently supported by the service.</span><span class="sxs-lookup"><span data-stu-id="57644-104">The **analyzers** REST API provides a list of analyzers currently supported by the service.</span></span>
+<span data-ttu-id="57644-105">The response includes their [names](Analyzer-Names.md) and the languages supported by each (such as "en" for English).</span><span class="sxs-lookup"><span data-stu-id="57644-105">The response includes their [names](Analyzer-Names.md) and the languages supported by each (such as "en" for English).</span></span>
 
-## <a name="request-parameters"></a><span data-ttu-id="f7dbb-106">Request parameters</span><span class="sxs-lookup"><span data-stu-id="f7dbb-106">Request parameters</span></span>
-<span data-ttu-id="f7dbb-107">None</span><span class="sxs-lookup"><span data-stu-id="f7dbb-107">None</span></span>
+## <a name="request-parameters"></a><span data-ttu-id="57644-106">Request parameters</span><span class="sxs-lookup"><span data-stu-id="57644-106">Request parameters</span></span>
+<span data-ttu-id="57644-107">None</span><span class="sxs-lookup"><span data-stu-id="57644-107">None</span></span>
 
 <br>
 
-## <a name="response-parameters"></a><span data-ttu-id="f7dbb-108">Response parameters</span><span class="sxs-lookup"><span data-stu-id="f7dbb-108">Response parameters</span></span>
-<span data-ttu-id="f7dbb-109">Name</span><span class="sxs-lookup"><span data-stu-id="f7dbb-109">Name</span></span> | <span data-ttu-id="f7dbb-110">Type</span><span class="sxs-lookup"><span data-stu-id="f7dbb-110">Type</span></span> | <span data-ttu-id="f7dbb-111">Description</span><span class="sxs-lookup"><span data-stu-id="f7dbb-111">Description</span></span>
+## <a name="response-parameters"></a><span data-ttu-id="57644-108">Response parameters</span><span class="sxs-lookup"><span data-stu-id="57644-108">Response parameters</span></span>
+<span data-ttu-id="57644-109">Name</span><span class="sxs-lookup"><span data-stu-id="57644-109">Name</span></span> | <span data-ttu-id="57644-110">Type</span><span class="sxs-lookup"><span data-stu-id="57644-110">Type</span></span> | <span data-ttu-id="57644-111">Description</span><span class="sxs-lookup"><span data-stu-id="57644-111">Description</span></span>
 -----|------|--------------
-<span data-ttu-id="f7dbb-112">languages</span><span class="sxs-lookup"><span data-stu-id="f7dbb-112">languages</span></span> | <span data-ttu-id="f7dbb-113">list of strings</span><span class="sxs-lookup"><span data-stu-id="f7dbb-113">list of strings</span></span> | <span data-ttu-id="f7dbb-114">list of two letter ISO language codes for which this analyzer can be used.</span><span class="sxs-lookup"><span data-stu-id="f7dbb-114">list of two letter ISO language codes for which this analyzer can be used.</span></span>
-<span data-ttu-id="f7dbb-115">id</span><span class="sxs-lookup"><span data-stu-id="f7dbb-115">id</span></span>   | <span data-ttu-id="f7dbb-116">string</span><span class="sxs-lookup"><span data-stu-id="f7dbb-116">string</span></span> | <span data-ttu-id="f7dbb-117">unique ID for this analyzer</span><span class="sxs-lookup"><span data-stu-id="f7dbb-117">unique ID for this analyzer</span></span>
-<span data-ttu-id="f7dbb-118">kind</span><span class="sxs-lookup"><span data-stu-id="f7dbb-118">kind</span></span> | <span data-ttu-id="f7dbb-119">string</span><span class="sxs-lookup"><span data-stu-id="f7dbb-119">string</span></span> | <span data-ttu-id="f7dbb-120">the broad type of analyzer here</span><span class="sxs-lookup"><span data-stu-id="f7dbb-120">the broad type of analyzer here</span></span>
-<span data-ttu-id="f7dbb-121">specification</span><span class="sxs-lookup"><span data-stu-id="f7dbb-121">specification</span></span> | <span data-ttu-id="f7dbb-122">string</span><span class="sxs-lookup"><span data-stu-id="f7dbb-122">string</span></span> | <span data-ttu-id="f7dbb-123">the name of the specification used for this analyzer</span><span class="sxs-lookup"><span data-stu-id="f7dbb-123">the name of the specification used for this analyzer</span></span>
-<span data-ttu-id="f7dbb-124">implementation</span><span class="sxs-lookup"><span data-stu-id="f7dbb-124">implementation</span></span> | <span data-ttu-id="f7dbb-125">string</span><span class="sxs-lookup"><span data-stu-id="f7dbb-125">string</span></span> | <span data-ttu-id="f7dbb-126">description of the model and/or algorithm behind this analyzer</span><span class="sxs-lookup"><span data-stu-id="f7dbb-126">description of the model and/or algorithm behind this analyzer</span></span>
+<span data-ttu-id="57644-112">languages</span><span class="sxs-lookup"><span data-stu-id="57644-112">languages</span></span> | <span data-ttu-id="57644-113">list of strings</span><span class="sxs-lookup"><span data-stu-id="57644-113">list of strings</span></span> | <span data-ttu-id="57644-114">list of two letter ISO language codes for which this analyzer can be used.</span><span class="sxs-lookup"><span data-stu-id="57644-114">list of two letter ISO language codes for which this analyzer can be used.</span></span>
+<span data-ttu-id="57644-115">id</span><span class="sxs-lookup"><span data-stu-id="57644-115">id</span></span>   | <span data-ttu-id="57644-116">string</span><span class="sxs-lookup"><span data-stu-id="57644-116">string</span></span> | <span data-ttu-id="57644-117">unique ID for this analyzer</span><span class="sxs-lookup"><span data-stu-id="57644-117">unique ID for this analyzer</span></span>
+<span data-ttu-id="57644-118">kind</span><span class="sxs-lookup"><span data-stu-id="57644-118">kind</span></span> | <span data-ttu-id="57644-119">string</span><span class="sxs-lookup"><span data-stu-id="57644-119">string</span></span> | <span data-ttu-id="57644-120">the broad type of analyzer here</span><span class="sxs-lookup"><span data-stu-id="57644-120">the broad type of analyzer here</span></span>
+<span data-ttu-id="57644-121">specification</span><span class="sxs-lookup"><span data-stu-id="57644-121">specification</span></span> | <span data-ttu-id="57644-122">string</span><span class="sxs-lookup"><span data-stu-id="57644-122">string</span></span> | <span data-ttu-id="57644-123">the name of the specification used for this analyzer</span><span class="sxs-lookup"><span data-stu-id="57644-123">the name of the specification used for this analyzer</span></span>
+<span data-ttu-id="57644-124">implementation</span><span class="sxs-lookup"><span data-stu-id="57644-124">implementation</span></span> | <span data-ttu-id="57644-125">string</span><span class="sxs-lookup"><span data-stu-id="57644-125">string</span></span> | <span data-ttu-id="57644-126">description of the model and/or algorithm behind this analyzer</span><span class="sxs-lookup"><span data-stu-id="57644-126">description of the model and/or algorithm behind this analyzer</span></span>
 
 <br>
-## <a name="example"></a><span data-ttu-id="f7dbb-127">Example</span><span class="sxs-lookup"><span data-stu-id="f7dbb-127">Example</span></span>
-<span data-ttu-id="f7dbb-128">GET /analyzers</span><span class="sxs-lookup"><span data-stu-id="f7dbb-128">GET /analyzers</span></span>
+## <a name="example"></a><span data-ttu-id="57644-127">Example</span><span class="sxs-lookup"><span data-stu-id="57644-127">Example</span></span>
+<span data-ttu-id="57644-128">GET /analyzers</span><span class="sxs-lookup"><span data-stu-id="57644-128">GET /analyzers</span></span>
 
-<span data-ttu-id="f7dbb-129">Response: JSON</span><span class="sxs-lookup"><span data-stu-id="f7dbb-129">Response: JSON</span></span>
+<span data-ttu-id="57644-129">Response: JSON</span><span class="sxs-lookup"><span data-stu-id="57644-129">Response: JSON</span></span>
 ```json
 [
     {

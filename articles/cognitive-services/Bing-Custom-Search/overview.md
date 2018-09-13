@@ -1,0 +1,47 @@
+---
+title: What is Bing Custom Search? | Microsoft Docs
+description: Provides a high-level overview of Bing Custom Search
+services: cognitive-services
+author: brapel
+manager: ehansen
+ms.service: cognitive-services
+ms.component: bing-custom-search
+ms.topic: article
+ms.date: 09/29/2017
+ms.author: v-brapel
+ms.openlocfilehash: 7cd61fc63d0d7734b842ed222c67c6753da9a418
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44870811"
+---
+# <a name="what-is-bing-custom-search"></a><span data-ttu-id="ad2ad-104">What is Bing Custom Search?</span><span class="sxs-lookup"><span data-stu-id="ad2ad-104">What is Bing Custom Search?</span></span>
+
+<span data-ttu-id="ad2ad-105">Bing Custom Search enables you to create tailored search experiences for topics that you care about.</span><span class="sxs-lookup"><span data-stu-id="ad2ad-105">Bing Custom Search enables you to create tailored search experiences for topics that you care about.</span></span> <span data-ttu-id="ad2ad-106">For example, if you own a website that provides a search experience, you can specify the domains, websites, and webpages that Bing searches.</span><span class="sxs-lookup"><span data-stu-id="ad2ad-106">For example, if you own a website that provides a search experience, you can specify the domains, websites, and webpages that Bing searches.</span></span> <span data-ttu-id="ad2ad-107">Your users see search results tailored to the content they care about instead of having to page through search results that have irrelevant content.</span><span class="sxs-lookup"><span data-stu-id="ad2ad-107">Your users see search results tailored to the content they care about instead of having to page through search results that have irrelevant content.</span></span>
+
+<span data-ttu-id="ad2ad-108">To create your custom view of the web, use the Bing Custom Search [portal](https://customsearch.ai).</span><span class="sxs-lookup"><span data-stu-id="ad2ad-108">To create your custom view of the web, use the Bing Custom Search [portal](https://customsearch.ai).</span></span> <span data-ttu-id="ad2ad-109">The portal lets you create a custom search instance that specifies the domains, websites, and webpages that you want Bing to search, and the websites that you don’t want it to search.</span><span class="sxs-lookup"><span data-stu-id="ad2ad-109">The portal lets you create a custom search instance that specifies the domains, websites, and webpages that you want Bing to search, and the websites that you don’t want it to search.</span></span> <span data-ttu-id="ad2ad-110">In addition to specifying the URLs of the content that you know about, you can also use the portal to find relevant content that you may want to add.</span><span class="sxs-lookup"><span data-stu-id="ad2ad-110">In addition to specifying the URLs of the content that you know about, you can also use the portal to find relevant content that you may want to add.</span></span>
+
+<span data-ttu-id="ad2ad-111">The portal also lets you pin a specific webpage to the top of the search result if the user enters a specific search term.</span><span class="sxs-lookup"><span data-stu-id="ad2ad-111">The portal also lets you pin a specific webpage to the top of the search result if the user enters a specific search term.</span></span> 
+
+<span data-ttu-id="ad2ad-112">After defining your instance, you can integrate custom search into your website, desktop app, or mobile app by calling the Custom Search API.</span><span class="sxs-lookup"><span data-stu-id="ad2ad-112">After defining your instance, you can integrate custom search into your website, desktop app, or mobile app by calling the Custom Search API.</span></span> <span data-ttu-id="ad2ad-113">If you have a web-based site or application, you can let the hosted UI render the search interface for you.</span><span class="sxs-lookup"><span data-stu-id="ad2ad-113">If you have a web-based site or application, you can let the hosted UI render the search interface for you.</span></span>
+
+<span data-ttu-id="ad2ad-114">The following image shows the simplicity of the custom search integration.</span><span class="sxs-lookup"><span data-stu-id="ad2ad-114">The following image shows the simplicity of the custom search integration.</span></span>
+
+<span data-ttu-id="ad2ad-115">![picture alt](./media/bcs-overview.png "How Bing Custom Search works.")</span><span class="sxs-lookup"><span data-stu-id="ad2ad-115">![picture alt](./media/bcs-overview.png "How Bing Custom Search works.")</span></span>
+
+## <a name="customize-search-suggestions"></a><span data-ttu-id="ad2ad-116">Customize search suggestions</span><span class="sxs-lookup"><span data-stu-id="ad2ad-116">Customize search suggestions</span></span>
+
+<span data-ttu-id="ad2ad-117">If you subscribed to Custom Search at the appropriate level (see the [pricing pages](https://azure.microsoft.com/pricing/details/cognitive-services/bing-custom-search/)), you can customize the search suggestions made in your Custom Search experience.</span><span class="sxs-lookup"><span data-stu-id="ad2ad-117">If you subscribed to Custom Search at the appropriate level (see the [pricing pages](https://azure.microsoft.com/pricing/details/cognitive-services/bing-custom-search/)), you can customize the search suggestions made in your Custom Search experience.</span></span> <span data-ttu-id="ad2ad-118">The Custom Autosuggest API returns a list of suggested queries based on a partial query string that the user provides.</span><span class="sxs-lookup"><span data-stu-id="ad2ad-118">The Custom Autosuggest API returns a list of suggested queries based on a partial query string that the user provides.</span></span> <span data-ttu-id="ad2ad-119">With Custom Autosuggest, you provide custom search suggestions relevant to your search experience.</span><span class="sxs-lookup"><span data-stu-id="ad2ad-119">With Custom Autosuggest, you provide custom search suggestions relevant to your search experience.</span></span> <span data-ttu-id="ad2ad-120">You specify whether to return only custom suggestions or to include Bing suggestions.</span><span class="sxs-lookup"><span data-stu-id="ad2ad-120">You specify whether to return only custom suggestions or to include Bing suggestions.</span></span> <span data-ttu-id="ad2ad-121">If Bing suggestions are included, custom suggestions appear before the suggestions Bing provides.</span><span class="sxs-lookup"><span data-stu-id="ad2ad-121">If Bing suggestions are included, custom suggestions appear before the suggestions Bing provides.</span></span> <span data-ttu-id="ad2ad-122">Bing suggestions are restricted to the context of your Custom Search instance.</span><span class="sxs-lookup"><span data-stu-id="ad2ad-122">Bing suggestions are restricted to the context of your Custom Search instance.</span></span>
+
+## <a name="next-steps"></a><span data-ttu-id="ad2ad-123">Next steps</span><span class="sxs-lookup"><span data-stu-id="ad2ad-123">Next steps</span></span>
+
+<span data-ttu-id="ad2ad-124">To get started quickly, see [Create your first Bing Custom Search instance](quick-start.md).</span><span class="sxs-lookup"><span data-stu-id="ad2ad-124">To get started quickly, see [Create your first Bing Custom Search instance](quick-start.md).</span></span>
+
+<span data-ttu-id="ad2ad-125">For details about available options to customize your search instance, see [Define a custom search instance](define-your-custom-view.md).</span><span class="sxs-lookup"><span data-stu-id="ad2ad-125">For details about available options to customize your search instance, see [Define a custom search instance](define-your-custom-view.md).</span></span>
+
+<span data-ttu-id="ad2ad-126">Familiarize yourself with the [Custom Search API](https://docs.microsoft.com/rest/api/cognitiveservices/bing-custom-search-api-v7-reference) reference.</span><span class="sxs-lookup"><span data-stu-id="ad2ad-126">Familiarize yourself with the [Custom Search API](https://docs.microsoft.com/rest/api/cognitiveservices/bing-custom-search-api-v7-reference) reference.</span></span> <span data-ttu-id="ad2ad-127">The reference contains the list of endpoints, headers, and query parameters that you'd use to request search results.</span><span class="sxs-lookup"><span data-stu-id="ad2ad-127">The reference contains the list of endpoints, headers, and query parameters that you'd use to request search results.</span></span> <span data-ttu-id="ad2ad-128">It also includes definitions of the response objects.</span><span class="sxs-lookup"><span data-stu-id="ad2ad-128">It also includes definitions of the response objects.</span></span>
+
+<span data-ttu-id="ad2ad-129">To learn how to customize suggestions, see [Define custom search suggestions](define-custom-suggestions.md).</span><span class="sxs-lookup"><span data-stu-id="ad2ad-129">To learn how to customize suggestions, see [Define custom search suggestions](define-custom-suggestions.md).</span></span>
+
+<span data-ttu-id="ad2ad-130">Be sure to read [Bing Use and Display Requirements](./use-and-display-requirements.md) so you don't break any of the rules about using the search results.</span><span class="sxs-lookup"><span data-stu-id="ad2ad-130">Be sure to read [Bing Use and Display Requirements](./use-and-display-requirements.md) so you don't break any of the rules about using the search results.</span></span>

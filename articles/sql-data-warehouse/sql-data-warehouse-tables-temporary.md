@@ -1,45 +1,30 @@
 ---
 title: Temporary tables in SQL Data Warehouse | Microsoft Docs
-description: Getting started with temporary tables in Azure SQL Data Warehouse.
+description: Essential guidance for using temporary tables and highlights the principles of session level temporary tables.
 services: sql-data-warehouse
-documentationcenter: NA
-author: jrowlandjones
-manager: jhubbard
-editor: ''
-ms.assetid: 9b1119eb-7f54-46d0-ad74-19c85a2a555a
+author: ronortloff
+manager: craigg
 ms.service: sql-data-warehouse
-ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: data-services
-ms.custom: tables
-ms.date: 10/31/2016
-ms.author: jrj;barbkess
-ms.openlocfilehash: 091ad6068c64bfe06c090430874d23f6ca497b34
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.topic: conceptual
+ms.component: implement
+ms.date: 04/17/2018
+ms.author: rortloff
+ms.reviewer: igorstan
+ms.openlocfilehash: f8eb401d8bc4f348be3c84390d3422571bebe444
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44551324"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44813929"
 ---
-# <a name="temporary-tables-in-sql-data-warehouse"></a><span data-ttu-id="6d5db-103">Temporary tables in SQL Data Warehouse</span><span class="sxs-lookup"><span data-stu-id="6d5db-103">Temporary tables in SQL Data Warehouse</span></span>
-> [!div class="op_single_selector"]
-> * [Overview][Overview]
-> * [Data Types][Data Types]
-> * [Distribute][Distribute]
-> * [Index][Index]
-> * [Partition][Partition]
-> * [Statistics][Statistics]
-> * [Temporary][Temporary]
-> 
-> 
+# <a name="temporary-tables-in-sql-data-warehouse"></a><span data-ttu-id="18b63-103">Temporary tables in SQL Data Warehouse</span><span class="sxs-lookup"><span data-stu-id="18b63-103">Temporary tables in SQL Data Warehouse</span></span>
+<span data-ttu-id="18b63-104">This article contains essential guidance for using temporary tables and highlights the principles of session level temporary tables.</span><span class="sxs-lookup"><span data-stu-id="18b63-104">This article contains essential guidance for using temporary tables and highlights the principles of session level temporary tables.</span></span> <span data-ttu-id="18b63-105">Using the information in this article can help you modularize your code, improving both reusability and ease of maintenance of your code.</span><span class="sxs-lookup"><span data-stu-id="18b63-105">Using the information in this article can help you modularize your code, improving both reusability and ease of maintenance of your code.</span></span>
 
-<span data-ttu-id="6d5db-111">Temporary tables are very useful when processing data - especially during transformation where the intermediate results are transient.</span><span class="sxs-lookup"><span data-stu-id="6d5db-111">Temporary tables are very useful when processing data - especially during transformation where the intermediate results are transient.</span></span> <span data-ttu-id="6d5db-112">In SQL Data Warehouse temporary tables exist at the session level.</span><span class="sxs-lookup"><span data-stu-id="6d5db-112">In SQL Data Warehouse temporary tables exist at the session level.</span></span>  <span data-ttu-id="6d5db-113">They are only visible to the session in which they were created and are automatically dropped when that session logs off.</span><span class="sxs-lookup"><span data-stu-id="6d5db-113">They are only visible to the session in which they were created and are automatically dropped when that session logs off.</span></span>  <span data-ttu-id="6d5db-114">Temporary tables offer a performance benefit because their results are written to local rather than remote storage.</span><span class="sxs-lookup"><span data-stu-id="6d5db-114">Temporary tables offer a performance benefit because their results are written to local rather than remote storage.</span></span>  <span data-ttu-id="6d5db-115">Temporary tables are slightly different in Azure SQL Data Warehouse than Azure SQL Database as they can be accessed from anywhere inside the session, including both inside and outside of a stored procedure.</span><span class="sxs-lookup"><span data-stu-id="6d5db-115">Temporary tables are slightly different in Azure SQL Data Warehouse than Azure SQL Database as they can be accessed from anywhere inside the session, including both inside and outside of a stored procedure.</span></span>
+## <a name="what-are-temporary-tables"></a><span data-ttu-id="18b63-106">What are temporary tables?</span><span class="sxs-lookup"><span data-stu-id="18b63-106">What are temporary tables?</span></span>
+<span data-ttu-id="18b63-107">Temporary tables are useful when processing data - especially during transformation where the intermediate results are transient.</span><span class="sxs-lookup"><span data-stu-id="18b63-107">Temporary tables are useful when processing data - especially during transformation where the intermediate results are transient.</span></span> <span data-ttu-id="18b63-108">In SQL Data Warehouse, temporary tables exist at the session level.</span><span class="sxs-lookup"><span data-stu-id="18b63-108">In SQL Data Warehouse, temporary tables exist at the session level.</span></span>  <span data-ttu-id="18b63-109">They are only visible to the session in which they were created and are automatically dropped when that session logs off.</span><span class="sxs-lookup"><span data-stu-id="18b63-109">They are only visible to the session in which they were created and are automatically dropped when that session logs off.</span></span>  <span data-ttu-id="18b63-110">Temporary tables offer a performance benefit because their results are written to local rather than remote storage.</span><span class="sxs-lookup"><span data-stu-id="18b63-110">Temporary tables offer a performance benefit because their results are written to local rather than remote storage.</span></span>  <span data-ttu-id="18b63-111">Temporary tables are slightly different in Azure SQL Data Warehouse than Azure SQL Database as they can be accessed from anywhere inside the session, including both inside and outside of a stored procedure.</span><span class="sxs-lookup"><span data-stu-id="18b63-111">Temporary tables are slightly different in Azure SQL Data Warehouse than Azure SQL Database as they can be accessed from anywhere inside the session, including both inside and outside of a stored procedure.</span></span>
 
-<span data-ttu-id="6d5db-116">This article contains essential guidance for using temporary tables and highlights the principles of session level temporary tables.</span><span class="sxs-lookup"><span data-stu-id="6d5db-116">This article contains essential guidance for using temporary tables and highlights the principles of session level temporary tables.</span></span> <span data-ttu-id="6d5db-117">Using the information in this article can help you modularize your code, improving both reusability and ease of maintenance of your code.</span><span class="sxs-lookup"><span data-stu-id="6d5db-117">Using the information in this article can help you modularize your code, improving both reusability and ease of maintenance of your code.</span></span>
-
-## <a name="create-a-temporary-table"></a><span data-ttu-id="6d5db-118">Create a temporary table</span><span class="sxs-lookup"><span data-stu-id="6d5db-118">Create a temporary table</span></span>
-<span data-ttu-id="6d5db-119">Temporary tables are created by simply prefixing your table name with a `#`.</span><span class="sxs-lookup"><span data-stu-id="6d5db-119">Temporary tables are created by simply prefixing your table name with a `#`.</span></span>  <span data-ttu-id="6d5db-120">For example:</span><span class="sxs-lookup"><span data-stu-id="6d5db-120">For example:</span></span>
+## <a name="create-a-temporary-table"></a><span data-ttu-id="18b63-112">Create a temporary table</span><span class="sxs-lookup"><span data-stu-id="18b63-112">Create a temporary table</span></span>
+<span data-ttu-id="18b63-113">Temporary tables are created by prefixing your table name with a `#`.</span><span class="sxs-lookup"><span data-stu-id="18b63-113">Temporary tables are created by prefixing your table name with a `#`.</span></span>  <span data-ttu-id="18b63-114">For example:</span><span class="sxs-lookup"><span data-stu-id="18b63-114">For example:</span></span>
 
 ```sql
 CREATE TABLE #stats_ddl
@@ -59,7 +44,7 @@ WITH
 )
 ```
 
-<span data-ttu-id="6d5db-121">Temporary tables can also be created with a `CTAS` using exactly the same approach:</span><span class="sxs-lookup"><span data-stu-id="6d5db-121">Temporary tables can also be created with a `CTAS` using exactly the same approach:</span></span>
+<span data-ttu-id="18b63-115">Temporary tables can also be created with a `CTAS` using exactly the same approach:</span><span class="sxs-lookup"><span data-stu-id="18b63-115">Temporary tables can also be created with a `CTAS` using exactly the same approach:</span></span>
 
 ```sql
 CREATE TABLE #stats_ddl
@@ -113,12 +98,12 @@ FROM    t1
 ``` 
 
 > [!NOTE]
-> `CTAS` is a very powerful command and has the added advantage of being very efficient in its use of transaction log space. 
+> <span data-ttu-id="18b63-116">`CTAS` is a powerful command and has the added advantage of being efficient in its use of transaction log space.</span><span class="sxs-lookup"><span data-stu-id="18b63-116">`CTAS` is a powerful command and has the added advantage of being efficient in its use of transaction log space.</span></span> 
 > 
 > 
 
-## <a name="dropping-temporary-tables"></a><span data-ttu-id="6d5db-123">Dropping temporary tables</span><span class="sxs-lookup"><span data-stu-id="6d5db-123">Dropping temporary tables</span></span>
-<span data-ttu-id="6d5db-124">When a new session is created, no temporary tables should exist.</span><span class="sxs-lookup"><span data-stu-id="6d5db-124">When a new session is created, no temporary tables should exist.</span></span>  <span data-ttu-id="6d5db-125">However, if you are calling the same stored procedure, which creates a temporary with the same name, to ensure that your `CREATE TABLE` statements are successful a simple pre-existence check with a `DROP` can be used as in the below example:</span><span class="sxs-lookup"><span data-stu-id="6d5db-125">However, if you are calling the same stored procedure, which creates a temporary with the same name, to ensure that your `CREATE TABLE` statements are successful a simple pre-existence check with a `DROP` can be used as in the below example:</span></span>
+## <a name="dropping-temporary-tables"></a><span data-ttu-id="18b63-117">Dropping temporary tables</span><span class="sxs-lookup"><span data-stu-id="18b63-117">Dropping temporary tables</span></span>
+<span data-ttu-id="18b63-118">When a new session is created, no temporary tables should exist.</span><span class="sxs-lookup"><span data-stu-id="18b63-118">When a new session is created, no temporary tables should exist.</span></span>  <span data-ttu-id="18b63-119">However, if you are calling the same stored procedure, which creates a temporary with the same name, to ensure that your `CREATE TABLE` statements are successful a simple pre-existence check with a `DROP` can be used as in the following example:</span><span class="sxs-lookup"><span data-stu-id="18b63-119">However, if you are calling the same stored procedure, which creates a temporary with the same name, to ensure that your `CREATE TABLE` statements are successful a simple pre-existence check with a `DROP` can be used as in the following example:</span></span>
 
 ```sql
 IF OBJECT_ID('tempdb..#stats_ddl') IS NOT NULL
@@ -127,14 +112,14 @@ BEGIN
 END
 ```
 
-<span data-ttu-id="6d5db-126">For coding consistency, it is a good practice to use this pattern for both tables and temporary tables.</span><span class="sxs-lookup"><span data-stu-id="6d5db-126">For coding consistency, it is a good practice to use this pattern for both tables and temporary tables.</span></span>  <span data-ttu-id="6d5db-127">It is also a good idea to use `DROP TABLE` to remove temporary tables when you have finished with them in your code.</span><span class="sxs-lookup"><span data-stu-id="6d5db-127">It is also a good idea to use `DROP TABLE` to remove temporary tables when you have finished with them in your code.</span></span>  <span data-ttu-id="6d5db-128">In stored procedure development it is quite common to see the drop commands bundled together at the end of a procedure to ensure these objects are cleaned up.</span><span class="sxs-lookup"><span data-stu-id="6d5db-128">In stored procedure development it is quite common to see the drop commands bundled together at the end of a procedure to ensure these objects are cleaned up.</span></span>
+<span data-ttu-id="18b63-120">For coding consistency, it is a good practice to use this pattern for both tables and temporary tables.</span><span class="sxs-lookup"><span data-stu-id="18b63-120">For coding consistency, it is a good practice to use this pattern for both tables and temporary tables.</span></span>  <span data-ttu-id="18b63-121">It is also a good idea to use `DROP TABLE` to remove temporary tables when you have finished with them in your code.</span><span class="sxs-lookup"><span data-stu-id="18b63-121">It is also a good idea to use `DROP TABLE` to remove temporary tables when you have finished with them in your code.</span></span>  <span data-ttu-id="18b63-122">In stored procedure development, it is common to see the drop commands bundled together at the end of a procedure to ensure these objects are cleaned up.</span><span class="sxs-lookup"><span data-stu-id="18b63-122">In stored procedure development, it is common to see the drop commands bundled together at the end of a procedure to ensure these objects are cleaned up.</span></span>
 
 ```sql
 DROP TABLE #stats_ddl
 ```
 
-## <a name="modularizing-code"></a><span data-ttu-id="6d5db-129">Modularizing code</span><span class="sxs-lookup"><span data-stu-id="6d5db-129">Modularizing code</span></span>
-<span data-ttu-id="6d5db-130">Since temporary tables can be seen anywhere in a user session, this can be exploited to help you modularize your application code.</span><span class="sxs-lookup"><span data-stu-id="6d5db-130">Since temporary tables can be seen anywhere in a user session, this can be exploited to help you modularize your application code.</span></span>  <span data-ttu-id="6d5db-131">For example, the stored procedure below brings together the recommended practices from above to generate DDL which will update all statistics in the database by statistic name.</span><span class="sxs-lookup"><span data-stu-id="6d5db-131">For example, the stored procedure below brings together the recommended practices from above to generate DDL which will update all statistics in the database by statistic name.</span></span>
+## <a name="modularizing-code"></a><span data-ttu-id="18b63-123">Modularizing code</span><span class="sxs-lookup"><span data-stu-id="18b63-123">Modularizing code</span></span>
+<span data-ttu-id="18b63-124">Since temporary tables can be seen anywhere in a user session, this can be exploited to help you modularize your application code.</span><span class="sxs-lookup"><span data-stu-id="18b63-124">Since temporary tables can be seen anywhere in a user session, this can be exploited to help you modularize your application code.</span></span>  <span data-ttu-id="18b63-125">For example, the following stored procedure generates DDL to update all statistics in the database by statistic name.</span><span class="sxs-lookup"><span data-stu-id="18b63-125">For example, the following stored procedure generates DDL to update all statistics in the database by statistic name.</span></span>
 
 ```sql
 CREATE PROCEDURE    [dbo].[prc_sqldw_update_stats]
@@ -208,7 +193,7 @@ FROM    t1
 GO
 ```
 
-<span data-ttu-id="6d5db-132">At this stage the only action that has occurred is the creation of a stored procedure which will simply generated a temporary table, #stats_ddl, with DDL statements.</span><span class="sxs-lookup"><span data-stu-id="6d5db-132">At this stage the only action that has occurred is the creation of a stored procedure which will simply generated a temporary table, #stats_ddl, with DDL statements.</span></span>  <span data-ttu-id="6d5db-133">This stored procedure will drop #stats_ddl if it already exists to ensure it does not fail if run more than once within a session.</span><span class="sxs-lookup"><span data-stu-id="6d5db-133">This stored procedure will drop #stats_ddl if it already exists to ensure it does not fail if run more than once within a session.</span></span>  <span data-ttu-id="6d5db-134">However, since there is no `DROP TABLE` at the end of the stored procedure, when the stored procedure completes, it will leave the created table so that it can be read outside of the stored procedure.</span><span class="sxs-lookup"><span data-stu-id="6d5db-134">However, since there is no `DROP TABLE` at the end of the stored procedure, when the stored procedure completes, it will leave the created table so that it can be read outside of the stored procedure.</span></span>  <span data-ttu-id="6d5db-135">In SQL Data Warehouse, unlike other SQL Server databases, it is possible to use the temporary table outside of the procedure that created it.</span><span class="sxs-lookup"><span data-stu-id="6d5db-135">In SQL Data Warehouse, unlike other SQL Server databases, it is possible to use the temporary table outside of the procedure that created it.</span></span>  <span data-ttu-id="6d5db-136">SQL Data Warehouse temporary tables can be used **anywhere** inside the session.</span><span class="sxs-lookup"><span data-stu-id="6d5db-136">SQL Data Warehouse temporary tables can be used **anywhere** inside the session.</span></span> <span data-ttu-id="6d5db-137">This can lead to more modular and manageable code as in the below example:</span><span class="sxs-lookup"><span data-stu-id="6d5db-137">This can lead to more modular and manageable code as in the below example:</span></span>
+<span data-ttu-id="18b63-126">At this stage, the only action that has occurred is the creation of a stored procedure that generatess a temporary table, #stats_ddl, with DDL statements.</span><span class="sxs-lookup"><span data-stu-id="18b63-126">At this stage, the only action that has occurred is the creation of a stored procedure that generatess a temporary table, #stats_ddl, with DDL statements.</span></span>  <span data-ttu-id="18b63-127">This stored procedure drops #stats_ddl if it already exists to ensure it does not fail if run more than once within a session.</span><span class="sxs-lookup"><span data-stu-id="18b63-127">This stored procedure drops #stats_ddl if it already exists to ensure it does not fail if run more than once within a session.</span></span>  <span data-ttu-id="18b63-128">However, since there is no `DROP TABLE` at the end of the stored procedure, when the stored procedure completes, it leaves the created table so that it can be read outside of the stored procedure.</span><span class="sxs-lookup"><span data-stu-id="18b63-128">However, since there is no `DROP TABLE` at the end of the stored procedure, when the stored procedure completes, it leaves the created table so that it can be read outside of the stored procedure.</span></span>  <span data-ttu-id="18b63-129">In SQL Data Warehouse, unlike other SQL Server databases, it is possible to use the temporary table outside of the procedure that created it.</span><span class="sxs-lookup"><span data-stu-id="18b63-129">In SQL Data Warehouse, unlike other SQL Server databases, it is possible to use the temporary table outside of the procedure that created it.</span></span>  <span data-ttu-id="18b63-130">SQL Data Warehouse temporary tables can be used **anywhere** inside the session.</span><span class="sxs-lookup"><span data-stu-id="18b63-130">SQL Data Warehouse temporary tables can be used **anywhere** inside the session.</span></span> <span data-ttu-id="18b63-131">This can lead to more modular and manageable code as in the following example:</span><span class="sxs-lookup"><span data-stu-id="18b63-131">This can lead to more modular and manageable code as in the following example:</span></span>
 
 ```sql
 EXEC [dbo].[prc_sqldw_update_stats] @update_type = 1, @sample_pct = NULL;
@@ -229,24 +214,9 @@ END
 DROP TABLE #stats_ddl;
 ```
 
-## <a name="temporary-table-limitations"></a><span data-ttu-id="6d5db-138">Temporary table limitations</span><span class="sxs-lookup"><span data-stu-id="6d5db-138">Temporary table limitations</span></span>
-<span data-ttu-id="6d5db-139">SQL Data Warehouse does impose a couple of limitations when implementing temporary tables.</span><span class="sxs-lookup"><span data-stu-id="6d5db-139">SQL Data Warehouse does impose a couple of limitations when implementing temporary tables.</span></span>  <span data-ttu-id="6d5db-140">Currently, only session scoped temporary tables are supported.</span><span class="sxs-lookup"><span data-stu-id="6d5db-140">Currently, only session scoped temporary tables are supported.</span></span>  <span data-ttu-id="6d5db-141">Global Temporary Tables are not supported.</span><span class="sxs-lookup"><span data-stu-id="6d5db-141">Global Temporary Tables are not supported.</span></span>  <span data-ttu-id="6d5db-142">In addition, views cannot be created on temporary tables.</span><span class="sxs-lookup"><span data-stu-id="6d5db-142">In addition, views cannot be created on temporary tables.</span></span>
+## <a name="temporary-table-limitations"></a><span data-ttu-id="18b63-132">Temporary table limitations</span><span class="sxs-lookup"><span data-stu-id="18b63-132">Temporary table limitations</span></span>
+<span data-ttu-id="18b63-133">SQL Data Warehouse does impose a couple of limitations when implementing temporary tables.</span><span class="sxs-lookup"><span data-stu-id="18b63-133">SQL Data Warehouse does impose a couple of limitations when implementing temporary tables.</span></span>  <span data-ttu-id="18b63-134">Currently, only session scoped temporary tables are supported.</span><span class="sxs-lookup"><span data-stu-id="18b63-134">Currently, only session scoped temporary tables are supported.</span></span>  <span data-ttu-id="18b63-135">Global Temporary Tables are not supported.</span><span class="sxs-lookup"><span data-stu-id="18b63-135">Global Temporary Tables are not supported.</span></span>  <span data-ttu-id="18b63-136">In addition, views cannot be created on temporary tables.</span><span class="sxs-lookup"><span data-stu-id="18b63-136">In addition, views cannot be created on temporary tables.</span></span>
 
-## <a name="next-steps"></a><span data-ttu-id="6d5db-143">Next steps</span><span class="sxs-lookup"><span data-stu-id="6d5db-143">Next steps</span></span>
-<span data-ttu-id="6d5db-144">To learn more, see the articles on [Table Overview][Overview], [Table Data Types][Data Types], [Distributing a Table][Distribute], [Indexing a Table][Index],  [Partitioning a Table][Partition] and [Maintaining Table Statistics][Statistics].</span><span class="sxs-lookup"><span data-stu-id="6d5db-144">To learn more, see the articles on [Table Overview][Overview], [Table Data Types][Data Types], [Distributing a Table][Distribute], [Indexing a Table][Index],  [Partitioning a Table][Partition] and [Maintaining Table Statistics][Statistics].</span></span>  <span data-ttu-id="6d5db-145">For more about best practices, see [SQL Data Warehouse Best Practices][SQL Data Warehouse Best Practices].</span><span class="sxs-lookup"><span data-stu-id="6d5db-145">For more about best practices, see [SQL Data Warehouse Best Practices][SQL Data Warehouse Best Practices].</span></span>
+## <a name="next-steps"></a><span data-ttu-id="18b63-137">Next steps</span><span class="sxs-lookup"><span data-stu-id="18b63-137">Next steps</span></span>
+<span data-ttu-id="18b63-138">To learn more about developing tables, see the [Table Overview](sql-data-warehouse-tables-overview.md).</span><span class="sxs-lookup"><span data-stu-id="18b63-138">To learn more about developing tables, see the [Table Overview](sql-data-warehouse-tables-overview.md).</span></span>
 
-<!--Image references-->
-
-<!--Article references-->
-[Overview]: ./sql-data-warehouse-tables-overview.md
-[Data Types]: ./sql-data-warehouse-tables-data-types.md
-[Distribute]: ./sql-data-warehouse-tables-distribute.md
-[Index]: ./sql-data-warehouse-tables-index.md
-[Partition]: ./sql-data-warehouse-tables-partition.md
-[Statistics]: ./sql-data-warehouse-tables-statistics.md
-[Temporary]: ./sql-data-warehouse-tables-temporary.md
-[SQL Data Warehouse Best Practices]: ./sql-data-warehouse-best-practices.md
-
-<!--MSDN references-->
-
-<!--Other Web references-->

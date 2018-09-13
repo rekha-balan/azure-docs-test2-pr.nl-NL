@@ -1,0 +1,62 @@
+---
+title: Dependency visualization in Azure Migrate | Microsoft Docs
+description: Provides an overview of assessment calculations in the Azure Migrate service.
+author: rayne-wiselman
+ms.service: azure-migrate
+ms.topic: conceptual
+ms.date: 06/19/2018
+ms.author: raynew
+ms.openlocfilehash: 94d4db078175309444db5113506020eae54dda70
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44870820"
+---
+# <a name="dependency-visualization"></a><span data-ttu-id="7b487-103">Dependency visualization</span><span class="sxs-lookup"><span data-stu-id="7b487-103">Dependency visualization</span></span>
+
+<span data-ttu-id="7b487-104">The [Azure Migrate](migrate-overview.md) services assesses groups of on-premises machines for migration to Azure.</span><span class="sxs-lookup"><span data-stu-id="7b487-104">The [Azure Migrate](migrate-overview.md) services assesses groups of on-premises machines for migration to Azure.</span></span> <span data-ttu-id="7b487-105">To group machines together, you can use dependency visualization.</span><span class="sxs-lookup"><span data-stu-id="7b487-105">To group machines together, you can use dependency visualization.</span></span> <span data-ttu-id="7b487-106">This article provides information about this feature.</span><span class="sxs-lookup"><span data-stu-id="7b487-106">This article provides information about this feature.</span></span>
+
+
+## <a name="overview"></a><span data-ttu-id="7b487-107">Overview</span><span class="sxs-lookup"><span data-stu-id="7b487-107">Overview</span></span>
+
+<span data-ttu-id="7b487-108">Dependency visualization in Azure Migrate allows you to create groups for migration assess with increased confidence.</span><span class="sxs-lookup"><span data-stu-id="7b487-108">Dependency visualization in Azure Migrate allows you to create groups for migration assess with increased confidence.</span></span> <span data-ttu-id="7b487-109">Using dependency visualization you can view the network dependencies of specific machines, or across a group of machines.</span><span class="sxs-lookup"><span data-stu-id="7b487-109">Using dependency visualization you can view the network dependencies of specific machines, or across a group of machines.</span></span> <span data-ttu-id="7b487-110">This is useful to ensure that no functionality or lost (or machines forgotten) in the migration process, when apps and workloads run across multiple machines.</span><span class="sxs-lookup"><span data-stu-id="7b487-110">This is useful to ensure that no functionality or lost (or machines forgotten) in the migration process, when apps and workloads run across multiple machines.</span></span>  
+
+## <a name="how-does-it-work"></a><span data-ttu-id="7b487-111">How does it work?</span><span class="sxs-lookup"><span data-stu-id="7b487-111">How does it work?</span></span>
+
+<span data-ttu-id="7b487-112">Azure Migrate uses the [Service Map](../operations-management-suite/operations-management-suite-service-map.md) solution in [Log Analytics](../log-analytics/log-analytics-overview.md) for dependency visualization.</span><span class="sxs-lookup"><span data-stu-id="7b487-112">Azure Migrate uses the [Service Map](../operations-management-suite/operations-management-suite-service-map.md) solution in [Log Analytics](../log-analytics/log-analytics-overview.md) for dependency visualization.</span></span>
+- <span data-ttu-id="7b487-113">When you create an Azure Migration project, a Log Analytics workspace is created in your subscription.</span><span class="sxs-lookup"><span data-stu-id="7b487-113">When you create an Azure Migration project, a Log Analytics workspace is created in your subscription.</span></span>
+- <span data-ttu-id="7b487-114">The workspace name is the name you specify for the migration project, prefixed with **migrate-**, and optionally suffixed with a number.</span><span class="sxs-lookup"><span data-stu-id="7b487-114">The workspace name is the name you specify for the migration project, prefixed with **migrate-**, and optionally suffixed with a number.</span></span> 
+- <span data-ttu-id="7b487-115">Navigate to the Log Analytics workspace from the **Essentials** section of the project **Overview** page.</span><span class="sxs-lookup"><span data-stu-id="7b487-115">Navigate to the Log Analytics workspace from the **Essentials** section of the project **Overview** page.</span></span>
+- <span data-ttu-id="7b487-116">The created workspace is tagged with the key **MigrateProject**, and value **project name**.</span><span class="sxs-lookup"><span data-stu-id="7b487-116">The created workspace is tagged with the key **MigrateProject**, and value **project name**.</span></span> <span data-ttu-id="7b487-117">You can use these to search in the Azure portal.</span><span class="sxs-lookup"><span data-stu-id="7b487-117">You can use these to search in the Azure portal.</span></span>  
+
+    ![Log Analytics workspace](./media/concepts-dependency-visualization/oms-workspace.png)
+
+<span data-ttu-id="7b487-119">To use dependency visualization, you need to download and install agents on each on-premises machine that you want to analyze.</span><span class="sxs-lookup"><span data-stu-id="7b487-119">To use dependency visualization, you need to download and install agents on each on-premises machine that you want to analyze.</span></span>  
+
+## <a name="do-i-need-to-pay-for-it"></a><span data-ttu-id="7b487-120">Do I need to pay for it?</span><span class="sxs-lookup"><span data-stu-id="7b487-120">Do I need to pay for it?</span></span>
+
+<span data-ttu-id="7b487-121">Azure Migrate is available at no additional charge.</span><span class="sxs-lookup"><span data-stu-id="7b487-121">Azure Migrate is available at no additional charge.</span></span> <span data-ttu-id="7b487-122">Use of the dependency visualization features in Azure Migrate require Service Map.</span><span class="sxs-lookup"><span data-stu-id="7b487-122">Use of the dependency visualization features in Azure Migrate require Service Map.</span></span> <span data-ttu-id="7b487-123">At the creation of an Azure Migrate project, Azure Migrate will automatically create a new Log Analytics workspace on your behalf.</span><span class="sxs-lookup"><span data-stu-id="7b487-123">At the creation of an Azure Migrate project, Azure Migrate will automatically create a new Log Analytics workspace on your behalf.</span></span>
+
+> [!NOTE]
+> <span data-ttu-id="7b487-124">The dependency visualization feature uses Service Map via a Log Analytics workspace.</span><span class="sxs-lookup"><span data-stu-id="7b487-124">The dependency visualization feature uses Service Map via a Log Analytics workspace.</span></span> <span data-ttu-id="7b487-125">Since 28 February 2018, with the announcement of Azure Migrate general availability, the feature is now available at no extra charge.</span><span class="sxs-lookup"><span data-stu-id="7b487-125">Since 28 February 2018, with the announcement of Azure Migrate general availability, the feature is now available at no extra charge.</span></span> <span data-ttu-id="7b487-126">You will need to create a new project to make use of the free usage workspace.</span><span class="sxs-lookup"><span data-stu-id="7b487-126">You will need to create a new project to make use of the free usage workspace.</span></span> <span data-ttu-id="7b487-127">Existing workspaces before general availaibility are still chargable, hence we recommend you to move to a new project.</span><span class="sxs-lookup"><span data-stu-id="7b487-127">Existing workspaces before general availaibility are still chargable, hence we recommend you to move to a new project.</span></span>
+
+1. <span data-ttu-id="7b487-128">Use of any solutions other than Service Map within this Log Analytics workspace will incur standard Log Analytics charges.</span><span class="sxs-lookup"><span data-stu-id="7b487-128">Use of any solutions other than Service Map within this Log Analytics workspace will incur standard Log Analytics charges.</span></span> 
+2. <span data-ttu-id="7b487-129">To support migration scenarios at no additional cost, the Service Map solution will not incur any charges for the first 180 days from creation of the Azure Migrate project, after which standard charges will apply.</span><span class="sxs-lookup"><span data-stu-id="7b487-129">To support migration scenarios at no additional cost, the Service Map solution will not incur any charges for the first 180 days from creation of the Azure Migrate project, after which standard charges will apply.</span></span>
+3. <span data-ttu-id="7b487-130">Only the workspace created as part of the project creation, will be free for use.</span><span class="sxs-lookup"><span data-stu-id="7b487-130">Only the workspace created as part of the project creation, will be free for use.</span></span>
+
+<span data-ttu-id="7b487-131">When you register agents to the workspace, use the ID and the Key given by the project on the install agent steps page.</span><span class="sxs-lookup"><span data-stu-id="7b487-131">When you register agents to the workspace, use the ID and the Key given by the project on the install agent steps page.</span></span> <span data-ttu-id="7b487-132">You cannot use an existing workspace and associate it with the Azure Migrate project.</span><span class="sxs-lookup"><span data-stu-id="7b487-132">You cannot use an existing workspace and associate it with the Azure Migrate project.</span></span>
+
+<span data-ttu-id="7b487-133">When the Azure Migrate project is deleted, the workspace is not deleted along with it.</span><span class="sxs-lookup"><span data-stu-id="7b487-133">When the Azure Migrate project is deleted, the workspace is not deleted along with it.</span></span> <span data-ttu-id="7b487-134">Post the project deletion, the Service Map usage will not be free and each node will be charged as per the paid tier of Log Analytics workspace.</span><span class="sxs-lookup"><span data-stu-id="7b487-134">Post the project deletion, the Service Map usage will not be free and each node will be charged as per the paid tier of Log Analytics workspace.</span></span>
+
+<span data-ttu-id="7b487-135">Learn more about Azure Migrate pricing [here](https://azure.microsoft.com/pricing/details/azure-migrate/).</span><span class="sxs-lookup"><span data-stu-id="7b487-135">Learn more about Azure Migrate pricing [here](https://azure.microsoft.com/pricing/details/azure-migrate/).</span></span> 
+
+## <a name="how-do-i-manage-the-workspace"></a><span data-ttu-id="7b487-136">How do I manage the workspace?</span><span class="sxs-lookup"><span data-stu-id="7b487-136">How do I manage the workspace?</span></span>
+
+<span data-ttu-id="7b487-137">You can use the Log Analytics workspace outside Azure Migrate.</span><span class="sxs-lookup"><span data-stu-id="7b487-137">You can use the Log Analytics workspace outside Azure Migrate.</span></span> <span data-ttu-id="7b487-138">It's not deleted if you delete the migration project in which it was created.</span><span class="sxs-lookup"><span data-stu-id="7b487-138">It's not deleted if you delete the migration project in which it was created.</span></span> <span data-ttu-id="7b487-139">If you no longer need the workspace, [delete it](../log-analytics/log-analytics-manage-access.md) manually.</span><span class="sxs-lookup"><span data-stu-id="7b487-139">If you no longer need the workspace, [delete it](../log-analytics/log-analytics-manage-access.md) manually.</span></span>
+
+<span data-ttu-id="7b487-140">Don't delete the workspace created by Azure Migrate, unless you delete the migration project.</span><span class="sxs-lookup"><span data-stu-id="7b487-140">Don't delete the workspace created by Azure Migrate, unless you delete the migration project.</span></span> <span data-ttu-id="7b487-141">If you do, dependencies don't work as expected.</span><span class="sxs-lookup"><span data-stu-id="7b487-141">If you do, dependencies don't work as expected.</span></span>
+
+## <a name="next-steps"></a><span data-ttu-id="7b487-142">Next steps</span><span class="sxs-lookup"><span data-stu-id="7b487-142">Next steps</span></span>
+
+[<span data-ttu-id="7b487-143">Group machines using machine dependencies</span><span class="sxs-lookup"><span data-stu-id="7b487-143">Group machines using machine dependencies</span></span>](how-to-create-group-machine-dependencies.md)

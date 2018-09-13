@@ -1,76 +1,88 @@
 ---
 title: Create your first function from the Azure Portal | Microsoft Docs
-description: Welcome to Azure. Create your first Azure Function from the Azure portal.
+description: Learn how to create your first Azure Function for serverless execution using the Azure portal.
 services: functions
 documentationcenter: na
 author: ggailey777
-manager: erikre
-editor: ''
-tags: ''
+manager: jeconnoc
 ms.assetid: 96cf87b9-8db6-41a8-863a-abb828e3d06d
-ms.service: functions
+ms.service: azure-functions
 ms.devlang: multiple
-ms.topic: article
-ms.tgt_pltfrm: multiple
-ms.workload: na
-ms.date: 04/10/2017
+ms.topic: quickstart
+ms.date: 03/28/2018
 ms.author: glenga
-ms.custom: welcome-email
-ROBOTS: NOINDEX, NOFOLLOW
-ms.openlocfilehash: dd97b195b0ae8a0e566c9f6580abd1766202ba54
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.custom: mvc, devcenter, cc996988-fb4f-47
+ms.openlocfilehash: d208a4b72a27eb288d46ee591f42a8f6b71c4f70
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44563319"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44821488"
 ---
-# <a name="create-your-first-function-in-the-azure-portal"></a><span data-ttu-id="b8942-104">Create your first function in the Azure portal</span><span class="sxs-lookup"><span data-stu-id="b8942-104">Create your first function in the Azure portal</span></span>
+# <a name="create-your-first-function-in-the-azure-portal"></a><span data-ttu-id="ea37d-103">Create your first function in the Azure portal</span><span class="sxs-lookup"><span data-stu-id="ea37d-103">Create your first function in the Azure portal</span></span>
 
-<span data-ttu-id="b8942-105">This topic shows you how to use Azure Functions to create a "hello world" function that is invoked by an HTTP request.</span><span class="sxs-lookup"><span data-stu-id="b8942-105">This topic shows you how to use Azure Functions to create a "hello world" function that is invoked by an HTTP request.</span></span> <span data-ttu-id="b8942-106">Before you can create a function in the Azure portal, you must create a function app to host the serverless execution of your function.</span><span class="sxs-lookup"><span data-stu-id="b8942-106">Before you can create a function in the Azure portal, you must create a function app to host the serverless execution of your function.</span></span>
+<span data-ttu-id="ea37d-104">Azure Functions lets you execute your code in a [serverless](https://azure.microsoft.com/overview/serverless-computing/) environment without having to first create a VM or publish a web application.</span><span class="sxs-lookup"><span data-stu-id="ea37d-104">Azure Functions lets you execute your code in a [serverless](https://azure.microsoft.com/overview/serverless-computing/) environment without having to first create a VM or publish a web application.</span></span> <span data-ttu-id="ea37d-105">In this topic, learn how to use Functions to create a "hello world" function in the Azure portal.</span><span class="sxs-lookup"><span data-stu-id="ea37d-105">In this topic, learn how to use Functions to create a "hello world" function in the Azure portal.</span></span>
 
-<span data-ttu-id="b8942-107">To complete this quickstart, you must have an Azure account.</span><span class="sxs-lookup"><span data-stu-id="b8942-107">To complete this quickstart, you must have an Azure account.</span></span> <span data-ttu-id="b8942-108">[Free accounts](https://azure.microsoft.com/free/) are available.</span><span class="sxs-lookup"><span data-stu-id="b8942-108">[Free accounts](https://azure.microsoft.com/free/) are available.</span></span> <span data-ttu-id="b8942-109">You can also [try Azure Functions](https://azure.microsoft.com/try/app-service/functions/) without having to register with Azure.</span><span class="sxs-lookup"><span data-stu-id="b8942-109">You can also [try Azure Functions](https://azure.microsoft.com/try/app-service/functions/) without having to register with Azure.</span></span>
+![Create function app in the Azure portal](./media/functions-create-first-azure-function/function-app-in-portal-editor.png)
 
-## <a name="log-in-to-azure"></a><span data-ttu-id="b8942-110">Log in to Azure</span><span class="sxs-lookup"><span data-stu-id="b8942-110">Log in to Azure</span></span>
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-<span data-ttu-id="b8942-111">Log in to the [Azure portal](https://portal.azure.com/).</span><span class="sxs-lookup"><span data-stu-id="b8942-111">Log in to the [Azure portal](https://portal.azure.com/).</span></span>
+> [!NOTE]
+> <span data-ttu-id="ea37d-107">C# developers should consider [creating your first function in Visual Studio 2017](functions-create-your-first-function-visual-studio.md) instead of in the portal.</span><span class="sxs-lookup"><span data-stu-id="ea37d-107">C# developers should consider [creating your first function in Visual Studio 2017](functions-create-your-first-function-visual-studio.md) instead of in the portal.</span></span> 
 
-## <a name="create-a-function-app"></a><span data-ttu-id="b8942-112">Create a function app</span><span class="sxs-lookup"><span data-stu-id="b8942-112">Create a function app</span></span>
+## <a name="log-in-to-azure"></a><span data-ttu-id="ea37d-108">Log in to Azure</span><span class="sxs-lookup"><span data-stu-id="ea37d-108">Log in to Azure</span></span>
 
-[!INCLUDE [functions-create-function-app-portal](../../includes/functions-create-function-app-portal.md)]
+<span data-ttu-id="ea37d-109">Sign in to the Azure portal at <http://portal.azure.com> with your Azure account.</span><span class="sxs-lookup"><span data-stu-id="ea37d-109">Sign in to the Azure portal at <http://portal.azure.com> with your Azure account.</span></span>
 
-<span data-ttu-id="b8942-113">For more information, see [Create a function app from the Azure portal](functions-create-function-app-portal.md).</span><span class="sxs-lookup"><span data-stu-id="b8942-113">For more information, see [Create a function app from the Azure portal](functions-create-function-app-portal.md).</span></span>
+## <a name="create-a-function-app"></a><span data-ttu-id="ea37d-110">Create a function app</span><span class="sxs-lookup"><span data-stu-id="ea37d-110">Create a function app</span></span>
 
-## <a name="create-a-function"></a><span data-ttu-id="b8942-114">Create a function</span><span class="sxs-lookup"><span data-stu-id="b8942-114">Create a function</span></span>
-<span data-ttu-id="b8942-115">These steps create a function in the new function app by using the Azure Functions quickstart.</span><span class="sxs-lookup"><span data-stu-id="b8942-115">These steps create a function in the new function app by using the Azure Functions quickstart.</span></span>
+<span data-ttu-id="ea37d-111">You must have a function app to host the execution of your functions.</span><span class="sxs-lookup"><span data-stu-id="ea37d-111">You must have a function app to host the execution of your functions.</span></span> <span data-ttu-id="ea37d-112">A function app lets you group functions as a logic unit for easier management, deployment, and sharing of resources.</span><span class="sxs-lookup"><span data-stu-id="ea37d-112">A function app lets you group functions as a logic unit for easier management, deployment, and sharing of resources.</span></span> 
 
-1. <span data-ttu-id="b8942-116">Click the **New** button, then click **WebHook + API**, choose a language for your function, and click **Create a function**.</span><span class="sxs-lookup"><span data-stu-id="b8942-116">Click the **New** button, then click **WebHook + API**, choose a language for your function, and click **Create a function**.</span></span> <span data-ttu-id="b8942-117">A function is created in your chosen language using the HTTP triggered function template.</span><span class="sxs-lookup"><span data-stu-id="b8942-117">A function is created in your chosen language using the HTTP triggered function template.</span></span>  
+[!INCLUDE [Create function app Azure portal](../../includes/functions-create-function-app-portal.md)]
+
+<span data-ttu-id="ea37d-113">Next, you create a function in the new function app.</span><span class="sxs-lookup"><span data-stu-id="ea37d-113">Next, you create a function in the new function app.</span></span>
+
+## <a name="create-function"></a><span data-ttu-id="ea37d-114">Create an HTTP triggered function</span><span class="sxs-lookup"><span data-stu-id="ea37d-114">Create an HTTP triggered function</span></span>
+
+1. <span data-ttu-id="ea37d-115">Expand your new function app, then click the **+** button next to **Functions**.</span><span class="sxs-lookup"><span data-stu-id="ea37d-115">Expand your new function app, then click the **+** button next to **Functions**.</span></span>
+
+2.  <span data-ttu-id="ea37d-116">In the **Get started quickly** page, select **WebHook + API**, **Choose a language** for your function, and click **Create this function**.</span><span class="sxs-lookup"><span data-stu-id="ea37d-116">In the **Get started quickly** page, select **WebHook + API**, **Choose a language** for your function, and click **Create this function**.</span></span> 
    
-    ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/azure-functions/media/functions-create-first-azure-function/function-app-quickstart-node-webhook.png)
+    ![Functions quickstart in the Azure portal.](./media/functions-create-first-azure-function/function-app-quickstart-node-webhook.png)
 
-<span data-ttu-id="b8942-118">After the function is created, you can test it by sending an HTTP request.</span><span class="sxs-lookup"><span data-stu-id="b8942-118">After the function is created, you can test it by sending an HTTP request.</span></span>
+<span data-ttu-id="ea37d-118">A function is created in your chosen language using the template for an HTTP triggered function.</span><span class="sxs-lookup"><span data-stu-id="ea37d-118">A function is created in your chosen language using the template for an HTTP triggered function.</span></span> <span data-ttu-id="ea37d-119">This topic shows a C# script function in the portal, but you can create a function in any [supported language](supported-languages.md).</span><span class="sxs-lookup"><span data-stu-id="ea37d-119">This topic shows a C# script function in the portal, but you can create a function in any [supported language](supported-languages.md).</span></span> 
 
-## <a name="test-the-function"></a><span data-ttu-id="b8942-119">Test the function</span><span class="sxs-lookup"><span data-stu-id="b8942-119">Test the function</span></span>
+<span data-ttu-id="ea37d-120">Now, you can run the new function by sending an HTTP request.</span><span class="sxs-lookup"><span data-stu-id="ea37d-120">Now, you can run the new function by sending an HTTP request.</span></span>
 
-<span data-ttu-id="b8942-120">Since the function templates contain working code, you can immediately test your new function right in the portal.</span><span class="sxs-lookup"><span data-stu-id="b8942-120">Since the function templates contain working code, you can immediately test your new function right in the portal.</span></span>
+## <a name="test-the-function"></a><span data-ttu-id="ea37d-121">Test the function</span><span class="sxs-lookup"><span data-stu-id="ea37d-121">Test the function</span></span>
 
-1. <span data-ttu-id="b8942-121">In your function app, click the new function and review the code from the template.</span><span class="sxs-lookup"><span data-stu-id="b8942-121">In your function app, click the new function and review the code from the template.</span></span> <span data-ttu-id="b8942-122">Notice that the function expects an HTTP request with a *name* value passed either in the message body or in a query string.</span><span class="sxs-lookup"><span data-stu-id="b8942-122">Notice that the function expects an HTTP request with a *name* value passed either in the message body or in a query string.</span></span> <span data-ttu-id="b8942-123">When the function runs, this value is returned in the response message.</span><span class="sxs-lookup"><span data-stu-id="b8942-123">When the function runs, this value is returned in the response message.</span></span> <span data-ttu-id="b8942-124">The example shown is a JavaScript function.</span><span class="sxs-lookup"><span data-stu-id="b8942-124">The example shown is a JavaScript function.</span></span>
-   
-2. <span data-ttu-id="b8942-125">Click **Run** to run the function.</span><span class="sxs-lookup"><span data-stu-id="b8942-125">Click **Run** to run the function.</span></span> <span data-ttu-id="b8942-126">You see that execution is triggered by a test HTTP request, information is written to the logs, and the "hello..." response is displayed in the **Output** in the **Test** tab.</span><span class="sxs-lookup"><span data-stu-id="b8942-126">You see that execution is triggered by a test HTTP request, information is written to the logs, and the "hello..." response is displayed in the **Output** in the **Test** tab.</span></span>
- 
-    ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/azure-functions/media/functions-create-first-azure-function/function-app-develop-tab-testing.png)
+1. <span data-ttu-id="ea37d-122">In your new function, click **</> Get function URL** at the top right, select **default (Function key)**, and then click **Copy**.</span><span class="sxs-lookup"><span data-stu-id="ea37d-122">In your new function, click **</> Get function URL** at the top right, select **default (Function key)**, and then click **Copy**.</span></span> 
 
-3. <span data-ttu-id="b8942-127">In the **Request body** text box, change the value of the *name* property to your name, and click **Run** again.</span><span class="sxs-lookup"><span data-stu-id="b8942-127">In the **Request body** text box, change the value of the *name* property to your name, and click **Run** again.</span></span> <span data-ttu-id="b8942-128">This time, the response in the **Output** contains your name.</span><span class="sxs-lookup"><span data-stu-id="b8942-128">This time, the response in the **Output** contains your name.</span></span>   
+    ![Copy the function URL from the Azure portal](./media/functions-create-first-azure-function/function-app-develop-tab-testing.png)
 
-4. <span data-ttu-id="b8942-129">To trigger execution of the same function from an HTTP testing tool or from another browser window, click **</> Get function URL**, copy the request URL and paste it into the tool or browser address bar.</span><span class="sxs-lookup"><span data-stu-id="b8942-129">To trigger execution of the same function from an HTTP testing tool or from another browser window, click **</> Get function URL**, copy the request URL and paste it into the tool or browser address bar.</span></span> <span data-ttu-id="b8942-130">Append the query string value `&name=yourname` to the URL and execute the request.</span><span class="sxs-lookup"><span data-stu-id="b8942-130">Append the query string value `&name=yourname` to the URL and execute the request.</span></span> <span data-ttu-id="b8942-131">The same information is written to the logs and the same string is contained in the body of the response message.</span><span class="sxs-lookup"><span data-stu-id="b8942-131">The same information is written to the logs and the same string is contained in the body of the response message.</span></span>
+2. <span data-ttu-id="ea37d-124">Paste the function URL into your browser's address bar.</span><span class="sxs-lookup"><span data-stu-id="ea37d-124">Paste the function URL into your browser's address bar.</span></span> <span data-ttu-id="ea37d-125">Add the query string value `&name=<yourname>` to the end of this URL and press the `Enter` key on your keyboard to execute the request.</span><span class="sxs-lookup"><span data-stu-id="ea37d-125">Add the query string value `&name=<yourname>` to the end of this URL and press the `Enter` key on your keyboard to execute the request.</span></span> <span data-ttu-id="ea37d-126">You should see the response returned by the function displayed in the browser.</span><span class="sxs-lookup"><span data-stu-id="ea37d-126">You should see the response returned by the function displayed in the browser.</span></span>  
 
-    ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/azure-functions/media/functions-create-first-azure-function/function-app-browser-testing.png)
+    <span data-ttu-id="ea37d-127">The following example shows the response in the Edge browser (other browsers may include displayed XML):</span><span class="sxs-lookup"><span data-stu-id="ea37d-127">The following example shows the response in the Edge browser (other browsers may include displayed XML):</span></span>
 
+    ![Function response in the browser.](./media/functions-create-first-azure-function/function-app-browser-testing.png)
 
-## <a name="next-steps"></a><span data-ttu-id="b8942-132">Next steps</span><span class="sxs-lookup"><span data-stu-id="b8942-132">Next steps</span></span>
-[!INCLUDE [Functions quickstart next steps](../../includes/functions-quickstart-next-steps.md)]
+    <span data-ttu-id="ea37d-129">The request URL includes a key that is required, by default, to access your function over HTTP.</span><span class="sxs-lookup"><span data-stu-id="ea37d-129">The request URL includes a key that is required, by default, to access your function over HTTP.</span></span>   
 
-[!INCLUDE [Getting Started Note](../../includes/functions-get-help.md)]
+3. <span data-ttu-id="ea37d-130">When your function runs, trace information is written to the logs.</span><span class="sxs-lookup"><span data-stu-id="ea37d-130">When your function runs, trace information is written to the logs.</span></span> <span data-ttu-id="ea37d-131">To see the trace output from the previous execution, return to your function in the portal and click the arrow at the bottom of the screen to expand the **Logs**.</span><span class="sxs-lookup"><span data-stu-id="ea37d-131">To see the trace output from the previous execution, return to your function in the portal and click the arrow at the bottom of the screen to expand the **Logs**.</span></span> 
 
+   ![Functions log viewer in the Azure portal.](./media/functions-create-first-azure-function/function-view-logs.png)
+
+## <a name="clean-up-resources"></a><span data-ttu-id="ea37d-133">Clean up resources</span><span class="sxs-lookup"><span data-stu-id="ea37d-133">Clean up resources</span></span>
+
+[!INCLUDE [Clean-up resources](../../includes/functions-quickstart-cleanup.md)]
+
+## <a name="next-steps"></a><span data-ttu-id="ea37d-134">Next steps</span><span class="sxs-lookup"><span data-stu-id="ea37d-134">Next steps</span></span>
+
+<span data-ttu-id="ea37d-135">You have created a function app with a simple HTTP triggered function.</span><span class="sxs-lookup"><span data-stu-id="ea37d-135">You have created a function app with a simple HTTP triggered function.</span></span>  
+
+[!INCLUDE [Next steps note](../../includes/functions-quickstart-next-steps.md)]
+
+<span data-ttu-id="ea37d-136">For more information, see [Azure Functions HTTP and webhook bindings](functions-bindings-http-webhook.md).</span><span class="sxs-lookup"><span data-stu-id="ea37d-136">For more information, see [Azure Functions HTTP and webhook bindings](functions-bindings-http-webhook.md).</span></span>
 
 
 

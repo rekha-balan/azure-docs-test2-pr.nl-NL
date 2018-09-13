@@ -1,74 +1,67 @@
 ---
-title: Run the Hadoop samples in HDInsight | Microsoft Docs
+title: Run the Hadoop samples in HDInsight - Azure
 description: Get started using the Azure HDInsight service with the samples provided. Use PowerShell scripts that run MapReduce programs on data clusters.
 services: hdinsight
-documentationcenter: ''
-tags: azure-portal
-author: mumian
-manager: jhubbard
-editor: cgronlun
-ms.assetid: bf76d452-abb4-4210-87bd-a2067778c6ed
+author: jasonwhowell
+ms.reviewer: jasonh
 ms.service: hdinsight
-ms.workload: big-data
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
-ms.date: 02/14/2017
-ms.author: jgao
+ms.topic: conceptual
+ms.date: 05/25/2017
+ms.author: jasonh
 ROBOTS: NOINDEX
-ms.openlocfilehash: 3e53d08723fe0cac8ce16a0da3c9e04525a4ffe7
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 59e6fd0a05374329efb20201c8d904cbbdc72b1a
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44551339"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44814696"
 ---
-# <a name="run-hadoop-mapreduce-samples-in-windows-based-hdinsight"></a><span data-ttu-id="47382-104">Run Hadoop MapReduce samples in Windows-based HDInsight</span><span class="sxs-lookup"><span data-stu-id="47382-104">Run Hadoop MapReduce samples in Windows-based HDInsight</span></span>
+# <a name="run-hadoop-mapreduce-samples-in-windows-based-hdinsight"></a><span data-ttu-id="3450e-104">Run Hadoop MapReduce samples in Windows-based HDInsight</span><span class="sxs-lookup"><span data-stu-id="3450e-104">Run Hadoop MapReduce samples in Windows-based HDInsight</span></span>
 [!INCLUDE [samples-selector](../../includes/hdinsight-run-samples-selector.md)]
 
-<span data-ttu-id="47382-105">A set of samples are provided to help you get started running MapReduce jobs on Hadoop clusters using Azure HDInsight.</span><span class="sxs-lookup"><span data-stu-id="47382-105">A set of samples are provided to help you get started running MapReduce jobs on Hadoop clusters using Azure HDInsight.</span></span> <span data-ttu-id="47382-106">These samples are made available on each of the HDInsight managed clusters that you create.</span><span class="sxs-lookup"><span data-stu-id="47382-106">These samples are made available on each of the HDInsight managed clusters that you create.</span></span> <span data-ttu-id="47382-107">Running these samples familiarize you with using Azure PowerShell cmdlets to run jobs on Hadoop clusters.</span><span class="sxs-lookup"><span data-stu-id="47382-107">Running these samples familiarize you with using Azure PowerShell cmdlets to run jobs on Hadoop clusters.</span></span>
+<span data-ttu-id="3450e-105">A set of samples are provided to help you get started running MapReduce jobs on Hadoop clusters using Azure HDInsight.</span><span class="sxs-lookup"><span data-stu-id="3450e-105">A set of samples are provided to help you get started running MapReduce jobs on Hadoop clusters using Azure HDInsight.</span></span> <span data-ttu-id="3450e-106">These samples are made available on each of the HDInsight managed clusters that you create.</span><span class="sxs-lookup"><span data-stu-id="3450e-106">These samples are made available on each of the HDInsight managed clusters that you create.</span></span> <span data-ttu-id="3450e-107">Running these samples familiarize you with using Azure PowerShell cmdlets to run jobs on Hadoop clusters.</span><span class="sxs-lookup"><span data-stu-id="3450e-107">Running these samples familiarize you with using Azure PowerShell cmdlets to run jobs on Hadoop clusters.</span></span>
 
-* <span data-ttu-id="47382-108">[**Word count**][hdinsight-sample-wordcount]: Counts word occurrences in a text file.</span><span class="sxs-lookup"><span data-stu-id="47382-108">[**Word count**][hdinsight-sample-wordcount]: Counts word occurrences in a text file.</span></span>
-* <span data-ttu-id="47382-109">[**C# streaming word count**][hdinsight-sample-csharp-streaming]: Counts word occurrences in a text file using the Hadoop streaming interface.</span><span class="sxs-lookup"><span data-stu-id="47382-109">[**C# streaming word count**][hdinsight-sample-csharp-streaming]: Counts word occurrences in a text file using the Hadoop streaming interface.</span></span>
-* <span data-ttu-id="47382-110">[**Pi estimator**][hdinsight-sample-pi-estimator]: Uses a statistical (quasi-Monte Carlo) method to estimate the value of pi.</span><span class="sxs-lookup"><span data-stu-id="47382-110">[**Pi estimator**][hdinsight-sample-pi-estimator]: Uses a statistical (quasi-Monte Carlo) method to estimate the value of pi.</span></span>
-* <span data-ttu-id="47382-111">[**10-GB Graysort**][hdinsight-sample-10gb-graysort]: Run a general purpose GraySort on a 10 GB file by using HDInsight.</span><span class="sxs-lookup"><span data-stu-id="47382-111">[**10-GB Graysort**][hdinsight-sample-10gb-graysort]: Run a general purpose GraySort on a 10 GB file by using HDInsight.</span></span> <span data-ttu-id="47382-112">There are three jobs to run: Teragen to generate the data, Terasort to sort the data, and Teravalidate to confirm that the data has been properly sorted.</span><span class="sxs-lookup"><span data-stu-id="47382-112">There are three jobs to run: Teragen to generate the data, Terasort to sort the data, and Teravalidate to confirm that the data has been properly sorted.</span></span>
+* <span data-ttu-id="3450e-108">[**Word count**][hdinsight-sample-wordcount]: Counts word occurrences in a text file.</span><span class="sxs-lookup"><span data-stu-id="3450e-108">[**Word count**][hdinsight-sample-wordcount]: Counts word occurrences in a text file.</span></span>
+* <span data-ttu-id="3450e-109">[**C# streaming word count**][hdinsight-sample-csharp-streaming]: Counts word occurrences in a text file using the Hadoop streaming interface.</span><span class="sxs-lookup"><span data-stu-id="3450e-109">[**C# streaming word count**][hdinsight-sample-csharp-streaming]: Counts word occurrences in a text file using the Hadoop streaming interface.</span></span>
+* <span data-ttu-id="3450e-110">[**Pi estimator**][hdinsight-sample-pi-estimator]: Uses a statistical (quasi-Monte Carlo) method to estimate the value of pi.</span><span class="sxs-lookup"><span data-stu-id="3450e-110">[**Pi estimator**][hdinsight-sample-pi-estimator]: Uses a statistical (quasi-Monte Carlo) method to estimate the value of pi.</span></span>
+* <span data-ttu-id="3450e-111">[**10-GB Graysort**][hdinsight-sample-10gb-graysort]: Run a general-purpose GraySort on a 10 GB file by using HDInsight.</span><span class="sxs-lookup"><span data-stu-id="3450e-111">[**10-GB Graysort**][hdinsight-sample-10gb-graysort]: Run a general-purpose GraySort on a 10 GB file by using HDInsight.</span></span> <span data-ttu-id="3450e-112">There are three jobs to run: Teragen to generate the data, Terasort to sort the data, and Teravalidate to confirm that the data has been properly sorted.</span><span class="sxs-lookup"><span data-stu-id="3450e-112">There are three jobs to run: Teragen to generate the data, Terasort to sort the data, and Teravalidate to confirm that the data has been properly sorted.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="47382-113">The source code can be found in the Appendix.</span><span class="sxs-lookup"><span data-stu-id="47382-113">The source code can be found in the Appendix.</span></span>
+> <span data-ttu-id="3450e-113">The source code can be found in the Appendix.</span><span class="sxs-lookup"><span data-stu-id="3450e-113">The source code can be found in the Appendix.</span></span>
 
-<span data-ttu-id="47382-114">Much additional documentation exists on the web for Hadoop-related technologies, such as Java-based MapReduce programming and streaming, and documentation about the cmdlets that are used in Windows PowerShell scripting.</span><span class="sxs-lookup"><span data-stu-id="47382-114">Much additional documentation exists on the web for Hadoop-related technologies, such as Java-based MapReduce programming and streaming, and documentation about the cmdlets that are used in Windows PowerShell scripting.</span></span> <span data-ttu-id="47382-115">For more information about these resources, see:</span><span class="sxs-lookup"><span data-stu-id="47382-115">For more information about these resources, see:</span></span>
+<span data-ttu-id="3450e-114">Much additional documentation exists on the web for Hadoop-related technologies, such as Java-based MapReduce programming and streaming, and documentation about the cmdlets that are used in Windows PowerShell scripting.</span><span class="sxs-lookup"><span data-stu-id="3450e-114">Much additional documentation exists on the web for Hadoop-related technologies, such as Java-based MapReduce programming and streaming, and documentation about the cmdlets that are used in Windows PowerShell scripting.</span></span> <span data-ttu-id="3450e-115">For more information about these resources, see:</span><span class="sxs-lookup"><span data-stu-id="3450e-115">For more information about these resources, see:</span></span>
 
-* [<span data-ttu-id="47382-116">Develop Java MapReduce programs for Hadoop in HDInsight</span><span class="sxs-lookup"><span data-stu-id="47382-116">Develop Java MapReduce programs for Hadoop in HDInsight</span></span>](hdinsight-develop-deploy-java-mapreduce-linux.md)
-* [<span data-ttu-id="47382-117">Submit Hadoop jobs in HDInsight</span><span class="sxs-lookup"><span data-stu-id="47382-117">Submit Hadoop jobs in HDInsight</span></span>](hdinsight-submit-hadoop-jobs-programmatically.md)
-* <span data-ttu-id="47382-118">[Introduction to Azure HDInsight][hdinsight-introduction]</span><span class="sxs-lookup"><span data-stu-id="47382-118">[Introduction to Azure HDInsight][hdinsight-introduction]</span></span>
+* [<span data-ttu-id="3450e-116">Develop Java MapReduce programs for Hadoop in HDInsight</span><span class="sxs-lookup"><span data-stu-id="3450e-116">Develop Java MapReduce programs for Hadoop in HDInsight</span></span>](hadoop/apache-hadoop-develop-deploy-java-mapreduce-linux.md)
+* [<span data-ttu-id="3450e-117">Submit Hadoop jobs in HDInsight</span><span class="sxs-lookup"><span data-stu-id="3450e-117">Submit Hadoop jobs in HDInsight</span></span>](hadoop/submit-apache-hadoop-jobs-programmatically.md)
+* <span data-ttu-id="3450e-118">[Introduction to Azure HDInsight][hdinsight-introduction]</span><span class="sxs-lookup"><span data-stu-id="3450e-118">[Introduction to Azure HDInsight][hdinsight-introduction]</span></span>
 
-<span data-ttu-id="47382-119">Nowadays, many people choose Hive and Pig over MapReduce.</span><span class="sxs-lookup"><span data-stu-id="47382-119">Nowadays, many people choose Hive and Pig over MapReduce.</span></span>  <span data-ttu-id="47382-120">For more information, see:</span><span class="sxs-lookup"><span data-stu-id="47382-120">For more information, see:</span></span>
+<span data-ttu-id="3450e-119">Nowadays, many people choose Hive and Pig over MapReduce.</span><span class="sxs-lookup"><span data-stu-id="3450e-119">Nowadays, many people choose Hive and Pig over MapReduce.</span></span>  <span data-ttu-id="3450e-120">For more information, see:</span><span class="sxs-lookup"><span data-stu-id="3450e-120">For more information, see:</span></span>
 
-* [<span data-ttu-id="47382-121">Use Hive in HDInsight</span><span class="sxs-lookup"><span data-stu-id="47382-121">Use Hive in HDInsight</span></span>](hdinsight-use-hive.md)
-* [<span data-ttu-id="47382-122">Use Pig in HDInsight</span><span class="sxs-lookup"><span data-stu-id="47382-122">Use Pig in HDInsight</span></span>](hdinsight-use-pig.md)
+* [<span data-ttu-id="3450e-121">Use Hive in HDInsight</span><span class="sxs-lookup"><span data-stu-id="3450e-121">Use Hive in HDInsight</span></span>](hadoop/hdinsight-use-hive.md)
+* [<span data-ttu-id="3450e-122">Use Pig in HDInsight</span><span class="sxs-lookup"><span data-stu-id="3450e-122">Use Pig in HDInsight</span></span>](hadoop/hdinsight-use-pig.md)
 
-<span data-ttu-id="47382-123">**Prerequisites**:</span><span class="sxs-lookup"><span data-stu-id="47382-123">**Prerequisites**:</span></span>
+<span data-ttu-id="3450e-123">**Prerequisites**:</span><span class="sxs-lookup"><span data-stu-id="3450e-123">**Prerequisites**:</span></span>
 
-* <span data-ttu-id="47382-124">**An Azure subscription**.</span><span class="sxs-lookup"><span data-stu-id="47382-124">**An Azure subscription**.</span></span> <span data-ttu-id="47382-125">See [Get Azure free trial](https://azure.microsoft.com/documentation/videos/get-azure-free-trial-for-testing-hadoop-in-hdinsight/).</span><span class="sxs-lookup"><span data-stu-id="47382-125">See [Get Azure free trial](https://azure.microsoft.com/documentation/videos/get-azure-free-trial-for-testing-hadoop-in-hdinsight/).</span></span>
-* <span data-ttu-id="47382-126">**an HDInsight cluster**.</span><span class="sxs-lookup"><span data-stu-id="47382-126">**an HDInsight cluster**.</span></span> <span data-ttu-id="47382-127">For instructions on the various ways in which such clusters can be created, see [Create Hadoop clusters in HDInsight](hdinsight-provision-clusters.md).</span><span class="sxs-lookup"><span data-stu-id="47382-127">For instructions on the various ways in which such clusters can be created, see [Create Hadoop clusters in HDInsight](hdinsight-provision-clusters.md).</span></span>
-* <span data-ttu-id="47382-128">**A workstation with Azure PowerShell**.</span><span class="sxs-lookup"><span data-stu-id="47382-128">**A workstation with Azure PowerShell**.</span></span>
+* <span data-ttu-id="3450e-124">**An Azure subscription**.</span><span class="sxs-lookup"><span data-stu-id="3450e-124">**An Azure subscription**.</span></span> <span data-ttu-id="3450e-125">See [Get Azure free trial](https://azure.microsoft.com/documentation/videos/get-azure-free-trial-for-testing-hadoop-in-hdinsight/).</span><span class="sxs-lookup"><span data-stu-id="3450e-125">See [Get Azure free trial](https://azure.microsoft.com/documentation/videos/get-azure-free-trial-for-testing-hadoop-in-hdinsight/).</span></span>
+* <span data-ttu-id="3450e-126">**an HDInsight cluster**.</span><span class="sxs-lookup"><span data-stu-id="3450e-126">**an HDInsight cluster**.</span></span> <span data-ttu-id="3450e-127">For instructions on the various ways in which such clusters can be created, see [Create Hadoop clusters in HDInsight](hdinsight-hadoop-provision-linux-clusters.md).</span><span class="sxs-lookup"><span data-stu-id="3450e-127">For instructions on the various ways in which such clusters can be created, see [Create Hadoop clusters in HDInsight](hdinsight-hadoop-provision-linux-clusters.md).</span></span>
+* <span data-ttu-id="3450e-128">**A workstation with Azure PowerShell**.</span><span class="sxs-lookup"><span data-stu-id="3450e-128">**A workstation with Azure PowerShell**.</span></span>
 
     > [!IMPORTANT]
-    > <span data-ttu-id="47382-129">Azure PowerShell support for managing HDInsight resources using Azure Service Manager is **deprecated**, and will be removed by January 1, 2017.</span><span class="sxs-lookup"><span data-stu-id="47382-129">Azure PowerShell support for managing HDInsight resources using Azure Service Manager is **deprecated**, and will be removed by January 1, 2017.</span></span> <span data-ttu-id="47382-130">The steps in this document use the new HDInsight cmdlets that work with Azure Resource Manager.</span><span class="sxs-lookup"><span data-stu-id="47382-130">The steps in this document use the new HDInsight cmdlets that work with Azure Resource Manager.</span></span>
+    > <span data-ttu-id="3450e-129">Azure PowerShell support for managing HDInsight resources using Azure Service Manager is **deprecated**, and will be removed by January 1, 2017.</span><span class="sxs-lookup"><span data-stu-id="3450e-129">Azure PowerShell support for managing HDInsight resources using Azure Service Manager is **deprecated**, and will be removed by January 1, 2017.</span></span> <span data-ttu-id="3450e-130">The steps in this document use the new HDInsight cmdlets that work with Azure Resource Manager.</span><span class="sxs-lookup"><span data-stu-id="3450e-130">The steps in this document use the new HDInsight cmdlets that work with Azure Resource Manager.</span></span>
     >
-    > <span data-ttu-id="47382-131">Follow the steps in [Install and configure Azure PowerShell](/powershell/azureps-cmdlets-docs) to install the latest version of Azure PowerShell.</span><span class="sxs-lookup"><span data-stu-id="47382-131">Follow the steps in [Install and configure Azure PowerShell](/powershell/azureps-cmdlets-docs) to install the latest version of Azure PowerShell.</span></span> <span data-ttu-id="47382-132">If you have scripts that need to be modified to use the new cmdlets that work with Azure Resource Manager, see [Migrating to Azure Resource Manager-based development tools for HDInsight clusters](hdinsight-hadoop-development-using-azure-resource-manager.md).</span><span class="sxs-lookup"><span data-stu-id="47382-132">If you have scripts that need to be modified to use the new cmdlets that work with Azure Resource Manager, see [Migrating to Azure Resource Manager-based development tools for HDInsight clusters](hdinsight-hadoop-development-using-azure-resource-manager.md).</span></span>
+    > <span data-ttu-id="3450e-131">Follow the steps in [Install and configure Azure PowerShell](/powershell/azureps-cmdlets-docs) to install the latest version of Azure PowerShell.</span><span class="sxs-lookup"><span data-stu-id="3450e-131">Follow the steps in [Install and configure Azure PowerShell](/powershell/azureps-cmdlets-docs) to install the latest version of Azure PowerShell.</span></span> <span data-ttu-id="3450e-132">If you have scripts that need to be modified to use the new cmdlets that work with Azure Resource Manager, see [Migrating to Azure Resource Manager-based development tools for HDInsight clusters](hdinsight-hadoop-development-using-azure-resource-manager.md).</span><span class="sxs-lookup"><span data-stu-id="3450e-132">If you have scripts that need to be modified to use the new cmdlets that work with Azure Resource Manager, see [Migrating to Azure Resource Manager-based development tools for HDInsight clusters](hdinsight-hadoop-development-using-azure-resource-manager.md).</span></span>
 
-## <a name="hdinsight-sample-wordcount"></a><span data-ttu-id="47382-133">Word count - Java</span><span class="sxs-lookup"><span data-stu-id="47382-133">Word count - Java</span></span>
-<span data-ttu-id="47382-134">To submit a MapReduce project, you first create a MapReduce job definition.</span><span class="sxs-lookup"><span data-stu-id="47382-134">To submit a MapReduce project, you first create a MapReduce job definition.</span></span> <span data-ttu-id="47382-135">In the job definition, you specify the MapReduce program jar file and the location of the jar file, which is **wasbs:///example/jars/hadoop-mapreduce-examples.jar**, the class name, and the arguments.</span><span class="sxs-lookup"><span data-stu-id="47382-135">In the job definition, you specify the MapReduce program jar file and the location of the jar file, which is **wasbs:///example/jars/hadoop-mapreduce-examples.jar**, the class name, and the arguments.</span></span>  <span data-ttu-id="47382-136">The wordcount MapReduce program takes two arguments: the source file that is used to count words, and the location for output.</span><span class="sxs-lookup"><span data-stu-id="47382-136">The wordcount MapReduce program takes two arguments: the source file that is used to count words, and the location for output.</span></span>
+## <a name="hdinsight-sample-wordcount"></a><span data-ttu-id="3450e-133">Word count - Java</span><span class="sxs-lookup"><span data-stu-id="3450e-133">Word count - Java</span></span>
+<span data-ttu-id="3450e-134">To submit a MapReduce project, you first create a MapReduce job definition.</span><span class="sxs-lookup"><span data-stu-id="3450e-134">To submit a MapReduce project, you first create a MapReduce job definition.</span></span> <span data-ttu-id="3450e-135">In the job definition, you specify the MapReduce program jar file and the location of the jar file, which is **wasb:///example/jars/hadoop-mapreduce-examples.jar**, the class name, and the arguments.</span><span class="sxs-lookup"><span data-stu-id="3450e-135">In the job definition, you specify the MapReduce program jar file and the location of the jar file, which is **wasb:///example/jars/hadoop-mapreduce-examples.jar**, the class name, and the arguments.</span></span>  <span data-ttu-id="3450e-136">The wordcount MapReduce program takes two arguments: the source file that is used to count words, and the location for output.</span><span class="sxs-lookup"><span data-stu-id="3450e-136">The wordcount MapReduce program takes two arguments: the source file that is used to count words, and the location for output.</span></span>
 
-<span data-ttu-id="47382-137">The source code can be found in the [Appendix A](#apendix-a---the-word-count-MapReduce-program-in-java).</span><span class="sxs-lookup"><span data-stu-id="47382-137">The source code can be found in the [Appendix A](#apendix-a---the-word-count-MapReduce-program-in-java).</span></span>
+<span data-ttu-id="3450e-137">The source code can be found in the [Appendix A](#apendix-a---the-word-count-MapReduce-program-in-java).</span><span class="sxs-lookup"><span data-stu-id="3450e-137">The source code can be found in the [Appendix A](#apendix-a---the-word-count-MapReduce-program-in-java).</span></span>
 
-<span data-ttu-id="47382-138">For the procedure of developing a Java MapReduce program, see - [Develop Java MapReduce programs for Hadoop in HDInsight](hdinsight-develop-deploy-java-mapreduce-linux.md)</span><span class="sxs-lookup"><span data-stu-id="47382-138">For the procedure of developing a Java MapReduce program, see - [Develop Java MapReduce programs for Hadoop in HDInsight](hdinsight-develop-deploy-java-mapreduce-linux.md)</span></span>
+<span data-ttu-id="3450e-138">For the procedure of developing a Java MapReduce program, see - [Develop Java MapReduce programs for Hadoop in HDInsight](hadoop/apache-hadoop-develop-deploy-java-mapreduce-linux.md)</span><span class="sxs-lookup"><span data-stu-id="3450e-138">For the procedure of developing a Java MapReduce program, see - [Develop Java MapReduce programs for Hadoop in HDInsight](hadoop/apache-hadoop-develop-deploy-java-mapreduce-linux.md)</span></span>
 
-<span data-ttu-id="47382-139">**To submit a word count MapReduce job**</span><span class="sxs-lookup"><span data-stu-id="47382-139">**To submit a word count MapReduce job**</span></span>
+<span data-ttu-id="3450e-139">**To submit a word count MapReduce job**</span><span class="sxs-lookup"><span data-stu-id="3450e-139">**To submit a word count MapReduce job**</span></span>
 
-1. <span data-ttu-id="47382-140">Open **Windows PowerShell ISE**.</span><span class="sxs-lookup"><span data-stu-id="47382-140">Open **Windows PowerShell ISE**.</span></span> <span data-ttu-id="47382-141">For instructions, see [Install and configure Azure PowerShell][powershell-install-configure].</span><span class="sxs-lookup"><span data-stu-id="47382-141">For instructions, see [Install and configure Azure PowerShell][powershell-install-configure].</span></span>
-2. <span data-ttu-id="47382-142">Paste the following PowerShell script:</span><span class="sxs-lookup"><span data-stu-id="47382-142">Paste the following PowerShell script:</span></span>
+1. <span data-ttu-id="3450e-140">Open **Windows PowerShell ISE**.</span><span class="sxs-lookup"><span data-stu-id="3450e-140">Open **Windows PowerShell ISE**.</span></span> <span data-ttu-id="3450e-141">For instructions, see [Install and configure Azure PowerShell][powershell-install-configure].</span><span class="sxs-lookup"><span data-stu-id="3450e-141">For instructions, see [Install and configure Azure PowerShell][powershell-install-configure].</span></span>
+2. <span data-ttu-id="3450e-142">Paste the following PowerShell script:</span><span class="sxs-lookup"><span data-stu-id="3450e-142">Paste the following PowerShell script:</span></span>
 
     ```powershell
     $subscriptionName = "<Azure Subscription Name>"
@@ -79,9 +72,9 @@ ms.locfileid: "44551339"
 
     # Define the MapReduce job
     $mrJobDefinition = New-AzureRmHDInsightMapReduceJobDefinition `
-                                -JarFile "wasbs:///example/jars/hadoop-mapreduce-examples.jar" `
+                                -JarFile "wasb:///example/jars/hadoop-mapreduce-examples.jar" `
                                 -ClassName "wordcount" `
-                                -Arguments "wasbs:///example/data/gutenberg/davinci.txt", "wasbs:///example/data/WordCountOutput"
+                                -Arguments "wasb:///example/data/gutenberg/davinci.txt", "wasb:///example/data/WordCountOutput"
 
     # Submit the job and wait for job completion
     $cred = Get-Credential -Message "Enter the HDInsight cluster HTTP user credential:"
@@ -121,28 +114,28 @@ ms.locfileid: "44551339"
     cat ./example/data/WordCountOutput/part-r-00000 | findstr "there"
     ```
 
-    <span data-ttu-id="47382-143">The MapReduce job produces a file named *part-r-00000*, which contains words and the counts.</span><span class="sxs-lookup"><span data-stu-id="47382-143">The MapReduce job produces a file named *part-r-00000*, which contains words and the counts.</span></span> <span data-ttu-id="47382-144">The script uses the **findstr** command to list all the words that contains *"there"*.</span><span class="sxs-lookup"><span data-stu-id="47382-144">The script uses the **findstr** command to list all the words that contains *"there"*.</span></span>
-3. <span data-ttu-id="47382-145">Set the first three variables, and run the script.</span><span class="sxs-lookup"><span data-stu-id="47382-145">Set the first three variables, and run the script.</span></span>
+    <span data-ttu-id="3450e-143">The MapReduce job produces a file named *part-r-00000*, which contains words and the counts.</span><span class="sxs-lookup"><span data-stu-id="3450e-143">The MapReduce job produces a file named *part-r-00000*, which contains words and the counts.</span></span> <span data-ttu-id="3450e-144">The script uses the **findstr** command to list all the words that contains *"there"*.</span><span class="sxs-lookup"><span data-stu-id="3450e-144">The script uses the **findstr** command to list all the words that contains *"there"*.</span></span>
+3. <span data-ttu-id="3450e-145">Set the first three variables, and run the script.</span><span class="sxs-lookup"><span data-stu-id="3450e-145">Set the first three variables, and run the script.</span></span>
 
-## <a name="hdinsight-sample-csharp-streaming"></a><span data-ttu-id="47382-146">Word count - C# streaming</span><span class="sxs-lookup"><span data-stu-id="47382-146">Word count - C# streaming</span></span>
-<span data-ttu-id="47382-147">Hadoop provides a streaming API to MapReduce, which enables you to write map and reduce functions in languages other than Java.</span><span class="sxs-lookup"><span data-stu-id="47382-147">Hadoop provides a streaming API to MapReduce, which enables you to write map and reduce functions in languages other than Java.</span></span>
+## <a name="hdinsight-sample-csharp-streaming"></a><span data-ttu-id="3450e-146">Word count - C# streaming</span><span class="sxs-lookup"><span data-stu-id="3450e-146">Word count - C# streaming</span></span>
+<span data-ttu-id="3450e-147">Hadoop provides a streaming API to MapReduce, which enables you to write map and reduce functions in languages other than Java.</span><span class="sxs-lookup"><span data-stu-id="3450e-147">Hadoop provides a streaming API to MapReduce, which enables you to write map and reduce functions in languages other than Java.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="47382-148">The steps in this tutorial apply only to Windows-based HDInsight clusters.</span><span class="sxs-lookup"><span data-stu-id="47382-148">The steps in this tutorial apply only to Windows-based HDInsight clusters.</span></span> <span data-ttu-id="47382-149">For an example of streaming for Linux-based HDInsight clusters, see [Develop Python streaming programs for HDInsight](hdinsight-hadoop-streaming-python.md).</span><span class="sxs-lookup"><span data-stu-id="47382-149">For an example of streaming for Linux-based HDInsight clusters, see [Develop Python streaming programs for HDInsight](hdinsight-hadoop-streaming-python.md).</span></span>
+> <span data-ttu-id="3450e-148">The steps in this tutorial apply only to Windows-based HDInsight clusters.</span><span class="sxs-lookup"><span data-stu-id="3450e-148">The steps in this tutorial apply only to Windows-based HDInsight clusters.</span></span> <span data-ttu-id="3450e-149">For an example of streaming for Linux-based HDInsight clusters, see [Develop Python streaming programs for HDInsight](hadoop/apache-hadoop-streaming-python.md).</span><span class="sxs-lookup"><span data-stu-id="3450e-149">For an example of streaming for Linux-based HDInsight clusters, see [Develop Python streaming programs for HDInsight](hadoop/apache-hadoop-streaming-python.md).</span></span>
 
-<span data-ttu-id="47382-150">In the example, the mapper and the reducer are executables that read the input from [stdin][stdin-stdout-stderr] (line-by-line) and emit the output to [stdout][stdin-stdout-stderr].</span><span class="sxs-lookup"><span data-stu-id="47382-150">In the example, the mapper and the reducer are executables that read the input from [stdin][stdin-stdout-stderr] (line-by-line) and emit the output to [stdout][stdin-stdout-stderr].</span></span> <span data-ttu-id="47382-151">The program counts all the words in the text.</span><span class="sxs-lookup"><span data-stu-id="47382-151">The program counts all the words in the text.</span></span>
+<span data-ttu-id="3450e-150">In the example, the mapper and the reducer are executables that read the input from [stdin][stdin-stdout-stderr] (line-by-line) and emit the output to [stdout][stdin-stdout-stderr].</span><span class="sxs-lookup"><span data-stu-id="3450e-150">In the example, the mapper and the reducer are executables that read the input from [stdin][stdin-stdout-stderr] (line-by-line) and emit the output to [stdout][stdin-stdout-stderr].</span></span> <span data-ttu-id="3450e-151">The program counts all the words in the text.</span><span class="sxs-lookup"><span data-stu-id="3450e-151">The program counts all the words in the text.</span></span>
 
-<span data-ttu-id="47382-152">When an executable is specified for **mappers**, each mapper task launches the executable as a separate process when the mapper is initialized.</span><span class="sxs-lookup"><span data-stu-id="47382-152">When an executable is specified for **mappers**, each mapper task launches the executable as a separate process when the mapper is initialized.</span></span> <span data-ttu-id="47382-153">As the mapper task runs, it converts its input into lines, and feeds the lines to the [stdin][stdin-stdout-stderr] of the process.</span><span class="sxs-lookup"><span data-stu-id="47382-153">As the mapper task runs, it converts its input into lines, and feeds the lines to the [stdin][stdin-stdout-stderr] of the process.</span></span>
+<span data-ttu-id="3450e-152">When an executable is specified for **mappers**, each mapper task launches the executable as a separate process when the mapper is initialized.</span><span class="sxs-lookup"><span data-stu-id="3450e-152">When an executable is specified for **mappers**, each mapper task launches the executable as a separate process when the mapper is initialized.</span></span> <span data-ttu-id="3450e-153">As the mapper task runs, it converts its input into lines, and feeds the lines to the [stdin][stdin-stdout-stderr] of the process.</span><span class="sxs-lookup"><span data-stu-id="3450e-153">As the mapper task runs, it converts its input into lines, and feeds the lines to the [stdin][stdin-stdout-stderr] of the process.</span></span>
 
-<span data-ttu-id="47382-154">In the meantime, the mapper collects the line-oriented output from the stdout of the process.</span><span class="sxs-lookup"><span data-stu-id="47382-154">In the meantime, the mapper collects the line-oriented output from the stdout of the process.</span></span> <span data-ttu-id="47382-155">It converts each line into a key/value pair, which is collected as the output of the mapper.</span><span class="sxs-lookup"><span data-stu-id="47382-155">It converts each line into a key/value pair, which is collected as the output of the mapper.</span></span> <span data-ttu-id="47382-156">By default, the prefix of a line up to the first Tab character is the key, and the remainder of the line (excluding the Tab character) is the value.</span><span class="sxs-lookup"><span data-stu-id="47382-156">By default, the prefix of a line up to the first Tab character is the key, and the remainder of the line (excluding the Tab character) is the value.</span></span> <span data-ttu-id="47382-157">If there is no Tab character in the line, entire line is considered as the key, and the value is null.</span><span class="sxs-lookup"><span data-stu-id="47382-157">If there is no Tab character in the line, entire line is considered as the key, and the value is null.</span></span>
+<span data-ttu-id="3450e-154">In the meantime, the mapper collects the line-oriented output from the stdout of the process.</span><span class="sxs-lookup"><span data-stu-id="3450e-154">In the meantime, the mapper collects the line-oriented output from the stdout of the process.</span></span> <span data-ttu-id="3450e-155">It converts each line into a key/value pair, which is collected as the output of the mapper.</span><span class="sxs-lookup"><span data-stu-id="3450e-155">It converts each line into a key/value pair, which is collected as the output of the mapper.</span></span> <span data-ttu-id="3450e-156">By default, the prefix of a line up to the first Tab character is the key, and the remainder of the line (excluding the Tab character) is the value.</span><span class="sxs-lookup"><span data-stu-id="3450e-156">By default, the prefix of a line up to the first Tab character is the key, and the remainder of the line (excluding the Tab character) is the value.</span></span> <span data-ttu-id="3450e-157">If there is no Tab character in the line, entire line is considered as the key, and the value is null.</span><span class="sxs-lookup"><span data-stu-id="3450e-157">If there is no Tab character in the line, entire line is considered as the key, and the value is null.</span></span>
 
-<span data-ttu-id="47382-158">When an executable is specified for **reducers**, each reducer task launches the executable as a separate process when the reducer is initialized.</span><span class="sxs-lookup"><span data-stu-id="47382-158">When an executable is specified for **reducers**, each reducer task launches the executable as a separate process when the reducer is initialized.</span></span> <span data-ttu-id="47382-159">As the reducer task runs, it converts its input key/values pairs into lines, and it feeds the lines to the [stdin][stdin-stdout-stderr] of the process.</span><span class="sxs-lookup"><span data-stu-id="47382-159">As the reducer task runs, it converts its input key/values pairs into lines, and it feeds the lines to the [stdin][stdin-stdout-stderr] of the process.</span></span>
+<span data-ttu-id="3450e-158">When an executable is specified for **reducers**, each reducer task launches the executable as a separate process when the reducer is initialized.</span><span class="sxs-lookup"><span data-stu-id="3450e-158">When an executable is specified for **reducers**, each reducer task launches the executable as a separate process when the reducer is initialized.</span></span> <span data-ttu-id="3450e-159">As the reducer task runs, it converts its input key/values pairs into lines, and it feeds the lines to the [stdin][stdin-stdout-stderr] of the process.</span><span class="sxs-lookup"><span data-stu-id="3450e-159">As the reducer task runs, it converts its input key/values pairs into lines, and it feeds the lines to the [stdin][stdin-stdout-stderr] of the process.</span></span>
 
-<span data-ttu-id="47382-160">In the meantime, the reducer collects the line-oriented output from the [stdout][stdin-stdout-stderr] of the process.</span><span class="sxs-lookup"><span data-stu-id="47382-160">In the meantime, the reducer collects the line-oriented output from the [stdout][stdin-stdout-stderr] of the process.</span></span> <span data-ttu-id="47382-161">It converts each line to a key/value pair, which is collected as the output of the reducer.</span><span class="sxs-lookup"><span data-stu-id="47382-161">It converts each line to a key/value pair, which is collected as the output of the reducer.</span></span> <span data-ttu-id="47382-162">By default, the prefix of a line up to the first Tab character is the key, and the remainder of the line (excluding the Tab character) is the value.</span><span class="sxs-lookup"><span data-stu-id="47382-162">By default, the prefix of a line up to the first Tab character is the key, and the remainder of the line (excluding the Tab character) is the value.</span></span>
+<span data-ttu-id="3450e-160">In the meantime, the reducer collects the line-oriented output from the [stdout][stdin-stdout-stderr] of the process.</span><span class="sxs-lookup"><span data-stu-id="3450e-160">In the meantime, the reducer collects the line-oriented output from the [stdout][stdin-stdout-stderr] of the process.</span></span> <span data-ttu-id="3450e-161">It converts each line to a key/value pair, which is collected as the output of the reducer.</span><span class="sxs-lookup"><span data-stu-id="3450e-161">It converts each line to a key/value pair, which is collected as the output of the reducer.</span></span> <span data-ttu-id="3450e-162">By default, the prefix of a line up to the first Tab character is the key, and the remainder of the line (excluding the Tab character) is the value.</span><span class="sxs-lookup"><span data-stu-id="3450e-162">By default, the prefix of a line up to the first Tab character is the key, and the remainder of the line (excluding the Tab character) is the value.</span></span>
 
-<span data-ttu-id="47382-163">**To submit a C# streaming word count job**</span><span class="sxs-lookup"><span data-stu-id="47382-163">**To submit a C# streaming word count job**</span></span>
+<span data-ttu-id="3450e-163">**To submit a C# streaming word count job**</span><span class="sxs-lookup"><span data-stu-id="3450e-163">**To submit a C# streaming word count job**</span></span>
 
-* <span data-ttu-id="47382-164">Follow the procedure in [Word count - Java](#word-count-java), and replace the job definition with the following line:</span><span class="sxs-lookup"><span data-stu-id="47382-164">Follow the procedure in [Word count - Java](#word-count-java), and replace the job definition with the following line:</span></span>
+* <span data-ttu-id="3450e-164">Follow the procedure in [Word count - Java](#word-count-java), and replace the job definition with the following line:</span><span class="sxs-lookup"><span data-stu-id="3450e-164">Follow the procedure in [Word count - Java](#word-count-java), and replace the job definition with the following line:</span></span>
 
     ```powershell
     $mrJobDefinition = New-AzureRmHDInsightStreamingMapReduceJobDefinition `
@@ -153,46 +146,46 @@ ms.locfileid: "44551339"
                             -OutputPath "/example/data/StreamingOutput/wc.txt"
     ```
 
-    <span data-ttu-id="47382-165">The output file shall be:</span><span class="sxs-lookup"><span data-stu-id="47382-165">The output file shall be:</span></span>
+    <span data-ttu-id="3450e-165">The output file shall be:</span><span class="sxs-lookup"><span data-stu-id="3450e-165">The output file shall be:</span></span>
 
         example/data/StreamingOutput/wc.txt/part-00000
 
-## <a name="hdinsight-sample-pi-estimator"></a><span data-ttu-id="47382-166">PI estimator</span><span class="sxs-lookup"><span data-stu-id="47382-166">PI estimator</span></span>
-<span data-ttu-id="47382-167">The pi estimator uses a statistical (quasi-Monte Carlo) method to estimate the value of pi.</span><span class="sxs-lookup"><span data-stu-id="47382-167">The pi estimator uses a statistical (quasi-Monte Carlo) method to estimate the value of pi.</span></span> <span data-ttu-id="47382-168">Points placed at random inside of a unit square also fall within a circle inscribed within that square with a probability equal to the area of the circle, pi/4.</span><span class="sxs-lookup"><span data-stu-id="47382-168">Points placed at random inside of a unit square also fall within a circle inscribed within that square with a probability equal to the area of the circle, pi/4.</span></span> <span data-ttu-id="47382-169">The value of pi can be estimated from the value of 4R, where R is the ratio of the number of points that are inside the circle to the total number of points that are within the square.</span><span class="sxs-lookup"><span data-stu-id="47382-169">The value of pi can be estimated from the value of 4R, where R is the ratio of the number of points that are inside the circle to the total number of points that are within the square.</span></span> <span data-ttu-id="47382-170">The larger the sample of points used, the better the estimate is.</span><span class="sxs-lookup"><span data-stu-id="47382-170">The larger the sample of points used, the better the estimate is.</span></span>
+## <a name="hdinsight-sample-pi-estimator"></a><span data-ttu-id="3450e-166">PI estimator</span><span class="sxs-lookup"><span data-stu-id="3450e-166">PI estimator</span></span>
+<span data-ttu-id="3450e-167">The pi estimator uses a statistical (quasi-Monte Carlo) method to estimate the value of pi.</span><span class="sxs-lookup"><span data-stu-id="3450e-167">The pi estimator uses a statistical (quasi-Monte Carlo) method to estimate the value of pi.</span></span> <span data-ttu-id="3450e-168">Points placed at random inside of a unit square also fall within a circle inscribed within that square with a probability equal to the area of the circle, pi/4.</span><span class="sxs-lookup"><span data-stu-id="3450e-168">Points placed at random inside of a unit square also fall within a circle inscribed within that square with a probability equal to the area of the circle, pi/4.</span></span> <span data-ttu-id="3450e-169">The value of pi can be estimated from the value of 4R, where R is the ratio of the number of points that are inside the circle to the total number of points that are within the square.</span><span class="sxs-lookup"><span data-stu-id="3450e-169">The value of pi can be estimated from the value of 4R, where R is the ratio of the number of points that are inside the circle to the total number of points that are within the square.</span></span> <span data-ttu-id="3450e-170">The larger the sample of points used, the better the estimate is.</span><span class="sxs-lookup"><span data-stu-id="3450e-170">The larger the sample of points used, the better the estimate is.</span></span>
 
-<span data-ttu-id="47382-171">The script provided for this sample submits a Hadoop jar job and is set up to run with a value 16 maps, each of which is required to compute 10 million sample points by the parameter values.</span><span class="sxs-lookup"><span data-stu-id="47382-171">The script provided for this sample submits a Hadoop jar job and is set up to run with a value 16 maps, each of which is required to compute 10 million sample points by the parameter values.</span></span> <span data-ttu-id="47382-172">These parameter values can be changed to improve the estimated value of pi.</span><span class="sxs-lookup"><span data-stu-id="47382-172">These parameter values can be changed to improve the estimated value of pi.</span></span> <span data-ttu-id="47382-173">For reference, the first 10 decimal places of pi are 3.1415926535.</span><span class="sxs-lookup"><span data-stu-id="47382-173">For reference, the first 10 decimal places of pi are 3.1415926535.</span></span>
+<span data-ttu-id="3450e-171">The script provided for this sample submits a Hadoop jar job and is set up to run with a value 16 maps, each of which is required to compute 10 million sample points by the parameter values.</span><span class="sxs-lookup"><span data-stu-id="3450e-171">The script provided for this sample submits a Hadoop jar job and is set up to run with a value 16 maps, each of which is required to compute 10 million sample points by the parameter values.</span></span> <span data-ttu-id="3450e-172">These parameter values can be changed to improve the estimated value of pi.</span><span class="sxs-lookup"><span data-stu-id="3450e-172">These parameter values can be changed to improve the estimated value of pi.</span></span> <span data-ttu-id="3450e-173">For reference, the first 10 decimal places of pi are 3.1415926535.</span><span class="sxs-lookup"><span data-stu-id="3450e-173">For reference, the first 10 decimal places of pi are 3.1415926535.</span></span>
 
-<span data-ttu-id="47382-174">**To submit a pi estimator job**</span><span class="sxs-lookup"><span data-stu-id="47382-174">**To submit a pi estimator job**</span></span>
+<span data-ttu-id="3450e-174">**To submit a pi estimator job**</span><span class="sxs-lookup"><span data-stu-id="3450e-174">**To submit a pi estimator job**</span></span>
 
-* <span data-ttu-id="47382-175">Follow the procedure in [Word count - Java](#word-count-java), and replace the job definition with the following line:</span><span class="sxs-lookup"><span data-stu-id="47382-175">Follow the procedure in [Word count - Java](#word-count-java), and replace the job definition with the following line:</span></span>
+* <span data-ttu-id="3450e-175">Follow the procedure in [Word count - Java](#word-count-java), and replace the job definition with the following line:</span><span class="sxs-lookup"><span data-stu-id="3450e-175">Follow the procedure in [Word count - Java](#word-count-java), and replace the job definition with the following line:</span></span>
 
     ```powershell
     $mrJobJobDefinition = New-AzureRmHDInsightMapReduceJobDefinition `
-                                -JarFile "wasbs:///example/jars/hadoop-mapreduce-examples.jar" `
+                                -JarFile "wasb:///example/jars/hadoop-mapreduce-examples.jar" `
                                 -ClassName "pi" `
                                 -Arguments "16", "10000000"
     ```
 
-## <a name="hdinsight-sample-10gb-graysort"></a><span data-ttu-id="47382-176">10-GB Graysort</span><span class="sxs-lookup"><span data-stu-id="47382-176">10-GB Graysort</span></span>
-<span data-ttu-id="47382-177">This sample uses a modest 10GB of data so that it can be run relatively quickly.</span><span class="sxs-lookup"><span data-stu-id="47382-177">This sample uses a modest 10GB of data so that it can be run relatively quickly.</span></span> <span data-ttu-id="47382-178">It uses the MapReduce applications developed by Owen O'Malley and Arun Murthy that won the annual general-purpose ("daytona") terabyte sort benchmark in 2009 with a rate of 0.578TB/min (100TB in 173 minutes).</span><span class="sxs-lookup"><span data-stu-id="47382-178">It uses the MapReduce applications developed by Owen O'Malley and Arun Murthy that won the annual general-purpose ("daytona") terabyte sort benchmark in 2009 with a rate of 0.578TB/min (100TB in 173 minutes).</span></span> <span data-ttu-id="47382-179">For more information on this and other sorting benchmarks, see the [Sortbenchmark](http://sortbenchmark.org/) site.</span><span class="sxs-lookup"><span data-stu-id="47382-179">For more information on this and other sorting benchmarks, see the [Sortbenchmark](http://sortbenchmark.org/) site.</span></span>
+## <a name="hdinsight-sample-10gb-graysort"></a><span data-ttu-id="3450e-176">10-GB Graysort</span><span class="sxs-lookup"><span data-stu-id="3450e-176">10-GB Graysort</span></span>
+<span data-ttu-id="3450e-177">This sample uses a modest 10GB of data so that it can be run relatively quickly.</span><span class="sxs-lookup"><span data-stu-id="3450e-177">This sample uses a modest 10GB of data so that it can be run relatively quickly.</span></span> <span data-ttu-id="3450e-178">It uses the MapReduce applications developed by Owen O'Malley and Arun Murthy that won the annual general-purpose ("daytona") terabyte sort benchmark in 2009 with a rate of 0.578TB/min (100TB in 173 minutes).</span><span class="sxs-lookup"><span data-stu-id="3450e-178">It uses the MapReduce applications developed by Owen O'Malley and Arun Murthy that won the annual general-purpose ("daytona") terabyte sort benchmark in 2009 with a rate of 0.578TB/min (100TB in 173 minutes).</span></span> <span data-ttu-id="3450e-179">For more information on this and other sorting benchmarks, see the [Sortbenchmark](http://sortbenchmark.org/) site.</span><span class="sxs-lookup"><span data-stu-id="3450e-179">For more information on this and other sorting benchmarks, see the [Sortbenchmark](http://sortbenchmark.org/) site.</span></span>
 
-<span data-ttu-id="47382-180">This sample uses three sets of MapReduce programs:</span><span class="sxs-lookup"><span data-stu-id="47382-180">This sample uses three sets of MapReduce programs:</span></span>
+<span data-ttu-id="3450e-180">This sample uses three sets of MapReduce programs:</span><span class="sxs-lookup"><span data-stu-id="3450e-180">This sample uses three sets of MapReduce programs:</span></span>
 
-1. <span data-ttu-id="47382-181">**TeraGen** is a MapReduce program that you can use to generate the rows of data to sort.</span><span class="sxs-lookup"><span data-stu-id="47382-181">**TeraGen** is a MapReduce program that you can use to generate the rows of data to sort.</span></span>
-2. <span data-ttu-id="47382-182">**TeraSort** samples the input data and uses MapReduce to sort the data into a total order.</span><span class="sxs-lookup"><span data-stu-id="47382-182">**TeraSort** samples the input data and uses MapReduce to sort the data into a total order.</span></span> <span data-ttu-id="47382-183">TeraSort is a standard sort of MapReduce functions, except for a custom partitioner that uses a sorted list of N-1 sampled keys that define the key range for each reduce.</span><span class="sxs-lookup"><span data-stu-id="47382-183">TeraSort is a standard sort of MapReduce functions, except for a custom partitioner that uses a sorted list of N-1 sampled keys that define the key range for each reduce.</span></span> <span data-ttu-id="47382-184">In particular, all keys such that sample[i-1] <= key < sample[i] are sent to reduce i.</span><span class="sxs-lookup"><span data-stu-id="47382-184">In particular, all keys such that sample[i-1] <= key < sample[i] are sent to reduce i.</span></span> <span data-ttu-id="47382-185">This guarantees that the outputs of reduce i are all less than the output of reduce i+1.</span><span class="sxs-lookup"><span data-stu-id="47382-185">This guarantees that the outputs of reduce i are all less than the output of reduce i+1.</span></span>
-3. <span data-ttu-id="47382-186">**TeraValidate** is a MapReduce program that validates that the output is globally sorted.</span><span class="sxs-lookup"><span data-stu-id="47382-186">**TeraValidate** is a MapReduce program that validates that the output is globally sorted.</span></span> <span data-ttu-id="47382-187">It creates one map per file in the output directory, and each map ensures that each key is less than or equal to the previous one.</span><span class="sxs-lookup"><span data-stu-id="47382-187">It creates one map per file in the output directory, and each map ensures that each key is less than or equal to the previous one.</span></span> <span data-ttu-id="47382-188">The map function also generates records of the first and last keys of each file, and the reduce function ensures that the first key of file i is greater than the last key of file i-1.</span><span class="sxs-lookup"><span data-stu-id="47382-188">The map function also generates records of the first and last keys of each file, and the reduce function ensures that the first key of file i is greater than the last key of file i-1.</span></span> <span data-ttu-id="47382-189">Any problems are reported as an output of the reduce with the keys that are out of order.</span><span class="sxs-lookup"><span data-stu-id="47382-189">Any problems are reported as an output of the reduce with the keys that are out of order.</span></span>
+1. <span data-ttu-id="3450e-181">**TeraGen** is a MapReduce program that you can use to generate the rows of data to sort.</span><span class="sxs-lookup"><span data-stu-id="3450e-181">**TeraGen** is a MapReduce program that you can use to generate the rows of data to sort.</span></span>
+2. <span data-ttu-id="3450e-182">**TeraSort** samples the input data and uses MapReduce to sort the data into a total order.</span><span class="sxs-lookup"><span data-stu-id="3450e-182">**TeraSort** samples the input data and uses MapReduce to sort the data into a total order.</span></span> <span data-ttu-id="3450e-183">TeraSort is a standard sort of MapReduce functions, except for a custom partitioner that uses a sorted list of N-1 sampled keys that define the key range for each reduce.</span><span class="sxs-lookup"><span data-stu-id="3450e-183">TeraSort is a standard sort of MapReduce functions, except for a custom partitioner that uses a sorted list of N-1 sampled keys that define the key range for each reduce.</span></span> <span data-ttu-id="3450e-184">In particular, all keys such that sample[i-1] <= key < sample[i] are sent to reduce i.</span><span class="sxs-lookup"><span data-stu-id="3450e-184">In particular, all keys such that sample[i-1] <= key < sample[i] are sent to reduce i.</span></span> <span data-ttu-id="3450e-185">This guarantees that the outputs of reduce i are all less than the output of reduce i+1.</span><span class="sxs-lookup"><span data-stu-id="3450e-185">This guarantees that the outputs of reduce i are all less than the output of reduce i+1.</span></span>
+3. <span data-ttu-id="3450e-186">**TeraValidate** is a MapReduce program that validates that the output is globally sorted.</span><span class="sxs-lookup"><span data-stu-id="3450e-186">**TeraValidate** is a MapReduce program that validates that the output is globally sorted.</span></span> <span data-ttu-id="3450e-187">It creates one map per file in the output directory, and each map ensures that each key is less than or equal to the previous one.</span><span class="sxs-lookup"><span data-stu-id="3450e-187">It creates one map per file in the output directory, and each map ensures that each key is less than or equal to the previous one.</span></span> <span data-ttu-id="3450e-188">The map function also generates records of the first and last keys of each file, and the reduce function ensures that the first key of file i is greater than the last key of file i-1.</span><span class="sxs-lookup"><span data-stu-id="3450e-188">The map function also generates records of the first and last keys of each file, and the reduce function ensures that the first key of file i is greater than the last key of file i-1.</span></span> <span data-ttu-id="3450e-189">Any problems are reported as an output of the reduce with the keys that are out of order.</span><span class="sxs-lookup"><span data-stu-id="3450e-189">Any problems are reported as an output of the reduce with the keys that are out of order.</span></span>
 
-<span data-ttu-id="47382-190">The input and output format, used by all three applications, reads and writes the text files in the right format.</span><span class="sxs-lookup"><span data-stu-id="47382-190">The input and output format, used by all three applications, reads and writes the text files in the right format.</span></span> <span data-ttu-id="47382-191">The output of the reduce has replication set to 1, instead of the default 3, because the benchmark contest does not require that the output data be replicated on to multiple nodes.</span><span class="sxs-lookup"><span data-stu-id="47382-191">The output of the reduce has replication set to 1, instead of the default 3, because the benchmark contest does not require that the output data be replicated on to multiple nodes.</span></span>
+<span data-ttu-id="3450e-190">The input and output format, used by all three applications, reads and writes the text files in the right format.</span><span class="sxs-lookup"><span data-stu-id="3450e-190">The input and output format, used by all three applications, reads and writes the text files in the right format.</span></span> <span data-ttu-id="3450e-191">The output of the reduce has replication set to 1, instead of the default 3, because the benchmark contest does not require that the output data be replicated on to multiple nodes.</span><span class="sxs-lookup"><span data-stu-id="3450e-191">The output of the reduce has replication set to 1, instead of the default 3, because the benchmark contest does not require that the output data be replicated on to multiple nodes.</span></span>
 
-<span data-ttu-id="47382-192">Three tasks are required by the sample, each corresponding to one of the MapReduce programs described in the introduction:</span><span class="sxs-lookup"><span data-stu-id="47382-192">Three tasks are required by the sample, each corresponding to one of the MapReduce programs described in the introduction:</span></span>
+<span data-ttu-id="3450e-192">Three tasks are required by the sample, each corresponding to one of the MapReduce programs described in the introduction:</span><span class="sxs-lookup"><span data-stu-id="3450e-192">Three tasks are required by the sample, each corresponding to one of the MapReduce programs described in the introduction:</span></span>
 
-1. <span data-ttu-id="47382-193">Generate the data for sorting by running the **TeraGen** MapReduce job.</span><span class="sxs-lookup"><span data-stu-id="47382-193">Generate the data for sorting by running the **TeraGen** MapReduce job.</span></span>
-2. <span data-ttu-id="47382-194">Sort the data by running the **TeraSort** MapReduce job.</span><span class="sxs-lookup"><span data-stu-id="47382-194">Sort the data by running the **TeraSort** MapReduce job.</span></span>
-3. <span data-ttu-id="47382-195">Confirm that the data has been correctly sorted by running the **TeraValidate** MapReduce job.</span><span class="sxs-lookup"><span data-stu-id="47382-195">Confirm that the data has been correctly sorted by running the **TeraValidate** MapReduce job.</span></span>
+1. <span data-ttu-id="3450e-193">Generate the data for sorting by running the **TeraGen** MapReduce job.</span><span class="sxs-lookup"><span data-stu-id="3450e-193">Generate the data for sorting by running the **TeraGen** MapReduce job.</span></span>
+2. <span data-ttu-id="3450e-194">Sort the data by running the **TeraSort** MapReduce job.</span><span class="sxs-lookup"><span data-stu-id="3450e-194">Sort the data by running the **TeraSort** MapReduce job.</span></span>
+3. <span data-ttu-id="3450e-195">Confirm that the data has been correctly sorted by running the **TeraValidate** MapReduce job.</span><span class="sxs-lookup"><span data-stu-id="3450e-195">Confirm that the data has been correctly sorted by running the **TeraValidate** MapReduce job.</span></span>
 
-<span data-ttu-id="47382-196">**To submit the jobs**</span><span class="sxs-lookup"><span data-stu-id="47382-196">**To submit the jobs**</span></span>
+<span data-ttu-id="3450e-196">**To submit the jobs**</span><span class="sxs-lookup"><span data-stu-id="3450e-196">**To submit the jobs**</span></span>
 
-* <span data-ttu-id="47382-197">Follow the procedure in [Word count - Java](#word-count-java), and use the following job definitions:</span><span class="sxs-lookup"><span data-stu-id="47382-197">Follow the procedure in [Word count - Java](#word-count-java), and use the following job definitions:</span></span>
+* <span data-ttu-id="3450e-197">Follow the procedure in [Word count - Java](#word-count-java), and use the following job definitions:</span><span class="sxs-lookup"><span data-stu-id="3450e-197">Follow the procedure in [Word count - Java](#word-count-java), and use the following job definitions:</span></span>
 
     ```powershell
     $teragen = New-AzureRmHDInsightMapReduceJobDefinition `
@@ -211,17 +204,16 @@ ms.locfileid: "44551339"
                                 -Arguments "-Dmapred.map.tasks=50", "-Dmapred.reduce.tasks=25", "/example/data/10GB-sort-output", "/example/data/10GB-sort-validate"
     ```
 
-## <a name="next-steps"></a><span data-ttu-id="47382-198">Next steps</span><span class="sxs-lookup"><span data-stu-id="47382-198">Next steps</span></span>
-<span data-ttu-id="47382-199">From this article and the articles in each of the samples, you learned how to run the samples included with the HDInsight clusters by using Azure PowerShell.</span><span class="sxs-lookup"><span data-stu-id="47382-199">From this article and the articles in each of the samples, you learned how to run the samples included with the HDInsight clusters by using Azure PowerShell.</span></span> <span data-ttu-id="47382-200">For tutorials about using Pig, Hive, and MapReduce with HDInsight, see the following topics:</span><span class="sxs-lookup"><span data-stu-id="47382-200">For tutorials about using Pig, Hive, and MapReduce with HDInsight, see the following topics:</span></span>
+## <a name="next-steps"></a><span data-ttu-id="3450e-198">Next steps</span><span class="sxs-lookup"><span data-stu-id="3450e-198">Next steps</span></span>
+<span data-ttu-id="3450e-199">From this article and the articles in each of the samples, you learned how to run the samples included with the HDInsight clusters by using Azure PowerShell.</span><span class="sxs-lookup"><span data-stu-id="3450e-199">From this article and the articles in each of the samples, you learned how to run the samples included with the HDInsight clusters by using Azure PowerShell.</span></span> <span data-ttu-id="3450e-200">For tutorials about using Pig, Hive, and MapReduce with HDInsight, see the following topics:</span><span class="sxs-lookup"><span data-stu-id="3450e-200">For tutorials about using Pig, Hive, and MapReduce with HDInsight, see the following topics:</span></span>
 
-* <span data-ttu-id="47382-201">[Get started using Hadoop with Hive in HDInsight to analyze mobile handset use][hdinsight-get-started]</span><span class="sxs-lookup"><span data-stu-id="47382-201">[Get started using Hadoop with Hive in HDInsight to analyze mobile handset use][hdinsight-get-started]</span></span>
-* <span data-ttu-id="47382-202">[Use Pig with Hadoop on HDInsight][hdinsight-use-pig]</span><span class="sxs-lookup"><span data-stu-id="47382-202">[Use Pig with Hadoop on HDInsight][hdinsight-use-pig]</span></span>
-* <span data-ttu-id="47382-203">[Use Hive with Hadoop on HDInsight][hdinsight-use-hive]</span><span class="sxs-lookup"><span data-stu-id="47382-203">[Use Hive with Hadoop on HDInsight][hdinsight-use-hive]</span></span>
-* <span data-ttu-id="47382-204">[Submit Hadoop Jobs in HDInsight][hdinsight-submit-jobs]</span><span class="sxs-lookup"><span data-stu-id="47382-204">[Submit Hadoop Jobs in HDInsight][hdinsight-submit-jobs]</span></span>
-* <span data-ttu-id="47382-205">[Azure HDInsight SDK documentation][hdinsight-sdk-documentation]</span><span class="sxs-lookup"><span data-stu-id="47382-205">[Azure HDInsight SDK documentation][hdinsight-sdk-documentation]</span></span>
-* <span data-ttu-id="47382-206">[Debug Hadoop in HDInsight: Error messages][hdinsight-errors]</span><span class="sxs-lookup"><span data-stu-id="47382-206">[Debug Hadoop in HDInsight: Error messages][hdinsight-errors]</span></span>
+* <span data-ttu-id="3450e-201">[Get started using Hadoop with Hive in HDInsight to analyze mobile handset use][hdinsight-get-started]</span><span class="sxs-lookup"><span data-stu-id="3450e-201">[Get started using Hadoop with Hive in HDInsight to analyze mobile handset use][hdinsight-get-started]</span></span>
+* <span data-ttu-id="3450e-202">[Use Pig with Hadoop on HDInsight][hdinsight-use-pig]</span><span class="sxs-lookup"><span data-stu-id="3450e-202">[Use Pig with Hadoop on HDInsight][hdinsight-use-pig]</span></span>
+* <span data-ttu-id="3450e-203">[Use Hive with Hadoop on HDInsight][hdinsight-use-hive]</span><span class="sxs-lookup"><span data-stu-id="3450e-203">[Use Hive with Hadoop on HDInsight][hdinsight-use-hive]</span></span>
+* <span data-ttu-id="3450e-204">[Submit Hadoop Jobs in HDInsight][hdinsight-submit-jobs]</span><span class="sxs-lookup"><span data-stu-id="3450e-204">[Submit Hadoop Jobs in HDInsight][hdinsight-submit-jobs]</span></span>
+* <span data-ttu-id="3450e-205">[Azure HDInsight SDK documentation][hdinsight-sdk-documentation]</span><span class="sxs-lookup"><span data-stu-id="3450e-205">[Azure HDInsight SDK documentation][hdinsight-sdk-documentation]</span></span>
 
-## <a name="appendix-a---the-word-count-source-code"></a><span data-ttu-id="47382-207">Appendix A - The Word count source code</span><span class="sxs-lookup"><span data-stu-id="47382-207">Appendix A - The Word count source code</span></span>
+## <a name="appendix-a---the-word-count-source-code"></a><span data-ttu-id="3450e-206">Appendix A - The Word count source code</span><span class="sxs-lookup"><span data-stu-id="3450e-206">Appendix A - The Word count source code</span></span>
 
 ```java
 package org.apache.hadoop.examples;
@@ -293,8 +285,8 @@ System.exit(job.waitForCompletion(true) ? 0 : 1);
     }
 ```
 
-## <a name="appendix-b---the-word-count-streaming-source-code"></a><span data-ttu-id="47382-208">Appendix B - The word count streaming source code</span><span class="sxs-lookup"><span data-stu-id="47382-208">Appendix B - The word count streaming source code</span></span>
-<span data-ttu-id="47382-209">The MapReduce program uses the cat.exe application as a mapping interface to stream the text into the console and the wc.exe application as the reduce interface to count the number of words that are streamed from a document.</span><span class="sxs-lookup"><span data-stu-id="47382-209">The MapReduce program uses the cat.exe application as a mapping interface to stream the text into the console and the wc.exe application as the reduce interface to count the number of words that are streamed from a document.</span></span> <span data-ttu-id="47382-210">Both the mapper and reducer read characters, line-by-line, from the standard input stream (stdin) and write to the standard output stream (stdout).</span><span class="sxs-lookup"><span data-stu-id="47382-210">Both the mapper and reducer read characters, line-by-line, from the standard input stream (stdin) and write to the standard output stream (stdout).</span></span>
+## <a name="appendix-b---the-word-count-streaming-source-code"></a><span data-ttu-id="3450e-207">Appendix B - The word count streaming source code</span><span class="sxs-lookup"><span data-stu-id="3450e-207">Appendix B - The word count streaming source code</span></span>
+<span data-ttu-id="3450e-208">The MapReduce program uses the cat.exe application as a mapping interface to stream the text into the console and the wc.exe application as the reduce interface to count the number of words that are streamed from a document.</span><span class="sxs-lookup"><span data-stu-id="3450e-208">The MapReduce program uses the cat.exe application as a mapping interface to stream the text into the console and the wc.exe application as the reduce interface to count the number of words that are streamed from a document.</span></span> <span data-ttu-id="3450e-209">Both the mapper and reducer read characters, line-by-line, from the standard input stream (stdin) and write to the standard output stream (stdout).</span><span class="sxs-lookup"><span data-stu-id="3450e-209">Both the mapper and reducer read characters, line-by-line, from the standard input stream (stdin) and write to the standard output stream (stdout).</span></span>
 
 ```csharp
 // The source code for the cat.exe (Mapper).
@@ -314,16 +306,21 @@ namespace cat
             }
 
             string line;
+            char[] separators = { ' ', '\n'};
             while ((line = Console.ReadLine()) != null)
             {
-                Console.WriteLine(line);
+                string[] words = line.Split(separators);
+                foreach (var word in words)
+                {
+                    Console.WriteLine("{0}\t1", word);
+                }
             }
         }
     }
 }
 ```
 
-<span data-ttu-id="47382-211">The mapper code in the cat.cs file uses a [StreamReader][streamreader] object to read the characters of the incoming stream to the console, which then writes the stream to the standard output stream with the static [Console.Writeline][console-writeline] method.</span><span class="sxs-lookup"><span data-stu-id="47382-211">The mapper code in the cat.cs file uses a [StreamReader][streamreader] object to read the characters of the incoming stream to the console, which then writes the stream to the standard output stream with the static [Console.Writeline][console-writeline] method.</span></span>
+<span data-ttu-id="3450e-210">The mapper code in the cat.cs file uses a [StreamReader][streamreader] object to read the characters of the incoming stream to the console, which then writes the stream to the standard output stream with the static [Console.Writeline][console-writeline] method.</span><span class="sxs-lookup"><span data-stu-id="3450e-210">The mapper code in the cat.cs file uses a [StreamReader][streamreader] object to read the characters of the incoming stream to the console, which then writes the stream to the standard output stream with the static [Console.Writeline][console-writeline] method.</span></span>
 
 ```csharp
 // The source code for wc.exe (Reducer) is:
@@ -331,6 +328,7 @@ namespace cat
 using System;
 using System.IO;
 using System.Linq;
+using System.Collections;
 
 namespace wc
 {
@@ -339,25 +337,42 @@ namespace wc
         static void Main(string[] args)
         {
             string line;
-            var count = 0;
 
-            if (args.Length > 0){
+            if (args.Length > 0)
+            {
                 Console.SetIn(new StreamReader(args[0]));
             }
 
-            while ((line = Console.ReadLine()) != null) {
-                count += line.Count(cr => (cr == ' ' || cr == '\n'));
+            Hashtable wordCount = new Hashtable();
+            while ((line = Console.ReadLine()) != null)
+            {
+                string[] words = line.Split('\t');
+
+                string key = words[0];
+
+                if (wordCount.ContainsKey(key) == true)
+                {
+                    int n = Convert.ToInt32(wordCount[key]);
+                    wordCount[key] = Convert.ToString(n + 1);
+                }
+                else
+                {
+                    wordCount[key] = words[1];
+                }
             }
-            Console.WriteLine(count);
+            foreach (var key in wordCount.Keys)
+            {
+                Console.WriteLine("{0} {1}", key, wordCount[key]);
+            }
         }
     }
 }
 ```
 
-<span data-ttu-id="47382-212">The reducer code in the wc.cs file uses a [StreamReader][streamreader]   object to read characters from the standard input stream that have been output by the cat.exe mapper.</span><span class="sxs-lookup"><span data-stu-id="47382-212">The reducer code in the wc.cs file uses a [StreamReader][streamreader]   object to read characters from the standard input stream that have been output by the cat.exe mapper.</span></span> <span data-ttu-id="47382-213">As it reads the characters with the [Console.Writeline][console-writeline] method, it counts the words by counting spaces and end-of-line characters at the end of each word.</span><span class="sxs-lookup"><span data-stu-id="47382-213">As it reads the characters with the [Console.Writeline][console-writeline] method, it counts the words by counting spaces and end-of-line characters at the end of each word.</span></span> <span data-ttu-id="47382-214">It then writes the total to the standard output stream with the [Console.Writeline][console-writeline] method.</span><span class="sxs-lookup"><span data-stu-id="47382-214">It then writes the total to the standard output stream with the [Console.Writeline][console-writeline] method.</span></span>
+<span data-ttu-id="3450e-211">The reducer code in the wc.cs file uses a [StreamReader][streamreader]   object to read characters from the standard input stream that have been output by the cat.exe mapper.</span><span class="sxs-lookup"><span data-stu-id="3450e-211">The reducer code in the wc.cs file uses a [StreamReader][streamreader]   object to read characters from the standard input stream that have been output by the cat.exe mapper.</span></span> <span data-ttu-id="3450e-212">As it reads the characters with the [Console.Writeline][console-writeline] method, it counts the words by counting spaces and end-of-line characters at the end of each word.</span><span class="sxs-lookup"><span data-stu-id="3450e-212">As it reads the characters with the [Console.Writeline][console-writeline] method, it counts the words by counting spaces and end-of-line characters at the end of each word.</span></span> <span data-ttu-id="3450e-213">It then writes the total to the standard output stream with the [Console.Writeline][console-writeline] method.</span><span class="sxs-lookup"><span data-stu-id="3450e-213">It then writes the total to the standard output stream with the [Console.Writeline][console-writeline] method.</span></span>
 
-## <a name="appendix-c---the-pi-estimator-source-code"></a><span data-ttu-id="47382-215">Appendix C - The Pi estimator source code</span><span class="sxs-lookup"><span data-stu-id="47382-215">Appendix C - The Pi estimator source code</span></span>
-<span data-ttu-id="47382-216">The pi estimator Java code that contains the mapper and reducer functions is available for inspection below.</span><span class="sxs-lookup"><span data-stu-id="47382-216">The pi estimator Java code that contains the mapper and reducer functions is available for inspection below.</span></span> <span data-ttu-id="47382-217">The mapper program generates a specified number of points placed at random inside of a unit square and then counts the number of those points that are inside the circle.</span><span class="sxs-lookup"><span data-stu-id="47382-217">The mapper program generates a specified number of points placed at random inside of a unit square and then counts the number of those points that are inside the circle.</span></span> <span data-ttu-id="47382-218">The reducer program accumulates points counted by the mappers and then estimates the value of pi from the formula 4R, where R is the ratio of the number of points counted inside the circle to the total number of points that are within the square.</span><span class="sxs-lookup"><span data-stu-id="47382-218">The reducer program accumulates points counted by the mappers and then estimates the value of pi from the formula 4R, where R is the ratio of the number of points counted inside the circle to the total number of points that are within the square.</span></span>
+## <a name="appendix-c---the-pi-estimator-source-code"></a><span data-ttu-id="3450e-214">Appendix C - The Pi estimator source code</span><span class="sxs-lookup"><span data-stu-id="3450e-214">Appendix C - The Pi estimator source code</span></span>
+<span data-ttu-id="3450e-215">The pi estimator Java code that contains the mapper and reducer functions is available for inspection below.</span><span class="sxs-lookup"><span data-stu-id="3450e-215">The pi estimator Java code that contains the mapper and reducer functions is available for inspection below.</span></span> <span data-ttu-id="3450e-216">The mapper program generates a specified number of points placed at random inside of a unit square and then counts the number of those points that are inside the circle.</span><span class="sxs-lookup"><span data-stu-id="3450e-216">The mapper program generates a specified number of points placed at random inside of a unit square and then counts the number of those points that are inside the circle.</span></span> <span data-ttu-id="3450e-217">The reducer program accumulates points counted by the mappers and then estimates the value of pi from the formula 4R, where R is the ratio of the number of points counted inside the circle to the total number of points that are within the square.</span><span class="sxs-lookup"><span data-stu-id="3450e-217">The reducer program accumulates points counted by the mappers and then estimates the value of pi from the formula 4R, where R is the ratio of the number of points counted inside the circle to the total number of points that are within the square.</span></span>
 
 ```java
 /**
@@ -498,7 +513,7 @@ implements Mapper<LongWritable, LongWritable, BooleanWritable, LongWritable> {
 //Map method.
 //@param offset samples starting from the (offset+1)th sample.
 //@param size the number of samples for this map
-//@param out output {ture->numInside, false->numOutside}
+//@param out output {true->numInside, false->numOutside}
 //@param reporter
 public void map(LongWritable offset,
 LongWritable size,
@@ -695,8 +710,8 @@ System.exit(ToolRunner.run(null, new PiEstimator(), argv));
 }
 ```
 
-## <a name="appendix-d---the-10gb-graysort-source-code"></a><span data-ttu-id="47382-219">Appendix D - The 10gb graysort source code</span><span class="sxs-lookup"><span data-stu-id="47382-219">Appendix D - The 10gb graysort source code</span></span>
-<span data-ttu-id="47382-220">The code for the TeraSort MapReduce program is presented for inspection in this section.</span><span class="sxs-lookup"><span data-stu-id="47382-220">The code for the TeraSort MapReduce program is presented for inspection in this section.</span></span>
+## <a name="appendix-d---the-10gb-graysort-source-code"></a><span data-ttu-id="3450e-218">Appendix D - The 10gb graysort source code</span><span class="sxs-lookup"><span data-stu-id="3450e-218">Appendix D - The 10gb graysort source code</span></span>
+<span data-ttu-id="3450e-219">The code for the TeraSort MapReduce program is presented for inspection in this section.</span><span class="sxs-lookup"><span data-stu-id="3450e-219">The code for the TeraSort MapReduce program is presented for inspection in this section.</span></span>
 
 ```java
 /**
@@ -963,16 +978,14 @@ public class TeraSort extends Configured implements Tool {
 }
 ```
 
-[hdinsight-errors]: hdinsight-debug-jobs.md
-
 [hdinsight-sdk-documentation]: https://msdn.microsoft.com/library/azure/dn479185.aspx
 
-[hdinsight-submit-jobs]: hdinsight-submit-hadoop-jobs-programmatically.md
-[hdinsight-introduction]: hdinsight-hadoop-introduction.md
+[hdinsight-submit-jobs]: hadoop/submit-apache-hadoop-jobs-programmatically.md
+[hdinsight-introduction]:hadoop/apache-hadoop-introduction.md
 
 [powershell-install-configure]: /powershell/azureps-cmdlets-docs
 
-[hdinsight-get-started]: hdinsight-hadoop-linux-tutorial-get-started.md
+[hdinsight-get-started]:hadoop/apache-hadoop-linux-tutorial-get-started.md
 
 [hdinsight-samples]: hdinsight-run-samples.md
 [hdinsight-sample-10gb-graysort]: #hdinsight-sample-10gb-graysort
@@ -980,8 +993,8 @@ public class TeraSort extends Configured implements Tool {
 [hdinsight-sample-pi-estimator]: #hdinsight-sample-pi-estimator
 [hdinsight-sample-wordcount]: #hdinsight-sample-wordcount
 
-[hdinsight-use-hive]: hdinsight-use-hive.md
-[hdinsight-use-pig]: hdinsight-use-pig.md
+[hdinsight-use-hive]: hadoop/hdinsight-use-hive.md
+[hdinsight-use-pig]: hadoop/hdinsight-use-pig.md
 
 [streamreader]: http://msdn.microsoft.com/library/system.io.streamreader.aspx
 [console-writeline]: http://msdn.microsoft.com/library/system.console.writeline
