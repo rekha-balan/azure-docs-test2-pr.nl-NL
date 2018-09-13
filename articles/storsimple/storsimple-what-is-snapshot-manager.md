@@ -15,12 +15,12 @@ ms.workload: TBD
 ms.date: 02/27/2017
 ms.author: v-sharos
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 6cd211979c390d4d7512896c65ec9c8c78ee809e
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 38c197c7bc57110b29b1d8cb789d5b7310823da2
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44548805"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44828594"
 ---
 # <a name="an-introduction-to-storsimple-snapshot-manager"></a>An introduction to StorSimple Snapshot Manager
 
@@ -49,7 +49,7 @@ The StorSimple Snapshot Manager fetches the list of applications registered with
 
 StorSimple Snapshot Manager backups take the form of incremental snapshots, which capture only the changes since the last backup. As a result, backups require less storage and can be created and restored quickly. StorSimple Snapshot Manager uses the Windows Volume Shadow Copy Service (VSS) to ensure that snapshots capture application-consistent data. (For more information, go to the Integration with Windows Volume Shadow Copy Service section.) With StorSimple Snapshot Manager, you can create backup schedules or take immediate backups as needed. If you need to restore data from a backup, StorSimple Snapshot Manager lets you select from a catalog of local or cloud snapshots. Azure StorSimple restores only the data that is needed as it is needed, which prevents delays in data availability during restore operations.)
 
-![StorSimple Snapshot Manager architecture](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-what-is-snapshot-manager/HCS_SSM_Overview.png)
+![StorSimple Snapshot Manager architecture](./media/storsimple-what-is-snapshot-manager/HCS_SSM_Overview.png)
 
 **StorSimple Snapshot Manager architecture** 
 
@@ -102,7 +102,7 @@ The StorSimple Snapshot Manager implementation of VSS works with SQL Server and 
 
 See the following illustration.
 
-![VSS process](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-what-is-snapshot-manager/HCS_SSM_VSS_process.png)
+![VSS process](./media/storsimple-what-is-snapshot-manager/HCS_SSM_VSS_process.png)
 
 **Windows Volume Shadow Copy Service process** 
 
@@ -140,6 +140,4 @@ For information about monitoring backup jobs, go to [Use StorSimple Snapshot Man
 ## <a name="next-steps"></a>Next steps
 * Learn more about [using StorSimple Snapshot Manager to administer your StorSimple solution](storsimple-snapshot-manager-admin.md).
 * Download [StorSimple Snapshot Manager](https://www.microsoft.com/download/details.aspx?id=44220).
-
-
 
