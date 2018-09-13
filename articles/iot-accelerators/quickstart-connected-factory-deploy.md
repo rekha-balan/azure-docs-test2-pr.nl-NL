@@ -1,0 +1,157 @@
+---
+title: Try a solution on Azure to manage my industrial IoT devices | Microsoft Docs
+description: In this quickstart, you deploy the Connected Factory Azure IoT solution accelerator, and sign in to and use the solution dashboard.
+author: dominicbetts
+manager: timlt
+ms.service: iot-accelerators
+services: iot-accelerators
+ms.topic: quickstart
+ms.custom: mvc
+ms.date: 07/12/2018
+ms.author: dobett
+ms.openlocfilehash: 649ce7bcd2d2e4ceb2fc397643f4dd0d3ef89c1e
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44969207"
+---
+# <a name="quickstart-try-a-cloud-based-solution-to-manage-my-industrial-iot-devices"></a><span data-ttu-id="e05e8-103">Quickstart: Try a cloud-based solution to manage my industrial IoT devices</span><span class="sxs-lookup"><span data-stu-id="e05e8-103">Quickstart: Try a cloud-based solution to manage my industrial IoT devices</span></span>
+
+<span data-ttu-id="e05e8-104">This quickstart shows you how to deploy the Azure IoT Connected Factory solution accelerator to run a cloud-based monitoring and management simulation for industrial IoT devices.</span><span class="sxs-lookup"><span data-stu-id="e05e8-104">This quickstart shows you how to deploy the Azure IoT Connected Factory solution accelerator to run a cloud-based monitoring and management simulation for industrial IoT devices.</span></span> <span data-ttu-id="e05e8-105">When you deploy the Connected Factory solution accelerator, it's pre-populated with simulated resources that let you step through a common industrial IoT scenario.</span><span class="sxs-lookup"><span data-stu-id="e05e8-105">When you deploy the Connected Factory solution accelerator, it's pre-populated with simulated resources that let you step through a common industrial IoT scenario.</span></span> <span data-ttu-id="e05e8-106">Several simulated factories are connected to the solution, they report the data values needed to compute overall equipment efficiency (OEE) and key performance indicators (KPIs).</span><span class="sxs-lookup"><span data-stu-id="e05e8-106">Several simulated factories are connected to the solution, they report the data values needed to compute overall equipment efficiency (OEE) and key performance indicators (KPIs).</span></span> <span data-ttu-id="e05e8-107">This quickstart shows you how to use the solution dashboard to:</span><span class="sxs-lookup"><span data-stu-id="e05e8-107">This quickstart shows you how to use the solution dashboard to:</span></span>
+
+* <span data-ttu-id="e05e8-108">Monitor factory, production lines, station OEE, and KPI values.</span><span class="sxs-lookup"><span data-stu-id="e05e8-108">Monitor factory, production lines, station OEE, and KPI values.</span></span>
+* <span data-ttu-id="e05e8-109">Analyze the telemetry data generated from these devices.</span><span class="sxs-lookup"><span data-stu-id="e05e8-109">Analyze the telemetry data generated from these devices.</span></span>
+* <span data-ttu-id="e05e8-110">Respond to alarms.</span><span class="sxs-lookup"><span data-stu-id="e05e8-110">Respond to alarms.</span></span>
+
+<span data-ttu-id="e05e8-111">To complete this quickstart, you need an active Azure subscription.</span><span class="sxs-lookup"><span data-stu-id="e05e8-111">To complete this quickstart, you need an active Azure subscription.</span></span>
+
+<span data-ttu-id="e05e8-112">If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.</span><span class="sxs-lookup"><span data-stu-id="e05e8-112">If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.</span></span>
+
+## <a name="deploy-the-solution"></a><span data-ttu-id="e05e8-113">Deploy the solution</span><span class="sxs-lookup"><span data-stu-id="e05e8-113">Deploy the solution</span></span>
+
+<span data-ttu-id="e05e8-114">When you deploy the solution accelerator to your Azure subscription, you must set some configuration options.</span><span class="sxs-lookup"><span data-stu-id="e05e8-114">When you deploy the solution accelerator to your Azure subscription, you must set some configuration options.</span></span>
+
+<span data-ttu-id="e05e8-115">Sign in to [azureiotsolutions.com](https://www.azureiotsolutions.com/Accelerators) using your Azure account credentials.</span><span class="sxs-lookup"><span data-stu-id="e05e8-115">Sign in to [azureiotsolutions.com](https://www.azureiotsolutions.com/Accelerators) using your Azure account credentials.</span></span>
+
+<span data-ttu-id="e05e8-116">Click **Try Now** on the **Connected Factory** tile.</span><span class="sxs-lookup"><span data-stu-id="e05e8-116">Click **Try Now** on the **Connected Factory** tile.</span></span>
+
+![Choose Connected Factory](./media/quickstart-connected-factory-deploy/connectedfactory.png)
+
+<span data-ttu-id="e05e8-118">On the **Create Connected Factory solution** page, enter a unique **Solution name** for your Connected Factory solution accelerator.</span><span class="sxs-lookup"><span data-stu-id="e05e8-118">On the **Create Connected Factory solution** page, enter a unique **Solution name** for your Connected Factory solution accelerator.</span></span> <span data-ttu-id="e05e8-119">This name is the name of the Azure resource group that contains all the solution accelerator resources.</span><span class="sxs-lookup"><span data-stu-id="e05e8-119">This name is the name of the Azure resource group that contains all the solution accelerator resources.</span></span> <span data-ttu-id="e05e8-120">For this quickstart, we're calling ours **MyDemoConnectedFactory**.</span><span class="sxs-lookup"><span data-stu-id="e05e8-120">For this quickstart, we're calling ours **MyDemoConnectedFactory**.</span></span>
+
+<span data-ttu-id="e05e8-121">Select the **Subscription** and **Region** you want to use to deploy the solution accelerator.</span><span class="sxs-lookup"><span data-stu-id="e05e8-121">Select the **Subscription** and **Region** you want to use to deploy the solution accelerator.</span></span> <span data-ttu-id="e05e8-122">Typically, you choose the region closest to you.</span><span class="sxs-lookup"><span data-stu-id="e05e8-122">Typically, you choose the region closest to you.</span></span> <span data-ttu-id="e05e8-123">For this quickstart, we're using **Visual Studio Enterprise** and **East US**.</span><span class="sxs-lookup"><span data-stu-id="e05e8-123">For this quickstart, we're using **Visual Studio Enterprise** and **East US**.</span></span> <span data-ttu-id="e05e8-124">You must be a [global administrator or user](iot-accelerators-permissions.md) in the subscription.</span><span class="sxs-lookup"><span data-stu-id="e05e8-124">You must be a [global administrator or user](iot-accelerators-permissions.md) in the subscription.</span></span>
+
+<span data-ttu-id="e05e8-125">Click **Create Solution** to start your deployment.</span><span class="sxs-lookup"><span data-stu-id="e05e8-125">Click **Create Solution** to start your deployment.</span></span> <span data-ttu-id="e05e8-126">This process takes at least five minutes to run:</span><span class="sxs-lookup"><span data-stu-id="e05e8-126">This process takes at least five minutes to run:</span></span>
+
+![Connected Factory solution details](./media/quickstart-connected-factory-deploy/createform.png)
+
+## <a name="sign-in-to-the-solution"></a><span data-ttu-id="e05e8-128">Sign in to the solution</span><span class="sxs-lookup"><span data-stu-id="e05e8-128">Sign in to the solution</span></span>
+
+<span data-ttu-id="e05e8-129">When the deployment to your Azure subscription is complete, you see a green checkmark and **Ready** on the solution tile.</span><span class="sxs-lookup"><span data-stu-id="e05e8-129">When the deployment to your Azure subscription is complete, you see a green checkmark and **Ready** on the solution tile.</span></span> <span data-ttu-id="e05e8-130">You can now sign in to your Connected Factory solution accelerator dashboard.</span><span class="sxs-lookup"><span data-stu-id="e05e8-130">You can now sign in to your Connected Factory solution accelerator dashboard.</span></span>
+
+<span data-ttu-id="e05e8-131">On the **Provisioned solutions** page, click your new Connected Factory solution accelerator:</span><span class="sxs-lookup"><span data-stu-id="e05e8-131">On the **Provisioned solutions** page, click your new Connected Factory solution accelerator:</span></span>
+
+![Choose new solution](./media/quickstart-connected-factory-deploy/choosenew.png)
+
+<span data-ttu-id="e05e8-133">You can view information about your Connected Factory solution accelerator in the panel that appears.</span><span class="sxs-lookup"><span data-stu-id="e05e8-133">You can view information about your Connected Factory solution accelerator in the panel that appears.</span></span> <span data-ttu-id="e05e8-134">Choose **Solution dashboard** to view your Connected Factory solution accelerator:</span><span class="sxs-lookup"><span data-stu-id="e05e8-134">Choose **Solution dashboard** to view your Connected Factory solution accelerator:</span></span>
+
+![Solution panel](./media/quickstart-connected-factory-deploy/solutionpanel.png)
+
+<span data-ttu-id="e05e8-136">Click **Accept** to accept the permissions request, the Connected Factory solution dashboard displays in your browser.</span><span class="sxs-lookup"><span data-stu-id="e05e8-136">Click **Accept** to accept the permissions request, the Connected Factory solution dashboard displays in your browser.</span></span> <span data-ttu-id="e05e8-137">It shows a set of simulated factories, production lines, and stations.</span><span class="sxs-lookup"><span data-stu-id="e05e8-137">It shows a set of simulated factories, production lines, and stations.</span></span>
+
+## <a name="view-the-dashboard"></a><span data-ttu-id="e05e8-138">View the dashboard</span><span class="sxs-lookup"><span data-stu-id="e05e8-138">View the dashboard</span></span>
+
+<span data-ttu-id="e05e8-139">The default view is the *dashboard*.</span><span class="sxs-lookup"><span data-stu-id="e05e8-139">The default view is the *dashboard*.</span></span> <span data-ttu-id="e05e8-140">To navigate to other areas of the portal, use the menu on the left-hand side of the page:</span><span class="sxs-lookup"><span data-stu-id="e05e8-140">To navigate to other areas of the portal, use the menu on the left-hand side of the page:</span></span>
+
+<span data-ttu-id="e05e8-141">[![Solution dashboard](./media/quickstart-connected-factory-deploy/dashboard-inline.png)](./media/quickstart-connected-factory-deploy/dashboard-expanded.png#lightbox)</span><span class="sxs-lookup"><span data-stu-id="e05e8-141">[![Solution dashboard](./media/quickstart-connected-factory-deploy/dashboard-inline.png)](./media/quickstart-connected-factory-deploy/dashboard-expanded.png#lightbox)</span></span>
+
+<span data-ttu-id="e05e8-142">You use the dashboard to manage your industrial IoT devices.</span><span class="sxs-lookup"><span data-stu-id="e05e8-142">You use the dashboard to manage your industrial IoT devices.</span></span> <span data-ttu-id="e05e8-143">Connected Factory uses a hierarchy to show a global factory configuration.</span><span class="sxs-lookup"><span data-stu-id="e05e8-143">Connected Factory uses a hierarchy to show a global factory configuration.</span></span> <span data-ttu-id="e05e8-144">At the top level of the hierarchy is the enterprise that contains one or more factories, each factory contains production lines, and each production line is made up of stations.</span><span class="sxs-lookup"><span data-stu-id="e05e8-144">At the top level of the hierarchy is the enterprise that contains one or more factories, each factory contains production lines, and each production line is made up of stations.</span></span> <span data-ttu-id="e05e8-145">At each level you can view OEE and KPIs, publish new nodes for telemetry, and respond to alarms.</span><span class="sxs-lookup"><span data-stu-id="e05e8-145">At each level you can view OEE and KPIs, publish new nodes for telemetry, and respond to alarms.</span></span>
+
+<span data-ttu-id="e05e8-146">On the dashboard you can see:</span><span class="sxs-lookup"><span data-stu-id="e05e8-146">On the dashboard you can see:</span></span>
+
+## <a name="overall-equipment-efficiency"></a><span data-ttu-id="e05e8-147">Overall equipment efficiency</span><span class="sxs-lookup"><span data-stu-id="e05e8-147">Overall equipment efficiency</span></span>
+
+<span data-ttu-id="e05e8-148">The **Overall Equipment Efficiency** panel shows the OEE values for the whole enterprise, or the factory/production line/station you're viewing.</span><span class="sxs-lookup"><span data-stu-id="e05e8-148">The **Overall Equipment Efficiency** panel shows the OEE values for the whole enterprise, or the factory/production line/station you're viewing.</span></span> <span data-ttu-id="e05e8-149">This value is aggregated from the station view to the enterprise level.</span><span class="sxs-lookup"><span data-stu-id="e05e8-149">This value is aggregated from the station view to the enterprise level.</span></span> <span data-ttu-id="e05e8-150">The OEE figure and its constituent elements can be further analyzed.</span><span class="sxs-lookup"><span data-stu-id="e05e8-150">The OEE figure and its constituent elements can be further analyzed.</span></span>
+
+<span data-ttu-id="e05e8-151">[![Overall equipment efficiency](./media/quickstart-connected-factory-deploy/oee-inline.png)](./media/quickstart-connected-factory-deploy/oee-expanded.png#lightbox)</span><span class="sxs-lookup"><span data-stu-id="e05e8-151">[![Overall equipment efficiency](./media/quickstart-connected-factory-deploy/oee-inline.png)](./media/quickstart-connected-factory-deploy/oee-expanded.png#lightbox)</span></span>
+
+<span data-ttu-id="e05e8-152">OEE rates the efficiency of the manufacturing process using production-related operational parameters.</span><span class="sxs-lookup"><span data-stu-id="e05e8-152">OEE rates the efficiency of the manufacturing process using production-related operational parameters.</span></span> <span data-ttu-id="e05e8-153">OEE is an industry standard measure calculated by multiplying the availability rate, performance rate, and quality rate: OEE = availability x performance x quality.</span><span class="sxs-lookup"><span data-stu-id="e05e8-153">OEE is an industry standard measure calculated by multiplying the availability rate, performance rate, and quality rate: OEE = availability x performance x quality.</span></span>
+
+<span data-ttu-id="e05e8-154">You can further analyze the OEE for any level in the hierarchy data.</span><span class="sxs-lookup"><span data-stu-id="e05e8-154">You can further analyze the OEE for any level in the hierarchy data.</span></span> <span data-ttu-id="e05e8-155">Click either the OEE, availability, performance, or quality percentage dial.</span><span class="sxs-lookup"><span data-stu-id="e05e8-155">Click either the OEE, availability, performance, or quality percentage dial.</span></span> <span data-ttu-id="e05e8-156">A context panel appears with visualizations showing data over different timescales:</span><span class="sxs-lookup"><span data-stu-id="e05e8-156">A context panel appears with visualizations showing data over different timescales:</span></span>
+
+<span data-ttu-id="e05e8-157">[![Overall equipment efficiency detail](./media/quickstart-connected-factory-deploy/oeedetail-inline.png)](./media/quickstart-connected-factory-deploy/oeedetail-expanded.png#lightbox)</span><span class="sxs-lookup"><span data-stu-id="e05e8-157">[![Overall equipment efficiency detail](./media/quickstart-connected-factory-deploy/oeedetail-inline.png)](./media/quickstart-connected-factory-deploy/oeedetail-expanded.png#lightbox)</span></span>
+
+<span data-ttu-id="e05e8-158">You can click on a chart to do further analysis of the data.</span><span class="sxs-lookup"><span data-stu-id="e05e8-158">You can click on a chart to do further analysis of the data.</span></span>
+
+### <a name="key-performance-indicators"></a><span data-ttu-id="e05e8-159">Key performance indicators</span><span class="sxs-lookup"><span data-stu-id="e05e8-159">Key performance indicators</span></span>
+
+<span data-ttu-id="e05e8-160">The **Key Performance Indicators** panel displays the number of units produced per hour and energy (kWh) used by the whole enterprise or by the factory/production line/station you're viewing.</span><span class="sxs-lookup"><span data-stu-id="e05e8-160">The **Key Performance Indicators** panel displays the number of units produced per hour and energy (kWh) used by the whole enterprise or by the factory/production line/station you're viewing.</span></span> <span data-ttu-id="e05e8-161">These values are aggregated from a station view to the enterprise level.</span><span class="sxs-lookup"><span data-stu-id="e05e8-161">These values are aggregated from a station view to the enterprise level.</span></span>
+
+<span data-ttu-id="e05e8-162">[![Key performance indicators](./media/quickstart-connected-factory-deploy/kpis-inline.png)](./media/quickstart-connected-factory-deploy/kpis-expanded.png#lightbox)</span><span class="sxs-lookup"><span data-stu-id="e05e8-162">[![Key performance indicators](./media/quickstart-connected-factory-deploy/kpis-inline.png)](./media/quickstart-connected-factory-deploy/kpis-expanded.png#lightbox)</span></span>
+
+<span data-ttu-id="e05e8-163">You can further analyze the KPIs for any level in the hierarchy data.</span><span class="sxs-lookup"><span data-stu-id="e05e8-163">You can further analyze the KPIs for any level in the hierarchy data.</span></span> <span data-ttu-id="e05e8-164">Click either the OEE, availability, performance, or quality percentage dial.</span><span class="sxs-lookup"><span data-stu-id="e05e8-164">Click either the OEE, availability, performance, or quality percentage dial.</span></span> <span data-ttu-id="e05e8-165">A context panel appears with visualizations showing data over different timescales:</span><span class="sxs-lookup"><span data-stu-id="e05e8-165">A context panel appears with visualizations showing data over different timescales:</span></span>
+
+<span data-ttu-id="e05e8-166">[![KPI detail](./media/quickstart-connected-factory-deploy/kpidetail-inline.png)](./media/quickstart-connected-factory-deploy/kpidetail-expanded.png#lightbox)</span><span class="sxs-lookup"><span data-stu-id="e05e8-166">[![KPI detail](./media/quickstart-connected-factory-deploy/kpidetail-inline.png)](./media/quickstart-connected-factory-deploy/kpidetail-expanded.png#lightbox)</span></span>
+
+<span data-ttu-id="e05e8-167">You can click on a chart to do further analysis of the data.</span><span class="sxs-lookup"><span data-stu-id="e05e8-167">You can click on a chart to do further analysis of the data.</span></span>
+
+### <a name="factory-locations"></a><span data-ttu-id="e05e8-168">Factory Locations</span><span class="sxs-lookup"><span data-stu-id="e05e8-168">Factory Locations</span></span>
+
+<span data-ttu-id="e05e8-169">A **Factory locations** panel that shows the status, location, and current production configuration in the solution.</span><span class="sxs-lookup"><span data-stu-id="e05e8-169">A **Factory locations** panel that shows the status, location, and current production configuration in the solution.</span></span> <span data-ttu-id="e05e8-170">When you first run the solution accelerator, the dashboard shows a simulated set of factories.</span><span class="sxs-lookup"><span data-stu-id="e05e8-170">When you first run the solution accelerator, the dashboard shows a simulated set of factories.</span></span> <span data-ttu-id="e05e8-171">Each production line simulation is made up of three real OPC UA servers that run simulated tasks and share data.</span><span class="sxs-lookup"><span data-stu-id="e05e8-171">Each production line simulation is made up of three real OPC UA servers that run simulated tasks and share data.</span></span> <span data-ttu-id="e05e8-172">For more information about OPC UA, see the [Connected Factory FAQ](iot-accelerators-faq-cf.md):</span><span class="sxs-lookup"><span data-stu-id="e05e8-172">For more information about OPC UA, see the [Connected Factory FAQ](iot-accelerators-faq-cf.md):</span></span>
+
+<span data-ttu-id="e05e8-173">[![Factory locations](./media/quickstart-connected-factory-deploy/factorylocations-inline.png)](./media/quickstart-connected-factory-deploy/factorylocations-expanded.png#lightbox)</span><span class="sxs-lookup"><span data-stu-id="e05e8-173">[![Factory locations](./media/quickstart-connected-factory-deploy/factorylocations-inline.png)](./media/quickstart-connected-factory-deploy/factorylocations-expanded.png#lightbox)</span></span>
+
+<span data-ttu-id="e05e8-174">You can navigate through the solution hierarchy and view OEE values and KPIs at each level:</span><span class="sxs-lookup"><span data-stu-id="e05e8-174">You can navigate through the solution hierarchy and view OEE values and KPIs at each level:</span></span>
+
+1. <span data-ttu-id="e05e8-175">In **Factory Locations**, click **Mumbai**.</span><span class="sxs-lookup"><span data-stu-id="e05e8-175">In **Factory Locations**, click **Mumbai**.</span></span> <span data-ttu-id="e05e8-176">You see the production lines at this location.</span><span class="sxs-lookup"><span data-stu-id="e05e8-176">You see the production lines at this location.</span></span>
+
+1. <span data-ttu-id="e05e8-177">Click **Production Line 1**.</span><span class="sxs-lookup"><span data-stu-id="e05e8-177">Click **Production Line 1**.</span></span> <span data-ttu-id="e05e8-178">You see the stations on this production line.</span><span class="sxs-lookup"><span data-stu-id="e05e8-178">You see the stations on this production line.</span></span>
+
+1. <span data-ttu-id="e05e8-179">Click **Packaging**.</span><span class="sxs-lookup"><span data-stu-id="e05e8-179">Click **Packaging**.</span></span> <span data-ttu-id="e05e8-180">You see the OPC UA nodes published by this station.</span><span class="sxs-lookup"><span data-stu-id="e05e8-180">You see the OPC UA nodes published by this station.</span></span>
+
+1. <span data-ttu-id="e05e8-181">Click **EnergyConsumption**.</span><span class="sxs-lookup"><span data-stu-id="e05e8-181">Click **EnergyConsumption**.</span></span> <span data-ttu-id="e05e8-182">You see some charts plotting this value over different timescales.</span><span class="sxs-lookup"><span data-stu-id="e05e8-182">You see some charts plotting this value over different timescales.</span></span> <span data-ttu-id="e05e8-183">You can click on a chart to do further analysis of the data.</span><span class="sxs-lookup"><span data-stu-id="e05e8-183">You can click on a chart to do further analysis of the data.</span></span>
+
+<span data-ttu-id="e05e8-184">[![View energy consumption](./media/quickstart-connected-factory-deploy/explorelocations-inline.png)](./media/quickstart-connected-factory-deploy/explorelocations-expanded.png#lightbox)</span><span class="sxs-lookup"><span data-stu-id="e05e8-184">[![View energy consumption](./media/quickstart-connected-factory-deploy/explorelocations-inline.png)](./media/quickstart-connected-factory-deploy/explorelocations-expanded.png#lightbox)</span></span>
+
+### <a name="map"></a><span data-ttu-id="e05e8-185">Map</span><span class="sxs-lookup"><span data-stu-id="e05e8-185">Map</span></span>
+
+<span data-ttu-id="e05e8-186">If your subscription has access to the [Bing Maps API](iot-accelerators-faq-cf.md), the *Factories* map shows you the geographical location and status of all the factories in the solution.</span><span class="sxs-lookup"><span data-stu-id="e05e8-186">If your subscription has access to the [Bing Maps API](iot-accelerators-faq-cf.md), the *Factories* map shows you the geographical location and status of all the factories in the solution.</span></span> <span data-ttu-id="e05e8-187">To drill into the location details, click the locations displayed on the map.</span><span class="sxs-lookup"><span data-stu-id="e05e8-187">To drill into the location details, click the locations displayed on the map.</span></span>
+
+<span data-ttu-id="e05e8-188">[![Map](./media/quickstart-connected-factory-deploy/map-inline.png)](./media/quickstart-connected-factory-deploy/map-expanded.png#lightbox)</span><span class="sxs-lookup"><span data-stu-id="e05e8-188">[![Map](./media/quickstart-connected-factory-deploy/map-inline.png)](./media/quickstart-connected-factory-deploy/map-expanded.png#lightbox)</span></span>
+
+### <a name="alarms"></a><span data-ttu-id="e05e8-189">Alarms</span><span class="sxs-lookup"><span data-stu-id="e05e8-189">Alarms</span></span>
+
+<span data-ttu-id="e05e8-190">The **Alarms** panel shows alarms generated when a reported value or a calculated OEE/KPI value exceeds a configured threshold.</span><span class="sxs-lookup"><span data-stu-id="e05e8-190">The **Alarms** panel shows alarms generated when a reported value or a calculated OEE/KPI value exceeds a configured threshold.</span></span> <span data-ttu-id="e05e8-191">This panel displays alarms at each level of the hierarchy, from the station level to the enterprise.</span><span class="sxs-lookup"><span data-stu-id="e05e8-191">This panel displays alarms at each level of the hierarchy, from the station level to the enterprise.</span></span> <span data-ttu-id="e05e8-192">Each alarm includes a description, date, time, location, and number of occurrences:</span><span class="sxs-lookup"><span data-stu-id="e05e8-192">Each alarm includes a description, date, time, location, and number of occurrences:</span></span>
+
+<span data-ttu-id="e05e8-193">[![Alarms](./media/quickstart-connected-factory-deploy/alarms-inline.png)](./media/quickstart-connected-factory-deploy/alarms-expanded.png#lightbox)</span><span class="sxs-lookup"><span data-stu-id="e05e8-193">[![Alarms](./media/quickstart-connected-factory-deploy/alarms-inline.png)](./media/quickstart-connected-factory-deploy/alarms-expanded.png#lightbox)</span></span>
+
+<span data-ttu-id="e05e8-194">You can analyze the data that caused the alarm from the dashboard.</span><span class="sxs-lookup"><span data-stu-id="e05e8-194">You can analyze the data that caused the alarm from the dashboard.</span></span> <span data-ttu-id="e05e8-195">If you're an Administrator, you can take default actions on the alarms such as:</span><span class="sxs-lookup"><span data-stu-id="e05e8-195">If you're an Administrator, you can take default actions on the alarms such as:</span></span>
+
+* <span data-ttu-id="e05e8-196">Close the alarm.</span><span class="sxs-lookup"><span data-stu-id="e05e8-196">Close the alarm.</span></span>
+* <span data-ttu-id="e05e8-197">Acknowledge the alarm.</span><span class="sxs-lookup"><span data-stu-id="e05e8-197">Acknowledge the alarm.</span></span>
+
+<span data-ttu-id="e05e8-198">Click one of the alarms, in the **Choose action** drop-down, choose **Acknowledge alert**, and then click **Apply**:</span><span class="sxs-lookup"><span data-stu-id="e05e8-198">Click one of the alarms, in the **Choose action** drop-down, choose **Acknowledge alert**, and then click **Apply**:</span></span>
+
+<span data-ttu-id="e05e8-199">[![Acknowledge alarm](./media/quickstart-connected-factory-deploy/acknowledge-inline.png)](./media/quickstart-connected-factory-deploy/acknowledge-expanded.png#lightbox)</span><span class="sxs-lookup"><span data-stu-id="e05e8-199">[![Acknowledge alarm](./media/quickstart-connected-factory-deploy/acknowledge-inline.png)](./media/quickstart-connected-factory-deploy/acknowledge-expanded.png#lightbox)</span></span>
+
+<span data-ttu-id="e05e8-200">To further analyze the alarm data, click the graph in the alarm panel.</span><span class="sxs-lookup"><span data-stu-id="e05e8-200">To further analyze the alarm data, click the graph in the alarm panel.</span></span>
+
+<span data-ttu-id="e05e8-201">These alarms are generated by rules that are specified in a configuration file in the solution accelerator.</span><span class="sxs-lookup"><span data-stu-id="e05e8-201">These alarms are generated by rules that are specified in a configuration file in the solution accelerator.</span></span> <span data-ttu-id="e05e8-202">These rules can generate alarms when the OEE or KPI figures or OPC UA Node values exceed their configured threshold.</span><span class="sxs-lookup"><span data-stu-id="e05e8-202">These rules can generate alarms when the OEE or KPI figures or OPC UA Node values exceed their configured threshold.</span></span>
+
+## <a name="clean-up-resources"></a><span data-ttu-id="e05e8-203">Clean up resources</span><span class="sxs-lookup"><span data-stu-id="e05e8-203">Clean up resources</span></span>
+
+<span data-ttu-id="e05e8-204">If you plan to explore further, leave the Connected Factory solution accelerator deployed.</span><span class="sxs-lookup"><span data-stu-id="e05e8-204">If you plan to explore further, leave the Connected Factory solution accelerator deployed.</span></span>
+
+<span data-ttu-id="e05e8-205">If you no longer need the solution accelerator, delete it from the [Provisioned solutions](https://www.azureiotsolutions.com/Accelerators#dashboard) page by selecting it, and then clicking **Delete Solution**:</span><span class="sxs-lookup"><span data-stu-id="e05e8-205">If you no longer need the solution accelerator, delete it from the [Provisioned solutions](https://www.azureiotsolutions.com/Accelerators#dashboard) page by selecting it, and then clicking **Delete Solution**:</span></span>
+
+![Delete solution](media/quickstart-connected-factory-deploy/deletesolution.png)
+
+## <a name="next-steps"></a><span data-ttu-id="e05e8-207">Next steps</span><span class="sxs-lookup"><span data-stu-id="e05e8-207">Next steps</span></span>
+
+<span data-ttu-id="e05e8-208">In this quickstart, you deployed the Connected Factory solution accelerator and learned how to navigate through your factories, production lines, and stations.</span><span class="sxs-lookup"><span data-stu-id="e05e8-208">In this quickstart, you deployed the Connected Factory solution accelerator and learned how to navigate through your factories, production lines, and stations.</span></span> <span data-ttu-id="e05e8-209">You also saw how to view the OEE and KPI values at any level in the hierarchy, and how to respond to alarms.</span><span class="sxs-lookup"><span data-stu-id="e05e8-209">You also saw how to view the OEE and KPI values at any level in the hierarchy, and how to respond to alarms.</span></span>
+
+<span data-ttu-id="e05e8-210">To learn how to use other features in the dashboard to manage your industrial IoT devices, continue to the following how-to guide:</span><span class="sxs-lookup"><span data-stu-id="e05e8-210">To learn how to use other features in the dashboard to manage your industrial IoT devices, continue to the following how-to guide:</span></span>
+
+> [!div class="nextstepaction"]
+> [<span data-ttu-id="e05e8-211">Use the Connected Factory dashboard</span><span class="sxs-lookup"><span data-stu-id="e05e8-211">Use the Connected Factory dashboard</span></span>](iot-accelerators-connected-factory-dashboard.md)
