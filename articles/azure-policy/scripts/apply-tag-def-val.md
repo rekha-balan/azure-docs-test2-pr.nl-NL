@@ -1,0 +1,81 @@
+---
+title: Azure Policy json sample - Apply tag and its default value | Microsoft Docs
+description: This json sample policy appends a specified tag name and value, if that tag is not provided.
+services: azure-policy
+documentationcenter: ''
+author: DCtheGeek
+manager: carmonm
+editor: ''
+ms.assetid: ''
+ms.service: azure-policy
+ms.devlang: ''
+ms.topic: sample
+ms.tgt_pltfrm: ''
+ms.workload: ''
+ms.date: 10/30/2017
+ms.author: dacoulte
+ms.custom: mvc
+ms.openlocfilehash: f8be0aab95297b87e1de23530c1e8d76e48af85d
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44857969"
+---
+# <a name="apply-tag-and-its-default-value"></a>Apply tag and its default value
+
+This policy appends a specified tag name and value, if that tag is not provided. You specify the tag name and value to apply.
+
+[!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
+
+## <a name="sample-template"></a>Sample template
+
+[!code-json[main](../../../policy-templates/samples/built-in-policy/apply-default-tag-value/azurepolicy.json "Apply tag and its default value")]
+
+You can deploy this template using the [Azure portal](#deploy-with-the-portal), with [PowerShell](#deploy-with-powershell) or with the [Azure CLI](#deploy-with-azure-cli).
+
+## <a name="deploy-with-the-portal"></a>Deploy with the portal
+
+[![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2Fbuilt-in-policy%2Fapply-default-tag-value%2Fazurepolicy.json)
+
+## <a name="deploy-with-powershell"></a>Deploy with PowerShell
+
+[!INCLUDE [sample-powershell-install](../../../includes/sample-powershell-install-no-ssh.md)]
+
+```powershell
+$definition = New-AzureRmPolicyDefinition -Name "apply-default-tag-value" -DisplayName "Apply tag and its default value" -description "Applies a required tag and its default value if it is not specified by the user." -Policy 'https://raw.githubusercontent.com/Azure/azure-policy/master/samples/built-in-policy/apply-default-tag-value/azurepolicy.rules.json' -Parameter 'https://raw.githubusercontent.com/Azure/azure-policy/master/samples/built-in-policy/apply-default-tag-value/azurepolicy.parameters.json' -Mode All
+$definition
+$assignment = New-AzureRMPolicyAssignment -Name <assignmentname> -Scope <scope>  -tagName <tagName> -tagValue <tagValue> -PolicyDefinition $definition
+$assignment
+```
+
+### <a name="clean-up-powershell-deployment"></a>Clean up PowerShell deployment
+
+Run the following command to remove the resource group, VM, and all related resources.
+
+```powershell
+Remove-AzureRmResourceGroup -Name myResourceGroup
+```
+
+
+## <a name="deploy-with-azure-cli"></a>Deploy with Azure CLI
+
+[!INCLUDE [sample-cli-install](../../../includes/sample-cli-install.md)]
+
+```azurecli-interactive
+az policy definition create --name 'apply-default-tag-value' --display-name 'Apply tag and its default value' --description 'Applies a required tag and its default value if it is not specified by the user.' --rules 'https://raw.githubusercontent.com/Azure/azure-policy/master/samples/built-in-policy/apply-default-tag-value/azurepolicy.rules.json' --params 'https://raw.githubusercontent.com/Azure/azure-policy/master/samples/built-in-policy/apply-default-tag-value/azurepolicy.parameters.json' --mode All
+
+az policy assignment create --name <assignmentname> --scope <scope> --policy "apply-default-tag-value"
+```
+
+### <a name="clean-up-azure-cli-deployment"></a>Clean up Azure CLI deployment
+
+Run the following command to remove the resource group, VM, and all related resources.
+
+```azurecli-interactive
+az group delete --name myResourceGroup --yes
+```
+
+## <a name="next-steps"></a>Next steps
+
+- Review more examples at [Azure Policy samples](../json-samples.md).
