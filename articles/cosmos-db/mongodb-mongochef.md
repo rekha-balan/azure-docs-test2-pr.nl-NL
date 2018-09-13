@@ -1,0 +1,115 @@
+---
+title: Use Studio 3T (MongoChef) with Azure Cosmos DB | Microsoft Docs
+description: Learn how to use Studio 3T with an Azure Cosmos DB MongoDB API account
+keywords: mongochef, studio 3T
+services: cosmos-db
+author: slyons
+manager: kfile
+ms.service: cosmos-db
+ms.component: cosmosdb-mongo
+ms.devlang: na
+ms.topic: conceptual
+ms.date: 01/18/2018
+ms.author: sclyon
+ms.openlocfilehash: af66f413055c01d9a4c3e94c7d3b9c5f1d5917b0
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44871333"
+---
+# <a name="azure-cosmos-db-use-studio-3t-with-a-mongodb-api-account"></a><span data-ttu-id="e550f-104">Azure Cosmos DB: Use Studio 3T with a MongoDB API account</span><span class="sxs-lookup"><span data-stu-id="e550f-104">Azure Cosmos DB: Use Studio 3T with a MongoDB API account</span></span>
+
+<span data-ttu-id="e550f-105">To connect to an Azure Cosmos DB MongoDB API account, you must:</span><span class="sxs-lookup"><span data-stu-id="e550f-105">To connect to an Azure Cosmos DB MongoDB API account, you must:</span></span>
+
+* <span data-ttu-id="e550f-106">Download and install [Studio 3T](https://studio3t.com/) (formerly known as MongoChef)</span><span class="sxs-lookup"><span data-stu-id="e550f-106">Download and install [Studio 3T](https://studio3t.com/) (formerly known as MongoChef)</span></span>
+* <span data-ttu-id="e550f-107">Have your Azure Cosmos DB [connection string](connect-mongodb-account.md) information for your MongoDB account</span><span class="sxs-lookup"><span data-stu-id="e550f-107">Have your Azure Cosmos DB [connection string](connect-mongodb-account.md) information for your MongoDB account</span></span>
+
+## <a name="create-the-connection-in-studio-3t"></a><span data-ttu-id="e550f-108">Create the connection in Studio 3T</span><span class="sxs-lookup"><span data-stu-id="e550f-108">Create the connection in Studio 3T</span></span>
+<span data-ttu-id="e550f-109">To add your Azure Cosmos DB account to the Studio 3T connection manager, perform the following steps:</span><span class="sxs-lookup"><span data-stu-id="e550f-109">To add your Azure Cosmos DB account to the Studio 3T connection manager, perform the following steps:</span></span>
+
+1. <span data-ttu-id="e550f-110">Retrieve the Azure Cosmos DB connection information for your MongoDB API account using the instructions in the [Connect a MongoDB application to Azure Cosmos DB](connect-mongodb-account.md) article.</span><span class="sxs-lookup"><span data-stu-id="e550f-110">Retrieve the Azure Cosmos DB connection information for your MongoDB API account using the instructions in the [Connect a MongoDB application to Azure Cosmos DB](connect-mongodb-account.md) article.</span></span>
+
+    ![Screen shot of the connection string page](./media/mongodb-mongochef/ConnectionStringBlade.png)
+2. <span data-ttu-id="e550f-112">Click **Connect** to open the Connection Manager, then click **New Connection**</span><span class="sxs-lookup"><span data-stu-id="e550f-112">Click **Connect** to open the Connection Manager, then click **New Connection**</span></span>
+
+    ![Screen shot of the Studio 3T connection manager](./media/mongodb-mongochef/ConnectionManager.png)
+3. <span data-ttu-id="e550f-114">In the **New Connection** window, on the **Server** tab, enter the HOST (FQDN) of the Azure Cosmos DB account and the PORT.</span><span class="sxs-lookup"><span data-stu-id="e550f-114">In the **New Connection** window, on the **Server** tab, enter the HOST (FQDN) of the Azure Cosmos DB account and the PORT.</span></span>
+
+    ![Screen shot of the Studio 3T connection manager server tab](./media/mongodb-mongochef/ConnectionManagerServerTab.png)
+4. <span data-ttu-id="e550f-116">In the **New Connection** window, on the **Authentication** tab, choose Authentication Mode **Basic (MONGODB-CR or SCARM-SHA-1)** and enter the USERNAME and PASSWORD.</span><span class="sxs-lookup"><span data-stu-id="e550f-116">In the **New Connection** window, on the **Authentication** tab, choose Authentication Mode **Basic (MONGODB-CR or SCARM-SHA-1)** and enter the USERNAME and PASSWORD.</span></span>  <span data-ttu-id="e550f-117">Accept the default authentication db (admin) or provide your own value.</span><span class="sxs-lookup"><span data-stu-id="e550f-117">Accept the default authentication db (admin) or provide your own value.</span></span>
+
+    ![Screen shot of the Studio 3T connection manager authentication tab](./media/mongodb-mongochef/ConnectionManagerAuthenticationTab.png)
+5. <span data-ttu-id="e550f-119">In the **New Connection** window, on the **SSL** tab, check the **Use SSL protocol to connect** check box and the **Accept server self-signed SSL certificates** radio button.</span><span class="sxs-lookup"><span data-stu-id="e550f-119">In the **New Connection** window, on the **SSL** tab, check the **Use SSL protocol to connect** check box and the **Accept server self-signed SSL certificates** radio button.</span></span>
+
+    ![Screen shot of the Studio 3T connection manager SSL tab](./media/mongodb-mongochef/ConnectionManagerSSLTab.png)
+6. <span data-ttu-id="e550f-121">Click the **Test Connection** button to validate the connection information, click **OK** to return to the New Connection window, and then click **Save**.</span><span class="sxs-lookup"><span data-stu-id="e550f-121">Click the **Test Connection** button to validate the connection information, click **OK** to return to the New Connection window, and then click **Save**.</span></span>
+
+    ![Screen shot of the Studio 3T test connection window](./media/mongodb-mongochef/TestConnectionResults.png)
+
+## <a name="use-studio-3t-to-create-a-database-collection-and-documents"></a><span data-ttu-id="e550f-123">Use Studio 3T to create a database, collection, and documents</span><span class="sxs-lookup"><span data-stu-id="e550f-123">Use Studio 3T to create a database, collection, and documents</span></span>
+<span data-ttu-id="e550f-124">To create a database, collection, and documents using Studio 3T, perform the following steps:</span><span class="sxs-lookup"><span data-stu-id="e550f-124">To create a database, collection, and documents using Studio 3T, perform the following steps:</span></span>
+
+1. <span data-ttu-id="e550f-125">In **Connection Manager**, highlight the connection and click **Connect**.</span><span class="sxs-lookup"><span data-stu-id="e550f-125">In **Connection Manager**, highlight the connection and click **Connect**.</span></span>
+
+    ![Screen shot of the Studio 3T connection manager](./media/mongodb-mongochef/ConnectToAccount.png)
+2. <span data-ttu-id="e550f-127">Right-click the host and choose **Add Database**.</span><span class="sxs-lookup"><span data-stu-id="e550f-127">Right-click the host and choose **Add Database**.</span></span>  <span data-ttu-id="e550f-128">Provide a database name and click **OK**.</span><span class="sxs-lookup"><span data-stu-id="e550f-128">Provide a database name and click **OK**.</span></span>
+
+    ![Screen shot of the Studio 3T Add Database option](./media/mongodb-mongochef/AddDatabase1.png)
+3. <span data-ttu-id="e550f-130">Right-click the database and choose **Add Collection**.</span><span class="sxs-lookup"><span data-stu-id="e550f-130">Right-click the database and choose **Add Collection**.</span></span>  <span data-ttu-id="e550f-131">Provide a collection name and click **Create**.</span><span class="sxs-lookup"><span data-stu-id="e550f-131">Provide a collection name and click **Create**.</span></span>
+
+    ![Screen shot of the Studio 3T Add Collection option](./media/mongodb-mongochef/AddCollection.png)
+4. <span data-ttu-id="e550f-133">Click the **Collection** menu item, then click **Add Document**.</span><span class="sxs-lookup"><span data-stu-id="e550f-133">Click the **Collection** menu item, then click **Add Document**.</span></span>
+
+    ![Screen shot of the Studio 3T Add Document menu item](./media/mongodb-mongochef/AddDocument1.png)
+5. <span data-ttu-id="e550f-135">In the Add Document dialog, paste the following and then click **Add Document**.</span><span class="sxs-lookup"><span data-stu-id="e550f-135">In the Add Document dialog, paste the following and then click **Add Document**.</span></span>
+
+        {
+        "_id": "AndersenFamily",
+        "lastName": "Andersen",
+        "parents": [
+               { "firstName": "Thomas" },
+               { "firstName": "Mary Kay"}
+        ],
+        "children": [
+           {
+               "firstName": "Henriette Thaulow", "gender": "female", "grade": 5,
+               "pets": [{ "givenName": "Fluffy" }]
+           }
+        ],
+        "address": { "state": "WA", "county": "King", "city": "seattle" },
+        "isRegistered": true
+        }
+6. <span data-ttu-id="e550f-136">Add another document, this time with the following content:</span><span class="sxs-lookup"><span data-stu-id="e550f-136">Add another document, this time with the following content:</span></span>
+
+        {
+        "_id": "WakefieldFamily",
+        "parents": [
+            { "familyName": "Wakefield", "givenName": "Robin" },
+            { "familyName": "Miller", "givenName": "Ben" }
+        ],
+        "children": [
+            {
+                "familyName": "Merriam",
+                 "givenName": "Jesse",
+                "gender": "female", "grade": 1,
+                "pets": [
+                    { "givenName": "Goofy" },
+                    { "givenName": "Shadow" }
+                ]
+            },
+            {
+                "familyName": "Miller",
+                 "givenName": "Lisa",
+                 "gender": "female",
+                 "grade": 8 }
+        ],
+        "address": { "state": "NY", "county": "Manhattan", "city": "NY" },
+        "isRegistered": false
+        }
+7. <span data-ttu-id="e550f-137">Execute a sample query.</span><span class="sxs-lookup"><span data-stu-id="e550f-137">Execute a sample query.</span></span> <span data-ttu-id="e550f-138">For example, search for families with the last name 'Andersen' and return the parents and state fields.</span><span class="sxs-lookup"><span data-stu-id="e550f-138">For example, search for families with the last name 'Andersen' and return the parents and state fields.</span></span>
+
+    ![Screen shot of Mongo Chef query results](./media/mongodb-mongochef/QueryDocument1.png)
+
+## <a name="next-steps"></a><span data-ttu-id="e550f-140">Next steps</span><span class="sxs-lookup"><span data-stu-id="e550f-140">Next steps</span></span>
+* <span data-ttu-id="e550f-141">Explore Azure Cosmos DB MongoDB API [samples](mongodb-samples.md).</span><span class="sxs-lookup"><span data-stu-id="e550f-141">Explore Azure Cosmos DB MongoDB API [samples](mongodb-samples.md).</span></span>
