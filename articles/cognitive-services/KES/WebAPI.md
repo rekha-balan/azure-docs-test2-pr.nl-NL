@@ -5,16 +5,16 @@ services: cognitive-services
 author: bojunehsu
 manager: stesp
 ms.service: cognitive-services
-ms.technology: kes
+ms.component: knowledge-exploration
 ms.topic: article
 ms.date: 03/26/2016
 ms.author: paulhsu
-ms.openlocfilehash: 9aadfadb74f26ced00c1caf77203e66ec442db95
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 16c5680eb4f249a5d37e6b90eea92cfff7090eef
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44556494"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44825656"
 ---
 # <a name="web-api-interface"></a>Web API Interface
 The model files built by the Knowledge Exploration Service can be hosted and accessed via a set of web APIs.  The APIs may be hosted on the local machine using the [`host_service`](CommandLine.md#host_service-command) command, or may be deployed to an Azure cloud service using the [`deploy_service`](CommandLine.md#deploy_service-command) command.  Both techniques expose the following API endpoints:

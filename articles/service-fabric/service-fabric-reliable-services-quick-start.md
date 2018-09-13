@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: d9b44d75-e905-468e-b867-2190ce97379a
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 03/06/2017
+ms.date: 03/16/2018
 ms.author: vturecek
-ms.openlocfilehash: 26e0e38b3c1c945ece09e6a602a60ca7866a8a09
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: fab112231fc82302a11911109d9fa89efd0532e7
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44555311"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44825812"
 ---
 # <a name="get-started-with-reliable-services"></a>Get started with Reliable Services
 > [!div class="op_single_selector"]
@@ -29,7 +29,7 @@ ms.locfileid: "44555311"
 > 
 
 An Azure Service Fabric application contains one or more services that run your code. This guide shows you how to create both stateless and stateful Service Fabric applications with [Reliable Services](service-fabric-reliable-services-introduction.md).  This Microsoft Virtual Academy video also shows you how to create a stateless Reliable service: <center><a target="_blank" href="https://mva.microsoft.com/en-US/training-courses/building-microservices-applications-on-azure-service-fabric-16747?l=s39AO76yC_7206218965">  
-<img src="https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-reliable-services-quick-start/ReliableServicesVid.png" WIDTH="360" HEIGHT="244">  
+<img src="./media/service-fabric-reliable-services-quick-start/ReliableServicesVid.png" WIDTH="360" HEIGHT="244">  
 </a></center>
 
 ## <a name="basic-concepts"></a>Basic concepts
@@ -45,11 +45,11 @@ A stateless service is a type of service that is currently the norm in cloud app
 
 Launch Visual Studio 2015 or Visual Studio 2017 as an administrator, and create a new Service Fabric application project named *HelloWorld*:
 
-![Use the New Project dialog box to create a new Service Fabric application](https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-reliable-services-quick-start/hello-stateless-NewProject.png)
+![Use the New Project dialog box to create a new Service Fabric application](media/service-fabric-reliable-services-quick-start/hello-stateless-NewProject.png)
 
-Then create a stateless service project named *HelloWorldStateless*:
+Then create a stateless service project using **.Net Core 2.0** named *HelloWorldStateless*:
 
-![In the second dialog box, create a stateless service project](https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-reliable-services-quick-start/hello-stateless-NewProject2.png)
+![In the second dialog box, create a stateless service project](media/service-fabric-reliable-services-quick-start/hello-stateless-NewProject2.png)
 
 Your solution now contains two projects:
 
@@ -98,7 +98,7 @@ protected override async Task RunAsync(CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        ServiceEventSource.Current.ServiceMessage(this, "Working-{0}", ++iterations);
+        ServiceEventSource.Current.ServiceMessage(this.Context, "Working-{0}", ++iterations);
 
         await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken);
     }
@@ -127,11 +127,11 @@ To convert a counter value from stateless to highly available and persistent, ev
 
 In the same *HelloWorld* application, you can add a new service by right-clicking on the Services references in the application project and selecting **Add ->  New Service Fabric Service**.
 
-![Add a service to your Service Fabric application](https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-reliable-services-quick-start/hello-stateful-NewService.png)
+![Add a service to your Service Fabric application](media/service-fabric-reliable-services-quick-start/hello-stateful-NewService.png)
 
-Select **Stateful Service** and name it *HelloWorldStateful*. Click **OK**.
+Select **.Net Core 2.0 -> Stateful Service** and name it *HelloWorldStateful*. Click **OK**.
 
-![Use the New Project dialog box to create a new Service Fabric stateful service](https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-reliable-services-quick-start/hello-stateful-NewProject.png)
+![Use the New Project dialog box to create a new Service Fabric stateful service](media/service-fabric-reliable-services-quick-start/hello-stateful-NewProject.png)
 
 Your application should now have two services: the stateless service *HelloWorldStateless* and the stateful service *HelloWorldStateful*.
 
@@ -155,7 +155,7 @@ protected override async Task RunAsync(CancellationToken cancellationToken)
         {
             var result = await myDictionary.TryGetValueAsync(tx, "Counter");
 
-            ServiceEventSource.Current.ServiceMessage(this, "Current Counter Value: {0}",
+            ServiceEventSource.Current.ServiceMessage(this.Context, "Current Counter Value: {0}",
                 result.HasValue ? result.Value.ToString() : "Value does not exist.");
 
             await myDictionary.AddOrUpdateAsync(tx, "Counter", 0, (key, value) => ++value);
@@ -189,7 +189,7 @@ Reliable Collections can store any .NET type, including your custom types, with 
 The Reliable State Manager manages Reliable Collections for you. You can simply ask the Reliable State Manager for a reliable collection by name at any time and at any place in your service. The Reliable State Manager ensures that you get a reference back. We don't recommended that you save references to reliable collection instances in class member variables or properties. Special care must be taken to ensure that the reference is set to an instance at all times in the service lifecycle. The Reliable State Manager handles this work for you, and it's optimized for repeat visits.
 
 ### <a name="transactional-and-asynchronous-operations"></a>Transactional and asynchronous operations
-```C#
+```csharp
 using (ITransaction tx = this.StateManager.CreateTransaction())
 {
     var result = await myDictionary.TryGetValueAsync(tx, "Counter-1");
@@ -214,7 +214,7 @@ After the services start running, you can view the generated Event Tracing for W
 > 
 > 
 
-![View Diagnostic Events in Visual Studio](https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-reliable-services-quick-start/hello-stateful-Output.png)
+![View Diagnostic Events in Visual Studio](media/service-fabric-reliable-services-quick-start/hello-stateful-Output.png)
 
 ## <a name="next-steps"></a>Next steps
 [Debug your Service Fabric application in Visual Studio](service-fabric-debugging-your-application.md)
@@ -228,10 +228,4 @@ After the services start running, you can view the generated Event Tracing for W
 [Application upgrade](service-fabric-application-upgrade.md)
 
 [Developer reference for Reliable Services](https://msdn.microsoft.com/library/azure/dn706529.aspx)
-
-
-
-
-
-
 

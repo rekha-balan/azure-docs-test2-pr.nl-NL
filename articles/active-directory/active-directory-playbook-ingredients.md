@@ -5,21 +5,21 @@ services: active-directory
 keywords: azure active directory, playbook, Proof of Concept, PoC
 documentationcenter: ''
 author: dstefanMSFT
-manager: asuthar
+manager: mtillman
 ms.assetid: ''
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 4/12/2017
+ms.date: 04/12/2017
 ms.author: dstefan
-ms.openlocfilehash: d2a0fe280f143d390f5e4ba40e0ebe92d8a4a837
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: ff4a8601b619837d835ec25c26b1f7e69b46ae85
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44555564"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44825721"
 ---
 # <a name="azure-active-directory-proof-of-concept-playbook-ingredients"></a>Azure Active Directory Proof of Concept Playbook Ingredients 
 

@@ -1,27 +1,23 @@
 ---
-title: Enterprise Integration for B2B - Azure Logic Apps | Microsoft Docs
-description: Build B2B workflows and support enterprise integration scenarios for logic apps with the Enterprise Integration Pack
+title: B2B enterprise integration overview - Azure Logic Apps | Microsoft Docs
+description: Build automated B2B workflows for enterprise integration solutions with Azure Logic Apps and Enterprise Integration Pack
 services: logic-apps
-documentationcenter: .net,nodejs,java
-author: msftman
-manager: anneta
-editor: cgronlun
-ms.assetid: dd517c4d-1701-4247-b83c-183c4d8d8aae
 ms.service: logic-apps
-ms.workload: integration
-ms.tgt_pltfrm: na
-ms.devlang: na
+ms.suite: integration
+author: divyaswarnkar
+ms.author: divswa
+ms.reviewer: jonfan, estfan, LADocs
 ms.topic: article
+ms.assetid: dd517c4d-1701-4247-b83c-183c4d8d8aae
 ms.date: 09/08/2016
-ms.author: estfan
-ms.openlocfilehash: 8c4dc4476c9a83e806ad74371bb6fcf2f93e7ac1
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: b2e2c81914e8c0440b358d59c7f0248db46b6c50
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44555735"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44826605"
 ---
-# <a name="overview-b2b-scenarios-and-communication-with-the-enterprise-integration-pack"></a>Overview: B2B scenarios and communication with the Enterprise Integration Pack
+# <a name="overview-b2b-enterprise-integration-scenarios-in-azure-logic-apps-with-enterprise-integration-pack"></a>Overview: B2B enterprise integration scenarios in Azure Logic Apps with Enterprise Integration Pack
 
 For business-to-business (B2B) workflows and seamless communication with Azure Logic Apps, you can enable enterprise integration scenarios with Microsoft's cloud-based solution, the Enterprise Integration Pack. Organizations can exchange messages electronically, even if they use different protocols and formats. The pack transforms different formats into a format that organizations' systems can interpret and process. Organizations can exchange messages through industry-standard protocols, including [AS2](../logic-apps/logic-apps-enterprise-integration-as2.md), [X12](logic-apps-enterprise-integration-x12.md), and [EDIFACT](../logic-apps/logic-apps-enterprise-integration-edifact.md). You can also secure messages with both encryption and digital signatures.
 
@@ -37,11 +33,11 @@ Architecturally, the Enterprise Integration Pack is based on "integration accoun
 
 ## <a name="how-to-get-started-with-enterprise-integration"></a>How to get started with enterprise integration?
 
-You can build and manage B2B apps with the Enterprise Integration Pack through the Logic App Designer in the **Azure portal**. You can also manage your logic apps with [PowerShell](https://msdn.microsoft.com/library/azure/mt652195.aspx "Logic apps PowerShell topics").
+You can build and manage B2B apps with the Enterprise Integration Pack through the Logic App Designer in the **Azure portal**. You can also manage your logic apps with [PowerShell](https://docs.microsoft.com/powershell/module/azurerm.logicapp "Logic apps PowerShell").
 
 Here are the high-level steps you must take before you can create apps in the Azure portal:
 
-![overview image](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-overview/overview-0.png)  
+![overview image](media/logic-apps-enterprise-integration-overview/overview-0.png)  
 
 ## <a name="what-are-some-common-scenarios"></a>What are some common scenarios?
 
@@ -75,5 +71,4 @@ Enterprise Integration supports these industry standards:
 * [Integration Account Metadata](../logic-apps/logic-apps-enterprise-integration-metadata.md "Learn about integration account metadata")
 * [Monitor B2B messages](logic-apps-monitor-b2b-message.md "Learn more about monitoring B2B messages")
 * [Tracking B2B messages in OMS portal](logic-apps-track-b2b-messages-omsportal.md "Learn more about tracking B2B messages in OMS portal")
-
 

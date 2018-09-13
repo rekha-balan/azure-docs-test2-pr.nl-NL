@@ -1,28 +1,23 @@
 ---
 title: EDIFACT messages for B2B enterprise integration - Azure Logic Apps | Microsoft Docs
-description: Exchange EDIFACT messages in EDI format for B2B enterprise integration with Azure Logic Apps
+description: Exchange EDIFACT messages in EDI format for B2B enterprise integration in Azure Logic Apps with Enterprise Integration Pack
 services: logic-apps
-documentationcenter: .net,nodejs,java
-author: jeffhollan
-manager: anneta
-editor: cgronlun
-ms.assetid: 2257d2c8-1929-4390-b22c-f96ca8b291bc
 ms.service: logic-apps
-ms.workload: integration
-ms.tgt_pltfrm: na
-ms.devlang: na
+ms.suite: integration
+author: divyaswarnkar
+ms.author: divswa
+ms.reviewer: jonfan, estfan, LADocs
 ms.topic: article
-ms.custom: H1Hack27Feb2017
+ms.assetid: 2257d2c8-1929-4390-b22c-f96ca8b291bc
 ms.date: 07/26/2016
-ms.author: jonfan
-ms.openlocfilehash: c2eeb1032150e8dabbdbb089920b8c0974bce727
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 2da672e1f55af1e38ae0a3fa90b7ecb10d2f17c7
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44669463"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44825747"
 ---
-# <a name="exchange-edifact-messages-for-enterprise-integration-with-logic-apps"></a>Exchange EDIFACT messages for enterprise integration with logic apps
+# <a name="exchange-edifact-messages-for-b2b-enterprise-integration-in-azure-logic-apps-with-enterprise-integration-pack"></a>Exchange EDIFACT messages for B2B enterprise integration in Azure Logic Apps with Enterprise Integration Pack
 
 Before you can exchange EDIFACT messages for Azure Logic Apps, you must create an EDIFACT agreement and store that agreement in your integration account. Here are the steps for how to create an EDIFACT agreement.
 
@@ -33,65 +28,63 @@ Before you can exchange EDIFACT messages for Azure Logic Apps, you must create a
 
 Here's the items you need:
 
-* An [integration account](../logic-apps/logic-apps-enterprise-integration-accounts.md) that's already defined and associated with your Azure subscription  
+* An [integration account](logic-apps-enterprise-integration-create-integration-account.md) that's already defined and associated with your Azure subscription  
 * At least two [partners](logic-apps-enterprise-integration-partners.md) that are already defined in your integration account
 
 > [!NOTE]
 > When you create an agreement, the content in the messages that you receive or send to and from the partner must match the agreement type.
 
-After you [create an integration account](../logic-apps/logic-apps-enterprise-integration-accounts.md) and [add partners](logic-apps-enterprise-integration-partners.md), you can create an EDIFACT agreement by following these steps.
+After you [create an integration account](../logic-apps/logic-apps-enterprise-integration-create-integration-account.md) and [add partners](logic-apps-enterprise-integration-partners.md), you can create an EDIFACT agreement by following these steps.
 
 ## <a name="create-an-edifact-agreement"></a>Create an EDIFACT agreement 
 
-1.  Sign in to the [Azure portal](http://portal.azure.com "Azure portal"). From the left menu, select **More services**.
+1. Sign in to the [Azure portal](http://portal.azure.com "Azure portal"). 
 
-    > [!TIP]
-    > If you don't see **More services**, you might have to expand the menu first. At the top of the collapsed menu, select **Show menu**.
+2. On the main Azure menu, select **All services**. In the search box, enter "integration", and then select **Integration accounts**.
 
-    ![On left menu, select "More services"](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-edifact/edifact-0.png)
+   ![Find your integration account](./media/logic-apps-enterprise-integration-edifact/edifact-0.png)
 
-2. In the search box, type "integration" for your filter. In the results list, select **Integration Accounts**.
+   > [!TIP]
+   > If **All services** doesn't appear, you might have to expand the menu first. At the top of the collapsed menu, select **Show text labels**.
 
-    ![Filter on "integration", select "Integration Accounts"](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-edifact/edifact-1-3.png)
+3. Under **Integration Accounts**, select the integration account where you want to create the agreement.
 
-3. In the **Integration Accounts** blade that opens, select the integration account where you want to create the agreement.
-If you don't see any integration accounts, [create one first](../logic-apps/logic-apps-enterprise-integration-accounts.md "All about integration accounts").  
+   ![Select integration account where to create the agreement](./media/logic-apps-enterprise-integration-edifact/edifact-1-4.png)
 
-    ![Select integration account where to create the agreement](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-edifact/edifact-1-4.png)
+4. Choose **Agreements**. If you don't have an Agreements tile, add the tile first.   
 
-4. Choose the **Agreements** tile. If you don't have an Agreements tile, add the tile first.   
+   ![Choose "Agreements" tile](./media/logic-apps-enterprise-integration-edifact/edifact-1-5.png)
 
-    ![Choose "Agreements" tile](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-edifact/edifact-1-5.png)
+5. On the Agreements page, choose **Add**.
 
-5. In the Agreements blade that opens, choose **Add**.
-
-    ![Choose "Add"](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-edifact/edifact-agreement-2.png)
+   ![Choose "Add"](./media/logic-apps-enterprise-integration-edifact/edifact-agreement-2.png)
 
 6. Under **Add**, enter a **Name** for your agreement. For **Agreement type**, select **EDIFACT**. Select the **Host Partner**, **Host Identity**, **Guest Partner**, and **Guest Identity** for your agreement.
 
-    ![Provide agreement details](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-edifact/edifact-1.png)
+   ![Provide agreement details](./media/logic-apps-enterprise-integration-edifact/edifact-1.png)
 
-    | Property | Description |
-    | --- | --- |
-    | Name |Name of the agreement |
-    | Agreement Type | Should be EDIFACT |
-    | Host Partner |An agreement needs both a host and guest partner. The host partner represents the organization that configures the agreement. |
-    | Host Identity |An identifier for the host partner |
-    | Guest Partner |An agreement needs both a host and guest partner. The guest partner represents the organization that's doing business with the host partner. |
-    | Guest Identity |An identifier for the guest partner |
-    | Receive Settings |These properties apply to all messages received by an agreement. |
-    | Send Settings |These properties apply to all messages sent by an agreement. |
+   | Property | Description |
+   | --- | --- |
+   | Name |Name of the agreement |
+   | Agreement Type | Should be EDIFACT |
+   | Host Partner |An agreement needs both a host and guest partner. The host partner represents the organization that configures the agreement. |
+   | Host Identity |An identifier for the host partner |
+   | Guest Partner |An agreement needs both a host and guest partner. The guest partner represents the organization that's doing business with the host partner. |
+   | Guest Identity |An identifier for the guest partner |
+   | Receive Settings |These properties apply to all messages received by an agreement. |
+   | Send Settings |These properties apply to all messages sent by an agreement. |
+   ||| 
 
 ## <a name="configure-how-your-agreement-handles-received-messages"></a>Configure how your agreement handles received messages
 
 Now that you've set the agreement properties, you can configure how this agreement identifies and handles incoming messages received from your partner through this agreement.
 
-1.  Under **Add**, select **Receive Settings**.
+1. Under **Add**, select **Receive Settings**.
 Configure these properties based on your agreement with the partner that exchanges messages with you. For property descriptions, see the tables in this section.
 
-    **Receive Settings** is organized into these sections: Identifiers, Acknowledgment, Schemas, Control Numbers, Validation, and Internal Settings.
+   **Receive Settings** is organized into these sections: Identifiers, Acknowledgment, Schemas, Control Numbers, Validation, and Internal Settings.
 
-    ![Configure "Receive Settings"](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-edifact/edifact-2.png)  
+   ![Configure "Receive Settings"](./media/logic-apps-enterprise-integration-edifact/edifact-2.png)  
 
 2. After you're done, make sure to save your settings by choosing **OK**.
 
@@ -164,7 +157,7 @@ Configure these properties based on your agreement with your partner who exchang
 
     **Send Settings** is organized into these sections: Identifiers, Acknowledgment, Schemas, Envelopes, Character Sets and Separators, Control Numbers, and Validations.
 
-    ![Configure "Send Settings"](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-edifact/edifact-3.png)    
+    ![Configure "Send Settings"](./media/logic-apps-enterprise-integration-edifact/edifact-3.png)    
 
 2. After you're done, make sure to save your settings by choosing **OK**.
 
@@ -212,7 +205,7 @@ Other than the character set, you can enter a different set of delimiters to be 
 | Property | Description |
 | --- | --- |
 | UNB1.1 (System Identifier) |Select the EDIFACT character set to be applied on the outgoing interchange. |
-| Schema |Select a schema from the drop-down list. After you complete each row, a new row is automatically added. For the selected schema, select the separators set that you want to use, based on the following separator descriptions. |
+| Schema |Select a schema from the drop-down list. After you complete each row, a new row is automatically added. For the selected schema, select the separators set that you want to use, based on the separator descriptions below. |
 | Input Type |Select an input type from the drop-down list. |
 | Component Separator |To separate composite data elements, enter a single character. |
 | Data Element Separator |To separate simple data elements within composite data elements, enter a single character. |
@@ -241,23 +234,17 @@ When you complete each validation row, another is automatically added. If you do
 
 ## <a name="find-your-created-agreement"></a>Find your created agreement
 
-1.  After you finish setting all your agreement properties, on the **Add** blade, choose **OK** to finish creating your agreement and return to your integration account blade.
+1.  After you finish setting all your agreement properties, on the **Add** page, choose **OK** to finish creating your agreement and return to your integration account.
 
     Your newly added agreement now appears in your **Agreements** list.
 
-2.  You can also view your agreements in your integration account overview. On your integration account blade, choose **Overview**, then select the **Agreements** tile. 
+2.  You can also view your agreements in your integration account overview. On your integration account menu, choose **Overview**, then select the **Agreements** tile. 
 
-    ![Choose "Agreements" tile to view all agreements](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-edifact/edifact-4.png)   
+    ![Choose "Agreements" tile](./media/logic-apps-enterprise-integration-edifact/edifact-4.png)   
+
+## <a name="view-swagger-file"></a>View Swagger file
+To view the Swagger details for the EDIFACT connector, see [EDIFACT](/connectors/edifact/).
 
 ## <a name="learn-more"></a>Learn more
 * [Learn more about the Enterprise Integration Pack](logic-apps-enterprise-integration-overview.md "Learn about Enterprise Integration Pack")  
-
-
-
-
-
-
-
-
-
 

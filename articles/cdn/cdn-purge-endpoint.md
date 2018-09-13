@@ -14,12 +14,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/23/2017
 ms.author: mazha
-ms.openlocfilehash: 5991a4c7783c5ad49c529d74205e040fd24ce0d0
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 262a8f7385ba5f74d21991772599540260a145fc
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44552462"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44826124"
 ---
 # <a name="purge-an-azure-cdn-endpoint"></a>Purge an Azure CDN endpoint
 ## <a name="overview"></a>Overview
@@ -38,14 +38,14 @@ This tutorial walks you through purging assets from all edge nodes of an endpoin
 1. In the [Azure Portal](https://portal.azure.com), browse to the CDN profile containing the endpoint you wish to purge.
 2. From the CDN profile blade, click the purge button.
    
-    ![CDN profile blade](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-purge-endpoint/cdn-profile-blade.png)
+    ![CDN profile blade](./media/cdn-purge-endpoint/cdn-profile-blade.png)
    
     The Purge blade opens.
    
-    ![CDN purge blade](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-purge-endpoint/cdn-purge-blade.png)
+    ![CDN purge blade](./media/cdn-purge-endpoint/cdn-purge-blade.png)
 3. On the Purge blade, select the service address you wish to purge from the URL dropdown.
    
-    ![Purge form](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-purge-endpoint/cdn-purge-form.png)
+    ![Purge form](./media/cdn-purge-endpoint/cdn-purge-form.png)
    
    > [!NOTE]
    > You can also get to the Purge blade by clicking the **Purge** button on the CDN endpoint blade.  In that case, the **URL** field will be pre-populated with the service address of that specific endpoint.
@@ -66,18 +66,14 @@ This tutorial walks you through purging assets from all edge nodes of an endpoin
    > 
 5. Click the **Purge** button.
    
-    ![Purge button](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-purge-endpoint/cdn-purge-button.png)
+    ![Purge button](./media/cdn-purge-endpoint/cdn-purge-button.png)
 
 > [!IMPORTANT]
-> Purge requests take approximately 2-3 minutes to process with **Azure CDN from Verizon** (Standard and Premium), and approximately 7 minutes with **Azure CDN from Akamai**.  Azure CDN has a limit of 50 concurrent purge requests at any given time. 
+> Purge requests take approximately 2-3 minutes to process with **Azure CDN from Verizon** (standard and premium), and approximately 7 minutes with **Azure CDN from Akamai**.  Azure CDN has a limit of 50 concurrent purge requests at any given time at the profile level. 
 > 
 > 
 
 ## <a name="see-also"></a>See also
 * [Pre-load assets on an Azure CDN endpoint](cdn-preload-endpoint.md)
 * [Azure CDN REST API reference - Purge or Pre-Load an Endpoint](https://msdn.microsoft.com/library/mt634451.aspx)
-
-
-
-
 
