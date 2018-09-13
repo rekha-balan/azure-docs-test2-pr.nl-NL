@@ -1,0 +1,74 @@
+---
+title: Troubleshoot BizTalk Services using operation logs | Microsoft Docs
+description: Troubleshoot BizTalk Services using operation logs. MABS, WABS
+services: biztalk-services
+documentationcenter: ''
+author: MandiOhlinger
+manager: anneta
+editor: ''
+ms.assetid: 1081a9c6-58cc-4a76-8ac8-11e5e7a6ea27
+ms.service: biztalk-services
+ms.workload: integration
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/07/2016
+ms.author: mandia
+ms.openlocfilehash: f5644f7cd23f8f840f5fb253157e5eef770805c6
+ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
+ms.translationtype: HT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 08/02/2018
+ms.locfileid: "44564083"
+---
+# <a name="biztalk-services-troubleshoot-using-operation-logs"></a><span data-ttu-id="8749e-104">BizTalk Services: Troubleshoot using operation logs</span><span class="sxs-lookup"><span data-stu-id="8749e-104">BizTalk Services: Troubleshoot using operation logs</span></span>
+## <a name="what-are-the-operation-logs"></a><span data-ttu-id="8749e-105">What are the Operation Logs</span><span class="sxs-lookup"><span data-stu-id="8749e-105">What are the Operation Logs</span></span>
+<span data-ttu-id="8749e-106">Operation Logs is a Management Services feature available in the Azure classic portal that allows you to view historical logs of operations performed on your Azure services, including BizTalk Services.</span><span class="sxs-lookup"><span data-stu-id="8749e-106">Operation Logs is a Management Services feature available in the Azure classic portal that allows you to view historical logs of operations performed on your Azure services, including BizTalk Services.</span></span> <span data-ttu-id="8749e-107">This enables you to view historical data related to management operations on your BizTalk Service subscription as far back as 180 days.</span><span class="sxs-lookup"><span data-stu-id="8749e-107">This enables you to view historical data related to management operations on your BizTalk Service subscription as far back as 180 days.</span></span>
+
+> [!NOTE]
+> <span data-ttu-id="8749e-108">This feature only captures logs for management operations on BizTalk Services, such as when the service was started, backed up, and so on.</span><span class="sxs-lookup"><span data-stu-id="8749e-108">This feature only captures logs for management operations on BizTalk Services, such as when the service was started, backed up, and so on.</span></span> <span data-ttu-id="8749e-109">Such operations are tracked irrespective of whether they are performed from the Azure classic portal or by using the [BizTalk Service REST APIs](http://msdn.microsoft.com/library/azure/dn232347.aspx).</span><span class="sxs-lookup"><span data-stu-id="8749e-109">Such operations are tracked irrespective of whether they are performed from the Azure classic portal or by using the [BizTalk Service REST APIs](http://msdn.microsoft.com/library/azure/dn232347.aspx).</span></span> <span data-ttu-id="8749e-110">For a complete list of operations that are tracked using Management Services, see [Operations Tracked Using Azure Management Services](#bizops).</span><span class="sxs-lookup"><span data-stu-id="8749e-110">For a complete list of operations that are tracked using Management Services, see [Operations Tracked Using Azure Management Services](#bizops).</span></span><br/><br/>
+> <span data-ttu-id="8749e-111">This does not capture the logs for activities related to BizTalk Service runtime (such as message processed by bridges, and so on.).</span><span class="sxs-lookup"><span data-stu-id="8749e-111">This does not capture the logs for activities related to BizTalk Service runtime (such as message processed by bridges, and so on.).</span></span> <span data-ttu-id="8749e-112">To view these logs, use the Tracking view from the BizTalk Services portal.</span><span class="sxs-lookup"><span data-stu-id="8749e-112">To view these logs, use the Tracking view from the BizTalk Services portal.</span></span> <span data-ttu-id="8749e-113">For more information, see [Tracking Messages](http://msdn.microsoft.com/library/azure/hh949805.aspx).</span><span class="sxs-lookup"><span data-stu-id="8749e-113">For more information, see [Tracking Messages](http://msdn.microsoft.com/library/azure/hh949805.aspx).</span></span>
+> 
+> 
+
+## <a name="view-biztalk-services-operation-logs"></a><span data-ttu-id="8749e-114">View BizTalk Services Operation Logs</span><span class="sxs-lookup"><span data-stu-id="8749e-114">View BizTalk Services Operation Logs</span></span>
+1. <span data-ttu-id="8749e-115">In the Azure classic portal, select **Management Services**, and then select the **Operation Logs** tab.</span><span class="sxs-lookup"><span data-stu-id="8749e-115">In the Azure classic portal, select **Management Services**, and then select the **Operation Logs** tab.</span></span>
+2. <span data-ttu-id="8749e-116">You can filter the logs based on different parameters like subscription, date range, service type (e.g. BizTalk Services), service name, or status of the operation (Succeeded, Failed).</span><span class="sxs-lookup"><span data-stu-id="8749e-116">You can filter the logs based on different parameters like subscription, date range, service type (e.g. BizTalk Services), service name, or status of the operation (Succeeded, Failed).</span></span>
+3. <span data-ttu-id="8749e-117">Select the checkmark to view the filtered list.</span><span class="sxs-lookup"><span data-stu-id="8749e-117">Select the checkmark to view the filtered list.</span></span> <span data-ttu-id="8749e-118">The following image shows activities related to testbiztalkservice: ![View operation logs][ViewLogs]</span><span class="sxs-lookup"><span data-stu-id="8749e-118">The following image shows activities related to testbiztalkservice: ![View operation logs][ViewLogs]</span></span> 
+4. <span data-ttu-id="8749e-119">To view more about a specific operation, select the row, and click **Details** in the task bar at the bottom.</span><span class="sxs-lookup"><span data-stu-id="8749e-119">To view more about a specific operation, select the row, and click **Details** in the task bar at the bottom.</span></span>
+
+## <a name="bizops"></a><span data-ttu-id="8749e-120">Operations Tracked Using Azure Management Services</span><span class="sxs-lookup"><span data-stu-id="8749e-120">Operations Tracked Using Azure Management Services</span></span>
+<span data-ttu-id="8749e-121">The following table lists the operations that are tracked using the Azure Management Services:</span><span class="sxs-lookup"><span data-stu-id="8749e-121">The following table lists the operations that are tracked using the Azure Management Services:</span></span>
+
+| <span data-ttu-id="8749e-122">Operation Name</span><span class="sxs-lookup"><span data-stu-id="8749e-122">Operation Name</span></span> | <span data-ttu-id="8749e-123">Task</span><span class="sxs-lookup"><span data-stu-id="8749e-123">Task</span></span> |
+| --- | --- |
+| <span data-ttu-id="8749e-124">CreateBizTalkService</span><span class="sxs-lookup"><span data-stu-id="8749e-124">CreateBizTalkService</span></span> |<span data-ttu-id="8749e-125">Operation to create a new BizTalk Service</span><span class="sxs-lookup"><span data-stu-id="8749e-125">Operation to create a new BizTalk Service</span></span> |
+| <span data-ttu-id="8749e-126">DeleteBizTalkService</span><span class="sxs-lookup"><span data-stu-id="8749e-126">DeleteBizTalkService</span></span> |<span data-ttu-id="8749e-127">Operation to delete a BizTalk Service</span><span class="sxs-lookup"><span data-stu-id="8749e-127">Operation to delete a BizTalk Service</span></span> |
+| <span data-ttu-id="8749e-128">RestartBizTalkService</span><span class="sxs-lookup"><span data-stu-id="8749e-128">RestartBizTalkService</span></span> |<span data-ttu-id="8749e-129">Operation to restart a BizTalk Service</span><span class="sxs-lookup"><span data-stu-id="8749e-129">Operation to restart a BizTalk Service</span></span> |
+| <span data-ttu-id="8749e-130">StartBizTalkService</span><span class="sxs-lookup"><span data-stu-id="8749e-130">StartBizTalkService</span></span> |<span data-ttu-id="8749e-131">Operation to start a BizTalk Service</span><span class="sxs-lookup"><span data-stu-id="8749e-131">Operation to start a BizTalk Service</span></span> |
+| <span data-ttu-id="8749e-132">StopBizTalkService</span><span class="sxs-lookup"><span data-stu-id="8749e-132">StopBizTalkService</span></span> |<span data-ttu-id="8749e-133">Operation to stop a BizTalk Service</span><span class="sxs-lookup"><span data-stu-id="8749e-133">Operation to stop a BizTalk Service</span></span> |
+| <span data-ttu-id="8749e-134">DisableBizTalkService</span><span class="sxs-lookup"><span data-stu-id="8749e-134">DisableBizTalkService</span></span> |<span data-ttu-id="8749e-135">Operation to disable a BizTalk Service</span><span class="sxs-lookup"><span data-stu-id="8749e-135">Operation to disable a BizTalk Service</span></span> |
+| <span data-ttu-id="8749e-136">EnableBizTalkService</span><span class="sxs-lookup"><span data-stu-id="8749e-136">EnableBizTalkService</span></span> |<span data-ttu-id="8749e-137">Operation to enable a BizTalk Service</span><span class="sxs-lookup"><span data-stu-id="8749e-137">Operation to enable a BizTalk Service</span></span> |
+| <span data-ttu-id="8749e-138">BackupBizTalkService</span><span class="sxs-lookup"><span data-stu-id="8749e-138">BackupBizTalkService</span></span> |<span data-ttu-id="8749e-139">Operation to back up a BizTalk Service</span><span class="sxs-lookup"><span data-stu-id="8749e-139">Operation to back up a BizTalk Service</span></span> |
+| <span data-ttu-id="8749e-140">RestoreBizTalkService</span><span class="sxs-lookup"><span data-stu-id="8749e-140">RestoreBizTalkService</span></span> |<span data-ttu-id="8749e-141">Operation to restore a BizTalk Service from specified backup</span><span class="sxs-lookup"><span data-stu-id="8749e-141">Operation to restore a BizTalk Service from specified backup</span></span> |
+| <span data-ttu-id="8749e-142">SuspendBizTalkService</span><span class="sxs-lookup"><span data-stu-id="8749e-142">SuspendBizTalkService</span></span> |<span data-ttu-id="8749e-143">Operation to suspend a BizTalk Service</span><span class="sxs-lookup"><span data-stu-id="8749e-143">Operation to suspend a BizTalk Service</span></span> |
+| <span data-ttu-id="8749e-144">ResumeBizTalkService</span><span class="sxs-lookup"><span data-stu-id="8749e-144">ResumeBizTalkService</span></span> |<span data-ttu-id="8749e-145">Operation to resume a BizTalk Service</span><span class="sxs-lookup"><span data-stu-id="8749e-145">Operation to resume a BizTalk Service</span></span> |
+| <span data-ttu-id="8749e-146">ScaleBizTalkService</span><span class="sxs-lookup"><span data-stu-id="8749e-146">ScaleBizTalkService</span></span> |<span data-ttu-id="8749e-147">Operation to scale a BizTalk Service up or down</span><span class="sxs-lookup"><span data-stu-id="8749e-147">Operation to scale a BizTalk Service up or down</span></span> |
+| <span data-ttu-id="8749e-148">ConfigUpdateBizTalkService</span><span class="sxs-lookup"><span data-stu-id="8749e-148">ConfigUpdateBizTalkService</span></span> |<span data-ttu-id="8749e-149">Operation to update the configuration of a BizTalk Service</span><span class="sxs-lookup"><span data-stu-id="8749e-149">Operation to update the configuration of a BizTalk Service</span></span> |
+| <span data-ttu-id="8749e-150">ServiceUpdateBizTalkService</span><span class="sxs-lookup"><span data-stu-id="8749e-150">ServiceUpdateBizTalkService</span></span> |<span data-ttu-id="8749e-151">Operation to upgrade or downgrade a BizTalk Service to a different version</span><span class="sxs-lookup"><span data-stu-id="8749e-151">Operation to upgrade or downgrade a BizTalk Service to a different version</span></span> |
+| <span data-ttu-id="8749e-152">PurgeBackupBizTalkService</span><span class="sxs-lookup"><span data-stu-id="8749e-152">PurgeBackupBizTalkService</span></span> |<span data-ttu-id="8749e-153">Operation to purge backups of the BizTalk Service outside the retention period</span><span class="sxs-lookup"><span data-stu-id="8749e-153">Operation to purge backups of the BizTalk Service outside the retention period</span></span> |
+
+## <a name="see-also"></a><span data-ttu-id="8749e-154">See Also</span><span class="sxs-lookup"><span data-stu-id="8749e-154">See Also</span></span>
+* [<span data-ttu-id="8749e-155">Backup BizTalk Service</span><span class="sxs-lookup"><span data-stu-id="8749e-155">Backup BizTalk Service</span></span>](http://go.microsoft.com/fwlink/p/?LinkID=325584)
+* [<span data-ttu-id="8749e-156">Restore BizTalk Service from Backup</span><span class="sxs-lookup"><span data-stu-id="8749e-156">Restore BizTalk Service from Backup</span></span>](http://go.microsoft.com/fwlink/p/?LinkID=325582)
+* [<span data-ttu-id="8749e-157">BizTalk Services: Developer, Basic, Standard and Premium Editions Chart</span><span class="sxs-lookup"><span data-stu-id="8749e-157">BizTalk Services: Developer, Basic, Standard and Premium Editions Chart</span></span>](http://go.microsoft.com/fwlink/p/?LinkID=302279)
+* [<span data-ttu-id="8749e-158">BizTalk Services: Provisioning Using Azure classic portal</span><span class="sxs-lookup"><span data-stu-id="8749e-158">BizTalk Services: Provisioning Using Azure classic portal</span></span>](http://go.microsoft.com/fwlink/p/?LinkID=302280)
+* [<span data-ttu-id="8749e-159">BizTalk Services: Provisioning Status Chart</span><span class="sxs-lookup"><span data-stu-id="8749e-159">BizTalk Services: Provisioning Status Chart</span></span>](http://go.microsoft.com/fwlink/p/?LinkID=329870)
+* [<span data-ttu-id="8749e-160">BizTalk Services: Dashboard, Monitor and Scale tabs</span><span class="sxs-lookup"><span data-stu-id="8749e-160">BizTalk Services: Dashboard, Monitor and Scale tabs</span></span>](http://go.microsoft.com/fwlink/p/?LinkID=302281)
+* [<span data-ttu-id="8749e-161">BizTalk Services: Throttling</span><span class="sxs-lookup"><span data-stu-id="8749e-161">BizTalk Services: Throttling</span></span>](http://go.microsoft.com/fwlink/p/?LinkID=302282)
+* [<span data-ttu-id="8749e-162">BizTalk Services: Issuer Name and Issuer Key</span><span class="sxs-lookup"><span data-stu-id="8749e-162">BizTalk Services: Issuer Name and Issuer Key</span></span>](http://go.microsoft.com/fwlink/p/?LinkID=303941)
+* [<span data-ttu-id="8749e-163">How do I Start Using the Azure BizTalk Services SDK</span><span class="sxs-lookup"><span data-stu-id="8749e-163">How do I Start Using the Azure BizTalk Services SDK</span></span>](http://go.microsoft.com/fwlink/p/?LinkID=302335)
+
+[ViewLogs]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/biztalk-services/media/biztalk-troubleshoot-using-ops-logs/Operation-Logs.png
+
+

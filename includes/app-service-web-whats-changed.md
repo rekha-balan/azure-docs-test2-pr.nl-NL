@@ -1,0 +1,3 @@
+## <a name="whats-changed"></a><span data-ttu-id="55588-101">What's changed</span><span class="sxs-lookup"><span data-stu-id="55588-101">What's changed</span></span>
+* <span data-ttu-id="55588-102">For a guide to the change from Websites to App Service see: [Azure App Service and Its Impact on Existing Azure Services](http://go.microsoft.com/fwlink/?LinkId=529714)</span><span class="sxs-lookup"><span data-stu-id="55588-102">For a guide to the change from Websites to App Service see: [Azure App Service and Its Impact on Existing Azure Services](http://go.microsoft.com/fwlink/?LinkId=529714)</span></span>
+

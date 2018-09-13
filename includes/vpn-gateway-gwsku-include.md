@@ -1,0 +1,17 @@
+<span data-ttu-id="47a0f-101">When you create a virtual network gateway, you need to specify the gateway SKU that you want to use.</span><span class="sxs-lookup"><span data-stu-id="47a0f-101">When you create a virtual network gateway, you need to specify the gateway SKU that you want to use.</span></span> <span data-ttu-id="47a0f-102">When you select a higher gateway SKU, more CPUs and network bandwidth are allocated to the gateway, and as a result, the gateway can support higher network throughput to the virtual network.</span><span class="sxs-lookup"><span data-stu-id="47a0f-102">When you select a higher gateway SKU, more CPUs and network bandwidth are allocated to the gateway, and as a result, the gateway can support higher network throughput to the virtual network.</span></span>
+
+<span data-ttu-id="47a0f-103">VPN Gateway can use the following SKUs:</span><span class="sxs-lookup"><span data-stu-id="47a0f-103">VPN Gateway can use the following SKUs:</span></span>
+
+* <span data-ttu-id="47a0f-104">Basic</span><span class="sxs-lookup"><span data-stu-id="47a0f-104">Basic</span></span>
+* <span data-ttu-id="47a0f-105">Standard</span><span class="sxs-lookup"><span data-stu-id="47a0f-105">Standard</span></span>
+* <span data-ttu-id="47a0f-106">HighPerformance</span><span class="sxs-lookup"><span data-stu-id="47a0f-106">HighPerformance</span></span>
+
+<span data-ttu-id="47a0f-107">VPN Gateway does not use the UltraPerformance gateway SKU.</span><span class="sxs-lookup"><span data-stu-id="47a0f-107">VPN Gateway does not use the UltraPerformance gateway SKU.</span></span> <span data-ttu-id="47a0f-108">For information about the UltraPerformance SKU, see the [ExpressRoute](../articles/expressroute/expressroute-about-virtual-network-gateways.md) documentation.</span><span class="sxs-lookup"><span data-stu-id="47a0f-108">For information about the UltraPerformance SKU, see the [ExpressRoute](../articles/expressroute/expressroute-about-virtual-network-gateways.md) documentation.</span></span>
+
+<span data-ttu-id="47a0f-109">When selecting a SKU, consider the following:</span><span class="sxs-lookup"><span data-stu-id="47a0f-109">When selecting a SKU, consider the following:</span></span>
+
+* <span data-ttu-id="47a0f-110">If you want to use a PolicyBased VPN type, you must use the Basic SKU.</span><span class="sxs-lookup"><span data-stu-id="47a0f-110">If you want to use a PolicyBased VPN type, you must use the Basic SKU.</span></span> <span data-ttu-id="47a0f-111">PolicyBased VPNs (previously called Static Routing) are not supported on any other SKU.</span><span class="sxs-lookup"><span data-stu-id="47a0f-111">PolicyBased VPNs (previously called Static Routing) are not supported on any other SKU.</span></span>
+* <span data-ttu-id="47a0f-112">BGP is not supported on the Basic SKU.</span><span class="sxs-lookup"><span data-stu-id="47a0f-112">BGP is not supported on the Basic SKU.</span></span>
+* <span data-ttu-id="47a0f-113">ExpressRoute-VPN Gateway coexist configurations are not supported on the Basic SKU.</span><span class="sxs-lookup"><span data-stu-id="47a0f-113">ExpressRoute-VPN Gateway coexist configurations are not supported on the Basic SKU.</span></span>
+* <span data-ttu-id="47a0f-114">Active-active S2S VPN Gateway connections can be configured on the HighPerformance SKU only.</span><span class="sxs-lookup"><span data-stu-id="47a0f-114">Active-active S2S VPN Gateway connections can be configured on the HighPerformance SKU only.</span></span>
+

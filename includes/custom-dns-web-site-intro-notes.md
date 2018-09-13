@@ -1,0 +1,10 @@
+<span data-ttu-id="e34e2-101">This article is for Azure App Service (Web Apps, API Apps, Mobile Apps, Logic Apps); for Cloud Services, see [Configuring a custom domain name for an Azure cloud service](../articles/cloud-services/cloud-services-custom-domain-name.md).</span><span class="sxs-lookup"><span data-stu-id="e34e2-101">This article is for Azure App Service (Web Apps, API Apps, Mobile Apps, Logic Apps); for Cloud Services, see [Configuring a custom domain name for an Azure cloud service](../articles/cloud-services/cloud-services-custom-domain-name.md).</span></span>
+
+> [!NOTE]
+> <span data-ttu-id="e34e2-102">If you app is load-balanced by [Azure Traffic Manager](https://azure.microsoft.com/services/traffic-manager/), click the selector at the top of this article to get specific steps.</span><span class="sxs-lookup"><span data-stu-id="e34e2-102">If you app is load-balanced by [Azure Traffic Manager](https://azure.microsoft.com/services/traffic-manager/), click the selector at the top of this article to get specific steps.</span></span>
+> 
+> <span data-ttu-id="e34e2-103">**Custom domain names are not enabled for Free tier**.</span><span class="sxs-lookup"><span data-stu-id="e34e2-103">**Custom domain names are not enabled for Free tier**.</span></span> <span data-ttu-id="e34e2-104">You must [scale up to a higher pricing tier](../articles/app-service-web/web-sites-scale.md), which may change how much you are billed for your subscription.</span><span class="sxs-lookup"><span data-stu-id="e34e2-104">You must [scale up to a higher pricing tier](../articles/app-service-web/web-sites-scale.md), which may change how much you are billed for your subscription.</span></span> 
+> <span data-ttu-id="e34e2-105">See [App Service Pricing](https://azure.microsoft.com/pricing/details/app-service/) for more information.</span><span class="sxs-lookup"><span data-stu-id="e34e2-105">See [App Service Pricing](https://azure.microsoft.com/pricing/details/app-service/) for more information.</span></span>
+> 
+> 
+

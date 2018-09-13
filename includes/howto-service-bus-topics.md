@@ -1,0 +1,47 @@
+## <a name="what-are-service-bus-topics-and-subscriptions"></a><span data-ttu-id="4d8ee-101">What are Service Bus topics and subscriptions?</span><span class="sxs-lookup"><span data-stu-id="4d8ee-101">What are Service Bus topics and subscriptions?</span></span>
+<span data-ttu-id="4d8ee-102">Service Bus topics and subscriptions support a *publish/subscribe* messaging communication model.</span><span class="sxs-lookup"><span data-stu-id="4d8ee-102">Service Bus topics and subscriptions support a *publish/subscribe* messaging communication model.</span></span> <span data-ttu-id="4d8ee-103">When using topics and subscriptions, components of a distributed application do not communicate directly with each other; instead they exchange messages via a topic, which acts as an intermediary.</span><span class="sxs-lookup"><span data-stu-id="4d8ee-103">When using topics and subscriptions, components of a distributed application do not communicate directly with each other; instead they exchange messages via a topic, which acts as an intermediary.</span></span>
+
+![TopicConcepts](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/howto-service-bus-topics/sb-topics-01.png)
+
+<span data-ttu-id="4d8ee-105">In contrast with Service Bus queues, in which each message is processed by a single consumer, topics and subscriptions provide a "one-to-many" form of communication, using a publish/subscribe pattern.</span><span class="sxs-lookup"><span data-stu-id="4d8ee-105">In contrast with Service Bus queues, in which each message is processed by a single consumer, topics and subscriptions provide a "one-to-many" form of communication, using a publish/subscribe pattern.</span></span> <span data-ttu-id="4d8ee-106">It is possible to register multiple subscriptions to a topic.</span><span class="sxs-lookup"><span data-stu-id="4d8ee-106">It is possible to register multiple subscriptions to a topic.</span></span> <span data-ttu-id="4d8ee-107">When a message is sent to a topic, it is then made available to each subscription to handle/process independently.</span><span class="sxs-lookup"><span data-stu-id="4d8ee-107">When a message is sent to a topic, it is then made available to each subscription to handle/process independently.</span></span>
+
+<span data-ttu-id="4d8ee-108">A subscription to a topic resembles a virtual queue that receives copies of the messages that were sent to the topic.</span><span class="sxs-lookup"><span data-stu-id="4d8ee-108">A subscription to a topic resembles a virtual queue that receives copies of the messages that were sent to the topic.</span></span> <span data-ttu-id="4d8ee-109">You can optionally register filter rules for a topic on a per-subscription basis, which enables you to filter or restrict which messages to a topic are received by which topic subscriptions.</span><span class="sxs-lookup"><span data-stu-id="4d8ee-109">You can optionally register filter rules for a topic on a per-subscription basis, which enables you to filter or restrict which messages to a topic are received by which topic subscriptions.</span></span>
+
+<span data-ttu-id="4d8ee-110">Service Bus topics and subscriptions enable you to scale and process a very large number of messages across many users and applications.</span><span class="sxs-lookup"><span data-stu-id="4d8ee-110">Service Bus topics and subscriptions enable you to scale and process a very large number of messages across many users and applications.</span></span>
+
+## <a name="create-a-namespace"></a><span data-ttu-id="4d8ee-111">Create a namespace</span><span class="sxs-lookup"><span data-stu-id="4d8ee-111">Create a namespace</span></span>
+<span data-ttu-id="4d8ee-112">To begin using Service Bus topics and subscriptions in Azure, you must first create a *service namespace*.</span><span class="sxs-lookup"><span data-stu-id="4d8ee-112">To begin using Service Bus topics and subscriptions in Azure, you must first create a *service namespace*.</span></span> <span data-ttu-id="4d8ee-113">A namespace provides a scoping container for addressing Service Bus resources within your application.</span><span class="sxs-lookup"><span data-stu-id="4d8ee-113">A namespace provides a scoping container for addressing Service Bus resources within your application.</span></span>
+
+<span data-ttu-id="4d8ee-114">To create a namespace:</span><span class="sxs-lookup"><span data-stu-id="4d8ee-114">To create a namespace:</span></span>
+
+1. <span data-ttu-id="4d8ee-115">Log on to the [Azure portal][Azure portal].</span><span class="sxs-lookup"><span data-stu-id="4d8ee-115">Log on to the [Azure portal][Azure portal].</span></span>
+2. <span data-ttu-id="4d8ee-116">In the left navigation pane of the portal, click **New**, then click **Enterprise Integration**, and then click **Service Bus**.</span><span class="sxs-lookup"><span data-stu-id="4d8ee-116">In the left navigation pane of the portal, click **New**, then click **Enterprise Integration**, and then click **Service Bus**.</span></span>
+3. <span data-ttu-id="4d8ee-117">In the **Create namespace** dialog, enter a namespace name.</span><span class="sxs-lookup"><span data-stu-id="4d8ee-117">In the **Create namespace** dialog, enter a namespace name.</span></span> <span data-ttu-id="4d8ee-118">The system immediately checks to see if the name is available.</span><span class="sxs-lookup"><span data-stu-id="4d8ee-118">The system immediately checks to see if the name is available.</span></span>
+4. <span data-ttu-id="4d8ee-119">After making sure the namespace name is available, choose the pricing tier (Basic, Standard, or Premium).</span><span class="sxs-lookup"><span data-stu-id="4d8ee-119">After making sure the namespace name is available, choose the pricing tier (Basic, Standard, or Premium).</span></span>
+5. <span data-ttu-id="4d8ee-120">In the **Subscription** field, choose an Azure subscription in which to create the namespace.</span><span class="sxs-lookup"><span data-stu-id="4d8ee-120">In the **Subscription** field, choose an Azure subscription in which to create the namespace.</span></span>
+6. <span data-ttu-id="4d8ee-121">In the **Resource group** field, choose an existing resource group in which the namespace will live, or create a new one.</span><span class="sxs-lookup"><span data-stu-id="4d8ee-121">In the **Resource group** field, choose an existing resource group in which the namespace will live, or create a new one.</span></span>      
+7. <span data-ttu-id="4d8ee-122">In **Location**, choose the country or region in which your namespace should be hosted.</span><span class="sxs-lookup"><span data-stu-id="4d8ee-122">In **Location**, choose the country or region in which your namespace should be hosted.</span></span>
+   
+    ![Create namespace][create-namespace]
+8. <span data-ttu-id="4d8ee-124">Click the **Create** button.</span><span class="sxs-lookup"><span data-stu-id="4d8ee-124">Click the **Create** button.</span></span> <span data-ttu-id="4d8ee-125">The system now creates your namespace and enables it.</span><span class="sxs-lookup"><span data-stu-id="4d8ee-125">The system now creates your namespace and enables it.</span></span> <span data-ttu-id="4d8ee-126">You might have to wait several minutes as the system provisions resources for your account.</span><span class="sxs-lookup"><span data-stu-id="4d8ee-126">You might have to wait several minutes as the system provisions resources for your account.</span></span>
+
+### <a name="obtain-the-credentials"></a><span data-ttu-id="4d8ee-127">Obtain the credentials</span><span class="sxs-lookup"><span data-stu-id="4d8ee-127">Obtain the credentials</span></span>
+1. <span data-ttu-id="4d8ee-128">In the list of namespaces, click the newly created namespace name.</span><span class="sxs-lookup"><span data-stu-id="4d8ee-128">In the list of namespaces, click the newly created namespace name.</span></span>
+2. <span data-ttu-id="4d8ee-129">In the **Service Bus namespace** blade, click **Shared access policies**.</span><span class="sxs-lookup"><span data-stu-id="4d8ee-129">In the **Service Bus namespace** blade, click **Shared access policies**.</span></span>
+3. <span data-ttu-id="4d8ee-130">In the **Shared access policies** blade, click **RootManageSharedAccessKey**.</span><span class="sxs-lookup"><span data-stu-id="4d8ee-130">In the **Shared access policies** blade, click **RootManageSharedAccessKey**.</span></span>
+   
+    ![connection-info][connection-info]
+4. <span data-ttu-id="4d8ee-132">In the **Policy: RootManageSharedAccessKey** blade, click the copy button next to **Connection string–primary key**, to copy the connection string to your clipboard for later use.</span><span class="sxs-lookup"><span data-stu-id="4d8ee-132">In the **Policy: RootManageSharedAccessKey** blade, click the copy button next to **Connection string–primary key**, to copy the connection string to your clipboard for later use.</span></span>
+   
+    ![connection-string][connection-string]
+
+[Azure portal]: https://portal.azure.com
+[create-namespace]: https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/howto-service-bus-topics/create-namespace.png
+[connection-info]: https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/howto-service-bus-topics/connection-info.png
+[connection-string]: https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/howto-service-bus-topics/connection-string.png
+
+
+
+
+
+
