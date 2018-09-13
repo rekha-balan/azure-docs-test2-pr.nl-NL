@@ -1,0 +1,91 @@
+---
+title: 'Azure Active Directory Domain Services: Administration Guide | Microsoft Docs'
+description: Create an Organizational Unit (OU) on Azure AD Domain Services managed domains
+services: active-directory-ds
+documentationcenter: ''
+author: mahesh-unnikrishnan
+manager: stevenpo
+editor: curtand
+ms.assetid: 52602ad8-2b93-4082-8487-427bdcfa8126
+ms.service: active-directory-ds
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 03/06/2017
+ms.author: maheshu
+ms.openlocfilehash: 4a615b143e0857780f5a241577953e894d495a00
+ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
+ms.translationtype: HT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 08/02/2018
+ms.locfileid: "44555089"
+---
+# <a name="create-an-organizational-unit-ou-on-an-azure-ad-domain-services-managed-domain"></a><span data-ttu-id="a9857-103">Create an Organizational Unit (OU) on an Azure AD Domain Services managed domain</span><span class="sxs-lookup"><span data-stu-id="a9857-103">Create an Organizational Unit (OU) on an Azure AD Domain Services managed domain</span></span>
+<span data-ttu-id="a9857-104">Azure AD Domain Services managed domains include two built-in containers called 'AADDC Computers' and 'AADDC Users' respectively.</span><span class="sxs-lookup"><span data-stu-id="a9857-104">Azure AD Domain Services managed domains include two built-in containers called 'AADDC Computers' and 'AADDC Users' respectively.</span></span> <span data-ttu-id="a9857-105">The 'AADDC Computers' container has computer objects for all computers that are joined to the managed domain.</span><span class="sxs-lookup"><span data-stu-id="a9857-105">The 'AADDC Computers' container has computer objects for all computers that are joined to the managed domain.</span></span> <span data-ttu-id="a9857-106">The 'AADDC Users' container includes users and groups in the Azure AD tenant.</span><span class="sxs-lookup"><span data-stu-id="a9857-106">The 'AADDC Users' container includes users and groups in the Azure AD tenant.</span></span> <span data-ttu-id="a9857-107">Occasionally, it may be necessary to create service accounts on the managed domain to deploy workloads.</span><span class="sxs-lookup"><span data-stu-id="a9857-107">Occasionally, it may be necessary to create service accounts on the managed domain to deploy workloads.</span></span> <span data-ttu-id="a9857-108">For this purpose, you can create a custom Organizational Unit (OU) on the managed domain and create service accounts within that OU.</span><span class="sxs-lookup"><span data-stu-id="a9857-108">For this purpose, you can create a custom Organizational Unit (OU) on the managed domain and create service accounts within that OU.</span></span> <span data-ttu-id="a9857-109">This article shows you how to create an OU in your managed domain.</span><span class="sxs-lookup"><span data-stu-id="a9857-109">This article shows you how to create an OU in your managed domain.</span></span>
+
+## <a name="before-you-begin"></a><span data-ttu-id="a9857-110">Before you begin</span><span class="sxs-lookup"><span data-stu-id="a9857-110">Before you begin</span></span>
+<span data-ttu-id="a9857-111">To perform the tasks listed in this article, you need:</span><span class="sxs-lookup"><span data-stu-id="a9857-111">To perform the tasks listed in this article, you need:</span></span>
+
+1. <span data-ttu-id="a9857-112">A valid **Azure subscription**.</span><span class="sxs-lookup"><span data-stu-id="a9857-112">A valid **Azure subscription**.</span></span>
+2. <span data-ttu-id="a9857-113">An **Azure AD directory** - either synchronized with an on-premises directory or a cloud-only directory.</span><span class="sxs-lookup"><span data-stu-id="a9857-113">An **Azure AD directory** - either synchronized with an on-premises directory or a cloud-only directory.</span></span>
+3. <span data-ttu-id="a9857-114">**Azure AD Domain Services** must be enabled for the Azure AD directory.</span><span class="sxs-lookup"><span data-stu-id="a9857-114">**Azure AD Domain Services** must be enabled for the Azure AD directory.</span></span> <span data-ttu-id="a9857-115">If you haven't done so, follow all the tasks outlined in the [Getting Started guide](active-directory-ds-getting-started.md).</span><span class="sxs-lookup"><span data-stu-id="a9857-115">If you haven't done so, follow all the tasks outlined in the [Getting Started guide](active-directory-ds-getting-started.md).</span></span>
+4. <span data-ttu-id="a9857-116">A domain-joined virtual machine from which you administer the Azure AD Domain Services managed domain.</span><span class="sxs-lookup"><span data-stu-id="a9857-116">A domain-joined virtual machine from which you administer the Azure AD Domain Services managed domain.</span></span> <span data-ttu-id="a9857-117">If you don't have such a virtual machine, follow all the tasks outlined in the article titled [Join a Windows virtual machine to a managed domain](active-directory-ds-admin-guide-join-windows-vm.md).</span><span class="sxs-lookup"><span data-stu-id="a9857-117">If you don't have such a virtual machine, follow all the tasks outlined in the article titled [Join a Windows virtual machine to a managed domain](active-directory-ds-admin-guide-join-windows-vm.md).</span></span>
+5. <span data-ttu-id="a9857-118">You need the credentials of a **user account belonging to the 'AAD DC Administrators' group** in your directory, to create a custom OU on your managed domain.</span><span class="sxs-lookup"><span data-stu-id="a9857-118">You need the credentials of a **user account belonging to the 'AAD DC Administrators' group** in your directory, to create a custom OU on your managed domain.</span></span>
+
+## <a name="install-ad-administration-tools-on-a-domain-joined-virtual-machine-for-remote-administration"></a><span data-ttu-id="a9857-119">Install AD administration tools on a domain-joined virtual machine for remote administration</span><span class="sxs-lookup"><span data-stu-id="a9857-119">Install AD administration tools on a domain-joined virtual machine for remote administration</span></span>
+<span data-ttu-id="a9857-120">Azure AD Domain Services managed domains can be managed remotely using familiar Active Directory administrative tools such as the Active Directory Administrative Center (ADAC) or AD PowerShell.</span><span class="sxs-lookup"><span data-stu-id="a9857-120">Azure AD Domain Services managed domains can be managed remotely using familiar Active Directory administrative tools such as the Active Directory Administrative Center (ADAC) or AD PowerShell.</span></span> <span data-ttu-id="a9857-121">Tenant administrators do not have privileges to connect to domain controllers on the managed domain via Remote Desktop.</span><span class="sxs-lookup"><span data-stu-id="a9857-121">Tenant administrators do not have privileges to connect to domain controllers on the managed domain via Remote Desktop.</span></span> <span data-ttu-id="a9857-122">To administer the managed domain, install the AD administration tools feature on a virtual machine joined to the managed domain.</span><span class="sxs-lookup"><span data-stu-id="a9857-122">To administer the managed domain, install the AD administration tools feature on a virtual machine joined to the managed domain.</span></span> <span data-ttu-id="a9857-123">Refer to the article titled [administer an Azure AD Domain Services managed domain](active-directory-ds-admin-guide-administer-domain.md) for instructions.</span><span class="sxs-lookup"><span data-stu-id="a9857-123">Refer to the article titled [administer an Azure AD Domain Services managed domain](active-directory-ds-admin-guide-administer-domain.md) for instructions.</span></span>
+
+## <a name="create-an-organizational-unit-on-the-managed-domain"></a><span data-ttu-id="a9857-124">Create an Organizational Unit on the managed domain</span><span class="sxs-lookup"><span data-stu-id="a9857-124">Create an Organizational Unit on the managed domain</span></span>
+<span data-ttu-id="a9857-125">Now that the AD Administrative Tools are installed on the domain joined virtual machine, we can use these tools to create an organization unit on the managed domain.</span><span class="sxs-lookup"><span data-stu-id="a9857-125">Now that the AD Administrative Tools are installed on the domain joined virtual machine, we can use these tools to create an organization unit on the managed domain.</span></span> <span data-ttu-id="a9857-126">Perform the following steps:</span><span class="sxs-lookup"><span data-stu-id="a9857-126">Perform the following steps:</span></span>
+
+> [!NOTE]
+> <span data-ttu-id="a9857-127">Only members of the 'AAD DC Administrators' group have the required privileges to create a custom OU.</span><span class="sxs-lookup"><span data-stu-id="a9857-127">Only members of the 'AAD DC Administrators' group have the required privileges to create a custom OU.</span></span> <span data-ttu-id="a9857-128">Ensure that you perform the following steps as a user who belongs to this group.</span><span class="sxs-lookup"><span data-stu-id="a9857-128">Ensure that you perform the following steps as a user who belongs to this group.</span></span>
+>
+>
+
+1. <span data-ttu-id="a9857-129">From the Start screen, click **Administrative Tools**.</span><span class="sxs-lookup"><span data-stu-id="a9857-129">From the Start screen, click **Administrative Tools**.</span></span> <span data-ttu-id="a9857-130">You should see the AD administrative tools installed on the virtual machine.</span><span class="sxs-lookup"><span data-stu-id="a9857-130">You should see the AD administrative tools installed on the virtual machine.</span></span>
+
+    ![Administrative Tools installed on server](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory-domain-services/media/active-directory-domain-services-admin-guide/install-rsat-admin-tools-installed.png)
+2. <span data-ttu-id="a9857-132">Click **Active Directory Administrative Center**.</span><span class="sxs-lookup"><span data-stu-id="a9857-132">Click **Active Directory Administrative Center**.</span></span>
+
+    ![Active Directory Administrative Center](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory-domain-services/media/active-directory-domain-services-admin-guide/adac-overview.png)
+3. <span data-ttu-id="a9857-134">To view the domain, click the domain name in the left pane (for example, 'contoso100.com').</span><span class="sxs-lookup"><span data-stu-id="a9857-134">To view the domain, click the domain name in the left pane (for example, 'contoso100.com').</span></span>
+
+    ![ADAC - view domain](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory-domain-services/media/active-directory-domain-services-admin-guide/create-ou-adac-overview.png)
+4. <span data-ttu-id="a9857-136">On the right side **Tasks** pane, click **New** under the domain name node.</span><span class="sxs-lookup"><span data-stu-id="a9857-136">On the right side **Tasks** pane, click **New** under the domain name node.</span></span> <span data-ttu-id="a9857-137">In this example, we click **New** under the 'contoso100(local)' node on the right side **Tasks** pane.</span><span class="sxs-lookup"><span data-stu-id="a9857-137">In this example, we click **New** under the 'contoso100(local)' node on the right side **Tasks** pane.</span></span>
+
+    ![ADAC - new OU](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory-domain-services/media/active-directory-domain-services-admin-guide/create-ou-adac-new-ou.png)
+5. <span data-ttu-id="a9857-139">You should see the option to create an Organizational Unit.</span><span class="sxs-lookup"><span data-stu-id="a9857-139">You should see the option to create an Organizational Unit.</span></span> <span data-ttu-id="a9857-140">Click **Organizational Unit** to launch the **Create Organizational Unit** dialog.</span><span class="sxs-lookup"><span data-stu-id="a9857-140">Click **Organizational Unit** to launch the **Create Organizational Unit** dialog.</span></span>
+6. <span data-ttu-id="a9857-141">In the **Create Organizational Unit** dialog, specify a **Name** for the new OU.</span><span class="sxs-lookup"><span data-stu-id="a9857-141">In the **Create Organizational Unit** dialog, specify a **Name** for the new OU.</span></span> <span data-ttu-id="a9857-142">Provide a short description for the OU.</span><span class="sxs-lookup"><span data-stu-id="a9857-142">Provide a short description for the OU.</span></span> <span data-ttu-id="a9857-143">You may also set the **Managed By** field for the OU.</span><span class="sxs-lookup"><span data-stu-id="a9857-143">You may also set the **Managed By** field for the OU.</span></span> <span data-ttu-id="a9857-144">To create the custom OU, click **OK**.</span><span class="sxs-lookup"><span data-stu-id="a9857-144">To create the custom OU, click **OK**.</span></span>
+
+    ![ADAC - create OU dialog](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory-domain-services/media/active-directory-domain-services-admin-guide/create-ou-dialog.png)
+7. <span data-ttu-id="a9857-146">The newly created OU should now appear in the AD Administrative Center (ADAC).</span><span class="sxs-lookup"><span data-stu-id="a9857-146">The newly created OU should now appear in the AD Administrative Center (ADAC).</span></span>
+
+    ![ADAC - OU created](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory-domain-services/media/active-directory-domain-services-admin-guide/create-ou-done.png)
+
+## <a name="permissionssecurity-for-newly-created-ous"></a><span data-ttu-id="a9857-148">Permissions/Security for newly created OUs</span><span class="sxs-lookup"><span data-stu-id="a9857-148">Permissions/Security for newly created OUs</span></span>
+<span data-ttu-id="a9857-149">By default, the user (member of the 'AAD DC Administrators' group) who created the custom OU is granted administrative privileges (full control) over the OU.</span><span class="sxs-lookup"><span data-stu-id="a9857-149">By default, the user (member of the 'AAD DC Administrators' group) who created the custom OU is granted administrative privileges (full control) over the OU.</span></span> <span data-ttu-id="a9857-150">The user can then go ahead and grant privileges to other users or to the 'AAD DC Administrators' group as desired.</span><span class="sxs-lookup"><span data-stu-id="a9857-150">The user can then go ahead and grant privileges to other users or to the 'AAD DC Administrators' group as desired.</span></span> <span data-ttu-id="a9857-151">As seen in the following screenshot, the user 'bob@domainservicespreview.onmicrosoft.com' who created the new 'MyCustomOU' organizational unit is granted full control over it.</span><span class="sxs-lookup"><span data-stu-id="a9857-151">As seen in the following screenshot, the user 'bob@domainservicespreview.onmicrosoft.com' who created the new 'MyCustomOU' organizational unit is granted full control over it.</span></span>
+
+ ![ADAC - new OU security](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory-domain-services/media/active-directory-domain-services-admin-guide/create-ou-permissions.png)
+
+## <a name="notes-on-administering-custom-ous"></a><span data-ttu-id="a9857-153">Notes on administering custom OUs</span><span class="sxs-lookup"><span data-stu-id="a9857-153">Notes on administering custom OUs</span></span>
+<span data-ttu-id="a9857-154">Now that you have created a custom OU, you can go ahead and create users, groups, computers, and service accounts in this OU.</span><span class="sxs-lookup"><span data-stu-id="a9857-154">Now that you have created a custom OU, you can go ahead and create users, groups, computers, and service accounts in this OU.</span></span> <span data-ttu-id="a9857-155">You cannot move users or groups from the 'AADDC Users' OU to custom OUs.</span><span class="sxs-lookup"><span data-stu-id="a9857-155">You cannot move users or groups from the 'AADDC Users' OU to custom OUs.</span></span>
+
+> [!WARNING]
+> <span data-ttu-id="a9857-156">User accounts, groups, service accounts, and computer objects that you create under custom OUs are not available in your Azure AD tenant.</span><span class="sxs-lookup"><span data-stu-id="a9857-156">User accounts, groups, service accounts, and computer objects that you create under custom OUs are not available in your Azure AD tenant.</span></span> <span data-ttu-id="a9857-157">In other words, these objects do not show up using the Azure AD Graph API or in the Azure AD UI.</span><span class="sxs-lookup"><span data-stu-id="a9857-157">In other words, these objects do not show up using the Azure AD Graph API or in the Azure AD UI.</span></span> <span data-ttu-id="a9857-158">These objects are only available in your Azure AD Domain Services managed domain.</span><span class="sxs-lookup"><span data-stu-id="a9857-158">These objects are only available in your Azure AD Domain Services managed domain.</span></span>
+>
+>
+
+## <a name="related-content"></a><span data-ttu-id="a9857-159">Related Content</span><span class="sxs-lookup"><span data-stu-id="a9857-159">Related Content</span></span>
+* [<span data-ttu-id="a9857-160">Administer an Azure AD Domain Services managed domain</span><span class="sxs-lookup"><span data-stu-id="a9857-160">Administer an Azure AD Domain Services managed domain</span></span>](active-directory-ds-admin-guide-administer-domain.md)
+* [<span data-ttu-id="a9857-161">Configure Group Policy on a managed domain</span><span class="sxs-lookup"><span data-stu-id="a9857-161">Configure Group Policy on a managed domain</span></span>](active-directory-ds-admin-guide-administer-group-policy.md)
+* [<span data-ttu-id="a9857-162">Active Directory Administrative Center: Getting Started</span><span class="sxs-lookup"><span data-stu-id="a9857-162">Active Directory Administrative Center: Getting Started</span></span>](https://technet.microsoft.com/library/dd560651.aspx)
+* [<span data-ttu-id="a9857-163">Service Accounts Step-by-Step Guide</span><span class="sxs-lookup"><span data-stu-id="a9857-163">Service Accounts Step-by-Step Guide</span></span>](https://technet.microsoft.com/library/dd548356.aspx)
+
+
+
+
+
+
+
