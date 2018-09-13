@@ -1,0 +1,20 @@
+### <a name="prerequisites"></a><span data-ttu-id="d185d-101">Prerequisites</span><span class="sxs-lookup"><span data-stu-id="d185d-101">Prerequisites</span></span>
+* <span data-ttu-id="d185d-102">A [OneDrive](http://OneDrive.com) account</span><span class="sxs-lookup"><span data-stu-id="d185d-102">A [OneDrive](http://OneDrive.com) account</span></span> 
+
+<span data-ttu-id="d185d-103">Before you can use your OneDrive for Business account in a Logic app, you must authorize the Logic app to connect to your OneDrive for Business account.</span><span class="sxs-lookup"><span data-stu-id="d185d-103">Before you can use your OneDrive for Business account in a Logic app, you must authorize the Logic app to connect to your OneDrive for Business account.</span></span> <span data-ttu-id="d185d-104">Fortunately, you can do this easily from within your Logic app on the Azure Portal.</span><span class="sxs-lookup"><span data-stu-id="d185d-104">Fortunately, you can do this easily from within your Logic app on the Azure Portal.</span></span> 
+
+<span data-ttu-id="d185d-105">Here are the steps to authorize your Logic app to connect to your OneDrive for Business account:</span><span class="sxs-lookup"><span data-stu-id="d185d-105">Here are the steps to authorize your Logic app to connect to your OneDrive for Business account:</span></span>
+
+1. <span data-ttu-id="d185d-106">To create a connection to OneDrive for Business, in the Logic app designer, select **Show Microsoft managed APIs** in the drop down list then enter *OneDrive for Business* in the search box.</span><span class="sxs-lookup"><span data-stu-id="d185d-106">To create a connection to OneDrive for Business, in the Logic app designer, select **Show Microsoft managed APIs** in the drop down list then enter *OneDrive for Business* in the search box.</span></span> <span data-ttu-id="d185d-107">Select the trigger or action you'll like to use:</span><span class="sxs-lookup"><span data-stu-id="d185d-107">Select the trigger or action you'll like to use:</span></span>  
+   ![](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/connectors-create-api-onedriveforbusiness/onedriveforbusiness-1.png)
+2. <span data-ttu-id="d185d-108">If you haven't created any connections to OneDrive for Business before, you'll get prompted to provide your OneDrive for Business credentials.</span><span class="sxs-lookup"><span data-stu-id="d185d-108">If you haven't created any connections to OneDrive for Business before, you'll get prompted to provide your OneDrive for Business credentials.</span></span> <span data-ttu-id="d185d-109">These credentials will be used to authorize your Logic app to connect to, and access your OneDrive for Business account's data:</span><span class="sxs-lookup"><span data-stu-id="d185d-109">These credentials will be used to authorize your Logic app to connect to, and access your OneDrive for Business account's data:</span></span>  
+   ![](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/connectors-create-api-onedriveforbusiness/onedriveforbusiness-2.png)
+3. <span data-ttu-id="d185d-110">Provide your OneDrive for Business user name and password to authorize your Logic app:</span><span class="sxs-lookup"><span data-stu-id="d185d-110">Provide your OneDrive for Business user name and password to authorize your Logic app:</span></span>  
+   ![](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/connectors-create-api-onedriveforbusiness/onedriveforbusiness-3.png)   
+4. <span data-ttu-id="d185d-111">Notice the connection has been created and you are now free to proceed with the other steps in your Logic app:</span><span class="sxs-lookup"><span data-stu-id="d185d-111">Notice the connection has been created and you are now free to proceed with the other steps in your Logic app:</span></span>  
+   ![](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/connectors-create-api-onedriveforbusiness/onedriveforbusiness-4.png)   
+
+
+
+
+

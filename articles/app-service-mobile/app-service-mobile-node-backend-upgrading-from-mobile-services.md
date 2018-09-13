@@ -1,0 +1,179 @@
+---
+title: Upgrade from Mobile Services to Azure App Service - Node.js
+description: Learn how to easily upgrade your Mobile Services application to an App Service Mobile App
+services: app-service\mobile
+documentationcenter: ''
+author: adrianhall
+manager: yochayk
+editor: ''
+ms.assetid: c58f6df0-5aad-40a3-bddc-319c378218e3
+ms.service: app-service-mobile
+ms.workload: mobile
+ms.tgt_pltfrm: mobile
+ms.devlang: node
+ms.topic: article
+ms.date: 10/01/2016
+ms.author: adrianha
+ms.openlocfilehash: 5dd831d261b1f75d1951b696abe5aaf8c3c19222
+ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
+ms.translationtype: HT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 08/02/2018
+ms.locfileid: "44661570"
+---
+# <a name="upgrade-your-existing-nodejs-azure-mobile-service-to-app-service"></a><span data-ttu-id="9f67a-103">Upgrade your existing Node.js Azure Mobile Service to App Service</span><span class="sxs-lookup"><span data-stu-id="9f67a-103">Upgrade your existing Node.js Azure Mobile Service to App Service</span></span>
+<span data-ttu-id="9f67a-104">App Service Mobile is a new way to build mobile applications using Microsoft Azure.</span><span class="sxs-lookup"><span data-stu-id="9f67a-104">App Service Mobile is a new way to build mobile applications using Microsoft Azure.</span></span> <span data-ttu-id="9f67a-105">To learn more, see [What are Mobile Apps?].</span><span class="sxs-lookup"><span data-stu-id="9f67a-105">To learn more, see [What are Mobile Apps?].</span></span>
+
+<span data-ttu-id="9f67a-106">This topic describes how to upgrade an existing Node.js backend application from Azure Mobile Services to a new App Service Mobile Apps.</span><span class="sxs-lookup"><span data-stu-id="9f67a-106">This topic describes how to upgrade an existing Node.js backend application from Azure Mobile Services to a new App Service Mobile Apps.</span></span> <span data-ttu-id="9f67a-107">While you perform this upgrade, your existing Mobile Services application can continue to operate.</span><span class="sxs-lookup"><span data-stu-id="9f67a-107">While you perform this upgrade, your existing Mobile Services application can continue to operate.</span></span>  <span data-ttu-id="9f67a-108">If you need to upgrade a Node.js backend application, refer to [Upgrading your .NET Mobile Services](app-service-mobile-net-upgrading-from-mobile-services.md).</span><span class="sxs-lookup"><span data-stu-id="9f67a-108">If you need to upgrade a Node.js backend application, refer to [Upgrading your .NET Mobile Services](app-service-mobile-net-upgrading-from-mobile-services.md).</span></span>
+
+<span data-ttu-id="9f67a-109">When a mobile backend is upgraded to Azure App Service, it has access to all App Service features and are billed according to [App Service pricing], not Mobile Services pricing.</span><span class="sxs-lookup"><span data-stu-id="9f67a-109">When a mobile backend is upgraded to Azure App Service, it has access to all App Service features and are billed according to [App Service pricing], not Mobile Services pricing.</span></span>
+
+## <a name="migrate-vs-upgrade"></a><span data-ttu-id="9f67a-110">Migrate vs. upgrade</span><span class="sxs-lookup"><span data-stu-id="9f67a-110">Migrate vs. upgrade</span></span>
+[!INCLUDE [app-service-mobile-migrate-vs-upgrade](../../includes/app-service-mobile-migrate-vs-upgrade.md)]
+
+> [!TIP]
+> <span data-ttu-id="9f67a-111">It is recommended that you [perform a migration](app-service-mobile-migrating-from-mobile-services.md) before going through an upgrade.</span><span class="sxs-lookup"><span data-stu-id="9f67a-111">It is recommended that you [perform a migration](app-service-mobile-migrating-from-mobile-services.md) before going through an upgrade.</span></span> <span data-ttu-id="9f67a-112">This way, you can put both versions of your application on the same App Service Plan and incur no additional cost.</span><span class="sxs-lookup"><span data-stu-id="9f67a-112">This way, you can put both versions of your application on the same App Service Plan and incur no additional cost.</span></span>
+> 
+> 
+
+### <a name="improvements-in-mobile-apps-nodejs-server-sdk"></a><span data-ttu-id="9f67a-113">Improvements in Mobile Apps Node.js server SDK</span><span class="sxs-lookup"><span data-stu-id="9f67a-113">Improvements in Mobile Apps Node.js server SDK</span></span>
+<span data-ttu-id="9f67a-114">Upgrading to the new [Mobile Apps SDK](https://www.npmjs.com/package/azure-mobile-apps) provides a lot of improvements, including:</span><span class="sxs-lookup"><span data-stu-id="9f67a-114">Upgrading to the new [Mobile Apps SDK](https://www.npmjs.com/package/azure-mobile-apps) provides a lot of improvements, including:</span></span>
+
+* <span data-ttu-id="9f67a-115">Based on the [Express framework](http://expressjs.com/en/index.html), the new Node SDK is light-weight and designed to keep up with new Node versions as they come out. You can customize the application behavior with Express middleware.</span><span class="sxs-lookup"><span data-stu-id="9f67a-115">Based on the [Express framework](http://expressjs.com/en/index.html), the new Node SDK is light-weight and designed to keep up with new Node versions as they come out. You can customize the application behavior with Express middleware.</span></span>
+* <span data-ttu-id="9f67a-116">Significant performance improvements compared to the Mobile Services SDK.</span><span class="sxs-lookup"><span data-stu-id="9f67a-116">Significant performance improvements compared to the Mobile Services SDK.</span></span>
+* <span data-ttu-id="9f67a-117">You can now host a website together with your mobile backend; similarly, it's easy to add the Azure Mobile SDK to any existing express.v4 application.</span><span class="sxs-lookup"><span data-stu-id="9f67a-117">You can now host a website together with your mobile backend; similarly, it's easy to add the Azure Mobile SDK to any existing express.v4 application.</span></span>
+* <span data-ttu-id="9f67a-118">Built for cross-platform and local development, the Mobile Apps SDK can be developed and run locally on Windows, Linux, and OSX platforms.</span><span class="sxs-lookup"><span data-stu-id="9f67a-118">Built for cross-platform and local development, the Mobile Apps SDK can be developed and run locally on Windows, Linux, and OSX platforms.</span></span> <span data-ttu-id="9f67a-119">It's now easy to use common Node development techniques like running [Mocha](https://mochajs.org/) tests prior to deployment.</span><span class="sxs-lookup"><span data-stu-id="9f67a-119">It's now easy to use common Node development techniques like running [Mocha](https://mochajs.org/) tests prior to deployment.</span></span>
+
+## <a name="overview"></a><span data-ttu-id="9f67a-120">Basic upgrade overview</span><span class="sxs-lookup"><span data-stu-id="9f67a-120">Basic upgrade overview</span></span>
+<span data-ttu-id="9f67a-121">To aid in upgrading a Node.js backend, Azure App Service has provided a compatibility package.</span><span class="sxs-lookup"><span data-stu-id="9f67a-121">To aid in upgrading a Node.js backend, Azure App Service has provided a compatibility package.</span></span>  <span data-ttu-id="9f67a-122">After upgrade, you will have a niew site that can be deployed to a new App Service site.</span><span class="sxs-lookup"><span data-stu-id="9f67a-122">After upgrade, you will have a niew site that can be deployed to a new App Service site.</span></span>
+
+<span data-ttu-id="9f67a-123">The Mobile Services client SDKs are **not** compatible with the new Mobile Apps server SDK.</span><span class="sxs-lookup"><span data-stu-id="9f67a-123">The Mobile Services client SDKs are **not** compatible with the new Mobile Apps server SDK.</span></span> <span data-ttu-id="9f67a-124">In order to provide continuity of service for your app, you should not publish changes to a site currently serving published clients.</span><span class="sxs-lookup"><span data-stu-id="9f67a-124">In order to provide continuity of service for your app, you should not publish changes to a site currently serving published clients.</span></span> <span data-ttu-id="9f67a-125">Instead, you should create a new mobile app that serves as a duplicate.</span><span class="sxs-lookup"><span data-stu-id="9f67a-125">Instead, you should create a new mobile app that serves as a duplicate.</span></span> <span data-ttu-id="9f67a-126">You can put this application on the same App Service plan to avoid incurring additional financial cost.</span><span class="sxs-lookup"><span data-stu-id="9f67a-126">You can put this application on the same App Service plan to avoid incurring additional financial cost.</span></span>
+
+<span data-ttu-id="9f67a-127">You will then have two versions of the application: one that stays the same and serves published apps in the wild, and the other which you can then upgrade and target with a new client release.</span><span class="sxs-lookup"><span data-stu-id="9f67a-127">You will then have two versions of the application: one that stays the same and serves published apps in the wild, and the other which you can then upgrade and target with a new client release.</span></span> <span data-ttu-id="9f67a-128">You can move and test your code at your pace, but you should make sure that any bug fixes you make get applied to both.</span><span class="sxs-lookup"><span data-stu-id="9f67a-128">You can move and test your code at your pace, but you should make sure that any bug fixes you make get applied to both.</span></span> <span data-ttu-id="9f67a-129">Once you feel that a desired number of client apps in the wild have updated to the latest version, you can delete the original migrated app if you desire.</span><span class="sxs-lookup"><span data-stu-id="9f67a-129">Once you feel that a desired number of client apps in the wild have updated to the latest version, you can delete the original migrated app if you desire.</span></span> <span data-ttu-id="9f67a-130">It doesn't incur any additional monetary costs, if hosted in the same App Service plan as your Mobile App.</span><span class="sxs-lookup"><span data-stu-id="9f67a-130">It doesn't incur any additional monetary costs, if hosted in the same App Service plan as your Mobile App.</span></span>
+
+<span data-ttu-id="9f67a-131">The full outline for the upgrade process is as follows:</span><span class="sxs-lookup"><span data-stu-id="9f67a-131">The full outline for the upgrade process is as follows:</span></span>
+
+1. <span data-ttu-id="9f67a-132">Download your existing (migrated) Azure Mobile Service.</span><span class="sxs-lookup"><span data-stu-id="9f67a-132">Download your existing (migrated) Azure Mobile Service.</span></span>
+2. <span data-ttu-id="9f67a-133">Convert the project to an Azure Mobile App using the compatibility package.</span><span class="sxs-lookup"><span data-stu-id="9f67a-133">Convert the project to an Azure Mobile App using the compatibility package.</span></span>
+3. <span data-ttu-id="9f67a-134">Correct any differences (such as authentication settings).</span><span class="sxs-lookup"><span data-stu-id="9f67a-134">Correct any differences (such as authentication settings).</span></span>
+4. <span data-ttu-id="9f67a-135">Deploy your converted Azure Mobile App project to a new App Service.</span><span class="sxs-lookup"><span data-stu-id="9f67a-135">Deploy your converted Azure Mobile App project to a new App Service.</span></span>
+5. <span data-ttu-id="9f67a-136">Release a new version of your client application that use the new Mobile App.</span><span class="sxs-lookup"><span data-stu-id="9f67a-136">Release a new version of your client application that use the new Mobile App.</span></span>
+6. <span data-ttu-id="9f67a-137">(Optional) Delete your original migrated mobile service app.</span><span class="sxs-lookup"><span data-stu-id="9f67a-137">(Optional) Delete your original migrated mobile service app.</span></span>
+
+<span data-ttu-id="9f67a-138">Deletion can occur when you don't see any traffic on your original migrated mobile service.</span><span class="sxs-lookup"><span data-stu-id="9f67a-138">Deletion can occur when you don't see any traffic on your original migrated mobile service.</span></span>
+
+## <a name="install-npm-package"></a> <span data-ttu-id="9f67a-139">Install the Pre-requisites</span><span class="sxs-lookup"><span data-stu-id="9f67a-139">Install the Pre-requisites</span></span>
+<span data-ttu-id="9f67a-140">You should install [Node] on your local machine.</span><span class="sxs-lookup"><span data-stu-id="9f67a-140">You should install [Node] on your local machine.</span></span>  <span data-ttu-id="9f67a-141">You should also install the compatibility package.</span><span class="sxs-lookup"><span data-stu-id="9f67a-141">You should also install the compatibility package.</span></span>  <span data-ttu-id="9f67a-142">After Node is installed, you can run the following command from a new cmd or PowerShell prompt:</span><span class="sxs-lookup"><span data-stu-id="9f67a-142">After Node is installed, you can run the following command from a new cmd or PowerShell prompt:</span></span>
+
+```npm i -g azure-mobile-apps-compatibility```
+
+## <a name="obtain-ams-scripts"></a> <span data-ttu-id="9f67a-143">Obtain your Azure Mobile Services Scripts</span><span class="sxs-lookup"><span data-stu-id="9f67a-143">Obtain your Azure Mobile Services Scripts</span></span>
+* <span data-ttu-id="9f67a-144">Log in to the [Azure Portal].</span><span class="sxs-lookup"><span data-stu-id="9f67a-144">Log in to the [Azure Portal].</span></span>
+* <span data-ttu-id="9f67a-145">Using **All Resources** or **App Services**, find your Mobile Services site.</span><span class="sxs-lookup"><span data-stu-id="9f67a-145">Using **All Resources** or **App Services**, find your Mobile Services site.</span></span>
+* <span data-ttu-id="9f67a-146">Within the site, click on **Tools** -> **Kudu** -> **Go** to open the Kudu site.</span><span class="sxs-lookup"><span data-stu-id="9f67a-146">Within the site, click on **Tools** -> **Kudu** -> **Go** to open the Kudu site.</span></span>
+* <span data-ttu-id="9f67a-147">Click on **Debug Console** -> **PowerShell** to open the Debug console.</span><span class="sxs-lookup"><span data-stu-id="9f67a-147">Click on **Debug Console** -> **PowerShell** to open the Debug console.</span></span>
+* <span data-ttu-id="9f67a-148">Navigate to `site/wwwroot/App_Data/config` by clicking on each directory in turn</span><span class="sxs-lookup"><span data-stu-id="9f67a-148">Navigate to `site/wwwroot/App_Data/config` by clicking on each directory in turn</span></span>
+* <span data-ttu-id="9f67a-149">Click on the download icon next to the `scripts` directory.</span><span class="sxs-lookup"><span data-stu-id="9f67a-149">Click on the download icon next to the `scripts` directory.</span></span>
+
+<span data-ttu-id="9f67a-150">This will download the scripts in ZIP format.</span><span class="sxs-lookup"><span data-stu-id="9f67a-150">This will download the scripts in ZIP format.</span></span>  <span data-ttu-id="9f67a-151">Create a new directory on your local machine and unpack the `scripts.ZIP` file within the directory.</span><span class="sxs-lookup"><span data-stu-id="9f67a-151">Create a new directory on your local machine and unpack the `scripts.ZIP` file within the directory.</span></span>  <span data-ttu-id="9f67a-152">This will create a `scripts` directory.</span><span class="sxs-lookup"><span data-stu-id="9f67a-152">This will create a `scripts` directory.</span></span>
+
+## <a name="scaffold-app"></a> <span data-ttu-id="9f67a-153">Scaffold the new Azure Mobile Apps backend</span><span class="sxs-lookup"><span data-stu-id="9f67a-153">Scaffold the new Azure Mobile Apps backend</span></span>
+<span data-ttu-id="9f67a-154">Run the following command from the directory containing the scripts directory:</span><span class="sxs-lookup"><span data-stu-id="9f67a-154">Run the following command from the directory containing the scripts directory:</span></span>
+
+```scaffold-mobile-app scripts out```
+
+<span data-ttu-id="9f67a-155">This will create a scaffolded Azure Mobile Apps backend in the `out` directory.</span><span class="sxs-lookup"><span data-stu-id="9f67a-155">This will create a scaffolded Azure Mobile Apps backend in the `out` directory.</span></span>  <span data-ttu-id="9f67a-156">Although not required, it's a good idea to check the `out` directory into a source code repository of your choice.</span><span class="sxs-lookup"><span data-stu-id="9f67a-156">Although not required, it's a good idea to check the `out` directory into a source code repository of your choice.</span></span>
+
+## <a name="deploy-ama-app"></a> <span data-ttu-id="9f67a-157">Deploy your Azure Mobile Apps backend</span><span class="sxs-lookup"><span data-stu-id="9f67a-157">Deploy your Azure Mobile Apps backend</span></span>
+<span data-ttu-id="9f67a-158">During deployment, you will need to do the following:</span><span class="sxs-lookup"><span data-stu-id="9f67a-158">During deployment, you will need to do the following:</span></span>
+
+1. <span data-ttu-id="9f67a-159">Create a new Mobile App in the [Azure Portal].</span><span class="sxs-lookup"><span data-stu-id="9f67a-159">Create a new Mobile App in the [Azure Portal].</span></span>
+2. <span data-ttu-id="9f67a-160">Run the `createViews.sql` script on your connected database.</span><span class="sxs-lookup"><span data-stu-id="9f67a-160">Run the `createViews.sql` script on your connected database.</span></span>
+3. <span data-ttu-id="9f67a-161">Link the database that is linked to your Mobile Service to your new App Service.</span><span class="sxs-lookup"><span data-stu-id="9f67a-161">Link the database that is linked to your Mobile Service to your new App Service.</span></span>
+4. <span data-ttu-id="9f67a-162">Link any other resources (such as Notification Hubs) to the new App Service.</span><span class="sxs-lookup"><span data-stu-id="9f67a-162">Link any other resources (such as Notification Hubs) to the new App Service.</span></span>
+5. <span data-ttu-id="9f67a-163">Deploy the generated code to your new site.</span><span class="sxs-lookup"><span data-stu-id="9f67a-163">Deploy the generated code to your new site.</span></span>
+
+### <a name="create-a-new-mobile-app"></a><span data-ttu-id="9f67a-164">Create a new Mobile App</span><span class="sxs-lookup"><span data-stu-id="9f67a-164">Create a new Mobile App</span></span>
+1. <span data-ttu-id="9f67a-165">Log in at the [Azure Portal].</span><span class="sxs-lookup"><span data-stu-id="9f67a-165">Log in at the [Azure Portal].</span></span>
+2. <span data-ttu-id="9f67a-166">Click **+NEW** > **Web + Mobile** > **Mobile App**, then provide a name for your Mobile App backend.</span><span class="sxs-lookup"><span data-stu-id="9f67a-166">Click **+NEW** > **Web + Mobile** > **Mobile App**, then provide a name for your Mobile App backend.</span></span>
+3. <span data-ttu-id="9f67a-167">For the **Resource Group**, select an existing resource group, or create a new one (using the same name as your app.)</span><span class="sxs-lookup"><span data-stu-id="9f67a-167">For the **Resource Group**, select an existing resource group, or create a new one (using the same name as your app.)</span></span> 
+   
+    <span data-ttu-id="9f67a-168">You can either select another App Service plan or create a new one.</span><span class="sxs-lookup"><span data-stu-id="9f67a-168">You can either select another App Service plan or create a new one.</span></span> <span data-ttu-id="9f67a-169">For more about App Services plans and how to create a new plan in a different pricing tier and in your desired location, see [Azure App Service plans in-depth overview](../app-service/azure-web-sites-web-hosting-plans-in-depth-overview.md).</span><span class="sxs-lookup"><span data-stu-id="9f67a-169">For more about App Services plans and how to create a new plan in a different pricing tier and in your desired location, see [Azure App Service plans in-depth overview](../app-service/azure-web-sites-web-hosting-plans-in-depth-overview.md).</span></span>
+4. <span data-ttu-id="9f67a-170">For the **App Service plan**, the default plan (in the [Standard tier](https://azure.microsoft.com/pricing/details/app-service/)) is selected.</span><span class="sxs-lookup"><span data-stu-id="9f67a-170">For the **App Service plan**, the default plan (in the [Standard tier](https://azure.microsoft.com/pricing/details/app-service/)) is selected.</span></span> <span data-ttu-id="9f67a-171">You can also  select a different plan, or [create a new one](../app-service/azure-web-sites-web-hosting-plans-in-depth-overview.md#create-an-app-service-plan).</span><span class="sxs-lookup"><span data-stu-id="9f67a-171">You can also  select a different plan, or [create a new one](../app-service/azure-web-sites-web-hosting-plans-in-depth-overview.md#create-an-app-service-plan).</span></span> <span data-ttu-id="9f67a-172">The App Service plan's settings determine the [location, features, cost and compute resources](https://azure.microsoft.com/pricing/details/app-service/) associated with your app.</span><span class="sxs-lookup"><span data-stu-id="9f67a-172">The App Service plan's settings determine the [location, features, cost and compute resources](https://azure.microsoft.com/pricing/details/app-service/) associated with your app.</span></span> 
+   
+    <span data-ttu-id="9f67a-173">After you decide on the plan, click **Create**.</span><span class="sxs-lookup"><span data-stu-id="9f67a-173">After you decide on the plan, click **Create**.</span></span> <span data-ttu-id="9f67a-174">This creates the Mobile App backend.</span><span class="sxs-lookup"><span data-stu-id="9f67a-174">This creates the Mobile App backend.</span></span> 
+
+### <a name="run-createviewssql"></a><span data-ttu-id="9f67a-175">Run CreateViews.SQL</span><span class="sxs-lookup"><span data-stu-id="9f67a-175">Run CreateViews.SQL</span></span>
+<span data-ttu-id="9f67a-176">The scaffolded app contains a file called `createViews.sql`.</span><span class="sxs-lookup"><span data-stu-id="9f67a-176">The scaffolded app contains a file called `createViews.sql`.</span></span>  <span data-ttu-id="9f67a-177">This script must be executed against the target database.</span><span class="sxs-lookup"><span data-stu-id="9f67a-177">This script must be executed against the target database.</span></span>  <span data-ttu-id="9f67a-178">The connection string for the target database can be obtained from your migrated mobile service from the **Settings** blade under **Connection Strings**.</span><span class="sxs-lookup"><span data-stu-id="9f67a-178">The connection string for the target database can be obtained from your migrated mobile service from the **Settings** blade under **Connection Strings**.</span></span>  <span data-ttu-id="9f67a-179">It is named `MS_TableConnectionString`.</span><span class="sxs-lookup"><span data-stu-id="9f67a-179">It is named `MS_TableConnectionString`.</span></span>
+
+<span data-ttu-id="9f67a-180">You can run this script from within SQL Server Management Studio or Visual Studio.</span><span class="sxs-lookup"><span data-stu-id="9f67a-180">You can run this script from within SQL Server Management Studio or Visual Studio.</span></span>
+
+### <a name="link-the-database-to-your-app-service"></a><span data-ttu-id="9f67a-181">Link the Database to your App Service</span><span class="sxs-lookup"><span data-stu-id="9f67a-181">Link the Database to your App Service</span></span>
+<span data-ttu-id="9f67a-182">Link the existing database to your App Service:</span><span class="sxs-lookup"><span data-stu-id="9f67a-182">Link the existing database to your App Service:</span></span>
+
+* <span data-ttu-id="9f67a-183">In the [Azure Portal], open your App Service.</span><span class="sxs-lookup"><span data-stu-id="9f67a-183">In the [Azure Portal], open your App Service.</span></span>
+* <span data-ttu-id="9f67a-184">Select **All Settings** -> **Data Connections**.</span><span class="sxs-lookup"><span data-stu-id="9f67a-184">Select **All Settings** -> **Data Connections**.</span></span>
+* <span data-ttu-id="9f67a-185">Click on **+ Add**.</span><span class="sxs-lookup"><span data-stu-id="9f67a-185">Click on **+ Add**.</span></span>
+* <span data-ttu-id="9f67a-186">In the drop-down, select **SQL Database**</span><span class="sxs-lookup"><span data-stu-id="9f67a-186">In the drop-down, select **SQL Database**</span></span>
+* <span data-ttu-id="9f67a-187">Under **SQL Database**, select your existing database, then click on **Select**.</span><span class="sxs-lookup"><span data-stu-id="9f67a-187">Under **SQL Database**, select your existing database, then click on **Select**.</span></span>
+* <span data-ttu-id="9f67a-188">Under **Connection string**, enter the username and password for the database, then click on **OK**.</span><span class="sxs-lookup"><span data-stu-id="9f67a-188">Under **Connection string**, enter the username and password for the database, then click on **OK**.</span></span>
+* <span data-ttu-id="9f67a-189">In the **Add data connections** blade, click on **OK**.</span><span class="sxs-lookup"><span data-stu-id="9f67a-189">In the **Add data connections** blade, click on **OK**.</span></span>
+
+<span data-ttu-id="9f67a-190">The username and password can be found by viewing the Connection String for the target database in your migrated Mobile Service.</span><span class="sxs-lookup"><span data-stu-id="9f67a-190">The username and password can be found by viewing the Connection String for the target database in your migrated Mobile Service.</span></span>
+
+### <a name="set-up-authentication"></a><span data-ttu-id="9f67a-191">Set up authentication</span><span class="sxs-lookup"><span data-stu-id="9f67a-191">Set up authentication</span></span>
+<span data-ttu-id="9f67a-192">Azure Mobile Apps allows you to configure Azure Active Directory, Facebook, Google, Microsoft and Twitter authentication within the service.</span><span class="sxs-lookup"><span data-stu-id="9f67a-192">Azure Mobile Apps allows you to configure Azure Active Directory, Facebook, Google, Microsoft and Twitter authentication within the service.</span></span>  <span data-ttu-id="9f67a-193">Custom authentication will need to be developed separately.</span><span class="sxs-lookup"><span data-stu-id="9f67a-193">Custom authentication will need to be developed separately.</span></span>  <span data-ttu-id="9f67a-194">Refer to the [Authentication Concepts] documentation and [Authentication Quickstart] documentation for more information.</span><span class="sxs-lookup"><span data-stu-id="9f67a-194">Refer to the [Authentication Concepts] documentation and [Authentication Quickstart] documentation for more information.</span></span>  
+
+## <a name="updating-clients"></a><span data-ttu-id="9f67a-195">Update Mobile clients</span><span class="sxs-lookup"><span data-stu-id="9f67a-195">Update Mobile clients</span></span>
+<span data-ttu-id="9f67a-196">Once you have an operational Mobile App backend, you can work on a new version of your client application which consumes it.</span><span class="sxs-lookup"><span data-stu-id="9f67a-196">Once you have an operational Mobile App backend, you can work on a new version of your client application which consumes it.</span></span> <span data-ttu-id="9f67a-197">Mobile Apps also includes a new version of the client SDKs, and similar to the server upgrade above, you will need to remove all references to the Mobile Services SDKs before installing the Mobile Apps versions.</span><span class="sxs-lookup"><span data-stu-id="9f67a-197">Mobile Apps also includes a new version of the client SDKs, and similar to the server upgrade above, you will need to remove all references to the Mobile Services SDKs before installing the Mobile Apps versions.</span></span>
+
+<span data-ttu-id="9f67a-198">One of the main changes between the versions is that the constructors no longer require an application key.</span><span class="sxs-lookup"><span data-stu-id="9f67a-198">One of the main changes between the versions is that the constructors no longer require an application key.</span></span> <span data-ttu-id="9f67a-199">You now simply pass in the URL of your Mobile App.</span><span class="sxs-lookup"><span data-stu-id="9f67a-199">You now simply pass in the URL of your Mobile App.</span></span> <span data-ttu-id="9f67a-200">For example, on the .NET clients, the `MobileServiceClient` constructor is now:</span><span class="sxs-lookup"><span data-stu-id="9f67a-200">For example, on the .NET clients, the `MobileServiceClient` constructor is now:</span></span>
+
+        public static MobileServiceClient MobileService = new MobileServiceClient(
+            "https://contoso.azurewebsites.net" // URL of the Mobile App
+        );
+
+<span data-ttu-id="9f67a-201">You can read about installing the new SDKs and using the new structure via the links below:</span><span class="sxs-lookup"><span data-stu-id="9f67a-201">You can read about installing the new SDKs and using the new structure via the links below:</span></span>
+
+* [<span data-ttu-id="9f67a-202">Android version 2.2 or later</span><span class="sxs-lookup"><span data-stu-id="9f67a-202">Android version 2.2 or later</span></span>](app-service-mobile-android-how-to-use-client-library.md)
+* [<span data-ttu-id="9f67a-203">iOS version 3.0.0 or later</span><span class="sxs-lookup"><span data-stu-id="9f67a-203">iOS version 3.0.0 or later</span></span>](app-service-mobile-ios-how-to-use-client-library.md)
+* [<span data-ttu-id="9f67a-204">.NET (Windows/Xamarin) version 2.0.0 or later</span><span class="sxs-lookup"><span data-stu-id="9f67a-204">.NET (Windows/Xamarin) version 2.0.0 or later</span></span>](app-service-mobile-dotnet-how-to-use-client-library.md)
+* [<span data-ttu-id="9f67a-205">Apache Cordova version 2.0 or later</span><span class="sxs-lookup"><span data-stu-id="9f67a-205">Apache Cordova version 2.0 or later</span></span>](app-service-mobile-cordova-how-to-use-client-library.md)
+
+<span data-ttu-id="9f67a-206">If your application makes use of push notifications, make note of the specific registration instructions for each platform, as there have been some changes there as well.</span><span class="sxs-lookup"><span data-stu-id="9f67a-206">If your application makes use of push notifications, make note of the specific registration instructions for each platform, as there have been some changes there as well.</span></span>
+
+<span data-ttu-id="9f67a-207">When you have the new client version ready, try it out against your upgraded server project.</span><span class="sxs-lookup"><span data-stu-id="9f67a-207">When you have the new client version ready, try it out against your upgraded server project.</span></span> <span data-ttu-id="9f67a-208">After validating that it works, you can release a new version of your application to customers.</span><span class="sxs-lookup"><span data-stu-id="9f67a-208">After validating that it works, you can release a new version of your application to customers.</span></span> <span data-ttu-id="9f67a-209">Eventually, once your customers have had a chance to receive these updates, you can delete the Mobile Services version of your app.</span><span class="sxs-lookup"><span data-stu-id="9f67a-209">Eventually, once your customers have had a chance to receive these updates, you can delete the Mobile Services version of your app.</span></span> <span data-ttu-id="9f67a-210">At this point, you have completely upgraded to an App Service Mobile App using the latest Mobile Apps server SDK.</span><span class="sxs-lookup"><span data-stu-id="9f67a-210">At this point, you have completely upgraded to an App Service Mobile App using the latest Mobile Apps server SDK.</span></span>
+
+<!-- URLs. -->
+
+[Azure portal]: https://portal.azure.com/
+[Azure classic portal]: https://manage.windowsazure.com/
+[What are Mobile Apps?]: app-service-mobile-value-prop.md
+[I already use web sites and mobile services – how does App Service help me?]: /en-us/documentation/articles/app-service-mobile-value-prop-migration-from-mobile-services
+[Mobile App Server SDK]: https://www.npmjs.com/package/azure-mobile-apps
+[Create a Mobile App]: app-service-mobile-xamarin-ios-get-started.md
+[Add push notifications to your mobile app]: app-service-mobile-xamarin-ios-get-started-push.md
+[Add authentication to your mobile app]: app-service-mobile-xamarin-ios-get-started-users.md
+[Azure Scheduler]: /en-us/documentation/services/scheduler/
+[Web Job]: ../app-service-web/websites-webjobs-resources.md
+[How to use the .NET server SDK]: app-service-mobile-dotnet-backend-how-to-use-server-sdk.md
+[Migrate from Mobile Services to an App Service Mobile App]: app-service-mobile-migrating-from-mobile-services.md
+[Migrate your existing Mobile Service to App Service]: app-service-mobile-migrating-from-mobile-services.md
+[App Service pricing]: https://azure.microsoft.com/en-us/pricing/details/app-service/
+[.NET server SDK overview]: app-service-mobile-dotnet-backend-how-to-use-server-sdk.md
+[Authentication Concepts]: ../app-service/app-service-authentication-overview.md
+[Authentication Quickstart]: app-service-mobile-auth.md
+
+[Azure Portal]: https://portal.azure.com/
+[OData]: http://www.odata.org
+[Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[basicapp sample on GitHub]: https://github.com/azure/azure-mobile-apps-node/tree/master/samples/basic-app
+[todo sample on GitHub]: https://github.com/azure/azure-mobile-apps-node/tree/master/samples/todo
+[samples directory on GitHub]: https://github.com/azure/azure-mobile-apps-node/tree/master/samples
+[static-schema sample on GitHub]: https://github.com/azure/azure-mobile-apps-node/tree/master/samples/static-schema
+[QueryJS]: https://github.com/Azure/queryjs
+[Node.js Tools 1.1 for Visual Studio]: https://github.com/Microsoft/nodejstools/releases/tag/v1.1-RC.2.1
+[mssql Node.js package]: https://www.npmjs.com/package/mssql
+[Microsoft SQL Server 2014 Express]: http://www.microsoft.com/en-us/server-cloud/Products/sql-server-editions/sql-server-express.aspx
+[ExpressJS Middleware]: http://expressjs.com/guide/using-middleware.html
+[Winston]: https://github.com/winstonjs/winston
