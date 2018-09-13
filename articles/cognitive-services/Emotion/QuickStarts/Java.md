@@ -2,30 +2,34 @@
 title: Emotion API Java for Android quick start | Microsoft Docs
 description: Get information and a code sample to help you quickly get started using the Emotion API with Java for Android in Cognitive Services.
 services: cognitive-services
-author: v-royhar
-manager: yutkuo
+author: anrothMSFT
+manager: corncar
 ms.service: cognitive-services
-ms.technology: emotion
+ms.component: emotion-api
 ms.topic: article
-ms.date: 03/02/2017
+ms.date: 05/23/2017
 ms.author: anroth
-ms.openlocfilehash: c5d38d881624e956b897cbc993f8a4622de3e324
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 0e7d3991b195a83a8b87e306b3b34fbed2098581
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44550707"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44784919"
 ---
-# <a name="emotion-api-java-for-android-quick-start"></a><span data-ttu-id="31cc6-103">Emotion API Java for Android Quick Start</span><span class="sxs-lookup"><span data-stu-id="31cc6-103">Emotion API Java for Android Quick Start</span></span>
-<span data-ttu-id="31cc6-104">This article provides information and a code sample to help you quickly get started with the [Emotion Recognize method](https://dev.projectoxford.ai/docs/services/5639d931ca73072154c1ce89/operations/563b31ea778daf121cc3a5fa) in the Emotion API Android client library.</span><span class="sxs-lookup"><span data-stu-id="31cc6-104">This article provides information and a code sample to help you quickly get started with the [Emotion Recognize method](https://dev.projectoxford.ai/docs/services/5639d931ca73072154c1ce89/operations/563b31ea778daf121cc3a5fa) in the Emotion API Android client library.</span></span> <span data-ttu-id="31cc6-105">The sample demonstrates how you can use Java to recognize the emotions expressed by people.</span><span class="sxs-lookup"><span data-stu-id="31cc6-105">The sample demonstrates how you can use Java to recognize the emotions expressed by people.</span></span> 
+# <a name="emotion-api-java-for-android-quick-start"></a><span data-ttu-id="b1b11-103">Emotion API Java for Android Quick Start</span><span class="sxs-lookup"><span data-stu-id="b1b11-103">Emotion API Java for Android Quick Start</span></span>
 
-## <a name="prerequisites"></a><span data-ttu-id="31cc6-106">Prerequisites</span><span class="sxs-lookup"><span data-stu-id="31cc6-106">Prerequisites</span></span>
-* <span data-ttu-id="31cc6-107">Get the Emotion API Java for Android SDK [here](https://github.com/Microsoft/Cognitive-emotion-android)</span><span class="sxs-lookup"><span data-stu-id="31cc6-107">Get the Emotion API Java for Android SDK [here](https://github.com/Microsoft/Cognitive-emotion-android)</span></span>
-* <span data-ttu-id="31cc6-108">Get your free subscription key [here](https://www.microsoft.com/cognitive-services/en-us/sign-up)</span><span class="sxs-lookup"><span data-stu-id="31cc6-108">Get your free subscription key [here](https://www.microsoft.com/cognitive-services/en-us/sign-up)</span></span>
+> [!IMPORTANT]
+> <span data-ttu-id="b1b11-104">Video API Preview will end on October 30th, 2017.</span><span class="sxs-lookup"><span data-stu-id="b1b11-104">Video API Preview will end on October 30th, 2017.</span></span> <span data-ttu-id="b1b11-105">Try the new [Video Indexer API Preview](https://azure.microsoft.com/services/cognitive-services/video-indexer/) to easily extract insights from videos and to enhance content discovery experiences, such as search results, by detecting spoken words, faces, characters, and emotions.</span><span class="sxs-lookup"><span data-stu-id="b1b11-105">Try the new [Video Indexer API Preview](https://azure.microsoft.com/services/cognitive-services/video-indexer/) to easily extract insights from videos and to enhance content discovery experiences, such as search results, by detecting spoken words, faces, characters, and emotions.</span></span> <span data-ttu-id="b1b11-106">[Learn more](https://docs.microsoft.com/azure/cognitive-services/video-indexer/video-indexer-overview).</span><span class="sxs-lookup"><span data-stu-id="b1b11-106">[Learn more](https://docs.microsoft.com/azure/cognitive-services/video-indexer/video-indexer-overview).</span></span>
 
-## <a name="recognize-emotions-java-for-android-example-request"></a><span data-ttu-id="31cc6-109">Recognize Emotions Java for Android Example Request</span><span class="sxs-lookup"><span data-stu-id="31cc6-109">Recognize Emotions Java for Android Example Request</span></span>
+<span data-ttu-id="b1b11-107">This article provides information and a code sample to help you quickly get started with the [Emotion Recognize method](https://westus.dev.cognitive.microsoft.com/docs/services/5639d931ca73072154c1ce89/operations/563b31ea778daf121cc3a5fa) in the Emotion API Android client library.</span><span class="sxs-lookup"><span data-stu-id="b1b11-107">This article provides information and a code sample to help you quickly get started with the [Emotion Recognize method](https://westus.dev.cognitive.microsoft.com/docs/services/5639d931ca73072154c1ce89/operations/563b31ea778daf121cc3a5fa) in the Emotion API Android client library.</span></span> <span data-ttu-id="b1b11-108">The sample demonstrates how you can use Java to recognize the emotions expressed by people.</span><span class="sxs-lookup"><span data-stu-id="b1b11-108">The sample demonstrates how you can use Java to recognize the emotions expressed by people.</span></span> 
 
-```Java
+## <a name="prerequisites"></a><span data-ttu-id="b1b11-109">Prerequisites</span><span class="sxs-lookup"><span data-stu-id="b1b11-109">Prerequisites</span></span>
+* <span data-ttu-id="b1b11-110">Get the Emotion API Java for Android SDK [here](https://github.com/Microsoft/Cognitive-emotion-android)</span><span class="sxs-lookup"><span data-stu-id="b1b11-110">Get the Emotion API Java for Android SDK [here](https://github.com/Microsoft/Cognitive-emotion-android)</span></span>
+* <span data-ttu-id="b1b11-111">Get your free subscription key [here](https://azure.microsoft.com/try/cognitive-services/)</span><span class="sxs-lookup"><span data-stu-id="b1b11-111">Get your free subscription key [here](https://azure.microsoft.com/try/cognitive-services/)</span></span>
+
+## <a name="recognize-emotions-java-for-android-example-request"></a><span data-ttu-id="b1b11-112">Recognize Emotions Java for Android Example Request</span><span class="sxs-lookup"><span data-stu-id="b1b11-112">Recognize Emotions Java for Android Example Request</span></span>
+
+```java
 // // This sample uses the Apache HTTP client from HTTP Components (http://hc.apache.org/httpcomponents-client-ga/)
 import java.net.URI;
 import org.apache.http.HttpEntity;
@@ -45,6 +49,9 @@ public class Main
 
         try
         {
+            // NOTE: You must use the same region in your REST call as you used to obtain your subscription keys.
+            //   For example, if you obtained your subscription keys from westcentralus, replace "westus" in the 
+            //   URL below with "westcentralus".
             URIBuilder uriBuilder = new URIBuilder("https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognize");
 
             URI uri = uriBuilder.build();
@@ -74,10 +81,10 @@ public class Main
 }
 ```
 
-## <a name="recognize-emotions-sample-response"></a><span data-ttu-id="31cc6-110">Recognize Emotions Sample Response</span><span class="sxs-lookup"><span data-stu-id="31cc6-110">Recognize Emotions Sample Response</span></span>
-<span data-ttu-id="31cc6-111">A successful call returns an array of face entries and their associated emotion scores, ranked by face rectangle size in descending order.</span><span class="sxs-lookup"><span data-stu-id="31cc6-111">A successful call returns an array of face entries and their associated emotion scores, ranked by face rectangle size in descending order.</span></span> <span data-ttu-id="31cc6-112">An empty response indicates that no faces were detected.</span><span class="sxs-lookup"><span data-stu-id="31cc6-112">An empty response indicates that no faces were detected.</span></span> <span data-ttu-id="31cc6-113">An emotion entry contains the following fields:</span><span class="sxs-lookup"><span data-stu-id="31cc6-113">An emotion entry contains the following fields:</span></span>
-* <span data-ttu-id="31cc6-114">faceRectangle - Rectangle location of face in the image.</span><span class="sxs-lookup"><span data-stu-id="31cc6-114">faceRectangle - Rectangle location of face in the image.</span></span>
-* <span data-ttu-id="31cc6-115">scores - Emotion scores for each face in the image.</span><span class="sxs-lookup"><span data-stu-id="31cc6-115">scores - Emotion scores for each face in the image.</span></span> 
+## <a name="recognize-emotions-sample-response"></a><span data-ttu-id="b1b11-113">Recognize Emotions Sample Response</span><span class="sxs-lookup"><span data-stu-id="b1b11-113">Recognize Emotions Sample Response</span></span>
+<span data-ttu-id="b1b11-114">A successful call returns an array of face entries and their associated emotion scores, ranked by face rectangle size in descending order.</span><span class="sxs-lookup"><span data-stu-id="b1b11-114">A successful call returns an array of face entries and their associated emotion scores, ranked by face rectangle size in descending order.</span></span> <span data-ttu-id="b1b11-115">An empty response indicates that no faces were detected.</span><span class="sxs-lookup"><span data-stu-id="b1b11-115">An empty response indicates that no faces were detected.</span></span> <span data-ttu-id="b1b11-116">An emotion entry contains the following fields:</span><span class="sxs-lookup"><span data-stu-id="b1b11-116">An emotion entry contains the following fields:</span></span>
+* <span data-ttu-id="b1b11-117">faceRectangle - Rectangle location of face in the image.</span><span class="sxs-lookup"><span data-stu-id="b1b11-117">faceRectangle - Rectangle location of face in the image.</span></span>
+* <span data-ttu-id="b1b11-118">scores - Emotion scores for each face in the image.</span><span class="sxs-lookup"><span data-stu-id="b1b11-118">scores - Emotion scores for each face in the image.</span></span> 
 
 ```json
 application/json 

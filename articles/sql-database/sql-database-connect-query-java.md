@@ -1,315 +1,147 @@
 ---
-title: Connect to Azure SQL Database by using Java | Microsoft Docs
-description: Presents a Java code sample you can use to connect to and query Azure SQL Database.
+title: Use Java to query Azure SQL Database | Microsoft Docs
+description: This topic shows you how to use Java to create a program that connects to an Azure SQL Database and query it using Transact-SQL statements.
 services: sql-database
-documentationcenter: ''
 author: ajlam
-manager: jhubbard
-editor: ''
-ms.assetid: ''
+manager: craigg
 ms.service: sql-database
-ms.custom: quick start connect
-ms.workload: drivers
-ms.tgt_pltfrm: na
+ms.custom: mvc,develop apps
 ms.devlang: java
-ms.topic: article
-ms.date: 04/17/2017
-ms.author: andrela;carlrab;sstein
-ms.openlocfilehash: d1335348d5a7def4447473af16b6740f5bb7d85c
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.topic: quickstart
+ms.date: 04/01/2018
+ms.author: andrela
+ms.openlocfilehash: 8bd2ad5c4b0ab17bd6a37d9fefbd36d5e2a3cf4c
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44564395"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44789547"
 ---
-# <a name="azure-sql-database-use-java-to-connect-and-query-data"></a><span data-ttu-id="97c38-103">Azure SQL Database: Use Java to connect and query data</span><span class="sxs-lookup"><span data-stu-id="97c38-103">Azure SQL Database: Use Java to connect and query data</span></span>
+# <a name="use-java-to-query-an-azure-sql-database"></a><span data-ttu-id="325cc-103">Use Java to query an Azure SQL database</span><span class="sxs-lookup"><span data-stu-id="325cc-103">Use Java to query an Azure SQL database</span></span>
 
-<span data-ttu-id="97c38-104">This quick start demonstrates how to use [Java](https://docs.microsoft.com/sql/connect/jdbc/microsoft-jdbc-driver-for-sql-server) to connect to an Azure SQL database, and then use Transact-SQL statements to query, insert, update, and delete data in the database from Mac OS, Ubuntu Linux, and Windows platforms.</span><span class="sxs-lookup"><span data-stu-id="97c38-104">This quick start demonstrates how to use [Java](https://docs.microsoft.com/sql/connect/jdbc/microsoft-jdbc-driver-for-sql-server) to connect to an Azure SQL database, and then use Transact-SQL statements to query, insert, update, and delete data in the database from Mac OS, Ubuntu Linux, and Windows platforms.</span></span>
+<span data-ttu-id="325cc-104">This quickstart demonstrates how to use [Java](https://docs.microsoft.com/sql/connect/jdbc/microsoft-jdbc-driver-for-sql-server) to connect to an Azure SQL database and then use Transact-SQL statements to query data.</span><span class="sxs-lookup"><span data-stu-id="325cc-104">This quickstart demonstrates how to use [Java](https://docs.microsoft.com/sql/connect/jdbc/microsoft-jdbc-driver-for-sql-server) to connect to an Azure SQL database and then use Transact-SQL statements to query data.</span></span>
 
-<span data-ttu-id="97c38-105">This quick start uses as its starting point the resources created in one of these quick starts:</span><span class="sxs-lookup"><span data-stu-id="97c38-105">This quick start uses as its starting point the resources created in one of these quick starts:</span></span>
+## <a name="prerequisites"></a><span data-ttu-id="325cc-105">Prerequisites</span><span class="sxs-lookup"><span data-stu-id="325cc-105">Prerequisites</span></span>
 
-- [<span data-ttu-id="97c38-106">Create DB - Portal</span><span class="sxs-lookup"><span data-stu-id="97c38-106">Create DB - Portal</span></span>](sql-database-get-started-portal.md)
-- [<span data-ttu-id="97c38-107">Create DB - CLI</span><span class="sxs-lookup"><span data-stu-id="97c38-107">Create DB - CLI</span></span>](sql-database-get-started-cli.md)
+<span data-ttu-id="325cc-106">To complete this quickstart, make sure you have the following prerequisites:</span><span class="sxs-lookup"><span data-stu-id="325cc-106">To complete this quickstart, make sure you have the following prerequisites:</span></span>
 
-## <a name="install-java-software"></a><span data-ttu-id="97c38-108">Install Java software</span><span class="sxs-lookup"><span data-stu-id="97c38-108">Install Java software</span></span>
+[!INCLUDE [prerequisites-create-db](../../includes/sql-database-connect-query-prerequisites-create-db-includes.md)]
 
-<span data-ttu-id="97c38-109">The steps in this section assume that you are familar with developing using Java and are new to working with Azure SQL Database.</span><span class="sxs-lookup"><span data-stu-id="97c38-109">The steps in this section assume that you are familar with developing using Java and are new to working with Azure SQL Database.</span></span> <span data-ttu-id="97c38-110">If you are new to developing with Java, go the [Build an app using SQL Server](https://www.microsoft.com/en-us/sql-server/developer-get-started/) and select **Java** and then select your operating system.</span><span class="sxs-lookup"><span data-stu-id="97c38-110">If you are new to developing with Java, go the [Build an app using SQL Server](https://www.microsoft.com/en-us/sql-server/developer-get-started/) and select **Java** and then select your operating system.</span></span>
+- <span data-ttu-id="325cc-107">A [server-level firewall rule](sql-database-get-started-portal-firewall.md) for the public IP address of the computer you use for this quickstart.</span><span class="sxs-lookup"><span data-stu-id="325cc-107">A [server-level firewall rule](sql-database-get-started-portal-firewall.md) for the public IP address of the computer you use for this quickstart.</span></span>
 
-### <a name="mac-os"></a><span data-ttu-id="97c38-111">**Mac OS**</span><span class="sxs-lookup"><span data-stu-id="97c38-111">**Mac OS**</span></span>
-<span data-ttu-id="97c38-112">Open your terminal and navigate to a directory where you plan on creating your Java project.</span><span class="sxs-lookup"><span data-stu-id="97c38-112">Open your terminal and navigate to a directory where you plan on creating your Java project.</span></span> <span data-ttu-id="97c38-113">Enter the following commands to install **brew** and **Maven**.</span><span class="sxs-lookup"><span data-stu-id="97c38-113">Enter the following commands to install **brew** and **Maven**.</span></span> 
+- <span data-ttu-id="325cc-108">You have installed Java and related software for your operating system:</span><span class="sxs-lookup"><span data-stu-id="325cc-108">You have installed Java and related software for your operating system:</span></span>
 
-```bash
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew update
-brew install maven
-```
+    - <span data-ttu-id="325cc-109">**MacOS**: Install Homebrew and Java, and then install Maven.</span><span class="sxs-lookup"><span data-stu-id="325cc-109">**MacOS**: Install Homebrew and Java, and then install Maven.</span></span> <span data-ttu-id="325cc-110">See [Step 1.2 and 1.3](https://www.microsoft.com/sql-server/developer-get-started/java/mac/).</span><span class="sxs-lookup"><span data-stu-id="325cc-110">See [Step 1.2 and 1.3](https://www.microsoft.com/sql-server/developer-get-started/java/mac/).</span></span>
+    - <span data-ttu-id="325cc-111">**Ubuntu**:  Install the Java Development Kit, and install Maven.</span><span class="sxs-lookup"><span data-stu-id="325cc-111">**Ubuntu**:  Install the Java Development Kit, and install Maven.</span></span> <span data-ttu-id="325cc-112">See [Step 1.2, 1.3, and 1.4](https://www.microsoft.com/sql-server/developer-get-started/java/ubuntu/).</span><span class="sxs-lookup"><span data-stu-id="325cc-112">See [Step 1.2, 1.3, and 1.4](https://www.microsoft.com/sql-server/developer-get-started/java/ubuntu/).</span></span>
+    - <span data-ttu-id="325cc-113">**Windows**: Install the Java Development Kit, and Maven.</span><span class="sxs-lookup"><span data-stu-id="325cc-113">**Windows**: Install the Java Development Kit, and Maven.</span></span> <span data-ttu-id="325cc-114">See [Step 1.2 and 1.3](https://www.microsoft.com/sql-server/developer-get-started/java/windows/).</span><span class="sxs-lookup"><span data-stu-id="325cc-114">See [Step 1.2 and 1.3](https://www.microsoft.com/sql-server/developer-get-started/java/windows/).</span></span>    
 
-### <a name="linux-ubuntu"></a><span data-ttu-id="97c38-114">**Linux (Ubuntu)**</span><span class="sxs-lookup"><span data-stu-id="97c38-114">**Linux (Ubuntu)**</span></span>
-<span data-ttu-id="97c38-115">Open your terminal and navigate to a directory where you plan on creating your Java project.</span><span class="sxs-lookup"><span data-stu-id="97c38-115">Open your terminal and navigate to a directory where you plan on creating your Java project.</span></span> <span data-ttu-id="97c38-116">Enter the following commands to install **Maven**.</span><span class="sxs-lookup"><span data-stu-id="97c38-116">Enter the following commands to install **Maven**.</span></span> 
+## <a name="sql-server-connection-information"></a><span data-ttu-id="325cc-115">SQL server connection information</span><span class="sxs-lookup"><span data-stu-id="325cc-115">SQL server connection information</span></span>
 
-```bash
-sudo apt-get install maven
-```
+[!INCLUDE [prerequisites-server-connection-info](../../includes/sql-database-connect-query-prerequisites-server-connection-info-includes.md)]
 
-### <a name="windows"></a><span data-ttu-id="97c38-117">**Windows**</span><span class="sxs-lookup"><span data-stu-id="97c38-117">**Windows**</span></span>
-<span data-ttu-id="97c38-118">Install [Maven](https://maven.apache.org/download.cgi) using the official installer.</span><span class="sxs-lookup"><span data-stu-id="97c38-118">Install [Maven](https://maven.apache.org/download.cgi) using the official installer.</span></span> <span data-ttu-id="97c38-119">Maven can be used to help manage dependencies, build, test and run your Java project.</span><span class="sxs-lookup"><span data-stu-id="97c38-119">Maven can be used to help manage dependencies, build, test and run your Java project.</span></span> 
+## <a name="create-maven-project-and-dependencies"></a><span data-ttu-id="325cc-116">**Create Maven project and dependencies**</span><span class="sxs-lookup"><span data-stu-id="325cc-116">**Create Maven project and dependencies**</span></span>
+1. <span data-ttu-id="325cc-117">From the terminal, create a new Maven project called **sqltest**.</span><span class="sxs-lookup"><span data-stu-id="325cc-117">From the terminal, create a new Maven project called **sqltest**.</span></span> 
 
-## <a name="get-connection-information"></a><span data-ttu-id="97c38-120">Get connection information</span><span class="sxs-lookup"><span data-stu-id="97c38-120">Get connection information</span></span>
+   ```bash
+   mvn archetype:generate "-DgroupId=com.sqldbsamples" "-DartifactId=sqltest" "-DarchetypeArtifactId=maven-archetype-quickstart" "-Dversion=1.0.0"
+   ```
 
-<span data-ttu-id="97c38-121">Get the connection information needed to connect to the Azure SQL database.</span><span class="sxs-lookup"><span data-stu-id="97c38-121">Get the connection information needed to connect to the Azure SQL database.</span></span> <span data-ttu-id="97c38-122">You will need the fully qualified server name, database name, and login information in the next procedures.</span><span class="sxs-lookup"><span data-stu-id="97c38-122">You will need the fully qualified server name, database name, and login information in the next procedures.</span></span>
+2. <span data-ttu-id="325cc-118">Enter **Y** when prompted.</span><span class="sxs-lookup"><span data-stu-id="325cc-118">Enter **Y** when prompted.</span></span>
+3. <span data-ttu-id="325cc-119">Change directory to **sqltest** and open ***pom.xml*** with your favorite text editor.</span><span class="sxs-lookup"><span data-stu-id="325cc-119">Change directory to **sqltest** and open ***pom.xml*** with your favorite text editor.</span></span>  <span data-ttu-id="325cc-120">Add the **Microsoft JDBC Driver for SQL Server** to your project's dependencies using the following code:</span><span class="sxs-lookup"><span data-stu-id="325cc-120">Add the **Microsoft JDBC Driver for SQL Server** to your project's dependencies using the following code:</span></span>
 
-1. <span data-ttu-id="97c38-123">Log in to the [Azure portal](https://portal.azure.com/).</span><span class="sxs-lookup"><span data-stu-id="97c38-123">Log in to the [Azure portal](https://portal.azure.com/).</span></span>
-2. <span data-ttu-id="97c38-124">Select **SQL Databases** from the left-hand menu, and click your database on the **SQL databases** page.</span><span class="sxs-lookup"><span data-stu-id="97c38-124">Select **SQL Databases** from the left-hand menu, and click your database on the **SQL databases** page.</span></span> 
-3. <span data-ttu-id="97c38-125">On the **Overview** page for your database, review the fully qualified server name as shown in the image below.</span><span class="sxs-lookup"><span data-stu-id="97c38-125">On the **Overview** page for your database, review the fully qualified server name as shown in the image below.</span></span> <span data-ttu-id="97c38-126">You can hover over the server name to bring up the **Click to copy** option.</span><span class="sxs-lookup"><span data-stu-id="97c38-126">You can hover over the server name to bring up the **Click to copy** option.</span></span> 
+   ```xml
+   <dependency>
+       <groupId>com.microsoft.sqlserver</groupId>
+       <artifactId>mssql-jdbc</artifactId>
+       <version>6.4.0.jre8</version>
+   </dependency>
+   ```
 
-   ![server-name](https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-database/media/sql-database-connect-query-dotnet/server-name.png) 
+4. <span data-ttu-id="325cc-121">Also in ***pom.xml***, add the following properties to your project.</span><span class="sxs-lookup"><span data-stu-id="325cc-121">Also in ***pom.xml***, add the following properties to your project.</span></span>  <span data-ttu-id="325cc-122">If you don't have a properties section, you can add it after the dependencies.</span><span class="sxs-lookup"><span data-stu-id="325cc-122">If you don't have a properties section, you can add it after the dependencies.</span></span>
 
-4. <span data-ttu-id="97c38-128">If you have forgotten the login information for your Azure SQL Database server, navigate to the SQL Database server page to view the server admin name and, if necessary, reset the password.</span><span class="sxs-lookup"><span data-stu-id="97c38-128">If you have forgotten the login information for your Azure SQL Database server, navigate to the SQL Database server page to view the server admin name and, if necessary, reset the password.</span></span>
-5. <span data-ttu-id="97c38-129">Click **Show database connection strings**.</span><span class="sxs-lookup"><span data-stu-id="97c38-129">Click **Show database connection strings**.</span></span>
+   ```xml
+   <properties>
+       <maven.compiler.source>1.8</maven.compiler.source>
+       <maven.compiler.target>1.8</maven.compiler.target>
+   </properties>
+   ```
 
-6. <span data-ttu-id="97c38-130">Review the complete **JDBC** connection string.</span><span class="sxs-lookup"><span data-stu-id="97c38-130">Review the complete **JDBC** connection string.</span></span>
+5. <span data-ttu-id="325cc-123">Save and close ***pom.xml***.</span><span class="sxs-lookup"><span data-stu-id="325cc-123">Save and close ***pom.xml***.</span></span>
 
-    ![JDBC connection string](https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-database/media/sql-database-connect-query-jdbc/jdbc-connection-string.png)  
+## <a name="insert-code-to-query-sql-database"></a><span data-ttu-id="325cc-124">Insert code to query SQL database</span><span class="sxs-lookup"><span data-stu-id="325cc-124">Insert code to query SQL database</span></span>
 
-### <a name="create-maven-project"></a><span data-ttu-id="97c38-132">**Create Maven project**</span><span class="sxs-lookup"><span data-stu-id="97c38-132">**Create Maven project**</span></span>
-<span data-ttu-id="97c38-133">From the terminal, create a new Maven project.</span><span class="sxs-lookup"><span data-stu-id="97c38-133">From the terminal, create a new Maven project.</span></span> 
-```bash
-mvn archetype:generate "-DgroupId=com.sqldbsamples" "-DartifactId=SqlDbSample" "-DarchetypeArtifactId=maven-archetype-quickstart" "-Dversion=1.0.0"
-```
+1. <span data-ttu-id="325cc-125">You should already have a file called ***App.java*** in your Maven project located at:  ..\sqltest\src\main\java\com\sqlsamples\App.java</span><span class="sxs-lookup"><span data-stu-id="325cc-125">You should already have a file called ***App.java*** in your Maven project located at:  ..\sqltest\src\main\java\com\sqlsamples\App.java</span></span>
 
-<span data-ttu-id="97c38-134">Add the **Microsoft JDBC Driver for SQL Server** to the dependencies in ***pom.xml***.</span><span class="sxs-lookup"><span data-stu-id="97c38-134">Add the **Microsoft JDBC Driver for SQL Server** to the dependencies in ***pom.xml***.</span></span> 
+2. <span data-ttu-id="325cc-126">Open the file and replace its contents with the following code and add the appropriate values for your server, database, user, and password.</span><span class="sxs-lookup"><span data-stu-id="325cc-126">Open the file and replace its contents with the following code and add the appropriate values for your server, database, user, and password.</span></span>
 
-```xml
-<dependency>
-    <groupId>com.microsoft.sqlserver</groupId>
-    <artifactId>mssql-jdbc</artifactId>
-    <version>6.1.0.jre8</version>
-</dependency>
-```
+   ```java
+   package com.sqldbsamples;
 
-## <a name="select-data"></a><span data-ttu-id="97c38-135">Select data</span><span class="sxs-lookup"><span data-stu-id="97c38-135">Select data</span></span>
+   import java.sql.Connection;
+   import java.sql.Statement;
+   import java.sql.PreparedStatement;
+   import java.sql.ResultSet;
+   import java.sql.DriverManager;
 
-<span data-ttu-id="97c38-136">Use the following code to query for the top 20 products by category using the [connection](https://docs.microsoft.com/sql/connect/jdbc/working-with-a-connection) class with a [SELECT](https://docs.microsoft.com/sql/t-sql/queries/select-transact-sql) Transact-SQL statement.</span><span class="sxs-lookup"><span data-stu-id="97c38-136">Use the following code to query for the top 20 products by category using the [connection](https://docs.microsoft.com/sql/connect/jdbc/working-with-a-connection) class with a [SELECT](https://docs.microsoft.com/sql/t-sql/queries/select-transact-sql) Transact-SQL statement.</span></span> <span data-ttu-id="97c38-137">Replace the hostHame, dbName, user, and password parameters with the values that you specified when you created the database with the AdventureWorksLT sample data.</span><span class="sxs-lookup"><span data-stu-id="97c38-137">Replace the hostHame, dbName, user, and password parameters with the values that you specified when you created the database with the AdventureWorksLT sample data.</span></span> 
-
-```java
-package com.sqldbsamples;
-
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.DriverManager;
-
-public class App {
+   public class App {
 
     public static void main(String[] args) {
     
         // Connect to database
-        String hostName = "your_server.database.windows.net";
-        String dbName = "your_database";
-        String user = "your_username";
-        String password = "your_password";
-        String url = String.format("jdbc:sqlserver://%s.database.windows.net:1433;database=%s;user=%s;password=%s;encrypt=true;hostNameInCertificate=*.database.windows.net;loginTimeout=30;", hostName, dbName, user, password);
-        Connection connection = null;
+           String hostName = "your_server.database.windows.net";
+           String dbName = "your_database";
+           String user = "your_username";
+           String password = "your_password";
+           String url = String.format("jdbc:sqlserver://%s:1433;database=%s;user=%s;password=%s;encrypt=true;hostNameInCertificate=*.database.windows.net;loginTimeout=30;", hostName, dbName, user, password);
+           Connection connection = null;
 
-        try {
-                connection = DriverManager.getConnection(url);
-                String schema = connection.getSchema();
-                System.out.println("Successful connection - Schema: " + schema);
+           try {
+                   connection = DriverManager.getConnection(url);
+                   String schema = connection.getSchema();
+                   System.out.println("Successful connection - Schema: " + schema);
 
-                System.out.println("Query data example:");
-                System.out.println("=========================================");
+                   System.out.println("Query data example:");
+                   System.out.println("=========================================");
 
-                // Create and execute a SELECT SQL statement.
-                String selectSql = "SELECT TOP 20 pc.Name as CategoryName, p.name as ProductName " 
-                    + "FROM [SalesLT].[ProductCategory] pc "  
-                    + "JOIN [SalesLT].[Product] p ON pc.productcategoryid = p.productcategoryid";
+                   // Create and execute a SELECT SQL statement.
+                   String selectSql = "SELECT TOP 20 pc.Name as CategoryName, p.name as ProductName " 
+                       + "FROM [SalesLT].[ProductCategory] pc "  
+                       + "JOIN [SalesLT].[Product] p ON pc.productcategoryid = p.productcategoryid";
                 
-                try (Statement statement = connection.createStatement();
-                    ResultSet resultSet = statement.executeQuery(selectSql)) {
+                   try (Statement statement = connection.createStatement();
+                       ResultSet resultSet = statement.executeQuery(selectSql)) {
 
-                        // Print results from select statement
-                        System.out.println("Top 20 categories:");
-                        while (resultSet.next())
-                        {
-                            System.out.println(resultSet.getString(1) + " "
-                                + resultSet.getString(2));
-                        }
-                }
-        }
-        catch (Exception e) {
-                e.printStackTrace();
-        }
-    }
-}
-```
+                           // Print results from select statement
+                           System.out.println("Top 20 categories:");
+                           while (resultSet.next())
+                           {
+                               System.out.println(resultSet.getString(1) + " "
+                                   + resultSet.getString(2));
+                           }
+                    connection.close();
+                   }                   
+           }
+           catch (Exception e) {
+                   e.printStackTrace();
+           }
+       }
+   }
+   ```
 
-## <a name="insert-data"></a><span data-ttu-id="97c38-138">Insert data</span><span class="sxs-lookup"><span data-stu-id="97c38-138">Insert data</span></span>
+## <a name="run-the-code"></a><span data-ttu-id="325cc-127">Run the code</span><span class="sxs-lookup"><span data-stu-id="325cc-127">Run the code</span></span>
 
-<span data-ttu-id="97c38-139">Use the following code to insert a new product into the SalesLT.Product table using the [Prepared Statements](https://docs.microsoft.com/sql/connect/jdbc/using-statements-with-sql) class with an [INSERT](https://docs.microsoft.com/sql/t-sql/statements/insert-transact-sql) Transact-SQL statement.</span><span class="sxs-lookup"><span data-stu-id="97c38-139">Use the following code to insert a new product into the SalesLT.Product table using the [Prepared Statements](https://docs.microsoft.com/sql/connect/jdbc/using-statements-with-sql) class with an [INSERT](https://docs.microsoft.com/sql/t-sql/statements/insert-transact-sql) Transact-SQL statement.</span></span> <span data-ttu-id="97c38-140">Replace the hostHame, dbName, user, and password parameters with the values that you specified when you created the database with the AdventureWorksLT sample data.</span><span class="sxs-lookup"><span data-stu-id="97c38-140">Replace the hostHame, dbName, user, and password parameters with the values that you specified when you created the database with the AdventureWorksLT sample data.</span></span> 
+1. <span data-ttu-id="325cc-128">At the command prompt, run the following commands:</span><span class="sxs-lookup"><span data-stu-id="325cc-128">At the command prompt, run the following commands:</span></span>
 
-```java
-package com.sqldbsamples;
+   ```bash
+   mvn package
+   mvn -q exec:java "-Dexec.mainClass=com.sqldbsamples.App"
+   ```
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.DriverManager;
-
-public class App {
-
-    public static void main(String[] args) {
-    
-        // Connect to database
-        String hostName = "your_server.database.windows.net";
-        String dbName = "your_database";
-        String user = "your_username";
-        String password = "your_password";
-        String url = String.format("jdbc:sqlserver://%s.database.windows.net:1433;database=%s;user=%s;password=%s;encrypt=true;hostNameInCertificate=*.database.windows.net;loginTimeout=30;", hostName, dbName, user, password);
-        Connection connection = null;
-
-        try {
-                connection = DriverManager.getConnection(url);
-                String schema = connection.getSchema();
-                System.out.println("Successful connection - Schema: " + schema);
-
-                System.out.println("Insert data example:");
-                System.out.println("=========================================");
-
-                // Prepared statement to insert data
-                String insertSql = "INSERT INTO SalesLT.Product (Name, ProductNumber, Color, " 
-                    + " StandardCost, ListPrice, SellStartDate) VALUES (?,?,?,?,?,?);";
-
-                java.util.Date date = new java.util.Date();
-                java.sql.Timestamp sqlTimeStamp = new java.sql.Timestamp(date.getTime());
-
-                try (PreparedStatement prep = connection.prepareStatement(insertSql)) {
-                        prep.setString(1, "BrandNewProduct");
-                        prep.setInt(2, 200989);
-                        prep.setString(3, "Blue");
-                        prep.setDouble(4, 75);
-                        prep.setDouble(5, 80);
-                        prep.setTimestamp(6, sqlTimeStamp);
-
-                        int count = prep.executeUpdate();
-                        System.out.println("Inserted: " + count + " row(s)");
-                }
-        }
-        catch (Exception e) {
-                e.printStackTrace();
-        }
-    }
-}
-```
-## <a name="update-data"></a><span data-ttu-id="97c38-141">Update data</span><span class="sxs-lookup"><span data-stu-id="97c38-141">Update data</span></span>
-
-<span data-ttu-id="97c38-142">Use the following code to update the new product that you previously added using the [Prepared Statements](https://docs.microsoft.com/sql/connect/jdbc/using-statements-with-sql) class with an [UPDATE](https://docs.microsoft.com/sql/t-sql/queries/update-transact-sql) Transact-SQL statement to update data in your Azure SQL database.</span><span class="sxs-lookup"><span data-stu-id="97c38-142">Use the following code to update the new product that you previously added using the [Prepared Statements](https://docs.microsoft.com/sql/connect/jdbc/using-statements-with-sql) class with an [UPDATE](https://docs.microsoft.com/sql/t-sql/queries/update-transact-sql) Transact-SQL statement to update data in your Azure SQL database.</span></span> <span data-ttu-id="97c38-143">Replace the hostHame, dbName, user, and password parameters with the values that you specified when you created the database with the AdventureWorksLT sample data.</span><span class="sxs-lookup"><span data-stu-id="97c38-143">Replace the hostHame, dbName, user, and password parameters with the values that you specified when you created the database with the AdventureWorksLT sample data.</span></span> 
-
-```java
-package com.sqldbsamples;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.DriverManager;
-
-public class App {
-
-    public static void main(String[] args) {
-    
-        // Connect to database
-        String hostName = "your_server.database.windows.net";
-        String dbName = "your_database";
-        String user = "your_username";
-        String password = "your_password";
-        String url = String.format("jdbc:sqlserver://%s.database.windows.net:1433;database=%s;user=%s;password=%s;encrypt=true;hostNameInCertificate=*.database.windows.net;loginTimeout=30;", hostName, dbName, user, password);
-        Connection connection = null;
-
-        try {
-                connection = DriverManager.getConnection(url);
-                String schema = connection.getSchema();
-                System.out.println("Successful connection - Schema: " + schema);
-
-                System.out.println("Update data example:");
-                System.out.println("=========================================");
-
-                // Prepared statement to update data
-                String updateSql = "UPDATE SalesLT.Product SET ListPrice = ? WHERE Name = ?";
-
-                try (PreparedStatement prep = connection.prepareStatement(updateSql)) {
-                        prep.setString(1, "500");
-                        prep.setString(2, "BrandNewProduct");
-
-                        int count = prep.executeUpdate();
-                        System.out.println("Updated: " + count + " row(s)")
-                }
-        }
-        catch (Exception e) {
-                e.printStackTrace();
-        }
-    }
-}
-```
+2. <span data-ttu-id="325cc-129">Verify that the top 20 rows are returned and then close the application window.</span><span class="sxs-lookup"><span data-stu-id="325cc-129">Verify that the top 20 rows are returned and then close the application window.</span></span>
 
 
-
-## <a name="delete-data"></a><span data-ttu-id="97c38-144">Delete data</span><span class="sxs-lookup"><span data-stu-id="97c38-144">Delete data</span></span>
-
-<span data-ttu-id="97c38-145">Use the following code to delete the new product that you previously added using the [Prepared Statements](https://docs.microsoft.com/sql/connect/jdbc/using-statements-with-sql) with a [DELETE](https://docs.microsoft.com/sql/t-sql/statements/delete-transact-sql) Transact-SQL statement .</span><span class="sxs-lookup"><span data-stu-id="97c38-145">Use the following code to delete the new product that you previously added using the [Prepared Statements](https://docs.microsoft.com/sql/connect/jdbc/using-statements-with-sql) with a [DELETE](https://docs.microsoft.com/sql/t-sql/statements/delete-transact-sql) Transact-SQL statement .</span></span> <span data-ttu-id="97c38-146">Replace the hostHame, dbName, user, and password parameters with the values that you specified when you created the database with the AdventureWorksLT sample data.</span><span class="sxs-lookup"><span data-stu-id="97c38-146">Replace the hostHame, dbName, user, and password parameters with the values that you specified when you created the database with the AdventureWorksLT sample data.</span></span> 
-
-```java
-package com.sqldbsamples;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.DriverManager;
-
-public class App {
-
-    public static void main(String[] args) {
-    
-        // Connect to database
-        String hostName = "your_server.database.windows.net";
-        String dbName = "your_database";
-        String user = "your_username";
-        String password = "your_password";
-        String url = String.format("jdbc:sqlserver://%s.database.windows.net:1433;database=%s;user=%s;password=%s;encrypt=true;hostNameInCertificate=*.database.windows.net;loginTimeout=30;", hostName, dbName, user, password);
-        Connection connection = null;
-
-        try {
-                connection = DriverManager.getConnection(url);
-                String schema = connection.getSchema();
-                System.out.println("Successful connection - Schema: " + schema);
-
-                System.out.println("Delete data example:");
-                System.out.println("=========================================");
-
-                // Prepared statement to delete data
-                String deleteSql = "DELETE SalesLT.Product WHERE Name = ?";
-
-                try (PreparedStatement prep = connection.prepareStatement(deleteSql)) {
-                        prep.setString(1, "BrandNewProduct");
-
-                        int count = prep.executeUpdate();
-                        System.out.println("Deleted: " + count + " row(s)");
-                }
-        }       
-        catch (Exception e) {
-                e.printStackTrace();
-        }
-    }
-}
-```
-
-## <a name="next-steps"></a><span data-ttu-id="97c38-147">Next steps</span><span class="sxs-lookup"><span data-stu-id="97c38-147">Next steps</span></span>
-
-- <span data-ttu-id="97c38-148">GitHub repository for [Microsoft JDBC Driver for SQL Server](https://github.com/microsoft/mssql-jdbc).</span><span class="sxs-lookup"><span data-stu-id="97c38-148">GitHub repository for [Microsoft JDBC Driver for SQL Server](https://github.com/microsoft/mssql-jdbc).</span></span>
-- <span data-ttu-id="97c38-149">[File issues/ask questions](https://github.com/microsoft/mssql-jdbc/issues).</span><span class="sxs-lookup"><span data-stu-id="97c38-149">[File issues/ask questions](https://github.com/microsoft/mssql-jdbc/issues).</span></span>
-- <span data-ttu-id="97c38-150">To connect and query using SQL Server Management Studio, see [Connect and query with SSMS](sql-database-connect-query-ssms.md)</span><span class="sxs-lookup"><span data-stu-id="97c38-150">To connect and query using SQL Server Management Studio, see [Connect and query with SSMS](sql-database-connect-query-ssms.md)</span></span>
-- <span data-ttu-id="97c38-151">To connect and query using Visual Studio, see [Connect and query with Visual Studio Code](sql-database-connect-query-vscode.md).</span><span class="sxs-lookup"><span data-stu-id="97c38-151">To connect and query using Visual Studio, see [Connect and query with Visual Studio Code](sql-database-connect-query-vscode.md).</span></span>
-- <span data-ttu-id="97c38-152">To connect and query using .NET, see [Connect and query with .NET](sql-database-connect-query-dotnet.md).</span><span class="sxs-lookup"><span data-stu-id="97c38-152">To connect and query using .NET, see [Connect and query with .NET](sql-database-connect-query-dotnet.md).</span></span>
-- <span data-ttu-id="97c38-153">To connect and query using PHP, see [Connect and query with PHP](sql-database-connect-query-php.md).</span><span class="sxs-lookup"><span data-stu-id="97c38-153">To connect and query using PHP, see [Connect and query with PHP](sql-database-connect-query-php.md).</span></span>
-- <span data-ttu-id="97c38-154">To connect and query using Node.js, see [Connect and query with Node.js](sql-database-connect-query-nodejs.md).</span><span class="sxs-lookup"><span data-stu-id="97c38-154">To connect and query using Node.js, see [Connect and query with Node.js](sql-database-connect-query-nodejs.md).</span></span>
-- <span data-ttu-id="97c38-155">To connect and query using Python, see [Connect and query with Python](sql-database-connect-query-python.md).</span><span class="sxs-lookup"><span data-stu-id="97c38-155">To connect and query using Python, see [Connect and query with Python](sql-database-connect-query-python.md).</span></span>
-- <span data-ttu-id="97c38-156">To connect and query using Ruby, see [Connect and query with Ruby](sql-database-connect-query-ruby.md).</span><span class="sxs-lookup"><span data-stu-id="97c38-156">To connect and query using Ruby, see [Connect and query with Ruby](sql-database-connect-query-ruby.md).</span></span>
-
-
+## <a name="next-steps"></a><span data-ttu-id="325cc-130">Next steps</span><span class="sxs-lookup"><span data-stu-id="325cc-130">Next steps</span></span>
+- [<span data-ttu-id="325cc-131">Design your first Azure SQL database</span><span class="sxs-lookup"><span data-stu-id="325cc-131">Design your first Azure SQL database</span></span>](sql-database-design-first-database.md)
+- [<span data-ttu-id="325cc-132">Microsoft JDBC Driver for SQL Server</span><span class="sxs-lookup"><span data-stu-id="325cc-132">Microsoft JDBC Driver for SQL Server</span></span>](https://github.com/microsoft/mssql-jdbc)
+- [<span data-ttu-id="325cc-133">Report issues/ask questions</span><span class="sxs-lookup"><span data-stu-id="325cc-133">Report issues/ask questions</span></span>](https://github.com/microsoft/mssql-jdbc/issues)
 

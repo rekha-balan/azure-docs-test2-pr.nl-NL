@@ -1,128 +1,188 @@
 ---
-title: Review API for Content Moderator | Microsoft Docs
-description: The Review API integrates content with the review tool to handle automated moderation and human reviews.
+title: Azure Content Moderator - Moderation jobs and human-in-the-loop reviews | Microsoft Docs
+description: Apply human oversight to machine-assisted moderation for best results.
 services: cognitive-services
 author: sanjeev3
 manager: mikemcca
 ms.service: cognitive-services
-ms.technology: content-moderator
+ms.component: content-moderator
 ms.topic: article
-ms.date: 11/21/2016
+ms.date: 1/21/2018
 ms.author: sajagtap
-ms.openlocfilehash: 112914e8ab0d14f8c2b43387aefa8cdec2d95e5d
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 35b3cdaa410712c3fd08d3df4ebe4c83e3955d50
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44552875"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44785361"
 ---
-# <a name="the-review-api"></a><span data-ttu-id="e375f-103">The Review API</span><span class="sxs-lookup"><span data-stu-id="e375f-103">The Review API</span></span>
+# <a name="moderation-jobs-and-reviews"></a><span data-ttu-id="5bb0c-103">Moderation jobs and reviews</span><span class="sxs-lookup"><span data-stu-id="5bb0c-103">Moderation jobs and reviews</span></span>
 
-<span data-ttu-id="e375f-104">Use Content Moderators's review API [(See API reference)](api-reference.md "Content Moderator API Reference") to integrate your content with the review tool to get both automated moderation and human reviews.</span><span class="sxs-lookup"><span data-stu-id="e375f-104">Use Content Moderators's review API [(See API reference)](api-reference.md "Content Moderator API Reference") to integrate your content with the review tool to get both automated moderation and human reviews.</span></span>
+<span data-ttu-id="5bb0c-104">Combine machine-assisted moderation with human-in-the-loop capabilities by using the Azure Content Moderator [Review API](https://westus.dev.cognitive.microsoft.com/docs/services/580519463f9b070e5c591178/operations/580519483f9b0709fc47f9c5) to get the best results for your business.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-104">Combine machine-assisted moderation with human-in-the-loop capabilities by using the Azure Content Moderator [Review API](https://westus.dev.cognitive.microsoft.com/docs/services/580519463f9b070e5c591178/operations/580519483f9b0709fc47f9c5) to get the best results for your business.</span></span>
 
-<span data-ttu-id="e375f-105">The Review API has a small set of operations that use the underlying moderation APIs to moderate your content and make the tagged images available within the review tool for human review.</span><span class="sxs-lookup"><span data-stu-id="e375f-105">The Review API has a small set of operations that use the underlying moderation APIs to moderate your content and make the tagged images available within the review tool for human review.</span></span>
+<span data-ttu-id="5bb0c-105">The Review API offers the following ways to include human oversight in your content moderation process:</span><span class="sxs-lookup"><span data-stu-id="5bb0c-105">The Review API offers the following ways to include human oversight in your content moderation process:</span></span>
 
-<span data-ttu-id="e375f-106">Here is a sample sequence of steps you might follow:</span><span class="sxs-lookup"><span data-stu-id="e375f-106">Here is a sample sequence of steps you might follow:</span></span>
+* <span data-ttu-id="5bb0c-106">`Job` operations are used to start machine-assisted moderation and human review creation as one step.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-106">`Job` operations are used to start machine-assisted moderation and human review creation as one step.</span></span>
+* <span data-ttu-id="5bb0c-107">`Review` operations are used for human review creation, outside of the moderation step.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-107">`Review` operations are used for human review creation, outside of the moderation step.</span></span>
+* <span data-ttu-id="5bb0c-108">`Workflow` operations are used to manage workflows that automate scanning with thresholds for review creation.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-108">`Workflow` operations are used to manage workflows that automate scanning with thresholds for review creation.</span></span>
 
-1. <span data-ttu-id="e375f-107">Submit an image to start a moderation job.</span><span class="sxs-lookup"><span data-stu-id="e375f-107">Submit an image to start a moderation job.</span></span>
-1. <span data-ttu-id="e375f-108">Get details for a moderation job that is either in-progress or completed.</span><span class="sxs-lookup"><span data-stu-id="e375f-108">Get details for a moderation job that is either in-progress or completed.</span></span>
-1. <span data-ttu-id="e375f-109">Once the human reviews are completed, get the detailed results.</span><span class="sxs-lookup"><span data-stu-id="e375f-109">Once the human reviews are completed, get the detailed results.</span></span>
+<span data-ttu-id="5bb0c-109">The `Job` and `Review` operations accept your callback endpoints for receiving status and results.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-109">The `Job` and `Review` operations accept your callback endpoints for receiving status and results.</span></span>
 
-## <a name="submitting-an-image-to-start-a-moderation-job"></a><span data-ttu-id="e375f-110">Submitting an image to start a moderation job</span><span class="sxs-lookup"><span data-stu-id="e375f-110">Submitting an image to start a moderation job</span></span> ##
-<span data-ttu-id="e375f-111">Use the **Job-Create** operation to start a moderation job for an image.</span><span class="sxs-lookup"><span data-stu-id="e375f-111">Use the **Job-Create** operation to start a moderation job for an image.</span></span> <span data-ttu-id="e375f-112">The Moderator will scan the image and generate reviews by evaluating the default or custom workflow configured within the review tool.</span><span class="sxs-lookup"><span data-stu-id="e375f-112">The Moderator will scan the image and generate reviews by evaluating the default or custom workflow configured within the review tool.</span></span>
+<span data-ttu-id="5bb0c-110">This article covers the `Job` and `Review` operations.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-110">This article covers the `Job` and `Review` operations.</span></span> <span data-ttu-id="5bb0c-111">Read the [Workflows overview](workflow-api.md) for information on how to create, edit, and get workflow definitions.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-111">Read the [Workflows overview](workflow-api.md) for information on how to create, edit, and get workflow definitions.</span></span>
 
-<span data-ttu-id="e375f-113">Your inputs will include:</span><span class="sxs-lookup"><span data-stu-id="e375f-113">Your inputs will include:</span></span>
+## <a name="job-operations"></a><span data-ttu-id="5bb0c-112">Job operations</span><span class="sxs-lookup"><span data-stu-id="5bb0c-112">Job operations</span></span>
 
-- <span data-ttu-id="e375f-114">The image to be moderated (file or URL)</span><span class="sxs-lookup"><span data-stu-id="e375f-114">The image to be moderated (file or URL)</span></span>
-- <span data-ttu-id="e375f-115">The default workflow identifier (“default”)</span><span class="sxs-lookup"><span data-stu-id="e375f-115">The default workflow identifier (“default”)</span></span>
-- <span data-ttu-id="e375f-116">Your API callback point for notification</span><span class="sxs-lookup"><span data-stu-id="e375f-116">Your API callback point for notification</span></span>
+### <a name="start-a-job"></a><span data-ttu-id="5bb0c-113">Start a job</span><span class="sxs-lookup"><span data-stu-id="5bb0c-113">Start a job</span></span>
+<span data-ttu-id="5bb0c-114">Use the `Job.Create` operation to start a moderation and human review creation job.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-114">Use the `Job.Create` operation to start a moderation and human review creation job.</span></span> <span data-ttu-id="5bb0c-115">Content Moderator scans the content and evaluates the designated workflow.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-115">Content Moderator scans the content and evaluates the designated workflow.</span></span> <span data-ttu-id="5bb0c-116">Based on the workflow results, it either creates reviews or skips the step.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-116">Based on the workflow results, it either creates reviews or skips the step.</span></span> <span data-ttu-id="5bb0c-117">It also submits the post-moderation and post-review tags to your callback endpoint.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-117">It also submits the post-moderation and post-review tags to your callback endpoint.</span></span>
 
-<span data-ttu-id="e375f-117">The response will return the identifier of the job that was started.</span><span class="sxs-lookup"><span data-stu-id="e375f-117">The response will return the identifier of the job that was started.</span></span>
+<span data-ttu-id="5bb0c-118">The inputs include the following information:</span><span class="sxs-lookup"><span data-stu-id="5bb0c-118">The inputs include the following information:</span></span>
 
-<span data-ttu-id="e375f-118">Once the job is completed, the operation will use your API callback information to notify you.</span><span class="sxs-lookup"><span data-stu-id="e375f-118">Once the job is completed, the operation will use your API callback information to notify you.</span></span> <span data-ttu-id="e375f-119">You can then use the job identifier to get the detailed information back and take further action.</span><span class="sxs-lookup"><span data-stu-id="e375f-119">You can then use the job identifier to get the detailed information back and take further action.</span></span>
-
-## <a name="getting-details-for-an-in-progress-or-completed-job"></a><span data-ttu-id="e375f-120">Getting details for an in-progress or completed job</span><span class="sxs-lookup"><span data-stu-id="e375f-120">Getting details for an in-progress or completed job</span></span>
-
-<span data-ttu-id="e375f-121">Use the **Job-Get** operation to get the details of a moderation job for the identifier returned by the previous operation.</span><span class="sxs-lookup"><span data-stu-id="e375f-121">Use the **Job-Get** operation to get the details of a moderation job for the identifier returned by the previous operation.</span></span> <span data-ttu-id="e375f-122">Note that while the method returns immediately with the job settings information, the moderation job itself is run asynchronously.</span><span class="sxs-lookup"><span data-stu-id="e375f-122">Note that while the method returns immediately with the job settings information, the moderation job itself is run asynchronously.</span></span> <span data-ttu-id="e375f-123">The results are returned through the callback point, and can also be queried by using the operation that we discuss in the next section.</span><span class="sxs-lookup"><span data-stu-id="e375f-123">The results are returned through the callback point, and can also be queried by using the operation that we discuss in the next section.</span></span>
-
-<span data-ttu-id="e375f-124">Your inputs will include at a minimum:</span><span class="sxs-lookup"><span data-stu-id="e375f-124">Your inputs will include at a minimum:</span></span>
-
-- <span data-ttu-id="e375f-125">The human review team name</span><span class="sxs-lookup"><span data-stu-id="e375f-125">The human review team name</span></span>
-- <span data-ttu-id="e375f-126">The job identifier returned by the previous operation</span><span class="sxs-lookup"><span data-stu-id="e375f-126">The job identifier returned by the previous operation</span></span>
-
-<span data-ttu-id="e375f-127">The response will include the following information:</span><span class="sxs-lookup"><span data-stu-id="e375f-127">The response will include the following information:</span></span>
-
-- <span data-ttu-id="e375f-128">The identifier of the review created (use this to get the final review results)</span><span class="sxs-lookup"><span data-stu-id="e375f-128">The identifier of the review created (use this to get the final review results)</span></span>
-- <span data-ttu-id="e375f-129">The status of the review (completed or in-progress)</span><span class="sxs-lookup"><span data-stu-id="e375f-129">The status of the review (completed or in-progress)</span></span>
-- <span data-ttu-id="e375f-130">The assigned moderation tags (key-value pairs)</span><span class="sxs-lookup"><span data-stu-id="e375f-130">The assigned moderation tags (key-value pairs)</span></span>
-
-## <a name="getting-results-after-a-human-review"></a><span data-ttu-id="e375f-131">Getting results after a human review</span><span class="sxs-lookup"><span data-stu-id="e375f-131">Getting results after a human review</span></span>
-
-<span data-ttu-id="e375f-132">Use the **Review-Get** operation to get the results after a human review of the moderated image is completed.</span><span class="sxs-lookup"><span data-stu-id="e375f-132">Use the **Review-Get** operation to get the results after a human review of the moderated image is completed.</span></span> <span data-ttu-id="e375f-133">You will get notified when your defined callback point is called by the review API.</span><span class="sxs-lookup"><span data-stu-id="e375f-133">You will get notified when your defined callback point is called by the review API.</span></span> <span data-ttu-id="e375f-134">The operation will return two sets of tag data - the tags assigned by the moderation service, and the tags after the human review was completed.</span><span class="sxs-lookup"><span data-stu-id="e375f-134">The operation will return two sets of tag data - the tags assigned by the moderation service, and the tags after the human review was completed.</span></span>
-
-<span data-ttu-id="e375f-135">Your inputs will include at a minimum:</span><span class="sxs-lookup"><span data-stu-id="e375f-135">Your inputs will include at a minimum:</span></span>
-
-- <span data-ttu-id="e375f-136">The human review team name</span><span class="sxs-lookup"><span data-stu-id="e375f-136">The human review team name</span></span>
-- <span data-ttu-id="e375f-137">The review identifier returned by the previous operation</span><span class="sxs-lookup"><span data-stu-id="e375f-137">The review identifier returned by the previous operation</span></span>
-
-<span data-ttu-id="e375f-138">The response will include the following information:</span><span class="sxs-lookup"><span data-stu-id="e375f-138">The response will include the following information:</span></span>
-
-- <span data-ttu-id="e375f-139">The tags (key-value pairs) confirmed by the human reviewer</span><span class="sxs-lookup"><span data-stu-id="e375f-139">The tags (key-value pairs) confirmed by the human reviewer</span></span>
-- <span data-ttu-id="e375f-140">The tags (key-value pairs) assigned by the moderation service</span><span class="sxs-lookup"><span data-stu-id="e375f-140">The tags (key-value pairs) assigned by the moderation service</span></span>
-
-## <a name="directly-creating-reviews-within-the-review-tool"></a><span data-ttu-id="e375f-141">Directly creating reviews within the review tool</span><span class="sxs-lookup"><span data-stu-id="e375f-141">Directly creating reviews within the review tool</span></span>
-
-<span data-ttu-id="e375f-142">If you want to use the review tool just for the human review capability because you are either already using the moderation APIs, or you want to separate them for other reasons, you can do that using the **Review-Create** operation.</span><span class="sxs-lookup"><span data-stu-id="e375f-142">If you want to use the review tool just for the human review capability because you are either already using the moderation APIs, or you want to separate them for other reasons, you can do that using the **Review-Create** operation.</span></span>
-
-<span data-ttu-id="e375f-143">Your inputs to this operation will include:</span><span class="sxs-lookup"><span data-stu-id="e375f-143">Your inputs to this operation will include:</span></span>
-
-- <span data-ttu-id="e375f-144">The content (image) to be reviewed</span><span class="sxs-lookup"><span data-stu-id="e375f-144">The content (image) to be reviewed</span></span>
-- <span data-ttu-id="e375f-145">The tags (key value pairs)</span><span class="sxs-lookup"><span data-stu-id="e375f-145">The tags (key value pairs)</span></span>
-
-## <a name="creating-or-updating-custom-workflow"></a><span data-ttu-id="e375f-146">Creating or updating custom workflow</span><span class="sxs-lookup"><span data-stu-id="e375f-146">Creating or updating custom workflow</span></span>
-
-<span data-ttu-id="e375f-147">While the review tool uses a default workflow, you can also define your custom workflow based on your business rules and content policies.</span><span class="sxs-lookup"><span data-stu-id="e375f-147">While the review tool uses a default workflow, you can also define your custom workflow based on your business rules and content policies.</span></span>
-
-<span data-ttu-id="e375f-148">You would do that using the **Workflow-Create or Update** operation.</span><span class="sxs-lookup"><span data-stu-id="e375f-148">You would do that using the **Workflow-Create or Update** operation.</span></span>
-
-<span data-ttu-id="e375f-149">Your inputs to this operation will include:</span><span class="sxs-lookup"><span data-stu-id="e375f-149">Your inputs to this operation will include:</span></span>
-
-- <span data-ttu-id="e375f-150">The review team name</span><span class="sxs-lookup"><span data-stu-id="e375f-150">The review team name</span></span>
-- <span data-ttu-id="e375f-151">The name of your workflow</span><span class="sxs-lookup"><span data-stu-id="e375f-151">The name of your workflow</span></span>
-
-<span data-ttu-id="e375f-152">Your request will contain the expression for describing the workflow.</span><span class="sxs-lookup"><span data-stu-id="e375f-152">Your request will contain the expression for describing the workflow.</span></span> <span data-ttu-id="e375f-153">When creating Jobs, the Expression in the specified workflow is evaluated against the moderator API results.</span><span class="sxs-lookup"><span data-stu-id="e375f-153">When creating Jobs, the Expression in the specified workflow is evaluated against the moderator API results.</span></span>
-
-<span data-ttu-id="e375f-154">For example:</span><span class="sxs-lookup"><span data-stu-id="e375f-154">For example:</span></span>
-
-<span data-ttu-id="e375f-155">Expression with one condition as in: Create review if **adult score > 0.4**.</span><span class="sxs-lookup"><span data-stu-id="e375f-155">Expression with one condition as in: Create review if **adult score > 0.4**.</span></span>
+- <span data-ttu-id="5bb0c-119">The review team ID.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-119">The review team ID.</span></span>
+- <span data-ttu-id="5bb0c-120">The content to be moderated.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-120">The content to be moderated.</span></span>
+- <span data-ttu-id="5bb0c-121">The workflow name.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-121">The workflow name.</span></span> <span data-ttu-id="5bb0c-122">(The default is the "default" workflow.)</span><span class="sxs-lookup"><span data-stu-id="5bb0c-122">(The default is the "default" workflow.)</span></span>
+- <span data-ttu-id="5bb0c-123">Your API callback point for notifications.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-123">Your API callback point for notifications.</span></span>
+ 
+<span data-ttu-id="5bb0c-124">The following response shows the identifier of the job that was started.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-124">The following response shows the identifier of the job that was started.</span></span> <span data-ttu-id="5bb0c-125">You use the job identifier to get the job status and receive detailed information.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-125">You use the job identifier to get the job status and receive detailed information.</span></span>
 
     {
-        "ConnectorName": "imagemoderator",
-        "OutputName": "adultscore",
-        "Operator": "ge",  //- where ge = greater than or equal to
-        "Value": "0.4",
-        "Type": "Condition"
+        "JobId": "2018014caceddebfe9446fab29056fd8d31ffe"
     }
 
-<span data-ttu-id="e375f-156">Expression with two conditions combined as in: Create review if **(adult score > 0.5 AND racy score > 0.5)**.</span><span class="sxs-lookup"><span data-stu-id="e375f-156">Expression with two conditions combined as in: Create review if **(adult score > 0.5 AND racy score > 0.5)**.</span></span>
+### <a name="get-job-status"></a><span data-ttu-id="5bb0c-126">Get job status</span><span class="sxs-lookup"><span data-stu-id="5bb0c-126">Get job status</span></span>
+
+<span data-ttu-id="5bb0c-127">Use the `Job.Get` operation and the job identifier to get the details of a running or completed job.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-127">Use the `Job.Get` operation and the job identifier to get the details of a running or completed job.</span></span> <span data-ttu-id="5bb0c-128">The operation returns immediately while the moderation job runs asynchronously.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-128">The operation returns immediately while the moderation job runs asynchronously.</span></span> <span data-ttu-id="5bb0c-129">The results are returned through the callback endpoint.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-129">The results are returned through the callback endpoint.</span></span>
+
+<span data-ttu-id="5bb0c-130">Your inputs include the following information:</span><span class="sxs-lookup"><span data-stu-id="5bb0c-130">Your inputs include the following information:</span></span>
+
+- <span data-ttu-id="5bb0c-131">The review team ID: The job identifier returned by the previous operation</span><span class="sxs-lookup"><span data-stu-id="5bb0c-131">The review team ID: The job identifier returned by the previous operation</span></span>
+
+<span data-ttu-id="5bb0c-132">The response includes the following information:</span><span class="sxs-lookup"><span data-stu-id="5bb0c-132">The response includes the following information:</span></span>
+
+- <span data-ttu-id="5bb0c-133">The identifier of the review created.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-133">The identifier of the review created.</span></span> <span data-ttu-id="5bb0c-134">(Use this ID to get the final review results.)</span><span class="sxs-lookup"><span data-stu-id="5bb0c-134">(Use this ID to get the final review results.)</span></span>
+- <span data-ttu-id="5bb0c-135">The status of the job (completed or in-progress): The assigned moderation tags (key-value pairs).</span><span class="sxs-lookup"><span data-stu-id="5bb0c-135">The status of the job (completed or in-progress): The assigned moderation tags (key-value pairs).</span></span>
+- <span data-ttu-id="5bb0c-136">The job execution report.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-136">The job execution report.</span></span>
+ 
+ 
+        {
+            "Id": "2018014caceddebfe9446fab29056fd8d31ffe",
+            "TeamName": "some team name",
+            "Status": "Complete",
+            "WorkflowId": "OCR",
+            "Type": "Image",
+            "CallBackEndpoint": "",
+            "ReviewId": "201801i28fc0f7cbf424447846e509af853ea54",
+            "ResultMetaData":[
+            {
+            "Key": "hasText",
+            "Value": "True"
+            },
+            {
+            "Key": "ocrText",
+            "Value": "IF WE DID \r\nALL \r\nTHE THINGS \r\nWE ARE \r\nCAPABLE \r\nOF DOING, \r\nWE WOULD \r\nLITERALLY \r\nASTOUND \r\nOURSELVE \r\n"
+            }
+            ],
+            "JobExecutionReport": [
+            {
+                "Ts": "2018-01-07T00:38:29.3238715",
+                "Msg": "Posted results to the Callbackendpoint: https://requestb.in/vxke1mvx"
+                },
+                {
+                "Ts": "2018-01-07T00:38:29.2928416",
+                "Msg": "Job marked completed and job content has been removed"
+                },
+                {
+                "Ts": "2018-01-07T00:38:29.0856472",
+                "Msg": "Execution Complete"
+                },
+            {
+                "Ts": "2018-01-07T00:38:26.7714671",
+                "Msg": "Successfully got hasText response from Moderator"
+                },
+                {
+                "Ts": "2018-01-07T00:38:26.4181346",
+                "Msg": "Getting hasText from Moderator"
+                },
+                {
+                "Ts": "2018-01-07T00:38:25.5122828",
+                "Msg": "Starting Execution - Try 1"
+                }
+            ]
+        }
+ 
+![Image review for human moderators](images/ocr-sample-image.PNG)
+
+## <a name="review-operations"></a><span data-ttu-id="5bb0c-138">Review operations</span><span class="sxs-lookup"><span data-stu-id="5bb0c-138">Review operations</span></span>
+
+### <a name="create-reviews"></a><span data-ttu-id="5bb0c-139">Create reviews</span><span class="sxs-lookup"><span data-stu-id="5bb0c-139">Create reviews</span></span>
+
+<span data-ttu-id="5bb0c-140">Use the `Review.Create` operation to create the human reviews.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-140">Use the `Review.Create` operation to create the human reviews.</span></span> <span data-ttu-id="5bb0c-141">You either moderate them elsewhere or use custom logic to assign the moderation tags.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-141">You either moderate them elsewhere or use custom logic to assign the moderation tags.</span></span>
+
+<span data-ttu-id="5bb0c-142">Your inputs to this operation include:</span><span class="sxs-lookup"><span data-stu-id="5bb0c-142">Your inputs to this operation include:</span></span>
+
+- <span data-ttu-id="5bb0c-143">The content to be reviewed.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-143">The content to be reviewed.</span></span>
+- <span data-ttu-id="5bb0c-144">The assigned tags (key value pairs) for review by human moderators.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-144">The assigned tags (key value pairs) for review by human moderators.</span></span>
+
+<span data-ttu-id="5bb0c-145">The following response shows the review identifier:</span><span class="sxs-lookup"><span data-stu-id="5bb0c-145">The following response shows the review identifier:</span></span>
+
+    [
+        "201712i46950138c61a4740b118a43cac33f434",
+    ]
+
+
+### <a name="get-review-status"></a><span data-ttu-id="5bb0c-146">Get review status</span><span class="sxs-lookup"><span data-stu-id="5bb0c-146">Get review status</span></span>
+<span data-ttu-id="5bb0c-147">Use the `Review.Get` operation to get the results after a human review of the moderated image is completed.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-147">Use the `Review.Get` operation to get the results after a human review of the moderated image is completed.</span></span> <span data-ttu-id="5bb0c-148">You get notified via your provided callback endpoint.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-148">You get notified via your provided callback endpoint.</span></span> 
+
+<span data-ttu-id="5bb0c-149">The operation returns two sets of tags:</span><span class="sxs-lookup"><span data-stu-id="5bb0c-149">The operation returns two sets of tags:</span></span> 
+
+* <span data-ttu-id="5bb0c-150">The tags assigned by the moderation service</span><span class="sxs-lookup"><span data-stu-id="5bb0c-150">The tags assigned by the moderation service</span></span>
+* <span data-ttu-id="5bb0c-151">The tags after the human review was completed</span><span class="sxs-lookup"><span data-stu-id="5bb0c-151">The tags after the human review was completed</span></span>
+
+<span data-ttu-id="5bb0c-152">Your inputs include at a minimum:</span><span class="sxs-lookup"><span data-stu-id="5bb0c-152">Your inputs include at a minimum:</span></span>
+
+- <span data-ttu-id="5bb0c-153">The review team name</span><span class="sxs-lookup"><span data-stu-id="5bb0c-153">The review team name</span></span>
+- <span data-ttu-id="5bb0c-154">The review identifier returned by the previous operation</span><span class="sxs-lookup"><span data-stu-id="5bb0c-154">The review identifier returned by the previous operation</span></span>
+
+<span data-ttu-id="5bb0c-155">The response includes the following information:</span><span class="sxs-lookup"><span data-stu-id="5bb0c-155">The response includes the following information:</span></span>
+
+- <span data-ttu-id="5bb0c-156">The review status</span><span class="sxs-lookup"><span data-stu-id="5bb0c-156">The review status</span></span>
+- <span data-ttu-id="5bb0c-157">The tags (key-value pairs) confirmed by the human reviewer</span><span class="sxs-lookup"><span data-stu-id="5bb0c-157">The tags (key-value pairs) confirmed by the human reviewer</span></span>
+- <span data-ttu-id="5bb0c-158">The tags (key-value pairs) assigned by the moderation service</span><span class="sxs-lookup"><span data-stu-id="5bb0c-158">The tags (key-value pairs) assigned by the moderation service</span></span>
+
+<span data-ttu-id="5bb0c-159">You see both the reviewer-assigned tags (**reviewerResultTags**) and the initial tags (**metadata**) in the following sample response:</span><span class="sxs-lookup"><span data-stu-id="5bb0c-159">You see both the reviewer-assigned tags (**reviewerResultTags**) and the initial tags (**metadata**) in the following sample response:</span></span>
 
     {
-        "Left": {
-            "ConnectorName": "imagemoderator",
-            "OutputName": "adultscore",
-            "Operator": "ge",
-            "Value": "0.4",
-            "Type": "Condition"
+        "reviewId": "201712i46950138c61a4740b118a43cac33f434",
+        "subTeam": "public",
+        "status": "Complete",
+        "reviewerResultTags": [
+        {
+            "key": "a",
+            "value": "False"
         },
-        "Right": {
-            "ConnectorName": "imagemoderator",
-            "OutputName": "racyscore",
-            "Operator": "ge",
-            "Value": "0.5",
-            "Type": "Condition"
+        {
+            "key": "r",
+            "value": "True"
         },
-        "Combine": "AND",
-        "Type": "Combine"
+        {
+            "key": "sc",
+            "value": "True"
+        }
+        ],
+        "createdBy": "{teamname}",
+        "metadata": [
+        {
+            "key": "sc",
+            "value": "true"
+        }
+        ],
+        "type": "Image",
+        "content": "https://reviewcontentprod.blob.core.windows.net/{teamname}/IMG_201712i46950138c61a4740b118a43cac33f434",
+        "contentId": "0",
+        "callbackEndpoint": "{callbackUrl}"
     }
 
-<span data-ttu-id="e375f-157">Please refer to the API Reference for more information and examples.</span><span class="sxs-lookup"><span data-stu-id="e375f-157">Please refer to the API Reference for more information and examples.</span></span>
+## <a name="next-steps"></a><span data-ttu-id="5bb0c-160">Next steps</span><span class="sxs-lookup"><span data-stu-id="5bb0c-160">Next steps</span></span>
+
+* <span data-ttu-id="5bb0c-161">Test drive the [Job API console](try-review-api-job.md), and use the REST API code samples.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-161">Test drive the [Job API console](try-review-api-job.md), and use the REST API code samples.</span></span> <span data-ttu-id="5bb0c-162">If you're familiar with Visual Studio and C#, also check out the [Jobs .NET quickstart](moderation-jobs-quickstart-dotnet.md).</span><span class="sxs-lookup"><span data-stu-id="5bb0c-162">If you're familiar with Visual Studio and C#, also check out the [Jobs .NET quickstart](moderation-jobs-quickstart-dotnet.md).</span></span> 
+* <span data-ttu-id="5bb0c-163">For reviews, get started with the [Review API console](try-review-api-review.md), and use the REST API code samples.</span><span class="sxs-lookup"><span data-stu-id="5bb0c-163">For reviews, get started with the [Review API console](try-review-api-review.md), and use the REST API code samples.</span></span> <span data-ttu-id="5bb0c-164">Then see the [Reviews .NET quickstart](moderation-reviews-quickstart-dotnet.md).</span><span class="sxs-lookup"><span data-stu-id="5bb0c-164">Then see the [Reviews .NET quickstart](moderation-reviews-quickstart-dotnet.md).</span></span>
+* <span data-ttu-id="5bb0c-165">For video reviews, use the [Video review quickstart](video-reviews-quickstart-dotnet.md), and learn how to [add transcripts to the video review](video-transcript-reviews-quickstart-dotnet.md).</span><span class="sxs-lookup"><span data-stu-id="5bb0c-165">For video reviews, use the [Video review quickstart](video-reviews-quickstart-dotnet.md), and learn how to [add transcripts to the video review](video-transcript-reviews-quickstart-dotnet.md).</span></span>

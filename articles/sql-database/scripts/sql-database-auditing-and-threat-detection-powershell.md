@@ -1,63 +1,66 @@
 ---
-title: Azure PowerShell Script-Configure database auditing & threat detection | Microsoft Docs
-description: Azure PowerShell Script Sample - Configure SQL Database auditing & threat detection using PowerShell
+title: PowerShell example-auditing-threat detection-Azure SQL Database  | Microsoft Docs
+description: Azure PowerShell example script to configure auditing & threat detection in an Azure SQL Database
 services: sql-database
 documentationcenter: sql-database
-author: janeng
-manager: jstrauss
+author: CarlRabeler
+manager: craigg
 editor: carlrab
 tags: azure-service-management
 ms.assetid: ''
 ms.service: sql-database
-ms.custom: sample
+ms.custom: mvc,security
 ms.devlang: PowerShell
-ms.topic: article
+ms.topic: sample
 ms.tgt_pltfrm: sql-database
 ms.workload: database
-ms.date: 03/07/2017
-ms.author: janeng
-ms.openlocfilehash: 5de010931880d04e1c7f65190eff141c0a836cf9
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 09/07/2018
+ms.author: carlrab
+ms.openlocfilehash: 1be7f049435f39d164cdcb151dc948d55da1c740
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44549630"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44797945"
 ---
-# <a name="configure-sql-database-auditing-and-threat-detection-using-powershell"></a><span data-ttu-id="6f8a3-103">Configure SQL Database auditing and threat detection using PowerShell</span><span class="sxs-lookup"><span data-stu-id="6f8a3-103">Configure SQL Database auditing and threat detection using PowerShell</span></span>
+# <a name="use-powershell-to-configure-sql-database-auditing-and-threat-detection"></a><span data-ttu-id="20ca5-103">Use PowerShell to configure SQL Database auditing and threat detection</span><span class="sxs-lookup"><span data-stu-id="20ca5-103">Use PowerShell to configure SQL Database auditing and threat detection</span></span>
 
-<span data-ttu-id="6f8a3-104">This sample PowerShell script configures SQL Database auditing and threat detection.</span><span class="sxs-lookup"><span data-stu-id="6f8a3-104">This sample PowerShell script configures SQL Database auditing and threat detection.</span></span> <span data-ttu-id="6f8a3-105">To run this sample, make sure you have installed the latest [Azure PowerShell](/powershell/azureps-cmdlets-docs).</span><span class="sxs-lookup"><span data-stu-id="6f8a3-105">To run this sample, make sure you have installed the latest [Azure PowerShell](/powershell/azureps-cmdlets-docs).</span></span>
+<span data-ttu-id="20ca5-104">This PowerShell script example configures SQL Database auditing and threat detection.</span><span class="sxs-lookup"><span data-stu-id="20ca5-104">This PowerShell script example configures SQL Database auditing and threat detection.</span></span> 
 
-[!INCLUDE [sample-powershell-install](../../../includes/sample-powershell-install-no-ssh.md)]
+[!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
+[!INCLUDE [cloud-shell-powershell.md](../../../includes/cloud-shell-powershell.md)]
 
-## <a name="sample-script"></a><span data-ttu-id="6f8a3-106">Sample script</span><span class="sxs-lookup"><span data-stu-id="6f8a3-106">Sample script</span></span>
+<span data-ttu-id="20ca5-105">If you choose to install and use the PowerShell locally, this tutorial requires the Azure PowerShell module version 5.7.0 or later.</span><span class="sxs-lookup"><span data-stu-id="20ca5-105">If you choose to install and use the PowerShell locally, this tutorial requires the Azure PowerShell module version 5.7.0 or later.</span></span> <span data-ttu-id="20ca5-106">Run `Get-Module -ListAvailable AzureRM` to find the version.</span><span class="sxs-lookup"><span data-stu-id="20ca5-106">Run `Get-Module -ListAvailable AzureRM` to find the version.</span></span> <span data-ttu-id="20ca5-107">If you need to upgrade, see [Install Azure PowerShell module](/powershell/azure/install-azurerm-ps).</span><span class="sxs-lookup"><span data-stu-id="20ca5-107">If you need to upgrade, see [Install Azure PowerShell module](/powershell/azure/install-azurerm-ps).</span></span> <span data-ttu-id="20ca5-108">If you are running PowerShell locally, you also need to run `Connect-AzureRmAccount` to create a connection with Azure.</span><span class="sxs-lookup"><span data-stu-id="20ca5-108">If you are running PowerShell locally, you also need to run `Connect-AzureRmAccount` to create a connection with Azure.</span></span>
 
-[!code-powershell[main](../../../powershell_scripts/sql-database/database-auditing-and-threat-detection/database-auditing-and-threat-detection.ps1 "Configure auditing and threat detection")]
+## <a name="sample-script"></a><span data-ttu-id="20ca5-109">Sample script</span><span class="sxs-lookup"><span data-stu-id="20ca5-109">Sample script</span></span>
 
-## <a name="clean-up-deployment"></a><span data-ttu-id="6f8a3-107">Clean up deployment</span><span class="sxs-lookup"><span data-stu-id="6f8a3-107">Clean up deployment</span></span>
+[!code-powershell-interactive[main](../../../powershell_scripts/sql-database/database-auditing-and-threat-detection/database-auditing-and-threat-detection.ps1?highlight=13-14 "Configure auditing and threat detection")]
 
-<span data-ttu-id="6f8a3-108">After the script sample has been run, the following command can be used to remove the resource group and all resources associated with it.</span><span class="sxs-lookup"><span data-stu-id="6f8a3-108">After the script sample has been run, the following command can be used to remove the resource group and all resources associated with it.</span></span>
+## <a name="clean-up-deployment"></a><span data-ttu-id="20ca5-110">Clean up deployment</span><span class="sxs-lookup"><span data-stu-id="20ca5-110">Clean up deployment</span></span>
+
+<span data-ttu-id="20ca5-111">After the script sample has been run, the following command can be used to remove the resource group and all resources associated with it.</span><span class="sxs-lookup"><span data-stu-id="20ca5-111">After the script sample has been run, the following command can be used to remove the resource group and all resources associated with it.</span></span>
 
 ```powershell
-Remove-AzureRmResourceGroup -ResourceGroupName "myResourceGroup"
+Remove-AzureRmResourceGroup -ResourceGroupName $resourcegroupname
 ```
 
-## <a name="script-explanation"></a><span data-ttu-id="6f8a3-109">Script explanation</span><span class="sxs-lookup"><span data-stu-id="6f8a3-109">Script explanation</span></span>
+## <a name="script-explanation"></a><span data-ttu-id="20ca5-112">Script explanation</span><span class="sxs-lookup"><span data-stu-id="20ca5-112">Script explanation</span></span>
 
-<span data-ttu-id="6f8a3-110">This script uses the following commands.</span><span class="sxs-lookup"><span data-stu-id="6f8a3-110">This script uses the following commands.</span></span> <span data-ttu-id="6f8a3-111">Each command in the table links to command specific documentation.</span><span class="sxs-lookup"><span data-stu-id="6f8a3-111">Each command in the table links to command specific documentation.</span></span>
+<span data-ttu-id="20ca5-113">This script uses the following commands.</span><span class="sxs-lookup"><span data-stu-id="20ca5-113">This script uses the following commands.</span></span> <span data-ttu-id="20ca5-114">Each command in the table links to command specific documentation.</span><span class="sxs-lookup"><span data-stu-id="20ca5-114">Each command in the table links to command specific documentation.</span></span>
 
-| <span data-ttu-id="6f8a3-112">Command</span><span class="sxs-lookup"><span data-stu-id="6f8a3-112">Command</span></span> | <span data-ttu-id="6f8a3-113">Notes</span><span class="sxs-lookup"><span data-stu-id="6f8a3-113">Notes</span></span> |
+| <span data-ttu-id="20ca5-115">Command</span><span class="sxs-lookup"><span data-stu-id="20ca5-115">Command</span></span> | <span data-ttu-id="20ca5-116">Notes</span><span class="sxs-lookup"><span data-stu-id="20ca5-116">Notes</span></span> |
 |---|---|
-| [<span data-ttu-id="6f8a3-114">New-AzureRmResourceGroup</span><span class="sxs-lookup"><span data-stu-id="6f8a3-114">New-AzureRmResourceGroup</span></span>](https://docs.microsoft.com/powershell/resourcemanager/azurerm.resources/v3.5.0/new-azurermresourcegroup) | <span data-ttu-id="6f8a3-115">Creates a resource group in which all resources are stored.</span><span class="sxs-lookup"><span data-stu-id="6f8a3-115">Creates a resource group in which all resources are stored.</span></span> |
-| [<span data-ttu-id="6f8a3-116">New-AzureRmSqlServer</span><span class="sxs-lookup"><span data-stu-id="6f8a3-116">New-AzureRmSqlServer</span></span>](https://docs.microsoft.com/powershell/resourcemanager/azurerm.sql/v2.5.0/new-azurermsqlserver) | <span data-ttu-id="6f8a3-117">Creates a logical server that hosts a database or elastic pool.</span><span class="sxs-lookup"><span data-stu-id="6f8a3-117">Creates a logical server that hosts a database or elastic pool.</span></span> |
-| [<span data-ttu-id="6f8a3-118">New-AzureRmSqlDatabase</span><span class="sxs-lookup"><span data-stu-id="6f8a3-118">New-AzureRmSqlDatabase</span></span>](https://docs.microsoft.com/powershell/resourcemanager/azurerm.sql/v2.5.0/new-azurermsqldatabase) | <span data-ttu-id="6f8a3-119">Creates a database in a logical server as a single or a pooled database.</span><span class="sxs-lookup"><span data-stu-id="6f8a3-119">Creates a database in a logical server as a single or a pooled database.</span></span> |
-| [<span data-ttu-id="6f8a3-120">New-AzureRmStorageAccount</span><span class="sxs-lookup"><span data-stu-id="6f8a3-120">New-AzureRmStorageAccount</span></span>](https://docs.microsoft.com/powershell/resourcemanager/azurerm.storage/v2.4.0/new-azurermstorageaccount) | <span data-ttu-id="6f8a3-121">Creates a Storage account.</span><span class="sxs-lookup"><span data-stu-id="6f8a3-121">Creates a Storage account.</span></span> |
-| [<span data-ttu-id="6f8a3-122">Set-AzureRmSqlDatabaseAuditingPolicy</span><span class="sxs-lookup"><span data-stu-id="6f8a3-122">Set-AzureRmSqlDatabaseAuditingPolicy</span></span>](https://docs.microsoft.com/powershell/resourcemanager/azurerm.sql/v2.5.0/set-azurermsqldatabaseauditingpolicy) | <span data-ttu-id="6f8a3-123">Sets the auditing policy for a database.</span><span class="sxs-lookup"><span data-stu-id="6f8a3-123">Sets the auditing policy for a database.</span></span> |
-| [<span data-ttu-id="6f8a3-124">Set-AzureRmSqlDatabaseThreatDetectionPolicy</span><span class="sxs-lookup"><span data-stu-id="6f8a3-124">Set-AzureRmSqlDatabaseThreatDetectionPolicy</span></span>](https://docs.microsoft.com/powershell/resourcemanager/azurerm.sql/v2.5.0/set-azurermsqldatabasethreatdetectionpolicy) | <span data-ttu-id="6f8a3-125">Sets a threat detection policy on a database.</span><span class="sxs-lookup"><span data-stu-id="6f8a3-125">Sets a threat detection policy on a database.</span></span> |
-| [<span data-ttu-id="6f8a3-126">Remove-AzureRmResourceGroup</span><span class="sxs-lookup"><span data-stu-id="6f8a3-126">Remove-AzureRmResourceGroup</span></span>](https://docs.microsoft.com/powershell/resourcemanager/azurerm.resources/v3.5.0/remove-azurermresourcegroup) | <span data-ttu-id="6f8a3-127">Deletes a resource group including all nested resources.</span><span class="sxs-lookup"><span data-stu-id="6f8a3-127">Deletes a resource group including all nested resources.</span></span> |
+| [<span data-ttu-id="20ca5-117">New-AzureRmResourceGroup</span><span class="sxs-lookup"><span data-stu-id="20ca5-117">New-AzureRmResourceGroup</span></span>](/powershell/module/azurerm.resources/new-azurermresourcegroup) | <span data-ttu-id="20ca5-118">Creates a resource group in which all resources are stored.</span><span class="sxs-lookup"><span data-stu-id="20ca5-118">Creates a resource group in which all resources are stored.</span></span> |
+| [<span data-ttu-id="20ca5-119">New-AzureRmSqlServer</span><span class="sxs-lookup"><span data-stu-id="20ca5-119">New-AzureRmSqlServer</span></span>](/powershell/module/azurerm.sql/new-azurermsqlserver) | <span data-ttu-id="20ca5-120">Creates a logical server that hosts a database or elastic pool.</span><span class="sxs-lookup"><span data-stu-id="20ca5-120">Creates a logical server that hosts a database or elastic pool.</span></span> |
+| [<span data-ttu-id="20ca5-121">New-AzureRmSqlDatabase</span><span class="sxs-lookup"><span data-stu-id="20ca5-121">New-AzureRmSqlDatabase</span></span>](/powershell/module/azurerm.sql/new-azurermsqldatabase) | <span data-ttu-id="20ca5-122">Creates a database in a logical server as a single or a pooled database.</span><span class="sxs-lookup"><span data-stu-id="20ca5-122">Creates a database in a logical server as a single or a pooled database.</span></span> |
+| [<span data-ttu-id="20ca5-123">New-AzureRmStorageAccount</span><span class="sxs-lookup"><span data-stu-id="20ca5-123">New-AzureRmStorageAccount</span></span>](/powershell/module/azurerm.storage/new-azurermstorageaccount) | <span data-ttu-id="20ca5-124">Creates a Storage account.</span><span class="sxs-lookup"><span data-stu-id="20ca5-124">Creates a Storage account.</span></span> |
+| [<span data-ttu-id="20ca5-125">Set-AzureRmSqlDatabaseAuditingPolicy</span><span class="sxs-lookup"><span data-stu-id="20ca5-125">Set-AzureRmSqlDatabaseAuditingPolicy</span></span>](/powershell/module/azurerm.sql/set-azurermsqldatabaseauditingpolicy) | <span data-ttu-id="20ca5-126">Sets the auditing policy for a database.</span><span class="sxs-lookup"><span data-stu-id="20ca5-126">Sets the auditing policy for a database.</span></span> |
+| [<span data-ttu-id="20ca5-127">Set-AzureRmSqlDatabaseThreatDetectionPolicy</span><span class="sxs-lookup"><span data-stu-id="20ca5-127">Set-AzureRmSqlDatabaseThreatDetectionPolicy</span></span>](/powershell/module/azurerm.sql/set-azurermsqldatabasethreatdetectionpolicy) | <span data-ttu-id="20ca5-128">Sets a threat detection policy on a database.</span><span class="sxs-lookup"><span data-stu-id="20ca5-128">Sets a threat detection policy on a database.</span></span> |
+| [<span data-ttu-id="20ca5-129">Remove-AzureRmResourceGroup</span><span class="sxs-lookup"><span data-stu-id="20ca5-129">Remove-AzureRmResourceGroup</span></span>](/powershell/module/azurerm.resources/remove-azurermresourcegroup) | <span data-ttu-id="20ca5-130">Deletes a resource group including all nested resources.</span><span class="sxs-lookup"><span data-stu-id="20ca5-130">Deletes a resource group including all nested resources.</span></span> |
 |||
 
-## <a name="next-steps"></a><span data-ttu-id="6f8a3-128">Next steps</span><span class="sxs-lookup"><span data-stu-id="6f8a3-128">Next steps</span></span>
+## <a name="next-steps"></a><span data-ttu-id="20ca5-131">Next steps</span><span class="sxs-lookup"><span data-stu-id="20ca5-131">Next steps</span></span>
 
-<span data-ttu-id="6f8a3-129">For more information on the Azure PowerShell, see [Azure PowerShell documentation](https://docs.microsoft.com/powershell/).</span><span class="sxs-lookup"><span data-stu-id="6f8a3-129">For more information on the Azure PowerShell, see [Azure PowerShell documentation](https://docs.microsoft.com/powershell/).</span></span>
+<span data-ttu-id="20ca5-132">For more information on the Azure PowerShell, see [Azure PowerShell documentation](/powershell/azure/overview).</span><span class="sxs-lookup"><span data-stu-id="20ca5-132">For more information on the Azure PowerShell, see [Azure PowerShell documentation](/powershell/azure/overview).</span></span>
 
-<span data-ttu-id="6f8a3-130">Additional SQL Database PowerShell script samples can be found in the [Azure SQL Database PowerShell scripts](../sql-database-powershell-samples.md).</span><span class="sxs-lookup"><span data-stu-id="6f8a3-130">Additional SQL Database PowerShell script samples can be found in the [Azure SQL Database PowerShell scripts](../sql-database-powershell-samples.md).</span></span>
+<span data-ttu-id="20ca5-133">Additional SQL Database PowerShell script samples can be found in the [Azure SQL Database PowerShell scripts](../sql-database-powershell-samples.md).</span><span class="sxs-lookup"><span data-stu-id="20ca5-133">Additional SQL Database PowerShell script samples can be found in the [Azure SQL Database PowerShell scripts](../sql-database-powershell-samples.md).</span></span>
