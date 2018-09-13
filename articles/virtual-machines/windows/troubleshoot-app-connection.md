@@ -1,10 +1,10 @@
 ---
-title: Troubleshoot application access on a Windows VM in Azure | Microsoft Docs
-description: If you can't access an application running on an Azure virtual machine, use these steps to isolate the source of the problem.
+title: Troubleshoot Windows VM application access in Azure | Microsoft Docs
+description: Use these detailed troubleshooting steps to isolate issues in connecting to applications running on Windows virtual machines in Azure.
 services: virtual-machines-windows
 documentationcenter: ''
-author: iainfoulds
-manager: timlt
+author: cynthn
+manager: jeconnoc
 editor: ''
 tags: top-support-issue,azure-service-management,azure-resource-manager
 ms.assetid: 9f82ca27-6453-4eab-9ae8-4c71c510bb61
@@ -12,16 +12,16 @@ ms.service: virtual-machines-windows
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-windows
 ms.devlang: na
-ms.topic: support-article
-ms.date: 12/20/2016
-ms.author: iainfou
-ms.openlocfilehash: 361c06f2a4d735f1854f7df26f37fc2b063a455a
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.topic: article
+ms.date: 05/18/2017
+ms.author: cynthn
+ms.openlocfilehash: a853d7f1408ee13a29cb180bdbf1a8ffb46caa7b
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44556140"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44828867"
 ---
-# <a name="troubleshoot-access-to-an-application-running-on-an-azure-virtual-machine"></a><span data-ttu-id="a2baa-103">Troubleshoot access to an application running on an Azure virtual machine</span><span class="sxs-lookup"><span data-stu-id="a2baa-103">Troubleshoot access to an application running on an Azure virtual machine</span></span>
+# <a name="troubleshoot-access-to-an-application-running-on-a-windows-virtual-machine-in-azure"></a><span data-ttu-id="fdab2-103">Troubleshoot access to an application running on a Windows virtual machine in Azure</span><span class="sxs-lookup"><span data-stu-id="fdab2-103">Troubleshoot access to an application running on a Windows virtual machine in Azure</span></span>
 [!INCLUDE [virtual-machines-common-troubleshoot-app-connection](../../../includes/virtual-machines-common-troubleshoot-app-connection.md)]
 
