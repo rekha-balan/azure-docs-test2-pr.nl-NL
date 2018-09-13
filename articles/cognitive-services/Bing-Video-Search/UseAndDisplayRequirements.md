@@ -5,17 +5,15 @@ services: cognitive-services
 author: swhite-msft
 manager: ehansen
 ms.service: cognitive-services
-ms.technology: bing-video-search
+ms.component: bing-video-search
 ms.topic: article
 ms.date: 02/27/2017
 ms.author: scottwhi
-ms.openlocfilehash: ff31a067a828fbddbb4755bc0358897caab4e836
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: a9fef13aef1e4cc8208148e1cabb3f2c940a25d0
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44550208"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44770503"
 ---
-# <a name="bing-search-api-use-and-display-requirements"></a>Bing Search API Use and Display Requirements
-
 [!INCLUDE [cognitive-services-bing-use-and-display-requirements](../../../includes/cognitive-services-bing-use-and-display-requirements.md)]

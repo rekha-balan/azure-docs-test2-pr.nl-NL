@@ -12,15 +12,15 @@ ms.service: cloud-services
 ms.workload: na
 ms.tgt_pltfrm: ibiza
 ms.devlang: na
-ms.topic: article
-ms.date: 4/6/2017
+ms.topic: troubleshooting
+ms.date: 06/15/2018
 ms.author: v-six
-ms.openlocfilehash: 9f3c57d5b4d3629ecc943031c7c2632d16dc265c
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 22888c76b27d287a8d7fb0f0f1f0a0d39d92375d
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44549435"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44772921"
 ---
 # <a name="troubleshooting-allocation-failure-when-you-deploy-cloud-services-in-azure"></a>Troubleshooting allocation failure when you deploy Cloud Services in Azure
 ## <a name="summary"></a>Summary
@@ -31,12 +31,12 @@ When you deploy instances to a Cloud Service or add new web or worker role insta
 ### <a name="background--how-allocation-works"></a>Background – How allocation works
 The servers in Azure datacenters are partitioned into clusters. A new cloud service allocation request is attempted in multiple clusters. When the first instance is deployed to a cloud service(in either staging or production), that cloud service gets pinned to a cluster. Any further deployments for the cloud service will happen in the same cluster. In this article, we'll refer to this as "pinned to a cluster". Diagram 1 below illustrates the case of a normal allocation which is attempted in multiple clusters; Diagram 2 illustrates the case of an allocation that's pinned to Cluster 2 because that's where the existing Cloud Service CS_1 is hosted.
 
-![Allocation Diagram](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cloud-services/media/cloud-services-allocation-failure/Allocation1.png)
+![Allocation Diagram](./media/cloud-services-allocation-failure/Allocation1.png)
 
 ### <a name="why-allocation-failure-happens"></a>Why allocation failure happens
 When an allocation request is pinned to a cluster, there's a higher chance of failing to find free resources since the available resource pool is limited to a cluster. Furthermore, if your allocation request is pinned to a cluster but the type of resource you requested is not supported by that cluster, your request will fail even if the cluster has free resource. Diagram 3 below illustrates the case where a pinned allocation fails because the only candidate cluster does not have free resources. Diagram 4 illustrates the case where a pinned allocation fails because the only candidate cluster does not support the requested VM size, even though the cluster has free resources.
 
-![Pinned Allocation Failure](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cloud-services/media/cloud-services-allocation-failure/Allocation2.png)
+![Pinned Allocation Failure](./media/cloud-services-allocation-failure/Allocation2.png)
 
 ## <a name="troubleshooting-allocation-failure-for-cloud-services"></a>Troubleshooting allocation failure for cloud services
 ### <a name="error-message"></a>Error Message
@@ -72,5 +72,3 @@ Here are the common allocation scenarios that cause an allocation request to be 
    * Follow #2 from above, making sure to specify the new ReservedIP in the service's CSCFG.
 4. Remove affinity group for new deployments - Affinity Groups are no longer recommended. Follow steps for #1 above to deploy a new cloud service. Ensure cloud service is not in an affinity group.
 5. Convert to a Regional Virtual Network - See [How to migrate from Affinity Groups to a Regional Virtual Network (VNet)](../virtual-network/virtual-networks-migrate-to-regional-vnet.md).
-
-

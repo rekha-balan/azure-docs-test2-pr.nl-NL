@@ -1,10 +1,10 @@
 ---
-title: Create a virtual network using the Azure portal | Microsoft Docs
-description: Learn how to create a virtual network using the Azure portal.
+title: Create a virtual network (classic) using the Azure portal | Microsoft Docs
+description: Learn how to create a virtual network (classic) using the Azure portal.
 services: virtual-network
 documentationcenter: ''
-author: jimdial
-manager: carmonm
+author: genlin
+manager: cshepard
 editor: ''
 tags: azure-service-management
 ms.assetid: c8e298a1-f6d9-4bec-b6cd-3c6ff2271dcd
@@ -14,22 +14,22 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/15/2016
-ms.author: jdial
-ms.openlocfilehash: 7fe8f4e20ec9c73b1a813a4d7f5f6932498246c1
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: genli
+ms.openlocfilehash: 60e9aa1daaa2edea534dabd549ed666fdcdd1940
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44555870"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44774130"
 ---
-# <a name="create-a-virtual-network-classic-by-using-the-azure-preview-portal"></a>Create a virtual network (classic) by using the Azure preview portal
+# <a name="create-a-virtual-network-classic-by-using-the-azure-portal"></a>Create a virtual network (classic) by using the Azure portal
 [!INCLUDE [virtual-networks-create-vnet-selectors-classic-include](../../includes/virtual-networks-create-vnet-selectors-classic-include.md)]
 
 [!INCLUDE [virtual-networks-create-vnet-intro](../../includes/virtual-networks-create-vnet-intro-include.md)]
 
 [!INCLUDE [azure-arm-classic-important-include](../../includes/azure-arm-classic-important-include.md)]
 
-This document covers creating a VNet by using the classic deployment model. You can also [create a virtual network in the Resource Manager deployment model by using the Azure preview portal](virtual-networks-create-vnet-arm-pportal.md).
+This document covers creating a VNet by using the classic deployment model. You can also [create a virtual network in the Resource Manager deployment model by using the Azure portal](quick-create-portal.md).
 
 [!INCLUDE [virtual-networks-create-vnet-scenario-include](../../includes/virtual-networks-create-vnet-scenario-include.md)]
 

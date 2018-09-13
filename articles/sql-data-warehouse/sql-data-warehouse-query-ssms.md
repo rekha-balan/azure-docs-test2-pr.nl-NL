@@ -2,25 +2,20 @@
 title: Connect to Azure SQL Data Warehouse - SSMS | Microsoft Docs
 description: Use SQL Server Management Studio (SSMS) to connect to and query Azure SQL Data Warehouse.
 services: sql-data-warehouse
-documentationcenter: ''
-author: hirokib
-manager: jhubbard
-editor: ''
-ms.assetid: 299e50b3-e68a-471c-8aee-b0b9874781bd
+author: kavithaj
+manager: craigg
 ms.service: sql-data-warehouse
-ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: data-services
-ms.custom: connect
-ms.date: 10/31/2016
-ms.author: elbutter;barbkess
-ms.openlocfilehash: 6b5ae5c14e44be861c530e5ecde2672cd37f4f33
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.topic: conceptual
+ms.component: consume
+ms.date: 04/17/2018
+ms.author: kavithaj
+ms.reviewer: igorstan
+ms.openlocfilehash: 6079c3064699da38fad20468517eb97d6ab107f8
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44550063"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44773519"
 ---
 # <a name="connect-to-sql-data-warehouse-with-sql-server-management-studio-ssms"></a>Connect to SQL Data Warehouse with SQL Server Management Studio (SSMS)
 > [!div class="op_single_selector"]
@@ -90,20 +85,14 @@ To configure your environment for Azure Active Directory authentication, see [Au
 
 <!--Other-->
 [Azure portal]: https://portal.azure.com
-[Install SSMS]: https://msdn.microsoft.com/en-US/library/hh213248.aspx
+[Install SSMS]: https://msdn.microsoft.com/library/hh213248.aspx
 
 
 <!--Image references-->
 
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-data-warehouse/media/sql-data-warehouse-query-ssms/connect-object-explorer.png
-[2]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-data-warehouse/media/sql-data-warehouse-query-ssms/connect-object-explorer1.png
-[3]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-data-warehouse/media/sql-data-warehouse-query-ssms/explore-tables.png
-[4]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-data-warehouse/media/sql-data-warehouse-query-ssms/new-query.png
-[5]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-data-warehouse/media/sql-data-warehouse-query-ssms/execute-query.png
-[6]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-data-warehouse/media/sql-data-warehouse-query-ssms/results.png
-
-
-
-
-
-
+[1]: media/sql-data-warehouse-query-ssms/connect-object-explorer.png
+[2]: media/sql-data-warehouse-query-ssms/connect-object-explorer1.png
+[3]: media/sql-data-warehouse-query-ssms/explore-tables.png
+[4]: media/sql-data-warehouse-query-ssms/new-query.png
+[5]: media/sql-data-warehouse-query-ssms/execute-query.png
+[6]: media/sql-data-warehouse-query-ssms/results.png

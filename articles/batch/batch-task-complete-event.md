@@ -1,24 +1,23 @@
 ---
-title: Task complete event - Azure | Microsoft Docs
-ms.custom: ''
-ms.date: 2017-02-01
-ms.prod: azure
-ms.reviewer: ''
+title: Azure Batch task complete event | Microsoft Docs
+description: Reference for Batch task complete event.
+services: batch
+author: dlepow
+manager: jeconnoc
+ms.assetid: ''
 ms.service: batch
-ms.suite: ''
+ms.devlang: multiple
+ms.topic: article
 ms.tgt_pltfrm: ''
-ms.topic: reference
-ms.assetid: 9dcc468b-e0a7-4b80-bec8-ffd466afdc8a
-caps.latest.revision: 4
-author: tamram
-ms.author: tamram
-manager: timlt
-ms.openlocfilehash: 03093ab26f8e394cb89be39542d86388f030cf50
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.workload: big-compute
+ms.date: 04/20/2017
+ms.author: danlep
+ms.openlocfilehash: 9f25d9cbdc70282afd71b1a4b9ac72250922d163
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44562907"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44774416"
 ---
 # <a name="task-complete-event"></a>Task complete event
 
