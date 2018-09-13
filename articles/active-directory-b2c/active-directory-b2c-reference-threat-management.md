@@ -1,35 +1,32 @@
 ---
-title: Threat Management for Azure B2C | Microsoft Docs
-description: DOS attacks and Password Attacks detection and mitigation techniques in Azure B2C.
+title: Threat management in Azure Active Directory B2C | Microsoft Docs
+description: Learn about detection and mitigation techniques for denial-of-service attacks and password attacks in Azure Active Directory B2C.
 services: active-directory-b2c
-documentationcenter: ''
-author: vigunase
-manager: Ajith Alexander
-editor: ''
-ms.assetid: 6df79878-65cb-4dfc-98bb-2b328055bc2e
-ms.service: active-directory-b2c
+author: davidmu1
+manager: mtillman
+ms.service: active-directory
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.date: 03/27/2016
-ms.author: ''
-ms.openlocfilehash: 5cca5fcd445e70b4eab9197258bb783e20016f76
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: davidmu
+ms.component: B2C
+ms.openlocfilehash: 1801fe9695aa15850d600300b957df2c7d7cd9ef
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44554819"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44828880"
 ---
-# <a name="azure-ad-b2c-threat-management"></a><span data-ttu-id="05827-103">Azure AD B2C: Threat Management</span><span class="sxs-lookup"><span data-stu-id="05827-103">Azure AD B2C: Threat Management</span></span>
-<span data-ttu-id="05827-104">Threat Management includes protection from attacks against the system and networks.</span><span class="sxs-lookup"><span data-stu-id="05827-104">Threat Management includes protection from attacks against the system and networks.</span></span> <span data-ttu-id="05827-105">Denial-of-service (DOS) can affect the availability and makes the resource unavailable to the intended users.</span><span class="sxs-lookup"><span data-stu-id="05827-105">Denial-of-service (DOS) can affect the availability and makes the resource unavailable to the intended users.</span></span> <span data-ttu-id="05827-106">Password attacks lead to unauthorized access to resources.</span><span class="sxs-lookup"><span data-stu-id="05827-106">Password attacks lead to unauthorized access to resources.</span></span> <span data-ttu-id="05827-107">Microsoft Azure Active Directory B2C has built-in features to protect your data against these threats in multiple ways.</span><span class="sxs-lookup"><span data-stu-id="05827-107">Microsoft Azure Active Directory B2C has built-in features to protect your data against these threats in multiple ways.</span></span> 
+# <a name="azure-active-directory-b2c-threat-management"></a><span data-ttu-id="d7982-103">Azure Active Directory B2C: Threat management</span><span class="sxs-lookup"><span data-stu-id="d7982-103">Azure Active Directory B2C: Threat management</span></span>
 
-## <a name="denial-of-service-attack"></a><span data-ttu-id="05827-108">Denial of Service Attack</span><span class="sxs-lookup"><span data-stu-id="05827-108">Denial of Service Attack</span></span>
+<span data-ttu-id="d7982-104">Threat management includes planning for protection from attacks against your system and networks.</span><span class="sxs-lookup"><span data-stu-id="d7982-104">Threat management includes planning for protection from attacks against your system and networks.</span></span> <span data-ttu-id="d7982-105">Denial-of-service attacks might make resources unavailable to intended users.</span><span class="sxs-lookup"><span data-stu-id="d7982-105">Denial-of-service attacks might make resources unavailable to intended users.</span></span> <span data-ttu-id="d7982-106">Password attacks lead to unauthorized access to resources.</span><span class="sxs-lookup"><span data-stu-id="d7982-106">Password attacks lead to unauthorized access to resources.</span></span> <span data-ttu-id="d7982-107">Azure Active Directory B2C (Azure AD B2C) has built-in features that can help you protect your data against these threats in multiple ways.</span><span class="sxs-lookup"><span data-stu-id="d7982-107">Azure Active Directory B2C (Azure AD B2C) has built-in features that can help you protect your data against these threats in multiple ways.</span></span>
 
-<span data-ttu-id="05827-109">Azure AD B2C uses Detection and Mitigation techniques such as SYN cookies, rate and connection limits, to protect the underlying resources against these attacks.</span><span class="sxs-lookup"><span data-stu-id="05827-109">Azure AD B2C uses Detection and Mitigation techniques such as SYN cookies, rate and connection limits, to protect the underlying resources against these attacks.</span></span>  
+## <a name="denial-of-service-attacks"></a><span data-ttu-id="d7982-108">Denial-of-service attacks</span><span class="sxs-lookup"><span data-stu-id="d7982-108">Denial-of-service attacks</span></span>
 
-## <a name="password-attacks"></a><span data-ttu-id="05827-110">Password Attacks</span><span class="sxs-lookup"><span data-stu-id="05827-110">Password Attacks</span></span>
+<span data-ttu-id="d7982-109">Azure AD B2C uses detection and mitigation techniques like SYN cookies, and rate and connection limits to protect underlying resources against denial-of-service attacks.</span><span class="sxs-lookup"><span data-stu-id="d7982-109">Azure AD B2C uses detection and mitigation techniques like SYN cookies, and rate and connection limits to protect underlying resources against denial-of-service attacks.</span></span>
 
-<span data-ttu-id="05827-111">Azure AD B2C also has mitigations in place for password attacks.</span><span class="sxs-lookup"><span data-stu-id="05827-111">Azure AD B2C also has mitigations in place for password attacks.</span></span>  <span data-ttu-id="05827-112">This technique includes both brute-force password attacks and dictionary password attacks.</span><span class="sxs-lookup"><span data-stu-id="05827-112">This technique includes both brute-force password attacks and dictionary password attacks.</span></span>  <span data-ttu-id="05827-113">Passwords set by users are required to be of reasonable complexity.</span><span class="sxs-lookup"><span data-stu-id="05827-113">Passwords set by users are required to be of reasonable complexity.</span></span>  <span data-ttu-id="05827-114">Azure AD B2C analyzes the integrity of requests to intelligently differentiate between intended users from hackers and botnets, using a various signals.</span><span class="sxs-lookup"><span data-stu-id="05827-114">Azure AD B2C analyzes the integrity of requests to intelligently differentiate between intended users from hackers and botnets, using a various signals.</span></span> <span data-ttu-id="05827-115">B2C provides a sophisticated strategy to lock accounts based on the passwords entered, on the likelihood of an attack.</span><span class="sxs-lookup"><span data-stu-id="05827-115">B2C provides a sophisticated strategy to lock accounts based on the passwords entered, on the likelihood of an attack.</span></span>
+## <a name="password-attacks"></a><span data-ttu-id="d7982-110">Password attacks</span><span class="sxs-lookup"><span data-stu-id="d7982-110">Password attacks</span></span>
 
-[<span data-ttu-id="05827-116">More information on Microsoft's Threat Management</span><span class="sxs-lookup"><span data-stu-id="05827-116">More information on Microsoft's Threat Management</span></span>](https://www.microsoft.com/trustcenter/security/threatmanagement)
+<span data-ttu-id="d7982-111">Azure AD B2C also has mitigation techniques in place for password attacks.</span><span class="sxs-lookup"><span data-stu-id="d7982-111">Azure AD B2C also has mitigation techniques in place for password attacks.</span></span> <span data-ttu-id="d7982-112">Mitigation includes brute-force password attacks and dictionary password attacks.</span><span class="sxs-lookup"><span data-stu-id="d7982-112">Mitigation includes brute-force password attacks and dictionary password attacks.</span></span> <span data-ttu-id="d7982-113">Passwords that are set by users are required to be reasonably complex.</span><span class="sxs-lookup"><span data-stu-id="d7982-113">Passwords that are set by users are required to be reasonably complex.</span></span> <span data-ttu-id="d7982-114">By using various signals, Azure AD B2C analyzes the integrity of requests.</span><span class="sxs-lookup"><span data-stu-id="d7982-114">By using various signals, Azure AD B2C analyzes the integrity of requests.</span></span> <span data-ttu-id="d7982-115">Azure AD B2C is designed to intelligently differentiate intended users from hackers and botnets.</span><span class="sxs-lookup"><span data-stu-id="d7982-115">Azure AD B2C is designed to intelligently differentiate intended users from hackers and botnets.</span></span> <span data-ttu-id="d7982-116">Azure AD B2C provides a sophisticated strategy to lock accounts based on the passwords entered, in the likelihood of an attack.</span><span class="sxs-lookup"><span data-stu-id="d7982-116">Azure AD B2C provides a sophisticated strategy to lock accounts based on the passwords entered, in the likelihood of an attack.</span></span>
+
+<span data-ttu-id="d7982-117">For more information, visit the [Microsoft Trust Center](https://www.microsoft.com/trustcenter/default.aspx).</span><span class="sxs-lookup"><span data-stu-id="d7982-117">For more information, visit the [Microsoft Trust Center](https://www.microsoft.com/trustcenter/default.aspx).</span></span>

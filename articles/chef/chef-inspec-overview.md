@@ -1,0 +1,42 @@
+---
+title: Use InSpec for compliance automation of your Azure infrastructure
+description: Learn how to use InSpec to detect issues in your Azure deployments
+keywords: azure, chef, devops, virtual machines, overview, automate, inspce
+ms.service: virtual-machines-linux
+author: tomarcher
+manager: jeconnoc
+ms.author: tarcher
+ms.date: 05/15/2018
+ms.topic: article
+ms.openlocfilehash: 4ee48da3b5443530da06039c609084400963e5b5
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44966304"
+---
+# <a name="use-inspec-for-compliance-automation-of-your-azure-infrastructure"></a><span data-ttu-id="e18b6-104">Use InSpec for compliance automation of your Azure infrastructure</span><span class="sxs-lookup"><span data-stu-id="e18b6-104">Use InSpec for compliance automation of your Azure infrastructure</span></span>
+<span data-ttu-id="e18b6-105">[InSpec](https://www.chef.io/inspec/) is a free and open-source framework for testing and auditing your applications and infrastructure.</span><span class="sxs-lookup"><span data-stu-id="e18b6-105">[InSpec](https://www.chef.io/inspec/) is a free and open-source framework for testing and auditing your applications and infrastructure.</span></span> <span data-ttu-id="e18b6-106">InSpec works by comparing the actual state of your system with the desired state that you express in easy-to-read and easy-to-write InSpec code.</span><span class="sxs-lookup"><span data-stu-id="e18b6-106">InSpec works by comparing the actual state of your system with the desired state that you express in easy-to-read and easy-to-write InSpec code.</span></span> <span data-ttu-id="e18b6-107">InSpec detects violations and displays findings in the form of a report, but puts you in control of remediation.</span><span class="sxs-lookup"><span data-stu-id="e18b6-107">InSpec detects violations and displays findings in the form of a report, but puts you in control of remediation.</span></span> <span data-ttu-id="e18b6-108">You can use InSpec to validate the state of your virtual machines running in Azure.</span><span class="sxs-lookup"><span data-stu-id="e18b6-108">You can use InSpec to validate the state of your virtual machines running in Azure.</span></span> <span data-ttu-id="e18b6-109">You can also use InSpec to scan and validate the state of resources and resource groups inside of a subscription.</span><span class="sxs-lookup"><span data-stu-id="e18b6-109">You can also use InSpec to scan and validate the state of resources and resource groups inside of a subscription.</span></span>
+
+<span data-ttu-id="e18b6-110">This article describes the benefits of using InSpec to make security and compliance easier on Azure.</span><span class="sxs-lookup"><span data-stu-id="e18b6-110">This article describes the benefits of using InSpec to make security and compliance easier on Azure.</span></span>
+
+## <a name="make-compliance-easy-to-understand-and-assess"></a><span data-ttu-id="e18b6-111">Make compliance easy to understand and assess</span><span class="sxs-lookup"><span data-stu-id="e18b6-111">Make compliance easy to understand and assess</span></span>
+<span data-ttu-id="e18b6-112">With InSpec, you transform your requirements into versioned, executable, human-readable code.</span><span class="sxs-lookup"><span data-stu-id="e18b6-112">With InSpec, you transform your requirements into versioned, executable, human-readable code.</span></span> <span data-ttu-id="e18b6-113">This allows you to organize your tests into composable profiles where you define and customize exceptions as needed.</span><span class="sxs-lookup"><span data-stu-id="e18b6-113">This allows you to organize your tests into composable profiles where you define and customize exceptions as needed.</span></span>
+
+## <a name="detect-fleet-wide-issues-and-prioritize-their-remediation"></a><span data-ttu-id="e18b6-114">Detect fleet-wide issues and prioritize their remediation</span><span class="sxs-lookup"><span data-stu-id="e18b6-114">Detect fleet-wide issues and prioritize their remediation</span></span>
+<span data-ttu-id="e18b6-115">The InSpec agentless detect mode enable you to quickly assess - at scale - your exposure level.</span><span class="sxs-lookup"><span data-stu-id="e18b6-115">The InSpec agentless detect mode enable you to quickly assess - at scale - your exposure level.</span></span> <span data-ttu-id="e18b6-116">Built-in metadata for impact/severity scoring helps determine what areas to focus on for remediation.</span><span class="sxs-lookup"><span data-stu-id="e18b6-116">Built-in metadata for impact/severity scoring helps determine what areas to focus on for remediation.</span></span>
+
+## <a name="inspect-machines-data-and-new-saas-apis"></a><span data-ttu-id="e18b6-117">Inspect machines, data, and new SaaS APIs</span><span class="sxs-lookup"><span data-stu-id="e18b6-117">Inspect machines, data, and new SaaS APIs</span></span>
+<span data-ttu-id="e18b6-118">The InSpec cloud API compliance capabilities let you make both coarse and fine-grained assertions about your cloud compliance and report on it continuously.</span><span class="sxs-lookup"><span data-stu-id="e18b6-118">The InSpec cloud API compliance capabilities let you make both coarse and fine-grained assertions about your cloud compliance and report on it continuously.</span></span>
+
+## <a name="satisfy-audits"></a><span data-ttu-id="e18b6-119">Satisfy audits</span><span class="sxs-lookup"><span data-stu-id="e18b6-119">Satisfy audits</span></span>
+<span data-ttu-id="e18b6-120">With InSpec, you can respond to audit questions at any time - not just at predetermined intervals such as quarterly or yearly.</span><span class="sxs-lookup"><span data-stu-id="e18b6-120">With InSpec, you can respond to audit questions at any time - not just at predetermined intervals such as quarterly or yearly.</span></span> <span data-ttu-id="e18b6-121">InSpec allows you to enter an audit cycle knowing your exact compliance posture, instead of being surprised by an auditor’s findings.</span><span class="sxs-lookup"><span data-stu-id="e18b6-121">InSpec allows you to enter an audit cycle knowing your exact compliance posture, instead of being surprised by an auditor’s findings.</span></span>
+
+## <a name="reduce-ambiguity-and-miscommunication-regarding-rules"></a><span data-ttu-id="e18b6-122">Reduce ambiguity and miscommunication regarding rules</span><span class="sxs-lookup"><span data-stu-id="e18b6-122">Reduce ambiguity and miscommunication regarding rules</span></span>
+<span data-ttu-id="e18b6-123">Documents leave configurations and processes open to interpretation.</span><span class="sxs-lookup"><span data-stu-id="e18b6-123">Documents leave configurations and processes open to interpretation.</span></span> <span data-ttu-id="e18b6-124">Executable code removes conversations about what should be assessed in favor of tangible tests with clear intent.</span><span class="sxs-lookup"><span data-stu-id="e18b6-124">Executable code removes conversations about what should be assessed in favor of tangible tests with clear intent.</span></span>
+
+## <a name="keep-up-with-rapidly-changing-threat-and-compliance-landscapes"></a><span data-ttu-id="e18b6-125">Keep up with rapidly changing threat and compliance landscapes</span><span class="sxs-lookup"><span data-stu-id="e18b6-125">Keep up with rapidly changing threat and compliance landscapes</span></span>
+<span data-ttu-id="e18b6-126">InSpec allows you to write and publish detection code the same day and write new rules in quick response to new regulations.</span><span class="sxs-lookup"><span data-stu-id="e18b6-126">InSpec allows you to write and publish detection code the same day and write new rules in quick response to new regulations.</span></span> <span data-ttu-id="e18b6-127">This means that changes in threats or regulations no longer equal emergencies.</span><span class="sxs-lookup"><span data-stu-id="e18b6-127">This means that changes in threats or regulations no longer equal emergencies.</span></span>
+
+## <a name="next-steps"></a><span data-ttu-id="e18b6-128">Next steps</span><span class="sxs-lookup"><span data-stu-id="e18b6-128">Next steps</span></span>
+* [<span data-ttu-id="e18b6-129">Create a Windows virtual machine on Azure using Chef</span><span class="sxs-lookup"><span data-stu-id="e18b6-129">Create a Windows virtual machine on Azure using Chef</span></span>](/azure/virtual-machines/windows/chef-automation)

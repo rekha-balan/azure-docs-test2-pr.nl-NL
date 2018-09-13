@@ -1,0 +1,39 @@
+---
+title: Language Understanding (LUIS) API HTTP response codes - Azure | Microsoft Docs
+titleSuffix: Azure
+description: Understand what HTTP response codes are returned from the LUIS Authoring and Endpoint APIs
+services: cognitive-services
+author: diberry
+manager: cjgronlund
+ms.service: cognitive-services
+ms.component: luis
+ms.topic: article
+ms.date: 04/16/2018
+ms.author: diberry
+ms.openlocfilehash: 5fd64b5fa3e3c084aee1e63c5233ccffc93917ae
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44967449"
+---
+# <a name="luis-api-http-response-codes"></a><span data-ttu-id="d2aea-103">LUIS API HTTP response codes</span><span class="sxs-lookup"><span data-stu-id="d2aea-103">LUIS API HTTP response codes</span></span>
+<span data-ttu-id="d2aea-104">The [authoring](https://aka.ms/luis-authoring-apis) and [endpoint](https://aka.ms/luis-endpoint-apis) APIs return HTTP response codes.</span><span class="sxs-lookup"><span data-stu-id="d2aea-104">The [authoring](https://aka.ms/luis-authoring-apis) and [endpoint](https://aka.ms/luis-endpoint-apis) APIs return HTTP response codes.</span></span> <span data-ttu-id="d2aea-105">While response messages include information specific to a request, the HTTP response status code is general.</span><span class="sxs-lookup"><span data-stu-id="d2aea-105">While response messages include information specific to a request, the HTTP response status code is general.</span></span> 
+
+## <a name="common-status-codes"></a><span data-ttu-id="d2aea-106">Common status codes</span><span class="sxs-lookup"><span data-stu-id="d2aea-106">Common status codes</span></span>
+<span data-ttu-id="d2aea-107">The following table lists some of the most common HTTP response status codes for the [authoring](https://aka.ms/luis-authoring-apis) and [endpoint](https://aka.ms/luis-endpoint-apis) APIs:</span><span class="sxs-lookup"><span data-stu-id="d2aea-107">The following table lists some of the most common HTTP response status codes for the [authoring](https://aka.ms/luis-authoring-apis) and [endpoint](https://aka.ms/luis-endpoint-apis) APIs:</span></span>
+
+|<span data-ttu-id="d2aea-108">Code</span><span class="sxs-lookup"><span data-stu-id="d2aea-108">Code</span></span>|<span data-ttu-id="d2aea-109">API</span><span class="sxs-lookup"><span data-stu-id="d2aea-109">API</span></span>|<span data-ttu-id="d2aea-110">Explanation</span><span class="sxs-lookup"><span data-stu-id="d2aea-110">Explanation</span></span>|
+|:--|--|--|
+|<span data-ttu-id="d2aea-111">400</span><span class="sxs-lookup"><span data-stu-id="d2aea-111">400</span></span>|<span data-ttu-id="d2aea-112">Authoring, Endpoint</span><span class="sxs-lookup"><span data-stu-id="d2aea-112">Authoring, Endpoint</span></span>|<span data-ttu-id="d2aea-113">request's parameters are incorrect meaning the required parameters are missing, malformed, or too large</span><span class="sxs-lookup"><span data-stu-id="d2aea-113">request's parameters are incorrect meaning the required parameters are missing, malformed, or too large</span></span>|
+|<span data-ttu-id="d2aea-114">400</span><span class="sxs-lookup"><span data-stu-id="d2aea-114">400</span></span>|<span data-ttu-id="d2aea-115">Authoring, Endpoint</span><span class="sxs-lookup"><span data-stu-id="d2aea-115">Authoring, Endpoint</span></span>|<span data-ttu-id="d2aea-116">request's body is incorrect meaning the JSON is missing, malformed, or too large</span><span class="sxs-lookup"><span data-stu-id="d2aea-116">request's body is incorrect meaning the JSON is missing, malformed, or too large</span></span>|
+|<span data-ttu-id="d2aea-117">401</span><span class="sxs-lookup"><span data-stu-id="d2aea-117">401</span></span>|<span data-ttu-id="d2aea-118">Authoring</span><span class="sxs-lookup"><span data-stu-id="d2aea-118">Authoring</span></span>|<span data-ttu-id="d2aea-119">used endpoint subscription key, instead of authoring key</span><span class="sxs-lookup"><span data-stu-id="d2aea-119">used endpoint subscription key, instead of authoring key</span></span>|
+|<span data-ttu-id="d2aea-120">401</span><span class="sxs-lookup"><span data-stu-id="d2aea-120">401</span></span>|<span data-ttu-id="d2aea-121">Authoring, Endpoint</span><span class="sxs-lookup"><span data-stu-id="d2aea-121">Authoring, Endpoint</span></span>|<span data-ttu-id="d2aea-122">invalid, malformed, or empty key</span><span class="sxs-lookup"><span data-stu-id="d2aea-122">invalid, malformed, or empty key</span></span>|
+|<span data-ttu-id="d2aea-123">401</span><span class="sxs-lookup"><span data-stu-id="d2aea-123">401</span></span>|<span data-ttu-id="d2aea-124">Authoring, Endpoint</span><span class="sxs-lookup"><span data-stu-id="d2aea-124">Authoring, Endpoint</span></span>| <span data-ttu-id="d2aea-125">key doesn't match region</span><span class="sxs-lookup"><span data-stu-id="d2aea-125">key doesn't match region</span></span>|
+|<span data-ttu-id="d2aea-126">401</span><span class="sxs-lookup"><span data-stu-id="d2aea-126">401</span></span>|<span data-ttu-id="d2aea-127">Authoring</span><span class="sxs-lookup"><span data-stu-id="d2aea-127">Authoring</span></span>|<span data-ttu-id="d2aea-128">you are not the owner or collaborator</span><span class="sxs-lookup"><span data-stu-id="d2aea-128">you are not the owner or collaborator</span></span>|
+|<span data-ttu-id="d2aea-129">401</span><span class="sxs-lookup"><span data-stu-id="d2aea-129">401</span></span>|<span data-ttu-id="d2aea-130">Authoring</span><span class="sxs-lookup"><span data-stu-id="d2aea-130">Authoring</span></span>|<span data-ttu-id="d2aea-131">invalid order of API calls</span><span class="sxs-lookup"><span data-stu-id="d2aea-131">invalid order of API calls</span></span>|
+|<span data-ttu-id="d2aea-132">403</span><span class="sxs-lookup"><span data-stu-id="d2aea-132">403</span></span>|<span data-ttu-id="d2aea-133">Authoring, Endpoint</span><span class="sxs-lookup"><span data-stu-id="d2aea-133">Authoring, Endpoint</span></span>|<span data-ttu-id="d2aea-134">total monthly key quota limit exceeded</span><span class="sxs-lookup"><span data-stu-id="d2aea-134">total monthly key quota limit exceeded</span></span>|
+|<span data-ttu-id="d2aea-135">409</span><span class="sxs-lookup"><span data-stu-id="d2aea-135">409</span></span>|<span data-ttu-id="d2aea-136">Endpoint</span><span class="sxs-lookup"><span data-stu-id="d2aea-136">Endpoint</span></span>|<span data-ttu-id="d2aea-137">application is still loading</span><span class="sxs-lookup"><span data-stu-id="d2aea-137">application is still loading</span></span>|
+|<span data-ttu-id="d2aea-138">410</span><span class="sxs-lookup"><span data-stu-id="d2aea-138">410</span></span>|<span data-ttu-id="d2aea-139">Endpoint</span><span class="sxs-lookup"><span data-stu-id="d2aea-139">Endpoint</span></span>|<span data-ttu-id="d2aea-140">application needs to be retrained and republished</span><span class="sxs-lookup"><span data-stu-id="d2aea-140">application needs to be retrained and republished</span></span>|
+|<span data-ttu-id="d2aea-141">414</span><span class="sxs-lookup"><span data-stu-id="d2aea-141">414</span></span>|<span data-ttu-id="d2aea-142">Endpoint</span><span class="sxs-lookup"><span data-stu-id="d2aea-142">Endpoint</span></span>|<span data-ttu-id="d2aea-143">query exceeds maximum character limit</span><span class="sxs-lookup"><span data-stu-id="d2aea-143">query exceeds maximum character limit</span></span>|
+|<span data-ttu-id="d2aea-144">429</span><span class="sxs-lookup"><span data-stu-id="d2aea-144">429</span></span>|<span data-ttu-id="d2aea-145">Authoring, Endpoint</span><span class="sxs-lookup"><span data-stu-id="d2aea-145">Authoring, Endpoint</span></span>|<span data-ttu-id="d2aea-146">Rate limit is exceeded (requests/second)</span><span class="sxs-lookup"><span data-stu-id="d2aea-146">Rate limit is exceeded (requests/second)</span></span>|

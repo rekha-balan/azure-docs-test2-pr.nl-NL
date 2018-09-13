@@ -1,0 +1,393 @@
+---
+title: Build a .NET Core and SQL Database web app in Azure App Service on Linux | Microsoft Docs
+description: Learn how to get a .NET Core app working in Azure App Service on Linux, with connection to a SQL Database.
+services: app-service\web
+documentationcenter: dotnet
+author: cephalin
+manager: syntaxc4
+editor: ''
+ms.assetid: 0b4d7d0e-e984-49a1-a57a-3c0caa955f0e
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: tutorial
+ms.date: 04/11/2018
+ms.author: cephalin
+ms.custom: mvc
+ms.openlocfilehash: ddea4621277303dd6c153205b683b4eea0151db0
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44967152"
+---
+# <a name="build-a-net-core-and-sql-database-web-app-in-azure-app-service-on-linux"></a><span data-ttu-id="4299a-103">Build a .NET Core and SQL Database web app in Azure App Service on Linux</span><span class="sxs-lookup"><span data-stu-id="4299a-103">Build a .NET Core and SQL Database web app in Azure App Service on Linux</span></span>
+
+> [!NOTE]
+> <span data-ttu-id="4299a-104">This article deploys an app to App Service on Linux.</span><span class="sxs-lookup"><span data-stu-id="4299a-104">This article deploys an app to App Service on Linux.</span></span> <span data-ttu-id="4299a-105">To deploy to App Service on _Windows_, see [Build a .NET Core and SQL Database web app in Azure App Service](../app-service-web-tutorial-dotnetcore-sqldb.md).</span><span class="sxs-lookup"><span data-stu-id="4299a-105">To deploy to App Service on _Windows_, see [Build a .NET Core and SQL Database web app in Azure App Service](../app-service-web-tutorial-dotnetcore-sqldb.md).</span></span>
+>
+
+<span data-ttu-id="4299a-106">[App Service on Linux](app-service-linux-intro.md) provides a highly scalable, self-patching web hosting service using the Linux operating system.</span><span class="sxs-lookup"><span data-stu-id="4299a-106">[App Service on Linux](app-service-linux-intro.md) provides a highly scalable, self-patching web hosting service using the Linux operating system.</span></span> <span data-ttu-id="4299a-107">This tutorial shows how to create a .NET Core web app and connect it to a SQL Database.</span><span class="sxs-lookup"><span data-stu-id="4299a-107">This tutorial shows how to create a .NET Core web app and connect it to a SQL Database.</span></span> <span data-ttu-id="4299a-108">When you're done, you'll have a .NET Core MVC app running in App Service on Linux.</span><span class="sxs-lookup"><span data-stu-id="4299a-108">When you're done, you'll have a .NET Core MVC app running in App Service on Linux.</span></span>
+
+![app running in App Service on Linux](./media/tutorial-dotnetcore-sqldb-app/azure-app-in-browser.png)
+
+<span data-ttu-id="4299a-110">What you learn how to:</span><span class="sxs-lookup"><span data-stu-id="4299a-110">What you learn how to:</span></span>
+
+> [!div class="checklist"]
+> * <span data-ttu-id="4299a-111">Create a SQL Database in Azure</span><span class="sxs-lookup"><span data-stu-id="4299a-111">Create a SQL Database in Azure</span></span>
+> * <span data-ttu-id="4299a-112">Connect a .NET Core app to SQL Database</span><span class="sxs-lookup"><span data-stu-id="4299a-112">Connect a .NET Core app to SQL Database</span></span>
+> * <span data-ttu-id="4299a-113">Deploy the app to Azure</span><span class="sxs-lookup"><span data-stu-id="4299a-113">Deploy the app to Azure</span></span>
+> * <span data-ttu-id="4299a-114">Update the data model and redeploy the app</span><span class="sxs-lookup"><span data-stu-id="4299a-114">Update the data model and redeploy the app</span></span>
+> * <span data-ttu-id="4299a-115">Stream diagnostic logs from Azure</span><span class="sxs-lookup"><span data-stu-id="4299a-115">Stream diagnostic logs from Azure</span></span>
+> * <span data-ttu-id="4299a-116">Manage the app in the Azure portal</span><span class="sxs-lookup"><span data-stu-id="4299a-116">Manage the app in the Azure portal</span></span>
+
+[!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
+
+## <a name="prerequisites"></a><span data-ttu-id="4299a-117">Prerequisites</span><span class="sxs-lookup"><span data-stu-id="4299a-117">Prerequisites</span></span>
+
+<span data-ttu-id="4299a-118">To complete this tutorial:</span><span class="sxs-lookup"><span data-stu-id="4299a-118">To complete this tutorial:</span></span>
+
+* [<span data-ttu-id="4299a-119">Install Git</span><span class="sxs-lookup"><span data-stu-id="4299a-119">Install Git</span></span>](https://git-scm.com/)
+* [<span data-ttu-id="4299a-120">Install .NET Core</span><span class="sxs-lookup"><span data-stu-id="4299a-120">Install .NET Core</span></span>](https://www.microsoft.com/net/core/)
+
+## <a name="create-local-net-core-app"></a><span data-ttu-id="4299a-121">Create local .NET Core app</span><span class="sxs-lookup"><span data-stu-id="4299a-121">Create local .NET Core app</span></span>
+
+<span data-ttu-id="4299a-122">In this step, you set up the local .NET Core project.</span><span class="sxs-lookup"><span data-stu-id="4299a-122">In this step, you set up the local .NET Core project.</span></span>
+
+### <a name="clone-the-sample-application"></a><span data-ttu-id="4299a-123">Clone the sample application</span><span class="sxs-lookup"><span data-stu-id="4299a-123">Clone the sample application</span></span>
+
+<span data-ttu-id="4299a-124">In the terminal window, `cd` to a working directory.</span><span class="sxs-lookup"><span data-stu-id="4299a-124">In the terminal window, `cd` to a working directory.</span></span>
+
+<span data-ttu-id="4299a-125">Run the following commands to clone the sample repository and change to its root.</span><span class="sxs-lookup"><span data-stu-id="4299a-125">Run the following commands to clone the sample repository and change to its root.</span></span>
+
+```bash
+git clone https://github.com/azure-samples/dotnetcore-sqldb-tutorial
+cd dotnetcore-sqldb-tutorial
+```
+
+<span data-ttu-id="4299a-126">The sample project contains a basic CRUD (create-read-update-delete) app using [Entity Framework Core](https://docs.microsoft.com/ef/core/).</span><span class="sxs-lookup"><span data-stu-id="4299a-126">The sample project contains a basic CRUD (create-read-update-delete) app using [Entity Framework Core](https://docs.microsoft.com/ef/core/).</span></span>
+
+### <a name="run-the-application"></a><span data-ttu-id="4299a-127">Run the application</span><span class="sxs-lookup"><span data-stu-id="4299a-127">Run the application</span></span>
+
+<span data-ttu-id="4299a-128">Run the following commands to install the required packages, run database migrations, and start the application.</span><span class="sxs-lookup"><span data-stu-id="4299a-128">Run the following commands to install the required packages, run database migrations, and start the application.</span></span>
+
+```bash
+dotnet restore
+dotnet ef database update
+dotnet run
+```
+
+<span data-ttu-id="4299a-129">Navigate to `http://localhost:5000` in a browser.</span><span class="sxs-lookup"><span data-stu-id="4299a-129">Navigate to `http://localhost:5000` in a browser.</span></span> <span data-ttu-id="4299a-130">Select the **Create New** link and create a couple _to-do_ items.</span><span class="sxs-lookup"><span data-stu-id="4299a-130">Select the **Create New** link and create a couple _to-do_ items.</span></span>
+
+![connects successfully to SQL Database](./media/tutorial-dotnetcore-sqldb-app/local-app-in-browser.png)
+
+<span data-ttu-id="4299a-132">To stop .NET Core at any time, press `Ctrl+C` in the terminal.</span><span class="sxs-lookup"><span data-stu-id="4299a-132">To stop .NET Core at any time, press `Ctrl+C` in the terminal.</span></span>
+
+[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
+
+## <a name="create-production-sql-database"></a><span data-ttu-id="4299a-133">Create production SQL Database</span><span class="sxs-lookup"><span data-stu-id="4299a-133">Create production SQL Database</span></span>
+
+<span data-ttu-id="4299a-134">In this step, you create a SQL Database in Azure.</span><span class="sxs-lookup"><span data-stu-id="4299a-134">In this step, you create a SQL Database in Azure.</span></span> <span data-ttu-id="4299a-135">When your app is deployed to Azure, it uses this cloud database.</span><span class="sxs-lookup"><span data-stu-id="4299a-135">When your app is deployed to Azure, it uses this cloud database.</span></span>
+
+<span data-ttu-id="4299a-136">For SQL Database, this tutorial uses [Azure SQL Database](/azure/sql-database/).</span><span class="sxs-lookup"><span data-stu-id="4299a-136">For SQL Database, this tutorial uses [Azure SQL Database](/azure/sql-database/).</span></span>
+
+### <a name="create-a-resource-group"></a><span data-ttu-id="4299a-137">Create a resource group</span><span class="sxs-lookup"><span data-stu-id="4299a-137">Create a resource group</span></span>
+
+[!INCLUDE [Create resource group](../../../includes/app-service-web-create-resource-group-linux-no-h.md)]
+
+### <a name="create-a-sql-database-logical-server"></a><span data-ttu-id="4299a-138">Create a SQL Database logical server</span><span class="sxs-lookup"><span data-stu-id="4299a-138">Create a SQL Database logical server</span></span>
+
+<span data-ttu-id="4299a-139">In the Cloud Shell, create a SQL Database logical server with the [`az sql server create`](/cli/azure/sql/server?view=azure-cli-latest#az-sql-server-create) command.</span><span class="sxs-lookup"><span data-stu-id="4299a-139">In the Cloud Shell, create a SQL Database logical server with the [`az sql server create`](/cli/azure/sql/server?view=azure-cli-latest#az-sql-server-create) command.</span></span>
+
+<span data-ttu-id="4299a-140">Replace the *\<server_name>* placeholder with a unique SQL Database name.</span><span class="sxs-lookup"><span data-stu-id="4299a-140">Replace the *\<server_name>* placeholder with a unique SQL Database name.</span></span> <span data-ttu-id="4299a-141">This name is used as the part of the SQL Database endpoint, `<server_name>.database.windows.net`, so the name needs to be unique across all logical servers in Azure.</span><span class="sxs-lookup"><span data-stu-id="4299a-141">This name is used as the part of the SQL Database endpoint, `<server_name>.database.windows.net`, so the name needs to be unique across all logical servers in Azure.</span></span> <span data-ttu-id="4299a-142">The name must contain only lowercase letters, numbers, and the hyphen (-) character, and must be between 3 and 50 characters long.</span><span class="sxs-lookup"><span data-stu-id="4299a-142">The name must contain only lowercase letters, numbers, and the hyphen (-) character, and must be between 3 and 50 characters long.</span></span> <span data-ttu-id="4299a-143">Also, replace *\<db_username>* and *\<db_password>* with a username and password of your choice.</span><span class="sxs-lookup"><span data-stu-id="4299a-143">Also, replace *\<db_username>* and *\<db_password>* with a username and password of your choice.</span></span> 
+
+
+```azurecli-interactive
+az sql server create --name <server_name> --resource-group myResourceGroup --location "West Europe" --admin-user <db_username> --admin-password <db_password>
+```
+
+<span data-ttu-id="4299a-144">When the SQL Database logical server is created, the Azure CLI shows information similar to the following example:</span><span class="sxs-lookup"><span data-stu-id="4299a-144">When the SQL Database logical server is created, the Azure CLI shows information similar to the following example:</span></span>
+
+```json
+{
+  "administratorLogin": "sqladmin",
+  "administratorLoginPassword": null,
+  "fullyQualifiedDomainName": "<server_name>.database.windows.net",
+  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Sql/servers/<server_name>",
+  "identity": null,
+  "kind": "v12.0",
+  "location": "westeurope",
+  "name": "<server_name>",
+  "resourceGroup": "myResourceGroup",
+  "state": "Ready",
+  "tags": null,
+  "type": "Microsoft.Sql/servers",
+  "version": "12.0"
+}
+```
+
+### <a name="configure-a-server-firewall-rule"></a><span data-ttu-id="4299a-145">Configure a server firewall rule</span><span class="sxs-lookup"><span data-stu-id="4299a-145">Configure a server firewall rule</span></span>
+
+<span data-ttu-id="4299a-146">Create an [Azure SQL Database server-level firewall rule](../../sql-database/sql-database-firewall-configure.md) using the [`az sql server firewall create`](/cli/azure/sql/server/firewall-rule?view=azure-cli-latest#az-sql-server-firewall-rule-create) command.</span><span class="sxs-lookup"><span data-stu-id="4299a-146">Create an [Azure SQL Database server-level firewall rule](../../sql-database/sql-database-firewall-configure.md) using the [`az sql server firewall create`](/cli/azure/sql/server/firewall-rule?view=azure-cli-latest#az-sql-server-firewall-rule-create) command.</span></span> <span data-ttu-id="4299a-147">When both starting IP and end IP are set to 0.0.0.0, the firewall is only opened for other Azure resources.</span><span class="sxs-lookup"><span data-stu-id="4299a-147">When both starting IP and end IP are set to 0.0.0.0, the firewall is only opened for other Azure resources.</span></span> 
+
+```azurecli-interactive
+az sql server firewall-rule create --resource-group myResourceGroup --server <server_name> --name AllowYourIp --start-ip-address 0.0.0.0 --end-ip-address 0.0.0.0
+```
+
+### <a name="create-a-database"></a><span data-ttu-id="4299a-148">Create a database</span><span class="sxs-lookup"><span data-stu-id="4299a-148">Create a database</span></span>
+
+<span data-ttu-id="4299a-149">Create a database with an [S0 performance level](../../sql-database/sql-database-service-tiers-dtu.md) in the server using the [`az sql db create`](/cli/azure/sql/db?view=azure-cli-latest#az-sql-db-create) command.</span><span class="sxs-lookup"><span data-stu-id="4299a-149">Create a database with an [S0 performance level](../../sql-database/sql-database-service-tiers-dtu.md) in the server using the [`az sql db create`](/cli/azure/sql/db?view=azure-cli-latest#az-sql-db-create) command.</span></span>
+
+```azurecli-interactive
+az sql db create --resource-group myResourceGroup --server <server_name> --name coreDB --service-objective S0
+```
+
+### <a name="create-connection-string"></a><span data-ttu-id="4299a-150">Create connection string</span><span class="sxs-lookup"><span data-stu-id="4299a-150">Create connection string</span></span>
+
+<span data-ttu-id="4299a-151">Replace the following string with the *\<server_name>*, *\<db_username>*, and *\<db_password>* you used earlier.</span><span class="sxs-lookup"><span data-stu-id="4299a-151">Replace the following string with the *\<server_name>*, *\<db_username>*, and *\<db_password>* you used earlier.</span></span>
+
+```
+Server=tcp:<server_name>.database.windows.net,1433;Database=coreDB;User ID=<db_username>;Password=<db_password>;Encrypt=true;Connection Timeout=30;
+```
+
+<span data-ttu-id="4299a-152">This is the connection string for your .NET Core app.</span><span class="sxs-lookup"><span data-stu-id="4299a-152">This is the connection string for your .NET Core app.</span></span> <span data-ttu-id="4299a-153">Copy it for use later.</span><span class="sxs-lookup"><span data-stu-id="4299a-153">Copy it for use later.</span></span>
+
+## <a name="deploy-app-to-azure"></a><span data-ttu-id="4299a-154">Deploy app to Azure</span><span class="sxs-lookup"><span data-stu-id="4299a-154">Deploy app to Azure</span></span>
+
+<span data-ttu-id="4299a-155">In this step, you deploy your SQL Database-connected .NET Core application to App Service on Linux.</span><span class="sxs-lookup"><span data-stu-id="4299a-155">In this step, you deploy your SQL Database-connected .NET Core application to App Service on Linux.</span></span>
+
+### <a name="configure-local-git-deployment"></a><span data-ttu-id="4299a-156">Configure local git deployment</span><span class="sxs-lookup"><span data-stu-id="4299a-156">Configure local git deployment</span></span>
+
+[!INCLUDE [Configure a deployment user](../../../includes/configure-deployment-user-no-h.md)]
+
+### <a name="create-an-app-service-plan"></a><span data-ttu-id="4299a-157">Create an App Service plan</span><span class="sxs-lookup"><span data-stu-id="4299a-157">Create an App Service plan</span></span>
+
+[!INCLUDE [Create app service plan](../../../includes/app-service-web-create-app-service-plan-linux-no-h.md)]
+
+### <a name="create-a-web-app"></a><span data-ttu-id="4299a-158">Create a web app</span><span class="sxs-lookup"><span data-stu-id="4299a-158">Create a web app</span></span>
+
+[!INCLUDE [Create web app](../../../includes/app-service-web-create-web-app-dotnetcore-linux-no-h.md)] 
+
+### <a name="configure-an-environment-variable"></a><span data-ttu-id="4299a-159">Configure an environment variable</span><span class="sxs-lookup"><span data-stu-id="4299a-159">Configure an environment variable</span></span>
+
+<span data-ttu-id="4299a-160">To set connection strings for your Azure app, use the [`az webapp config appsettings set`](/cli/azure/webapp/config/appsettings?view=azure-cli-latest#az-webapp-config-appsettings-set) command in the Cloud Shell.</span><span class="sxs-lookup"><span data-stu-id="4299a-160">To set connection strings for your Azure app, use the [`az webapp config appsettings set`](/cli/azure/webapp/config/appsettings?view=azure-cli-latest#az-webapp-config-appsettings-set) command in the Cloud Shell.</span></span> <span data-ttu-id="4299a-161">In the following command, replace *\<app name>*, as well as the *\<connection_string>* parameter with the connection string you created earlier.</span><span class="sxs-lookup"><span data-stu-id="4299a-161">In the following command, replace *\<app name>*, as well as the *\<connection_string>* parameter with the connection string you created earlier.</span></span>
+
+```azurecli-interactive
+az webapp config connection-string set --resource-group myResourceGroup --name <app name> --settings MyDbConnection='<connection_string>' --connection-string-type SQLServer
+```
+
+<span data-ttu-id="4299a-162">Next, set `ASPNETCORE_ENVIRONMENT` app setting to _Production_.</span><span class="sxs-lookup"><span data-stu-id="4299a-162">Next, set `ASPNETCORE_ENVIRONMENT` app setting to _Production_.</span></span> <span data-ttu-id="4299a-163">This setting lets you know whether you are running in Azure, because you use SQLite for your local development environment and SQL Database for your Azure environment.</span><span class="sxs-lookup"><span data-stu-id="4299a-163">This setting lets you know whether you are running in Azure, because you use SQLite for your local development environment and SQL Database for your Azure environment.</span></span>
+
+<span data-ttu-id="4299a-164">The following example configures a `ASPNETCORE_ENVIRONMENT` app setting in your Azure web app.</span><span class="sxs-lookup"><span data-stu-id="4299a-164">The following example configures a `ASPNETCORE_ENVIRONMENT` app setting in your Azure web app.</span></span> <span data-ttu-id="4299a-165">Replace the *\<app_name>* placeholder.</span><span class="sxs-lookup"><span data-stu-id="4299a-165">Replace the *\<app_name>* placeholder.</span></span>
+
+```azurecli-interactive
+az webapp config appsettings set --name <app_name> --resource-group myResourceGroup --settings ASPNETCORE_ENVIRONMENT="Production"
+```
+
+### <a name="connect-to-sql-database-in-production"></a><span data-ttu-id="4299a-166">Connect to SQL Database in production</span><span class="sxs-lookup"><span data-stu-id="4299a-166">Connect to SQL Database in production</span></span>
+
+<span data-ttu-id="4299a-167">In your local repository, open Startup.cs and find the following code:</span><span class="sxs-lookup"><span data-stu-id="4299a-167">In your local repository, open Startup.cs and find the following code:</span></span>
+
+```csharp
+services.AddDbContext<MyDatabaseContext>(options =>
+        options.UseSqlite("Data Source=localdatabase.db"));
+```
+
+<span data-ttu-id="4299a-168">Replace it with the following code, which uses the environment variables that you configured earlier.</span><span class="sxs-lookup"><span data-stu-id="4299a-168">Replace it with the following code, which uses the environment variables that you configured earlier.</span></span>
+
+```csharp
+// Use SQL Database if in Azure, otherwise, use SQLite
+if(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+    services.AddDbContext<MyDatabaseContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("MyDbConnection")));
+else
+    services.AddDbContext<MyDatabaseContext>(options =>
+            options.UseSqlite("Data Source=MvcMovie.db"));
+
+// Automatically perform database migration
+services.BuildServiceProvider().GetService<MyDatabaseContext>().Database.Migrate();
+```
+
+<span data-ttu-id="4299a-169">If this code detects that it is running in production (which indicates the Azure environment), then it uses the connection string you configured to connect to the SQL Database.</span><span class="sxs-lookup"><span data-stu-id="4299a-169">If this code detects that it is running in production (which indicates the Azure environment), then it uses the connection string you configured to connect to the SQL Database.</span></span>
+
+<span data-ttu-id="4299a-170">The `Database.Migrate()` call helps you when it is run in Azure, because it automatically creates the databases that your .NET Core app needs, based on its migration configuration.</span><span class="sxs-lookup"><span data-stu-id="4299a-170">The `Database.Migrate()` call helps you when it is run in Azure, because it automatically creates the databases that your .NET Core app needs, based on its migration configuration.</span></span> 
+
+<span data-ttu-id="4299a-171">Save your changes, then commit it into your Git repository.</span><span class="sxs-lookup"><span data-stu-id="4299a-171">Save your changes, then commit it into your Git repository.</span></span> 
+
+```bash
+git add .
+git commit -m "connect to SQLDB in Azure"
+```
+
+### <a name="push-to-azure-from-git"></a><span data-ttu-id="4299a-172">Push to Azure from Git</span><span class="sxs-lookup"><span data-stu-id="4299a-172">Push to Azure from Git</span></span>
+
+[!INCLUDE [app-service-plan-no-h](../../../includes/app-service-web-git-push-to-azure-no-h.md)]
+
+```bash
+Counting objects: 98, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (92/92), done.
+Writing objects: 100% (98/98), 524.98 KiB | 5.58 MiB/s, done.
+Total 98 (delta 8), reused 0 (delta 0)
+remote: Updating branch 'master'.
+remote: .
+remote: Updating submodules.
+remote: Preparing deployment for commit id '0c497633b8'.
+remote: Generating deployment script.
+remote: Project file path: ./DotNetCoreSqlDb.csproj
+remote: Generated deployment script files
+remote: Running deployment command...
+remote: Handling ASP.NET Core Web Application deployment.
+remote: .
+remote: .
+remote: .
+remote: Finished successfully.
+remote: Running post deployment command(s)...
+remote: Deployment successful.
+remote: App container will begin restart within 10 seconds.
+To https://<app_name>.scm.azurewebsites.net/<app_name>.git
+ * [new branch]      master -> master
+```
+
+### <a name="browse-to-the-azure-web-app"></a><span data-ttu-id="4299a-173">Browse to the Azure web app</span><span class="sxs-lookup"><span data-stu-id="4299a-173">Browse to the Azure web app</span></span>
+
+<span data-ttu-id="4299a-174">Browse to the deployed web app using your web browser.</span><span class="sxs-lookup"><span data-stu-id="4299a-174">Browse to the deployed web app using your web browser.</span></span>
+
+```bash
+http://<app_name>.azurewebsites.net
+```
+
+<span data-ttu-id="4299a-175">Add a few to-do items.</span><span class="sxs-lookup"><span data-stu-id="4299a-175">Add a few to-do items.</span></span>
+
+![app running in App Service on Linux](./media/tutorial-dotnetcore-sqldb-app/azure-app-in-browser.png)
+
+<span data-ttu-id="4299a-177">**Congratulations!**</span><span class="sxs-lookup"><span data-stu-id="4299a-177">**Congratulations!**</span></span> <span data-ttu-id="4299a-178">You're running a data-driven .NET Core app in App Service on Linux.</span><span class="sxs-lookup"><span data-stu-id="4299a-178">You're running a data-driven .NET Core app in App Service on Linux.</span></span>
+
+## <a name="update-locally-and-redeploy"></a><span data-ttu-id="4299a-179">Update locally and redeploy</span><span class="sxs-lookup"><span data-stu-id="4299a-179">Update locally and redeploy</span></span>
+
+<span data-ttu-id="4299a-180">In this step, you make a change to your database schema and publish it to Azure.</span><span class="sxs-lookup"><span data-stu-id="4299a-180">In this step, you make a change to your database schema and publish it to Azure.</span></span>
+
+### <a name="update-your-data-model"></a><span data-ttu-id="4299a-181">Update your data model</span><span class="sxs-lookup"><span data-stu-id="4299a-181">Update your data model</span></span>
+
+<span data-ttu-id="4299a-182">Open _Models\Todo.cs_ in the code editor.</span><span class="sxs-lookup"><span data-stu-id="4299a-182">Open _Models\Todo.cs_ in the code editor.</span></span> <span data-ttu-id="4299a-183">Add the following property to the `ToDo` class:</span><span class="sxs-lookup"><span data-stu-id="4299a-183">Add the following property to the `ToDo` class:</span></span>
+
+```csharp
+public bool Done { get; set; }
+```
+
+### <a name="run-code-first-migrations-locally"></a><span data-ttu-id="4299a-184">Run Code First Migrations locally</span><span class="sxs-lookup"><span data-stu-id="4299a-184">Run Code First Migrations locally</span></span>
+
+<span data-ttu-id="4299a-185">Run a few commands to make updates to your local database.</span><span class="sxs-lookup"><span data-stu-id="4299a-185">Run a few commands to make updates to your local database.</span></span>
+
+```bash
+dotnet ef migrations add AddProperty
+```
+
+<span data-ttu-id="4299a-186">Update the local database:</span><span class="sxs-lookup"><span data-stu-id="4299a-186">Update the local database:</span></span>
+
+```bash
+dotnet ef database update
+```
+
+### <a name="use-the-new-property"></a><span data-ttu-id="4299a-187">Use the new property</span><span class="sxs-lookup"><span data-stu-id="4299a-187">Use the new property</span></span>
+
+<span data-ttu-id="4299a-188">Make some changes in your code to use the `Done` property.</span><span class="sxs-lookup"><span data-stu-id="4299a-188">Make some changes in your code to use the `Done` property.</span></span> <span data-ttu-id="4299a-189">For simplicity in this tutorial, you're only going to change the `Index` and `Create` views to see the property in action.</span><span class="sxs-lookup"><span data-stu-id="4299a-189">For simplicity in this tutorial, you're only going to change the `Index` and `Create` views to see the property in action.</span></span>
+
+<span data-ttu-id="4299a-190">Open _Controllers\TodosController.cs_.</span><span class="sxs-lookup"><span data-stu-id="4299a-190">Open _Controllers\TodosController.cs_.</span></span>
+
+<span data-ttu-id="4299a-191">Find the `Create()` method and add `Done` to the list of properties in the `Bind` attribute.</span><span class="sxs-lookup"><span data-stu-id="4299a-191">Find the `Create()` method and add `Done` to the list of properties in the `Bind` attribute.</span></span> <span data-ttu-id="4299a-192">When you're done, your `Create()` method signature looks like the following code:</span><span class="sxs-lookup"><span data-stu-id="4299a-192">When you're done, your `Create()` method signature looks like the following code:</span></span>
+
+```csharp
+public async Task<IActionResult> Create([Bind("ID,Description,CreatedDate,Done")] Todo todo)
+```
+
+<span data-ttu-id="4299a-193">Open _Views\Todos\Create.cshtml_.</span><span class="sxs-lookup"><span data-stu-id="4299a-193">Open _Views\Todos\Create.cshtml_.</span></span>
+
+<span data-ttu-id="4299a-194">In the Razor code, you should see a `<div class="form-group">` element for `Description`, and then another `<div class="form-group">` element for `CreatedDate`.</span><span class="sxs-lookup"><span data-stu-id="4299a-194">In the Razor code, you should see a `<div class="form-group">` element for `Description`, and then another `<div class="form-group">` element for `CreatedDate`.</span></span> <span data-ttu-id="4299a-195">Immediately following these two elements, add another `<div class="form-group">` element for `Done`:</span><span class="sxs-lookup"><span data-stu-id="4299a-195">Immediately following these two elements, add another `<div class="form-group">` element for `Done`:</span></span>
+
+```csharp
+<div class="form-group">
+    <label asp-for="Done" class="col-md-2 control-label"></label>
+    <div class="col-md-10">
+        <input asp-for="Done" class="form-control" />
+        <span asp-validation-for="Done" class="text-danger"></span>
+    </div>
+</div>
+```
+
+<span data-ttu-id="4299a-196">Open _Views\Todos\Index.cshtml_.</span><span class="sxs-lookup"><span data-stu-id="4299a-196">Open _Views\Todos\Index.cshtml_.</span></span>
+
+<span data-ttu-id="4299a-197">Search for the empty `<th></th>` element.</span><span class="sxs-lookup"><span data-stu-id="4299a-197">Search for the empty `<th></th>` element.</span></span> <span data-ttu-id="4299a-198">Just above this element, add the following Razor code:</span><span class="sxs-lookup"><span data-stu-id="4299a-198">Just above this element, add the following Razor code:</span></span>
+
+```csharp
+<th>
+    @Html.DisplayNameFor(model => model.Done)
+</th>
+```
+
+<span data-ttu-id="4299a-199">Find the `<td>` element that contains the `asp-action` tag helpers.</span><span class="sxs-lookup"><span data-stu-id="4299a-199">Find the `<td>` element that contains the `asp-action` tag helpers.</span></span> <span data-ttu-id="4299a-200">Just above this element, add the following Razor code:</span><span class="sxs-lookup"><span data-stu-id="4299a-200">Just above this element, add the following Razor code:</span></span>
+
+```csharp
+<td>
+    @Html.DisplayFor(modelItem => item.CreatedDate)
+</td>
+```
+
+<span data-ttu-id="4299a-201">That's all you need to see the changes in the `Index` and `Create` views.</span><span class="sxs-lookup"><span data-stu-id="4299a-201">That's all you need to see the changes in the `Index` and `Create` views.</span></span>
+
+### <a name="test-your-changes-locally"></a><span data-ttu-id="4299a-202">Test your changes locally</span><span class="sxs-lookup"><span data-stu-id="4299a-202">Test your changes locally</span></span>
+
+<span data-ttu-id="4299a-203">Run the app locally.</span><span class="sxs-lookup"><span data-stu-id="4299a-203">Run the app locally.</span></span>
+
+```bash
+dotnet run
+```
+
+<span data-ttu-id="4299a-204">In your browser, navigate to `http://localhost:5000/`.</span><span class="sxs-lookup"><span data-stu-id="4299a-204">In your browser, navigate to `http://localhost:5000/`.</span></span> <span data-ttu-id="4299a-205">You can now add a to-do item and check **Done**.</span><span class="sxs-lookup"><span data-stu-id="4299a-205">You can now add a to-do item and check **Done**.</span></span> <span data-ttu-id="4299a-206">Then it should show up in your homepage as a completed item.</span><span class="sxs-lookup"><span data-stu-id="4299a-206">Then it should show up in your homepage as a completed item.</span></span> <span data-ttu-id="4299a-207">Remember that the `Edit` view doesn't show the `Done` field, because you didn't change the `Edit` view.</span><span class="sxs-lookup"><span data-stu-id="4299a-207">Remember that the `Edit` view doesn't show the `Done` field, because you didn't change the `Edit` view.</span></span>
+
+### <a name="publish-changes-to-azure"></a><span data-ttu-id="4299a-208">Publish changes to Azure</span><span class="sxs-lookup"><span data-stu-id="4299a-208">Publish changes to Azure</span></span>
+
+```bash
+git add .
+git commit -m "added done field"
+git push azure master
+```
+
+<span data-ttu-id="4299a-209">Once the `git push` is complete, navigate to your Azure web app and try out the new functionality.</span><span class="sxs-lookup"><span data-stu-id="4299a-209">Once the `git push` is complete, navigate to your Azure web app and try out the new functionality.</span></span>
+
+![Azure web app after Code First Migration](./media/tutorial-dotnetcore-sqldb-app/this-one-is-done.png)
+
+<span data-ttu-id="4299a-211">All your existing to-do items are still displayed.</span><span class="sxs-lookup"><span data-stu-id="4299a-211">All your existing to-do items are still displayed.</span></span> <span data-ttu-id="4299a-212">When you republish your .NET Core app, existing data in your SQL Database is not lost.</span><span class="sxs-lookup"><span data-stu-id="4299a-212">When you republish your .NET Core app, existing data in your SQL Database is not lost.</span></span> <span data-ttu-id="4299a-213">Also, Entity Framework Core Migrations only changes the data schema and leaves your existing data intact.</span><span class="sxs-lookup"><span data-stu-id="4299a-213">Also, Entity Framework Core Migrations only changes the data schema and leaves your existing data intact.</span></span>
+
+## <a name="manage-your-azure-web-app"></a><span data-ttu-id="4299a-214">Manage your Azure web app</span><span class="sxs-lookup"><span data-stu-id="4299a-214">Manage your Azure web app</span></span>
+
+<span data-ttu-id="4299a-215">Go to the [Azure portal](https://portal.azure.com) to see the web app you created.</span><span class="sxs-lookup"><span data-stu-id="4299a-215">Go to the [Azure portal](https://portal.azure.com) to see the web app you created.</span></span>
+
+<span data-ttu-id="4299a-216">From the left menu, click **App Services**, then click the name of your Azure web app.</span><span class="sxs-lookup"><span data-stu-id="4299a-216">From the left menu, click **App Services**, then click the name of your Azure web app.</span></span>
+
+![Portal navigation to Azure web app](./media/tutorial-dotnetcore-sqldb-app/access-portal.png)
+
+<span data-ttu-id="4299a-218">By default, the portal shows your web app's **Overview** page.</span><span class="sxs-lookup"><span data-stu-id="4299a-218">By default, the portal shows your web app's **Overview** page.</span></span> <span data-ttu-id="4299a-219">This page gives you a view of how your app is doing.</span><span class="sxs-lookup"><span data-stu-id="4299a-219">This page gives you a view of how your app is doing.</span></span> <span data-ttu-id="4299a-220">Here, you can also perform basic management tasks like browse, stop, start, restart, and delete.</span><span class="sxs-lookup"><span data-stu-id="4299a-220">Here, you can also perform basic management tasks like browse, stop, start, restart, and delete.</span></span> <span data-ttu-id="4299a-221">The tabs on the left side of the page show the different configuration pages you can open.</span><span class="sxs-lookup"><span data-stu-id="4299a-221">The tabs on the left side of the page show the different configuration pages you can open.</span></span>
+
+![App Service page in Azure portal](./media/tutorial-dotnetcore-sqldb-app/web-app-blade.png)
+
+[!INCLUDE [cli-samples-clean-up](../../../includes/cli-samples-clean-up.md)]
+
+<a name="next"></a>
+## <a name="next-steps"></a><span data-ttu-id="4299a-223">Next steps</span><span class="sxs-lookup"><span data-stu-id="4299a-223">Next steps</span></span>
+
+<span data-ttu-id="4299a-224">What you learned:</span><span class="sxs-lookup"><span data-stu-id="4299a-224">What you learned:</span></span>
+
+> [!div class="checklist"]
+> * <span data-ttu-id="4299a-225">Create a SQL Database in Azure</span><span class="sxs-lookup"><span data-stu-id="4299a-225">Create a SQL Database in Azure</span></span>
+> * <span data-ttu-id="4299a-226">Connect a .NET Core app to SQL Database</span><span class="sxs-lookup"><span data-stu-id="4299a-226">Connect a .NET Core app to SQL Database</span></span>
+> * <span data-ttu-id="4299a-227">Deploy the app to Azure</span><span class="sxs-lookup"><span data-stu-id="4299a-227">Deploy the app to Azure</span></span>
+> * <span data-ttu-id="4299a-228">Update the data model and redeploy the app</span><span class="sxs-lookup"><span data-stu-id="4299a-228">Update the data model and redeploy the app</span></span>
+> * <span data-ttu-id="4299a-229">Stream logs from Azure to your terminal</span><span class="sxs-lookup"><span data-stu-id="4299a-229">Stream logs from Azure to your terminal</span></span>
+> * <span data-ttu-id="4299a-230">Manage the app in the Azure portal</span><span class="sxs-lookup"><span data-stu-id="4299a-230">Manage the app in the Azure portal</span></span>
+
+<span data-ttu-id="4299a-231">Advance to the next tutorial to learn how to map a custom DNS name to your web app.</span><span class="sxs-lookup"><span data-stu-id="4299a-231">Advance to the next tutorial to learn how to map a custom DNS name to your web app.</span></span>
+
+> [!div class="nextstepaction"]
+> [<span data-ttu-id="4299a-232">Map an existing custom DNS name to Azure Web Apps</span><span class="sxs-lookup"><span data-stu-id="4299a-232">Map an existing custom DNS name to Azure Web Apps</span></span>](../app-service-web-tutorial-custom-domain.md)

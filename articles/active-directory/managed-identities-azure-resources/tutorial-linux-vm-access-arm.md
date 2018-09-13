@@ -1,0 +1,111 @@
+---
+title: Use a Linux VM system-assigned managed identity to access Azure Resource Manager
+description: A quickstart that walks you through the process of using a Linux VM system-assigned managed identity to access Azure Resource Manager.
+services: active-directory
+documentationcenter: ''
+author: daveba
+manager: mtillman
+editor: bryanla
+ms.service: active-directory
+ms.component: msi
+ms.devlang: na
+ms.topic: quickstart
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 11/20/2017
+ms.author: daveba
+ms.openlocfilehash: 79aacd7160dd4e794681e9b182236d6946baf3b8
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44965909"
+---
+# <a name="use-a-linux-vm-system-assigned-managed-identity-to-access-azure-resource-manager"></a><span data-ttu-id="fb3a5-103">Use a Linux VM system-assigned managed identity to access Azure Resource Manager</span><span class="sxs-lookup"><span data-stu-id="fb3a5-103">Use a Linux VM system-assigned managed identity to access Azure Resource Manager</span></span>
+
+[!INCLUDE [preview-notice](../../../includes/active-directory-msi-preview-notice.md)]
+
+<span data-ttu-id="fb3a5-104">This quickstart shows you how to use a system-assigned identity for a Linux virtual machine (VM) to access the Azure Resource Manager API.</span><span class="sxs-lookup"><span data-stu-id="fb3a5-104">This quickstart shows you how to use a system-assigned identity for a Linux virtual machine (VM) to access the Azure Resource Manager API.</span></span> <span data-ttu-id="fb3a5-105">Managed identities for Azure resources are automatically managed by Azure and enable you to authenticate to services that support Azure AD authentication without needing to insert credentials into your code.</span><span class="sxs-lookup"><span data-stu-id="fb3a5-105">Managed identities for Azure resources are automatically managed by Azure and enable you to authenticate to services that support Azure AD authentication without needing to insert credentials into your code.</span></span> <span data-ttu-id="fb3a5-106">You learn how to:</span><span class="sxs-lookup"><span data-stu-id="fb3a5-106">You learn how to:</span></span>
+
+> [!div class="checklist"]
+> * <span data-ttu-id="fb3a5-107">Grant your VM access to a Resource Group in Azure Resource Manager</span><span class="sxs-lookup"><span data-stu-id="fb3a5-107">Grant your VM access to a Resource Group in Azure Resource Manager</span></span> 
+> * <span data-ttu-id="fb3a5-108">Get an access token using the VM identity and use it to call Azure Resource Manager</span><span class="sxs-lookup"><span data-stu-id="fb3a5-108">Get an access token using the VM identity and use it to call Azure Resource Manager</span></span> 
+
+## <a name="prerequisites"></a><span data-ttu-id="fb3a5-109">Prerequisites</span><span class="sxs-lookup"><span data-stu-id="fb3a5-109">Prerequisites</span></span>
+
+[!INCLUDE [msi-qs-configure-prereqs](../../../includes/active-directory-msi-qs-configure-prereqs.md)]
+
+[!INCLUDE [msi-tut-prereqs](../../../includes/active-directory-msi-tut-prereqs.md)]
+
+- [<span data-ttu-id="fb3a5-110">Sign in to Azure portal</span><span class="sxs-lookup"><span data-stu-id="fb3a5-110">Sign in to Azure portal</span></span>](https://portal.azure.com)
+
+- [<span data-ttu-id="fb3a5-111">Create a Linux virtual machine</span><span class="sxs-lookup"><span data-stu-id="fb3a5-111">Create a Linux virtual machine</span></span>](/azure/virtual-machines/linux/quick-create-portal)
+
+- [<span data-ttu-id="fb3a5-112">Enable system-assigned managed identity on your virtual machine</span><span class="sxs-lookup"><span data-stu-id="fb3a5-112">Enable system-assigned managed identity on your virtual machine</span></span>](/azure/active-directory/managed-service-identity/qs-configure-portal-windows-vm#enable-system-assigned-identity-on-an-existing-vm)
+
+## <a name="grant-your-vm-access-to-a-resource-group-in-azure-resource-manager"></a><span data-ttu-id="fb3a5-113">Grant your VM access to a Resource Group in Azure Resource Manager</span><span class="sxs-lookup"><span data-stu-id="fb3a5-113">Grant your VM access to a Resource Group in Azure Resource Manager</span></span> 
+
+<span data-ttu-id="fb3a5-114">Using managed identities for Azure resources, your code can get access tokens to authenticate to resources that support Azure AD authentication.</span><span class="sxs-lookup"><span data-stu-id="fb3a5-114">Using managed identities for Azure resources, your code can get access tokens to authenticate to resources that support Azure AD authentication.</span></span> <span data-ttu-id="fb3a5-115">The Azure Resource Manager API supports Azure AD authentication.</span><span class="sxs-lookup"><span data-stu-id="fb3a5-115">The Azure Resource Manager API supports Azure AD authentication.</span></span> <span data-ttu-id="fb3a5-116">First, we need to grant this VM's identity access to a resource in Azure Resource Manager, in this case the Resource Group in which the VM is contained.</span><span class="sxs-lookup"><span data-stu-id="fb3a5-116">First, we need to grant this VM's identity access to a resource in Azure Resource Manager, in this case the Resource Group in which the VM is contained.</span></span>  
+
+1. <span data-ttu-id="fb3a5-117">Navigate to the tab for **Resource Groups**.</span><span class="sxs-lookup"><span data-stu-id="fb3a5-117">Navigate to the tab for **Resource Groups**.</span></span>
+2. <span data-ttu-id="fb3a5-118">Select the specific **Resource Group** you created earlier.</span><span class="sxs-lookup"><span data-stu-id="fb3a5-118">Select the specific **Resource Group** you created earlier.</span></span>
+3. <span data-ttu-id="fb3a5-119">Go to **Access control(IAM)** in the left panel.</span><span class="sxs-lookup"><span data-stu-id="fb3a5-119">Go to **Access control(IAM)** in the left panel.</span></span>
+4. <span data-ttu-id="fb3a5-120">Click to **Add** a new role assignment for your VM.</span><span class="sxs-lookup"><span data-stu-id="fb3a5-120">Click to **Add** a new role assignment for your VM.</span></span> <span data-ttu-id="fb3a5-121">Choose **Role** as **Reader**.</span><span class="sxs-lookup"><span data-stu-id="fb3a5-121">Choose **Role** as **Reader**.</span></span>
+5. <span data-ttu-id="fb3a5-122">In the next dropdown, **Assign access to** the resource **Virtual Machine**.</span><span class="sxs-lookup"><span data-stu-id="fb3a5-122">In the next dropdown, **Assign access to** the resource **Virtual Machine**.</span></span>
+6. <span data-ttu-id="fb3a5-123">Next, ensure the proper subscription is listed in the **Subscription** dropdown.</span><span class="sxs-lookup"><span data-stu-id="fb3a5-123">Next, ensure the proper subscription is listed in the **Subscription** dropdown.</span></span> <span data-ttu-id="fb3a5-124">And for **Resource Group**, select **All resource groups**.</span><span class="sxs-lookup"><span data-stu-id="fb3a5-124">And for **Resource Group**, select **All resource groups**.</span></span>
+7. <span data-ttu-id="fb3a5-125">Finally, in **Select** choose your Linux Virtual Machine in the dropdown and click **Save**.</span><span class="sxs-lookup"><span data-stu-id="fb3a5-125">Finally, in **Select** choose your Linux Virtual Machine in the dropdown and click **Save**.</span></span>
+
+    ![Alt image text](media/msi-tutorial-linux-vm-access-arm/msi-permission-linux.png)
+
+## <a name="get-an-access-token-using-the-vms-system-assigned-managed-identity-and-use-it-to-call-resource-manager"></a><span data-ttu-id="fb3a5-127">Get an access token using the VM's system-assigned managed identity and use it to call Resource Manager</span><span class="sxs-lookup"><span data-stu-id="fb3a5-127">Get an access token using the VM's system-assigned managed identity and use it to call Resource Manager</span></span> 
+
+<span data-ttu-id="fb3a5-128">To complete these steps, you will need an SSH client.</span><span class="sxs-lookup"><span data-stu-id="fb3a5-128">To complete these steps, you will need an SSH client.</span></span> <span data-ttu-id="fb3a5-129">If you are using Windows, you can use the SSH client in the [Windows Subsystem for Linux](https://msdn.microsoft.com/commandline/wsl/about).</span><span class="sxs-lookup"><span data-stu-id="fb3a5-129">If you are using Windows, you can use the SSH client in the [Windows Subsystem for Linux](https://msdn.microsoft.com/commandline/wsl/about).</span></span> <span data-ttu-id="fb3a5-130">If you need assistance configuring your SSH client's keys, see [How to Use SSH keys with Windows on Azure](../../virtual-machines/linux/ssh-from-windows.md), or [How to create and use an SSH public and private key pair for Linux VMs in Azure](../../virtual-machines/linux/mac-create-ssh-keys.md).</span><span class="sxs-lookup"><span data-stu-id="fb3a5-130">If you need assistance configuring your SSH client's keys, see [How to Use SSH keys with Windows on Azure](../../virtual-machines/linux/ssh-from-windows.md), or [How to create and use an SSH public and private key pair for Linux VMs in Azure](../../virtual-machines/linux/mac-create-ssh-keys.md).</span></span>
+
+1. <span data-ttu-id="fb3a5-131">In the portal, navigate to your Linux VM and in the **Overview**, click **Connect**.</span><span class="sxs-lookup"><span data-stu-id="fb3a5-131">In the portal, navigate to your Linux VM and in the **Overview**, click **Connect**.</span></span>  
+2. <span data-ttu-id="fb3a5-132">**Connect** to the VM with the SSH client of your choice.</span><span class="sxs-lookup"><span data-stu-id="fb3a5-132">**Connect** to the VM with the SSH client of your choice.</span></span> 
+3. <span data-ttu-id="fb3a5-133">In the terminal window, using CURL, make a request to the local managed identities for Azure resources endpoint to get an access token for Azure Resource Manager.</span><span class="sxs-lookup"><span data-stu-id="fb3a5-133">In the terminal window, using CURL, make a request to the local managed identities for Azure resources endpoint to get an access token for Azure Resource Manager.</span></span>  
+ 
+    <span data-ttu-id="fb3a5-134">The CURL request for the access token is below.</span><span class="sxs-lookup"><span data-stu-id="fb3a5-134">The CURL request for the access token is below.</span></span>  
+    
+    ```bash
+    curl 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https%3A%2F%2Fmanagement.azure.com%2F' -H Metadata:true   
+    ```
+    
+    > [!NOTE]
+    > <span data-ttu-id="fb3a5-135">The value of the “resource” parameter must be an exact match for what is expected by Azure AD.</span><span class="sxs-lookup"><span data-stu-id="fb3a5-135">The value of the “resource” parameter must be an exact match for what is expected by Azure AD.</span></span>  <span data-ttu-id="fb3a5-136">In the case of the Resource Manager resource ID, you must include the trailing slash on the URI.</span><span class="sxs-lookup"><span data-stu-id="fb3a5-136">In the case of the Resource Manager resource ID, you must include the trailing slash on the URI.</span></span> 
+    
+    <span data-ttu-id="fb3a5-137">The response includes the access token you need to access Azure Resource Manager.</span><span class="sxs-lookup"><span data-stu-id="fb3a5-137">The response includes the access token you need to access Azure Resource Manager.</span></span> 
+    
+    <span data-ttu-id="fb3a5-138">Response:</span><span class="sxs-lookup"><span data-stu-id="fb3a5-138">Response:</span></span>  
+
+    ```bash
+    {"access_token":"eyJ0eXAiOi...",
+    "refresh_token":"",
+    "expires_in":"3599",
+    "expires_on":"1504130527",
+    "not_before":"1504126627",
+    "resource":"https://management.azure.com",
+    "token_type":"Bearer"} 
+    ```
+    
+    <span data-ttu-id="fb3a5-139">You can use this access token to access Azure Resource Manager, for example to read the details of the Resource Group to which you previously granted this VM access.</span><span class="sxs-lookup"><span data-stu-id="fb3a5-139">You can use this access token to access Azure Resource Manager, for example to read the details of the Resource Group to which you previously granted this VM access.</span></span> <span data-ttu-id="fb3a5-140">Replace the values of \<SUBSCRIPTION ID\>, \<RESOURCE GROUP\>, and \<ACCESS TOKEN\> with the ones you created earlier.</span><span class="sxs-lookup"><span data-stu-id="fb3a5-140">Replace the values of \<SUBSCRIPTION ID\>, \<RESOURCE GROUP\>, and \<ACCESS TOKEN\> with the ones you created earlier.</span></span> 
+    
+    > [!NOTE]
+    > <span data-ttu-id="fb3a5-141">The URL is case-sensitive, so ensure if you are using the exact same case as you used earlier when you named the Resource Group, and the uppercase “G” in “resourceGroup”.</span><span class="sxs-lookup"><span data-stu-id="fb3a5-141">The URL is case-sensitive, so ensure if you are using the exact same case as you used earlier when you named the Resource Group, and the uppercase “G” in “resourceGroup”.</span></span>  
+    
+    ```bash 
+    curl https://management.azure.com/subscriptions/<SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP>?api-version=2016-09-01 -H "Authorization: Bearer <ACCESS TOKEN>" 
+    ```
+    
+    <span data-ttu-id="fb3a5-142">The response back with the specific Resource Group information:</span><span class="sxs-lookup"><span data-stu-id="fb3a5-142">The response back with the specific Resource Group information:</span></span> 
+     
+    ```bash
+    {"id":"/subscriptions/98f51385-2edc-4b79-bed9-7718de4cb861/resourceGroups/DevTest","name":"DevTest","location":"westus","properties":{"provisioningState":"Succeeded"}} 
+    ```     
+
+## <a name="next-steps"></a><span data-ttu-id="fb3a5-143">Next steps</span><span class="sxs-lookup"><span data-stu-id="fb3a5-143">Next steps</span></span>
+
+<span data-ttu-id="fb3a5-144">In this quickstart, you learned how to use a system-assigned managed identity to access the Azure Resource Manager API.</span><span class="sxs-lookup"><span data-stu-id="fb3a5-144">In this quickstart, you learned how to use a system-assigned managed identity to access the Azure Resource Manager API.</span></span>  <span data-ttu-id="fb3a5-145">To learn more about Azure Resource Manager see:</span><span class="sxs-lookup"><span data-stu-id="fb3a5-145">To learn more about Azure Resource Manager see:</span></span>
+
+> [!div class="nextstepaction"]
+>[<span data-ttu-id="fb3a5-146">Azure Resource Manager</span><span class="sxs-lookup"><span data-stu-id="fb3a5-146">Azure Resource Manager</span></span>](/azure/azure-resource-manager/resource-group-overview)
