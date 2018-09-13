@@ -14,12 +14,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/23/2017
 ms.author: mazha
-ms.openlocfilehash: b9b3d97318383ec0ae417c524141d6d8ad39d846
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 14d50cb7cac77af75dd4b7293812154d1f24e47c
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44551943"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44790525"
 ---
 # <a name="troubleshooting-cdn-file-compression"></a>Troubleshooting CDN file compression
 This article helps you troubleshoot issues with [CDN file compression](cdn-improve-performance.md).
@@ -32,7 +32,7 @@ Compression for your endpoint is enabled, but files are being returned uncompres
 > [!TIP]
 > To check whether your files are being returned compressed, you need to use a tool like [Fiddler](http://www.telerik.com/fiddler) or your browser's [developer tools](https://developer.microsoft.com/microsoft-edge/platform/documentation/f12-devtools-guide/).  Check the HTTP response headers returned with your cached CDN content.  If there is a header named `Content-Encoding` with a value of **gzip**, **bzip2**, or **deflate**, your content is compressed.
 > 
-> ![Content-Encoding header](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-troubleshoot-compression/cdn-content-header.png)
+> ![Content-Encoding header](./media/cdn-troubleshoot-compression/cdn-content-header.png)
 > 
 > 
 
@@ -60,11 +60,11 @@ First, we should do a quick sanity check on the request.  You can use your brows
 > 
 > 
 
-![CDN request headers](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-troubleshoot-compression/cdn-request-headers.png)
+![CDN request headers](./media/cdn-troubleshoot-compression/cdn-request-headers.png)
 
-### <a name="verify-compression-settings-standard-cdn-profile"></a>Verify compression settings (Standard CDN profile)
+### <a name="verify-compression-settings-standard-cdn-profiles"></a>Verify compression settings (standard CDN profiles)
 > [!NOTE]
-> This step only applies if your CDN profile is an **Azure CDN Standard from Verizon** or **Azure CDN Standard from Akamai** profile. 
+> This step applies only if your CDN profile is an **Azure CDN Standard from Microsoft**, **Azure CDN Standard from Verizon**, or **Azure CDN Standard from Akamai** profile. 
 > 
 > 
 
@@ -73,11 +73,11 @@ Navigate to your endpoint in the [Azure portal](https://portal.azure.com) and cl
 * Verify compression is enabled.
 * Verify the MIME type for the content to be compressed is included in the list of compressed formats.
 
-![CDN compression settings](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-troubleshoot-compression/cdn-compression-settings.png)
+![CDN compression settings](./media/cdn-troubleshoot-compression/cdn-compression-settings.png)
 
-### <a name="verify-compression-settings-premium-cdn-profile"></a>Verify compression settings (Premium CDN profile)
+### <a name="verify-compression-settings-premium-cdn-profiles"></a>Verify compression settings (Premium CDN profiles)
 > [!NOTE]
-> This step only applies if your CDN profile is an **Azure CDN Premium from Verizon** profile.
+> This step applies only if your CDN profile is an **Azure CDN Premium from Verizon** profile.
 > 
 > 
 
@@ -87,11 +87,11 @@ Navigate to your endpoint in the [Azure portal](https://portal.azure.com) and cl
 * Verify the **File Types** list contains a comma-separated list (no spaces) of MIME types.
 * Verify the MIME type for the content to be compressed is included in the list of compressed formats.
 
-![CDN premium compression settings](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-troubleshoot-compression/cdn-compression-settings-premium.png)
+![CDN premium compression settings](./media/cdn-troubleshoot-compression/cdn-compression-settings-premium.png)
 
-### <a name="verify-the-content-is-cached"></a>Verify the content is cached
+### <a name="verify-the-content-is-cached-verizon-cdn-profiles"></a>Verify the content is cached (Verizon CDN profiles)
 > [!NOTE]
-> This step only applies if your CDN profile is an **Azure CDN from Verizon** profile (Standard or Premium).
+> This step applies only if your CDN profile is an **Azure CDN Standard from Verizon** or **Azure CDN Premium from Verizon** profile.
 > 
 > 
 
@@ -100,11 +100,11 @@ Using your browser's developer tools, check the response headers to ensure the f
 * Check the **Server** response header.  The header should have the format **Platform (POP/Server ID)**, as seen in the following example.
 * Check the **X-Cache** response header.  The header should read **HIT**.  
 
-![CDN response headers](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-troubleshoot-compression/cdn-response-headers.png)
+![CDN response headers](./media/cdn-troubleshoot-compression/cdn-response-headers.png)
 
-### <a name="verify-the-file-meets-the-size-requirements"></a>Verify the file meets the size requirements
+### <a name="verify-the-file-meets-the-size-requirements-verizon-cdn-profiles"></a>Verify the file meets the size requirements (Verizon CDN profiles)
 > [!NOTE]
-> This step only applies if your CDN profile is an **Azure CDN from Verizon** profile (Standard or Premium).
+> This step applies only if your CDN profile is an **Azure CDN Standard from Verizon** or **Azure CDN Premium from Verizon** profile.
 > 
 > 
 
@@ -118,9 +118,4 @@ The **Via** HTTP header indicates to the web server that the request is being pa
 
 * **IIS 6**: [Set HcNoCompressionForProxies="FALSE" in the IIS Metabase properties](https://msdn.microsoft.com/library/ms525390.aspx)
 * **IIS 7 and up**: [Set both **noCompressionForHttp10** and **noCompressionForProxies** to False in the server configuration](http://www.iis.net/configreference/system.webserver/httpcompression)
-
-
-
-
-
 

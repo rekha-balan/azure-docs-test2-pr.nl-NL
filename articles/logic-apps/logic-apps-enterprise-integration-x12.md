@@ -1,27 +1,23 @@
 ---
 title: X12 messages for B2B enterprise integration - Azure Logic Apps | Microsoft Docs
-description: Exchange X12 messages in EDI format for B2B enterprise integration with Azure Logic Apps
+description: Exchange X12 messages in EDI format for B2B enterprise integration in Azure Logic Apps with Enterprise Integration Pack
 services: logic-apps
-documentationcenter: .net,nodejs,java
-author: padmavc
-manager: anneta
-editor: cgronlun
-ms.assetid: 7422d2d5-b1c7-4a11-8c9b-0d8cfa463164
 ms.service: logic-apps
-ms.workload: integration
-ms.tgt_pltfrm: na
-ms.devlang: na
+ms.suite: integration
+author: divyaswarnkar
+ms.author: divswa
+ms.reviewer: jonfan, estfan, LADocs
 ms.topic: article
+ms.assetid: 7422d2d5-b1c7-4a11-8c9b-0d8cfa463164
 ms.date: 01/31/2017
-ms.author: padmavc
-ms.openlocfilehash: aaa8640e99699be99d2c72b89f1ce106874ac4b9
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: c4ee56f4ddcccb1fc4ddd84aa1c1b16dea9754d9
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44660710"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44784256"
 ---
-# <a name="exchange-x12-messages-for-enterprise-integration-with-logic-apps"></a>Exchange X12 messages for enterprise integration with logic apps
+# <a name="exchange-x12-messages-for-b2b-enterprise-integration-in-azure-logic-apps-with-enterprise-integration-pack"></a>Exchange X12 messages for B2B enterprise integration in Azure Logic Apps with Enterprise Integration Pack
 
 Before you can exchange X12 messages for Azure Logic Apps, you must create an X12 agreement and store that agreement in your integration account. Here are the steps for how to create an X12 agreement.
 
@@ -32,41 +28,38 @@ Before you can exchange X12 messages for Azure Logic Apps, you must create an X1
 
 Here's the items you need:
 
-* An [integration account](../logic-apps/logic-apps-enterprise-integration-accounts.md) that's already defined and associated with your Azure subscription
+* An [integration account](logic-apps-enterprise-integration-create-integration-account.md) that's already defined and associated with your Azure subscription
 * At least two [partners](../logic-apps/logic-apps-enterprise-integration-partners.md) that are defined in your integration account and configured with the X12 identifier under **Business Identities**    
-* A required [schema](../logic-apps/logic-apps-enterprise-integration-schemas.md) for uploading to your [integration account](../logic-apps/logic-apps-enterprise-integration-accounts.md)
+* A required [schema](../logic-apps/logic-apps-enterprise-integration-schemas.md) that you can upload to your integration account
 
-After you [create an integration account](../logic-apps/logic-apps-enterprise-integration-accounts.md), [add partners](logic-apps-enterprise-integration-partners.md), and have a [schema](../logic-apps/logic-apps-enterprise-integration-schemas.md) that you want to use, you can create an X12 agreement by following these steps.
+After you [create an integration account](../logic-apps/logic-apps-enterprise-integration-create-integration-account.md), [add partners](logic-apps-enterprise-integration-partners.md), and have a [schema](../logic-apps/logic-apps-enterprise-integration-schemas.md) that you want to use, you can create an X12 agreement by following these steps.
 
 ## <a name="create-an-x12-agreement"></a>Create an X12 agreement
 
-1.  Sign in to the [Azure portal](http://portal.azure.com "Azure portal"). From the left menu, select **More services**. 
+1. Sign in to the [Azure portal](http://portal.azure.com "Azure portal"). 
 
-    > [!TIP]
-    > If you don't see **More services**, you might have to expand the menu first. At the top of the collapsed menu, select **Show menu**.
+2. From the main Azure menu, select **All services**. In the search box, enter "integration", and then select **Integration accounts**.  
 
-    ![On left menu, select "More services"](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-x12/account-1.png)
+   ![Find your integration account](./media/logic-apps-enterprise-integration-x12/account-1.png)
 
-2.  In the search box, type "integration" as your filter. In the results list, select **Integration Accounts**.  
+   > [!TIP]
+   > If **All services** doesn't appear, you might have to expand the menu first. At the top of the collapsed menu, select **Show menu**.
 
-    ![Filter on "integration", select "Integration Accounts"](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-x12/account-2.png)
+3. Under **Integration Accounts**, select the integration account where you want to add the agreement.
 
-3. In the **Integration Accounts** blade that opens, select the integration account where you want to add the agreement.
-If you don't see any integration accounts, [create one first](../logic-apps/logic-apps-enterprise-integration-accounts.md "All about integration accounts").
-
-    ![Select integration account where to create the agreement](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-x12/account-3.png)
+   ![Select integration account where to create the agreement](./media/logic-apps-enterprise-integration-x12/account-3.png)
 
 4. Select **Overview**, then select the **Agreements** tile. If you don't have an Agreements tile, add the tile first. 
 
-    ![Choose "Agreements" tile](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-agreements/agreement-1.png)
+   ![Choose "Agreements" tile](./media/logic-apps-enterprise-integration-as2/agreement-1.png)
 
-5. In the Agreements blade that opens, choose **Add**.
+5. Under **Agreements**, choose **Add**.
 
-    ![Choose "Add"](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-agreements/agreement-2.png)     
+   ![Choose "Add"](./media/logic-apps-enterprise-integration-as2/agreement-2.png)     
 
 6. Under **Add**, enter a **Name** for your agreement. For the agreement type, select **X12**. Select the **Host Partner**, **Host Identity**, **Guest Partner**, and **Guest Identity** for your agreement. For more property details, see the table in this step.
 
-    ![Provide agreement details](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-x12/x12-1.png)  
+    ![Provide agreement details](./media/logic-apps-enterprise-integration-x12/x12-1.png)  
 
     | Property | Description |
     | --- | --- |
@@ -97,7 +90,7 @@ Now your agreement is ready to handle incoming messages that conform to your sel
 
 ### <a name="identifiers"></a>Identifiers
 
-![Set Identifier properties](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-x12/x12-2.png)  
+![Set Identifier properties](./media/logic-apps-enterprise-integration-x12/x12-2.png)  
 
 | Property | Description |
 | --- | --- |
@@ -108,7 +101,7 @@ Now your agreement is ready to handle incoming messages that conform to your sel
 
 ### <a name="acknowledgment"></a>Acknowledgment
 
-![Set Acknowledgement properties](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-x12/x12-3.png) 
+![Set Acknowledgement properties](./media/logic-apps-enterprise-integration-x12/x12-3.png) 
 
 | Property | Description |
 | --- | --- |
@@ -120,7 +113,7 @@ Now your agreement is ready to handle incoming messages that conform to your sel
 
 Select a schema for each transaction type (ST1) and Sender Application (GS2). The receive pipeline disassembles the incoming message by matching the values for ST1 and GS2 in the incoming message with the values you set here, and the schema of the incoming message with the schema you set here.
 
-![Select schema](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-x12/x12-33.png) 
+![Select schema](./media/logic-apps-enterprise-integration-x12/x12-33.png) 
 
 | Property | Description |
 | --- | --- |
@@ -134,7 +127,7 @@ Select a schema for each transaction type (ST1) and Sender Application (GS2). Th
 
 ### <a name="envelopes"></a>Envelopes
 
-![Specify the separator in a transaction set: choose Standard Identifier or Repetition Separator](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-x12/x12-34.png)
+![Specify the separator in a transaction set: choose Standard Identifier or Repetition Separator](./media/logic-apps-enterprise-integration-x12/x12-34.png)
 
 | Property | Description |
 | --- | --- |
@@ -142,7 +135,7 @@ Select a schema for each transaction type (ST1) and Sender Application (GS2). Th
 
 ### <a name="control-numbers"></a>Control Numbers
 
-![Select how to handle control number duplicates](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-x12/x12-35.png) 
+![Select how to handle control number duplicates](./media/logic-apps-enterprise-integration-x12/x12-35.png) 
 
 | Property | Description |
 | --- | --- |
@@ -152,7 +145,7 @@ Select a schema for each transaction type (ST1) and Sender Application (GS2). Th
 
 ### <a name="validations"></a>Validations
 
-![Set Validation properties for received messages](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-x12/x12-36.png) 
+![Set Validation properties for received messages](./media/logic-apps-enterprise-integration-x12/x12-36.png) 
 
 When you complete each validation row, another is automatically added. If you don't specify any rules, then validation uses the "Default" row.
 
@@ -167,7 +160,7 @@ When you complete each validation row, another is automatically added. If you do
 
 ### <a name="internal-settings"></a>Internal Settings
 
-![Select internal settings](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-x12/x12-37.png) 
+![Select internal settings](./media/logic-apps-enterprise-integration-x12/x12-37.png) 
 
 | Property | Description |
 | --- | --- |
@@ -193,7 +186,7 @@ Now your agreement is ready to handle outgoing messages that conform to your sel
 
 ### <a name="identifiers"></a>Identifiers
 
-![Set Identifier properties](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-x12/x12-4.png)  
+![Set Identifier properties](./media/logic-apps-enterprise-integration-x12/x12-4.png)  
 
 | Property | Description |
 | --- | --- |
@@ -204,7 +197,7 @@ Now your agreement is ready to handle outgoing messages that conform to your sel
 
 ### <a name="acknowledgment"></a>Acknowledgment
 
-![Set Acknowledgement properties](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-x12/x12-5.png)  
+![Set Acknowledgement properties](./media/logic-apps-enterprise-integration-x12/x12-5.png)  
 
 | Property | Description |
 | --- | --- |
@@ -214,7 +207,7 @@ Now your agreement is ready to handle outgoing messages that conform to your sel
 
 ### <a name="schemas"></a>Schemas
 
-![Select schema to use](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-x12/x12-5.png)  
+![Select schema to use](./media/logic-apps-enterprise-integration-x12/x12-5.png)  
 
 | Property | Description |
 | --- | --- |
@@ -227,7 +220,7 @@ Now your agreement is ready to handle outgoing messages that conform to your sel
 
 ### <a name="envelopes"></a>Envelopes
 
-![Specify the separator in a transaction set: choose Standard Identifier or Repetition Separator](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-x12/x12-6.png) 
+![Specify the separator in a transaction set: choose Standard Identifier or Repetition Separator](./media/logic-apps-enterprise-integration-x12/x12-6.png) 
 
 | Property | Description |
 | --- | --- |
@@ -235,7 +228,7 @@ Now your agreement is ready to handle outgoing messages that conform to your sel
 
 ### <a name="control-numbers"></a>Control Numbers
 
-![Specify Control Number properties](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-x12/x12-8.png) 
+![Specify Control Number properties](./media/logic-apps-enterprise-integration-x12/x12-8.png) 
 
 | Property | Description |
 | --- | --- |
@@ -259,12 +252,12 @@ Now your agreement is ready to handle outgoing messages that conform to your sel
 
 Other than the character set, you can enter a different set of delimiters for each message type. If a character set isn't specified for a given message schema, then the default character set is used.
 
-![Specify delimiters for message types](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-x12/x12-9.png) 
+![Specify delimiters for message types](./media/logic-apps-enterprise-integration-x12/x12-9.png) 
 
 | Property | Description |
 | --- | --- |
 | Character Set to be used |To validate the properties, select the X12 character set. The options are Basic, Extended, and UTF8. |
-| Schema |Select a schema from the drop-down list. After you complete each row, a new row is automatically added. For the selected schema, select the separators set that you want to use, based on the following separator descriptions. |
+| Schema |Select a schema from the drop-down list. After you complete each row, a new row is automatically added. For the selected schema, select the separators set that you want to use, based on the separator descriptions below. |
 | Input Type |Select an input type from the drop-down list. |
 | Component Separator |To separate composite data elements, enter a single character. |
 | Data Element Separator |To separate simple data elements within composite data elements, enter a single character. |
@@ -272,9 +265,12 @@ Other than the character set, you can enter a different set of delimiters for ea
 | Segment Terminator |To indicate the end of an EDI segment, enter a single character. |
 | Suffix |Select the character that is used with the segment identifier. If you designate a suffix, then the segment terminator data element can be empty. If the segment terminator is left empty, then you must designate a suffix. |
 
+> [!TIP]
+> To provide special character values, edit the agreement as JSON and provide the ASCII value for the special character.
+
 ### <a name="validation"></a>Validation
 
-![Set Validation properties for sending messages](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-x12/x12-10.png) 
+![Set Validation properties for sending messages](./media/logic-apps-enterprise-integration-x12/x12-10.png) 
 
 When you complete each validation row, another is automatically added. If you don't specify any rules, then validation uses the "Default" row.
 
@@ -289,35 +285,17 @@ When you complete each validation row, another is automatically added. If you do
 
 ## <a name="find-your-created-agreement"></a>Find your created agreement
 
-1.  After you finish setting all your agreement properties, on the **Add** blade, choose **OK** to finish creating your agreement and return to your integration account blade.
+1.  After you finish setting all your agreement properties, on the **Add** page, choose **OK** to finish creating your agreement and return to your integration account.
 
     Your newly added agreement now appears in your **Agreements** list.
 
-2.  You can also view your agreements in your integration account overview. On your integration account blade, choose **Overview**, then select the **Agreements** tile.
+2.  You can also view your agreements in your integration account overview. On your integration account menu, choose **Overview**, then select the **Agreements** tile.
 
-    ![Choose "Agreements" tile to view all agreements](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-x12/x12-1-5.png)   
+    ![Choose "Agreements" tile](./media/logic-apps-enterprise-integration-x12/x12-1-5.png)   
+
+## <a name="view-the-swagger"></a>View the swagger
+See the [swagger details](/connectors/x12/). 
 
 ## <a name="learn-more"></a>Learn more
 * [Learn more about the Enterprise Integration Pack](../logic-apps/logic-apps-enterprise-integration-overview.md "Learn about Enterprise Integration Pack")  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

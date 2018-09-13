@@ -1,52 +1,48 @@
 ---
-title: Get started with Azure DNS using Azure CLI 2.0 | Microsoft Docs
-description: Learn how to create a DNS zone and record in Azure DNS. This is a step-by-step guide to create and manage your first DNS zone and record using the Azure CLI 2.0.
+title: Quickstart - Create an Azure DNS zone and record using Azure CLI
+description: Quickstart - Learn how to create a DNS zone and record in Azure DNS. This is a step-by-step guide to create and manage your first DNS zone and record using the Azure CLI.
 services: dns
-documentationcenter: na
-author: jtuliani
-manager: timlt
-editor: ''
-tags: azure-resource-manager
-ms.assetid: fb0aa0a6-d096-4d6a-b2f6-eda1c64f6182
+author: vhorne
 ms.service: dns
-ms.devlang: azurecli
-ms.topic: get-started-article
-ms.tgt_pltfrm: na
-ms.workload: infrastructure-services
-ms.date: 03/10/2017
-ms.author: jonatul
-ms.openlocfilehash: 64e722d005ff76aa9d1b82c46a0d6eb079d18403
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.topic: quickstart
+ms.date: 7/16/2018
+ms.author: victorh
+ms.openlocfilehash: 3fb39558ff99c35786dedc133a9d1d1a450b5928
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44555069"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44776873"
 ---
-# <a name="get-started-with-azure-dns-using-azure-cli-20"></a>Get started with Azure DNS using Azure CLI 2.0
+# <a name="quickstart-create-an-azure-dns-zone-and-record-using-azure-cli"></a>Quickstart: Create an Azure DNS zone and record using Azure CLI
 
-> [!div class="op_single_selector"]
-> * [Azure portal](dns-getstarted-portal.md)
-> * [PowerShell](dns-getstarted-powershell.md)
-> * [Azure CLI 1.0](dns-getstarted-cli-nodejs.md)
-> * [Azure CLI 2.0](dns-getstarted-cli.md)
+This article walks you through the steps to create your first DNS zone and record using Azure CLI, which is available for Windows, Mac and Linux. You can also perform these steps using the [Azure portal](dns-getstarted-portal.md) or [Azure PowerShell](dns-getstarted-powershell.md).
 
-This article walks you through the steps to create your first DNS zone and record using the cross-platform Azure CLI 2.0, which is available for Windows, Mac and Linux. You can also perform these steps using the Azure portal or Azure PowerShell.
+A DNS zone is used to host the DNS records for a particular domain. To start hosting your domain in Azure DNS, you need to create a DNS zone for that domain name. Each DNS record for your domain is then created inside this DNS zone. Finally,to publish your DNS zone to the Internet, you need to configure the name servers for the domain. Each of these steps is described below.
 
-A DNS zone is used to host the DNS records for a particular domain. To start hosting your domain in Azure DNS, you need to create a DNS zone for that domain name. Each DNS record for your domain is then created inside this DNS zone. Finally, to publish your DNS zone to the Internet, you need to configure the name servers for the domain. Each of these steps is described below.
+Azure DNS now also supports private DNS zones (currently in public preview). To learn more about private DNS zones, see [Using Azure DNS for private domains](private-dns-overview.md). For an example of how to create a private DNS zone, see [Get started with Azure DNS private zones using CLI](./private-dns-getstarted-cli.md).
 
-These instructions assume you have already installed and signed in to Azure CLI 1.0. For help, see [How to manage DNS zones using Azure CLI 2.0](dns-operations-dnszones-cli.md).
+[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
 
+If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+
+## <a name="create-the-resource-group"></a>Create the resource group
+
+Before you create the DNS zone, create a resource group to contain the DNS zone:
+
+```azurecli
+az group create --name MyResourceGroup --location "East US"
+```
 
 ## <a name="create-a-dns-zone"></a>Create a DNS zone
 
 A DNS zone is created using the `az network dns zone create` command. To see help for this command, type `az network dns zone create -h`.
 
-The following example creates a DNS zone called *contoso.com* in the resource group called *MyResourceGroup*. Use the example to create a DNS zone, substituting the values for your own.
+The following example creates a DNS zone called *contoso.com* in the resource group *MyResourceGroup*. Use the example to create a DNS zone, substituting the values for your own.
 
 ```azurecli
 az network dns zone create -g MyResourceGroup -n contoso.com
 ```
-
 
 ## <a name="create-a-dns-record"></a>Create a DNS record
 
@@ -55,11 +51,8 @@ To create a DNS record, use the `az network dns record-set [record type] add-rec
 The following example creates a record with the relative name "www" in the DNS Zone "contoso.com", in resource group "MyResourceGroup". The fully-qualified name of the record set is "www.contoso.com". The record type is "A", with IP address "1.2.3.4", and a default TTL of 3600 seconds (1 hour) is used.
 
 ```azurecli
-az network dns record-set A add-record -g MyResourceGroup -z contoso.com -n www -a 1.2.3.4
+az network dns record-set a add-record -g MyResourceGroup -z contoso.com -n www -a 1.2.3.4
 ```
-
-For other record types, for record sets with more than one record, for alternative TTL values, and to modify existing records, see [Manage DNS records and record sets using the Azure CLI 2.0](dns-operations-recordsets-cli.md).
-
 
 ## <a name="view-records"></a>View records
 
@@ -68,7 +61,6 @@ To list the DNS records in your zone, use:
 ```azurecli
 az network dns record-set list -g MyResourceGroup -z contoso.com
 ```
-
 
 ## <a name="update-name-servers"></a>Update name servers
 
@@ -100,11 +92,17 @@ az network dns zone show -g MyResourceGroup -n contoso.com -o json
 
 These name servers should be configured with the domain name registrar (where you purchased the domain name). Your registrar will offer the option to set up the name servers for the domain. For more information, see [Delegate your domain to Azure DNS](dns-domain-delegation.md).
 
+## <a name="delete-all-resources"></a>Delete all resources
+ 
+When no longer needed, you can delete all resources created in this quickstart by deleting the resource group:
+
+```azurecli
+az group delete --name MyResourceGroup
+```
 
 ## <a name="next-steps"></a>Next steps
 
-To learn more about Azure DNS, see [Azure DNS overview](dns-overview.md).
+Now that you've created your first DNS zone and record using Azure CLI, you can create records for a web app in a custom domain.
 
-To learn more about managing DNS zones in Azure DNS, see [Manage DNS zones in Azure DNS using Azure CLI 2.0](dns-operations-dnszones-cli.md).
-
-To learn more about managing DNS records in Azure DNS, see [Manage DNS records and record sets in Azure DNS using Azure CLI 2.0](dns-operations-recordsets-cli.md).
+> [!div class="nextstepaction"]
+> [Create DNS records for a web app in a custom domain](./dns-web-sites-custom-domain.md)

@@ -3,7 +3,7 @@ title: Scale an Azure cloud service in Windows PowerShell | Microsoft Docs
 description: (classic) Learn how to use PowerShell to scale a web role or worker role in or out in Azure.
 services: cloud-services
 documentationcenter: ''
-author: seanmck
+author: mmccrory
 manager: timlt
 editor: ''
 ms.assetid: ee37dd8c-6714-4c61-adb8-03d6bbf76c9a
@@ -13,13 +13,13 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 12/01/2016
-ms.author: seanmck
-ms.openlocfilehash: 21156462b6565acad9d8d12ff9f7ec0c0a72e736
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: mmccrory
+ms.openlocfilehash: a7ae8ff202d403dff19b8c9a6a09492235db27ac
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44552465"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44784542"
 ---
 # <a name="how-to-scale-a-cloud-service-in-powershell"></a>How to scale a cloud service in PowerShell
 
@@ -55,7 +55,7 @@ Get-AzureRole -ServiceName '<your_service_name>' -RoleName '<your_role_name>'
 
 You should get back information about the role, including its current OS version and instance count. In this case, the role has a single instance.
 
-![Information about the role](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cloud-services/media/cloud-services-how-to-scale-powershell/get-azure-role.PNG)
+![Information about the role](./media/cloud-services-how-to-scale-powershell/get-azure-role.png)
 
 ## <a name="scale-out-the-role-by-adding-more-instances"></a>Scale out the role by adding more instances
 
@@ -67,11 +67,11 @@ Set-AzureRole -ServiceName '<your_service_name>' -RoleName '<your_role_name>' -S
 
 The cmdlet blocks momentarily while the new instances are provisioned and started. During this time, if you open a new PowerShell window and call **Get-AzureRole** as shown earlier, you will see the new target instance count. And if you inspect the role status in the portal, you should see the new instance starting up:
 
-![VM instance starting in portal](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cloud-services/media/cloud-services-how-to-scale-powershell/role-instance-starting.PNG)
+![VM instance starting in portal](./media/cloud-services-how-to-scale-powershell/role-instance-starting.png)
 
 Once the new instances have started, the cmdlet will return successfully:
 
-![Role instance increase success](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cloud-services/media/cloud-services-how-to-scale-powershell/set-azure-role-success.PNG)
+![Role instance increase success](./media/cloud-services-how-to-scale-powershell/set-azure-role-success.png)
 
 ## <a name="scale-in-the-role-by-removing-instances"></a>Scale in the role by removing instances
 
@@ -80,6 +80,3 @@ You can scale in a role by removing instances in the same way. Set the **Count**
 ## <a name="next-steps"></a>Next steps
 
 It is not possible to configure auto-scale for cloud services from PowerShell. To do that, see [How to auto scale a cloud service](cloud-services-how-to-scale-portal.md).
-
-
-

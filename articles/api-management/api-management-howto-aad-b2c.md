@@ -4,23 +4,25 @@ description: Learn how to authorize users by using Azure Active Directory B2C in
 services: api-management
 documentationcenter: API Management
 author: miaojiang
-manager: erikre
+manager: cfowler
 editor: ''
-ms.assetid: 33a69a83-94f2-4e4e-9cef-f2a5af3c9732
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 01/23/2017
+ms.date: 10/30/2017
 ms.author: apimpm
-ms.openlocfilehash: 8722be9e58dc6b0450d3334340f43b236da66a86
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: a6e7aad6c3d20a67ecba66c49be4efcdebdf718a
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44554033"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44775924"
 ---
+> [!WARNING]
+> Azure Active Directory B2C integration is available in the [Developer, Standard, and Premium](https://azure.microsoft.com/pricing/details/api-management/) tiers only.
+
 # <a name="how-to-authorize-developer-accounts-by-using-azure-active-directory-b2c-in-azure-api-management"></a>How to authorize developer accounts by using Azure Active Directory B2C in Azure API Management
 ## <a name="overview"></a>Overview
 Azure Active Directory B2C is a cloud identity management solution for consumer-facing web and mobile applications. You can use it to manage access to your developer portal. This guide shows you the configuration that's required in your API Management service to integrate with Azure Active Directory B2C. For information about enabling access to the developer portal by using classic Azure Active Directory, see [How to authorize developer accounts using Azure Active Directory].
@@ -125,63 +127,63 @@ Azure Active Directory B2C is a cloud identity management solution for consumer-
 
 
 
-[api-management-howto-aad-b2c-security-tab]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad-b2c/api-management-b2c-security-tab.PNG
-[api-management-howto-aad-b2c-security-tab-reply-url]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad-b2c/api-management-b2c-security-tab-reply-url.PNG
-[api-management-howto-aad-b2c-portal-menu]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad-b2c/api-management-b2c-portal-menu.PNG
-[api-management-howto-aad-b2c-add-button]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad-b2c/api-management-b2c-add-button.PNG
-[api-management-howto-aad-b2c-app-details]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad-b2c/api-management-b2c-app-details.PNG
-[api-management-howto-aad-b2c-app-created]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad-b2c/api-management-b2c-app-created.PNG
-[api-management-howto-aad-b2c-app-id]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad-b2c/api-management-b2c-app-id.PNG
-[api-management-howto-aad-b2c-client-id]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad-b2c/api-management-b2c-client-id.PNG
-[api-management-howto-aad-b2c-app-key]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad-b2c/api-management-b2c-app-key.PNG
-[api-management-howto-aad-b2c-app-key-saved]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad-b2c/api-management-b2c-app-key-saved.PNG
-[api-management-howto-aad-b2c-client-secret]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad-b2c/api-management-b2c-client-secret.PNG
-[api-management-howto-aad-b2c-allowed-tenant]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad-b2c/api-management-b2c-allowed-tenant.PNG
-[api-management-howto-aad-b2c-policies]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad-b2c/api-management-b2c-policies.PNG
-[api-management-howto-aad-b2c-dev-portal]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad-b2c/api-management-b2c-dev-portal.PNG
-[api-management-howto-aad-b2c-dev-portal-b2c-button]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad-b2c/api-management-b2c-dev-portal-b2c-button.PNG
-[api-management-howto-aad-b2c-dev-portal-b2c-options]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad-b2c/api-management-b2c-dev-portal-b2c-options.PNG
-[api-management-complete-registration]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-complete-registration.png
-[api-management-registration-complete]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-registration-complete.png
+[api-management-howto-aad-b2c-security-tab]: ./media/api-management-howto-aad-b2c/api-management-b2c-security-tab.PNG
+[api-management-howto-aad-b2c-security-tab-reply-url]: ./media/api-management-howto-aad-b2c/api-management-b2c-security-tab-reply-url.PNG
+[api-management-howto-aad-b2c-portal-menu]: ./media/api-management-howto-aad-b2c/api-management-b2c-portal-menu.PNG
+[api-management-howto-aad-b2c-add-button]: ./media/api-management-howto-aad-b2c/api-management-b2c-add-button.PNG
+[api-management-howto-aad-b2c-app-details]: ./media/api-management-howto-aad-b2c/api-management-b2c-app-details.PNG
+[api-management-howto-aad-b2c-app-created]: ./media/api-management-howto-aad-b2c/api-management-b2c-app-created.PNG
+[api-management-howto-aad-b2c-app-id]: ./media/api-management-howto-aad-b2c/api-management-b2c-app-id.PNG
+[api-management-howto-aad-b2c-client-id]: ./media/api-management-howto-aad-b2c/api-management-b2c-client-id.PNG
+[api-management-howto-aad-b2c-app-key]: ./media/api-management-howto-aad-b2c/api-management-b2c-app-key.PNG
+[api-management-howto-aad-b2c-app-key-saved]: ./media/api-management-howto-aad-b2c/api-management-b2c-app-key-saved.PNG
+[api-management-howto-aad-b2c-client-secret]: ./media/api-management-howto-aad-b2c/api-management-b2c-client-secret.PNG
+[api-management-howto-aad-b2c-allowed-tenant]: ./media/api-management-howto-aad-b2c/api-management-b2c-allowed-tenant.PNG
+[api-management-howto-aad-b2c-policies]: ./media/api-management-howto-aad-b2c/api-management-b2c-policies.PNG
+[api-management-howto-aad-b2c-dev-portal]: ./media/api-management-howto-aad-b2c/api-management-b2c-dev-portal.PNG
+[api-management-howto-aad-b2c-dev-portal-b2c-button]: ./media/api-management-howto-aad-b2c/api-management-b2c-dev-portal-b2c-button.PNG
+[api-management-howto-aad-b2c-dev-portal-b2c-options]: ./media/api-management-howto-aad-b2c/api-management-b2c-dev-portal-b2c-options.PNG
+[api-management-complete-registration]: ./media/api-management-howto-aad/api-management-complete-registration.PNG
+[api-management-registration-complete]: ./media/api-management-howto-aad/api-management-registration-complete.png
 
-[api-management-management-console]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-management-console.png
+[api-management-management-console]: ./media/api-management-howto-aad/api-management-management-console.png
 [api-management-security-external-identities]: ./media/api-management-howto-aad/api-management-b2c-security-tab.png
-[api-management-security-aad-new]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-security-aad-new.png
-[api-management-new-aad-application-menu]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-new-aad-application-menu.png
-[api-management-new-aad-application-1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-new-aad-application-1.png
-[api-management-new-aad-application-2]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-new-aad-application-2.png
-[api-management-new-aad-app-created]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-new-aad-app-created.png
-[api-management-aad-app-permissions]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-aad-app-permissions.png
-[api-management-aad-app-client-id]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-aad-app-client-id.png
-[api-management-client-id]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-client-id.png
-[api-management-aad-key-before-save]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-aad-key-before-save.png
-[api-management-aad-key-after-save]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-aad-key-after-save.png
-[api-management-client-secret]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-client-secret.png
-[api-management-client-allowed-tenants]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-client-allowed-tenants.png
-[api-management-client-allowed-tenants-save]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-client-allowed-tenants-save.png
-[api-management-aad-delegated-permissions]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-aad-delegated-permissions.png
-[api-management-dev-portal-signin]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-dev-portal-signin.png
-[api-management-aad-signin]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-aad-signin.png
-[api-management-aad-app-multi-tenant]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-aad-app-multi-tenant.png
-[api-management-aad-reply-url]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-aad-reply-url.png
-[api-management-permissions-form]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-permissions-form.png
-[api-management-configure-product]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-configure-product.png
-[api-management-add-groups]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-add-groups.png
-[api-management-select-group]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-select-group.png
-[api-management-aad-groups-list]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-aad-groups-list.png
-[api-management-aad-group-added]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-aad-group-added.png
-[api-management-groups]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-groups.png
-[api-management-edit-group]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/api-management/media/api-management-howto-aad/api-management-edit-group.png
+[api-management-security-aad-new]: ./media/api-management-howto-aad/api-management-security-aad-new.png
+[api-management-new-aad-application-menu]: ./media/api-management-howto-aad/api-management-new-aad-application-menu.png
+[api-management-new-aad-application-1]: ./media/api-management-howto-aad/api-management-new-aad-application-1.png
+[api-management-new-aad-application-2]: ./media/api-management-howto-aad/api-management-new-aad-application-2.png
+[api-management-new-aad-app-created]: ./media/api-management-howto-aad/api-management-new-aad-app-created.png
+[api-management-aad-app-permissions]: ./media/api-management-howto-aad/api-management-aad-app-permissions.png
+[api-management-aad-app-client-id]: ./media/api-management-howto-aad/api-management-aad-app-client-id.png
+[api-management-client-id]: ./media/api-management-howto-aad/api-management-client-id.png
+[api-management-aad-key-before-save]: ./media/api-management-howto-aad/api-management-aad-key-before-save.png
+[api-management-aad-key-after-save]: ./media/api-management-howto-aad/api-management-aad-key-after-save.png
+[api-management-client-secret]: ./media/api-management-howto-aad/api-management-client-secret.png
+[api-management-client-allowed-tenants]: ./media/api-management-howto-aad/api-management-client-allowed-tenants.png
+[api-management-client-allowed-tenants-save]: ./media/api-management-howto-aad/api-management-client-allowed-tenants-save.png
+[api-management-aad-delegated-permissions]: ./media/api-management-howto-aad/api-management-aad-delegated-permissions.png
+[api-management-dev-portal-signin]: ./media/api-management-howto-aad/api-management-dev-portal-signin.png
+[api-management-aad-signin]: ./media/api-management-howto-aad/api-management-aad-signin.png
+[api-management-aad-app-multi-tenant]: ./media/api-management-howto-aad/api-management-aad-app-multi-tenant.png
+[api-management-aad-reply-url]: ./media/api-management-howto-aad/api-management-aad-reply-url.png
+[api-management-permissions-form]: ./media/api-management-howto-aad/api-management-permissions-form.png
+[api-management-configure-product]: ./media/api-management-howto-aad/api-management-configure-product.png
+[api-management-add-groups]: ./media/api-management-howto-aad/api-management-add-groups.png
+[api-management-select-group]: ./media/api-management-howto-aad/api-management-select-group.png
+[api-management-aad-groups-list]: ./media/api-management-howto-aad/api-management-aad-groups-list.png
+[api-management-aad-group-added]: ./media/api-management-howto-aad/api-management-aad-group-added.png
+[api-management-groups]: ./media/api-management-howto-aad/api-management-groups.png
+[api-management-edit-group]: ./media/api-management-howto-aad/api-management-edit-group.png
 
 [How to add operations to an API]: api-management-howto-add-operations.md
 [How to add and publish a product]: api-management-howto-add-products.md
 [Monitoring and analytics]: api-management-monitoring.md
 [Add APIs to a product]: api-management-howto-add-products.md#add-apis
 [Publish a product]: api-management-howto-add-products.md#publish-product
-[Get started with Azure API Management]: api-management-get-started.md
+[Get started with Azure API Management]: get-started-create-service-instance.md
 [API Management policy reference]: api-management-policy-reference.md
 [Caching policies]: api-management-policy-reference.md#caching-policies
-[Create an API Management service instance]: api-management-get-started.md#create-service-instance
+[Create an API Management service instance]: get-started-create-service-instance.md
 
 [http://oauth.net/2/]: http://oauth.net/2/
 [WebApp-GraphAPI-DotNet]: https://github.com/AzureADSamples/WebApp-GraphAPI-DotNet
@@ -201,48 +203,3 @@ Azure Active Directory B2C is a cloud identity management solution for consumer-
 [Next steps]: #next-steps
 
 [Log in to the Developer portal using an Azure Active Directory account]: #Log-in-to-the-Developer-portal-using-an-Azure-Active-Directory-account
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

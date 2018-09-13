@@ -3,22 +3,22 @@ title: Data retention and storage in Azure Application Insights | Microsoft Docs
 description: Retention and privacy policy statement
 services: application-insights
 documentationcenter: ''
-author: alancameronwills
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: a6268811-c8df-42b5-8b1b-1d5a7e94cbca
 ms.service: application-insights
 ms.workload: tbd
 ms.tgt_pltfrm: ibiza
 ms.devlang: na
-ms.topic: article
-ms.date: 04/07/2017
-ms.author: awills
-ms.openlocfilehash: 0c777aa3492641c96ec22f5b31bb684e941713be
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.topic: conceptual
+ms.date: 06/29/2018
+ms.author: mbullwin
+ms.openlocfilehash: 897671ef592ac691402a4e452f7a0baa04aa228a
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44555224"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44775456"
 ---
 # <a name="data-collection-retention-and-storage-in-application-insights"></a>Data collection, retention and storage in Application Insights
 
@@ -39,7 +39,7 @@ The rest of this article elaborates more fully on these answers. It's designed t
 
 In order to get this functionality, you install an Application Insights SDK in your application, which becomes part of its code. When your app is running, the SDK monitors its operation and sends telemetry to the Application Insights service. This is a cloud service hosted by [Microsoft Azure](http://azure.com). (But Application Insights works for any applications, not just those that are hosted in Azure.)
 
-![The SDK in your app sends telemetry to the Application Insights service.](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-data-retention-privacy/01-scheme.png)
+![The SDK in your app sends telemetry to the Application Insights service.](./media/app-insights-data-retention-privacy/01-scheme.png)
 
 The Application Insights service stores and analyzes the telemetry. To see the analysis or search through the stored telemetry, you sign in to your Azure account and open the Application Insights resource for your application. You can also share access to the data with other members of your team, or with specified Azure subscribers.
 
@@ -75,13 +75,13 @@ The main categories are:
 ## <a name="how-can-i-verify-whats-being-collected"></a>How can I verify what's being collected?
 If you're developing the app using Visual Studio, run the app in debug mode (F5). The telemetry appears in the Output window. From there, you can copy it and format it as JSON for easy inspection. 
 
-![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-data-retention-privacy/06-vs.png)
+![](./media/app-insights-data-retention-privacy/06-vs.png)
 
 There's also a more readable view in the Diagnostics window.
 
 For web pages, open your browser's debugging window.
 
-![Press F12 and open the Network tab.](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-data-retention-privacy/08-browser.png)
+![Press F12 and open the Network tab.](./media/app-insights-data-retention-privacy/08-browser.png)
 
 ### <a name="can-i-write-code-to-filter-the-telemetry-before-it-is-sent"></a>Can I write code to filter the telemetry before it is sent?
 This would be possible by writing a [telemetry processor plugin](app-insights-api-filtering-sampling.md).
@@ -100,10 +100,10 @@ It can be exported by you and your team members and could be copied to other loc
 Microsoft uses the data only in order to provide the service to you.
 
 ## <a name="where-is-the-data-held"></a>Where is the data held?
-* In the USA or Europe. You can select the location when you create a new Application Insights resource. 
+* In the USA, Europe or Southeast Asia. You can select the location when you create a new Application Insights resource. 
 
 
-#### <a name="does-that-mean-my-app-has-to-be-hosted-in-the-usa-or-europe"></a>Does that mean my app has to be hosted in the USA or Europe?
+#### <a name="does-that-mean-my-app-has-to-be-hosted-in-the-usa-europe-or-southeast-asia"></a>Does that mean my app has to be hosted in the USA, Europe or Southeast Asia?
 * No. Your application can run anywhere, either in your own on-premises hosts or in the Cloud.
 
 ## <a name="how-secure-is-my-data"></a>How secure is my data?
@@ -126,35 +126,60 @@ Not inside the servers at present.
 All data is encrypted as it moves between data centers.
 
 #### <a name="is-the-data-encrypted-in-transit-from-my-application-to-application-insights-servers"></a>Is the data encrypted in transit from my application to Application Insights servers?
-Yes, we use https to send data to the portal from nearly all SDKs, including web servers, devices and HTTPS web pages. The only exception is data sent from plain HTTP web pages. 
+Yes, we use https to send data to the portal from nearly all SDKs, including web servers, devices and HTTPS web pages. The only exception is data sent from plain HTTP web pages.
 
-## <a name="personally-identifiable-information"></a>Personally Identifiable Information
-#### <a name="could-personally-identifiable-information-pii-be-sent-to-application-insights"></a>Could Personally Identifiable Information (PII) be sent to Application Insights?
-Yes, it's possible. 
+## <a name="how-do-i-send-data-to-application-insights-using-tls-12"></a>How do I send data to Application Insights using TLS 1.2?
 
-As general guidance:
+To insure the security of data in transit to the Application Insights endpoints, we strongly encourage customers to configure their application to use at least Transport Layer Security (TLS) 1.2. Older versions of TLS/Secure Sockets Layer (SSL) have been found to be vulnerable and while they still currently work to allow backwards compatibility, they are **not recommended**, and the industry is quickly moving to abandon support for these older protocols. 
 
-* Most standard telemetry (that is, telemetry sent without you writing any code) does not include explicit PII. However, it might be possible to identify individuals by inference from a collection of events.
-* Exception and trace messages could contain PII
-* Custom telemetry - that is, calls such as TrackEvent that you write in code using the API or log traces - can contain any data you choose.
+The [PCI Security Standards Council](https://www.pcisecuritystandards.org/) has set a [deadline of June 30th, 2018](https://www.pcisecuritystandards.org/pdfs/PCI_SSC_Migrating_from_SSL_and_Early_TLS_Resource_Guide.pdf) to disable older versions of TLS/SSL and upgrade to more secure protocols. Once Azure drops legacy support, if your application/clients cannot communicate over at least TLS 1.2 you would not be able to send data to Application Insights. The approach you take to test and validate your application's TLS support will vary depending on the operating system/platform as well as the language/framework your application uses.
 
-The table at the end of this document contains more detailed descriptions of the data collected.
+We do not recommend explicitly setting your application to only use TLS 1.2 unless absolutely necessary as this can break platform level security features that allow you to automatically detect and take advantage of newer more secure protocols as they become available such as TLS 1.3. We recommend performing a thorough audit of your application's code to check for hardcoding of specific TLS/SSL versions.
 
-#### <a name="am-i-responsible-for-complying-with-laws-and-regulations-in-regard-to-pii"></a>Am I responsible for complying with laws and regulations in regard to PII?
-Yes. It is your responsibility to ensure that the collection and use of the data complies with laws and regulations, and with the Microsoft Online Services Terms.
+### <a name="platformlanguage-specific-guidance"></a>Platform/Language specific guidance
 
-You should inform your customers appropriately about the data your application collects and how the data is used.
+|Platform/Language | Support | More Information |
+| --- | --- | --- |
+| Azure App Services  | Supported, configuration may be required. | Support was announced in April 2018. Read the announcement for [configuration details](https://blogs.msdn.microsoft.com/appserviceteam/2018/04/17/app-service-and-functions-hosted-apps-can-now-update-tls-versions/).  |
+| Azure Function Apps | Supported, configuration may be required. | Support was announced in April 2018. Read the announcement for [configuration details](https://blogs.msdn.microsoft.com/appserviceteam/2018/04/17/app-service-and-functions-hosted-apps-can-now-update-tls-versions/). |
+|.NET | Supported, configuration varies by version. | For detailed configuration info for .NET 4.7 and earlier versions refer to [these instructions](https://docs.microsoft.com/en-us/dotnet/framework/network-programming/tls#support-for-tls-12).  |
+|Status Monitor | Supported, configuration required | Status Monitor relies on [OS Configuration](https://docs.microsoft.com/en-us/windows-server/security/tls/tls-registry-settings) + [.NET Configuration](https://docs.microsoft.com/en-us/dotnet/framework/network-programming/tls#support-for-tls-12) to support TLS 1.2.
+|Node.js |  Supported, in v10.5.0, configuration may be required. | Use the [official Node.js TLS/SSL documentation](https://nodejs.org/api/tls.html) for any application specific configuration. |
+|Java | Supported, JDK support for TLS 1.2 was added in [JDK 6 update 121](http://www.oracle.com/technetwork/java/javase/overview-156328.html#R160_121) and [JDK 7](http://www.oracle.com/technetwork/java/javase/7u131-relnotes-3338543.html). | JDK 8 uses [TLS 1.2 by default](https://blogs.oracle.com/java-platform-group/jdk-8-will-use-tls-12-as-default).  |
+|Linux | Linux distributions tend to rely on [OpenSSL](https://www.openssl.org) for TLS 1.2 support.  | Check the [OpenSSL Changelog](https://www.openssl.org/news/changelog.html) to confirm your version of OpenSSL is supported.|
+| Windows 8.0 - 10 | Supported, and enabled by default. | To confirm that you are still using the [default settings](https://docs.microsoft.com/en-us/windows-server/security/tls/tls-registry-settings).  |
+| Windows Server 2012 - 2016 | Supported, and enabled by default. | To confirm that you are still using the [default settings](https://docs.microsoft.com/en-us/windows-server/security/tls/tls-registry-settings) |
+| Windows 7 SP1 and Windows Server 2008 R2 SP1 | Supported, but not enabled by default. | See the [Transport Layer Security (TLS) registry settings](https://docs.microsoft.com/en-us/windows-server/security/tls/tls-registry-settings) page for details on how to enable.  |
+| Windows Server 2008 SP2 | Support for TLS 1.2 requires an update. | See [Update to add support for TLS 1.2](https://support.microsoft.com/help/4019276/update-to-add-support-for-tls-1-1-and-tls-1-2-in-windows-server-2008-s) in Windows Server 2008 SP2. |
+|Windows Vista | Not Supported. | N/A
+
+### <a name="check-what-version-of-openssl-your-linux-distribution-is-running"></a>Check what version of OpenSSL your Linux distribution is running
+
+To check what version of OpenSSL you have installed, open the terminal and run:
+
+```terminal
+openssl version -a
+```
+
+### <a name="run-a-test-tls-12-transaction-on-linux"></a>Run a test TLS 1.2 transaction on Linux
+
+To run a basic preliminary test to see if your Linux system can communicate over TLS 1.2. Open the terminal and run:
+
+```terminal
+openssl s_client -connect bing.com:443 -tls1_2
+```
+
+## <a name="personal-data-stored-in-application-insights"></a>Personal data stored in Application Insights
+
+Our [Application Insights personal data article](app-insights-customer-data.md) discusses this issue in-depth.
 
 #### <a name="can-my-users-turn-off-application-insights"></a>Can my users turn off Application Insights?
 Not directly. We don't provide a switch that your users can operate to turn off Application Insights.
 
 However, you can implement such a feature in your application. All the SDKs include an API setting that turns off telemetry collection. 
 
-#### <a name="my-application-is-unintentionally-collecting-sensitive-information-can-application-insights-scrub-this-data-so-it-isnt-retained"></a>My application is unintentionally collecting sensitive information. Can Application Insights scrub this data so it isn't retained?
-Application Insights does not filter or delete your data. You should manage the data appropriately and avoid sending such data to Application Insights.
-
 ## <a name="data-sent-by-application-insights"></a>Data sent by Application Insights
-The SDKs vary between platforms, and there are are several components that you can install. (Refer to [Application Insights - overview][start].) Each component sends different data.
+The SDKs vary between platforms, and there are several components that you can install. (Refer to [Application Insights - overview][start].) Each component sends different data.
 
 #### <a name="classes-of-data-sent-in-different-scenarios"></a>Classes of data sent in different scenarios
 | Your action | Data classes collected (see next table) |
@@ -213,7 +238,4 @@ This product includes GeoLite2 data created by MaxMind, available from [http://w
 [pricing]: http://azure.microsoft.com/pricing/details/application-insights/
 [redfield]: app-insights-monitor-performance-live-website-now.md
 [start]: app-insights-overview.md
-
-
-
 

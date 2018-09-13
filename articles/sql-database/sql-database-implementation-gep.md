@@ -2,28 +2,22 @@
 title: Azure SQL Database Azure Case Study - GEP| Microsoft Docs
 description: Learn about how GEP uses SQL Database to reach more global customers and achieve greater efficiency
 services: sql-database
-documentationcenter: ''
 author: CarlRabeler
-manager: jhubbard
-editor: ''
-ms.assetid: ae8bcb10-c251-4bac-b666-10a253918583
+manager: craigg
 ms.service: sql-database
-ms.custom: customer implementations
-ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: NA
-ms.date: 01/10/2017
+ms.custom: reference
+ms.topic: conceptual
+ms.date: 04/01/2018
 ms.author: carlrab
-ms.openlocfilehash: 2b49522f22b1a21f2d7bf77b5beab46ea49c729c
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: c39f59c4648fb8eafb8db4cb8cd2bc73de02dca4
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44669162"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44775902"
 ---
 # <a name="azure-gives-gep-global-reach-and-greater-efficiency"></a>Azure gives GEP global reach and greater efficiency
-![GEP Logo](https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-database/media/sql-database-implementation-gep/geplogo.png)
+![GEP Logo](./media/sql-database-implementation-gep/geplogo.png)
 
 GEP delivers software and services that enable procurement leaders around the world to maximize their impact on their businesses’ operations, strategies, and financial performances. In addition to consulting and managed services, the company offers SMART by GEP®, a cloud-based, comprehensive procurement-software platform. However, GEP ran into limitations trying to support solutions like SMART by GEP with its own on-premises datacenters: the investments needed were steep and regulatory requirements in other countries would have made the necessary investments more daunting still. By moving to the cloud, GEP has freed up IT resources, allowing it to worry less about IT operations and to focus more on developing new sources of value for its customers across the globe.
 
@@ -49,7 +43,7 @@ By taking advantage of Azure datacenters across the globe, GEP can easily extend
 ## <a name="smart-by-gep-architecture"></a>SMART by GEP architecture
 GEP built SMART by GEP from the ground up on Azure. A critical motivation for GEP was the greater scalability, less downtime, and reduced maintenance costs that GEP could experience with Azure SQL Database compared to what GEP could achieve on-premises. However, once moved to the cloud, GEP discovered new development opportunities in the cloud, like rapid prototyping and lean engineering to better respond to customer needs. Developing in Azure let GEP do away with the software licensing headaches that its developers could run into on-premises. The core of SMART by GEP is Azure SQL Database, though GEP uses many other Azure services to easily and rapidly continue to improve SMART by GEP.
 
-![SMART by GEP Architecture](https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-database/media/sql-database-implementation-gep/figure1.png) Figure 1. SMART by GEP architecture
+![SMART by GEP Architecture](./media/sql-database-implementation-gep/figure1.png) Figure 1. SMART by GEP architecture
 
 ## <a name="structured-data"></a>Structured data
 At the heart of the SMART by GEP application are the Azure SQL Database instances that power the enterprise procurement-management solution. When GEP engineered SMART by GEP, it saw Azure SQL Database as a perfect fit for its architecture, one that would enable the company to achieve the highest degree of data protection and to meet its regulatory requirements. GEP makes use of the multiple layers of data protection that Azure SQL Database offers, including:
@@ -64,7 +58,7 @@ At the heart of the SMART by GEP application are the Azure SQL Database instance
 > 
 > 
 
-By using Azure SQL Database, GEP automatically has greater disaster-recovery capabilities than it could have economically engineered on premises due to the fault-tolerance features built in to Azure SQL Database. GEP uses the Active Geo-Replication capability in Azure SQL Database, coupled with multiple active, readable, and online secondary replicas (Always On Availability Groups) in different geographical regions, to form high-availability pairs. Replicating SMART by GEP data across regions means that, in the case of a region-wide disaster, GEP can easily recover customer data with a minimum recovery-point objective (RPO) and recovery-time objective (RTO).
+By using Azure SQL Database, GEP automatically has greater disaster-recovery capabilities than it could have economically engineered on premises due to the fault-tolerance features built in to Azure SQL Database. GEP uses the active geo-replication capability in Azure SQL Database, coupled with multiple active, readable, and online secondary replicas (Always On Availability Groups) in different geographical regions, to form high-availability pairs. Replicating SMART by GEP data across regions means that, in the case of a region-wide disaster, GEP can easily recover customer data with a minimum recovery-point objective (RPO) and recovery-time objective (RTO).
 
 Each SMART by GEP customer has two Azure SQL Database instances: one for online transaction processing (OLTP) and one for analysis (such as customer spend and report analysis). Azure SQL Database elastic pools enable GEP to easily manage thousands of databases globally to handle unpredictable database-resource demands. Elastic pools provide a means for GEP to ensure that customer databases can scale as necessary, without over-provisioning or under-provisioning, while also allowing GEP to control costs. Moreover, because this is a PaaS service, GEP gets all the new Azure SQL Database features with automatic upgrades.
 
@@ -104,6 +98,4 @@ Since migrating from on-premises datacenters to Azure, and building SMART by GEP
 * Huzaifa Matawala, Associate Director—Architect, GEP
 * Sathyan Narasingh, Engineering Manager, GEP
 * Deepa Velukutty, Database Architect, GEP
-
-
 

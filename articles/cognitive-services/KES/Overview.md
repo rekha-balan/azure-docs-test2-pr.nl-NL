@@ -5,23 +5,25 @@ services: cognitive-services
 author: bojunehsu
 manager: stesp
 ms.service: cognitive-services
-ms.technology: kes
+ms.component: knowledge-exploration
 ms.topic: article
 ms.date: 03/26/2016
 ms.author: paulhsu
-ms.openlocfilehash: bc36de6463ce1c9203e8596c3c9623692225cffd
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: a53bd1fa0f95e96c42be4df74dbbe45836dd3028
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44553521"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44782371"
 ---
 # <a name="knowledge-exploration-service"></a>Knowledge Exploration Service
 Welcome to the Microsoft Knowledge Exploration Service.  Knowledge Exploration Service (KES) offers a fast and effective way to add interactive search and refinement to applications.  With KES, you can build a compressed index from structured data, author a grammar that interprets natural language queries, and provide interactive query formulation with auto-completion suggestions.
 
 See [Getting Started](GettingStarted.md) for a sample walkthrough of how to use KES to create an interactive search interface for an academic publications domain.
 
-![AcademicAutoComplete](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cognitive-services/KES/AutoComplete.png)
+![AcademicAutoComplete](AutoComplete.png)
+
+KES has moved from Cognitive Services Preview to Cognitive Services Labs. The new homepage for the project is [http://labs.cognitive.microsoft.com/en-us/project-knowledge-exploration](http://labs.cognitive.microsoft.com/en-us/project-knowledge-exploration).
 
 ## <a name="reference"></a>Reference
 * [Command Line Interface](CommandLine.md)
@@ -34,5 +36,4 @@ See [Getting Started](GettingStarted.md) for a sample walkthrough of how to use 
   * [evaluate Request](evaluateMethod.md)
   * [calchistogram Request](calchistogramMethod.md)
 * [Structured Query Expression](Expressions.md)
-
 

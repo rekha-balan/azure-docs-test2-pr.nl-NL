@@ -3,22 +3,22 @@ title: How do I ... in Azure Application Insights | Microsoft Docs
 description: FAQ in Application Insights.
 services: application-insights
 documentationcenter: ''
-author: alancameronwills
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: 48b2b644-92e4-44c3-bc14-068f1bbedd22
 ms.service: application-insights
 ms.workload: tbd
 ms.tgt_pltfrm: ibiza
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.date: 04/04/2017
-ms.author: awills
-ms.openlocfilehash: 0c239814089734b1a4cba76254a1bdb025375f72
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: mbullwin
+ms.openlocfilehash: 8cee346a45cd20e7dd677fd7f2efed5500175598
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44552300"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44783905"
 ---
 # <a name="how-do-i--in-application-insights"></a>How do I ... in Application Insights?
 ## <a name="get-an-email-when-"></a>Get an email when ...
@@ -28,7 +28,7 @@ Set an [availability web test](app-insights-monitor-web-app-availability.md).
 ### <a name="email-if-my-site-is-overloaded"></a>Email if my site is overloaded
 Set an [alert](app-insights-alerts.md) on **Server response time**. A threshold between 1 and 2 seconds should work.
 
-![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-how-do-i/030-server.png)
+![](./media/app-insights-how-do-i/030-server.png)
 
 Your app might also show signs of strain by returning failure codes. Set an alert on **Failed requests**.
 
@@ -57,11 +57,11 @@ Because alerts have two states, you have to send a low value when you consider t
 
 Create a chart in [metric explorer](app-insights-metrics-explorer.md) to see your alarm:
 
-![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-how-do-i/010-alarm.png)
+![](./media/app-insights-how-do-i/010-alarm.png)
 
 Now set an alert to fire when the metric goes above a mid value for a short period:
 
-![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-how-do-i/020-threshold.png)
+![](./media/app-insights-how-do-i/020-threshold.png)
 
 Set the averaging period to the minimum.
 
@@ -81,55 +81,11 @@ Some points to consider:
 * [Create new resources](app-insights-powershell-script-create-resource.md)
 * [Create new alerts](app-insights-alerts.md#automation)
 
-## <a name="application-versions-and-stamps"></a>Application versions and stamps
-### <a name="separate-the-results-from-dev-test-and-prod"></a>Separate the results from dev, test and prod
-* For different environmnents, set up different ikeys
-* For different stamps (dev, test, prod) tag the telemetry with different property values
+## <a name="separate-telemetry-from-different-versions"></a>Separate telemetry from different versions
 
-[Learn more](app-insights-separate-resources.md)
-
-### <a name="filter-on-build-number"></a>Filter on build number
-When you publish a new version of your app, you'll want to be able to separate the telemetry from different builds.
-
-You can set the Application Version property so that you can filter [search](app-insights-diagnostic-search.md) and [metric explorer](app-insights-metrics-explorer.md) results.
-
-![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-how-do-i/050-filter.png)
-
-There are several different methods of setting the Application Version property.
-
-* Set directly:
-
-    `telemetryClient.Context.Component.Version = typeof(MyProject.MyClass).Assembly.GetName().Version;`
-* Wrap that line in a [telemetry initializer](app-insights-api-custom-events-metrics.md#defaults) to ensure that all TelemetryClient instances are set consistently.
-* [ASP.NET] Set the version in `BuildInfo.config`. The web module will pick up the version from the BuildLabel node. Include this file in your project and remember to set the Copy Always property in Solution Explorer.
-
-    ```XML
-
-    <?xml version="1.0" encoding="utf-8"?>
-    <DeploymentEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/VisualStudio/DeploymentEvent/2013/06">
-      <ProjectName>AppVersionExpt</ProjectName>
-      <Build type="MSBuild">
-        <MSBuild>
-          <BuildLabel kind="label">1.0.0.2</BuildLabel>
-        </MSBuild>
-      </Build>
-    </DeploymentEvent>
-
-    ```
-* [ASP.NET] Generate BuildInfo.config automatically in MSBuild. To do this, add a few lines to your .csproj file:
-
-    ```XML
-
-    <PropertyGroup>
-      <GenerateBuildInfoConfigFile>true</GenerateBuildInfoConfigFile>    <IncludeServerNameInBuildInfo>true</IncludeServerNameInBuildInfo>
-    </PropertyGroup>
-    ```
-
-    This generates a file called *yourProjectName*.BuildInfo.config. The Publish process renames it to BuildInfo.config.
-
-    The build label contains a placeholder (AutoGen_...) when you build with Visual Studio. But when built with MSBuild, it is populated with the correct version number.
-
-    To allow MSBuild to generate version numbers, set the version like `1.0.*` in AssemblyReference.cs
+* Multiple roles in an app: Use a single Application Insights resource, and filter on cloud_Rolename. [Learn more](app-insights-monitor-multi-role-apps.md)
+* Separating development, test, and release versions: Use different Application Insights resources. Pick up the instrumentation keys from web.config. [Learn more](app-insights-separate-resources.md)
+* Reporting build versions: Add a property using a telemetry initializer. [Learn more](app-insights-separate-resources.md)
 
 ## <a name="monitor-backend-servers-and-desktop-apps"></a>Monitor backend servers and desktop apps
 [Use the Windows Server SDK module](app-insights-windows-desktop.md).
@@ -154,11 +110,11 @@ You can then:
 
 * Search on specific user ids
 
-![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-how-do-i/110-search.png)
+![](./media/app-insights-how-do-i/110-search.png)
 
 * Filter metrics to either anonymous or authenticated users
 
-![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-how-do-i/115-metrics.png)
+![](./media/app-insights-how-do-i/115-metrics.png)
 
 ## <a name="modify-property-names-or-values"></a>Modify property names or values
 Create a [filter](app-insights-api-filtering-sampling.md#filtering). This lets you modify or filter telemetry before it is sent from your app to Application Insights.
@@ -196,7 +152,7 @@ To **disable selected standard collectors** - for example, performance counters,
 ## <a name="view-system-performance-counters"></a>View system performance counters
 Among the metrics you can show in metrics explorer are a set of system performance counters. There's a predefined blade titled **Servers** that displays several of them.
 
-![Open your Application Insights resource and click Servers](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-how-do-i/121-servers.png)
+![Open your Application Insights resource and click Servers](./media/app-insights-how-do-i/121-servers.png)
 
 ### <a name="if-you-see-no-performance-counter-data"></a>If you see no performance counter data
 * **IIS server** on your own machine or on a VM. [Install Status Monitor](app-insights-monitor-performance-live-website-now.md).
@@ -206,29 +162,3 @@ Among the metrics you can show in metrics explorer are a set of system performan
 ### <a name="to-display-more-performance-counters"></a>To display more performance counters
 * First, [add a new chart](app-insights-metrics-explorer.md) and see if the counter is in the basic set that we offer.
 * If not, [add the counter to the set collected by the performance counter module](app-insights-performance-counters.md).
-
-## <a name="version-and-release-tracking"></a>Version and release tracking
-To track the application version, make sure `buildinfo.config` is generated by your Microsoft Build Engine process. In your .csproj file, add:  
-
-```XML
-
-    <PropertyGroup>
-      <GenerateBuildInfoConfigFile>true</GenerateBuildInfoConfigFile>    <IncludeServerNameInBuildInfo>true</IncludeServerNameInBuildInfo>
-    </PropertyGroup>
-```
-
-When it has the build info, the Application Insights web module automatically adds **Application version** as a property to every item of telemetry. That allows you to filter by version when you perform [diagnostic searches](app-insights-diagnostic-search.md), or when you [explore metrics](app-insights-metrics-explorer.md).
-
-However, notice that the build version number is generated only by the Microsoft Build Engine, not by the developer build in Visual Studio.
-
-### <a name="release-annotations"></a>Release annotations
-If you use Visual Studio Team Services, you can [get an annotation marker](app-insights-annotations.md) added to your charts whenever you release a new version. The following image shows how this marker appears.
-
-![Screenshot of sample release annotation on a chart](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-asp-net/release-annotation.png)
-
-
-
-
-
-
-

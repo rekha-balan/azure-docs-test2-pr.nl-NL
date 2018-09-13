@@ -1,0 +1,17 @@
+items:
+- name: Kubernetes
+  href: kubernetes/container-service-kubernetes-walkthrough.md
+- name: DC/OS and Docker Swarm
+  href: dcos-swarm/container-service-dcos-quickstart.md
+- name: Resources
+  items:
+  - name: Azure Roadmap
+    href: https://azure.microsoft.com/roadmap/?category=containers
+  - name: Pricing calculator
+    href: https://azure.microsoft.com/pricing/calculator/
+ms.openlocfilehash: a0d18ca054169df28a52a14c2210e6019261abf9
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44864795"

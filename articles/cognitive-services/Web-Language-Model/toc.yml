@@ -1,0 +1,22 @@
+items:
+- name: Web Language Model API Documentation
+- name: Overview
+  items:
+  - name: What is the Web Language Model API?
+    href: Home.md
+- name: Reference
+  items:
+  - name: Web Language Model API
+    href: https://westus.dev.cognitive.microsoft.com/docs/services/55de9ca4e597ed1fd4e2f104/operations/55de9ca4e597ed19b0de8a51
+  - name: Windows SDK
+    href: https://github.com/Microsoft/Cognitive-WebLM-Windows
+- name: Resources
+  items:
+  - name: UserVoice
+    href: https://cognitive.uservoice.com/forums/555943-web-language-model-api
+ms.openlocfilehash: 1997a597d89be77e62b3c3d51b809ba992d396b6
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44866346"

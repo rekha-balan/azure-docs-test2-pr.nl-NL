@@ -5,16 +5,16 @@ services: cognitive-services
 author: bojunehsu
 manager: stesp
 ms.service: cognitive-services
-ms.technology: kes
+ms.component: knowledge-exploration
 ms.topic: article
 ms.date: 03/26/2016
 ms.author: paulhsu
-ms.openlocfilehash: 0618fcd59b7ba4265863d8a728690798be5d125a
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 3009392a5acb12a8f4df3d30a2cbe5e74f2172fc
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44556198"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44790249"
 ---
 # <a name="schema-format"></a>Schema Format
 The schema is specified in a JSON file that describes the attribute structure of the objects in the data file used to create the index.  For each attribute, the schema specifies the name, data type, optional operations, and optional synonyms list.  An object may have 0 or more values of each attribute.  Below is a simplified example from an academic publication domain:

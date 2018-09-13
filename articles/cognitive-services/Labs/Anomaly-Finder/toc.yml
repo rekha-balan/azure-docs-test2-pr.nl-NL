@@ -1,0 +1,55 @@
+items:
+- name: Anomaly Finder Documentation
+- name: Overview
+  items:
+  - name: What is Anomaly Finder?
+    href: overview.md
+  expanded: true
+- name: How-to guides
+  items:
+  - name: Use the Anomaly Finder API
+    items:
+    - name: cURL
+      href: quickstarts/curl.md
+    - name: C#
+      href: quickstarts/csharp.md
+    - name: Java
+      href: quickstarts/java.md
+    - name: Python
+      href: quickstarts/python.md
+    - name: PHP
+      href: quickstarts/php.md
+    - name: Ruby
+      href: quickstarts/ruby.md
+    - name: Javascript
+      href: quickstarts/javascript.md
+- name: Examples
+  items:
+  - name: C# app
+    href: tutorials/csharp-tutorial.md
+  - name: Java app
+    href: tutorials/java-tutorial.md
+  - name: Python app
+    href: tutorials/python-tutorial.md
+  - name: Javascript Web app
+    href: tutorials/javascript-tutorial.md
+- name: Reference
+  items:
+  - name: Anomaly Finder API Reference
+    href: apiref.md
+  - name: REST v1
+    href: https://dev.labs.cognitive.microsoft.com/docs/services/anomaly-detection/operations/post-anomalydetection
+- name: Resources
+  items:
+  - name: Subscription key
+    href: https://labs.cognitive.microsoft.com/en-us/subscriptions?productId=/products/AnomalyDetection.Preview&source=labs
+  - name: Try it!
+    href: https://labs.cognitive.microsoft.com/en-us/project-anomaly-finder
+  - name: Stack Overflow
+    href: https://stackoverflow.com/search?q=anomaly+finder
+ms.openlocfilehash: 12c8f87ab3498ca2cf3829a8355db91f61816e83
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44867511"
