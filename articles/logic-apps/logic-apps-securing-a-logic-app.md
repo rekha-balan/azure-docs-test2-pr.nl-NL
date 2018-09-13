@@ -1,35 +1,31 @@
 ---
 title: Secure access to Azure Logic Apps | Microsoft Docs
-description: Add security for protecting access to triggers, inputs and outputs, action parameters, and services used with workflows in Azure Logic Apps.
+description: Protect access to triggers, inputs and outputs, action parameters, and services in workflows for Azure Logic Apps
 services: logic-apps
-documentationcenter: .net,nodejs,java
-author: jeffhollan
-manager: anneta
-editor: ''
-ms.assetid: 9fab1050-cfbc-4a8b-b1b3-5531bee92856
 ms.service: logic-apps
-ms.devlang: multiple
+ms.suite: integration
+author: kevinlam1
+ms.author: klam
+ms.reviewer: estfan, LADocs
+ms.assetid: 9fab1050-cfbc-4a8b-b1b3-5531bee92856
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: integration
 ms.date: 11/22/2016
-ms.author: jehollan
-ms.openlocfilehash: 3f119409e031ca2b88694a011916f52aa9ef5d36
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 1307b6df22c51af9710d44abb23178d65e3507aa
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44660695"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44783918"
 ---
-# <a name="secure-access-to-your-logic-apps"></a>Secure access to your logic apps
+# <a name="secure-access-in-azure-logic-apps"></a>Secure access in Azure Logic Apps
 
-There are many tools available to help you secure your logic app.
+Here are ways that you can secure access to different components in your logic app:
 
-* Securing access to trigger a logic app (HTTP Request Trigger)
-* Securing access to manage, edit, or read a logic app
-* Securing access to contents of inputs and outputs for a run
-* Securing parameters or inputs within actions in a workflow
-* Securing access to services that receive requests from a workflow
+* Secure access for triggering a logic app workflow with the HTTP request trigger.
+* Secure access for managing, editing, or reading a logic app.
+* Secure access to the contents inside inputs and outputs for a logic app run.
+* Secure parameters or inputs for actions in a logic app workflow.
+* Secure access to services that receive requests from a logic app workflow.
 
 ## <a name="secure-access-to-trigger"></a>Secure access to trigger
 
@@ -37,7 +33,7 @@ When you work with a logic app that fires on an HTTP Request ([Request](../conne
 
 ### <a name="shared-access-signature"></a>Shared Access Signature
 
-Every request endpoint for a logic app includes a [Shared Access Signature (SAS)](../storage/storage-dotnet-shared-access-signature-part-1.md) as part of the URL. Each URL contains a `sp`, `sv`, and `sig` query parameter. Permissions are specified by `sp`, and correspond to HTTP methods allowed, `sv` is the version used to generate, and `sig` is used to authenticate access to trigger. The signature is generated using the SHA256 algorithm with a secret key on all the URL paths and properties. The secret key is never exposed and published, and is kept encrypted and stored as part of the logic app. Your logic app only authorizes triggers that contain a valid signature created with the secret key.
+Every request endpoint for a logic app includes a [Shared Access Signature (SAS)](../storage/common/storage-dotnet-shared-access-signature-part-1.md) as part of the URL. Each URL contains a `sp`, `sv`, and `sig` query parameter. Permissions are specified by `sp`, and correspond to HTTP methods allowed, `sv` is the version used to generate, and `sig` is used to authenticate access to trigger. The signature is generated using the SHA256 algorithm with a secret key on all the URL paths and properties. The secret key is never exposed and published, and is kept encrypted and stored as part of the logic app. Your logic app only authorizes triggers that contain a valid signature created with the secret key.
 
 #### <a name="regenerate-access-keys"></a>Regenerate access keys
 
@@ -78,10 +74,10 @@ In addition to the Shared Access Signature, you may wish to restrict calling a l
 This setting can be configured within the logic app settings:
 
 1. In the Azure portal, open the logic app you want to add IP address restrictions
-1. Click the **Access control configuration** menu item under **Settings**
+1. Click the **Workflow Settings** menu item under **Settings**
 1. Specify the list of IP address ranges to be accepted by the trigger
 
-A valid IP range takes the format `192.168.1.1/255`. If you want the logic app to only fire as a nested logic app, select the **Only other logic apps** option. This option writes an empty array to the resource, meaning only calls from the service itself (parent logic apps) fire successfully.
+A valid IP range takes the format `192.168.1.1/32`. If you want the logic app to only fire as a nested logic app, select the **Only other logic apps** option. This option writes an empty array to the resource, meaning only calls from the service itself (parent logic apps) fire successfully.
 
 > [!NOTE]
 > You can still run a logic app with a request trigger through the REST API / Management `/triggers/{triggerName}/run` regardless of IP. This scenario requires authentication against the Azure REST API, and all events would appear in the Azure Audit Log. Set access control policies accordingly.
@@ -120,7 +116,7 @@ To add more authorization protocols on top of a logic app, [Azure API Management
 
 ## <a name="secure-access-to-manage-or-edit-logic-apps"></a>Secure access to manage or edit logic apps
 
-You can restrict access to management operations on a logic app so that only specific users or groups are able to perform operations on the resource. Logic apps use the Azure [Role-Based Access Control (RBAC)](../active-directory/role-based-access-control-configure.md) feature, and can be customized with the same tools.  There are a few built-in roles you can assign members of your subscription to as well:
+You can restrict access to management operations on a logic app so that only specific users or groups are able to perform operations on the resource. Logic apps use the Azure [Role-Based Access Control (RBAC)](../role-based-access-control/role-assignments-portal.md) feature, and can be customized with the same tools.  There are a few built-in roles you can assign members of your subscription to as well:
 
 * **Logic App Contributor** - Provides access to view, edit, and update a logic app.  Cannot remove the resource or perform admin operations.
 * **Logic App Operator** - Can view the logic app and run history, and enable/disable.  Cannot edit or update the definition.
@@ -136,8 +132,8 @@ All data within a workflow run is encrypted in transit and at rest. When a call 
 This setting can be configured within the resource settings of the Azure portal:
 
 1. In the Azure portal, open the logic app you want to add IP address restrictions
-1. Click the **Access control configuration** menu item under **Settings**
-1. Specify the list of IP address ranges for access to content
+2. Click the **Access control configuration** menu item under **Settings**
+3. Specify the list of IP address ranges for access to content
 
 #### <a name="setting-ip-ranges-on-the-resource-definition"></a>Setting IP ranges on the resource definition
 
@@ -184,64 +180,62 @@ The following example shows a deployment that references a secure parameter of `
 
 ``` json
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "secretDeploymentParam": {
-      "type": "securestring"
-    }
-  },
-  "variables": {},
-  "resources": [
-    {
+   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+   "contentVersion": "1.0.0.0",
+   "parameters": {
+      "secretDeploymentParam": {
+         "type": "securestring"
+      }
+   },
+   "variables": {},
+   "resources": [ {
       "name": "secret-deploy",
       "type": "Microsoft.Logic/workflows",
       "location": "westus",
       "tags": {
-        "displayName": "LogicApp"
+         "displayName": "LogicApp"
       },
       "apiVersion": "2016-06-01",
       "properties": {
-        "definition": {
-          "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
-          "actions": {
-            "Call_External_API": {
-              "type": "http",
-              "inputs": {
-                "headers": {
-                  "Authorization": "@parameters('secret')"
-                },
-                "body": "This is the request"
-              },
-              "runAfter": {}
-            }
-          },
-          "parameters": {
+         "definition": {
+            "$schema": "https://schema.management.azure.com/schemas/2016-06-01/Microsoft.Logic.json",
+            "actions": {
+               "Call_External_API": {
+                  "type": "Http",
+                  "inputs": {
+                     "headers": {
+                        "Authorization": "@parameters('secret')"
+                     },
+                     "body": "This is the request"
+                  },
+                  "runAfter": {}
+               }
+            },
+            "parameters": {
+               "secret": {
+                  "type": "SecureString"
+               }
+            },
+            "triggers": {
+               "manual": {
+                  "type": "Request",
+                  "kind": "Http",
+                  "inputs": {
+                     "schema": {}
+                  }
+               }
+            },
+            "contentVersion": "1.0.0.0",
+            "outputs": {}
+         },
+         "parameters": {
             "secret": {
-              "type": "SecureString"
+               "value": "[parameters('secretDeploymentParam')]"
             }
-          },
-          "triggers": {
-            "manual": {
-              "type": "Request",
-              "kind": "Http",
-              "inputs": {
-                "schema": {}
-              }
-            }
-          },
-          "contentVersion": "1.0.0.0",
-          "outputs": {}
-        },
-        "parameters": {
-          "secret": {
-            "value": "[parameters('secretDeploymentParam')]"
-          }
-        }
+         }
       }
-    }
-  ],
-  "outputs": {}
+   } ],
+   "outputs": {}
 }
 ```
 
@@ -263,15 +257,11 @@ Logic apps provide integration with several services to provide secure and relia
 
 #### <a name="on-premises-data-gateway"></a>On-premises data gateway
 
-Many of the managed connectors from logic apps provide secure connectivity to on-premises systems, including File System, SQL, SharePoint, DB2, and more.  The gateway uses encrypted channels via Azure Service Bus to relay data on-premises, and all traffic originates from secure outbound traffic from the gateway agent.  More details on how the gateway works [in this article](logic-apps-gateway-install.md#how-the-gateway-works).
+Many managed connectors for logic apps provide secure connectivity to on-premises systems, including File System, SQL, SharePoint, DB2, and more. The gateway relays data from on-premises sources on encrypted channels through the Azure Service Bus. All traffic originates as secure outbound traffic from the gateway agent. Learn more about [how the data gateway works](logic-apps-gateway-install.md#gateway-cloud-service).
 
 #### <a name="azure-api-management"></a>Azure API Management
 
 [Azure API Management](https://azure.microsoft.com/services/api-management/) has on-premises connectivity options, including site-to-site VPN and ExpressRoute integration for secured proxy and communication to on-premises systems. In the Logic App Designer, you can quickly select an API exposed from Azure API Management within a workflow, providing quick access to on-premises systems.
-
-#### <a name="hybrid-connections-from-azure-app-service"></a>Hybrid connections from Azure App Service
-
-You can use the on-premises hybrid connection feature for Azure API and Web apps to communicate on-premises.  Details on hybrid connections and how to configure can be found [in this article](../app-service-web/web-sites-hybrid-connection-get-started.md).
 
 ## <a name="next-steps"></a>Next steps
 [Create a deployment template](logic-apps-create-deploy-template.md)  

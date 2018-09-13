@@ -1,28 +1,25 @@
 ---
 title: Azure IoT device SDK for C - Serializer | Microsoft Docs
 description: How to use the Serializer library in the Azure IoT device SDK for C to create device apps that communicate with an IoT hub.
-services: iot-hub
-documentationcenter: ''
-author: olivierbloch
-manager: timlt
-editor: ''
-ms.assetid: defbed34-de73-429c-8592-cd863a38e4dd
+author: yzhong94
+manager: arjmands
 ms.service: iot-hub
-ms.devlang: cpp
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
+services: iot-hub
+ms.devlang: c
+ms.topic: conceptual
 ms.date: 09/06/2016
-ms.author: obloch
-ms.openlocfilehash: 3e285e776bf2237bd94b19d9dd0c14b5ebe23125
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: yizhon
+ms.openlocfilehash: a724fa5acc930475bdbe4ffcc74141470a92326c
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44550772"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44782839"
 ---
 # <a name="azure-iot-device-sdk-for-c--more-about-serializer"></a>Azure IoT device SDK for C – more about serializer
 The [first article](iot-hub-device-sdk-c-intro.md) in this series introduced the **Azure IoT device SDK for C**. The next article provided a more detailed description of the [**IoTHubClient**](iot-hub-device-sdk-c-iothubclient.md). This article completes coverage of the SDK by providing a more detailed description of the remaining component: the **serializer** library.
+
+[!INCLUDE [iot-hub-basic](../../includes/iot-hub-basic-partial.md)]
 
 The introductory article described how to use the **serializer** library to send events to and receive messages from IoT Hub. In this article, we extend that discussion by providing a more complete explanation of how to model your data with the **serializer** macro language. The article also includes more detail about how the library serializes messages (and in some cases how you can control the serialization behavior). We'll also describe some parameters you can modify that determine the size of the models you create.
 
@@ -554,7 +551,7 @@ azure-c-shared-utility\\macro\_utils\_h\_generator.
 
 This folder contains a Visual Studio solution called **macro\_utils\_h\_generator.sln**:
 
-  ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/iot-hub/media/iot-hub-device-sdk-c-serializer/01-macro_utils_h_generator.PNG)
+  ![](media/iot-hub-device-sdk-c-serializer/01-macro_utils_h_generator.PNG)
 
 The program in this solution generates the **macro\_utils.h** file. There’s a default macro\_utils.h file included with the SDK. This solution allows you to modify some parameters and then recreate the header file based on these parameters.
 
@@ -581,17 +578,17 @@ WITH_DATA(int, MyData)
 
 As mentioned previously, **DECLARE\_MODEL** is just a C macro. The names of the model and the **WITH\_DATA** statement (yet another macro) are parameters of **DECLARE\_MODEL**. **nMacroParameters** defines how many parameters can be included in **DECLARE\_MODEL**. Effectively, this defines how many data event and action declarations you can have. As such, with the default limit of 124 this means that you can define a model with a combination of about 60 actions and data events. If you try to exceed this limit, you'll receive compiler errors that look similar to this:
 
-  ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/iot-hub/media/iot-hub-device-sdk-c-serializer/02-nMacroParametersCompilerErrors.PNG)
+  ![](media/iot-hub-device-sdk-c-serializer/02-nMacroParametersCompilerErrors.PNG)
 
 The **nArithmetic** parameter is more about the internal workings of the macro language than your application.  It controls the total number of members you can have in your model, including **DECLARE_STRUCT** macros. If you start seeing compiler errors such as this, then you should try increasing **nArithmetic**:
 
-   ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/iot-hub/media/iot-hub-device-sdk-c-serializer/03-nArithmeticCompilerErrors.PNG)
+   ![](media/iot-hub-device-sdk-c-serializer/03-nArithmeticCompilerErrors.PNG)
 
 If you want to change these parameters, modify the values in the macro\_utils.tt file, recompile the macro\_utils\_h\_generator.sln solution, and run the compiled program. When you do so, a new macro\_utils.h file is generated and placed in the .\\common\\inc directory.
 
 In order to use the new version of macro\_utils.h, remove the **serializer** NuGet package from your solution and in its place include the **serializer** Visual Studio project. This enables your code to compile against the source code of the serializer library. This includes the updated macro\_utils.h. If you want to do this for **simplesample\_amqp**, start by removing the NuGet package for the serializer library from the solution:
 
-   ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/iot-hub/media/iot-hub-device-sdk-c-serializer/04-serializer-github-package.PNG)
+   ![](media/iot-hub-device-sdk-c-serializer/04-serializer-github-package.PNG)
 
 Then add this project to your Visual Studio solution:
 
@@ -601,7 +598,7 @@ Then add this project to your Visual Studio solution:
 
 When you're done, your solution should look like this:
 
-   ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/iot-hub/media/iot-hub-device-sdk-c-serializer/05-serializer-project.PNG)
+   ![](media/iot-hub-device-sdk-c-serializer/05-serializer-project.PNG)
 
 Now when you compile your solution, the updated macro\_utils.h is included in your binary.
 
@@ -672,13 +669,8 @@ To learn more about developing for IoT Hub, see the [Azure IoT SDKs][lnk-sdks].
 
 To further explore the capabilities of IoT Hub, see:
 
-* [Simulating a device with the IoT Gateway SDK][lnk-gateway]
+* [Deploying AI to edge devices with Azure IoT Edge][lnk-iotedge]
 
 [lnk-sdks]: iot-hub-devguide-sdks.md
 
-[lnk-gateway]: iot-hub-linux-gateway-sdk-simulated-device.md
-
-
-
-
-
+[lnk-iotedge]: ../iot-edge/tutorial-simulate-device-linux.md

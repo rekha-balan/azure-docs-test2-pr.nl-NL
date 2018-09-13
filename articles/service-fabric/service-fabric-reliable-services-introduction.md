@@ -9,17 +9,17 @@ editor: vturecek; mani-ramaswamy
 ms.assetid: 0c88a533-73f8-4ae1-a939-67d17456ac06
 ms.service: Service-Fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 04/07/2017
-ms.author: masnider;
-ms.openlocfilehash: 0a2a04accda64f12c5beefcca362ec19f4552ce1
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 3/9/2018
+ms.author: masnider
+ms.openlocfilehash: 6f8734345359a99c93e7f0e5d9a2589d781e20c0
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44551939"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44774741"
 ---
 # <a name="reliable-services-overview"></a>Reliable Services overview
 Azure Service Fabric simplifies writing and managing stateless and stateful Reliable Services. This topic covers:
@@ -35,7 +35,7 @@ Service Fabric manages the lifetime of services, from provisioning and deploymen
 ## <a name="what-are-reliable-services"></a>What are Reliable Services?
 Reliable Services gives you a simple, powerful, top-level programming model to help you express what is important to your application. With the Reliable Services programming model, you get:
 
-* Access to the rest of the Service Fabric programming APIs. Unlike Service Fabric Services modeled as [Guest Executables](service-fabric-deploy-existing-app.md), Reliable Services get to use the rest of the Service Fabric APIs directly. This allows services to:
+* Access to the rest of the Service Fabric programming APIs. Unlike Service Fabric Services modeled as [Guest Executables](service-fabric-guest-executables-introduction.md), Reliable Services get to use the rest of the Service Fabric APIs directly. This allows services to:
   * query the system
   * report health about entities in the cluster
   * receive notifications about configuration and code changes
@@ -48,7 +48,7 @@ Reliable Services gives you a simple, powerful, top-level programming model to h
 
 Watch this Microsoft Virtual Academy video for an overview of Reliable services: <center>
 <a target="_blank" href="https://mva.microsoft.com/en-US/training-courses/building-microservices-applications-on-azure-service-fabric-16747?l=HhD9566yC_4106218965">
-<img src="https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-reliable-services-introduction/ReliableServicesVid.png" WIDTH="360" HEIGHT="244" />
+<img src="./media/service-fabric-reliable-services-introduction/ReliableServicesVid.png" WIDTH="360" HEIGHT="244" />
 </a>
 </center>
 
@@ -89,10 +89,6 @@ A stateful service is one that must have some portion of state kept consistent a
 
 Most services today store their state externally, since the external store is what provides reliability, availability, scalability, and consistency for that state. In Service Fabric, services aren't required to store their state externally. Service Fabric takes care of these requirements for both the service code and the service state.
 
-> [!NOTE]
-> Support for Stateful Reliable Services is not available on Linux yet (for C# or Java).
->
-
 Let's say we want to write a service that processes images. To do this, the service takes in an image and the series of conversions to perform on that image. This service returns a communication listener (let's suppose it's a WebAPI) that exposes an API like `ConvertImage(Image i, IList<Conversion> conversions)`. When it receives a request, the service stores it in a `IReliableQueue`, and returns some id to the client so it can track the request.
 
 In this service, `RunAsync()` could be more complex. The service has a loop inside its `RunAsync()` that pulls requests out of `IReliableQueue` and performs the conversions requested. The results get stored in an `IReliableDictionary` so that when the client comes back they can get their converted images. To ensure that even if something fails the image isn't lost, this Reliable Service would pull out of the queue, perform the conversions, and store the result all in a single transaction. In this case, the message is removed from the queue and the results are stored in the result dictionary only when the conversions are complete. Alternatively, the service could pull the image out of the queue and immediately store it in a remote store. This reduces the amount of state the service has to manage, but increases complexity since the service has to keep the necessary metadata to manage the remote store. With either approach, if something failed in the middle the request remains in the queue waiting to be processed.
@@ -116,6 +112,5 @@ If any of the following characterize your application service needs, then you sh
 
 ## <a name="next-steps"></a>Next steps
 * [Reliable Services quick start](service-fabric-reliable-services-quick-start.md)
-* [Reliable Services advanced usage](service-fabric-reliable-services-advanced-usage.md)
+* [Reliable collections](service-fabric-reliable-services-reliable-collections.md)
 * [The Reliable Actors programming model](service-fabric-reliable-actors-introduction.md)
-

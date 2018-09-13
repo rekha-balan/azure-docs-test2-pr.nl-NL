@@ -1,162 +1,80 @@
 ---
-title: SendGrid | Microsoft Docs
-description: Create Logic apps with Azure App service. SendGrid Connection Provider lets you send email and manage recipient lists.
+title: Connect to SendGrid from Azure Logic Apps | Microsoft Docs
+description: Automate tasks and workflows that send emails and manage mailing lists in SendGrid by using Azure Logic Apps
 services: logic-apps
-documentationcenter: .net,nodejs,java
-author: msftman
-manager: erikre
-editor: ''
-tags: connectors
-ms.assetid: bc4f1fc2-824c-4ed7-8de8-e82baff3b746
 ms.service: logic-apps
-ms.devlang: multiple
+ms.suite: integration
+author: ecfan
+ms.author: estfan
+ms.reviewer: klam, LADocs
+ms.assetid: bc4f1fc2-824c-4ed7-8de8-e82baff3b746
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: integration
-ms.date: 08/18/2016
-ms.author: deonhe
-ms.openlocfilehash: e30231bd576436ae69f4fa42d0e2ab312c3938d6
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+tags: connectors
+ms.date: 08/24/2018
+ms.openlocfilehash: c8747210a77879d551e323a7c0e46a9ab013fa3f
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44549547"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44775781"
 ---
-# <a name="get-started-with-the-sendgrid-connector"></a>Get started with the SendGrid connector
-SendGrid Connection Provider lets you send email and manage recipient lists.
+# <a name="send-emails-and-manage-mailing-lists-in-sendgrid-by-using-azure-logic-apps"></a>Send emails and manage mailing lists in SendGrid by using Azure Logic Apps
 
-> [!NOTE]
-> This version of the article applies to logic apps 2015-08-01-preview schema version. 
-> 
-> 
+With Azure Logic Apps and the SendGrid connector, you can create automated tasks and workflows that send emails and manage your recipient lists, for example:
 
-You can get started by creating a Logic app now, see [Create a logic app](../logic-apps/logic-apps-create-a-logic-app.md).
+* Send email.
+* Add recipients to lists.
+* Get, add, and manage global suppression.
 
-## <a name="triggers-and-actions"></a>Triggers and actions
-The SendGrid connector can be used as an action; it has trigger(s). All connectors support data in JSON and XML formats. 
+You can use SendGrid actions in your logic apps to perform these tasks. You can also have other actions use the output from SendGrid actions. 
 
- The SendGrid connector has the following actions available. There are no triggers.
+This connector provides only actions, so to start your logic app, use a separate trigger, such as a **Recurrence** trigger. For example, if you regularly add recipients to your lists, you can send email about recipients and lists using the Office 365 Outlook connector or Outlook.com connector.
+If you're new to logic apps, review [What is Azure Logic Apps?](../logic-apps/logic-apps-overview.md)
 
-### <a name="sendgrid-actions"></a>SendGrid actions
-You can take these action(s):
+## <a name="prerequisites"></a>Prerequisites
 
-| Action | Description |
-| --- | --- |
-| [SendEmail](connectors-create-api-sendgrid.md#sendemail) |Sends an email using SendGrid API (Limited to 10,000 recipients) |
-| [AddRecipientToList](connectors-create-api-sendgrid.md#addrecipienttolist) |Add an individual recipient to a recipient list |
+* An Azure subscription. If you don't have an Azure subscription, <a href="https://azure.microsoft.com/free/" target="_blank">sign up for a free Azure account</a>. 
 
-## <a name="create-a-connection-to-sendgrid"></a>Create a connection to SendGrid
-To create Logic apps with SendGrid, you must first create a **connection** then provide the details for the following properties: 
+* A [SendGrid account](https://www.sendgrid.com/) and a [SendGrid API key](https://sendgrid.com/docs/ui/account-and-settings/api-keys/)
 
-| Property | Required | Description |
-| --- | --- | --- |
-| ApiKey |Yes |Provide Your SendGrid Api Key |
+   Your API key authorizes your logic app to create  a connection and access your SendGrid account.
 
-> [!INCLUDE [Steps to create a connection to SendGrid](../../includes/connectors-create-api-sendgrid.md)]
-> 
-> [!TIP]
-> You can use this connection in other logic apps.
-> 
-> 
+* Basic knowledge about [how to create logic apps](../logic-apps/quickstart-create-first-logic-app-workflow.md)
 
-After you create the connection, you can use it to execute the actions and listen for the triggers described in this article.
+* The logic app where you want to access your SendGrid account. To use a SendGrid action, start your logic app with another trigger, for example, the **Recurrence** trigger.
 
-## <a name="reference-for-sendgrid"></a>Reference for SendGrid
-Applies to version: 1.0
+## <a name="connect-to-sendgrid"></a>Connect to SendGrid
 
-## <a name="sendemail"></a>SendEmail
-Send email: Sends an email using SendGrid API (Limited to 10,000 recipients) 
+[!INCLUDE [Create connection general intro](../../includes/connectors-create-connection-general-intro.md)]
 
-```POST: /api/mail.send.json``` 
+1. Sign in to the [Azure portal](https://portal.azure.com), and open your logic app in Logic App Designer, if not open already.
 
-| Name | Data Type | Required | Located In | Default Value | Description |
-| --- | --- | --- | --- | --- | --- |
-| request | |yes |body |none |Email message to send |
+1. Choose a path: 
 
-#### <a name="response"></a>Response
-| Name | Description |
-| --- | --- |
-| 200 |OK |
-| 400 |Bad Request |
-| 401 |Unauthorized |
-| 403 |Forbidden |
-| 404 |Not Found |
-| 429 |Too Many Request |
-| 500 |Internal Server Error. Unknown error occured |
-| default |Operation Failed. |
+   * Under the last step where you want to add an action, choose **New step**. 
 
-## <a name="addrecipienttolist"></a>AddRecipientToList
-Add recipient to list: Add an individual recipient to a recipient list 
+     -or-
 
-```POST: /v3/contactdb/lists/{listId}/recipients/{recipientId}``` 
+   * Between the steps where you want to add an action, move your pointer over the arrow between steps. 
+   Choose the plus sign (**+**) that appears, and then select **Add an action**.
 
-| Name | Data Type | Required | Located In | Default Value | Description |
-| --- | --- | --- | --- | --- | --- |
-| listId |string |yes |path |none |Unique id of the recipient list |
-| recipientId |string |yes |path |none |Unique id of the recipient |
+1. In the search box, enter "sendgrid" as your filter. Under the actions list, select the action you want.
 
-#### <a name="response"></a>Response
-| Name | Description |
-| --- | --- |
-| 200 |OK |
-| 400 |Bad Request |
-| 401 |Unauthorized |
-| 403 |Forbidden |
-| 404 |Not Found |
-| 500 |Internal Server Error. Unknown error occured |
-| default |Operation Failed. |
+1. Provide a name for your connection. 
 
-## <a name="object-definitions"></a>Object definitions
-### <a name="emailrequest"></a>EmailRequest
-| Property Name | Data Type | Required |
-| --- | --- | --- |
-| from |string |Yes |
-| fromname |string |No |
-| to |string |Yes |
-| toname |string |No |
-| subject |string |Yes |
-| body |string |Yes |
-| ishtml |boolean |No |
-| cc |string |No |
-| ccname |string |No |
-| bcc |string |No |
-| bccname |string |No |
-| replyto |string |No |
-| date |string |No |
-| headers |string |No |
-| files |array |No |
-| filenames |array |No |
+1. Enter your SendGrid API key, and then choose **Create**.
 
-### <a name="emailresponse"></a>EmailResponse
-| Property Name | Data Type | Required |
-| --- | --- | --- |
-| message |string |No |
+1. Provide the necessary details for your selected action and continue building your logic app's workflow.
 
-### <a name="recipientlists"></a>RecipientLists
-| Property Name | Data Type | Required |
-| --- | --- | --- |
-| lists |array |No |
+## <a name="connector-reference"></a>Connector reference
 
-### <a name="recipientlist"></a>RecipientList
-| Property Name | Data Type | Required |
-| --- | --- | --- |
-| id |integer |No |
-| name |string |No |
-| recipient_count |integer |No |
+For technical details about triggers, actions, and limits, which are described by the connector's OpenAPI (formerly Swagger) description, review the connector's [reference page](/connectors/sendgrid/).
 
-### <a name="recipients"></a>Recipients
-| Property Name | Data Type | Required |
-| --- | --- | --- |
-| recipients |array |No |
+## <a name="get-support"></a>Get support
 
-### <a name="recipient"></a>Recipient
-| Property Name | Data Type | Required |
-| --- | --- | --- |
-| email |string |No |
-| last_name |string |No |
-| first_name |string |No |
-| id |string |No |
+* For questions, visit the [Azure Logic Apps forum](https://social.msdn.microsoft.com/Forums/en-US/home?forum=azurelogicapps).
+* To submit or vote on feature ideas, visit the [Logic Apps user feedback site](http://aka.ms/logicapps-wish).
 
-## <a name="next-steps"></a>Next Steps
-[Create a logic app](../logic-apps/logic-apps-create-a-logic-app.md)
+## <a name="next-steps"></a>Next steps
 
+* Learn about other [Logic Apps connectors](../connectors/apis-list.md)

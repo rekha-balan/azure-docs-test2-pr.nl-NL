@@ -1,25 +1,19 @@
 ---
-title: Use autoscale actions to send email and webhook alert notifications. | Microsoft Docs
+title: Use autoscale to send email and webhook alert notifications
 description: 'See how to use autoscale actions to call web URLs or send email notifications in Azure Monitor. '
-author: kamathashwin
-manager: carolz
-editor: ''
-services: monitoring-and-diagnostics
-documentationcenter: monitoring-and-diagnostics
-ms.assetid: eb9a4c98-0894-488c-8ee8-5df0065d094f
-ms.service: monitoring-and-diagnostics
-ms.workload: na
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+author: anirudhcavale
+services: azure-monitor
+ms.service: azure-monitor
+ms.topic: conceptual
 ms.date: 04/03/2017
-ms.author: ashwink
-ms.openlocfilehash: bbf189c8c3a8925e46674c0bb759dca64b0054f1
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: ancav
+ms.component: autoscale
+ms.openlocfilehash: 65405a6d7f1d49911da1e2a5d26b02098a261c01
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44671440"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44779381"
 ---
 # <a name="use-autoscale-actions-to-send-email-and-webhook-alert-notifications-in-azure-monitor"></a>Use autoscale actions to send email and webhook alert notifications in Azure Monitor
 This article shows you how set up triggers so that you can call specific web URLs or send emails based on autoscale actions in Azure.  
@@ -35,7 +29,7 @@ You can opt-in from the Azure portal for Cloud Services and Server Farms (Web Ap
 
 * Choose the **scale by** metric.
 
-![scale by](https://docstestmedia1.blob.core.windows.net/azure-media/articles/monitoring-and-diagnostics/media/insights-autoscale-to-webhook-email/insights-autoscale-scale-by.png)
+![scale by](./media/insights-autoscale-to-webhook-email/insights-autoscale-notify.png)
 
 ## <a name="virtual-machine-scale-sets"></a>Virtual Machine scale sets
 For newer Virtual Machines created with Resource Manager (Virtual Machine scale sets), you can configure this using REST API, Resource Manager templates, PowerShell, and CLI. A portal interface is not yet available.
@@ -126,5 +120,3 @@ When the autoscale notification is generated, the following metadata is included
 | oldCapacity |Yes |The current (old) instance count when Autoscale took a scale action |
 | newCapacity |Yes |The new instance count that Autoscale scaled the resource to |
 | Properties |No |Optional. Set of <Key, Value> pairs (for example,  Dictionary <String, String>). The properties field is optional. In a custom user interface  or Logic app based workflow, you can enter keys and values that can be passed using the payload. An alternate way to pass custom properties back to the outgoing webhook call is to use the webhook URI itself (as query parameters) |
-
-

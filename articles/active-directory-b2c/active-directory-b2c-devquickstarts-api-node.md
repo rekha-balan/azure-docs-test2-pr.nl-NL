@@ -1,25 +1,21 @@
 ---
-title: 'Azure AD B2C: Secure a web API by using Node.js | Microsoft Docs'
-description: How to build a Node.js web API that accepts tokens from a B2C tenant
+title: Secure a web API by using Node.js in Azure Active Directory B2C | Microsoft Docs
+description: How to build a Node.js web API that accepts tokens from a B2C tenant.
 services: active-directory-b2c
-documentationcenter: ''
-author: xerners
-manager: mbaldwin
-editor: ''
-ms.assetid: fc2b9af8-fbda-44e0-962a-8b963449106a
-ms.service: active-directory-b2c
+author: davidmu1
+manager: mtillman
+ms.service: active-directory
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: javascript
-ms.topic: hero-article
+ms.topic: conceptual
 ms.date: 01/07/2017
-ms.author: xerners
-ms.openlocfilehash: f8ec871c29478592caf019f9461c0f34a16b6f17
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: davidmu
+ms.component: B2C
+ms.openlocfilehash: 93c3bd3f902f08c8f019744b3f30745c1fd9fa01
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44551294"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44778705"
 ---
 # <a name="azure-ad-b2c-secure-a-web-api-by-using-nodejs"></a>Azure AD B2C: Secure a web API by using Node.js
 <!-- TODO [AZURE.INCLUDE [active-directory-b2c-devquickstarts-web-switcher](../../includes/active-directory-b2c-devquickstarts-web-switcher.md)]-->
@@ -36,7 +32,7 @@ With Azure Active Directory (Azure AD) B2C, you can secure a web API by using OA
 To do this sample, you need to:
 
 1. Register an application with Azure AD.
-2. Set up your application to use Passport's `azure-ad-passport` plug-in.
+2. Set up your application to use Passport's `passport-azure-ad` plug-in.
 3. Configure a client application to call the "to-do list" web API.
 
 ## <a name="get-an-azure-ad-b2c-directory"></a>Get an Azure AD B2C directory
@@ -49,8 +45,6 @@ Next, you need to create an app in your B2C directory that gives Azure AD some i
 * Enter `http://localhost/TodoListService` as a **Reply URL**. It is the default URL for this code sample.
 * Create an **Application secret** for your application and copy it. You need this data later. Note that this value needs to be [XML escaped](https://www.w3.org/TR/2006/REC-xml11-20060816/#dt-escape) before you use it.
 * Copy the **Application ID** that is assigned to your app. You need this data later.
-
-[!INCLUDE [active-directory-b2c-devquickstarts-v2-apps](../../includes/active-directory-b2c-devquickstarts-v2-apps.md)]
 
 ## <a name="create-your-policies"></a>Create your policies
 In Azure AD B2C, every user experience is defined by a [policy](active-directory-b2c-reference-policies.md). This app contains two identity experiences: sign up and sign in. You need to create one policy of each type, as described in the [policy reference article](active-directory-b2c-reference-policies.md#create-a-sign-up-policy).  When you create your three policies, be sure to:
@@ -549,7 +543,7 @@ Restify and Express provide deep customization for a REST API server, but we use
 
 ```Javascript
 
-**
+/**
  * Our Server
  */
 

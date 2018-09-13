@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: azure-government
 ms.date: 11/14/2016
 ms.author: kydeeds
-ms.openlocfilehash: 582e55d2d04a4518cca96ff4006fdff2cd4ebcbc
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: ed70c7e9714e1dfa9925b9b47fdcab7aad687e34
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44554046"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44788754"
 ---
 # <a name="itar-overview-for-azure-government"></a>ITAR Overview for Azure Government
 ## <a name="overview"></a>Overview
@@ -27,7 +27,7 @@ This information is intended for Azure Government customers with obligations und
 
 You should refer to the <a href="http://www.microsoft.com/en-us/TrustCenter/Compliance/default.aspx/"> Microsoft Azure Trust Center Compliance Page </a> for current information on the Azure Government services covered under ITAR. Additional Microsoft services might also be available, but are not within the scope of the Azure Government covered services. Azure Government services might also permit you to use a variety of additional resources, applications, or services that are provided by third parties—or by Microsoft under separate terms of use and privacy policies. You are responsible for reviewing the terms of all such “add-on” offerings, such as Marketplace offerings, to ensure that they meet your needs regarding ITAR compliance.
 
-<a href="https://azure.microsoft.com/en-us/features/gov/"> Azure Government </a> is available to entities that handle data that is subject to certain government regulations and requirements, such as ITAR, where use of Azure Government is required to comply with regulations. Azure Government customers are subject to validation of eligibility. Validation of eligibility by Microsoft will include confirmation that you are a manufacturer, exporter, or broker of defense articles under the ITAR—as shown by your registration with the US Department of State—or through a sponsorship agreement with a government entity that has specific requirements for the handling of data.
+<a href="https://azure.microsoft.com/features/gov/"> Azure Government </a> is available to entities that handle data that is subject to certain government regulations and requirements, such as ITAR, where use of Azure Government is required to comply with regulations. Azure Government customers are subject to validation of eligibility. Validation of eligibility by Microsoft will include confirmation that you are a manufacturer, exporter, or broker of defense articles under the ITAR—as shown by your registration with the US Department of State—or through a sponsorship agreement with a government entity that has specific requirements for the handling of data.
 
 Entities with questions about eligibility for Azure Government should consult their account team.
 

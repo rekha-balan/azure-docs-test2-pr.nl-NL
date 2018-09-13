@@ -1,28 +1,23 @@
 ---
-title: Working with XML messages in your workflows - Azure Logic Apps | Microsoft Docs
-description: Process, validate, transform, and enrich XML messages in logic apps and business-to scenarios using the Enterprise Integration Pack
+title: XML messages for B2B enterprise integration - Azure Logic Apps | Microsoft Docs
+description: Process, validate, transform, and enrich XML messages for B2B solutions in Azure Logic Apps with Enterprise Integration Pack
 services: logic-apps
-documentationcenter: .net,nodejs,java
-author: MandiOhlinger
-manager: anneta
-editor: ''
-ms.assetid: 47672dc4-1caa-44e5-b8cb-68ec3a76b7dc
 ms.service: logic-apps
-ms.workload: integration
-ms.tgt_pltfrm: na
-ms.devlang: na
+ms.suite: integration
+author: divyaswarnkar
+ms.author: divswa
+ms.reviewer: jonfan, estfan, LADocs
 ms.topic: article
+ms.assetid: 47672dc4-1caa-44e5-b8cb-68ec3a76b7dc
 ms.date: 02/27/2017
-ms.author: mandia
-ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 9d40c5028fd8b3ab20f7562dce9274664e4e56ac
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 5f804bf656b423d6dbe8f5c2ed73ba54d8361000
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44548874"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44784776"
 ---
-# <a name="validate-and-transform-xml-encode-and-decode-flat-files-and-enrich-messages-features-in-logic-apps"></a>Validate and transform XML, encode and decode flat files, and enrich messages features in logic apps
+# <a name="xml-messages-and-flat-files-in-azure-logic-apps-with-enterprise-integration-pack"></a>XML messages and flat files in Azure Logic Apps with Enterprise Integration Pack
 
 Using logic apps, you have the ability to process XML messages that you send and receive. This feature is included with the Enterprise Integration Pack. For those users with a BizTalk Server background, the Enterprise Integration Pack gives you similar abilities to transform and validate messages, work with flat files, and even use XPath to enrich or extract specific properties from a message. 
 

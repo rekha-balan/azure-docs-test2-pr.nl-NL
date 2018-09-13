@@ -14,14 +14,19 @@ ms.devlang: na
 ms.topic: article
 ms.date: 08/15/2016
 ms.author: deonhe
-ms.openlocfilehash: 6db164357e9f17c776d3c0468ac6223c1a4c4ed7
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 5c05c7c4c0f8f0b3619b36390c8a0224a03c900a
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44552208"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44774429"
 ---
 # <a name="release-notes-for-azure-biztalk-services"></a>Release Notes for Azure BizTalk Services
+
+> [!INCLUDE [BizTalk Services is being retired, and replaced with Azure Logic Apps](../../includes/biztalk-services-retirement.md)]
+
+> [!INCLUDE [Use APIs to manage MABS](../../includes/biztalk-services-retirement-azure-classic-portal.md)]
+
 The release notes for the Microsoft Azure BizTalk Services contain the known issues in this release.
 
 ## <a name="whats-new-in-the-november-update-of-biztalk-services"></a>What’s new in the November update of BizTalk Services
@@ -32,8 +37,8 @@ The release notes for the Microsoft Azure BizTalk Services contain the known iss
 * Organizational accounts are supported:  
   * **Scenario**: You registered a BizTalk Service deployment using a Microsoft account (like user@live.com). In this scenario, only Microsoft Account users can manage the BizTalk Service using the BizTalk Services portal. An organizational account cannot be used.  
   * **Scenario**: You registered a BizTalk Service deployment using an organizational account in an Azure Active Directory (like user@fabrikam.com or user@contoso.com). In this scenario, only Azure Active Directory users within the same organization can manage the BizTalk Service using the BizTalk Services portal. A Microsoft account cannot be used.  
-* When you create a BizTalk Service in the Azure classic portal, you are automatically registered in the BizTalk Services Portal.
-  * **Scenario**: You sign into the Azure classic portal, create a BizTalk Service, and then select **Manage** for the very first time. When the BizTalk Services portal opens, the BizTalk Service automatically registers and is ready for your deployments.  
+* When you create a BizTalk Service, you are automatically registered in the BizTalk Services Portal.
+  * **Scenario**: You sign into Azure, create a BizTalk Service, and then select **Manage** for the very first time. When the BizTalk Services portal opens, the BizTalk Service automatically registers and is ready for your deployments.  
     See [Registering and Updating a BizTalk Service Deployment on the BizTalk Services Portal](https://msdn.microsoft.com/library/azure/hh689837.aspx).  
 
 ### <a name="august-14-update"></a>August 14 Update
@@ -61,11 +66,11 @@ You ‘Build’ the solution in Visual Studio successfully. Then, you ‘Rebuild
   Unable to copy file <Path to DLL> to “bin\Debug\FileName.dll”. The process cannot access the file ‘bin\Debug\FileName.dll’ because it is being used by another process.  
 
 #### <a name="workaround"></a>Workaround
-* If [Visual Studio 2012 Update 3](https://www.microsoft.com/download/details.aspx?id=39305) is installed, you have the following two options:
+* If [Visual Studio 2012 Update 3](https://docs.microsoft.com/en-us/visualstudio/releasenotes/vs2012-update3-vs) is installed, you have the following two options:
   
   * Restart Visual Studio, or
   * Restart the solution. Then, perform only a Build on the solution.  
-* If [Visual Studio 2012 Update 3](https://www.microsoft.com/download/details.aspx?id=39305) is not installed, open Task Manager, click the Processes tab, click the MSBuild.exe process, and then click the End Process button.  
+* If [Visual Studio 2012 Update 3](https://docs.microsoft.com/en-us/visualstudio/releasenotes/vs2012-update3-vs) is not installed, open Task Manager, click the Processes tab, click the MSBuild.exe process, and then click the End Process button.  
 
 ### <a name="routing-to-basichttprelay-endpoints-is-not-supported-from-bridges-and-biztalk-services-portal-if-non-printable-characters-are-promoted-as-http-headers"></a>Routing to BasicHttpRelay endpoints is not supported from bridges and BizTalk Services Portal if non-printable characters are promoted as HTTP headers
 If you use non-printable characters as part of promoted properties for messages, those messages cannot be routed to relay destinations that use the BasicHttpRelay binding. Also, the promoted properties that are available as part of tracking are URL-encoded for blobs and un-encoded for destinations.  
@@ -135,7 +140,7 @@ When using user-defined datatypes, copy the files (.dll) to drive:\Program Files
 > 
 
 ### <a name="restarting-the-biztalk-adapter-service-web-site"></a>Restarting the BizTalk Adapter Service Web Site
-Installing the **BizTalk Adapter Service Runtime*** creates the **BizTalk Adapter Service** web site in IIS that contains the **BAService** application. **BAService** application internally uses relay binding to extend the reach of on-premise service endpoint to the cloud. For a service hosted on-premises, the corresponding relay endpoint will be registered on the Service Bus only when the on-premises service starts.  
+Installing the **BizTalk Adapter Service Runtime*** creates the **BizTalk Adapter Service** web site in IIS that contains the **BAService** application. **BAService** application internally uses relay binding to extend the reach of on-premises service endpoint to the cloud. For a service hosted on-premises, the corresponding relay endpoint will be registered on the Service Bus only when the on-premises service starts.  
 
 If you stop and start an application, the configuration for auto-starting an application is not honored. So when **BAService** is stopped, you must always restart the **BizTalk Adapter Service** web site instead. Do not start or stop the **BAService** application.
 

@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 08/02/2016
 ms.author: hascipio
-ms.openlocfilehash: ac01e109ed97d74b13361b7f5a52fbf7a752ba42
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 12dc81642905cd9449a1032c7ab57298e6b69ba8
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44562839"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44782865"
 ---
 # <a name="deploy-your-offer-to-the-azure-marketplace"></a>Deploy your offer to the Azure Marketplace
 When you are satisfied with your offer (that is, you have tested customer scenarios, marketing content, etc.) and you are ready to launch, request **Push to production** on the **Publish** tab.  
@@ -83,9 +83,6 @@ Once the offer goes live, test the customer scenarios to validate that all the c
 ## <a name="see-also"></a>See also
 * [Getting started: How to publish an offer to the Azure Marketplace](marketplace-publishing-getting-started.md)
 
-[img-pubportal-walkthru-checked]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/marketplace-publishing/media/marketplace-publishing-push-to-production/pubportal-walkthru-checked.png
-[img-pubportal-menu-publish]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/marketplace-publishing/media/marketplace-publishing-push-to-production/pubportal-menu-publish.png
-[img-pubportal-publish-pushproduction]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/marketplace-publishing/media/marketplace-publishing-push-to-production/pubportal-publish-pushproduction.png
-
-
-
+[img-pubportal-walkthru-checked]:media/marketplace-publishing-push-to-production/pubportal-walkthru-checked.png
+[img-pubportal-menu-publish]:media/marketplace-publishing-push-to-production/pubportal-menu-publish.png
+[img-pubportal-publish-pushproduction]:media/marketplace-publishing-push-to-production/pubportal-publish-pushproduction.png

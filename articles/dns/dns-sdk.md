@@ -3,8 +3,8 @@ title: Create DNS zones and record sets in Azure DNS using the .NET SDK | Micros
 description: How to create DNS zones and record sets in Azure DNS by using the .NET SDK.
 services: dns
 documentationcenter: na
-author: jtuliani
-manager: carmonm
+author: vhorne
+manager: jeconnoc
 ms.assetid: eed99b87-f4d4-4fbf-a926-263f7e30b884
 ms.service: dns
 ms.devlang: na
@@ -12,13 +12,13 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 09/19/2016
-ms.author: jonatul
-ms.openlocfilehash: c0fb0be8da1c0ca48a4d43ea027d30a0bc17fe30
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: victorh
+ms.openlocfilehash: 14860ae48e520f86ce9d5bea739605d1a4baf0c7
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44553649"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44775144"
 ---
 # <a name="create-dns-zones-and-record-sets-using-the-net-sdk"></a>Create DNS zones and record sets using the .NET SDK
 
@@ -30,7 +30,7 @@ Typically, programmatic access to Azure resources is granted via a dedicated acc
 
 1. Follow [these instructions](../azure-resource-manager/resource-group-authenticate-service-principal.md) to create a service principal account (the Azure DNS SDK sample project assumes password-based authentication.)
 2. Create a resource group ([here's how](../azure-resource-manager/resource-group-template-deploy-portal.md)).
-3. Use Azure RBAC to grant the service principal account 'DNS Zone Contributor' permissions to the resource group ([here's how](../active-directory/role-based-access-control-configure.md).)
+3. Use Azure RBAC to grant the service principal account 'DNS Zone Contributor' permissions to the resource group ([here's how](../role-based-access-control/role-assignments-portal.md).)
 4. If using the Azure DNS SDK sample project, edit the 'program.cs' file as follows:
 
    * Insert the correct values for the tenantId, clientId (also known as account ID), secret (service principal account password) and subscriptionId as used in step 1.

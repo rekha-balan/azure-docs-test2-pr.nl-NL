@@ -10,17 +10,17 @@ tags: top-support-issue
 ms.assetid: 674b2faf-26d7-4f54-99ea-a9e02ef0eb2f
 ms.service: cloud-services
 ms.devlang: na
-ms.topic: article
+ms.topic: troubleshooting
 ms.tgt_pltfrm: na
 ms.workload: tbd
-ms.date: 4/6/2017
+ms.date: 06/15/2018
 ms.author: v-six
-ms.openlocfilehash: a35f299b29e42b847121158a410a0a2f51848a0e
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 4b4669ecdae474c8926a346ed02f40913cf67265
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44562974"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44775573"
 ---
 # <a name="troubleshoot-cloud-service-roles-that-fail-to-start"></a>Troubleshoot Cloud Service roles that fail to start
 Here are some common problems and solutions related to Azure Cloud Services roles that fail to start.
@@ -40,7 +40,7 @@ There are several recommended methods for investigating these issues.
 ## <a name="diagnose-missing-dll-issues-in-a-web-role"></a>Diagnose missing DLL issues in a web role
 When you navigate to a website that is deployed in a web role, and the browser displays a server error similar to the following, it may indicate that a DLL is missing.
 
-![Server Error in '/' Application.](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cloud-services/media/cloud-services-troubleshoot-roles-that-fail-start/ic503388.png)
+![Server Error in '/' Application.](./media/cloud-services-troubleshoot-roles-that-fail-start/ic503388.png)
 
 ## <a name="diagnose-issues-by-turning-off-custom-errors"></a>Diagnose issues by turning off custom errors
 More complete error information can be viewed by configuring the web.config for the web role to set the custom error mode to Off and redeploying the service.
@@ -63,9 +63,8 @@ Once the service is redeployed, you will see an error message with the name of t
 You can use Remote Desktop to access the role and view more complete error information remotely. Use the following steps to view the errors by using Remote Desktop:
 
 1. Ensure that Azure SDK 1.3 or later is installed.
-2. During the deployment of the solution by using Visual Studio, choose to “Configure Remote Desktop connections…”. For more information on configuring the Remote Desktop connection, see [Using Remote Desktop with Azure Roles](../vs-azure-tools-remote-desktop-roles.md).
-3. In the Microsoft Azure classic portal, once the instance shows a status of **Ready**, click one of the role instances.
-4. Click the **Connect** icon in the **Remote Access** area of the ribbon.
+2. During the deployment of the solution by using Visual Studio, enable Remote Desktop. For more information, see [Enable Remote Desktop Connection for a Role in Azure Cloud Services using Visual Studio](cloud-services-role-enable-remote-desktop-visual-studio.md).
+3. In the Microsoft Azure portal, once the instance shows a status of **Ready**, remote into the instance. For more information on using the remote desktop with Cloud Services, see [Remote into role instances](cloud-services-role-enable-remote-desktop-new-portal.md#remote-into-role-instances).
 5. Sign in to the virtual machine by using the credentials that were specified during the Remote Desktop configuration.
 6. Open a command window.
 7. Type `IPconfig`.
@@ -81,7 +80,7 @@ Navigating to the website will now return more explicit error messages:
 
 For example:
 
-![Explicit Server Error in '/' Application](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cloud-services/media/cloud-services-troubleshoot-roles-that-fail-start/ic503389.png)
+![Explicit Server Error in '/' Application](./media/cloud-services-troubleshoot-roles-that-fail-start/ic503389.png)
 
 ## <a name="diagnose-issues-by-using-the-compute-emulator"></a>Diagnose issues by using the compute emulator
 You can use the Microsoft Azure compute emulator to diagnose and troubleshoot issues of missing dependencies and web.config errors.
@@ -110,7 +109,7 @@ Follow these steps to deploy the service with IntelliTrace enabled:
 7. Locate the exceptions section of the summary. If there are exceptions, the section will be labeled **Exception Data**.
 8. Expand the **Exception Data** and look for **System.IO.FileNotFoundException** errors similar to the following:
 
-![Exception data, missing file, or assembly](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cloud-services/media/cloud-services-troubleshoot-roles-that-fail-start/ic503390.png)
+![Exception data, missing file, or assembly](./media/cloud-services-troubleshoot-roles-that-fail-start/ic503390.png)
 
 ## <a name="address-missing-dlls-and-assemblies"></a>Address missing DLLs and assemblies
 To address missing DLL and assembly errors, follow these steps:
@@ -127,6 +126,3 @@ Once you have verified that all errors have been corrected, you can deploy the s
 View more [troubleshooting articles](https://azure.microsoft.com/documentation/articles/?tag=top-support-issue&product=cloud-services) for cloud services.
 
 To learn how to troubleshoot cloud service role issues by using Azure PaaS computer diagnostics data, see [Kevin Williamson's blog series](http://blogs.msdn.com/b/kwill/archive/2013/08/09/windows-azure-paas-compute-diagnostics-data.aspx).
-
-
-

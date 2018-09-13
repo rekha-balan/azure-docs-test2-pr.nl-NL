@@ -1,33 +1,33 @@
 ---
-title: Start building Batch solutions with Visual Studio project templates - Azure | Microsoft Docs
+title: Build Batch solutions with Visual Studio templates - Azure | Microsoft Docs
 description: Learn how Visual Studio project templates can help you implement and run your compute-intensive workloads on Azure Batch.
 services: batch
 documentationcenter: .net
-author: fayora
-manager: timlt
+author: dlepow
+manager: jeconnoc
 editor: ''
 ms.assetid: 5e041ae2-25af-4882-a79e-3aa63c4bfb20
 ms.service: batch
 ms.devlang: multiple
 ms.topic: article
-ms.tgt_pltfrm: vm-windows
+ms.tgt_pltfrm: ''
 ms.workload: big-compute
 ms.date: 02/27/2017
-ms.author: tamram
+ms.author: danlep
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 4a5f0201ad034f0a6e9aac27f255935737dbd160
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 5a44c249a957050afb500decd094183c71d6ca5e
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44556590"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44790743"
 ---
 # <a name="use-visual-studio-project-templates-to-jump-start-batch-solutions"></a>Use Visual Studio project templates to jump-start Batch solutions
 
 The **Job Manager** and **Task Processor Visual Studio templates** for Batch provide code to help you to implement and run your compute-intensive workloads on Batch with the least amount of effort. This document describes these templates and provides guidance for how to use them.
 
 > [!IMPORTANT]
-> This article discusses only information applicable to these two templates, and assumes that you are familiar with the Batch service and key concepts related to it: pools, compute nodes, jobs and tasks, job manager tasks, environment variables, and other relevant information. You can find more information in [Basics of Azure Batch](batch-technical-overview.md), [Batch feature overview for developers](batch-api-basics.md), and [Get started with the Azure Batch library for .NET](batch-dotnet-get-started.md).
+> This article discusses only information applicable to these two templates, and assumes that you are familiar with the Batch service and key concepts related to it: pools, compute nodes, jobs and tasks, job manager tasks, environment variables, and other relevant information. You can find more information in [Basics of Azure Batch](batch-technical-overview.md) and [Batch feature overview for developers](batch-api-basics.md).
 > 
 > 
 
@@ -439,10 +439,7 @@ parameters.json, and if found it loads it as the parameters dictionary. There ar
 ### <a name="persist-job-and-task-output-to-azure-storage"></a>Persist job and task output to Azure Storage
 Another helpful tool in Batch solution development is [Azure Batch File Conventions][nuget_package]. Use this .NET class library (currently in preview) in your Batch .NET applications to easily store and retrieve task outputs to and from Azure Storage. [Persist Azure Batch job and task output](batch-task-output.md) contains a full discussion of the library and its usage.
 
-### <a name="batch-forum"></a>Batch Forum
-The [Azure Batch Forum][forum] on MSDN is a great place to discuss Batch and ask questions about the service. Head on over for helpful "sticky" posts, and post your questions as they arise while you build your Batch solutions.
 
-[forum]: https://social.msdn.microsoft.com/forums/azure/en-US/home?forum=azurebatch
 [net_jobmanagertask]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.jobmanagertask.aspx
 [github_samples]: https://github.com/Azure/azure-batch-samples
 [nuget_package]: https://www.nuget.org/packages/Microsoft.Azure.Batch.Conventions.Files
@@ -451,9 +448,6 @@ The [Azure Batch Forum][forum] on MSDN is a great place to discuss Batch and ask
 [vs_gallery_templates]: https://go.microsoft.com/fwlink/?linkid=820714
 [vs_find_use_ext]: https://msdn.microsoft.com/library/dd293638.aspx
 
-[diagram01]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/batch/media/batch-visual-studio-templates/diagram01.png
-[solution_explorer01]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/batch/media/batch-visual-studio-templates/solution_explorer01.png
-[solution_explorer02]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/batch/media/batch-visual-studio-templates/solution_explorer02.png
-
-
-
+[diagram01]: ./media/batch-visual-studio-templates/diagram01.png
+[solution_explorer01]: ./media/batch-visual-studio-templates/solution_explorer01.png
+[solution_explorer02]: ./media/batch-visual-studio-templates/solution_explorer02.png

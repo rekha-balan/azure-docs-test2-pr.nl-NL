@@ -3,23 +3,23 @@ title: Azure Security Center and Azure Virtual Machines with Linux | Microsoft D
 description: This document helps you to understand how Azure Security Center can safeguard you Azure Virtual Machines.
 services: security-center
 documentationcenter: na
-author: YuriDio
-manager: swadhwa
+author: terrylan
+manager: mbaldwin
 editor: ''
 ms.assetid: 5fe5a12c-5d25-430c-9d47-df9438b1d7c5
 ms.service: security-center
 ms.devlang: na
-ms.topic: hero-article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 01/03/2017
 ms.author: yurid
-ms.openlocfilehash: bc9c23959549a33ec3f442b660ae620379e7ddf4
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: c3be92f7363430c6c6c93245625c0bfd00f9f94d
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44556559"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44776054"
 ---
 # <a name="azure-security-center-and-azure-virtual-machines-with-linux"></a>Azure Security Center and Azure Virtual Machines with Linux
 [Azure Security Center](https://azure.microsoft.com/services/security-center/) helps you prevent, detect, and respond to threats. It provides integrated security monitoring and policy management across your Azure subscriptions, helps detect threats that might otherwise go unnoticed, and works with a broad ecosystem of security solutions.
@@ -33,7 +33,7 @@ Security Center helps you safeguard virtual machine data in Azure by providing v
 * System security and critical updates that are missing
 * Endpoint protection recommendations
 * Disk encryption validation
-* Network based attacks (only available in [standard version](https://azure.microsoft.com/en-us/pricing/details/security-center/))
+* Network based attacks (only available in [standard version](https://azure.microsoft.com/pricing/details/security-center/))
 
 In addition to helping protect your Azure VMs, Security Center also provides security monitoring and management for Cloud Services, App Services, Virtual Networks, and more. 
 
@@ -54,7 +54,7 @@ Data collection needs to be enabled so that Azure Security Center can gather the
 
 A security policy defines the set of controls which are recommended for resources within the specified subscription or resource group. Before enabling security policy, you must have data collection enabled, Security Center collects data from your virtual machines in order to assess their security state, provide security recommendations, and alert you to threats. In Security Center, you define policies for your Azure subscriptions or resource groups according to your company’s security needs and the type of applications or sensitivity of the data in each subscription. 
 
-![Security policy](https://docstestmedia1.blob.core.windows.net/azure-media/articles/security-center/media/security-center-linux-virtual-machine/security-center-linux-virtual-machine-fig1.png)
+![Security policy](./media/security-center-linux-virtual-machine/security-center-linux-virtual-machine-fig1.png)
 
 > [!NOTE]
 > To learn more about each **Prevention policy** available, see [Set security policies](security-center-policies.md) article.
@@ -82,23 +82,23 @@ After setting a security policy, Security Center analyzes the security state of 
 ## <a name="monitor-security-health"></a>Monitor security health
 After you enable [security policies](security-center-policies.md) for a subscription’s resources, Security Center will analyze the security of your resources to identify potential vulnerabilities.  You can view the security state of your resources, along with any issues in the **Resource security health** blade. When you click **Virtual machines** in the **Resource security** health tile, the **Virtual machines** blade will open with recommendations for your VMs. 
 
-![Security health](https://docstestmedia1.blob.core.windows.net/azure-media/articles/security-center/media/security-center-virtual-machine/security-center-virtual-machine-fig2.png)
+![Security health](./media/security-center-virtual-machine/security-center-virtual-machine-fig2.png)
 
 ## <a name="manage-and-respond-to-security-alerts"></a>Manage and respond to security alerts
 Security Center automatically collects, analyzes, and integrates log data from your Azure resources, the network, and connected partner solutions (like firewall and endpoint protection solutions), to detect real threats and reduce false positives. By leveraging a diverse aggregation of [detection capabilities](security-center-detection-capabilities.md), Security Center is able to generate prioritized security alerts to help you quickly investigate the problem and provide recommendations for how to remediate possible attacks.
 
-![Security alerts](https://docstestmedia1.blob.core.windows.net/azure-media/articles/security-center/media/security-center-virtual-machine/security-center-virtual-machine-fig3.png)
+![Security alerts](./media/security-center-virtual-machine/security-center-virtual-machine-fig3.png)
 
 Select a security alert to learn more about the event(s) that triggered the alert and what, if any, steps you need to take to remediate an attack. Security alerts are grouped by [type](security-center-alerts-type.md) and date.
 
 ## <a name="monitor-security-health"></a>Monitor security health
 After you enable [security policies](security-center-policies.md) for a subscription’s resources, Security Center will analyze the security of your resources to identify potential vulnerabilities.  You can view the security state of your resources, along with any issues in the **Resource security health** blade. When you click **Virtual machines** in the **Resource security** health tile, the **Virtual machines** blade will open with recommendations for your VMs. 
 
-![Security health](https://docstestmedia1.blob.core.windows.net/azure-media/articles/security-center/media/security-center-linux-virtual-machine/security-center-linux-virtual-machine-fig4.png)
+![Security health](./media/security-center-linux-virtual-machine/security-center-linux-virtual-machine-fig4.png)
 
 If you click on this recommendation, you will see more details about the specific actions that should be taken to address those issues. The details will appear in the bottom of the blade, under **Recommendations**. 
 
-![Security health 2](https://docstestmedia1.blob.core.windows.net/azure-media/articles/security-center/media/security-center-linux-virtual-machine/security-center-linux-virtual-machine-fig5.png)
+![Security health 2](./media/security-center-linux-virtual-machine/security-center-linux-virtual-machine-fig5.png)
 
 
 ## <a name="see-also"></a>See also
@@ -107,9 +107,4 @@ To learn more about Security Center, see the following:
 * [Setting security policies in Azure Security Center](security-center-policies.md) -- Learn how to configure security policies for your Azure subscriptions and resource groups.
 * [Managing and responding to security alerts in Azure Security Center](security-center-managing-and-responding-alerts.md) -- Learn how to manage and respond to security alerts.
 * [Azure Security Center FAQ](security-center-faq.md) -- Find frequently asked questions about using the service.
-
-
-
-
-
 

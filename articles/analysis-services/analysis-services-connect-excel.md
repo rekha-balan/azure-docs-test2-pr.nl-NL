@@ -1,53 +1,49 @@
 ---
 title: Connect to Azure Analysis Services with Excel | Microsoft Docs
 description: Learn how to connect to an Azure Analysis Services server by using Excel.
-services: analysis-services
-documentationcenter: ''
 author: minewiskan
-manager: erikre
-editor: ''
-tags: ''
-ms.assetid: ''
-ms.service: analysis-services
-ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: na
-ms.date: 04/12/2017
+manager: kfile
+ms.service: azure-analysis-services
+ms.topic: conceptual
+ms.date: 07/03/2018
 ms.author: owend
-ms.openlocfilehash: 163827e323b728f507459563a1bbd4f39ffbd067
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.reviewer: minewiskan
+ms.openlocfilehash: 807496584acb3f93fccd3495de005792b769b37f
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44563085"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44775521"
 ---
 # <a name="connect-with-excel"></a>Connect with Excel
 
-Once you've created a server in Azure, and deployed a tabular model to it, you're ready to connect and begin exploring data. 
+Once you've created a server, and deployed a tabular model to it, clients can connect and begin exploring data. 
 
+## <a name="before-you-begin"></a>Before you begin
+The account you log in with must belong to a model database role with at least read permissions. To learn more, see [Authentication and user permissions](analysis-services-manage-users.md). 
 
 ## <a name="connect-in-excel"></a>Connect in Excel
 
-Connecting to a server in Excel is supported by using Get Data in Excel 2016 or Power Query in earlier versions. Connecting by using the Import Table Wizard in Power Pivot is not supported. 
+Connecting to a server in Excel is supported by using Get Data in Excel 2016. Connecting by using the Import Table Wizard in Power Pivot is not supported. 
 
 **To connect in Excel 2016**
 
 1. In Excel 2016, on the **Data** ribbon, click **Get External Data** > **From Other Sources** > **From Analysis Services**.
 
-2. In the Data Connection Wizard, in **Server name**, paste the server name from the clipboard. Then, in **Logon credentials**, select **Use the following User Name and Password**, and then type the organizational user name, for example nancy@adventureworks.com, and password.
+2. In the Data Connection Wizard, in **Server name**, enter the server name including protocol and URI. For example, asazure://westcentralus.asazure.windows.net/advworks. Then, in **Logon credentials**, select **Use the following User Name and Password**, and then type the organizational user name, for example nancy@adventureworks.com, and password.
 
-    ![Connect from Excel logon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/analysis-services/media/analysis-services-connect-excel/aas-connect-excel-logon.png)
+    > [!IMPORTANT]
+    > If you log in with a Microsoft Account, Live ID, Yahoo, Gmail, etc., or you are required to sign in with multi-factor authentication, leave the password field blank. You are prompted for a password after clicking Next. 
+
+    ![Connect from Excel logon](./media/analysis-services-connect-excel/aas-connect-excel-logon.png)
 
 3. In **Select Database and Table**, select the database and model or perspective, and then click **Finish**.
    
-    ![Connect from Excel select model](https://docstestmedia1.blob.core.windows.net/azure-media/articles/analysis-services/media/analysis-services-connect-excel/aas-connect-excel-select.png)
+    ![Connect from Excel select model](./media/analysis-services-connect-excel/aas-connect-excel-select.png)
 
 
 ## <a name="see-also"></a>See also
 [Client libraries](analysis-services-data-providers.md)   
 [Manage your server](analysis-services-manage.md)     
-
-
 
 

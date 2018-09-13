@@ -3,7 +3,7 @@ title: Handle Cloud Service lifecycle events | Microsoft Docs
 description: Learn how the lifecycle methods of a Cloud Service role can be used in .NET
 services: cloud-services
 documentationcenter: .net
-author: Thraka
+author: jpconnock
 manager: timlt
 editor: ''
 ms.assetid: 39b30acd-57b9-48b7-a7c4-40ea3430e451
@@ -12,14 +12,14 @@ ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 01/04/2017
-ms.author: adegeo
-ms.openlocfilehash: 857c73d8a3ca1bbcfed6040da5d0acb9b357cda7
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 07/18/2017
+ms.author: jeconnoc
+ms.openlocfilehash: 56f7b5e3b303ce68868f15528d1ec200919b52aa
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44552088"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44778783"
 ---
 # <a name="customize-the-lifecycle-of-a-web-or-worker-role-in-net"></a>Customize the Lifecycle of a Web or Worker role in .NET
 When you create a worker role, you extend the [RoleEntryPoint](https://msdn.microsoft.com/library/azure/microsoft.windowsazure.serviceruntime.roleentrypoint.aspx) class which provides methods for you to override that let you respond to lifecycle events. For web roles this class is optional, so you must use it to respond to lifecycle events.

@@ -2,24 +2,19 @@
 title: Moving data between scaled-out cloud databases | Microsoft Docs
 description: Explains how to manipulate shards and move data via a self-hosted service using elastic database APIs.
 services: sql-database
-documentationcenter: ''
-manager: jhubbard
-author: ddove
-ms.assetid: 204fd902-0397-4185-985a-dea3ed7c7d9f
+manager: craigg
+author: stevestein
 ms.service: sql-database
-ms.custom: multiple databases
-ms.workload: sql-database
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
-ms.date: 10/24/2016
-ms.author: ddove
-ms.openlocfilehash: b0e2e14610212745d33e9c80d7a4c67b37c78aa6
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.custom: scale out apps
+ms.topic: conceptual
+ms.date: 04/01/2018
+ms.author: sstein
+ms.openlocfilehash: 3c68b18a96ae79cd32cd3059eab837e6051847dd
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44550202"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44776184"
 ---
 # <a name="moving-data-between-scaled-out-cloud-databases"></a>Moving data between scaled-out cloud databases
 If you are a Software as a Service developer, and suddenly your app undergoes tremendous demand, you need to accommodate the growth. So you add more databases (shards). How do you redistribute the data to the new databases without disrupting the data integrity? Use the **split-merge tool** to move data from constrained databases to the new databases.  
@@ -213,10 +208,7 @@ You do not need to provision a new metadata database for split-merge to upgrade.
 
 <!--Anchors-->
 <!--Image references-->
-[1]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-database/media/sql-database-elastic-scale-overview-split-and-merge/split-merge-overview.png
-[2]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-database/media/sql-database-elastic-scale-overview-split-and-merge/diagnostics.png
-[3]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-database/media/sql-database-elastic-scale-overview-split-and-merge/diagnostics-config.png
-
-
-
+[1]:./media/sql-database-elastic-scale-overview-split-and-merge/split-merge-overview.png
+[2]:./media/sql-database-elastic-scale-overview-split-and-merge/diagnostics.png
+[3]:./media/sql-database-elastic-scale-overview-split-and-merge/diagnostics-config.png
 

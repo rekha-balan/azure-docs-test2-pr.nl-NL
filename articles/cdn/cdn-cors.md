@@ -14,12 +14,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/23/2017
 ms.author: mazha
-ms.openlocfilehash: 96d992bcb9018782e146e05d225cb46c54f4fb9c
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: f9429e88525e27c0b6bad29d1927d53d05dfbcc8
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44672451"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44785049"
 ---
 # <a name="using-azure-cdn-with-cors"></a>Using Azure CDN with CORS
 ## <a name="what-is-cors"></a>What is CORS?
@@ -48,7 +48,7 @@ There are two types of CORS requests, *simple requests* and *complex requests.*
 
 ### <a name="for-complex-requests"></a>For complex requests:
 
-A complex request is a CORS request where the browser is required to send a *preflight request* (i.e. a preliminary probe) before sending the actual CORS request. The preflight request asks the server permission if the original CORS request can proceed and is an `OPTIONS` request to the same URL.
+A complex request is a CORS request where the browser is required to send a *preflight request* (that is, a preliminary probe) before sending the actual CORS request. The preflight request asks the server permission if the original CORS request can proceed and is an `OPTIONS` request to the same URL.
 
 > [!TIP]
 > For more details on CORS flows and common pitfalls, view the [Guide to CORS for REST APIs](https://www.moesif.com/blog/technical/cors/Authoritative-Guide-to-CORS-Cross-Origin-Resource-Sharing-for-REST-APIs/).
@@ -58,7 +58,7 @@ A complex request is a CORS request where the browser is required to send a *pre
 ## <a name="wildcard-or-single-origin-scenarios"></a>Wildcard or single origin scenarios
 CORS on Azure CDN will work automatically with no additional configuration when the **Access-Control-Allow-Origin** header is set to wildcard (*) or a single origin.  The CDN will cache the first response and subsequent requests will use the same header.
 
-If requests have already been made to the CDN prior to CORS being set on the your origin, you will need to purge content on your endpoint content to reload the content with the **Access-Control-Allow-Origin** header.
+If requests have already been made to the CDN prior to CORS being set on your origin, you will need to purge content on your endpoint content to reload the content with the **Access-Control-Allow-Origin** header.
 
 ## <a name="multiple-origin-scenarios"></a>Multiple origin scenarios
 If you need to allow a specific list of origins to be allowed for CORS, things get a little more complicated. The problem occurs when the CDN caches the **Access-Control-Allow-Origin** header for the first CORS origin.  When a different CORS origin makes a subsequent request, the CDN will serve the cached **Access-Control-Allow-Origin** header, which won't match.  There are several ways to correct this.
@@ -66,9 +66,9 @@ If you need to allow a specific list of origins to be allowed for CORS, things g
 ### <a name="azure-cdn-premium-from-verizon"></a>Azure CDN Premium from Verizon
 The best way to enable this is to use **Azure CDN Premium from Verizon**, which exposes some advanced functionality. 
 
-You'll need to [create a rule](cdn-rules-engine.md) to check the **Origin** header on the request.  If it's a valid origin, your rule will set the **Access-Control-Allow-Origin** header with the origin provided in the request.  If the origin specified in the **Origin** header is not allowed, your rule should omit the **Access-Control-Allow-Origin** header which will cause the browser to reject the request. 
+You'll need to [create a rule](cdn-rules-engine.md) to check the **Origin** header on the request.  If it's a valid origin, your rule will set the **Access-Control-Allow-Origin** header with the origin provided in the request.  If the origin specified in the **Origin** header is not allowed, your rule should omit the **Access-Control-Allow-Origin** header, which will cause the browser to reject the request. 
 
-There are two ways to do this with the rules engine.  In both cases, the **Access-Control-Allow-Origin** header from the file's origin server is completely ignored, the CDN's rules engine completely manages the allowed CORS origins.
+There are two ways to do this with the rules engine. In both cases, the **Access-Control-Allow-Origin** header from the file's origin server is ignored and the CDN's rules engine completely manages the allowed CORS origins.
 
 #### <a name="one-regular-expression-with-all-valid-origins"></a>One regular expression with all valid origins
 In this case, you'll create a regular expression that includes all of the origins you want to allow: 
@@ -76,26 +76,24 @@ In this case, you'll create a regular expression that includes all of the origin
     https?:\/\/(www\.contoso\.com|contoso\.com|www\.microsoft\.com|microsoft.com\.com)$
 
 > [!TIP]
-> **Azure CDN from Verizon** uses [Perl Compatible Regular Expressions](http://pcre.org/) as its engine for regular expressions.  You can use a tool like [Regular Expressions 101](https://regex101.com/) to validate your regular expression.  Note that the "/" character is valid in regular expressions and doesn't need to be escaped, however, escaping that character is considered a best practice and is expected by some regex validators.
+> **Azure CDN Premium from Verizon** uses [Perl Compatible Regular Expressions](http://pcre.org/) as its engine for regular expressions.  You can use a tool like [Regular Expressions 101](https://regex101.com/) to validate your regular expression.  Note that the "/" character is valid in regular expressions and doesn't need to be escaped, however, escaping that character is considered a best practice and is expected by some regex validators.
 > 
 > 
 
 If the regular expression matches, your rule will replace the **Access-Control-Allow-Origin** header (if any) from the origin with the origin that sent the request.  You can also add additional CORS headers, such as **Access-Control-Allow-Methods**.
 
-![Rules example with regular expression](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-cors/cdn-cors-regex.png)
+![Rules example with regular expression](./media/cdn-cors/cdn-cors-regex.png)
 
 #### <a name="request-header-rule-for-each-origin"></a>Request header rule for each origin.
 Rather than regular expressions, you can instead create a separate rule for each origin you wish to allow using the **Request Header Wildcard** [match condition](https://msdn.microsoft.com/library/mt757336.aspx#Anchor_1). As with the regular expression method, the rules engine alone sets the CORS headers. 
 
-![Rules example without regular expression](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-cors/cdn-cors-no-regex.png)
+![Rules example without regular expression](./media/cdn-cors/cdn-cors-no-regex.png)
 
 > [!TIP]
 > In the example above, the use of the wildcard character * tells the rules engine to match both HTTP and HTTPS.
 > 
 > 
 
-### <a name="azure-cdn-standard"></a>Azure CDN Standard
-On Azure CDN Standard profiles, the only mechanism to allow for multiple origins without the use of the wildcard origin is to use [query string caching](cdn-query-string.md).  You need to enable query string setting for the CDN endpoint and then use a unique query string for requests from each allowed domain. Doing this will result in the CDN caching a separate object for each unique query string. This approach is not ideal, however, as it will result in multiple copies of the same file cached on the CDN.  
-
-
+### <a name="azure-cdn-standard-profiles"></a>Azure CDN standard profiles
+On Azure CDN standard profiles (**Azure CDN Standard from Microsoft**, **Azure CDN Standard from Akamai**, and **Azure CDN Standard from Verizon**), the only mechanism to allow for multiple origins without the use of the wildcard origin is to use [query string caching](cdn-query-string.md). Enable the query string setting for the CDN endpoint and then use a unique query string for requests from each allowed domain. Doing so will result in the CDN caching a separate object for each unique query string. This approach is not ideal, however, as it will result in multiple copies of the same file cached on the CDN.  
 

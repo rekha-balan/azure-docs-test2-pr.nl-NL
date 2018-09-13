@@ -3,7 +3,7 @@ title: Azure API Management caching policies | Microsoft Docs
 description: Learn about the caching policies available for use in Azure API Management.
 services: api-management
 documentationcenter: ''
-author: miaojiang
+author: vladvino
 manager: erikre
 editor: ''
 ms.assetid: 8147199c-24d8-439f-b2a9-da28a70a890c
@@ -12,14 +12,14 @@ ms.workload: mobile
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 01/09/2017
+ms.date: 11/27/2017
 ms.author: apimpm
-ms.openlocfilehash: 2a8f012e7e223ef5c1683c8a6c5ecf2f3e96bed8
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: f3734304bdcc4b3f0944ebf568094595eea01a4e
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44549806"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44775170"
 ---
 # <a name="api-management-caching-policies"></a>API Management caching policies
 This topic provides a reference for the following API Management policies. For information on adding and configuring policies, see [Policies in API Management](http://go.microsoft.com/fwlink/?LinkID=398186).  
@@ -29,15 +29,12 @@ This topic provides a reference for the following API Management policies. For i
 -   Response caching policies  
   
     -   [Get from cache](api-management-caching-policies.md#GetFromCache) - Perform cache look up and return a valid cached responses when available.  
-  
     -   [Store to cache](api-management-caching-policies.md#StoreToCache) - Caches responses according to the specified cache control configuration.  
   
 -   Value caching policies  
-  
-    -   [Get value from cache](#GetFromCacheByKey) - Retrieve a cached item by key.  
-  
-    -   [Store value in cache](#StoreToCacheByKey) - Store an item in the cache by key.  
-  
+
+    -   [Get value from cache](#GetFromCacheByKey) - Retrieve a cached item by key. 
+    -   [Store value in cache](#StoreToCacheByKey) - Store an item in the cache by key. 
     -   [Remove value from cache](#RemoveCacheByKey) - Remove an item in the cache by key.  
   
 ##  <a name="GetFromCache"></a> Get from cache  
@@ -55,7 +52,7 @@ This topic provides a reference for the following API Management policies. For i
   <vary-by-header>Accept-Charset</vary-by-header>  
   <!-- should be present in most cases -->  
   <vary-by-header>Authorization</vary-by-header>  
-  <!-- should be present when allow-authorized-response-caching is "true"-->  
+  <!-- should be present when allow-private-response-caching is "true"-->  
   <vary-by-header>header name</vary-by-header>  
   <!-- optional, can repeated several times -->  
   <vary-by-query-parameter>parameter name</vary-by-query-parameter>  
@@ -83,7 +80,7 @@ This topic provides a reference for the following API Management policies. For i
 ```  
   
 #### <a name="example-using-policy-expressions"></a>Example using policy expressions  
- This example shows how to to configure API Management response caching duration that matches the response caching of the backend service as specified by the backed service's `Cache-Control` directive. For a demonstration of configuring and using this policy, see [Cloud Cover Episode 177: More API Management Features with Vlad Vinogradsky](https://azure.microsoft.com/documentation/videos/episode-177-more-api-management-features-with-vlad-vinogradsky/) and fast-forward to 25:25.  
+ This example shows how to configure API Management response caching duration that matches the response caching of the backend service as specified by the backed service's `Cache-Control` directive. For a demonstration of configuring and using this policy, see [Cloud Cover Episode 177: More API Management Features with Vlad Vinogradsky](https://azure.microsoft.com/documentation/videos/episode-177-more-api-management-features-with-vlad-vinogradsky/) and fast-forward to 25:25.  
   
 ```xml  
 <!-- The following cache policy snippets demonstrate how to control API Management reponse cache duration with Cache-Control headers sent by the backend service. -->  
@@ -120,14 +117,13 @@ This topic provides a reference for the following API Management policies. For i
 |allow-private-response-caching|When set to `true`, allows caching of requests that contain an Authorization header.|No|false|  
 |downstream-caching-type|This attribute must be set to one of the following values.<br /><br /> -   none - downstream caching is not allowed.<br />-   private - downstream private caching is allowed.<br />-   public - private and shared downstream caching is allowed.|No|none|  
 |must-revalidate|When downstream caching is enabled this attribute turns on or off  the `must-revalidate` cache control directive in gateway responses.|No|true|  
-|vary-by-developer|Set to `true` to cache responses per developer key.|No|false|  
-|vary-by-developer-groups|Set to `true` to cache responses per user role.|No|false|  
+|vary-by-developer|Set to `true` to cache responses per developer key.|Yes||  
+|vary-by-developer-groups|Set to `true` to cache responses per user role.|Yes||  
   
 ### <a name="usage"></a>Usage  
  This policy can be used in the following policy [sections](http://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) and [scopes](http://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes).  
   
 -   **Policy sections:** inbound  
-  
 -   **Policy scopes:** API, operation, product  
   
 ##  <a name="StoreToCache"></a> Store to cache  
@@ -162,7 +158,7 @@ This topic provides a reference for the following API Management policies. For i
 ```  
   
 #### <a name="example-using-policy-expressions"></a>Example using policy expressions  
- This example shows how to to configure API Management response caching duration that matches the response caching of the backend service as specified by the backed service's `Cache-Control` directive. For a demonstration of configuring and using this policy, see [Cloud Cover Episode 177: More API Management Features with Vlad Vinogradsky](https://azure.microsoft.com/documentation/videos/episode-177-more-api-management-features-with-vlad-vinogradsky/) and fast-forward to 25:25.  
+ This example shows how to configure API Management response caching duration that matches the response caching of the backend service as specified by the backed service's `Cache-Control` directive. For a demonstration of configuring and using this policy, see [Cloud Cover Episode 177: More API Management Features with Vlad Vinogradsky](https://azure.microsoft.com/documentation/videos/episode-177-more-api-management-features-with-vlad-vinogradsky/) and fast-forward to 25:25.  
   
 ```xml  
 <!-- The following cache policy snippets demonstrate how to control API Management reponse cache duration with Cache-Control headers sent by the backend service. -->  
@@ -199,8 +195,7 @@ This topic provides a reference for the following API Management policies. For i
 ### <a name="usage"></a>Usage  
  This policy can be used in the following policy [sections](http://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) and [scopes](http://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes).  
   
--   **Policy sections:** outbound  
-  
+-   **Policy sections:** outbound    
 -   **Policy scopes:** API, operation, product  
   
 ##  <a name="GetFromCacheByKey"></a> Get value from cache  
@@ -245,7 +240,6 @@ This topic provides a reference for the following API Management policies. For i
  This policy can be used in the following policy [sections](http://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) and [scopes](http://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes).  
   
 -   **Policy sections:** inbound, outbound, backend, on-error  
-  
 -   **Policy scopes:** global, API, operation, product  
   
 ##  <a name="StoreToCacheByKey"></a> Store value in cache  
@@ -288,11 +282,10 @@ This topic provides a reference for the following API Management policies. For i
  This policy can be used in the following policy [sections](http://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) and [scopes](http://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes).  
   
 -   **Policy sections:** inbound, outbound, backend, on-error  
-  
 -   **Policy scopes:** global, API, operation, product  
   
 ###  <a name="RemoveCacheByKey"></a> Remove value from cache  
- The             `cache-remove-value` deletes a cached item identified by its key. The key can have an arbitrary string value and is typically provided using a policy expression.  
+The             `cache-remove-value` deletes a cached item identified by its key. The key can have an arbitrary string value and is typically provided using a policy expression.  
   
 #### <a name="policy-statement"></a>Policy statement  
   
@@ -326,9 +319,13 @@ This topic provides a reference for the following API Management policies. For i
  This policy can be used in the following policy                    [sections](http://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) and                   [scopes](http://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes) .  
   
 -   **Policy sections:** inbound, outbound, backend, on-error  
-  
 -   **Policy scopes:** global, API, operation, product  
-  
 
 ## <a name="next-steps"></a>Next steps
-For more information working with policies, see [Policies in API Management](api-management-howto-policies.md).  
+
+For more information working with policies, see:
+
++ [Policies in API Management](api-management-howto-policies.md)
++ [Transform APIs](transform-api.md)
++ [Policy Reference](api-management-policy-reference.md) for a full list of policy statements and their settings
++ [Policy samples](policy-samples.md)   

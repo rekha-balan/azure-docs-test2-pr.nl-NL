@@ -1,10 +1,10 @@
 ---
-title: Azure Active Directory hybrid identity design considerations - determine access control requirements| Microsoft Docs
+title: Hybrid identity design access control requirements Azure | Microsoft Docs
 description: Covers the pillars of identity, and identifying access requirements for resources for users in a hybrid environment.
 documentationcenter: ''
 services: active-directory
 author: billmath
-manager: femila
+manager: mtillman
 editor: ''
 ms.assetid: e3b3b984-0d15-4654-93be-a396324b9f5e
 ms.service: active-directory
@@ -12,24 +12,26 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 02/14/2017
+ms.date: 05/30/2018
+ms.component: hybrid
 ms.author: billmath
-ms.openlocfilehash: f0121aa9e78291f2d533f85331fbb0e06e1cc1bc
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.custom: seohack1
+ms.openlocfilehash: 3a61e7ab4c738f6cba17bcc74c3bfd335378ab83
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44660579"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44779134"
 ---
 # <a name="determine-access-control-requirements-for-your-hybrid-identity-solution"></a>Determine access control requirements for your hybrid identity solution
-When an organization is designing their hybrid identity solution they can also use this opportunity to review access requirements for the resources that they are planning to make it available for users. The data access cross all four pillars of identity, which are:
+When an organization is designing their hybrid identity solution, they can also use this opportunity to review access requirements for the resources that they are planning to make it available for users. The data access cross all four pillars of identity, which are:
 
 * Administration
 * Authentication
 * Authorization
 * Auditing
 
-The sections that follows will cover authentication and authorization in more details, administration and auditing are part of the hybrid identity lifecycle. Read [Determine hybrid identity management tasks](active-directory-hybrid-identity-design-considerations-hybrid-id-management-tasks.md) for more information about these capabilities.
+The sections that follow will cover authentication and authorization in more details, administration, and auditing are part of the hybrid identity lifecycle. Read [Determine hybrid identity management tasks](active-directory-hybrid-identity-design-considerations-hybrid-id-management-tasks.md) for more information about these capabilities.
 
 > [!NOTE]
 > Read [The Four Pillars of Identity - Identity Management in the Age of Hybrid IT](http://social.technet.microsoft.com/wiki/contents/articles/15530.the-four-pillars-of-identity-identity-management-in-the-age-of-hybrid-it.aspx) for more information about each one of those pillars.
@@ -41,13 +43,13 @@ There are different scenarios for authentication and authorization, these scenar
 
 * Will your organization authenticate and authorize only users located at their identity management system?
   * Are there any plans for B2B scenarios?
-  * If yes, do you already know which protocols (SAML, OAuth, Kerberos, Tokens or Certificates) will be used to connect both businesses?
+  * If yes, do you already know which protocols (SAML, OAuth, Kerberos, or Certificates) will be used to connect both businesses?
 * Does the hybrid identity solution that you are going to adopt support those protocols?
 
 Another important point to consider is where the authentication repository that will be used by users and partners will be located and the administrative model to be used. Consider the following two core options:
 
-* Centralized: in this model the user’s credentials, policies and administration can be centralized on-premises or in the cloud.
-* Hybrid: in this model the user’s credentials, policies and administration will be centralized on-premises and a replicated in the cloud.
+* Centralized: in this model, the user’s credentials, policies and administration can be centralized on-premises or in the cloud.
+* Hybrid: in this model, the user’s credentials, policies and administration will be centralized on-premises and a replicated in the cloud.
 
 Which model your organization will adopt will vary according to their business requirements, you want to answer the following questions to identify where the identity management system will reside and the administrative mode to use:
 
@@ -58,7 +60,7 @@ Which model your organization will adopt will vary according to their business r
   * If yes, does the adoption of a hybrid identity model affect this process?
 
 ## <a name="access-control"></a>Access Control
-While authentication and authorization are core elements to enable access to corporate data through user’s validation, it is also important to control the level of access that these users will have and the level of access administrators will have over the resources that they are managing. Your hybrid identity solution must be able to provide granular access to resources, delegation and role base access control. Ensure that the following question are answered regarding access control:
+While authentication and authorization are core elements to enable access to corporate data through user’s validation, it is also important to control the level of access that these users will have and the level of access administrators will have over the resources that they are managing. Your hybrid identity solution must be able to provide granular access to resources, delegation, and role base access control. Ensure that the following question is answered regarding access control:
 
 * Does your company have more than one user with elevated privilege to manage your identity system?
   * If yes, does each user need the same access level?

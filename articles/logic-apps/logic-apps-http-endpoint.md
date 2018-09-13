@@ -4,7 +4,7 @@ description: Set up HTTP endpoints to call, trigger, or nest workflows for Azure
 services: logic-apps
 keywords: workflows, HTTP endpoints
 author: jeffhollan
-manager: anneta
+manager: jeconnoc
 editor: ''
 documentationcenter: ''
 ms.assetid: 73ba2a70-03e9-4982-bfc8-ebfaad798bc2
@@ -15,13 +15,13 @@ ms.tgt_pltfrm: na
 ms.workload: integration
 ms.custom: H1Hack27Feb2017
 ms.date: 03/31/2017
-ms.author: jehollan; LADocs
-ms.openlocfilehash: 871f585bc29b5ebfa5456a7332bfc5c22bdd7955
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: klam; LADocs
+ms.openlocfilehash: 9c02a0f540f52007412a850b9d69e337743fc35f
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44660698"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44784308"
 ---
 # <a name="call-trigger-or-nest-workflows-with-http-endpoints-in-logic-apps"></a>Call, trigger, or nest workflows with HTTP endpoints in logic apps
 
@@ -31,12 +31,12 @@ To create HTTP endpoints, you can add these triggers so that your logic apps can
 
 * [Request](../connectors/connectors-native-reqres.md)
 
-* [API Connection Webhook](logic-apps-workflow-actions-triggers.md#api-connection)
+* [API Connection Webhook](../logic-apps/logic-apps-workflow-actions-triggers.md#apiconnection-trigger)
 
-* [HTTP Webhook](../connectors/connectors-native-http.md)
+* [HTTP Webhook](../connectors/connectors-native-webhook.md)
 
    > [!NOTE]
-   > Although our examples use the **Request** trigger, you can use any of the listed HTTP triggers, and all principles identically apply to the other trigger types.
+   > Although these examples use the **Request** trigger, you can use any of the listed HTTP triggers, and all principles identically apply to the other trigger types.
 
 ## <a name="set-up-an-http-endpoint-for-your-logic-app"></a>Set up an HTTP endpoint for your logic app
 
@@ -85,7 +85,7 @@ To create an HTTP endpoint, add a trigger that can receive incoming requests.
     generates this schema:
 
     ```json
-    }
+    {
        "type": "object",
        "properties": {
           "address": {
@@ -97,7 +97,7 @@ To create an HTTP endpoint, add a trigger that can receive incoming requests.
 
 4.  Save your logic app. Under **HTTP POST to this URL**, you should now find a generated callback URL, like this example:
 
-    ![Generated callback URL for endpoint](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-http-endpoint/generated-endpoint-url.png)
+    ![Generated callback URL for endpoint](./media/logic-apps-http-endpoint/generated-endpoint-url.png)
 
     This URL contains a Shared Access Signature (SAS) key in the query parameters that are used for authentication. 
     You can also get the HTTP endpoint URL from your logic app overview in the Azure portal. Under **Trigger History**, select your trigger:
@@ -124,7 +124,7 @@ By default, the **Request** trigger expects an HTTP POST request, but you can us
     > [!NOTE]
     > You can select any other HTTP method, or specify a custom method for your own logic app.
 
-    ![Change HTTP method](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-http-endpoint/change-method.png)
+    ![Change HTTP method](./media/logic-apps-http-endpoint/change-method.png)
 
 ## <a name="accept-parameters-through-your-http-endpoint-url"></a>Accept parameters through your HTTP endpoint URL
 
@@ -139,7 +139,7 @@ When you want your HTTP endpoint URL to accept parameters, customize your trigge
 
 3. Under **Relative path**, specify the relative path for the parameter that your URL should accept, for example, `customers/{customerID}`.
 
-    ![Specify the HTTP method and relative path for parameter](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-http-endpoint/relativeurl.png)
+    ![Specify the HTTP method and relative path for parameter](./media/logic-apps-http-endpoint/relativeurl.png)
 
 4. To use the parameter, add a **Response** action to your logic app. (Under your trigger, choose **New step** > **Add an action** > **Response**) 
 
@@ -148,11 +148,11 @@ When you want your HTTP endpoint URL to accept parameters, customize your trigge
     For example, to return `Hello {customerID}`, update your response's **Body** with `Hello {customerID token}`. 
     The dynamic content list should appear and show the `customerID` token for you to select.
 
-    ![Add parameter to response body](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-http-endpoint/relativeurlresponse.png)
+    ![Add parameter to response body](./media/logic-apps-http-endpoint/relativeurlresponse.png)
 
     Your **Body** should look like this example:
 
-    ![Response body with parameter](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-http-endpoint/relative-url-with-parameter.png)
+    ![Response body with parameter](./media/logic-apps-http-endpoint/relative-url-with-parameter.png)
 
 6. Save your logic app. 
 
@@ -167,6 +167,7 @@ When you want your HTTP endpoint URL to accept parameters, customize your trigge
     `Hello 123456`
 
 <a name="generated-tokens"></a>
+
 ### <a name="tokens-generated-from-json-schemas-for-your-logic-app"></a>Tokens generated from JSON schemas for your logic app
 
 When you provide a JSON schema in your **Request** trigger, the Logic App Designer generates tokens for properties in that schema. You can then use those tokens for passing data through your logic app workflow.
@@ -201,15 +202,18 @@ Here is the complete JSON schema:
 
 You can nest workflows in your logic app by adding other logic apps that can receive requests. To include these logic apps, add the **Azure Logic Apps - Choose a Logic Apps workflow** action to your trigger. You can then select from eligible logic apps.
 
-![Add another logic app](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-http-endpoint/choose-logic-apps-workflow.png)
+![Add another logic app](./media/logic-apps-http-endpoint/choose-logic-apps-workflow.png)
 
 ## <a name="call-or-trigger-logic-apps-through-http-endpoints"></a>Call or trigger logic apps through HTTP endpoints
 
 After you create your HTTP endpoint, you can trigger your logic app through a `POST` method to the full URL. Logic apps have built-in support for direct-access endpoints.
 
+> [!NOTE] 
+> To manually run a logic app at any time, on the Logic App Designer or Logic App Code View toolbar, choose **Run**.
+
 ## <a name="reference-content-from-an-incoming-request"></a>Reference content from an incoming request
 
-If the content's type is `application/json`, you can reference properties from the incoming request. Otherwise, content is treated as a single binary unit that you can pass to other APIs. You can't reference this content inside the workflow without converting that content. For example, if you pass `application/xml` content, you can use `@xpath()` for an XPath extraction, or `@json()` for converting XML to JSON. Learn about [working with content types](../logic-apps/logic-apps-content-type.md).
+If the content's type is `application/json`, you can reference properties from the incoming request. Otherwise, content is treated as a single binary unit that you can pass to other APIs. To reference this content inside the workflow, you must convert that content. For example, if you pass `application/xml` content, you can use `@xpath()` for an XPath extraction, or `@json()` for converting XML to JSON. Learn about [working with content types](../logic-apps/logic-apps-content-type.md).
 
 To get the output from an incoming request, you can use the `@triggerOutputs()` function. The output might look like this example:
 
@@ -235,7 +239,7 @@ You might want to respond to certain requests that start a logic app by returnin
 
 ### <a name="construct-the-response"></a>Construct the response
 
-You can include more than one header and any type of content in the response body. In our example response, the header specifies that the response has content type `application/json`. and the body contains `title` and `name`, based on the JSON schema updated previously for the **Request** trigger.
+You can include more than one header and any type of content in the response body. In the example response, the header specifies that the response has content type `application/json`. and the body contains `title` and `name`, based on the JSON schema updated previously for the **Request** trigger.
 
 ![HTTP Response action][3]
 
@@ -275,6 +279,12 @@ Here's what the JSON schema looks like now for the **Response** action:
 
 A: Azure securely generates logic app callback URLs using a Shared Access Signature (SAS). This signature passes through as a query parameter and must be validated before your logic app can fire. Azure generates the signature using a unique combination of a secret key per logic app, the trigger name, and the operation that's performed. So unless someone has access to the secret logic app key, they cannot generate a valid signature.
 
+   > [!IMPORTANT]
+   > For production and secure systems, we strongly recommend against calling your logic app directly from the browser because:
+   > 
+   > * The shared access key appears in the URL.
+   > * You can't manage secure content policies due to shared domains across Logic App customers.
+
 #### <a name="q-can-i-configure-http-endpoints-further"></a>Q: Can I configure HTTP endpoints further?
 
 A: Yes, HTTP endpoints support more advanced configuration through [**API Management**](../api-management/api-management-key-concepts.md). This service also offers the capability for you to consistently manage all your APIs, including logic apps, set up custom domain names, use more authentication methods, and more, for example:
@@ -309,15 +319,6 @@ To help improve Azure Logic Apps and connectors, vote on or submit ideas at the 
 * [Author logic app definitions](./logic-apps-author-definitions.md)
 * [Handle errors and exceptions](./logic-apps-exception-handling.md)
 
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-http-endpoint/manualtrigger.png
-[2]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-http-endpoint/manualtriggerurl.png
-[3]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-http-endpoint/response.png
-
-
-
-
-
-
-
-
-
+[1]: ./media/logic-apps-http-endpoint/manualtrigger.png
+[2]: ./media/logic-apps-http-endpoint/manualtriggerurl.png
+[3]: ./media/logic-apps-http-endpoint/response.png

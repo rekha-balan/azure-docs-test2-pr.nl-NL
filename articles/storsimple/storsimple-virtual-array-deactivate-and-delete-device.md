@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 11/21/2016
 ms.author: alkohli
-ms.openlocfilehash: 2e5a150be74d22b575c35f8fe89b9a30e658df07
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 8dea36f92b034f8c6cdb6875634848d37f4c6606
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44553591"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44774975"
 ---
 # <a name="deactivate-and-delete-a-storsimple-virtual-array"></a>Deactivate and delete a StorSimple Virtual Array
 
@@ -48,20 +48,20 @@ To deactivate your device, perform the following steps.
 
 1. In your service, go to **Management > Devices**. In the **Devices** blade, click and select the device that you wish to deactivate.
    
-    ![Select device to deactivate](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-deactivate-and-delete-device/deactivate-delete7.png)
+    ![Select device to deactivate](./media/storsimple-virtual-array-deactivate-and-delete-device/deactivate-delete7.png)
 2. In your **Device dashboard** blade, click **… More** and from the list, select **Deactivate**.
    
-    ![Click deactivate](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-deactivate-and-delete-device/deactivate-delete8.png)
+    ![Click deactivate](./media/storsimple-virtual-array-deactivate-and-delete-device/deactivate-delete8.png)
 3. In the **Deactivate** blade, type the device name and then click **Deactivate**. 
    
-    ![Confirm deactivate](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-deactivate-and-delete-device/deactivate-delete1.png)
+    ![Confirm deactivate](./media/storsimple-virtual-array-deactivate-and-delete-device/deactivate-delete1.png)
    
     The deactivate process starts and takes a few minutes to complete.
    
-    ![Deactivate in progress](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-deactivate-and-delete-device/deactivate-delete2.png)
+    ![Deactivate in progress](./media/storsimple-virtual-array-deactivate-and-delete-device/deactivate-delete2.png)
 4. After deactivation, the list of devices refreshes.
    
-    ![Deactivate complete](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-deactivate-and-delete-device/deactivate-delete3.png)
+    ![Deactivate complete](./media/storsimple-virtual-array-deactivate-and-delete-device/deactivate-delete3.png)
    
     You can now delete this device.
 
@@ -76,13 +76,13 @@ To delete the device, perform the following steps.
 1. In your StorSimple Device Manager, go to **Management > Devices**. In the **Devices** blade, select a deactivated device that you wish to delete.
 2. In the **Device dashboard** blade, click **… More** and then click **Delete**.
    
-   ![Select device to delete](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-deactivate-and-delete-device/deactivate-delete4.png)
+   ![Select device to delete](./media/storsimple-virtual-array-deactivate-and-delete-device/deactivate-delete4.png)
 3. In the **Delete** blade, type the name of your device to confirm the deletion and then click **Delete**. Deleting the device does not delete the cloud data associated with the device. 
    
-   ![Confirm delete](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-deactivate-and-delete-device/deactivate-delete5.png) 
+   ![Confirm delete](./media/storsimple-virtual-array-deactivate-and-delete-device/deactivate-delete5.png) 
 4. The deletion starts and takes a few minutes to complete.
    
-   ![Delete in progress](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-deactivate-and-delete-device/deactivate-delete6.png)
+   ![Delete in progress](./media/storsimple-virtual-array-deactivate-and-delete-device/deactivate-delete6.png)
    
     After the device is deleted, you can view the updated list of devices.
 
@@ -91,12 +91,4 @@ To delete the device, perform the following steps.
 * For information on how to fail over, go to [Failover and disaster recovery of your StorSimple Virtual Array](storsimple-virtual-array-failover-dr.md).
 
 * To learn more about how to use the StorSimple Device Manager service, go to [Use the StorSimple Device Manager service to administer your StorSimple Virtual Array](storsimple-virtual-array-manager-service-administration.md). 
-
-
-
-
-
-
-
-
 

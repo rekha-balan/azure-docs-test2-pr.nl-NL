@@ -1,57 +1,46 @@
 ---
-title: How to migrate logic apps to schema version 2015-08-01-preview | Microsoft Docs
-description: You can easily migrate your logic apps to the latest schema version. Just follow these steps.
+title: Migrate apps to latest schema - Azure Logic Apps | Microsoft Docs
+description: How to migrate your logic apps to the latest schema version
 services: logic-apps
-documentationcenter: ''
-author: MSFTMAN
-manager: erikre
-editor: ''
-tags: connectors
-ms.assetid: 3e177e49-fd69-43e9-9b9b-218abb250c31
 ms.service: logic-apps
-ms.workload: integration
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: get-started-article
-ms.date: 08/23/2016
-ms.author: deonhe
-ms.openlocfilehash: f719c1c94ab2c515d572ee3578fc7a29eeadf7d6
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.suite: integration
+author: ecfan
+ms.author: estfan
+ms.assetid: 3e177e49-fd69-43e9-9b9b-218abb250c31
+ms.topic: article
+ms.date: 08/25/2018
+ms.openlocfilehash: 8a6925d79b225a34d980472d4fb3241ab9eb1017
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44564493"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44784061"
 ---
-# <a name="how-to-migrate-logic-apps-to-schema-version-2015-08-01-preview"></a>How to migrate logic apps to schema version 2015-08-01-preview
-To move your existing logic apps to the new schema, do the following:  
+# <a name="migrate-logic-apps-to-latest-schema-version"></a>Migrate logic apps to latest schema version
 
-1. Open your logic app in the Azure portal  
-2. Click Update Schema:
-   
-   ![API Icon][step1]   
-   The Update Schema page displays and provides a link to a document that provide details on the improvements in the new schema: ![API Icon][step2]
+To move your existing logic apps to the newest schema, follow these steps: 
 
-> [!NOTE]
-> When you select **Update Schema**, we automatically run the migration steps and provide the code output for you. You can use this to update your definition, however, ensure you follow good coding practices such as those outlined in the **Best practices** section below.
-> 
-> 
+1. In the [Azure portal](https://portal.azure.com), open your logic app in the Logic App Designer.
 
-## <a name="best-practices-when-migrating-your-logic-apps-to-the-latest-schema-version"></a>Best practices when migrating your Logic apps to the latest schema version:
-* Copy the migrated script to a new Logic App - don't overwrite the old one until you've completed your testing and confirmed the migrated app works as expected.
-* Test your Logic app **before** putting in production
-* After migration completes, start updating your Logic apps to use the [managed APIs](apis-list.md) where possible. For example, you can start using Dropbox v2, whereever you are using DropBox v1.
+2. On your logic app's menu, choose **Overview**. On the toolbar, choose **Update Schema**.
 
-## <a name="whats-next"></a>What's next
-* [Learn how to manually migrate your Logic apps](../logic-apps/logic-apps-schema-2015-08-01.md)
+   > [!NOTE]
+   > When you chooose **Update Schema**, Azure Logic Apps automatically runs the migration steps and provides the code output for you. You can use this output for updating your logic app definition. However, make sure you follow best practices as described in the following **Best practices** section.
 
-<!--Icon references-->
-[step1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/connectors-schema-migration/migrateschema1.png
-[step2]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/connectors-schema-migration/migrateschema2.png
+   ![Update Schema](./media/connectors-schema-migration/update-schema.png)
 
+   The Update Schema page appears and shows a link to a document that describes the improvements in the new schema.
 
+## <a name="best-practices"></a>Best practices
 
+Here are some best practices for migrating your logic apps to the latest schema version:
 
+* Copy the migrated script to a new logic app. Don't overwrite the old version until you complete your testing and confirm that your migrated app works as expected.
 
+* Test your logic app **before** putting in production.
 
+* After you finish migration, start updating your logic apps to use the [managed APIs](../connectors/apis-list.md) where possible. For example, start using Dropbox v2 everywhere that you use DropBox v1.
 
+## <a name="next-steps"></a>Next steps
 
+* Learn how to [manually migrate your Logic apps](../logic-apps/logic-apps-schema-2015-08-01.md)

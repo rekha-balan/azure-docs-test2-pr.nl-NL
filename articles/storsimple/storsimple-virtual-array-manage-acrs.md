@@ -15,12 +15,12 @@ ms.workload: na
 ms.date: 02/27/2017
 ms.author: alkohli
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: c70000cc3ac2c5a2e95104b47ce0982505adb6d1
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 2ce65aa4efba735305208f7a6d761bc2814d1b8f
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44564401"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44780512"
 ---
 # <a name="use-storsimple-device-manager-to-manage-access-control-records-for-storsimple-virtual-array"></a>Use StorSimple Device Manager to manage access control records for StorSimple Virtual Array
 
@@ -28,7 +28,7 @@ ms.locfileid: "44564401"
 
 Access control records (ACRs) allow you to specify which hosts can connect to a volume on the StorSimple Virtual Array (also known as the StorSimple on-premises virtual device). ACRs are set to a specific volume and contain the iSCSI Qualified Names (IQNs) of the hosts. When a host tries to connect to a volume, the device checks the ACR associated with that volume for the IQN name, and if there is a match, then the connection is established. The **Access control records** blade within the **Configuration** section of your Device Manager service displays all the access control records with the corresponding IQNs of the hosts.
 
-![Manage access control records](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-manage-acrs/ova-manage-acrs.png)
+![Manage access control records](./media/storsimple-virtual-array-manage-acrs/ova-manage-acrs.png)
 
 This tutorial explains the following common ACR-related tasks:
 
@@ -76,7 +76,7 @@ Perform the following steps to add an ACR.
    
     6. Click **Add** to add the ACR.  
    
-        ![Add access control records](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-manage-acrs/ova-add-acrs.png)
+        ![Add access control records](./media/storsimple-virtual-array-manage-acrs/ova-add-acrs.png)
 4. The tabular listing is updated to reflect this addition.
 
 ## <a name="edit-an-acr"></a>Edit an ACR
@@ -99,7 +99,7 @@ Perform the following steps to edit an ACR.
    
     2. Click **Save** at the top of the blade to save the modified ACR. You see the following confirmation message:
    
-        ![Edit access control records](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-manage-acrs/ova-edit-acrs.png)
+        ![Edit access control records](./media/storsimple-virtual-array-manage-acrs/ova-edit-acrs.png)
 
 ## <a name="delete-an-access-control-record"></a>Delete an access control record
 
@@ -121,18 +121,13 @@ Perform the following steps to delete an access control record.
 
 3. In the Edit access control records blade, click **Delete**.
    
-    ![Delete ACRS](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-manage-acrs/ova-del-acrs.png)
+    ![Delete ACRS](./media/storsimple-virtual-array-manage-acrs/ova-del-acrs.png)
 
 4. When prompted for confirmation, click **Delete** to continue with the deletion. The tabular listing is updated to reflect the deletion.
    
-   ![Warning message](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-manage-acrs/ova-del-acrs-warning.png)
+   ![Warning message](./media/storsimple-virtual-array-manage-acrs/ova-del-acrs-warning.png)
 
 ## <a name="next-steps"></a>Next steps
 
 * Learn more about [adding volumes and configuring ACRs](storsimple-virtual-array-deploy3-iscsi-setup.md#step-3-add-a-volume).
-
-
-
-
-
 

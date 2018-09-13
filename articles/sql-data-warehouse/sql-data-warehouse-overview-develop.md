@@ -2,31 +2,26 @@
 title: Resources for developing a data warehouse in Azure | Microsoft Docs
 description: Development concepts, design decisions, recommendations and coding techniques for SQL Data Warehouse.
 services: sql-data-warehouse
-documentationcenter: NA
-author: jrowlandjones
-manager: barbkess
-editor: ''
-ms.assetid: 996e3afc-c21c-4e21-b9df-997f953f6dfd
+author: kevinvngo
+manager: craigg
 ms.service: sql-data-warehouse
-ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: data-services
-ms.custom: develop
-ms.date: 10/31/2016
-ms.author: jrj;barbkess
-ms.openlocfilehash: b85a4f09e561e429aa5bf46ec680014487fb40c7
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.topic: conceptual
+ms.component: implement
+ms.date: 08/29/2018
+ms.author: kevinvngo
+ms.reviewer: igorstan
+ms.openlocfilehash: 5cb3b3b261bcb762187b165e297225080b0fee81
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44563714"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44779368"
 ---
 # <a name="design-decisions-and-coding-techniques-for-sql-data-warehouse"></a>Design decisions and coding techniques for SQL Data Warehouse
-Take a look through these development articles to better understand key design decisions, recommendations and coding techniques for SQL Data Warehouse.
+Take a look through these development articles to better understand key design decisions, recommendations, and coding techniques for SQL Data Warehouse.
 
 ## <a name="key-design-decisions"></a>Key design decisions
-The following articles highlight some of the key concepts and design decisions you will need to understand for the development of your distributed data warehouse using SQL Data Warehouse:
+The following articles highlight concepts and design decisions for developing a distributed data warehouse using SQL Data Warehouse:
 
 * [connections][connections]
 * [concurrency][concurrency]
@@ -39,7 +34,7 @@ The following articles highlight some of the key concepts and design decisions y
 * [statistics][statistics]
 
 ## <a name="development-recommendations-and-coding-techniques"></a>Development recommendations and coding techniques
-These articles highlight specific coding techniques, tips and recommendations for developing your SQL Data Warehouse:
+These articles highlight specific coding techniques, tips, and recommendations for developing your SQL Data Warehouse:
 
 * [stored procedures][stored procedures]
 * [labels][labels]
@@ -51,12 +46,12 @@ These articles highlight specific coding techniques, tips and recommendations fo
 * [variable assignment][variable assignment]
 
 ## <a name="next-steps"></a>Next steps
-Once you have been through the development articles take a look through the [Transact-SQL reference][Transact-SQL reference] page for more details on the supported syntax for SQL Data Warehouse.
+For more reference information, see [SQL Data Warehouse T-SQL statements](sql-data-warehouse-reference-tsql-statements.md).
 
 <!--Image references-->
 
 <!--Article references-->
-[concurrency]: ./sql-data-warehouse-develop-concurrency.md
+[concurrency]: ./resource-classes-for-workload-management.md
 [connections]: ./sql-data-warehouse-connect-overview.md
 [CTAS]: ./sql-data-warehouse-develop-ctas.md
 [dynamic SQL]: ./sql-data-warehouse-develop-dynamic-sql.md
@@ -73,7 +68,7 @@ Once you have been through the development articles take a look through the [Tra
 [user-defined schemas]: ./sql-data-warehouse-develop-user-defined-schemas.md
 [variable assignment]: ./sql-data-warehouse-develop-variable-assignment.md
 [views]: ./sql-data-warehouse-develop-views.md
-[Transact-SQL reference]: ./sql-data-warehouse-overview-reference.md
+
 
 <!--MSDN references-->
 [renaming objects]: https://msdn.microsoft.com/library/mt631611.aspx

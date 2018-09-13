@@ -11,17 +11,18 @@ ms.service: azure-resource-manager
 ms.workload: multiple
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 01/09/2017
+ms.topic: conceptual
+ms.date: 04/04/2018
 ms.author: tomfitz
-ms.openlocfilehash: 20dcecc6fade37d74f7e5d6c361257ea8b96dd9e
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 2dcf93a635a8eb0a01ec266d2478b6e5a336ec00
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44553184"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44775586"
 ---
 # <a name="view-activity-logs-to-audit-actions-on-resources"></a>View activity logs to audit actions on resources
+
 Through activity logs, you can determine:
 
 * what operations were taken on the resources in your subscription
@@ -30,41 +31,47 @@ Through activity logs, you can determine:
 * the status of the operation
 * the values of other properties that might help you research the operation
 
-[!INCLUDE [resource-manager-audit-limitations](../../includes/resource-manager-audit-limitations.md)]
+The activity log contains all write operations (PUT, POST, DELETE) performed on your resources. It does not include read operations (GET). For a list of resource actions, see [Azure Resource Manager Resource Provider operations](../role-based-access-control/resource-provider-operations.md). You can use the audit logs to find an error when troubleshooting or to monitor how a user in your organization modified a resource.
+
+Activity logs are retained for 90 days. You can query for any range of dates, as long as the starting date is not more than 90 days in the past.
+
+
 
 You can retrieve information from the activity logs through the portal, PowerShell, Azure CLI, Insights REST API, or [Insights .NET Library](https://www.nuget.org/packages/Microsoft.Azure.Insights/).
 
 ## <a name="portal"></a>Portal
+
 1. To view the activity logs through the portal, select **Monitor**.
    
-    ![select activity logs](https://docstestmedia1.blob.core.windows.net/azure-media/articles/azure-resource-manager/media/resource-group-audit/select-monitor.png)
+    ![select activity logs](./media/resource-group-audit/select-monitor.png)
 
-   Or, to automatically filter the activity log for a particular resource or resource group, select **Activity log** from that resource blade. Notice that the activity log is automatically filtered by the selected resource.
+   Or, to automatically filter the activity log for a particular resource or resource group, select **Activity log**. Notice that the activity log is automatically filtered by the selected resource.
    
-    ![filter by resource](https://docstestmedia1.blob.core.windows.net/azure-media/articles/azure-resource-manager/media/resource-group-audit/filtered-by-resource.png)
-2. In the **Activity Log** blade, you see a summary of recent operations.
+    ![filter by resource](./media/resource-group-audit/filtered-by-resource.png)
+2. In the **Activity Log**, you see a summary of recent operations.
    
-    ![show actions](https://docstestmedia1.blob.core.windows.net/azure-media/articles/azure-resource-manager/media/resource-group-audit/audit-summary.png)
+    ![show actions](./media/resource-group-audit/audit-summary.png)
 3. To restrict the number of operations displayed, select different conditions. For example, the following image shows the **Timespan** and **Event initiated by** fields changed to view the actions taken by a particular user or application for the past month. Select **Apply** to view the results of your query.
    
-    ![set filter options](https://docstestmedia1.blob.core.windows.net/azure-media/articles/azure-resource-manager/media/resource-group-audit/set-filter.png)
+    ![set filter options](./media/resource-group-audit/set-filter.png)
 
 4. If you need to run the query again later, select **Save** and give the query a name.
    
-    ![save query](https://docstestmedia1.blob.core.windows.net/azure-media/articles/azure-resource-manager/media/resource-group-audit/save-query.png)
+    ![save query](./media/resource-group-audit/save-query.png)
 5. To quickly run a query, you can select one of the built-in queries, such as failed deployments.
 
-    ![select query](https://docstestmedia1.blob.core.windows.net/azure-media/articles/azure-resource-manager/media/resource-group-audit/select-quick-query.png)
+    ![select query](./media/resource-group-audit/select-quick-query.png)
 
    The selected query automatically sets the required filter values.
 
-    ![view deployment errors](https://docstestmedia1.blob.core.windows.net/azure-media/articles/azure-resource-manager/media/resource-group-audit/view-failed-deployment.png)   
+    ![view deployment errors](./media/resource-group-audit/view-failed-deployment.png)   
 
 6. Select one of the operations to see a summary of the event.
 
-    ![view operation](https://docstestmedia1.blob.core.windows.net/azure-media/articles/azure-resource-manager/media/resource-group-audit/view-operation.png)  
+    ![view operation](./media/resource-group-audit/view-operation.png)  
 
 ## <a name="powershell"></a>PowerShell
+
 1. To retrieve log entries, run the **Get-AzureRmLog** command. You provide additional parameters to filter the list of entries. If you do not specify a start and end time, entries for the last hour are returned. For example, to retrieve the operations for a resource group during the past hour run:
 
   ```powershell
@@ -133,27 +140,23 @@ You can retrieve information from the activity logs through the portal, PowerShe
 
 
 ## <a name="azure-cli"></a>Azure CLI
-* To retrieve log entries, you run the **azure group log show** command.
+
+To retrieve log entries, run the [az monitor activity-log list](/cli/azure/monitor/activity-log#az-monitor-activity-log-list) command.
 
   ```azurecli
-  azure group log show ExampleGroup --json
+  az monitor activity-log list --resource-group <group name>
   ```
 
 
 ## <a name="rest-api"></a>REST API
+
 The REST operations for working with the activity log are part of the [Insights REST API](https://msdn.microsoft.com/library/azure/dn931943.aspx). To retrieve activity log events, see [List the management events in a subscription](https://msdn.microsoft.com/library/azure/dn931934.aspx).
 
 ## <a name="next-steps"></a>Next steps
+
 * Azure Activity logs can be used with Power BI to gain greater insights about the actions in your subscription. See [View and analyze Azure Activity Logs in Power BI and more](https://azure.microsoft.com/blog/analyze-azure-audit-logs-in-powerbi-more/).
-* To learn about setting security policies, see [Azure Role-based Access Control](../active-directory/role-based-access-control-configure.md).
+* To learn about setting security policies, see [Azure Role-based Access Control](../role-based-access-control/role-assignments-portal.md).
 * To learn about the commands for viewing deployment operations, see [View deployment operations](resource-manager-deployment-operations.md).
 * To learn how to prevent deletions on a resource for all users, see [Lock resources with Azure Resource Manager](resource-group-lock-resources.md).
-
-
-
-
-
-
-
-
+* To see the list of operations available for each Microsoft Azure Resource Manager provider, see [Azure Resource Manager Resource Provider operations](../role-based-access-control/resource-provider-operations.md)
 

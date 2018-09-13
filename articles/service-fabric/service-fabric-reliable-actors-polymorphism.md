@@ -3,23 +3,23 @@ title: Polymorphism in the Reliable Actors framework | Microsoft Docs
 description: Build hierarchies of .NET interfaces and types in the Reliable Actors framework to reuse functionality and API definitions.
 services: service-fabric
 documentationcenter: .net
-author: seanmck
+author: vturecek
 manager: timlt
 editor: vturecek
 ms.assetid: ef0eeff6-32b7-410d-ac69-87cba8b8fd46
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 03/28/2017
-ms.author: seanmck
-ms.openlocfilehash: b399f4f4e6381ac2652ab8c06f1a0aea4b8bcfca
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 11/02/2017
+ms.author: vturecek
+ms.openlocfilehash: cfe47c3b6c6a51aa59e9585c6fde5cc2ee789b2a
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44556019"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44789313"
 ---
 # <a name="polymorphism-in-the-reliable-actors-framework"></a>Polymorphism in the Reliable Actors framework
 The Reliable Actors framework allows you to build actors using many of the same techniques that you would use in object-oriented design. One of those techniques is polymorphism, which allows types and interfaces to inherit from more generalized parents. Inheritance in the Reliable Actors framework generally follows the .NET model with a few additional constraints. In case of Java/Linux, it follows the Java model.
@@ -100,5 +100,4 @@ Note the `ActorService` attribute on the actor type. This attribute tells the Re
 
 <!-- Image references -->
 
-[shapes-interface-hierarchy]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-reliable-actors-polymorphism/Shapes-Interface-Hierarchy.png
-
+[shapes-interface-hierarchy]: ./media/service-fabric-reliable-actors-polymorphism/Shapes-Interface-Hierarchy.png

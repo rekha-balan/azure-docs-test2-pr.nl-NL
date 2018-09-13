@@ -1,0 +1,18 @@
+items:
+- name: Azure
+  tocHref: /azure/
+  topicHref: /azure/index
+  items:
+  - name: Internet of Things
+    tocHref: /azure/iot-fundamentals/
+    topicHref: /azure/iot-fundamentals/
+    items:
+    - name: IoT Hub
+      tocHref: /azure/iot-fundamentals/
+      topicHref: /azure/iot-hub/
+ms.openlocfilehash: 3e3cc24f4598458d8e37697d07222a167e076ece
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44866792"
