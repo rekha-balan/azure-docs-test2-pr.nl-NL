@@ -1,0 +1,52 @@
+---
+title: Azure Multi-Factor Authentication - How it works
+description: Azure Multi-Factor Authentication helps safeguard access to data and applications while meeting user demand for a simple sign-in process. It provides additional security by requiring a second form of authentication and delivers strong authentication via a range of easy verification options.
+services: multi-factor-authentication
+documentationcenter: ''
+author: kgremban
+manager: femila
+editor: curtland
+ms.assetid: d14db902-9afe-4fca-b3a5-4bd54b3d8ec5
+ms.service: multi-factor-authentication
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 02/10/2017
+ms.author: kgremban
+ms.openlocfilehash: d64c7a092e34ffb2942597e599cb0642c862bc7b
+ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 08/02/2018
+ms.locfileid: "44549648"
+---
+# <a name="how-azure-multi-factor-authentication-works"></a><span data-ttu-id="9ca92-104">How Azure Multi-Factor Authentication works</span><span class="sxs-lookup"><span data-stu-id="9ca92-104">How Azure Multi-Factor Authentication works</span></span>
+<span data-ttu-id="9ca92-105">The security of multi-factor authentication lies in its layered approach.</span><span class="sxs-lookup"><span data-stu-id="9ca92-105">The security of multi-factor authentication lies in its layered approach.</span></span> <span data-ttu-id="9ca92-106">Compromising multiple authentication factors presents a significant challenge for attackers.</span><span class="sxs-lookup"><span data-stu-id="9ca92-106">Compromising multiple authentication factors presents a significant challenge for attackers.</span></span> <span data-ttu-id="9ca92-107">Even if an attacker manages to learn the user's password, it is useless without also having possession of the trusted device.</span><span class="sxs-lookup"><span data-stu-id="9ca92-107">Even if an attacker manages to learn the user's password, it is useless without also having possession of the trusted device.</span></span> <span data-ttu-id="9ca92-108">Should the user lose the device, the person who finds it won't be able to use it unless he or she also knows the user's password.</span><span class="sxs-lookup"><span data-stu-id="9ca92-108">Should the user lose the device, the person who finds it won't be able to use it unless he or she also knows the user's password.</span></span>
+
+![Proofup](https://docstestmedia1.blob.core.windows.net/azure-media/articles/multi-factor-authentication/media/multi-factor-authentication-how-it-works/howitworks.png)
+
+<span data-ttu-id="9ca92-110">Azure Multi-Factor Authentication helps safeguard access to data and applications while meeting user demand for a simple sign-in process.</span><span class="sxs-lookup"><span data-stu-id="9ca92-110">Azure Multi-Factor Authentication helps safeguard access to data and applications while meeting user demand for a simple sign-in process.</span></span>  <span data-ttu-id="9ca92-111">It provides additional security by requiring a second form of authentication and delivers strong authentication via a range of easy verification options.</span><span class="sxs-lookup"><span data-stu-id="9ca92-111">It provides additional security by requiring a second form of authentication and delivers strong authentication via a range of easy verification options.</span></span>
+
+<span data-ttu-id="9ca92-112">For detailed information on how it works, see the following video:</span><span class="sxs-lookup"><span data-stu-id="9ca92-112">For detailed information on how it works, see the following video:</span></span>
+
+> [!VIDEO https://channel9.msdn.com/Events/TechEd/Europe/2014/EM-B313/player]
+
+## <a name="methods-available-for-two-step-verification"></a><span data-ttu-id="9ca92-113">Methods available for two-step verification</span><span class="sxs-lookup"><span data-stu-id="9ca92-113">Methods available for two-step verification</span></span>
+<span data-ttu-id="9ca92-114">When a user signs in, an additional verification is sent to the user.</span><span class="sxs-lookup"><span data-stu-id="9ca92-114">When a user signs in, an additional verification is sent to the user.</span></span>  <span data-ttu-id="9ca92-115">The following are a list of methods that can be used for this second verification.</span><span class="sxs-lookup"><span data-stu-id="9ca92-115">The following are a list of methods that can be used for this second verification.</span></span>
+
+| <span data-ttu-id="9ca92-116">Verification Method</span><span class="sxs-lookup"><span data-stu-id="9ca92-116">Verification Method</span></span> | <span data-ttu-id="9ca92-117">Description</span><span class="sxs-lookup"><span data-stu-id="9ca92-117">Description</span></span> |
+| --- | --- |
+| <span data-ttu-id="9ca92-118">Phone Call</span><span class="sxs-lookup"><span data-stu-id="9ca92-118">Phone Call</span></span> |<span data-ttu-id="9ca92-119">A call is placed to a user’s registered phone asking them to verify that they are signing in by pressing the # sign or entering a PIN.</span><span class="sxs-lookup"><span data-stu-id="9ca92-119">A call is placed to a user’s registered phone asking them to verify that they are signing in by pressing the # sign or entering a PIN.</span></span> |
+| <span data-ttu-id="9ca92-120">Text Message</span><span class="sxs-lookup"><span data-stu-id="9ca92-120">Text Message</span></span> |<span data-ttu-id="9ca92-121">A text message will be sent to a user’s mobile phone with a six-digit code.</span><span class="sxs-lookup"><span data-stu-id="9ca92-121">A text message will be sent to a user’s mobile phone with a six-digit code.</span></span>  <span data-ttu-id="9ca92-122">Enter this code in to complete the verification process.</span><span class="sxs-lookup"><span data-stu-id="9ca92-122">Enter this code in to complete the verification process.</span></span> |
+| <span data-ttu-id="9ca92-123">Mobile App Notification</span><span class="sxs-lookup"><span data-stu-id="9ca92-123">Mobile App Notification</span></span> |<span data-ttu-id="9ca92-124">A verification request is sent to a user’s smart phone asking them complete the verification by selecting Verify from the mobile app.</span><span class="sxs-lookup"><span data-stu-id="9ca92-124">A verification request is sent to a user’s smart phone asking them complete the verification by selecting Verify from the mobile app.</span></span> <span data-ttu-id="9ca92-125">This will occur if you selected app notification as your primary verification method.</span><span class="sxs-lookup"><span data-stu-id="9ca92-125">This will occur if you selected app notification as your primary verification method.</span></span>  <span data-ttu-id="9ca92-126">If they receive this when they are not signing in, they can choose to report it as fraud.</span><span class="sxs-lookup"><span data-stu-id="9ca92-126">If they receive this when they are not signing in, they can choose to report it as fraud.</span></span> |
+| <span data-ttu-id="9ca92-127">Mobile app verification code</span><span class="sxs-lookup"><span data-stu-id="9ca92-127">Mobile app verification code</span></span> |<span data-ttu-id="9ca92-128">The mobile app, which is running on a user’s smart phone, displays a 6-digit verification code that changes every 30 seconds.</span><span class="sxs-lookup"><span data-stu-id="9ca92-128">The mobile app, which is running on a user’s smart phone, displays a 6-digit verification code that changes every 30 seconds.</span></span> <span data-ttu-id="9ca92-129">The user finds the most recent code and enters it on the sign-in page to complete the verification process.</span><span class="sxs-lookup"><span data-stu-id="9ca92-129">The user finds the most recent code and enters it on the sign-in page to complete the verification process.</span></span> <span data-ttu-id="9ca92-130">This will occur if you selected a verification code as your primary verification method.</span><span class="sxs-lookup"><span data-stu-id="9ca92-130">This will occur if you selected a verification code as your primary verification method.</span></span> |
+| <span data-ttu-id="9ca92-131">3rd party OATH tokens</span><span class="sxs-lookup"><span data-stu-id="9ca92-131">3rd party OATH tokens</span></span> | <span data-ttu-id="9ca92-132">Azure Multi-Factor Authentication can be configured to accept 3rd party verification methods.</span><span class="sxs-lookup"><span data-stu-id="9ca92-132">Azure Multi-Factor Authentication can be configured to accept 3rd party verification methods.</span></span> |
+
+<span data-ttu-id="9ca92-133">Azure Multi-Factor Authentication provides selectable verification methods for both cloud and server.</span><span class="sxs-lookup"><span data-stu-id="9ca92-133">Azure Multi-Factor Authentication provides selectable verification methods for both cloud and server.</span></span> <span data-ttu-id="9ca92-134">This means that you can choose which methods are available for your users: phone call, text, app notification, or app codes.</span><span class="sxs-lookup"><span data-stu-id="9ca92-134">This means that you can choose which methods are available for your users: phone call, text, app notification, or app codes.</span></span> <span data-ttu-id="9ca92-135">For more information, see [selectable verification methods](multi-factor-authentication-whats-next.md#selectable-verification-methods).</span><span class="sxs-lookup"><span data-stu-id="9ca92-135">For more information, see [selectable verification methods](multi-factor-authentication-whats-next.md#selectable-verification-methods).</span></span>
+
+## <a name="next-steps"></a><span data-ttu-id="9ca92-136">Next steps</span><span class="sxs-lookup"><span data-stu-id="9ca92-136">Next steps</span></span>
+
+- <span data-ttu-id="9ca92-137">Read about the different [versions and consumption methods for Azure Multi-Factor Authentication](multi-factor-authentication-versions-plans.md)</span><span class="sxs-lookup"><span data-stu-id="9ca92-137">Read about the different [versions and consumption methods for Azure Multi-Factor Authentication](multi-factor-authentication-versions-plans.md)</span></span>
+
+- <span data-ttu-id="9ca92-138">Choose whether to deploy Azure MFA [in the cloud or on-premises](multi-factor-authentication-get-started.md)</span><span class="sxs-lookup"><span data-stu-id="9ca92-138">Choose whether to deploy Azure MFA [in the cloud or on-premises](multi-factor-authentication-get-started.md)</span></span>

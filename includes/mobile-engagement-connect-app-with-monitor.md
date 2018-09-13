@@ -1,0 +1,13 @@
+<span data-ttu-id="74559-101">This section shows you how to connect your app to the Mobile Engagement backend by using the Mobile Engagement's real-time monitoring feature.</span><span class="sxs-lookup"><span data-stu-id="74559-101">This section shows you how to connect your app to the Mobile Engagement backend by using the Mobile Engagement's real-time monitoring feature.</span></span> 
+
+1. <span data-ttu-id="74559-102">In your **Azure Mobile Engagement** account, make sure you select the app you wish to monitor and manage in the **Mobile Engagement** portal.</span><span class="sxs-lookup"><span data-stu-id="74559-102">In your **Azure Mobile Engagement** account, make sure you select the app you wish to monitor and manage in the **Mobile Engagement** portal.</span></span> <span data-ttu-id="74559-103">Navigate to your Mobile Engagement portal by clicking the **Engage** button at the bottom.</span><span class="sxs-lookup"><span data-stu-id="74559-103">Navigate to your Mobile Engagement portal by clicking the **Engage** button at the bottom.</span></span> 
+   
+     ![](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/mobile-engagement-connect-app-with-monitor/engage-button.png)
+2. <span data-ttu-id="74559-104">You will land in the Mobile Engagement portal.</span><span class="sxs-lookup"><span data-stu-id="74559-104">You will land in the Mobile Engagement portal.</span></span> <span data-ttu-id="74559-105">If the Monitor tab is not selected, click on the **Monitor**.</span><span class="sxs-lookup"><span data-stu-id="74559-105">If the Monitor tab is not selected, click on the **Monitor**.</span></span>
+3. <span data-ttu-id="74559-106">The monitor is ready to show you any device in real time, which will start your app.</span><span class="sxs-lookup"><span data-stu-id="74559-106">The monitor is ready to show you any device in real time, which will start your app.</span></span>
+4. <span data-ttu-id="74559-107">Start your app now.</span><span class="sxs-lookup"><span data-stu-id="74559-107">Start your app now.</span></span> <span data-ttu-id="74559-108">You should see one session in the monitor if your integration is correct which means that your app is now connected to the Mobile Engagement backend and is sending data to it.</span><span class="sxs-lookup"><span data-stu-id="74559-108">You should see one session in the monitor if your integration is correct which means that your app is now connected to the Mobile Engagement backend and is sending data to it.</span></span>  
+   
+     ![](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/mobile-engagement-connect-app-with-monitor/monitor.png)
+
+
+

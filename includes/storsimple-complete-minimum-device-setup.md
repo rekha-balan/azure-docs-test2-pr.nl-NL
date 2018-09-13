@@ -1,0 +1,47 @@
+<!--author=alkohli last changed: 9/17/15-->
+
+#### <a name="to-complete-the-minimum-storsimple-device-setup"></a><span data-ttu-id="80c21-101">To complete the minimum StorSimple device setup</span><span class="sxs-lookup"><span data-stu-id="80c21-101">To complete the minimum StorSimple device setup</span></span>
+1. <span data-ttu-id="80c21-102">In the **Devices** page, select the device, click the arrow against the device name to go to the specific device page.</span><span class="sxs-lookup"><span data-stu-id="80c21-102">In the **Devices** page, select the device, click the arrow against the device name to go to the specific device page.</span></span> 
+   
+    ![Devices page with device online](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/storsimple-complete-minimum-device-setup/HCS_DevicesPageM-include.png) 
+2. <span data-ttu-id="80c21-104">Click quick start icon ![Quick Start Icon](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/storsimple-complete-minimum-device-setup/HCS_QuickStartIcon-include.png) to access the device quick start page.</span><span class="sxs-lookup"><span data-stu-id="80c21-104">Click quick start icon ![Quick Start Icon](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/storsimple-complete-minimum-device-setup/HCS_QuickStartIcon-include.png) to access the device quick start page.</span></span> <span data-ttu-id="80c21-105">Click **Complete device setup** to start the **Configure device** wizard.</span><span class="sxs-lookup"><span data-stu-id="80c21-105">Click **Complete device setup** to start the **Configure device** wizard.</span></span>
+   
+    ![Device quick start page](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/storsimple-complete-minimum-device-setup/Device_Quick_Start_page_1M.png)
+3. <span data-ttu-id="80c21-107">On the **Basic Settings** page, do the following:</span><span class="sxs-lookup"><span data-stu-id="80c21-107">On the **Basic Settings** page, do the following:</span></span>
+   
+   1. <span data-ttu-id="80c21-108">Supply a **friendly name** for your device.</span><span class="sxs-lookup"><span data-stu-id="80c21-108">Supply a **friendly name** for your device.</span></span> <span data-ttu-id="80c21-109">The default device name reflects information such as the device model and serial number.</span><span class="sxs-lookup"><span data-stu-id="80c21-109">The default device name reflects information such as the device model and serial number.</span></span> <span data-ttu-id="80c21-110">You can assign a friendly name of up to 64 characters to manage your device.</span><span class="sxs-lookup"><span data-stu-id="80c21-110">You can assign a friendly name of up to 64 characters to manage your device.</span></span>
+   2. <span data-ttu-id="80c21-111">Set the **time zone** based on the geographic location in which the device is being deployed.</span><span class="sxs-lookup"><span data-stu-id="80c21-111">Set the **time zone** based on the geographic location in which the device is being deployed.</span></span> <span data-ttu-id="80c21-112">Your device will use this time zone for all scheduled operations.</span><span class="sxs-lookup"><span data-stu-id="80c21-112">Your device will use this time zone for all scheduled operations.</span></span>
+   3. <span data-ttu-id="80c21-113">Under **DNS Settings**, provide an address for your **Secondary DNS Server**.</span><span class="sxs-lookup"><span data-stu-id="80c21-113">Under **DNS Settings**, provide an address for your **Secondary DNS Server**.</span></span> <span data-ttu-id="80c21-114">If you are using IPv6, the field will be populated based on the IPv6 prefix provided in the Windows PowerShell interface.</span><span class="sxs-lookup"><span data-stu-id="80c21-114">If you are using IPv6, the field will be populated based on the IPv6 prefix provided in the Windows PowerShell interface.</span></span> 
+      <span data-ttu-id="80c21-115">If the secondary DNS server is not configured, you will not be allowed to save your device configuration.</span><span class="sxs-lookup"><span data-stu-id="80c21-115">If the secondary DNS server is not configured, you will not be allowed to save your device configuration.</span></span>
+   4. <span data-ttu-id="80c21-116">Under iSCSI enabled interfaces, enable at least one network for iSCSI.</span><span class="sxs-lookup"><span data-stu-id="80c21-116">Under iSCSI enabled interfaces, enable at least one network for iSCSI.</span></span> <span data-ttu-id="80c21-117">At least one network interface needs to be cloud-enabled and one interface needs to be iSCSI-enabled.</span><span class="sxs-lookup"><span data-stu-id="80c21-117">At least one network interface needs to be cloud-enabled and one interface needs to be iSCSI-enabled.</span></span> <span data-ttu-id="80c21-118">DATA 0 is automatically cloud-enabled.</span><span class="sxs-lookup"><span data-stu-id="80c21-118">DATA 0 is automatically cloud-enabled.</span></span>
+      
+      ![StorSimple minimum device setup basic settings](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/storsimple-complete-minimum-device-setup/HCS_MinDeviceSetupBasicSettings1-include.png)
+4. <span data-ttu-id="80c21-120">Click the arrow icon.</span><span class="sxs-lookup"><span data-stu-id="80c21-120">Click the arrow icon.</span></span> ![StorSimple arrow icon](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/storsimple-complete-minimum-device-setup/HCS_ArrowIcon-include.png)
+5. <span data-ttu-id="80c21-122">On the **Network Interfaces** page, provide the fixed IP addresses for Controller 0 and Controller 1.</span><span class="sxs-lookup"><span data-stu-id="80c21-122">On the **Network Interfaces** page, provide the fixed IP addresses for Controller 0 and Controller 1.</span></span> <span data-ttu-id="80c21-123">If the DATA 0 interface was configured for IPv4, the fixed IP addresses need to be provided in the IPv4 format.</span><span class="sxs-lookup"><span data-stu-id="80c21-123">If the DATA 0 interface was configured for IPv4, the fixed IP addresses need to be provided in the IPv4 format.</span></span> <span data-ttu-id="80c21-124">If you provided a prefix for IPv6 configuration, the fixed IP addresses will be populated automatically in these fields.</span><span class="sxs-lookup"><span data-stu-id="80c21-124">If you provided a prefix for IPv6 configuration, the fixed IP addresses will be populated automatically in these fields.</span></span>
+
+    > [!NOTE] 
+    > - <span data-ttu-id="80c21-125">The controller fixed IP addresses need to be free IPs within the subnet accessible by the device IP address.</span><span class="sxs-lookup"><span data-stu-id="80c21-125">The controller fixed IP addresses need to be free IPs within the subnet accessible by the device IP address.</span></span>
+    > - <span data-ttu-id="80c21-126">The fixed IP addresses for the controller are used for servicing the updates to the device, and therefore the fixed IPs must be routable and able to connect to the Internet.</span><span class="sxs-lookup"><span data-stu-id="80c21-126">The fixed IP addresses for the controller are used for servicing the updates to the device, and therefore the fixed IPs must be routable and able to connect to the Internet.</span></span>
+
+    ![StorSimple minimum device setup network interfaces](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/storsimple-complete-minimum-device-setup/HCS_MinDeviceSetupNetworkInterfaces2-include.png)
+
+1. <span data-ttu-id="80c21-128">Click the check icon ![StorSimple check icon](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/storsimple-complete-minimum-device-setup/HCS_CheckIcon-include.png).</span><span class="sxs-lookup"><span data-stu-id="80c21-128">Click the check icon ![StorSimple check icon](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/storsimple-complete-minimum-device-setup/HCS_CheckIcon-include.png).</span></span>
+   <span data-ttu-id="80c21-129">You will return to the device **Quick Start** page.</span><span class="sxs-lookup"><span data-stu-id="80c21-129">You will return to the device **Quick Start** page.</span></span>
+   
+   > [!NOTE]
+   > <span data-ttu-id="80c21-130">You can modify all the other device settings at any time by accessing the **Configure** page.</span><span class="sxs-lookup"><span data-stu-id="80c21-130">You can modify all the other device settings at any time by accessing the **Configure** page.</span></span>
+   > 
+   > 
+
+<span data-ttu-id="80c21-131">![Video available](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/storsimple-complete-minimum-device-setup/Video_icon.png) **Video available**</span><span class="sxs-lookup"><span data-stu-id="80c21-131">![Video available](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/storsimple-complete-minimum-device-setup/Video_icon.png) **Video available**</span></span>
+
+<span data-ttu-id="80c21-132">To watch a video that demonstrates how to complete the minimum device setup, click [here](https://azure.microsoft.com/documentation/videos/minimum-storsimple-device-setup/).</span><span class="sxs-lookup"><span data-stu-id="80c21-132">To watch a video that demonstrates how to complete the minimum device setup, click [here](https://azure.microsoft.com/documentation/videos/minimum-storsimple-device-setup/).</span></span>
+
+
+
+
+
+
+
+
+

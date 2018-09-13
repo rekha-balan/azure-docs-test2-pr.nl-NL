@@ -1,0 +1,8 @@
+#### <a name="to-get-the-storsimple-service-registration-key"></a><span data-ttu-id="d4b99-101">To get the StorSimple service registration key</span><span class="sxs-lookup"><span data-stu-id="d4b99-101">To get the StorSimple service registration key</span></span>
+1. <span data-ttu-id="d4b99-102">On the **StorSimple Manager service** page, click **Registration Key** at the bottom of the page.</span><span class="sxs-lookup"><span data-stu-id="d4b99-102">On the **StorSimple Manager service** page, click **Registration Key** at the bottom of the page.</span></span>
+2. <span data-ttu-id="d4b99-103">You will have to wait for a few minutes while the key is retrieved.</span><span class="sxs-lookup"><span data-stu-id="d4b99-103">You will have to wait for a few minutes while the key is retrieved.</span></span> <span data-ttu-id="d4b99-104">The **Service Registration Key** dialog box appears.</span><span class="sxs-lookup"><span data-stu-id="d4b99-104">The **Service Registration Key** dialog box appears.</span></span>
+   
+   1. <span data-ttu-id="d4b99-105">Locate the **Service Registration Key**.</span><span class="sxs-lookup"><span data-stu-id="d4b99-105">Locate the **Service Registration Key**.</span></span>
+   2. <span data-ttu-id="d4b99-106">Click the copy icon ![](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/storsimple-ova-get-service-registration-key/image6-include.png) to copy the key and save it for later use.</span><span class="sxs-lookup"><span data-stu-id="d4b99-106">Click the copy icon ![](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/storsimple-ova-get-service-registration-key/image6-include.png) to copy the key and save it for later use.</span></span>
+
+

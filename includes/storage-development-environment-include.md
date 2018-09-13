@@ -1,0 +1,86 @@
+## <a name="set-up-your-development-environment"></a><span data-ttu-id="9b77f-101">Set up your development environment</span><span class="sxs-lookup"><span data-stu-id="9b77f-101">Set up your development environment</span></span>
+<span data-ttu-id="9b77f-102">Next, set up your development environment in Visual Studio so you're ready to try the code examples in this guide.</span><span class="sxs-lookup"><span data-stu-id="9b77f-102">Next, set up your development environment in Visual Studio so you're ready to try the code examples in this guide.</span></span>
+
+### <a name="create-a-windows-console-application-project"></a><span data-ttu-id="9b77f-103">Create a Windows console application project</span><span class="sxs-lookup"><span data-stu-id="9b77f-103">Create a Windows console application project</span></span>
+<span data-ttu-id="9b77f-104">In Visual Studio, create a new Windows console application.</span><span class="sxs-lookup"><span data-stu-id="9b77f-104">In Visual Studio, create a new Windows console application.</span></span> <span data-ttu-id="9b77f-105">The following steps show you how to create a console application in Visual Studio 2017, however, the steps are similar in other versions of Visual Studio.</span><span class="sxs-lookup"><span data-stu-id="9b77f-105">The following steps show you how to create a console application in Visual Studio 2017, however, the steps are similar in other versions of Visual Studio.</span></span>
+
+1. <span data-ttu-id="9b77f-106">Select **File** > **New** > **Project**</span><span class="sxs-lookup"><span data-stu-id="9b77f-106">Select **File** > **New** > **Project**</span></span>
+2. <span data-ttu-id="9b77f-107">Select **Installed** > **Templates** > **Visual C#** > **Windows Classic Desktop**</span><span class="sxs-lookup"><span data-stu-id="9b77f-107">Select **Installed** > **Templates** > **Visual C#** > **Windows Classic Desktop**</span></span>
+3. <span data-ttu-id="9b77f-108">Select **Console App (.NET Framework)**</span><span class="sxs-lookup"><span data-stu-id="9b77f-108">Select **Console App (.NET Framework)**</span></span>
+4. <span data-ttu-id="9b77f-109">Enter a name for your application in the **Name:** field</span><span class="sxs-lookup"><span data-stu-id="9b77f-109">Enter a name for your application in the **Name:** field</span></span>
+5. <span data-ttu-id="9b77f-110">Select **OK**</span><span class="sxs-lookup"><span data-stu-id="9b77f-110">Select **OK**</span></span>
+
+![Project creation dialog in Visual Studio](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/storage-development-environment-include/storage-development-environment-include-1.png)
+
+<span data-ttu-id="9b77f-112">All code examples in this tutorial can be added to the `Main()` method of your console application's `Program.cs` file.</span><span class="sxs-lookup"><span data-stu-id="9b77f-112">All code examples in this tutorial can be added to the `Main()` method of your console application's `Program.cs` file.</span></span>
+
+<span data-ttu-id="9b77f-113">You can use the Azure Storage Client Library in any type of .NET application, including an Azure cloud service or web app, and desktop and mobile applications.</span><span class="sxs-lookup"><span data-stu-id="9b77f-113">You can use the Azure Storage Client Library in any type of .NET application, including an Azure cloud service or web app, and desktop and mobile applications.</span></span> <span data-ttu-id="9b77f-114">In this guide, we use a console application for simplicity.</span><span class="sxs-lookup"><span data-stu-id="9b77f-114">In this guide, we use a console application for simplicity.</span></span>
+
+### <a name="use-nuget-to-install-the-required-packages"></a><span data-ttu-id="9b77f-115">Use NuGet to install the required packages</span><span class="sxs-lookup"><span data-stu-id="9b77f-115">Use NuGet to install the required packages</span></span>
+<span data-ttu-id="9b77f-116">There are two packages you need to reference in your project to complete this tutorial:</span><span class="sxs-lookup"><span data-stu-id="9b77f-116">There are two packages you need to reference in your project to complete this tutorial:</span></span>
+
+* <span data-ttu-id="9b77f-117">[Microsoft Azure Storage Client Library for .NET](https://www.nuget.org/packages/WindowsAzure.Storage/): This package provides programmatic access to data resources in your storage account.</span><span class="sxs-lookup"><span data-stu-id="9b77f-117">[Microsoft Azure Storage Client Library for .NET](https://www.nuget.org/packages/WindowsAzure.Storage/): This package provides programmatic access to data resources in your storage account.</span></span>
+* <span data-ttu-id="9b77f-118">[Microsoft Azure Configuration Manager library for .NET](https://www.nuget.org/packages/Microsoft.WindowsAzure.ConfigurationManager/): This package provides a class for parsing a connection string in a configuration file, regardless of where your application is running.</span><span class="sxs-lookup"><span data-stu-id="9b77f-118">[Microsoft Azure Configuration Manager library for .NET](https://www.nuget.org/packages/Microsoft.WindowsAzure.ConfigurationManager/): This package provides a class for parsing a connection string in a configuration file, regardless of where your application is running.</span></span>
+
+<span data-ttu-id="9b77f-119">You can use NuGet to obtain both packages.</span><span class="sxs-lookup"><span data-stu-id="9b77f-119">You can use NuGet to obtain both packages.</span></span> <span data-ttu-id="9b77f-120">Follow these steps:</span><span class="sxs-lookup"><span data-stu-id="9b77f-120">Follow these steps:</span></span>
+
+1. <span data-ttu-id="9b77f-121">Right-click your project in **Solution Explorer** and choose **Manage NuGet Packages**.</span><span class="sxs-lookup"><span data-stu-id="9b77f-121">Right-click your project in **Solution Explorer** and choose **Manage NuGet Packages**.</span></span>
+2. <span data-ttu-id="9b77f-122">Search online for "WindowsAzure.Storage" and click **Install** to install the Storage Client Library and its dependencies.</span><span class="sxs-lookup"><span data-stu-id="9b77f-122">Search online for "WindowsAzure.Storage" and click **Install** to install the Storage Client Library and its dependencies.</span></span>
+3. <span data-ttu-id="9b77f-123">Search online for "WindowsAzure.ConfigurationManager" and click **Install** to install the Azure Configuration Manager.</span><span class="sxs-lookup"><span data-stu-id="9b77f-123">Search online for "WindowsAzure.ConfigurationManager" and click **Install** to install the Azure Configuration Manager.</span></span>
+
+> [!NOTE]
+> <span data-ttu-id="9b77f-124">The Storage Client Library package is also included in the [Azure SDK for .NET](https://azure.microsoft.com/downloads/).</span><span class="sxs-lookup"><span data-stu-id="9b77f-124">The Storage Client Library package is also included in the [Azure SDK for .NET](https://azure.microsoft.com/downloads/).</span></span> <span data-ttu-id="9b77f-125">However, we recommend that you also install the Storage Client Library from NuGet to ensure that you always have the latest version of the client library.</span><span class="sxs-lookup"><span data-stu-id="9b77f-125">However, we recommend that you also install the Storage Client Library from NuGet to ensure that you always have the latest version of the client library.</span></span>
+> 
+> <span data-ttu-id="9b77f-126">The ODataLib dependencies in the Storage Client Library for .NET are resolved by the ODataLib packages available on NuGet, not from WCF Data Services.</span><span class="sxs-lookup"><span data-stu-id="9b77f-126">The ODataLib dependencies in the Storage Client Library for .NET are resolved by the ODataLib packages available on NuGet, not from WCF Data Services.</span></span> <span data-ttu-id="9b77f-127">The ODataLib libraries can be downloaded directly or referenced by your code project through NuGet.</span><span class="sxs-lookup"><span data-stu-id="9b77f-127">The ODataLib libraries can be downloaded directly or referenced by your code project through NuGet.</span></span> <span data-ttu-id="9b77f-128">The specific ODataLib packages used by the Storage Client Library are [OData](http://nuget.org/packages/Microsoft.Data.OData/), [Edm](http://nuget.org/packages/Microsoft.Data.Edm/), and [Spatial](http://nuget.org/packages/System.Spatial/).</span><span class="sxs-lookup"><span data-stu-id="9b77f-128">The specific ODataLib packages used by the Storage Client Library are [OData](http://nuget.org/packages/Microsoft.Data.OData/), [Edm](http://nuget.org/packages/Microsoft.Data.Edm/), and [Spatial](http://nuget.org/packages/System.Spatial/).</span></span> <span data-ttu-id="9b77f-129">While these libraries are used by the Azure Table storage classes, they are required dependencies for programming with the Storage Client Library.</span><span class="sxs-lookup"><span data-stu-id="9b77f-129">While these libraries are used by the Azure Table storage classes, they are required dependencies for programming with the Storage Client Library.</span></span>
+> 
+> 
+
+### <a name="determine-your-target-environment"></a><span data-ttu-id="9b77f-130">Determine your target environment</span><span class="sxs-lookup"><span data-stu-id="9b77f-130">Determine your target environment</span></span>
+<span data-ttu-id="9b77f-131">You have two environment options for running the examples in this guide:</span><span class="sxs-lookup"><span data-stu-id="9b77f-131">You have two environment options for running the examples in this guide:</span></span>
+
+* <span data-ttu-id="9b77f-132">You can run your code against an Azure Storage account in the cloud.</span><span class="sxs-lookup"><span data-stu-id="9b77f-132">You can run your code against an Azure Storage account in the cloud.</span></span> 
+* <span data-ttu-id="9b77f-133">You can run your code against the Azure storage emulator.</span><span class="sxs-lookup"><span data-stu-id="9b77f-133">You can run your code against the Azure storage emulator.</span></span> <span data-ttu-id="9b77f-134">The storage emulator is a local environment that emulates an Azure Storage account in the cloud.</span><span class="sxs-lookup"><span data-stu-id="9b77f-134">The storage emulator is a local environment that emulates an Azure Storage account in the cloud.</span></span> <span data-ttu-id="9b77f-135">The emulator is a free option for testing and debugging your code while your application is under development.</span><span class="sxs-lookup"><span data-stu-id="9b77f-135">The emulator is a free option for testing and debugging your code while your application is under development.</span></span> <span data-ttu-id="9b77f-136">The emulator uses a well-known account and key.</span><span class="sxs-lookup"><span data-stu-id="9b77f-136">The emulator uses a well-known account and key.</span></span> <span data-ttu-id="9b77f-137">For more information, see [Use the Azure Storage Emulator for Development and Testing](../articles/storage/storage-use-emulator.md)</span><span class="sxs-lookup"><span data-stu-id="9b77f-137">For more information, see [Use the Azure Storage Emulator for Development and Testing](../articles/storage/storage-use-emulator.md)</span></span>
+
+<span data-ttu-id="9b77f-138">If you are targeting a storage account in the cloud, copy the primary access key for your storage account from the Azure portal.</span><span class="sxs-lookup"><span data-stu-id="9b77f-138">If you are targeting a storage account in the cloud, copy the primary access key for your storage account from the Azure portal.</span></span> <span data-ttu-id="9b77f-139">For more information, see [View and copy storage access keys](../articles/storage/storage-create-storage-account.md#view-and-copy-storage-access-keys).</span><span class="sxs-lookup"><span data-stu-id="9b77f-139">For more information, see [View and copy storage access keys](../articles/storage/storage-create-storage-account.md#view-and-copy-storage-access-keys).</span></span>
+
+> [!NOTE]
+> <span data-ttu-id="9b77f-140">You can target the storage emulator to avoid incurring any costs associated with Azure Storage.</span><span class="sxs-lookup"><span data-stu-id="9b77f-140">You can target the storage emulator to avoid incurring any costs associated with Azure Storage.</span></span> <span data-ttu-id="9b77f-141">However, if you do choose to target an Azure storage account in the cloud, costs for performing this tutorial will be negligible.</span><span class="sxs-lookup"><span data-stu-id="9b77f-141">However, if you do choose to target an Azure storage account in the cloud, costs for performing this tutorial will be negligible.</span></span>
+> 
+> 
+
+### <a name="configure-your-storage-connection-string"></a><span data-ttu-id="9b77f-142">Configure your storage connection string</span><span class="sxs-lookup"><span data-stu-id="9b77f-142">Configure your storage connection string</span></span>
+<span data-ttu-id="9b77f-143">The Azure Storage Client Library for .NET supports using a storage connection string to configure endpoints and credentials for accessing storage services.</span><span class="sxs-lookup"><span data-stu-id="9b77f-143">The Azure Storage Client Library for .NET supports using a storage connection string to configure endpoints and credentials for accessing storage services.</span></span> <span data-ttu-id="9b77f-144">The best way to maintain your storage connection string is in a configuration file.</span><span class="sxs-lookup"><span data-stu-id="9b77f-144">The best way to maintain your storage connection string is in a configuration file.</span></span> 
+
+<span data-ttu-id="9b77f-145">For more information about connection strings, see [Configure a Connection String to Azure Storage](../articles/storage/storage-configure-connection-string.md).</span><span class="sxs-lookup"><span data-stu-id="9b77f-145">For more information about connection strings, see [Configure a Connection String to Azure Storage](../articles/storage/storage-configure-connection-string.md).</span></span>
+
+> [!NOTE]
+> <span data-ttu-id="9b77f-146">Your storage account key is similar to the root password for your storage account.</span><span class="sxs-lookup"><span data-stu-id="9b77f-146">Your storage account key is similar to the root password for your storage account.</span></span> <span data-ttu-id="9b77f-147">Always be careful to protect your storage account key.</span><span class="sxs-lookup"><span data-stu-id="9b77f-147">Always be careful to protect your storage account key.</span></span> <span data-ttu-id="9b77f-148">Avoid distributing it to other users, hard-coding it, or saving it in a plain-text file that is accessible to others.</span><span class="sxs-lookup"><span data-stu-id="9b77f-148">Avoid distributing it to other users, hard-coding it, or saving it in a plain-text file that is accessible to others.</span></span> <span data-ttu-id="9b77f-149">Regenerate your key using the Azure portal if you believe it may have been compromised.</span><span class="sxs-lookup"><span data-stu-id="9b77f-149">Regenerate your key using the Azure portal if you believe it may have been compromised.</span></span>
+> 
+> 
+
+<span data-ttu-id="9b77f-150">To configure your connection string, open the `app.config` file from Solution Explorer in Visual Studio.</span><span class="sxs-lookup"><span data-stu-id="9b77f-150">To configure your connection string, open the `app.config` file from Solution Explorer in Visual Studio.</span></span> <span data-ttu-id="9b77f-151">Add the contents of the `<appSettings>` element shown below.</span><span class="sxs-lookup"><span data-stu-id="9b77f-151">Add the contents of the `<appSettings>` element shown below.</span></span> <span data-ttu-id="9b77f-152">Replace `account-name` with the name of your storage account, and `account-key` with your account access key:</span><span class="sxs-lookup"><span data-stu-id="9b77f-152">Replace `account-name` with the name of your storage account, and `account-key` with your account access key:</span></span>
+
+```xml
+<configuration>
+    <startup> 
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5.2" />
+    </startup>
+    <appSettings>
+        <add key="StorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=account-name;AccountKey=account-key" />
+    </appSettings>
+</configuration>
+```
+
+<span data-ttu-id="9b77f-153">For example, your configuration setting appears similar to:</span><span class="sxs-lookup"><span data-stu-id="9b77f-153">For example, your configuration setting appears similar to:</span></span>
+
+```xml
+<add key="StorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=storagesample;AccountKey=nYV0gln6fT7mvY+rxu2iWAEyzPKITGkhM88J8HUoyofvK7C6fHcZc2kRZp6cKgYRUM74lHI84L50Iau1+9hPjB==" />
+```
+
+To target the storage emulator, you can use a shortcut that maps to the well-known account name and key. <span data-ttu-id="9b77f-155">In that case, your connection string setting is:</span><span class="sxs-lookup"><span data-stu-id="9b77f-155">In that case, your connection string setting is:</span></span>
+
+```xml
+<add key="StorageConnectionString" value="UseDevelopmentStorage=true;" />
+```
+
+

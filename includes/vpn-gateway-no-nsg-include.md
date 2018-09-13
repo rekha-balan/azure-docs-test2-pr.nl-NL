@@ -1,0 +1,5 @@
+> [!IMPORTANT]
+> <span data-ttu-id="58d31-101">When working with gateway subnets, avoid associating a network security group (NSG) to the gateway subnet.</span><span class="sxs-lookup"><span data-stu-id="58d31-101">When working with gateway subnets, avoid associating a network security group (NSG) to the gateway subnet.</span></span> <span data-ttu-id="58d31-102">Associating a network security group to this subnet may cause your VPN gateway to stop functioning as expected.</span><span class="sxs-lookup"><span data-stu-id="58d31-102">Associating a network security group to this subnet may cause your VPN gateway to stop functioning as expected.</span></span> <span data-ttu-id="58d31-103">For more information about network security groups, see [What is a network security group?](../articles/virtual-network/virtual-networks-nsg.md)</span><span class="sxs-lookup"><span data-stu-id="58d31-103">For more information about network security groups, see [What is a network security group?](../articles/virtual-network/virtual-networks-nsg.md)</span></span>
+> 
+> 
+

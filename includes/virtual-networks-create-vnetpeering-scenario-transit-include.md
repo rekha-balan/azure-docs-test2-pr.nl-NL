@@ -1,0 +1,14 @@
+## <a name="service-chaining---transit-through-peered-vnet"></a><span data-ttu-id="c7181-101">Service Chaining - Transit through peered VNet</span><span class="sxs-lookup"><span data-stu-id="c7181-101">Service Chaining - Transit through peered VNet</span></span>
+<span data-ttu-id="c7181-102">Although the use of system routes facilitates traffic automatically for your deployment, there are cases in which you want to control the routing of packets through a virtual appliance.</span><span class="sxs-lookup"><span data-stu-id="c7181-102">Although the use of system routes facilitates traffic automatically for your deployment, there are cases in which you want to control the routing of packets through a virtual appliance.</span></span>
+<span data-ttu-id="c7181-103">In this scenario, there are two VNets in a subscription, HubVNet and VNet1 as described in the diagram below.</span><span class="sxs-lookup"><span data-stu-id="c7181-103">In this scenario, there are two VNets in a subscription, HubVNet and VNet1 as described in the diagram below.</span></span> <span data-ttu-id="c7181-104">You deploy Network Virtual Appliance(NVA) in VNet HubVNet.</span><span class="sxs-lookup"><span data-stu-id="c7181-104">You deploy Network Virtual Appliance(NVA) in VNet HubVNet.</span></span> <span data-ttu-id="c7181-105">After establishing VNet peering between HubVNet and VNet1, you can set up User Defined Routes and specify the next hop to NVA in the HubVNet.</span><span class="sxs-lookup"><span data-stu-id="c7181-105">After establishing VNet peering between HubVNet and VNet1, you can set up User Defined Routes and specify the next hop to NVA in the HubVNet.</span></span>
+
+![NVA Transit](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/virtual-networks-create-vnetpeering-scenario-transit-include/figure01.PNG)
+
+> [!NOTE]
+> <span data-ttu-id="c7181-107">For the simplicity, assume all VNets here are in the same subscription.</span><span class="sxs-lookup"><span data-stu-id="c7181-107">For the simplicity, assume all VNets here are in the same subscription.</span></span> <span data-ttu-id="c7181-108">But it also works for cross-subscription scenario.</span><span class="sxs-lookup"><span data-stu-id="c7181-108">But it also works for cross-subscription scenario.</span></span>
+> 
+> 
+
+<span data-ttu-id="c7181-109">The key property to enable Transit routing is the "Allow Forwarded Traffic" parameter.</span><span class="sxs-lookup"><span data-stu-id="c7181-109">The key property to enable Transit routing is the "Allow Forwarded Traffic" parameter.</span></span> <span data-ttu-id="c7181-110">This allows accepting and sending traffic from/to the NVA in the peered VNet.</span><span class="sxs-lookup"><span data-stu-id="c7181-110">This allows accepting and sending traffic from/to the NVA in the peered VNet.</span></span>  
+
+

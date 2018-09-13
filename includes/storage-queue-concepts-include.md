@@ -1,0 +1,25 @@
+## <a name="what-is-queue-storage"></a><span data-ttu-id="1c1ea-101">What is Queue Storage?</span><span class="sxs-lookup"><span data-stu-id="1c1ea-101">What is Queue Storage?</span></span>
+<span data-ttu-id="1c1ea-102">Azure Queue storage is a service for storing large numbers of messages that can be accessed from anywhere in the world via authenticated calls using HTTP or HTTPS.</span><span class="sxs-lookup"><span data-stu-id="1c1ea-102">Azure Queue storage is a service for storing large numbers of messages that can be accessed from anywhere in the world via authenticated calls using HTTP or HTTPS.</span></span> <span data-ttu-id="1c1ea-103">A single queue message can be up to 64 KB in size, and a queue can contain millions of messages, up to the total capacity limit of a storage account.</span><span class="sxs-lookup"><span data-stu-id="1c1ea-103">A single queue message can be up to 64 KB in size, and a queue can contain millions of messages, up to the total capacity limit of a storage account.</span></span>
+
+<span data-ttu-id="1c1ea-104">Common uses of Queue storage include:</span><span class="sxs-lookup"><span data-stu-id="1c1ea-104">Common uses of Queue storage include:</span></span>
+
+* <span data-ttu-id="1c1ea-105">Creating a backlog of work to process asynchronously</span><span class="sxs-lookup"><span data-stu-id="1c1ea-105">Creating a backlog of work to process asynchronously</span></span>
+* <span data-ttu-id="1c1ea-106">Passing messages from an Azure web role to an Azure worker role</span><span class="sxs-lookup"><span data-stu-id="1c1ea-106">Passing messages from an Azure web role to an Azure worker role</span></span>
+
+## <a name="queue-service-concepts"></a><span data-ttu-id="1c1ea-107">Queue Service Concepts</span><span class="sxs-lookup"><span data-stu-id="1c1ea-107">Queue Service Concepts</span></span>
+<span data-ttu-id="1c1ea-108">The Queue service contains the following components:</span><span class="sxs-lookup"><span data-stu-id="1c1ea-108">The Queue service contains the following components:</span></span>
+
+![Queue1](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/storage-queue-concepts-include/queue1.png)
+
+* <span data-ttu-id="1c1ea-110">**URL format:** Queues are addressable using the following URL format:</span><span class="sxs-lookup"><span data-stu-id="1c1ea-110">**URL format:** Queues are addressable using the following URL format:</span></span>   
+    <span data-ttu-id="1c1ea-111">http://`<storage account>`.queue.core.windows.net/`<queue>`</span><span class="sxs-lookup"><span data-stu-id="1c1ea-111">http://`<storage account>`.queue.core.windows.net/`<queue>`</span></span> 
+  
+    <span data-ttu-id="1c1ea-112">The following URL addresses a queue in the diagram:</span><span class="sxs-lookup"><span data-stu-id="1c1ea-112">The following URL addresses a queue in the diagram:</span></span>  
+  
+    `http://myaccount.queue.core.windows.net/images-to-download`
+
+* <span data-ttu-id="1c1ea-113">**Storage Account:** All access to Azure Storage is done through a storage account.</span><span class="sxs-lookup"><span data-stu-id="1c1ea-113">**Storage Account:** All access to Azure Storage is done through a storage account.</span></span> <span data-ttu-id="1c1ea-114">See [Azure Storage Scalability and Performance Targets](../articles/storage/storage-scalability-targets.md) for details about storage account capacity.</span><span class="sxs-lookup"><span data-stu-id="1c1ea-114">See [Azure Storage Scalability and Performance Targets](../articles/storage/storage-scalability-targets.md) for details about storage account capacity.</span></span>
+* <span data-ttu-id="1c1ea-115">**Queue:** A queue contains a set of messages.</span><span class="sxs-lookup"><span data-stu-id="1c1ea-115">**Queue:** A queue contains a set of messages.</span></span> <span data-ttu-id="1c1ea-116">All messages must be in a queue.</span><span class="sxs-lookup"><span data-stu-id="1c1ea-116">All messages must be in a queue.</span></span> <span data-ttu-id="1c1ea-117">Note that the queue name must be all lowercase.</span><span class="sxs-lookup"><span data-stu-id="1c1ea-117">Note that the queue name must be all lowercase.</span></span> <span data-ttu-id="1c1ea-118">For information on naming queues, see [Naming Queues and Metadata](https://msdn.microsoft.com/library/azure/dd179349.aspx).</span><span class="sxs-lookup"><span data-stu-id="1c1ea-118">For information on naming queues, see [Naming Queues and Metadata](https://msdn.microsoft.com/library/azure/dd179349.aspx).</span></span>
+* <span data-ttu-id="1c1ea-119">**Message:** A message, in any format, of up to 64 KB.</span><span class="sxs-lookup"><span data-stu-id="1c1ea-119">**Message:** A message, in any format, of up to 64 KB.</span></span> <span data-ttu-id="1c1ea-120">The maximum time that a message can remain in the queue is 7 days.</span><span class="sxs-lookup"><span data-stu-id="1c1ea-120">The maximum time that a message can remain in the queue is 7 days.</span></span>
+
+

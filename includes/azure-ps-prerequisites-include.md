@@ -1,0 +1,6 @@
+## <a name="prerequisite-install-the-azure-powershell-module"></a><span data-ttu-id="4a675-101">Prerequisite: Install the Azure PowerShell Module</span><span class="sxs-lookup"><span data-stu-id="4a675-101">Prerequisite: Install the Azure PowerShell Module</span></span>
+
+<span data-ttu-id="4a675-102">To perform the steps in this article, you'll need to [to install and configure Azure PowerShell](/powershell/azureps-cmdlets-docs) and follow the instructions all the way to the end to sign into Azure and select your subscription.</span><span class="sxs-lookup"><span data-stu-id="4a675-102">To perform the steps in this article, you'll need to [to install and configure Azure PowerShell](/powershell/azureps-cmdlets-docs) and follow the instructions all the way to the end to sign into Azure and select your subscription.</span></span>
+
+> [!NOTE]
+> <span data-ttu-id="4a675-103">If you don't have an Azure account, you'll need one.</span><span class="sxs-lookup"><span data-stu-id="4a675-103">If you don't have an Azure account, you'll need one.</span></span> <span data-ttu-id="4a675-104">Go sign up for a [free trial here](../articles/active-directory/sign-up-organization.md).</span><span class="sxs-lookup"><span data-stu-id="4a675-104">Go sign up for a [free trial here](../articles/active-directory/sign-up-organization.md).</span></span>
