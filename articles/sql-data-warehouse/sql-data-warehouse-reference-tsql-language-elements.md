@@ -1,30 +1,27 @@
 ---
-title: SQL Data Warehouse Transact-SQL language elements | Microsoft Docs
-description: List of links to reference content for the Transact-SQL language elements used for SQL Data Warehouse.
+title: T-SQL language elements - Azure SQL Data Warehouse | Microsoft Docs
+description: Links to the documentation for T-SQL statements supported in Azure SQL Data Warehouse.
 services: sql-data-warehouse
-documentationcenter: NA
-author: barbkess
-manager: jhubbard
-editor: ''
-ms.assetid: ea0b9a3e-e489-458e-addc-cc153e5cc158
+author: twounder
+manager: craigg
 ms.service: sql-data-warehouse
-ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: data-services
-ms.custom: reference
-ms.date: 10/31/2016
-ms.author: barbkess
-ms.openlocfilehash: 604cc41e2a7e0858c6926ef3a2199dfd6ca2943f
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.topic: conceptual
+ms.component: implement
+ms.date: 06/13/2018
+ms.author: mausher
+ms.reviewer: igorstan
+ms.openlocfilehash: d40861650f479f8ef840c5150b2153f461871331
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44550985"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44829309"
 ---
-# <a name="language-elements"></a>Language elements
+# <a name="t-sql-language-elements-supported-in-azure-sql-data-warehouse"></a>T-SQL language elements supported in Azure SQL Data Warehouse
+Links to the documentation for T-SQL language elements supported in Azure SQL Data Warehouse.
+
 ## <a name="core-elements"></a>Core elements
-* [syntax conventions](https://msdn.microsoft.com/library/ms177563.aspx)
+* [syntax conventions](/sql/t-sql/language-elements/transact-sql-syntax-conventions-transact-sql)
 * [object naming rules](https://msdn.microsoft.com/library/ms175874.aspx)
 * [reserved keywords](https://msdn.microsoft.com/library/ms189822.aspx)
 * [collations](https://msdn.microsoft.com/library/ff848763.aspx)
@@ -280,11 +277,5 @@ ms.locfileid: "44550985"
 * [SET XACT_ABORT](https://msdn.microsoft.com/library/ms188792.aspx)
 
 ## <a name="next-steps"></a>Next steps
-For more reference information, see [SQL Data Warehouse reference overview][SQL Data Warehouse reference overview].
+For more reference information, see [T-SQL statements in Azure SQL Data Warehouse](sql-data-warehouse-reference-tsql-statements.md), and [System views in Azure SQL Data Warehouse](sql-data-warehouse-reference-tsql-system-views.md).
 
-<!--Image references-->
-
-<!--Article references-->
-[SQL Data Warehouse reference overview]: sql-data-warehouse-overview-reference.md
-
-<!--MSDN references-->

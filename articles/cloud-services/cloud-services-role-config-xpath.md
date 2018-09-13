@@ -3,7 +3,7 @@ title: Cloud Services Role config XPath cheat sheet | Microsoft Docs
 description: The various XPath settings you can use in the cloud service role config to expose settings as an environment variable.
 services: cloud-services
 documentationcenter: ''
-author: Thraka
+author: jpconnock
 manager: timlt
 editor: ''
 ms.assetid: c51e4493-0643-4d05-bc44-06c76bcbf7d1
@@ -13,13 +13,13 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 04/19/2017
-ms.author: adegeo
-ms.openlocfilehash: fd6efac829d3fd9e2840362b8d2ff423add566d9
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: jeconnoc
+ms.openlocfilehash: 2db63be6c6997840f7409a3ca79f1845f30e4ceb
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44671248"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44829452"
 ---
 # <a name="expose-role-configuration-settings-as-an-environment-variable-with-xpath"></a>Expose role configuration settings as an environment variable with XPath
 In the cloud service worker or web role service definition file, you can expose runtime configuration values as environment variables. The following XPath values are supported (which correspond to API values).
@@ -167,5 +167,5 @@ Learn more about the [ServiceConfiguration.cscfg](cloud-services-model-and-packa
 
 Create a [ServicePackage.cspkg](cloud-services-model-and-package.md#servicepackagecspkg) package.
 
-Enable [remote desktop](cloud-services-role-enable-remote-desktop.md) for a role.
+Enable [remote desktop](cloud-services-role-enable-remote-desktop-new-portal.md) for a role.
 
