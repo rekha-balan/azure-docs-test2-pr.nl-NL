@@ -1,41 +1,42 @@
 ---
-title: Azure Data Lake Store Documentation - Tutorials, API Reference | Microsoft Docs
+title: Azure Data Lake Storage Gen1 Documentation - Tutorials, API Reference | Microsoft Docs
 description: Learn how to set up, manage, and access a hyper-scale, Hadoop-compatible data lake repository for analytics on data of any size, type, and ingestion speed.
 services: data-lake-store
-author: carolz
-manager: carolz
+author: twooley
+manager: twooley
 layout: LandingPage
 ms.assetid: ''
 ms.service: data-lake-store
-ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: landing-page
-ms.date: 01/23/2017
-ms.author: carolz
-ms.openlocfilehash: a108751864870251d7fef0b13667168488efcce4
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.topic: conceptual
+ms.date: 06/27/2018
+ms.author: twooley
+ms.openlocfilehash: dc37a9f514069f49f6188caf2e22c24494d2a272
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44564595"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44776015"
 ---
-# <a name="data-lake-store-documentation"></a>Data Lake Store Documentation
+# <a name="azure-data-lake-storage-gen1-documentation"></a>Azure Data Lake Storage Gen1 Documentation
 
-Learn how to use Data Lake Store to create a hyper-scale, Hadoop-compatible repository for analytics on data of any size, type, and ingestion speed. Tutorials, API references, and other documentation show you how to set up, manage, and access a data lake repository for operational and exploratory analytics.
+Learn how to use Azure Data Lake Storage Gen1 (previously known as Azure Data Lake Store) to create a hyper-scale, Hadoop-compatible repository for analytics on data of any size, type, and ingestion speed. Tutorials, API references, and other documentation show you how to set up, manage, and access a data lake repository for operational and exploratory analytics.
+
+If you're interested in learning about the preview of Data Lake Storage Gen2, see the [product page](https://aka.ms/adlsgen2-product).
 
 <ul class="panelContent cardsFTitle">
     <li>
-        <a href="/azure-nomedia/data-lake-store/data-lake-store-overview">
+        <a href="/azure/data-lake-store/data-lake-store-overview">
         <div class="cardSize">
             <div class="cardPadding">
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/media/index/data-lake-store.svg" alt="" />
+                            <img src="media/index/data-lake-store.svg" alt="" />
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Learn about Azure Data Lake Store</h3>
+                        <h3>Learn about Data Lake Storage Gen1</h3>
                     </div>
                 </div>
             </div>
@@ -49,11 +50,11 @@ Learn how to use Data Lake Store to create a hyper-scale, Hadoop-compatible repo
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/media/index/video-library.svg" alt="" />
+                            <img src="media/index/video-library.svg" alt="" />
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Azure Data Lake Store Video Library</h3>
+                        <h3>Data Lake Storage Gen1 Video Library</h3>
                     </div>
                 </div>
             </div>
@@ -61,17 +62,17 @@ Learn how to use Data Lake Store to create a hyper-scale, Hadoop-compatible repo
         </a>
     </li>
     <li>
-        <a href="/azure-nomedia/data-lake-store/data-lake-store-get-started-portal">
+        <a href="/azure/data-lake-store/data-lake-store-get-started-portal">
         <div class="cardSize">
             <div class="cardPadding">
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/media/index/get-started.svg" alt="" />
+                            <img src="media/index/get-started.svg" alt="" />
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Get Started with Azure Data Lake Store using the Azure portal</h3>
+                        <h3>Get Started with Data Lake Storage Gen1 using the Azure portal</h3>
                     </div>
                 </div>
             </div>
@@ -79,17 +80,17 @@ Learn how to use Data Lake Store to create a hyper-scale, Hadoop-compatible repo
         </a>
     </li>
      <li>
-        <a href="/azure-nomedia/data-lake-store/data-lake-store-get-started-powershell">
+        <a href="/azure/data-lake-store/data-lake-store-get-started-powershell">
         <div class="cardSize">
             <div class="cardPadding">
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/media/index/get-started.svg" alt="" />
+                            <img src="media/index/get-started.svg" alt="" />
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Get Started with Azure Data Lake Store using PowerShell</h3>
+                        <h3>Get Started with Data Lake Storage Gen1 using PowerShell</h3>
                     </div>
                 </div>
             </div>
@@ -97,17 +98,17 @@ Learn how to use Data Lake Store to create a hyper-scale, Hadoop-compatible repo
         </a>
     </li>
      <li>
-        <a href="/azure-nomedia/data-lake-store/data-lake-store-get-started-cli">
+        <a href="/azure/data-lake-store/data-lake-store-get-started-cli">
         <div class="cardSize">
             <div class="cardPadding">
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/media/index/get-started.svg" alt="" />
+                            <img src="media/index/get-started.svg" alt="" />
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Get Started with Azure Data Lake Store using the Azure CLI</h3>
+                        <h3>Get Started with Data Lake Storage Gen1 using the Azure CLI</h3>
                     </div>
                 </div>
             </div>
@@ -115,17 +116,17 @@ Learn how to use Data Lake Store to create a hyper-scale, Hadoop-compatible repo
         </a>
     </li>
     <li>
-        <a href="/azure-nomedia/data-lake-store/data-lake-store-get-started-net-sdk">
+        <a href="/azure/data-lake-store/data-lake-store-get-started-net-sdk">
         <div class="cardSize">
             <div class="cardPadding">
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/media/index/get-started.svg" alt="" />
+                            <img src="media/index/get-started.svg" alt="" />
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Get Started with Azure Data Lake Store using .NET</h3>
+                        <h3>Get Started with Data Lake Storage Gen1 using .NET</h3>
                     </div>
                 </div>
             </div>
@@ -133,17 +134,17 @@ Learn how to use Data Lake Store to create a hyper-scale, Hadoop-compatible repo
         </a>
     </li>
     <li>
-        <a href="/azure-nomedia/data-lake-store/data-lake-store-get-started-java-sdk">
+        <a href="/azure/data-lake-store/data-lake-store-get-started-java-sdk">
         <div class="cardSize">
             <div class="cardPadding">
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/media/index/get-started.svg" alt="" />
+                            <img src="media/index/get-started.svg" alt="" />
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Get Started with Azure Data Lake Store using Java</h3>
+                        <h3>Get Started with Data Lake Storage Gen1 using Java</h3>
                     </div>
                 </div>
             </div>
@@ -151,17 +152,17 @@ Learn how to use Data Lake Store to create a hyper-scale, Hadoop-compatible repo
         </a>
     </li>
      <li>
-        <a href="/azure-nomedia/data-lake-store/data-lake-store-manage-use-nodejs">
+        <a href="/azure/data-lake-store/data-lake-store-manage-use-nodejs">
         <div class="cardSize">
             <div class="cardPadding">
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/https://docstestmedia1.blob.core.windows.net/azure-media/articles/data-lake-store/media/index/get-started.svg" alt="" />
+                            <img src="media/index/get-started.svg" alt="" />
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Get Started with Azure Data Lake Store using Node.js</h3>
+                        <h3>Get Started with Data Lake Storage Gen1 using Node.js</h3>
                     </div>
                 </div>
             </div>
@@ -180,7 +181,7 @@ Learn how to use Data Lake Store to create a hyper-scale, Hadoop-compatible repo
                 <div class="card">
                     <div class="cardText">
                         <h3>Command-Line</h3>
-                        <p><a href="/powershell/resourcemanager/azurerm.datalakestore/v3.1.0/azurerm.datalakestore">PowerShell</a></p>
+                        <p><a href="/powershell/module/azurerm.datalakestore">PowerShell</a></p>
                         <p><a href="/cli/azure/dls">Azure CLI 2.0</a></p>
                     </div>
                 </div>
@@ -193,10 +194,10 @@ Learn how to use Data Lake Store to create a hyper-scale, Hadoop-compatible repo
                 <div class="card">
                     <div class="cardText">
                         <h3>Languages</h3>
-                        <p><a href="/dotnet/api/microsoft.azure.management.datalake.store">.NET</a></p>
+                        <p><a href="/dotnet/api/overview/azure/data-lake-store">.NET</a></p>
                         <p><a href="/java/api/com.microsoft.azure.datalake.store">Java</a></p>
                         <p><a href="https://www.npmjs.com/package/azure-arm-datalake-store">Node.js</a></p>
-                        <p><a href="http://azure-sdk-for-python.readthedocs.io/en/latest/sample_azure-mgmt-datalake-store.html">Python (Account Mgmt.)</a></p>
+                        <p><a href="https://docs.microsoft.com/python/api/azure.mgmt.datalake.store?view=azure-python">Python (Account Mgmt.)</a></p>
                         <p><a href="http://azure-datalake-store.readthedocs.io/en/latest">Python (Filesystem Mgmt.)</a></p>
                     </div>
                 </div>
@@ -216,12 +217,4 @@ Learn how to use Data Lake Store to create a hyper-scale, Hadoop-compatible repo
         </div>
     </li>
 </ul>
-
-
-
-
-
-
-
-
 
