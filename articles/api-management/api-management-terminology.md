@@ -1,0 +1,39 @@
+---
+title: Azure API Management terminology | Microsoft Docs
+description: This article gives definitions for the terms that are specific to API Management.
+services: api-management
+documentationcenter: ''
+author: vladvino
+manager: cfowler
+editor: ''
+ms.service: api-management
+ms.workload: integration
+ms.topic: article
+ms.date: 10/11/2017
+ms.author: apimpm
+ms.openlocfilehash: 81cf34cacdfe37e25d6b745304ab0879245fd8da
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44856901"
+---
+# <a name="terminology"></a><span data-ttu-id="c8dcb-103">Terminology</span><span class="sxs-lookup"><span data-stu-id="c8dcb-103">Terminology</span></span>
+
+<span data-ttu-id="c8dcb-104">This article gives definitions for the terms that are specific to API Management (APIM).</span><span class="sxs-lookup"><span data-stu-id="c8dcb-104">This article gives definitions for the terms that are specific to API Management (APIM).</span></span>
+
+## <a name="term-definitions"></a><span data-ttu-id="c8dcb-105">Term definitions</span><span class="sxs-lookup"><span data-stu-id="c8dcb-105">Term definitions</span></span>
+
+* <span data-ttu-id="c8dcb-106">**Backend API** -  An HTTP service that implements your API and its operations.</span><span class="sxs-lookup"><span data-stu-id="c8dcb-106">**Backend API** -  An HTTP service that implements your API and its operations.</span></span> 
+* <span data-ttu-id="c8dcb-107">**Frontend API**/**APIM API** - An APIM API does not host APIs, it creates facades for your APIs in order to customize the facade according to your needs without touching the back end API.</span><span class="sxs-lookup"><span data-stu-id="c8dcb-107">**Frontend API**/**APIM API** - An APIM API does not host APIs, it creates facades for your APIs in order to customize the facade according to your needs without touching the back end API.</span></span> <span data-ttu-id="c8dcb-108">For more information, see [Import and publish an API](import-and-publish.md).</span><span class="sxs-lookup"><span data-stu-id="c8dcb-108">For more information, see [Import and publish an API](import-and-publish.md).</span></span>
+* <span data-ttu-id="c8dcb-109">**APIM product** -  a product contains one or more APIs as well as a usage quota and the terms of use.</span><span class="sxs-lookup"><span data-stu-id="c8dcb-109">**APIM product** -  a product contains one or more APIs as well as a usage quota and the terms of use.</span></span> <span data-ttu-id="c8dcb-110">You can include a number of APIs and offer them to developers through the Developer portal.</span><span class="sxs-lookup"><span data-stu-id="c8dcb-110">You can include a number of APIs and offer them to developers through the Developer portal.</span></span> <span data-ttu-id="c8dcb-111">For more information, see [Create and publish a product](api-management-howto-add-products.md).</span><span class="sxs-lookup"><span data-stu-id="c8dcb-111">For more information, see [Create and publish a product](api-management-howto-add-products.md).</span></span>
+* <span data-ttu-id="c8dcb-112">**APIM API operation** -  Each APIM API represents a set of operations available to developers.</span><span class="sxs-lookup"><span data-stu-id="c8dcb-112">**APIM API operation** -  Each APIM API represents a set of operations available to developers.</span></span> <span data-ttu-id="c8dcb-113">Each APIM API contains a reference to the back end service that implements the API, and its operations map to the operations implemented by the back end service.</span><span class="sxs-lookup"><span data-stu-id="c8dcb-113">Each APIM API contains a reference to the back end service that implements the API, and its operations map to the operations implemented by the back end service.</span></span> <span data-ttu-id="c8dcb-114">For more information, see [Mock API responses](mock-api-responses.md).</span><span class="sxs-lookup"><span data-stu-id="c8dcb-114">For more information, see [Mock API responses](mock-api-responses.md).</span></span>
+* <span data-ttu-id="c8dcb-115">**Version** - Sometimes you want to publish new or different API features to some users, while others want to stick with the API that currently works for them.</span><span class="sxs-lookup"><span data-stu-id="c8dcb-115">**Version** - Sometimes you want to publish new or different API features to some users, while others want to stick with the API that currently works for them.</span></span> <span data-ttu-id="c8dcb-116">For more information, see [Publish multiple versions of your API](api-management-get-started-publish-versions.md).</span><span class="sxs-lookup"><span data-stu-id="c8dcb-116">For more information, see [Publish multiple versions of your API](api-management-get-started-publish-versions.md).</span></span>
+* <span data-ttu-id="c8dcb-117">**Revision** - When your API is ready to go and starts to be used by developers, you usually need to take care in making changes to that API and at the same time not to disrupt callers of your API.</span><span class="sxs-lookup"><span data-stu-id="c8dcb-117">**Revision** - When your API is ready to go and starts to be used by developers, you usually need to take care in making changes to that API and at the same time not to disrupt callers of your API.</span></span> <span data-ttu-id="c8dcb-118">It's also useful to let developers know about the changes you made.</span><span class="sxs-lookup"><span data-stu-id="c8dcb-118">It's also useful to let developers know about the changes you made.</span></span> <span data-ttu-id="c8dcb-119">For more information, see [Use revisions](api-management-get-started-revise-api.md).</span><span class="sxs-lookup"><span data-stu-id="c8dcb-119">For more information, see [Use revisions](api-management-get-started-revise-api.md).</span></span>
+* <span data-ttu-id="c8dcb-120">**Developer portal** - Your customers (developers) should use the Developer portal to access your APIs.</span><span class="sxs-lookup"><span data-stu-id="c8dcb-120">**Developer portal** - Your customers (developers) should use the Developer portal to access your APIs.</span></span> <span data-ttu-id="c8dcb-121">The Developer portal can be customized.</span><span class="sxs-lookup"><span data-stu-id="c8dcb-121">The Developer portal can be customized.</span></span> <span data-ttu-id="c8dcb-122">For more information, see [Customize the Developer portal](api-management-customize-styles.md).</span><span class="sxs-lookup"><span data-stu-id="c8dcb-122">For more information, see [Customize the Developer portal](api-management-customize-styles.md).</span></span>
+
+## <a name="next-steps"></a><span data-ttu-id="c8dcb-123">Next steps</span><span class="sxs-lookup"><span data-stu-id="c8dcb-123">Next steps</span></span>
+
+> [!div class="nextstepaction"]
+> [<span data-ttu-id="c8dcb-124">Create an instance</span><span class="sxs-lookup"><span data-stu-id="c8dcb-124">Create an instance</span></span>](get-started-create-service-instance.md)
+

@@ -1,0 +1,35 @@
+---
+title: FAQs on Personality Chat - Azure Cognitive Services | Microsoft Docs
+description: FAQs on Personality Chat
+services: cognitive-services
+author: noellelacharite
+manager: nolachar
+ms.service: cognitive-services
+ms.topic: faq
+ms.date: 05/07/2018
+ms.author: nolachar
+comment: As a bot developer, I want my bot to be able to handle small talk in a consistent tone so that my bot appears more complete and conversational.
+ms.openlocfilehash: 5304b25672f9951e004876dfd19af75ea7d86502
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44856745"
+---
+# <a name="frequently-asked-questions"></a><span data-ttu-id="e5d6a-103">Frequently Asked Questions</span><span class="sxs-lookup"><span data-stu-id="e5d6a-103">Frequently Asked Questions</span></span>
+
+## <a name="why-doesnt-this-answer-every-question-i-ask-it-like-other-chat-bots"></a><span data-ttu-id="e5d6a-104">Why doesn't this answer every question I ask it, like other chat bots?</span><span class="sxs-lookup"><span data-stu-id="e5d6a-104">Why doesn't this answer every question I ask it, like other chat bots?</span></span>
+
+<span data-ttu-id="e5d6a-105">Project Personality chat will enhance a bot with common small talk that showcases personality and creates a more complete user experience.</span><span class="sxs-lookup"><span data-stu-id="e5d6a-105">Project Personality chat will enhance a bot with common small talk that showcases personality and creates a more complete user experience.</span></span> <span data-ttu-id="e5d6a-106">It's not designed to carry on long conversations about topics that aren't relevant to the bot's primary function.</span><span class="sxs-lookup"><span data-stu-id="e5d6a-106">It's not designed to carry on long conversations about topics that aren't relevant to the bot's primary function.</span></span> <span data-ttu-id="e5d6a-107">While it could respond to all conversations, it's restricted—in the beta version—to common small talk domains.</span><span class="sxs-lookup"><span data-stu-id="e5d6a-107">While it could respond to all conversations, it's restricted—in the beta version—to common small talk domains.</span></span>
+
+## <a name="how-can-i-customize-the-personality-to-suit-my-brand"></a><span data-ttu-id="e5d6a-108">How can I customize the personality to suit my brand?</span><span class="sxs-lookup"><span data-stu-id="e5d6a-108">How can I customize the personality to suit my brand?</span></span>
+
+<span data-ttu-id="e5d6a-109">Select the closest persona from the available default personas.</span><span class="sxs-lookup"><span data-stu-id="e5d6a-109">Select the closest persona from the available default personas.</span></span> <span data-ttu-id="e5d6a-110">Today, you can take the editorial library and edit the responses to better suit your brand.</span><span class="sxs-lookup"><span data-stu-id="e5d6a-110">Today, you can take the editorial library and edit the responses to better suit your brand.</span></span> <span data-ttu-id="e5d6a-111">In the future, you can upload a sample set of utterances from your chosen personality and find its closest persona ID version.</span><span class="sxs-lookup"><span data-stu-id="e5d6a-111">In the future, you can upload a sample set of utterances from your chosen personality and find its closest persona ID version.</span></span> <span data-ttu-id="e5d6a-112">There are also ways to retrain and customize the model.</span><span class="sxs-lookup"><span data-stu-id="e5d6a-112">There are also ways to retrain and customize the model.</span></span>
+
+## <a name="is-this-service-powering-existing-intelligent-agents-such-as-zo"></a><span data-ttu-id="e5d6a-113">Is this service powering existing intelligent agents such as Zo?</span><span class="sxs-lookup"><span data-stu-id="e5d6a-113">Is this service powering existing intelligent agents such as Zo?</span></span>
+
+<span data-ttu-id="e5d6a-114">The services powering Zo, Cortana, and Project Personality Chat share some similar techniques, but are different stacks.</span><span class="sxs-lookup"><span data-stu-id="e5d6a-114">The services powering Zo, Cortana, and Project Personality Chat share some similar techniques, but are different stacks.</span></span> <span data-ttu-id="e5d6a-115">It has incorporated learnings from the experiences with Zo and Cortana.</span><span class="sxs-lookup"><span data-stu-id="e5d6a-115">It has incorporated learnings from the experiences with Zo and Cortana.</span></span>
+
+## <a name="can-this-service-lead-to-bad-customer-experiences"></a><span data-ttu-id="e5d6a-116">Can this service lead to bad customer experiences?</span><span class="sxs-lookup"><span data-stu-id="e5d6a-116">Can this service lead to bad customer experiences?</span></span>
+
+<span data-ttu-id="e5d6a-117">To provide a richer experience, Personality Chat can generate responses beyond the ones in the editorial dataset, and it tries to interpret all user input.</span><span class="sxs-lookup"><span data-stu-id="e5d6a-117">To provide a richer experience, Personality Chat can generate responses beyond the ones in the editorial dataset, and it tries to interpret all user input.</span></span> <span data-ttu-id="e5d6a-118">So, it's possible a response won't seem right in context.</span><span class="sxs-lookup"><span data-stu-id="e5d6a-118">So, it's possible a response won't seem right in context.</span></span> <span data-ttu-id="e5d6a-119">A number of controls have been put into place to help prevent unfavorable responses, building on knowledge from intelligent agents like Zo.</span><span class="sxs-lookup"><span data-stu-id="e5d6a-119">A number of controls have been put into place to help prevent unfavorable responses, building on knowledge from intelligent agents like Zo.</span></span> <span data-ttu-id="e5d6a-120">By default, Project Personality Chat is set to respond solely to recognized user intents.</span><span class="sxs-lookup"><span data-stu-id="e5d6a-120">By default, Project Personality Chat is set to respond solely to recognized user intents.</span></span> <span data-ttu-id="e5d6a-121">You may want to test whether Project Personality Chat is suitable for your circumstances.</span><span class="sxs-lookup"><span data-stu-id="e5d6a-121">You may want to test whether Project Personality Chat is suitable for your circumstances.</span></span> <span data-ttu-id="e5d6a-122">Your feedback is welcome if you see anything that needs further training.</span><span class="sxs-lookup"><span data-stu-id="e5d6a-122">Your feedback is welcome if you see anything that needs further training.</span></span> <span data-ttu-id="e5d6a-123">If you use this service with your customers in the future, we recommend you consider anonymized logging to help you identify issues with live user interactions.</span><span class="sxs-lookup"><span data-stu-id="e5d6a-123">If you use this service with your customers in the future, we recommend you consider anonymized logging to help you identify issues with live user interactions.</span></span>

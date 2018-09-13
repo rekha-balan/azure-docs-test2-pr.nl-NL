@@ -1,0 +1,144 @@
+---
+title: Reset Azure ExpressRoute peerings | Microsoft Docs
+description: How to disable and enable peeerings of an ExpressRoute circuit.
+services: expressroute
+author: charwen
+ms.service: expressroute
+ms.topic: conceptual
+ms.date: 08/15/2018
+ms.author: charwen
+ms.openlocfilehash: e7a3ca96f5d444bcb8ada8b398d45c63e1184a65
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44856146"
+---
+# <a name="reset-expressroute-peerings"></a><span data-ttu-id="40357-103">Reset ExpressRoute peerings</span><span class="sxs-lookup"><span data-stu-id="40357-103">Reset ExpressRoute peerings</span></span>
+
+<span data-ttu-id="40357-104">This article describes how to disable and enable peerings of an ExpressRoute circuit using PowerShell.</span><span class="sxs-lookup"><span data-stu-id="40357-104">This article describes how to disable and enable peerings of an ExpressRoute circuit using PowerShell.</span></span> <span data-ttu-id="40357-105">When you disable a peering, the BGP session on both the primary connection and the secondary connection of your ExpressRoute circuit will be shut down.</span><span class="sxs-lookup"><span data-stu-id="40357-105">When you disable a peering, the BGP session on both the primary connection and the secondary connection of your ExpressRoute circuit will be shut down.</span></span> <span data-ttu-id="40357-106">You will lose connectivity through this peering to Microsoft.</span><span class="sxs-lookup"><span data-stu-id="40357-106">You will lose connectivity through this peering to Microsoft.</span></span> <span data-ttu-id="40357-107">When you enable a peering, the BGP session on both the primary connection and the secondary connection of your ExpressRoute circuit will be brought up.</span><span class="sxs-lookup"><span data-stu-id="40357-107">When you enable a peering, the BGP session on both the primary connection and the secondary connection of your ExpressRoute circuit will be brought up.</span></span> <span data-ttu-id="40357-108">You will regain connectivity through this peering to Microsoft.</span><span class="sxs-lookup"><span data-stu-id="40357-108">You will regain connectivity through this peering to Microsoft.</span></span> <span data-ttu-id="40357-109">You can enable and disable Microsoft Peering and Azure Private Peering on an ExpressRoute circuit independently.</span><span class="sxs-lookup"><span data-stu-id="40357-109">You can enable and disable Microsoft Peering and Azure Private Peering on an ExpressRoute circuit independently.</span></span> <span data-ttu-id="40357-110">When you first configure the peerings on your ExpressRoute circuit, the peerings are enabled by default.</span><span class="sxs-lookup"><span data-stu-id="40357-110">When you first configure the peerings on your ExpressRoute circuit, the peerings are enabled by default.</span></span> 
+
+<span data-ttu-id="40357-111">There are a couple scenarios where you may find it helpful resetting your ExpressRoute peerings.</span><span class="sxs-lookup"><span data-stu-id="40357-111">There are a couple scenarios where you may find it helpful resetting your ExpressRoute peerings.</span></span>
+* <span data-ttu-id="40357-112">Test your disaster recovery design and implementation.</span><span class="sxs-lookup"><span data-stu-id="40357-112">Test your disaster recovery design and implementation.</span></span> <span data-ttu-id="40357-113">For example, you have two ExpressRoute circuits.</span><span class="sxs-lookup"><span data-stu-id="40357-113">For example, you have two ExpressRoute circuits.</span></span> <span data-ttu-id="40357-114">You can disable the peerings of one circuit and force your network traffic to fail over to the other circuit.</span><span class="sxs-lookup"><span data-stu-id="40357-114">You can disable the peerings of one circuit and force your network traffic to fail over to the other circuit.</span></span>
+* <span data-ttu-id="40357-115">Enable Bidirectional Forwarding Detection (BFD) on Azure Private Peering of your ExpressRoute circuit.</span><span class="sxs-lookup"><span data-stu-id="40357-115">Enable Bidirectional Forwarding Detection (BFD) on Azure Private Peering of your ExpressRoute circuit.</span></span> <span data-ttu-id="40357-116">BFD is enabled by default if your ExpressRoute circuit is created after August 1, 2018.</span><span class="sxs-lookup"><span data-stu-id="40357-116">BFD is enabled by default if your ExpressRoute circuit is created after August 1, 2018.</span></span> <span data-ttu-id="40357-117">If your circuit was created before that, BFD wasn't enabled.</span><span class="sxs-lookup"><span data-stu-id="40357-117">If your circuit was created before that, BFD wasn't enabled.</span></span> <span data-ttu-id="40357-118">You can enable BFD by disabling the peering and reenabling it.</span><span class="sxs-lookup"><span data-stu-id="40357-118">You can enable BFD by disabling the peering and reenabling it.</span></span> <span data-ttu-id="40357-119">It should be noted that BFD is supported on Azure Private Peering only.</span><span class="sxs-lookup"><span data-stu-id="40357-119">It should be noted that BFD is supported on Azure Private Peering only.</span></span>
+
+
+## <a name="reset-a-peering"></a><span data-ttu-id="40357-120">Reset a peering</span><span class="sxs-lookup"><span data-stu-id="40357-120">Reset a peering</span></span>
+
+1. <span data-ttu-id="40357-121">Install the latest version of the Azure Resource Manager PowerShell cmdlets.</span><span class="sxs-lookup"><span data-stu-id="40357-121">Install the latest version of the Azure Resource Manager PowerShell cmdlets.</span></span> <span data-ttu-id="40357-122">For more information, see [Install and configure Azure PowerShell](/powershell/azure/install-azurerm-ps).</span><span class="sxs-lookup"><span data-stu-id="40357-122">For more information, see [Install and configure Azure PowerShell](/powershell/azure/install-azurerm-ps).</span></span>
+
+2. <span data-ttu-id="40357-123">Open your PowerShell console with elevated privileges, and connect to your account.</span><span class="sxs-lookup"><span data-stu-id="40357-123">Open your PowerShell console with elevated privileges, and connect to your account.</span></span> <span data-ttu-id="40357-124">Use the following example to help you connect:</span><span class="sxs-lookup"><span data-stu-id="40357-124">Use the following example to help you connect:</span></span>
+
+  ```powershell
+  Connect-AzureRmAccount
+  ```
+3. <span data-ttu-id="40357-125">If you have multiple Azure subscriptions, check the subscriptions for the account.</span><span class="sxs-lookup"><span data-stu-id="40357-125">If you have multiple Azure subscriptions, check the subscriptions for the account.</span></span>
+
+  ```powershell
+  Get-AzureRmSubscription
+  ```
+4. <span data-ttu-id="40357-126">Specify the subscription that you want to use.</span><span class="sxs-lookup"><span data-stu-id="40357-126">Specify the subscription that you want to use.</span></span>
+
+  ```powershell
+  Select-AzureRmSubscription -SubscriptionName "Replace_with_your_subscription_name"
+  ```
+5. <span data-ttu-id="40357-127">Run the following commands to retrieve your ExpressRoute circuit.</span><span class="sxs-lookup"><span data-stu-id="40357-127">Run the following commands to retrieve your ExpressRoute circuit.</span></span>
+
+  ```powershell
+  $ckt = Get-AzureRmExpressRouteCircuit -Name "ExpressRouteARMCircuit" -ResourceGroupName "ExpressRouteResourceGroup"
+  ```
+6. <span data-ttu-id="40357-128">Identify the peering you want to disable or enable.</span><span class="sxs-lookup"><span data-stu-id="40357-128">Identify the peering you want to disable or enable.</span></span> <span data-ttu-id="40357-129">*Peerings* is an array.</span><span class="sxs-lookup"><span data-stu-id="40357-129">*Peerings* is an array.</span></span> <span data-ttu-id="40357-130">In the following example, Peerings[0] is Azure Private Peering and Peerings[1] Microsoft Peering.</span><span class="sxs-lookup"><span data-stu-id="40357-130">In the following example, Peerings[0] is Azure Private Peering and Peerings[1] Microsoft Peering.</span></span>
+
+  ```powershell
+Name                             : ExpressRouteARMCircuit
+ResourceGroupName                : ExpressRouteResourceGroup
+Location                         : westus
+Id                               : /subscriptions/########-####-####-####-############/resourceGroups/ExpressRouteResourceGroup/providers/Microsoft.Network/expressRouteCircuits/ExpressRouteARMCircuit
+Etag                             : W/"cd011bef-dc79-49eb-b4c6-81fb6ea5d178"
+ProvisioningState                : Succeeded
+Sku                              : {
+                                     "Name": "Standard_MeteredData",
+                                     "Tier": "Standard",
+                                     "Family": "MeteredData"
+                                   }
+CircuitProvisioningState         : Enabled
+ServiceProviderProvisioningState : Provisioned
+ServiceProviderNotes             :
+ServiceProviderProperties        : {
+                                     "ServiceProviderName": "Coresite",
+                                     "PeeringLocation": "Los Angeles",
+                                     "BandwidthInMbps": 50
+                                   }
+ServiceKey                       : ########-####-####-####-############
+Peerings                         : [
+                                     {
+                                       "Name": "AzurePrivatePeering",
+                                       "Etag": "W/\"cd011bef-dc79-49eb-b4c6-81fb6ea5d178\"",
+                                       "Id": "/subscriptions/########-####-####-####-############/resourceGroups/ExpressRouteResourceGroup/providers/Microsoft.Network/expressRouteCircuits/ExpressRouteARMCircuit/peerings/AzurePrivatePeering",
+                                       "PeeringType": "AzurePrivatePeering",
+                                       "State": "Enabled",
+                                       "AzureASN": 12076,
+                                       "PeerASN": 123,
+                                       "PrimaryPeerAddressPrefix": "10.0.0.0/30",
+                                       "SecondaryPeerAddressPrefix": "10.0.0.4/30",
+                                       "PrimaryAzurePort": "",
+                                       "SecondaryAzurePort": "",
+                                       "VlanId": 789,
+                                       "MicrosoftPeeringConfig": {
+                                         "AdvertisedPublicPrefixes": [],
+                                         "AdvertisedCommunities": [],
+                                         "AdvertisedPublicPrefixesState": "NotConfigured",
+                                         "CustomerASN": 0,
+                                         "LegacyMode": 0,
+                                         "RoutingRegistryName": "NONE"
+                                       },
+                                       "ProvisioningState": "Succeeded",
+                                       "GatewayManagerEtag": "",
+                                       "LastModifiedBy": "Customer",
+                                       "Connections": []
+                                     },
+                                     {
+                                       "Name": "MicrosoftPeering",
+                                       "Etag": "W/\"cd011bef-dc79-49eb-b4c6-81fb6ea5d178\"",
+                                       "Id": "/subscriptions/########-####-####-####-############/resourceGroups/ExpressRouteResourceGroup/providers/Microsoft.Network/expressRouteCircuits/ExpressRouteARMCircuit/peerings/MicrosoftPeering",
+                                       "PeeringType": "MicrosoftPeering",
+                                       "State": "Enabled",
+                                       "AzureASN": 12076,
+                                       "PeerASN": 123,
+                                       "PrimaryPeerAddressPrefix": "3.0.0.0/30",
+                                       "SecondaryPeerAddressPrefix": "3.0.0.4/30",
+                                       "PrimaryAzurePort": "",
+                                       "SecondaryAzurePort": "",
+                                       "VlanId": 345,
+                                       "MicrosoftPeeringConfig": {
+                                         "AdvertisedPublicPrefixes": [
+                                           "3.0.0.3/32"
+                                         ],
+                                         "AdvertisedCommunities": [],
+                                         "AdvertisedPublicPrefixesState": "ValidationNeeded",
+                                         "CustomerASN": 0,
+                                         "LegacyMode": 0,
+                                         "RoutingRegistryName": "NONE"
+                                       },
+                                       "ProvisioningState": "Succeeded",
+                                       "GatewayManagerEtag": "",
+                                       "LastModifiedBy": "Customer",
+                                       "Connections": []
+                                     }
+                                   ]
+Authorizations                   : []
+AllowClassicOperations           : False
+GatewayManagerEtag               :
+  ```
+7. <span data-ttu-id="40357-131">Run the following commands to change the state of the peering.</span><span class="sxs-lookup"><span data-stu-id="40357-131">Run the following commands to change the state of the peering.</span></span>
+
+  ```powershell
+  $ckt.Peerings[0].State = "Disabled"
+  Set-AzureRmExpressRouteCircuit -ExpressRouteCircuit $ckt
+  ```
+<span data-ttu-id="40357-132">The peering should be in a state you set.</span><span class="sxs-lookup"><span data-stu-id="40357-132">The peering should be in a state you set.</span></span> 
+
+## <a name="next-steps"></a><span data-ttu-id="40357-133">Next steps</span><span class="sxs-lookup"><span data-stu-id="40357-133">Next steps</span></span>
+<span data-ttu-id="40357-134">If you need help to troubleshoot an ExpressRoute problem, check out the following articles:</span><span class="sxs-lookup"><span data-stu-id="40357-134">If you need help to troubleshoot an ExpressRoute problem, check out the following articles:</span></span>
+* [<span data-ttu-id="40357-135">Verifying ExpressRoute connectivity</span><span class="sxs-lookup"><span data-stu-id="40357-135">Verifying ExpressRoute connectivity</span></span>](expressroute-troubleshooting-expressroute-overview.md)
+* [<span data-ttu-id="40357-136">Troubleshooting network performance</span><span class="sxs-lookup"><span data-stu-id="40357-136">Troubleshooting network performance</span></span>](expressroute-troubleshooting-network-performance.md)

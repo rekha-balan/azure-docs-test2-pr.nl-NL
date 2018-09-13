@@ -1,0 +1,51 @@
+---
+title: Useful operators in Azure Log Analytics queries | Microsoft Docs
+description: Common functions to use for different scenarios in Log Analytics queries.
+services: log-analytics
+documentationcenter: ''
+author: bwren
+manager: carmonm
+editor: ''
+ms.assetid: ''
+ms.service: log-analytics
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: conceptual
+ms.date: 08/21/2018
+ms.author: bwren
+ms.component: na
+ms.openlocfilehash: ce397b1ba8d77d2916caa2798c0161ba55f51dbb
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44856593"
+---
+# <a name="useful-operators-in-log-analytics-queries"></a><span data-ttu-id="4c357-103">Useful operators in Log Analytics queries</span><span class="sxs-lookup"><span data-stu-id="4c357-103">Useful operators in Log Analytics queries</span></span>
+
+<span data-ttu-id="4c357-104">The table below provides some common functions to use for different scenarios in Log Analytics queries.</span><span class="sxs-lookup"><span data-stu-id="4c357-104">The table below provides some common functions to use for different scenarios in Log Analytics queries.</span></span>
+
+## <a name="useful-operators"></a><span data-ttu-id="4c357-105">Useful operators</span><span class="sxs-lookup"><span data-stu-id="4c357-105">Useful operators</span></span>
+
+<span data-ttu-id="4c357-106">Category</span><span class="sxs-lookup"><span data-stu-id="4c357-106">Category</span></span>                                |<span data-ttu-id="4c357-107">Relevant Analytics Function</span><span class="sxs-lookup"><span data-stu-id="4c357-107">Relevant Analytics Function</span></span>
+----------------------------------------|----------------------------------------
+<span data-ttu-id="4c357-108">Selection and Column aliases</span><span class="sxs-lookup"><span data-stu-id="4c357-108">Selection and Column aliases</span></span>            |<span data-ttu-id="4c357-109">`project`, `project-away`, `extend`</span><span class="sxs-lookup"><span data-stu-id="4c357-109">`project`, `project-away`, `extend`</span></span>
+<span data-ttu-id="4c357-110">Temporary tables and constants</span><span class="sxs-lookup"><span data-stu-id="4c357-110">Temporary tables and constants</span></span>          |`let scalar_alias_name = …;` <br> `let table_alias_name = (){ … &#124; … &#124; … };`
+<span data-ttu-id="4c357-111">Comparison and String Operators</span><span class="sxs-lookup"><span data-stu-id="4c357-111">Comparison and String Operators</span></span>         |<span data-ttu-id="4c357-112">`startswith`, `!startswith`, `has`, `!has`</span><span class="sxs-lookup"><span data-stu-id="4c357-112">`startswith`, `!startswith`, `has`, `!has`</span></span> <br> <span data-ttu-id="4c357-113">`contains`, `!contains`, `containscs`</span><span class="sxs-lookup"><span data-stu-id="4c357-113">`contains`, `!contains`, `containscs`</span></span> <br> <span data-ttu-id="4c357-114">`hasprefix`, `!hasprefix`, `hassuffix`, `!hassuffix`, `in`, `!in`</span><span class="sxs-lookup"><span data-stu-id="4c357-114">`hasprefix`, `!hasprefix`, `hassuffix`, `!hassuffix`, `in`, `!in`</span></span> <br> `matches regex` <br> <span data-ttu-id="4c357-115">`==`, `=~`, `!=`, `!~`</span><span class="sxs-lookup"><span data-stu-id="4c357-115">`==`, `=~`, `!=`, `!~`</span></span>
+<span data-ttu-id="4c357-116">Common string functions</span><span class="sxs-lookup"><span data-stu-id="4c357-116">Common string functions</span></span>                 |<span data-ttu-id="4c357-117">`strcat()`, `replace()`, `tolower()`, `toupper()`, `substring()`, `strlen()`</span><span class="sxs-lookup"><span data-stu-id="4c357-117">`strcat()`, `replace()`, `tolower()`, `toupper()`, `substring()`, `strlen()`</span></span>
+<span data-ttu-id="4c357-118">Common math functions</span><span class="sxs-lookup"><span data-stu-id="4c357-118">Common math functions</span></span>                   |<span data-ttu-id="4c357-119">`sqrt()`, `abs()`</span><span class="sxs-lookup"><span data-stu-id="4c357-119">`sqrt()`, `abs()`</span></span> <br> <span data-ttu-id="4c357-120">`exp()`, `exp2()`, `exp10()`, `log()`, `log2()`, `log10()`, `pow()`</span><span class="sxs-lookup"><span data-stu-id="4c357-120">`exp()`, `exp2()`, `exp10()`, `log()`, `log2()`, `log10()`, `pow()`</span></span> <br> <span data-ttu-id="4c357-121">`gamma()`, `gammaln()`</span><span class="sxs-lookup"><span data-stu-id="4c357-121">`gamma()`, `gammaln()`</span></span>
+<span data-ttu-id="4c357-122">Parsing text</span><span class="sxs-lookup"><span data-stu-id="4c357-122">Parsing text</span></span>                            |<span data-ttu-id="4c357-123">`extract()`, `extractjson()`, `parse`, `split()`</span><span class="sxs-lookup"><span data-stu-id="4c357-123">`extract()`, `extractjson()`, `parse`, `split()`</span></span>
+<span data-ttu-id="4c357-124">Limiting output</span><span class="sxs-lookup"><span data-stu-id="4c357-124">Limiting output</span></span>                         |<span data-ttu-id="4c357-125">`take`, `limit`, `top`, `sample`</span><span class="sxs-lookup"><span data-stu-id="4c357-125">`take`, `limit`, `top`, `sample`</span></span>
+<span data-ttu-id="4c357-126">Date functions</span><span class="sxs-lookup"><span data-stu-id="4c357-126">Date functions</span></span>                          |<span data-ttu-id="4c357-127">`now()`, `ago()`</span><span class="sxs-lookup"><span data-stu-id="4c357-127">`now()`, `ago()`</span></span> <br> <span data-ttu-id="4c357-128">`datetime()`, `datepart()`, `timespan`</span><span class="sxs-lookup"><span data-stu-id="4c357-128">`datetime()`, `datepart()`, `timespan`</span></span> <br> <span data-ttu-id="4c357-129">`startofday()`, `startofweek()`, `startofmonth()`, `startofyear()`</span><span class="sxs-lookup"><span data-stu-id="4c357-129">`startofday()`, `startofweek()`, `startofmonth()`, `startofyear()`</span></span> <br> <span data-ttu-id="4c357-130">`endofday()`, `endofweek()`, `endofmonth()`, `endofyear()`</span><span class="sxs-lookup"><span data-stu-id="4c357-130">`endofday()`, `endofweek()`, `endofmonth()`, `endofyear()`</span></span> <br> <span data-ttu-id="4c357-131">`dayofweek()`, `dayofmonth()`, `dayofyear()`</span><span class="sxs-lookup"><span data-stu-id="4c357-131">`dayofweek()`, `dayofmonth()`, `dayofyear()`</span></span> <br> <span data-ttu-id="4c357-132">`getmonth()`, `getyear()`, `weekofyear()`, `monthofyear()`</span><span class="sxs-lookup"><span data-stu-id="4c357-132">`getmonth()`, `getyear()`, `weekofyear()`, `monthofyear()`</span></span>
+<span data-ttu-id="4c357-133">Grouping and aggregation</span><span class="sxs-lookup"><span data-stu-id="4c357-133">Grouping and aggregation</span></span>                |`summarize by` <br> <span data-ttu-id="4c357-134">`max()`, `min()`, `count()`, `dcount()`, `avg()`, `sum()`</span><span class="sxs-lookup"><span data-stu-id="4c357-134">`max()`, `min()`, `count()`, `dcount()`, `avg()`, `sum()`</span></span> <br> <span data-ttu-id="4c357-135">`stddev()`, `countif()`, `dcountif()`, `argmax()`, `argmin()`</span><span class="sxs-lookup"><span data-stu-id="4c357-135">`stddev()`, `countif()`, `dcountif()`, `argmax()`, `argmin()`</span></span> <br> <span data-ttu-id="4c357-136">`percentiles()`, `percentile_array()`</span><span class="sxs-lookup"><span data-stu-id="4c357-136">`percentiles()`, `percentile_array()`</span></span>
+<span data-ttu-id="4c357-137">Joins and Unions</span><span class="sxs-lookup"><span data-stu-id="4c357-137">Joins and Unions</span></span>                        |<span data-ttu-id="4c357-138">`join kind=leftouter`, `inner`, `rightouter`, `fullouter`, `leftanti`</span><span class="sxs-lookup"><span data-stu-id="4c357-138">`join kind=leftouter`, `inner`, `rightouter`, `fullouter`, `leftanti`</span></span> <br> `union`
+<span data-ttu-id="4c357-139">Sort, order</span><span class="sxs-lookup"><span data-stu-id="4c357-139">Sort, order</span></span>                             |<span data-ttu-id="4c357-140">`sort`, `order`</span><span class="sxs-lookup"><span data-stu-id="4c357-140">`sort`, `order`</span></span> 
+<span data-ttu-id="4c357-141">Dynamic object (JSON and array)</span><span class="sxs-lookup"><span data-stu-id="4c357-141">Dynamic object (JSON and array)</span></span>         |`parsejson()` <br> <span data-ttu-id="4c357-142">`makeset()`, `makelist()`</span><span class="sxs-lookup"><span data-stu-id="4c357-142">`makeset()`, `makelist()`</span></span> <br> <span data-ttu-id="4c357-143">`split()`, `arraylength()`</span><span class="sxs-lookup"><span data-stu-id="4c357-143">`split()`, `arraylength()`</span></span> <br> <span data-ttu-id="4c357-144">`zip()`, `pack()`</span><span class="sxs-lookup"><span data-stu-id="4c357-144">`zip()`, `pack()`</span></span>
+<span data-ttu-id="4c357-145">Logical operators</span><span class="sxs-lookup"><span data-stu-id="4c357-145">Logical operators</span></span>                       |<span data-ttu-id="4c357-146">`and`, `or`, `iff(condition, value_t, value_f)`</span><span class="sxs-lookup"><span data-stu-id="4c357-146">`and`, `or`, `iff(condition, value_t, value_f)`</span></span> <br> <span data-ttu-id="4c357-147">`binary_and()`, `binary_or()`, `binary_not()`, `binary_xor()`</span><span class="sxs-lookup"><span data-stu-id="4c357-147">`binary_and()`, `binary_or()`, `binary_not()`, `binary_xor()`</span></span>
+<span data-ttu-id="4c357-148">Machine learning</span><span class="sxs-lookup"><span data-stu-id="4c357-148">Machine learning</span></span>                        |<span data-ttu-id="4c357-149">`evaluate autocluster`, `basket`, `diffpatterns`, `extractcolumns`</span><span class="sxs-lookup"><span data-stu-id="4c357-149">`evaluate autocluster`, `basket`, `diffpatterns`, `extractcolumns`</span></span>
+
+
+## <a name="next-steps"></a><span data-ttu-id="4c357-150">Next steps</span><span class="sxs-lookup"><span data-stu-id="4c357-150">Next steps</span></span>
+
+- <span data-ttu-id="4c357-151">Go through a lesson on the [writing queries in Log Analytics](get-started-queries.md).</span><span class="sxs-lookup"><span data-stu-id="4c357-151">Go through a lesson on the [writing queries in Log Analytics](get-started-queries.md).</span></span>

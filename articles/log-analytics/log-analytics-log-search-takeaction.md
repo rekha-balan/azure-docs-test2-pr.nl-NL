@@ -1,0 +1,55 @@
+---
+title: User-initiated Azure Automation Runbook Action in Log Analytics  | Microsoft Docs
+description: This article describes how to run an Automation runbook from a Log Analytics search result on-demand.
+services: log-analytics
+documentationcenter: ''
+author: mgoedtel
+manager: carmonm
+editor: tysonn
+ms.assetid: ''
+ms.service: log-analytics
+ms.devlang: na
+ms.topic: conceptual
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 05/04/2017
+ms.author: magoedte
+ms.component: na
+ms.openlocfilehash: 48e184206d9f1cf5b14c2e18b4ca1ed260d70161
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44856410"
+---
+# <a name="take-action-with-an-automation-runbook-from-a-log-analytics-log-search-result"></a><span data-ttu-id="5ba24-103">Take Action with an Automation Runbook from a Log Analytics log search result</span><span class="sxs-lookup"><span data-stu-id="5ba24-103">Take Action with an Automation Runbook from a Log Analytics log search result</span></span>
+
+<span data-ttu-id="5ba24-104">From a log search result in Azure Log Analytics, you can now select **Take action** to run an Automation runbook.</span><span class="sxs-lookup"><span data-stu-id="5ba24-104">From a log search result in Azure Log Analytics, you can now select **Take action** to run an Automation runbook.</span></span>  <span data-ttu-id="5ba24-105">The runbook can be used to remediate the issue or take some other action such as collect troubleshooting information, send an email, or create a service request.</span><span class="sxs-lookup"><span data-stu-id="5ba24-105">The runbook can be used to remediate the issue or take some other action such as collect troubleshooting information, send an email, or create a service request.</span></span> 
+
+## <a name="components-and-features-used"></a><span data-ttu-id="5ba24-106">Components and features used</span><span class="sxs-lookup"><span data-stu-id="5ba24-106">Components and features used</span></span>
+* [<span data-ttu-id="5ba24-107">Azure Automation account</span><span class="sxs-lookup"><span data-stu-id="5ba24-107">Azure Automation account</span></span>](../automation/automation-offering-get-started.md)
+* [<span data-ttu-id="5ba24-108">Log Analytics workspace</span><span class="sxs-lookup"><span data-stu-id="5ba24-108">Log Analytics workspace</span></span>](../log-analytics/log-analytics-overview.md)
+
+## <a name="to-initiate-runbook-from-log-search"></a><span data-ttu-id="5ba24-109">To initiate runbook from log search</span><span class="sxs-lookup"><span data-stu-id="5ba24-109">To initiate runbook from log search</span></span>
+
+<span data-ttu-id="5ba24-110">To take action on an event and initiate a runbook from your log search results, you start by creating a log search and from the results you can invoke a runbook on-demand.</span><span class="sxs-lookup"><span data-stu-id="5ba24-110">To take action on an event and initiate a runbook from your log search results, you start by creating a log search and from the results you can invoke a runbook on-demand.</span></span>  <span data-ttu-id="5ba24-111">This can be achieved from the log search feature in the [Azure portal](../log-analytics/log-analytics-log-search-new.md).</span><span class="sxs-lookup"><span data-stu-id="5ba24-111">This can be achieved from the log search feature in the [Azure portal](../log-analytics/log-analytics-log-search-new.md).</span></span>  <span data-ttu-id="5ba24-112">In this example, we perform a log search from the Azure portal with a basic demonstration of this feature.</span><span class="sxs-lookup"><span data-stu-id="5ba24-112">In this example, we perform a log search from the Azure portal with a basic demonstration of this feature.</span></span>
+
+1. <span data-ttu-id="5ba24-113">In the Azure portal, click **All services** and select **Log Analytics**.</span><span class="sxs-lookup"><span data-stu-id="5ba24-113">In the Azure portal, click **All services** and select **Log Analytics**.</span></span>  
+2. <span data-ttu-id="5ba24-114">Select your Log Analytics workspace.</span><span class="sxs-lookup"><span data-stu-id="5ba24-114">Select your Log Analytics workspace.</span></span>
+3. <span data-ttu-id="5ba24-115">On the workspace, select **Log Search**.</span><span class="sxs-lookup"><span data-stu-id="5ba24-115">On the workspace, select **Log Search**.</span></span>  
+4. <span data-ttu-id="5ba24-116">On the Log Search page, perform a log search.</span><span class="sxs-lookup"><span data-stu-id="5ba24-116">On the Log Search page, perform a log search.</span></span>  
+5. <span data-ttu-id="5ba24-117">From the log search results, click the ellipse to the left of one of the fields and from the popup, select **Take action on**.</span><span class="sxs-lookup"><span data-stu-id="5ba24-117">From the log search results, click the ellipse to the left of one of the fields and from the popup, select **Take action on**.</span></span><br><br> <span data-ttu-id="5ba24-118">![Select Take Action from search result](./media/log-analytics-log-search-takeaction/log-search-takeaction-menuoption.png)</span><span class="sxs-lookup"><span data-stu-id="5ba24-118">![Select Take Action from search result](./media/log-analytics-log-search-takeaction/log-search-takeaction-menuoption.png)</span></span> 
+6. <span data-ttu-id="5ba24-119">Select **Run a runbook** and select a runbook to run.</span><span class="sxs-lookup"><span data-stu-id="5ba24-119">Select **Run a runbook** and select a runbook to run.</span></span>  <span data-ttu-id="5ba24-120">You can select any runbook in the Automation account that is linked to the Log Analytics workspace.</span><span class="sxs-lookup"><span data-stu-id="5ba24-120">You can select any runbook in the Automation account that is linked to the Log Analytics workspace.</span></span>  <span data-ttu-id="5ba24-121">Note the following:</span><span class="sxs-lookup"><span data-stu-id="5ba24-121">Note the following:</span></span>
+
+    * <span data-ttu-id="5ba24-122">Runbooks are organized by tags</span><span class="sxs-lookup"><span data-stu-id="5ba24-122">Runbooks are organized by tags</span></span>
+    * <span data-ttu-id="5ba24-123">Runbook input parameter values can be selected directly from the fields of the search result.</span><span class="sxs-lookup"><span data-stu-id="5ba24-123">Runbook input parameter values can be selected directly from the fields of the search result.</span></span>  <span data-ttu-id="5ba24-124">A drop-down list will appear displaying all the available fields from the result to select from.</span><span class="sxs-lookup"><span data-stu-id="5ba24-124">A drop-down list will appear displaying all the available fields from the result to select from.</span></span>  
+    * <span data-ttu-id="5ba24-125">You can choose to run the runbook on a [hybrid runbook worker](../automation/automation-hybrid-runbook-worker.md) that you have installed on the machine that has the issue if you have a corresponding Hybrid Runbook Worker group that only contains this machine as a member.</span><span class="sxs-lookup"><span data-stu-id="5ba24-125">You can choose to run the runbook on a [hybrid runbook worker](../automation/automation-hybrid-runbook-worker.md) that you have installed on the machine that has the issue if you have a corresponding Hybrid Runbook Worker group that only contains this machine as a member.</span></span>  <span data-ttu-id="5ba24-126">If the name of the Hybrid Worker group matches the name of the computer that is in the log search result, then the group is selected automatically.</span><span class="sxs-lookup"><span data-stu-id="5ba24-126">If the name of the Hybrid Worker group matches the name of the computer that is in the log search result, then the group is selected automatically.</span></span>    
+
+6. <span data-ttu-id="5ba24-127">After you click **Run**, the runbook job page opens to allow you to review the status of the job.</span><span class="sxs-lookup"><span data-stu-id="5ba24-127">After you click **Run**, the runbook job page opens to allow you to review the status of the job.</span></span>   
+
+<span data-ttu-id="5ba24-128">If you select a runbook that was configured to be [called from a Log Analytics alert](../automation/automation-invoke-runbook-from-omsla-alert.md), it has an input parameter called **WebhookData** that is **Object** type.</span><span class="sxs-lookup"><span data-stu-id="5ba24-128">If you select a runbook that was configured to be [called from a Log Analytics alert](../automation/automation-invoke-runbook-from-omsla-alert.md), it has an input parameter called **WebhookData** that is **Object** type.</span></span>  <span data-ttu-id="5ba24-129">If the input parameter is mandatory, you need to pass the search results to the runbook so it can convert the JSON-formatted string into an object type allowing you to filter on specific items that you will reference in runbook activities.</span><span class="sxs-lookup"><span data-stu-id="5ba24-129">If the input parameter is mandatory, you need to pass the search results to the runbook so it can convert the JSON-formatted string into an object type allowing you to filter on specific items that you will reference in runbook activities.</span></span>  <span data-ttu-id="5ba24-130">You do this by selecting **Search result (Object)** from the drop-down list.</span><span class="sxs-lookup"><span data-stu-id="5ba24-130">You do this by selecting **Search result (Object)** from the drop-down list.</span></span><br><br> <span data-ttu-id="5ba24-131">![Select Webhook data object for runbook parameter](media/log-analytics-log-search-takeaction/select-runbook-and-properties.png)</span><span class="sxs-lookup"><span data-stu-id="5ba24-131">![Select Webhook data object for runbook parameter](media/log-analytics-log-search-takeaction/select-runbook-and-properties.png)</span></span>   
+    
+## <a name="next-steps"></a><span data-ttu-id="5ba24-132">Next steps</span><span class="sxs-lookup"><span data-stu-id="5ba24-132">Next steps</span></span>
+
+* <span data-ttu-id="5ba24-133">Review the [Log Analytics log search reference](log-analytics-search-reference.md) to view all of the search fields and facets available in Log Analytics.</span><span class="sxs-lookup"><span data-stu-id="5ba24-133">Review the [Log Analytics log search reference](log-analytics-search-reference.md) to view all of the search fields and facets available in Log Analytics.</span></span>
+* <span data-ttu-id="5ba24-134">To learn how to invoke an Automation runbook automatically, review [calling an Azure Automation runbook from a Log Analytics alert](../automation/automation-invoke-runbook-from-omsla-alert.md).</span><span class="sxs-lookup"><span data-stu-id="5ba24-134">To learn how to invoke an Automation runbook automatically, review [calling an Azure Automation runbook from a Log Analytics alert](../automation/automation-invoke-runbook-from-omsla-alert.md).</span></span>  
