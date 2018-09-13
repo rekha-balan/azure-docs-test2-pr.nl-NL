@@ -1,0 +1,42 @@
+
+## <a name="faq---reverse-dns-for-your-azure-assigned-ip-address"></a><span data-ttu-id="9fb23-101">FAQ - Reverse DNS for your Azure-assigned IP address</span><span class="sxs-lookup"><span data-stu-id="9fb23-101">FAQ - Reverse DNS for your Azure-assigned IP address</span></span>
+
+### <a name="how-much-do-reverse-dns-records-cost"></a><span data-ttu-id="9fb23-102">How much do reverse DNS records cost?</span><span class="sxs-lookup"><span data-stu-id="9fb23-102">How much do reverse DNS records cost?</span></span>
+
+<span data-ttu-id="9fb23-103">They're free!</span><span class="sxs-lookup"><span data-stu-id="9fb23-103">They're free!</span></span>  <span data-ttu-id="9fb23-104">There is no additional cost for reverse DNS records or queries.</span><span class="sxs-lookup"><span data-stu-id="9fb23-104">There is no additional cost for reverse DNS records or queries.</span></span>
+
+### <a name="will-the-reverse-dns-records-for-my-azure-assigned-public-ip-address-resolve-from-the-internet"></a><span data-ttu-id="9fb23-105">Will the reverse DNS records for my Azure-assigned Public IP Address resolve from the internet?</span><span class="sxs-lookup"><span data-stu-id="9fb23-105">Will the reverse DNS records for my Azure-assigned Public IP Address resolve from the internet?</span></span>
+
+<span data-ttu-id="9fb23-106">Yes.</span><span class="sxs-lookup"><span data-stu-id="9fb23-106">Yes.</span></span> <span data-ttu-id="9fb23-107">Once you set the reverse DNS property for your Public IP Address, Azure manages all the DNS delegations and DNS zones required to ensure that reverse DNS record resolves for all internet users.</span><span class="sxs-lookup"><span data-stu-id="9fb23-107">Once you set the reverse DNS property for your Public IP Address, Azure manages all the DNS delegations and DNS zones required to ensure that reverse DNS record resolves for all internet users.</span></span>
+
+### <a name="will-a-default-reverse-dns-record-be-created-for-my-public-ip-addresses"></a><span data-ttu-id="9fb23-108">Will a default reverse DNS record be created for my Public IP Addresses?</span><span class="sxs-lookup"><span data-stu-id="9fb23-108">Will a default reverse DNS record be created for my Public IP Addresses?</span></span>
+
+<span data-ttu-id="9fb23-109">No.</span><span class="sxs-lookup"><span data-stu-id="9fb23-109">No.</span></span> <span data-ttu-id="9fb23-110">Reverse DNS is an opt-in feature.</span><span class="sxs-lookup"><span data-stu-id="9fb23-110">Reverse DNS is an opt-in feature.</span></span> <span data-ttu-id="9fb23-111">No default reverse DNS records are created if you choose not to configure them.</span><span class="sxs-lookup"><span data-stu-id="9fb23-111">No default reverse DNS records are created if you choose not to configure them.</span></span>
+
+### <a name="what-is-the-format-for-the-fully-qualified-domain-name-fqdn"></a><span data-ttu-id="9fb23-112">What is the format for the fully-qualified domain name (FQDN)?</span><span class="sxs-lookup"><span data-stu-id="9fb23-112">What is the format for the fully-qualified domain name (FQDN)?</span></span>
+
+<span data-ttu-id="9fb23-113">FQDNs are specified in forward order, and must be terminated by a dot (e.g., "app1.contoso.com.").</span><span class="sxs-lookup"><span data-stu-id="9fb23-113">FQDNs are specified in forward order, and must be terminated by a dot (e.g., "app1.contoso.com.").</span></span>
+
+### <a name="what-happens-if-the-validation-checks-for-the-reverse-dns-ive-specified-fail"></a><span data-ttu-id="9fb23-114">What happens if the validation checks for the reverse DNS I've specified fail?</span><span class="sxs-lookup"><span data-stu-id="9fb23-114">What happens if the validation checks for the reverse DNS I've specified fail?</span></span>
+
+<span data-ttu-id="9fb23-115">Where the validation for reverse DNS checks fail, the service management operation will fail.</span><span class="sxs-lookup"><span data-stu-id="9fb23-115">Where the validation for reverse DNS checks fail, the service management operation will fail.</span></span> <span data-ttu-id="9fb23-116">Please correct the reverse DNS value as required, and retry.</span><span class="sxs-lookup"><span data-stu-id="9fb23-116">Please correct the reverse DNS value as required, and retry.</span></span>
+
+### <a name="can-i-manage-reverse-dns-for-my-azure-website"></a><span data-ttu-id="9fb23-117">Can I manage reverse DNS for my Azure Website?</span><span class="sxs-lookup"><span data-stu-id="9fb23-117">Can I manage reverse DNS for my Azure Website?</span></span>
+
+<span data-ttu-id="9fb23-118">Reverse DNS is not supported for Azure Websites.</span><span class="sxs-lookup"><span data-stu-id="9fb23-118">Reverse DNS is not supported for Azure Websites.</span></span> <span data-ttu-id="9fb23-119">Reverse DNS is supported for Azure Virtual Machines.</span><span class="sxs-lookup"><span data-stu-id="9fb23-119">Reverse DNS is supported for Azure Virtual Machines.</span></span>
+
+### <a name="can-i-configure-multiple-reverse-dns-records-for-my-public-ip-address"></a><span data-ttu-id="9fb23-120">Can I configure multiple reverse DNS records for my Public IP Address?</span><span class="sxs-lookup"><span data-stu-id="9fb23-120">Can I configure multiple reverse DNS records for my Public IP Address?</span></span>
+
+<span data-ttu-id="9fb23-121">No.</span><span class="sxs-lookup"><span data-stu-id="9fb23-121">No.</span></span> <span data-ttu-id="9fb23-122">Azure supports a single reverse DNS record for each Public IP Address.</span><span class="sxs-lookup"><span data-stu-id="9fb23-122">Azure supports a single reverse DNS record for each Public IP Address.</span></span> <span data-ttu-id="9fb23-123">Each Public IP Address however can have their own reverse DNS record.</span><span class="sxs-lookup"><span data-stu-id="9fb23-123">Each Public IP Address however can have their own reverse DNS record.</span></span>
+
+### <a name="can-i-configure-reverse-dns-records-for-an-ipv6-public-ip-address"></a><span data-ttu-id="9fb23-124">Can I configure reverse DNS records for an IPv6 Public IP Address?</span><span class="sxs-lookup"><span data-stu-id="9fb23-124">Can I configure reverse DNS records for an IPv6 Public IP Address?</span></span>
+
+<span data-ttu-id="9fb23-125">No.</span><span class="sxs-lookup"><span data-stu-id="9fb23-125">No.</span></span>  <span data-ttu-id="9fb23-126">At this time, reverse DNS records are supported for IPv4 Public IP Addresses only.</span><span class="sxs-lookup"><span data-stu-id="9fb23-126">At this time, reverse DNS records are supported for IPv4 Public IP Addresses only.</span></span>
+
+### <a name="can-i-configure-a-reverse-dns-record-for-my-public-ip-address-without-having-a-domainnamelabel-specified"></a><span data-ttu-id="9fb23-127">Can I configure a reverse DNS record for my Public IP Address without having a DomainNameLabel specified?</span><span class="sxs-lookup"><span data-stu-id="9fb23-127">Can I configure a reverse DNS record for my Public IP Address without having a DomainNameLabel specified?</span></span>
+
+<span data-ttu-id="9fb23-128">No.</span><span class="sxs-lookup"><span data-stu-id="9fb23-128">No.</span></span> <span data-ttu-id="9fb23-129">To leverage reverse DNS records for your Public IP Addresses, you must specify the DomainNameLabel property.</span><span class="sxs-lookup"><span data-stu-id="9fb23-129">To leverage reverse DNS records for your Public IP Addresses, you must specify the DomainNameLabel property.</span></span>
+
+### <a name="can-i-send-emails-to-external-domains-from-my-azure-compute-services"></a><span data-ttu-id="9fb23-130">Can I send emails to external domains from my Azure Compute services?</span><span class="sxs-lookup"><span data-stu-id="9fb23-130">Can I send emails to external domains from my Azure Compute services?</span></span>
+
+<span data-ttu-id="9fb23-131">No.</span><span class="sxs-lookup"><span data-stu-id="9fb23-131">No.</span></span> <span data-ttu-id="9fb23-132">[Azure Compute services do not support sending emails to external domains](https://blogs.msdn.microsoft.com/mast/2016/04/04/sending-e-mail-from-azure-compute-resource-to-external-domains/).</span><span class="sxs-lookup"><span data-stu-id="9fb23-132">[Azure Compute services do not support sending emails to external domains](https://blogs.msdn.microsoft.com/mast/2016/04/04/sending-e-mail-from-azure-compute-resource-to-external-domains/).</span></span>

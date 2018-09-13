@@ -1,0 +1,26 @@
+### <a name="determine-the-dns-name-of-the-virtual-machine"></a><span data-ttu-id="607d5-101">Determine the DNS name of the virtual machine</span><span class="sxs-lookup"><span data-stu-id="607d5-101">Determine the DNS name of the virtual machine</span></span>
+<span data-ttu-id="607d5-102">To connect to the SQL Server Database Engine from another computer, you must know the Domain Name System (DNS) name of the virtual machine.</span><span class="sxs-lookup"><span data-stu-id="607d5-102">To connect to the SQL Server Database Engine from another computer, you must know the Domain Name System (DNS) name of the virtual machine.</span></span> <span data-ttu-id="607d5-103">(This is the name the internet uses to identify the virtual machine.</span><span class="sxs-lookup"><span data-stu-id="607d5-103">(This is the name the internet uses to identify the virtual machine.</span></span> <span data-ttu-id="607d5-104">You can use the IP address, but the IP address might change when Azure moves resources for redundancy or maintenance.</span><span class="sxs-lookup"><span data-stu-id="607d5-104">You can use the IP address, but the IP address might change when Azure moves resources for redundancy or maintenance.</span></span> <span data-ttu-id="607d5-105">The DNS name will be stable because it can be redirected to a new IP address.)</span><span class="sxs-lookup"><span data-stu-id="607d5-105">The DNS name will be stable because it can be redirected to a new IP address.)</span></span>  
+
+1. <span data-ttu-id="607d5-106">In the Azure Portal (or from the previous step), select **Virtual machines (classic)**.</span><span class="sxs-lookup"><span data-stu-id="607d5-106">In the Azure Portal (or from the previous step), select **Virtual machines (classic)**.</span></span>
+2. <span data-ttu-id="607d5-107">Select your SQL VM.</span><span class="sxs-lookup"><span data-stu-id="607d5-107">Select your SQL VM.</span></span>
+3. <span data-ttu-id="607d5-108">On the **Virtual machine** blade, copy the **DNS name** for the virtual machine.</span><span class="sxs-lookup"><span data-stu-id="607d5-108">On the **Virtual machine** blade, copy the **DNS name** for the virtual machine.</span></span>
+   
+    ![DNS name](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/virtual-machines-sql-server-connection-steps/sql-vm-dns-name.png)
+
+### <a name="connect-to-the-database-engine-from-another-computer"></a><span data-ttu-id="607d5-110">Connect to the Database Engine from another computer</span><span class="sxs-lookup"><span data-stu-id="607d5-110">Connect to the Database Engine from another computer</span></span>
+1. <span data-ttu-id="607d5-111">On a computer connected to the internet, open SQL Server Management Studio.</span><span class="sxs-lookup"><span data-stu-id="607d5-111">On a computer connected to the internet, open SQL Server Management Studio.</span></span>
+2. <span data-ttu-id="607d5-112">In the **Connect to Server** or **Connect to Database Engine** dialog box, in the **Server name** box, enter the DNS name of the virtual machine (determined in the previous task) and a public endpoint port number in the format of *DNSName,portnumber* such as **mysqlvm.cloudapp.net,57500**.</span><span class="sxs-lookup"><span data-stu-id="607d5-112">In the **Connect to Server** or **Connect to Database Engine** dialog box, in the **Server name** box, enter the DNS name of the virtual machine (determined in the previous task) and a public endpoint port number in the format of *DNSName,portnumber* such as **mysqlvm.cloudapp.net,57500**.</span></span>
+   
+    ![Connect using SSMS](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/virtual-machines-sql-server-connection-steps/33Connect-SSMS.png)
+   
+    <span data-ttu-id="607d5-114">If you don't remember the public endpoint port number you previously created, you can find it in the **Endpoints** area of the **Virtual machine** blade.</span><span class="sxs-lookup"><span data-stu-id="607d5-114">If you don't remember the public endpoint port number you previously created, you can find it in the **Endpoints** area of the **Virtual machine** blade.</span></span>
+   
+    ![Public Port](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/virtual-machines-sql-server-connection-steps/sql-vm-port-number.png)
+3. <span data-ttu-id="607d5-116">In the **Authentication** box, select **SQL Server Authentication**.</span><span class="sxs-lookup"><span data-stu-id="607d5-116">In the **Authentication** box, select **SQL Server Authentication**.</span></span>
+4. <span data-ttu-id="607d5-117">In the **Login** box, type the name of a login that you created in an earlier task.</span><span class="sxs-lookup"><span data-stu-id="607d5-117">In the **Login** box, type the name of a login that you created in an earlier task.</span></span>
+5. <span data-ttu-id="607d5-118">In the **Password** box, type the password of the login that you create in an earlier task.</span><span class="sxs-lookup"><span data-stu-id="607d5-118">In the **Password** box, type the password of the login that you create in an earlier task.</span></span>
+6. <span data-ttu-id="607d5-119">Click **Connect**.</span><span class="sxs-lookup"><span data-stu-id="607d5-119">Click **Connect**.</span></span>
+
+
+
+

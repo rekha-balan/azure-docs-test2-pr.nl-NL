@@ -1,0 +1,23 @@
+
+<!--author=SharS last changed: 9/15/15-->
+
+
+#### <a name="to-create-a-manual-backup"></a><span data-ttu-id="b916b-101">To create a manual backup</span><span class="sxs-lookup"><span data-stu-id="b916b-101">To create a manual backup</span></span>
+1. <span data-ttu-id="b916b-102">On the **Devices** page, go to the **Backup Policies** tab. This tab lists all the backup policies in a tabular format, including the policy for the volume that you want to back up.</span><span class="sxs-lookup"><span data-stu-id="b916b-102">On the **Devices** page, go to the **Backup Policies** tab. This tab lists all the backup policies in a tabular format, including the policy for the volume that you want to back up.</span></span>
+2. <span data-ttu-id="b916b-103">Select the policy by clicking anywhere in the corresponding row except for the first column.</span><span class="sxs-lookup"><span data-stu-id="b916b-103">Select the policy by clicking anywhere in the corresponding row except for the first column.</span></span> <span data-ttu-id="b916b-104">At the bottom of the page, click **Take backup**.</span><span class="sxs-lookup"><span data-stu-id="b916b-104">At the bottom of the page, click **Take backup**.</span></span> <span data-ttu-id="b916b-105">The button will expand to show the backup options: local snapshot and cloud snapshot.</span><span class="sxs-lookup"><span data-stu-id="b916b-105">The button will expand to show the backup options: local snapshot and cloud snapshot.</span></span> 
+3. <span data-ttu-id="b916b-106">When you choose either of these options, you will be prompted for confirmation.</span><span class="sxs-lookup"><span data-stu-id="b916b-106">When you choose either of these options, you will be prompted for confirmation.</span></span> <span data-ttu-id="b916b-107">Click **Yes**.</span><span class="sxs-lookup"><span data-stu-id="b916b-107">Click **Yes**.</span></span> 
+   
+    ![Create manual backup](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/storsimple-create-manual-backup/HCS_CreateManualBackup1-include.png)
+   
+    <span data-ttu-id="b916b-109">This will start a job to create a snapshot.</span><span class="sxs-lookup"><span data-stu-id="b916b-109">This will start a job to create a snapshot.</span></span> <span data-ttu-id="b916b-110">You will see a notification at the bottom of the page after the job is successfully created.</span><span class="sxs-lookup"><span data-stu-id="b916b-110">You will see a notification at the bottom of the page after the job is successfully created.</span></span>
+4. <span data-ttu-id="b916b-111">To monitor the job, click **View Job** in the notification area (at the bottom of the page).</span><span class="sxs-lookup"><span data-stu-id="b916b-111">To monitor the job, click **View Job** in the notification area (at the bottom of the page).</span></span> 
+   
+    ![Monitor the manual backup](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/storsimple-create-manual-backup/HCS_CreateManualBackup2-include.png)
+5. <span data-ttu-id="b916b-113">After the backup job is finished, go to the **Backup catalog** tab.</span><span class="sxs-lookup"><span data-stu-id="b916b-113">After the backup job is finished, go to the **Backup catalog** tab.</span></span>
+6. <span data-ttu-id="b916b-114">Set the filter selections to the appropriate device, backup policy, and time range.</span><span class="sxs-lookup"><span data-stu-id="b916b-114">Set the filter selections to the appropriate device, backup policy, and time range.</span></span> <span data-ttu-id="b916b-115">Click the check icon</span><span class="sxs-lookup"><span data-stu-id="b916b-115">Click the check icon</span></span> ![check icon](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/storsimple-create-manual-backup/HCS_CheckIcon-include.png) <span data-ttu-id="b916b-117">after setting the filters.</span><span class="sxs-lookup"><span data-stu-id="b916b-117">after setting the filters.</span></span>
+   
+   <span data-ttu-id="b916b-118">The backup should appear in the list of backup sets that is displayed in the catalog.</span><span class="sxs-lookup"><span data-stu-id="b916b-118">The backup should appear in the list of backup sets that is displayed in the catalog.</span></span>
+
+
+
+

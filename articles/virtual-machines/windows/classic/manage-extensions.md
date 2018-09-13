@@ -1,0 +1,32 @@
+---
+title: Manage Windows-based virtual machine extensions | Microsoft Docs
+description: Describes how to add, find, update, and remove extensions for Azure virtual machines, in the classic deployment model.
+services: virtual-machines-windows
+documentationcenter: ''
+author: squillace
+manager: timlt
+editor: ''
+tags: azure-service-management
+ms.assetid: 53f0543f-3217-4ad5-90ca-802810118ff9
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows
+ms.workload: infrastructure-services
+ms.date: 08/29/2016
+ms.author: rasquill
+ms.openlocfilehash: eb1597b3f6fc5dd2c3e630463e83a2aec7af9606
+ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 08/02/2018
+ms.locfileid: "44660571"
+---
+# <a name="manage-virtual-machine-extensions"></a><span data-ttu-id="48c1a-103">Manage virtual machine extensions</span><span class="sxs-lookup"><span data-stu-id="48c1a-103">Manage virtual machine extensions</span></span>
+<span data-ttu-id="48c1a-104">Describes how to find, add, modify, or remove VM Extensions with either Windows or Linux Virtual Machines on Azure.</span><span class="sxs-lookup"><span data-stu-id="48c1a-104">Describes how to find, add, modify, or remove VM Extensions with either Windows or Linux Virtual Machines on Azure.</span></span>
+
+> [!IMPORTANT] 
+> <span data-ttu-id="48c1a-105">Azure has two different deployment models for creating and working with resources: [Resource Manager and Classic](../../../resource-manager-deployment-model.md).</span><span class="sxs-lookup"><span data-stu-id="48c1a-105">Azure has two different deployment models for creating and working with resources: [Resource Manager and Classic](../../../resource-manager-deployment-model.md).</span></span> <span data-ttu-id="48c1a-106">This article covers using the Classic deployment model.</span><span class="sxs-lookup"><span data-stu-id="48c1a-106">This article covers using the Classic deployment model.</span></span> <span data-ttu-id="48c1a-107">Microsoft recommends that most new deployments use the Resource Manager model.</span><span class="sxs-lookup"><span data-stu-id="48c1a-107">Microsoft recommends that most new deployments use the Resource Manager model.</span></span> <span data-ttu-id="48c1a-108">For information about VM extensions using the Resource Manager model, see [here](../extensions-features.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).</span><span class="sxs-lookup"><span data-stu-id="48c1a-108">For information about VM extensions using the Resource Manager model, see [here](../extensions-features.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).</span></span>
+
+[!INCLUDE [virtual-machines-common-classic-manage-extensions](../../../../includes/virtual-machines-common-classic-manage-extensions.md)]
+
