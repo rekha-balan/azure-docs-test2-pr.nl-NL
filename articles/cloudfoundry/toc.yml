@@ -1,0 +1,36 @@
+items:
+- name: Cloud Foundry Documentation
+  href: index.md
+- name: Quickstarts
+  items:
+  - name: Marketplace template
+    href: https://azuremarketplace.microsoft.com/marketplace/apps/pivotal.pivotal-cloud-foundry
+  expanded: true
+- name: Tutorials
+  items:
+  - name: Deploy CF App to Azure
+    href: /azure/virtual-machines/linux/cloudfoundry-deploy-your-first-app
+  - name: CloudFoundry on Azure
+    href: /azure/virtual-machines/linux/cloudfoundry-get-started
+  - name: Deploy CF OMS Nozzle
+    href: /azure/cloudfoundry/cloudfoundry-oms-nozzle
+  - name: Integrate Cloud Foundry with Azure
+    href: /azure/cloudfoundry/how-cloud-foundry-integrates-with-azure
+- name: Resources
+  items:
+  - name: Azure Roadmap
+    href: https://azure.microsoft.com/roadmap/
+  - name: Cloud Foundry site
+    href: https://docs.cloudfoundry.org/
+  - name: Installing CF on Azure
+    href: https://docs.pivotal.io/pivotalcf/1-11/customizing/pcf_azure.html
+  - name: Pivotal and Azure
+    href: https://pivotal.io/partners/microsoft
+  - name: Azure DevOps plugin for CF
+    href: https://github.com/Microsoft/vsts-cloudfoundry
+ms.openlocfilehash: ee63fd4e7387777a042c41a8b457f2d9d0ace8e5
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44864383"
