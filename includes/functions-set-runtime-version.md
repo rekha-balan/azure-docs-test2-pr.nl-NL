@@ -1,0 +1,2 @@
+
+<span data-ttu-id="5e1a0-101">To make your function app use the preview 2.0 version of the Functions runtime, set the `FUNCTIONS_EXTENSION_VERSION` app setting in your function app to a value of `beta`.</span><span class="sxs-lookup"><span data-stu-id="5e1a0-101">To make your function app use the preview 2.0 version of the Functions runtime, set the `FUNCTIONS_EXTENSION_VERSION` app setting in your function app to a value of `beta`.</span></span>

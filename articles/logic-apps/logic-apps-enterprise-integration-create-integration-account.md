@@ -1,149 +1,175 @@
 ---
-title: Create, link, delete, or move an integration account in Azure logic apps | Microsoft Docs
-description: How to create an integration account, and link it to your logic apps
+title: Create and manage integration accounts for B2B solutions - Azure Logic Apps | Microsoft Docs
+description: Create, link, move, and delete integration accounts for enterprise integration and B2B solutions with Azure Logic Apps
 services: logic-apps
-documentationcenter: .net,nodejs,java
-author: MandiOhlinger
-manager: anneta
+documentationcenter: ''
+author: ecfan
+manager: jeconnoc
 editor: ''
 ms.assetid: d3ad9e99-a9ee-477b-81bf-0881e11e632f
 ms.service: logic-apps
-ms.workload: integration
-ms.tgt_pltfrm: na
-ms.devlang: na
+ms.workload: logic-apps
+ms.tgt_pltfrm: ''
+ms.devlang: ''
 ms.topic: article
-ms.date: 02/23/2017
-ms.author: mandia
-ms.openlocfilehash: 75eb0f5846cf1b3247a83c012a7965d42037c58b
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 04/30/2018
+ms.author: estfan
+ms.openlocfilehash: 2a1fe501386884e02657d4b6cbef58ffc533fa33
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44556642"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44777107"
 ---
-# <a name="what-is-an-integration-account"></a><span data-ttu-id="dcaeb-103">What is an integration account?</span><span class="sxs-lookup"><span data-stu-id="dcaeb-103">What is an integration account?</span></span>
+# <a name="create-and-manage-integration-accounts-for-b2b-solutions-with-logic-apps"></a><span data-ttu-id="dd2dd-103">Create and manage integration accounts for B2B solutions with logic apps</span><span class="sxs-lookup"><span data-stu-id="dd2dd-103">Create and manage integration accounts for B2B solutions with logic apps</span></span>
 
-<span data-ttu-id="dcaeb-104">An integration account allows enterprise integration apps to manage artifacts, including schemas, maps, certificates, partners and agreements.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-104">An integration account allows enterprise integration apps to manage artifacts, including schemas, maps, certificates, partners and agreements.</span></span> <span data-ttu-id="dcaeb-105">Any integration app you create uses an integration account to access these schemas, maps, certificates, and so on.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-105">Any integration app you create uses an integration account to access these schemas, maps, certificates, and so on.</span></span>
+<span data-ttu-id="dd2dd-104">Before you can build [enterprise integration and B2B solutions](../logic-apps/logic-apps-enterprise-integration-overview.md) with [Azure Logic Apps](../logic-apps/logic-apps-overview.md), you must first have an integration account, which is where you create, store, and manage B2B artifacts, such as trading partners, agreements, maps, schemas, certificates, and so on.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-104">Before you can build [enterprise integration and B2B solutions](../logic-apps/logic-apps-enterprise-integration-overview.md) with [Azure Logic Apps](../logic-apps/logic-apps-overview.md), you must first have an integration account, which is where you create, store, and manage B2B artifacts, such as trading partners, agreements, maps, schemas, certificates, and so on.</span></span> <span data-ttu-id="dd2dd-105">Before your logic app can work with the artifacts in your integration account and use the Logic Apps B2B connectors, such as XML validation, you must [link your integration account](#link-account) to your logic app.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-105">Before your logic app can work with the artifacts in your integration account and use the Logic Apps B2B connectors, such as XML validation, you must [link your integration account](#link-account) to your logic app.</span></span> <span data-ttu-id="dd2dd-106">To link them, both your integration account and logic app must have the *same* Azure location, or region.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-106">To link them, both your integration account and logic app must have the *same* Azure location, or region.</span></span>
 
-## <a name="create-an-integration-account"></a><span data-ttu-id="dcaeb-106">Create an integration account</span><span class="sxs-lookup"><span data-stu-id="dcaeb-106">Create an integration account</span></span>
+<span data-ttu-id="dd2dd-107">This article shows you how to perform these tasks:</span><span class="sxs-lookup"><span data-stu-id="dd2dd-107">This article shows you how to perform these tasks:</span></span>
 
-1.  <span data-ttu-id="dcaeb-107">Sign in to the [Azure portal](http://portal.azure.com "Azure portal").</span><span class="sxs-lookup"><span data-stu-id="dcaeb-107">Sign in to the [Azure portal](http://portal.azure.com "Azure portal").</span></span> <span data-ttu-id="dcaeb-108">From the left menu, select **More services**.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-108">From the left menu, select **More services**.</span></span>
+* <span data-ttu-id="dd2dd-108">Create your integration account.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-108">Create your integration account.</span></span>
+* <span data-ttu-id="dd2dd-109">Link your integration account to a logic app.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-109">Link your integration account to a logic app.</span></span>
+* <span data-ttu-id="dd2dd-110">Move your integration account to another Azure resource group or subscription.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-110">Move your integration account to another Azure resource group or subscription.</span></span>
+* <span data-ttu-id="dd2dd-111">Delete your integration account.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-111">Delete your integration account.</span></span>
 
-    ![Select "More services"](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-accounts/account-1.png)
+<span data-ttu-id="dd2dd-112">If you don't have an Azure subscription, <a href="https://azure.microsoft.com/free/" target="_blank">sign up for a free Azure account</a>.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-112">If you don't have an Azure subscription, <a href="https://azure.microsoft.com/free/" target="_blank">sign up for a free Azure account</a>.</span></span>
 
-2. <span data-ttu-id="dcaeb-110">In the search box, type "integration" for your filter.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-110">In the search box, type "integration" for your filter.</span></span> <span data-ttu-id="dcaeb-111">In the results list, select **Integration Accounts**.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-111">In the results list, select **Integration Accounts**.</span></span>
+## <a name="sign-in-to-the-azure-portal"></a><span data-ttu-id="dd2dd-113">Sign in to the Azure portal</span><span class="sxs-lookup"><span data-stu-id="dd2dd-113">Sign in to the Azure portal</span></span>
 
-    ![Filter on "integration", select "Integration Accounts"](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-accounts/account-2.png)  
+<span data-ttu-id="dd2dd-114">Sign in to the <a href="https://portal.azure.com" target="_blank">Azure portal</a> with your Azure account credentials.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-114">Sign in to the <a href="https://portal.azure.com" target="_blank">Azure portal</a> with your Azure account credentials.</span></span>
 
-3. <span data-ttu-id="dcaeb-113">At the top of the page, choose **Add**.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-113">At the top of the page, choose **Add**.</span></span>
+## <a name="create-integration-account"></a><span data-ttu-id="dd2dd-115">Create integration account</span><span class="sxs-lookup"><span data-stu-id="dd2dd-115">Create integration account</span></span>
 
-    ![Choose Add](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-accounts/account-3.png)
+1. <span data-ttu-id="dd2dd-116">From the main Azure menu, select **All services**.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-116">From the main Azure menu, select **All services**.</span></span> <span data-ttu-id="dd2dd-117">In the search box, enter "integration accounts" as your filter, and select **Integration accounts**.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-117">In the search box, enter "integration accounts" as your filter, and select **Integration accounts**.</span></span>
 
-4. <span data-ttu-id="dcaeb-115">Name your integration account and select the Azure subscription that you want to use.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-115">Name your integration account and select the Azure subscription that you want to use.</span></span> <span data-ttu-id="dcaeb-116">You can either create a new **Resource group** or select an existing resource group.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-116">You can either create a new **Resource group** or select an existing resource group.</span></span> <span data-ttu-id="dcaeb-117">Then select a **Location** for hosting your integration account and a **Pricing Tier**.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-117">Then select a **Location** for hosting your integration account and a **Pricing Tier**.</span></span> 
+   ![Find integration accounts](./media/logic-apps-enterprise-integration-create-integration-account/create-integration-account.png)
 
-    <span data-ttu-id="dcaeb-118">When you're ready, choose **Create**.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-118">When you're ready, choose **Create**.</span></span>
+2. <span data-ttu-id="dd2dd-119">Under **Integration accounts**, choose **Add**.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-119">Under **Integration accounts**, choose **Add**.</span></span>
 
-    ![Provide details for your integration account](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-accounts/account-4.png)
+   ![Choose "Add" to create integration account](./media/logic-apps-enterprise-integration-create-integration-account/add-integration-account.png)
 
-    <span data-ttu-id="dcaeb-120">Azure provisions your integration account  in the selected location, which should complete within 1 minute.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-120">Azure provisions your integration account  in the selected location, which should complete within 1 minute.</span></span>
+3. <span data-ttu-id="dd2dd-121">Provide information about your integration account:</span><span class="sxs-lookup"><span data-stu-id="dd2dd-121">Provide information about your integration account:</span></span> 
 
-5. <span data-ttu-id="dcaeb-121">Refresh the page.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-121">Refresh the page.</span></span> <span data-ttu-id="dcaeb-122">You see your new integration account listed.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-122">You see your new integration account listed.</span></span>
+   ![Provide details for your integration account](./media/logic-apps-enterprise-integration-create-integration-account/integration-account-details.png)
 
-    ![Your new integration account appears](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-accounts/account-5.png) 
+   | <span data-ttu-id="dd2dd-123">Property</span><span class="sxs-lookup"><span data-stu-id="dd2dd-123">Property</span></span> | <span data-ttu-id="dd2dd-124">Required</span><span class="sxs-lookup"><span data-stu-id="dd2dd-124">Required</span></span> | <span data-ttu-id="dd2dd-125">Example value</span><span class="sxs-lookup"><span data-stu-id="dd2dd-125">Example value</span></span> | <span data-ttu-id="dd2dd-126">Description</span><span class="sxs-lookup"><span data-stu-id="dd2dd-126">Description</span></span> | 
+   |----------|----------|---------------|-------------|
+   | <span data-ttu-id="dd2dd-127">Name</span><span class="sxs-lookup"><span data-stu-id="dd2dd-127">Name</span></span> | <span data-ttu-id="dd2dd-128">Yes</span><span class="sxs-lookup"><span data-stu-id="dd2dd-128">Yes</span></span> | <span data-ttu-id="dd2dd-129">test-integration-account</span><span class="sxs-lookup"><span data-stu-id="dd2dd-129">test-integration-account</span></span> | <span data-ttu-id="dd2dd-130">The name for your integration account.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-130">The name for your integration account.</span></span> <span data-ttu-id="dd2dd-131">For this example, use the specified name.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-131">For this example, use the specified name.</span></span> | 
+   | <span data-ttu-id="dd2dd-132">Subscription</span><span class="sxs-lookup"><span data-stu-id="dd2dd-132">Subscription</span></span> | <span data-ttu-id="dd2dd-133">Yes</span><span class="sxs-lookup"><span data-stu-id="dd2dd-133">Yes</span></span> | <span data-ttu-id="dd2dd-134"><*Azure-subscription-name*></span><span class="sxs-lookup"><span data-stu-id="dd2dd-134"><*Azure-subscription-name*></span></span> | <span data-ttu-id="dd2dd-135">The name for the Azure subscription to use</span><span class="sxs-lookup"><span data-stu-id="dd2dd-135">The name for the Azure subscription to use</span></span> | 
+   | <span data-ttu-id="dd2dd-136">Resource group</span><span class="sxs-lookup"><span data-stu-id="dd2dd-136">Resource group</span></span> | <span data-ttu-id="dd2dd-137">Yes</span><span class="sxs-lookup"><span data-stu-id="dd2dd-137">Yes</span></span> | <span data-ttu-id="dd2dd-138">test-integration-account-rg</span><span class="sxs-lookup"><span data-stu-id="dd2dd-138">test-integration-account-rg</span></span> | <span data-ttu-id="dd2dd-139">The name for the [Azure resource group](../azure-resource-manager/resource-group-overview.md) used to organize related resources.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-139">The name for the [Azure resource group](../azure-resource-manager/resource-group-overview.md) used to organize related resources.</span></span> <span data-ttu-id="dd2dd-140">For this example, create a new resource group with the specified name.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-140">For this example, create a new resource group with the specified name.</span></span> | 
+   | <span data-ttu-id="dd2dd-141">Pricing Tier</span><span class="sxs-lookup"><span data-stu-id="dd2dd-141">Pricing Tier</span></span> | <span data-ttu-id="dd2dd-142">Yes</span><span class="sxs-lookup"><span data-stu-id="dd2dd-142">Yes</span></span> | <span data-ttu-id="dd2dd-143">Free</span><span class="sxs-lookup"><span data-stu-id="dd2dd-143">Free</span></span> | <span data-ttu-id="dd2dd-144">The pricing tier that you want to use.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-144">The pricing tier that you want to use.</span></span> <span data-ttu-id="dd2dd-145">For this example, select **Free**, but for more information, see [Logic Apps limits and configuration](../logic-apps/logic-apps-limits-and-config.md) and [Logic Apps pricing](https://azure.microsoft.com/pricing/details/logic-apps/).</span><span class="sxs-lookup"><span data-stu-id="dd2dd-145">For this example, select **Free**, but for more information, see [Logic Apps limits and configuration](../logic-apps/logic-apps-limits-and-config.md) and [Logic Apps pricing](https://azure.microsoft.com/pricing/details/logic-apps/).</span></span> | 
+   | <span data-ttu-id="dd2dd-146">Location</span><span class="sxs-lookup"><span data-stu-id="dd2dd-146">Location</span></span> | <span data-ttu-id="dd2dd-147">Yes</span><span class="sxs-lookup"><span data-stu-id="dd2dd-147">Yes</span></span> | <span data-ttu-id="dd2dd-148">West US</span><span class="sxs-lookup"><span data-stu-id="dd2dd-148">West US</span></span> | <span data-ttu-id="dd2dd-149">The region where to store your integration account information.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-149">The region where to store your integration account information.</span></span> <span data-ttu-id="dd2dd-150">Either select the same location as your logic app, or create a logic app in the same location as your integration account.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-150">Either select the same location as your logic app, or create a logic app in the same location as your integration account.</span></span> | 
+   | <span data-ttu-id="dd2dd-151">Log Analytics</span><span class="sxs-lookup"><span data-stu-id="dd2dd-151">Log Analytics</span></span> | <span data-ttu-id="dd2dd-152">No</span><span class="sxs-lookup"><span data-stu-id="dd2dd-152">No</span></span> | <span data-ttu-id="dd2dd-153">Off</span><span class="sxs-lookup"><span data-stu-id="dd2dd-153">Off</span></span> | <span data-ttu-id="dd2dd-154">Keep the **Off** setting for diagnostic logging.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-154">Keep the **Off** setting for diagnostic logging.</span></span> | 
+   ||||| 
 
-<span data-ttu-id="dcaeb-124">Next, link the integration account that you created to your logic app.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-124">Next, link the integration account that you created to your logic app.</span></span> 
+4. <span data-ttu-id="dd2dd-155">When you're ready, select **Pin to dashboard**, and choose **Create**.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-155">When you're ready, select **Pin to dashboard**, and choose **Create**.</span></span>
 
-## <a name="link-an-integration-account-to-a-logic-app"></a><span data-ttu-id="dcaeb-125">Link an integration account to a logic app</span><span class="sxs-lookup"><span data-stu-id="dcaeb-125">Link an integration account to a logic app</span></span>
+   <span data-ttu-id="dd2dd-156">After Azure deploys your integration account to the selected location, which usually finishes within one minute, Azure opens your integration account.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-156">After Azure deploys your integration account to the selected location, which usually finishes within one minute, Azure opens your integration account.</span></span>
 
-<span data-ttu-id="dcaeb-126">To give your logic apps access to maps, schemas, agreements, and other artifacts in your integration account, link the integration account to your logic app.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-126">To give your logic apps access to maps, schemas, agreements, and other artifacts in your integration account, link the integration account to your logic app.</span></span>
+   ![Azure opens your integration account](./media/logic-apps-enterprise-integration-create-integration-account/integration-account-created.png)
 
-### <a name="prerequisites"></a><span data-ttu-id="dcaeb-127">Prerequisites</span><span class="sxs-lookup"><span data-stu-id="dcaeb-127">Prerequisites</span></span>
+<span data-ttu-id="dd2dd-158">Now, before your logic app can use your integration account, you must link the integration account to your logic app.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-158">Now, before your logic app can use your integration account, you must link the integration account to your logic app.</span></span>
 
-* <span data-ttu-id="dcaeb-128">An integration account</span><span class="sxs-lookup"><span data-stu-id="dcaeb-128">An integration account</span></span>
-* <span data-ttu-id="dcaeb-129">A logic app</span><span class="sxs-lookup"><span data-stu-id="dcaeb-129">A logic app</span></span>
+<a name="link-account"></a>
 
-> [!NOTE] 
-> <span data-ttu-id="dcaeb-130">Make sure your integration account and logic app are in the *same Azure location* before you begin.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-130">Make sure your integration account and logic app are in the *same Azure location* before you begin.</span></span>
+## <a name="link-to-logic-app"></a><span data-ttu-id="dd2dd-159">Link to logic app</span><span class="sxs-lookup"><span data-stu-id="dd2dd-159">Link to logic app</span></span>
 
+<span data-ttu-id="dd2dd-160">To give your logic apps access to an integration account that contains your B2B artifacts, such as trading partners, agreements, maps, and schemas, you must link your integration account to your logic app.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-160">To give your logic apps access to an integration account that contains your B2B artifacts, such as trading partners, agreements, maps, and schemas, you must link your integration account to your logic app.</span></span> 
 
-1. <span data-ttu-id="dcaeb-131">In the Azure portal, select your logic app, and check your logic app's location.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-131">In the Azure portal, select your logic app, and check your logic app's location.</span></span>
+> [!NOTE]
+> <span data-ttu-id="dd2dd-161">Your integration account and logic app must exist in the same region.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-161">Your integration account and logic app must exist in the same region.</span></span>
 
-    ![Select your logic app, check location](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-accounts/linkaccount-1.png)
+1. <span data-ttu-id="dd2dd-162">In the Azure portal, find and open your logic app.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-162">In the Azure portal, find and open your logic app.</span></span>
 
-2. <span data-ttu-id="dcaeb-133">Under **Settings**, select **Integration Account**.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-133">Under **Settings**, select **Integration Account**.</span></span>
+2. <span data-ttu-id="dd2dd-163">On your logic app's menu, under **Settings**, select **Workflow settings**.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-163">On your logic app's menu, under **Settings**, select **Workflow settings**.</span></span> <span data-ttu-id="dd2dd-164">In the **Select an Integration account** list, select the integration account to link to your logic app.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-164">In the **Select an Integration account** list, select the integration account to link to your logic app.</span></span>
 
-    ![Select "Integration Account"](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-accounts/linkaccount-2.png)
+   ![Select your integration account](./media/logic-apps-enterprise-integration-create-integration-account/linkaccount-2.png)
 
-3. <span data-ttu-id="dcaeb-135">From the **Select an Integration account** list, select the integration account you want to link to your logic app.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-135">From the **Select an Integration account** list, select the integration account you want to link to your logic app.</span></span> <span data-ttu-id="dcaeb-136">To finish linking, choose **Save**.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-136">To finish linking, choose **Save**.</span></span>
+3. <span data-ttu-id="dd2dd-166">To finish linking, choose **Save**.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-166">To finish linking, choose **Save**.</span></span>
 
-    ![Select your integration account](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-accounts/linkaccount-3.png)
+   ![Select your integration account](./media/logic-apps-enterprise-integration-create-integration-account/linkaccount-3.png)
 
-    <span data-ttu-id="dcaeb-138">You get a notification that shows your integration account is linked to your logic app,  and that all artifacts in your integration account are now available to your logic app.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-138">You get a notification that shows your integration account is linked to your logic app,  and that all artifacts in your integration account are now available to your logic app.</span></span>
+   <span data-ttu-id="dd2dd-168">When your integration account is successfully linked, Azure shows a confirmation message.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-168">When your integration account is successfully linked, Azure shows a confirmation message.</span></span> 
 
-    ![Your logic app is linked to your integration account](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-accounts/linkaccount-5.png)
+   ![Azure confirms successful link](./media/logic-apps-enterprise-integration-create-integration-account/linkaccount-5.png)
 
-<span data-ttu-id="dcaeb-140">Now that your integration account is linked to your logic app, you can use the B2B connectors in your logic apps.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-140">Now that your integration account is linked to your logic app, you can use the B2B connectors in your logic apps.</span></span> <span data-ttu-id="dcaeb-141">Some common B2B connectors include XML validation and flat file encode/decode.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-141">Some common B2B connectors include XML validation and flat file encode/decode.</span></span>  
+<span data-ttu-id="dd2dd-170">Now your logic app can use any and all the artifacts in your integration account plus the B2B connectors, such as XML validation and flat file encoding or decoding.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-170">Now your logic app can use any and all the artifacts in your integration account plus the B2B connectors, such as XML validation and flat file encoding or decoding.</span></span>  
 
-## <a name="delete-your-integration-account"></a><span data-ttu-id="dcaeb-142">Delete your integration account</span><span class="sxs-lookup"><span data-stu-id="dcaeb-142">Delete your integration account</span></span>
+## <a name="unlink-from-logic-app"></a><span data-ttu-id="dd2dd-171">Unlink from logic app</span><span class="sxs-lookup"><span data-stu-id="dd2dd-171">Unlink from logic app</span></span>
 
-1. <span data-ttu-id="dcaeb-143">Select **More services**.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-143">Select **More services**.</span></span>
+<span data-ttu-id="dd2dd-172">To link your logic app to another integration account, or no longer use an integration account with your logic app, you can delete the link through Azure Resource Explorer.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-172">To link your logic app to another integration account, or no longer use an integration account with your logic app, you can delete the link through Azure Resource Explorer.</span></span>
 
-    ![Select "More services"](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-accounts/account-1.png)
+1. <span data-ttu-id="dd2dd-173">In your browser, go to <a href="https://resources.azure.com" target="_blank">Azure Resource Explorer (https://resources.azure.com)</a>.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-173">In your browser, go to <a href="https://resources.azure.com" target="_blank">Azure Resource Explorer (https://resources.azure.com)</a>.</span></span> <span data-ttu-id="dd2dd-174">Make sure that you're signed in with the same Azure credentials.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-174">Make sure that you're signed in with the same Azure credentials.</span></span>
 
-2. <span data-ttu-id="dcaeb-145">In the search box, type "integration" for your filter.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-145">In the search box, type "integration" for your filter.</span></span> <span data-ttu-id="dcaeb-146">In the results list, select **Integration Accounts**.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-146">In the results list, select **Integration Accounts**.</span></span>
+   ![Azure Resource Explorer](./media/logic-apps-enterprise-integration-create-integration-account/resource-explorer.png)
 
-    ![Filter on "integration", select "Integration Accounts"](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-accounts/account-2.png)  
+2. <span data-ttu-id="dd2dd-176">In the search box, enter your logic app's name, then find and select your logic app.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-176">In the search box, enter your logic app's name, then find and select your logic app.</span></span>
 
-3. <span data-ttu-id="dcaeb-148">Select the integration account that you want to delete.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-148">Select the integration account that you want to delete.</span></span>
+   ![Find and select logic app](./media/logic-apps-enterprise-integration-create-integration-account/resource-explorer-find-logic-app.png)
 
-    ![Select integration account to delete](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-accounts/account-5.png)
+3. <span data-ttu-id="dd2dd-178">On the explorer title bar, choose **Read/Write**.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-178">On the explorer title bar, choose **Read/Write**.</span></span>
 
-4. <span data-ttu-id="dcaeb-150">On the menu, choose **Delete**.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-150">On the menu, choose **Delete**.</span></span>
+   ![Turn on "Read/Write" mode](./media/logic-apps-enterprise-integration-create-integration-account/resource-explorer-choose-read-write-mode.png)
 
-    ![Choose "Delete"](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-accounts/delete.png)
+4. <span data-ttu-id="dd2dd-180">On the **Data** tab, choose **Edit**.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-180">On the **Data** tab, choose **Edit**.</span></span>
 
-5. <span data-ttu-id="dcaeb-152">Confirm your choice to delete the integration account.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-152">Confirm your choice to delete the integration account.</span></span>
+   ![On "Data" tab, choose "Edit"](./media/logic-apps-enterprise-integration-create-integration-account/resource-explorer-choose-edit.png)
 
-## <a name="move-your-integration-account"></a><span data-ttu-id="dcaeb-153">Move your integration account</span><span class="sxs-lookup"><span data-stu-id="dcaeb-153">Move your integration account</span></span>
+5. <span data-ttu-id="dd2dd-182">In the editor, find the `integrationAccount` property for the integration account and delete that property, which has this format:</span><span class="sxs-lookup"><span data-stu-id="dd2dd-182">In the editor, find the `integrationAccount` property for the integration account and delete that property, which has this format:</span></span>
 
-<span data-ttu-id="dcaeb-154">To move an integration account to another Azure subscription or resource group, follow these steps.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-154">To move an integration account to another Azure subscription or resource group, follow these steps.</span></span>
+   ```json
+   "integrationAccount": {
+      "name": "<integration-account-name>",
+      "id": "<integration-account-resource-ID>",
+      "type": "Microsoft.Logic/integrationAccounts"  
+   },
+   ```
 
-> [!IMPORTANT]
-> <span data-ttu-id="dcaeb-155">You must update all scripts to use the new resource IDs after you move an integration account.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-155">You must update all scripts to use the new resource IDs after you move an integration account.</span></span>
+   <span data-ttu-id="dd2dd-183">For example:</span><span class="sxs-lookup"><span data-stu-id="dd2dd-183">For example:</span></span>
 
-1. <span data-ttu-id="dcaeb-156">Select **More services**.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-156">Select **More services**.</span></span>
+   ![Find "integrationAccount" property definition](./media/logic-apps-enterprise-integration-create-integration-account/resource-explorer-delete-integration-account.png)
 
-    ![Select "More services"](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-accounts/account-1.png)
+6. <span data-ttu-id="dd2dd-185">On the **Data** tab, choose **Put** to save your changes.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-185">On the **Data** tab, choose **Put** to save your changes.</span></span> 
 
-2. <span data-ttu-id="dcaeb-158">In the search box, type "integration" for your filter.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-158">In the search box, type "integration" for your filter.</span></span> <span data-ttu-id="dcaeb-159">In the results list, select **Integration Accounts**.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-159">In the results list, select **Integration Accounts**.</span></span>
+   ![Choose "Put" to save changes](./media/logic-apps-enterprise-integration-create-integration-account/resource-explorer-save-changes.png)
 
-    ![Filter on "integration", select "Integration Accounts"](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-accounts/account-2.png)
+7. <span data-ttu-id="dd2dd-187">In the Azure portal, under your logic app's **Workflow settings**, check that the **Integration account** property now appears empty.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-187">In the Azure portal, under your logic app's **Workflow settings**, check that the **Integration account** property now appears empty.</span></span>
 
-3. <span data-ttu-id="dcaeb-161">Select the integration account that you want to move.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-161">Select the integration account that you want to move.</span></span> <span data-ttu-id="dcaeb-162">Under **Settings**, choose **Properties**.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-162">Under **Settings**, choose **Properties**.</span></span>
+   ![Check that integration account is not linked](./media/logic-apps-enterprise-integration-create-integration-account/unlinked-account.png)
 
-    ![Select integration account to move.](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-accounts/move.png)
+## <a name="move-integration-account"></a><span data-ttu-id="dd2dd-189">Move integration account</span><span class="sxs-lookup"><span data-stu-id="dd2dd-189">Move integration account</span></span>
 
-5. <span data-ttu-id="dcaeb-165">Change the resource group or Azure subscription that's associated with your integration account.</span><span class="sxs-lookup"><span data-stu-id="dcaeb-165">Change the resource group or Azure subscription that's associated with your integration account.</span></span>
+<span data-ttu-id="dd2dd-190">You can move your integration account to another Azure subscription or resource group.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-190">You can move your integration account to another Azure subscription or resource group.</span></span>
 
-    ![Choose Change resource group or Change subscription](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-enterprise-integration-accounts/move-2.png)
+1. <span data-ttu-id="dd2dd-191">On the main Azure menu, select **All services**.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-191">On the main Azure menu, select **All services**.</span></span> <span data-ttu-id="dd2dd-192">In the search box, enter "integration accounts" as your filter, and select **Integration accounts**.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-192">In the search box, enter "integration accounts" as your filter, and select **Integration accounts**.</span></span>
 
-## <a name="next-steps"></a><span data-ttu-id="dcaeb-167">Next Steps</span><span class="sxs-lookup"><span data-stu-id="dcaeb-167">Next Steps</span></span>
-* [<span data-ttu-id="dcaeb-168">Learn more about agreements</span><span class="sxs-lookup"><span data-stu-id="dcaeb-168">Learn more about agreements</span></span>](../logic-apps/logic-apps-enterprise-integration-agreements.md "Learn about enterprise integration agreements")  
+   ![Find your integration account](./media/logic-apps-enterprise-integration-create-integration-account/create-integration-account.png)
 
+2. <span data-ttu-id="dd2dd-194">Under **Integration accounts**, select the integration account that you want to move.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-194">Under **Integration accounts**, select the integration account that you want to move.</span></span> <span data-ttu-id="dd2dd-195">On your integration account menu, under **Settings**, choose **Properties**.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-195">On your integration account menu, under **Settings**, choose **Properties**.</span></span>
 
+   ![Under "Settings", choose "Properties"](./media/logic-apps-enterprise-integration-create-integration-account/integration-account-properties.png)
 
+3. <span data-ttu-id="dd2dd-197">Change either the Azure resource group or subscription for your integration account.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-197">Change either the Azure resource group or subscription for your integration account.</span></span>
 
+   ![Choose "Change resource group" or "Change subscription"](./media/logic-apps-enterprise-integration-create-integration-account/change-resource-group-subscription.png)
 
+4. <span data-ttu-id="dd2dd-199">When you're done, make sure that you update any and all scripts with the new resource IDs for your artifacts.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-199">When you're done, make sure that you update any and all scripts with the new resource IDs for your artifacts.</span></span>  
 
+## <a name="delete-integration-account"></a><span data-ttu-id="dd2dd-200">Delete integration account</span><span class="sxs-lookup"><span data-stu-id="dd2dd-200">Delete integration account</span></span>
 
+1. <span data-ttu-id="dd2dd-201">On the main Azure menu, select **All services**.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-201">On the main Azure menu, select **All services**.</span></span> <span data-ttu-id="dd2dd-202">In the search box, enter "integration accounts" as your filter, and select **Integration accounts**.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-202">In the search box, enter "integration accounts" as your filter, and select **Integration accounts**.</span></span>
 
+   ![Find your integration account](./media/logic-apps-enterprise-integration-create-integration-account/create-integration-account.png)
 
+2. <span data-ttu-id="dd2dd-204">Under **Integration accounts**, select the integration account that you want to delete.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-204">Under **Integration accounts**, select the integration account that you want to delete.</span></span> <span data-ttu-id="dd2dd-205">On the integration account menu, choose **Overview**, then choose **Delete**.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-205">On the integration account menu, choose **Overview**, then choose **Delete**.</span></span> 
 
+   ![Select integration account.](./media/logic-apps-enterprise-integration-create-integration-account/delete-integration-account.png)
 
+3. <span data-ttu-id="dd2dd-208">To confirm that you want to delete your integration account, choose **Yes**.</span><span class="sxs-lookup"><span data-stu-id="dd2dd-208">To confirm that you want to delete your integration account, choose **Yes**.</span></span>
 
+   ![To confirm delete, choose "Yes"](./media/logic-apps-enterprise-integration-create-integration-account/confirm-delete.png)
 
+## <a name="next-steps"></a><span data-ttu-id="dd2dd-210">Next steps</span><span class="sxs-lookup"><span data-stu-id="dd2dd-210">Next steps</span></span>
 
-
-
-
-
+* [<span data-ttu-id="dd2dd-211">Create trading partners</span><span class="sxs-lookup"><span data-stu-id="dd2dd-211">Create trading partners</span></span>](../logic-apps/logic-apps-enterprise-integration-partners.md)
+* [<span data-ttu-id="dd2dd-212">Create agreements</span><span class="sxs-lookup"><span data-stu-id="dd2dd-212">Create agreements</span></span>](../logic-apps/logic-apps-enterprise-integration-agreements.md)

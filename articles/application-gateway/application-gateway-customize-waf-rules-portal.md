@@ -1,10 +1,10 @@
 ---
-title: Customize web application firewall rules in Azure Application Gateway - Portal | Microsoft Docs
-description: This page provides information on how to customize web application firewall rules in Application Gateway with the portal.
+title: Customize web application firewall rules in Azure Application Gateway - Azure portal | Microsoft Docs
+description: This article provides information on how to customize web application firewall rules in Application Gateway with the Azure portal.
 documentationcenter: na
 services: application-gateway
-author: georgewallace
-manager: timlt
+author: vhorne
+manager: jpconnock
 editor: tysonn
 ms.assetid: 1159500b-17ba-41e7-88d6-b96986795084
 ms.service: application-gateway
@@ -14,49 +14,60 @@ ms.tgt_pltfrm: na
 ms.custom: ''
 ms.workload: infrastructure-services
 ms.date: 03/28/2017
-ms.author: gwallace
-ms.openlocfilehash: 742ec41f95550c148de69569f5e0fa6d7c7fedc8
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: victorh
+ms.openlocfilehash: ae61e3a8308e95c16ccde71de37fb10666ef0df9
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44563777"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44776912"
 ---
-# <a name="customize-web-application-firewall-rules-through-the-portal"></a><span data-ttu-id="bc127-103">Customize web application firewall rules through the portal</span><span class="sxs-lookup"><span data-stu-id="bc127-103">Customize web application firewall rules through the portal</span></span>
+# <a name="customize-web-application-firewall-rules-through-the-azure-portal"></a><span data-ttu-id="dbeb8-103">Customize web application firewall rules through the Azure portal</span><span class="sxs-lookup"><span data-stu-id="dbeb8-103">Customize web application firewall rules through the Azure portal</span></span>
 
-<span data-ttu-id="bc127-104">Application Gateway web application firewall provides protection for web applications.</span><span class="sxs-lookup"><span data-stu-id="bc127-104">Application Gateway web application firewall provides protection for web applications.</span></span> <span data-ttu-id="bc127-105">These protections are provided by OWASP CRS rulesets.</span><span class="sxs-lookup"><span data-stu-id="bc127-105">These protections are provided by OWASP CRS rulesets.</span></span> <span data-ttu-id="bc127-106">Some rules can cause false positives and block real traffic.</span><span class="sxs-lookup"><span data-stu-id="bc127-106">Some rules can cause false positives and block real traffic.</span></span>  <span data-ttu-id="bc127-107">For this reason application gateway provides the capability to customize rulegroups and rules on a web application firewall enabled application gateway.</span><span class="sxs-lookup"><span data-stu-id="bc127-107">For this reason application gateway provides the capability to customize rulegroups and rules on a web application firewall enabled application gateway.</span></span> <span data-ttu-id="bc127-108">For more information on the specific rule groups and rules, visit [web application firewall CRS Rule groups and rules](application-gateway-crs-rulegroups-rules.md)</span><span class="sxs-lookup"><span data-stu-id="bc127-108">For more information on the specific rule groups and rules, visit [web application firewall CRS Rule groups and rules](application-gateway-crs-rulegroups-rules.md)</span></span>
+> [!div class="op_single_selector"]
+> * [Azure portal](application-gateway-customize-waf-rules-portal.md)
+> * [PowerShell](application-gateway-customize-waf-rules-powershell.md)
+> * [Azure CLI 2.0](application-gateway-customize-waf-rules-cli.md)
+
+<span data-ttu-id="dbeb8-107">The Azure Application Gateway web application firewall (WAF) provides protection for web applications.</span><span class="sxs-lookup"><span data-stu-id="dbeb8-107">The Azure Application Gateway web application firewall (WAF) provides protection for web applications.</span></span> <span data-ttu-id="dbeb8-108">These protections are provided by the Open Web Application Security Project (OWASP) Core Rule Set (CRS).</span><span class="sxs-lookup"><span data-stu-id="dbeb8-108">These protections are provided by the Open Web Application Security Project (OWASP) Core Rule Set (CRS).</span></span> <span data-ttu-id="dbeb8-109">Some rules can cause false positives and block real traffic.</span><span class="sxs-lookup"><span data-stu-id="dbeb8-109">Some rules can cause false positives and block real traffic.</span></span> <span data-ttu-id="dbeb8-110">For this reason, Application Gateway provides the capability to customize rule groups and rules.</span><span class="sxs-lookup"><span data-stu-id="dbeb8-110">For this reason, Application Gateway provides the capability to customize rule groups and rules.</span></span> <span data-ttu-id="dbeb8-111">For more information on the specific rule groups and rules, see [List of web application firewall CRS rule groups and rules](application-gateway-crs-rulegroups-rules.md).</span><span class="sxs-lookup"><span data-stu-id="dbeb8-111">For more information on the specific rule groups and rules, see [List of web application firewall CRS rule groups and rules](application-gateway-crs-rulegroups-rules.md).</span></span>
 
 >[!NOTE]
-> <span data-ttu-id="bc127-109">If your application gateway is not using the WAF tier, you are presented the option to upgrade the application gateway to the WAF tier as shown in the following image:</span><span class="sxs-lookup"><span data-stu-id="bc127-109">If your application gateway is not using the WAF tier, you are presented the option to upgrade the application gateway to the WAF tier as shown in the following image:</span></span>
+> If your application gateway is not using the WAF tier, the option to upgrade the application gateway to the WAF tier appears in the right pane. 
 
-![enable waf][fig1]
+![Enable WAF][fig1]
 
-## <a name="view-rule-groups-and-rules"></a><span data-ttu-id="bc127-111">View rule groups and rules</span><span class="sxs-lookup"><span data-stu-id="bc127-111">View rule groups and rules</span></span>
+## <a name="view-rule-groups-and-rules"></a><span data-ttu-id="dbeb8-114">View rule groups and rules</span><span class="sxs-lookup"><span data-stu-id="dbeb8-114">View rule groups and rules</span></span>
 
-<span data-ttu-id="bc127-112">Navigate to an application gateway and select **Web application firewall**.</span><span class="sxs-lookup"><span data-stu-id="bc127-112">Navigate to an application gateway and select **Web application firewall**.</span></span>  <span data-ttu-id="bc127-113">Click **Advanced rule configuration**.</span><span class="sxs-lookup"><span data-stu-id="bc127-113">Click **Advanced rule configuration**.</span></span>  <span data-ttu-id="bc127-114">This shows a table on the page of all the rule groups provided with the rule set chosen.</span><span class="sxs-lookup"><span data-stu-id="bc127-114">This shows a table on the page of all the rule groups provided with the rule set chosen.</span></span>
+<span data-ttu-id="dbeb8-115">**To view rule groups and rules**</span><span class="sxs-lookup"><span data-stu-id="dbeb8-115">**To view rule groups and rules**</span></span>
+   1. <span data-ttu-id="dbeb8-116">Browse to the application gateway, and then select **Web application firewall**.</span><span class="sxs-lookup"><span data-stu-id="dbeb8-116">Browse to the application gateway, and then select **Web application firewall**.</span></span>  
+   2. <span data-ttu-id="dbeb8-117">Select **Advanced rule configuration**.</span><span class="sxs-lookup"><span data-stu-id="dbeb8-117">Select **Advanced rule configuration**.</span></span>  
+   <span data-ttu-id="dbeb8-118">This view shows a table on the page of all the rule groups provided with the chosen rule set.</span><span class="sxs-lookup"><span data-stu-id="dbeb8-118">This view shows a table on the page of all the rule groups provided with the chosen rule set.</span></span> <span data-ttu-id="dbeb8-119">All of the rule's check boxes are selected.</span><span class="sxs-lookup"><span data-stu-id="dbeb8-119">All of the rule's check boxes are selected.</span></span>
 
-![configure disabled rules][1]
+![Configure disabled rules][1]
 
-## <a name="search-for-rules-to-disable"></a><span data-ttu-id="bc127-116">Search for rules to disable</span><span class="sxs-lookup"><span data-stu-id="bc127-116">Search for rules to disable</span></span>
+## <a name="search-for-rules-to-disable"></a><span data-ttu-id="dbeb8-121">Search for rules to disable</span><span class="sxs-lookup"><span data-stu-id="dbeb8-121">Search for rules to disable</span></span>
 
-<span data-ttu-id="bc127-117">The web application firewall settings blade provides the capability to filter the rules by a text search.</span><span class="sxs-lookup"><span data-stu-id="bc127-117">The web application firewall settings blade provides the capability to filter the rules by a text search.</span></span> <span data-ttu-id="bc127-118">The result displays only rule groups and rules that contain the text that is being searched for.</span><span class="sxs-lookup"><span data-stu-id="bc127-118">The result displays only rule groups and rules that contain the text that is being searched for.</span></span>
+<span data-ttu-id="dbeb8-122">The **Web application firewall settings** blade provides the capability to filter the rules through a text search.</span><span class="sxs-lookup"><span data-stu-id="dbeb8-122">The **Web application firewall settings** blade provides the capability to filter the rules through a text search.</span></span> <span data-ttu-id="dbeb8-123">The result displays only the rule groups and rules that contain the text you searched for.</span><span class="sxs-lookup"><span data-stu-id="dbeb8-123">The result displays only the rule groups and rules that contain the text you searched for.</span></span>
 
-![search for rules][2]
+![Search for rules][2]
 
-## <a name="disable-rule-groups-and-rules"></a><span data-ttu-id="bc127-120">Disable rule groups and rules</span><span class="sxs-lookup"><span data-stu-id="bc127-120">Disable rule groups and rules</span></span>
+## <a name="disable-rule-groups-and-rules"></a><span data-ttu-id="dbeb8-125">Disable rule groups and rules</span><span class="sxs-lookup"><span data-stu-id="dbeb8-125">Disable rule groups and rules</span></span>
 
-<span data-ttu-id="bc127-121">When disabling rules you can disable an entire rule group, or specific rules under one or more rule groups.</span><span class="sxs-lookup"><span data-stu-id="bc127-121">When disabling rules you can disable an entire rule group, or specific rules under one or more rule groups.</span></span>  <span data-ttu-id="bc127-122">Once the rules that you want to disable are unchecked, click **Save**.</span><span class="sxs-lookup"><span data-stu-id="bc127-122">Once the rules that you want to disable are unchecked, click **Save**.</span></span>  <span data-ttu-id="bc127-123">This saves the changes to the application gateway.</span><span class="sxs-lookup"><span data-stu-id="bc127-123">This saves the changes to the application gateway.</span></span>
+<span data-ttu-id="dbeb8-126">When your're disabling rules, you can disable an entire rule group or specific rules under one or more rule groups.</span><span class="sxs-lookup"><span data-stu-id="dbeb8-126">When your're disabling rules, you can disable an entire rule group or specific rules under one or more rule groups.</span></span> 
 
-![save changes][3]
+<span data-ttu-id="dbeb8-127">**To disable rule groups or specific rules**</span><span class="sxs-lookup"><span data-stu-id="dbeb8-127">**To disable rule groups or specific rules**</span></span>
 
-## <a name="next-steps"></a><span data-ttu-id="bc127-125">Next steps</span><span class="sxs-lookup"><span data-stu-id="bc127-125">Next steps</span></span>
+   1. <span data-ttu-id="dbeb8-128">Search for the rules or rule groups that you want to disable.</span><span class="sxs-lookup"><span data-stu-id="dbeb8-128">Search for the rules or rule groups that you want to disable.</span></span>
+   2. <span data-ttu-id="dbeb8-129">Clear the check boxes for the rules that you want to disable.</span><span class="sxs-lookup"><span data-stu-id="dbeb8-129">Clear the check boxes for the rules that you want to disable.</span></span> 
+   2. <span data-ttu-id="dbeb8-130">Select **Save**.</span><span class="sxs-lookup"><span data-stu-id="dbeb8-130">Select **Save**.</span></span> 
 
-<span data-ttu-id="bc127-126">Once you configure your disabled rules, learn how to view your WAF logs by visiting [Application Gateway Diagnostics](application-gateway-diagnostics.md#diagnostic-logging)</span><span class="sxs-lookup"><span data-stu-id="bc127-126">Once you configure your disabled rules, learn how to view your WAF logs by visiting [Application Gateway Diagnostics](application-gateway-diagnostics.md#diagnostic-logging)</span></span>
+![Save changes][3]
 
-[fig1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-gateway/media/application-gateway-customize-waf-rules-portal/1.png
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-gateway/media/application-gateway-customize-waf-rules-portal/figure1.png
-[2]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-gateway/media/application-gateway-customize-waf-rules-portal/figure2.png
-[3]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-gateway/media/application-gateway-customize-waf-rules-portal/figure3.png
+## <a name="next-steps"></a><span data-ttu-id="dbeb8-132">Next steps</span><span class="sxs-lookup"><span data-stu-id="dbeb8-132">Next steps</span></span>
 
+<span data-ttu-id="dbeb8-133">After you configure your disabled rules, you can learn how to view your WAF logs.</span><span class="sxs-lookup"><span data-stu-id="dbeb8-133">After you configure your disabled rules, you can learn how to view your WAF logs.</span></span> <span data-ttu-id="dbeb8-134">For more information, see [Application Gateway diagnostics](application-gateway-diagnostics.md#diagnostic-logging).</span><span class="sxs-lookup"><span data-stu-id="dbeb8-134">For more information, see [Application Gateway diagnostics](application-gateway-diagnostics.md#diagnostic-logging).</span></span>
 
-
+[fig1]: ./media/application-gateway-customize-waf-rules-portal/1.png
+[1]: ./media/application-gateway-customize-waf-rules-portal/figure1.png
+[2]: ./media/application-gateway-customize-waf-rules-portal/figure2.png
+[3]: ./media/application-gateway-customize-waf-rules-portal/figure3.png

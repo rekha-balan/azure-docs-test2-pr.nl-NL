@@ -1,0 +1,41 @@
+### YamlMime:YamlDocument
+ms.openlocfilehash: 7625fbb02a1ede91c01c35cddd286f4c26ad77be
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44865744"
+documentType: LandingData
+title: Container Service Documentation
+metadata:
+  document_id: 
+  title: Azure Container Service Documentation - Tutorials, API Reference | Microsoft Docs
+  meta.description: Azure Container Service allows you to quickly deploy a production ready Kubernetes, DC/OS, or Docker Swarm cluster. Learn how to use Azure Container Service with these quickstarts, tutorials, and samples.
+  services: container-service
+  author: czeumault
+  manager: carolz
+  ms.service: container-service
+  ms.tgt_pltfrm: na
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 07-21-2017
+  ms.author: carolz
+abstract:
+  description: Azure Container Service allows you to quickly deploy a production ready Kubernetes, DC/OS, or Docker Swarm cluster. Learn how to use Azure Container Service with these quickstarts, tutorials, and samples.
+sections:
+- title: 
+  items:
+  - type: list
+    style: cards
+    className: cardsFTitle
+    items:
+    - title: Getting started with Kubernetes clusters
+      href: /azure/container-service/kubernetes
+      image:
+        src: media/index/get-started.svg
+        href: /azure/container-service/kubernetes
+    - title: Getting started with DC/OS and Docker Swarm clusters
+      href: /azure/container-service/dcos-swarm
+      image:
+        src: media/index/get-started.svg
+        href: /azure/container-service/dcos-swarm

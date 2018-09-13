@@ -1,6 +1,6 @@
 ---
-title: Create your first actor-based Azure microservice in C# | Microsoft Docs
-description: This tutorial walks you through the steps of creating, debugging, and deploying a simple actor-based service using Service Fabric Reliable Actors.
+title: Create an actor-based service on Azure Service Fabric | Microsoft Docs
+description: Learn how to create, debug, and deploy your first actor-based service in C# using Service Fabric Reliable Actors.
 services: service-fabric
 documentationcenter: .net
 author: vturecek
@@ -9,152 +9,164 @@ editor: ''
 ms.assetid: d4aebe72-1551-4062-b1eb-54d83297f139
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 03/06/2017
+ms.date: 03/16/2018
 ms.author: vturecek
-ms.openlocfilehash: d90b881ef1afbdec52874df0d4f3708c9f7ff95d
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 14fd73d6ff50e297c40ae34d0501c7a3185a468e
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44660917"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44780603"
 ---
-# <a name="getting-started-with-reliable-actors"></a><span data-ttu-id="1be90-103">Getting started with Reliable Actors</span><span class="sxs-lookup"><span data-stu-id="1be90-103">Getting started with Reliable Actors</span></span>
+# <a name="getting-started-with-reliable-actors"></a><span data-ttu-id="8f431-103">Getting started with Reliable Actors</span><span class="sxs-lookup"><span data-stu-id="8f431-103">Getting started with Reliable Actors</span></span>
 > [!div class="op_single_selector"]
 > * [C# on Windows](service-fabric-reliable-actors-get-started.md)
 > * [Java on Linux](service-fabric-reliable-actors-get-started-java.md)
-> 
-> 
 
-<span data-ttu-id="1be90-106">This article explains the basics of Azure Service Fabric Reliable Actors and walks you through creating, debugging, and deploying a simple Reliable Actor application in Visual Studio.</span><span class="sxs-lookup"><span data-stu-id="1be90-106">This article explains the basics of Azure Service Fabric Reliable Actors and walks you through creating, debugging, and deploying a simple Reliable Actor application in Visual Studio.</span></span>
+<span data-ttu-id="8f431-106">This article walks through creating and debugging a simple Reliable Actor application in Visual Studio.</span><span class="sxs-lookup"><span data-stu-id="8f431-106">This article walks through creating and debugging a simple Reliable Actor application in Visual Studio.</span></span> <span data-ttu-id="8f431-107">For more information on Reliable Actors, see [Introduction to Service Fabric Reliable Actors](service-fabric-reliable-actors-introduction.md).</span><span class="sxs-lookup"><span data-stu-id="8f431-107">For more information on Reliable Actors, see [Introduction to Service Fabric Reliable Actors](service-fabric-reliable-actors-introduction.md).</span></span>
 
-## <a name="installation-and-setup"></a><span data-ttu-id="1be90-107">Installation and setup</span><span class="sxs-lookup"><span data-stu-id="1be90-107">Installation and setup</span></span>
-<span data-ttu-id="1be90-108">Before you start, ensure that you have the Service Fabric development environment set up on your machine.</span><span class="sxs-lookup"><span data-stu-id="1be90-108">Before you start, ensure that you have the Service Fabric development environment set up on your machine.</span></span>
-<span data-ttu-id="1be90-109">If you need to set it up, see detailed instructions on [how to set up the development environment](service-fabric-get-started.md).</span><span class="sxs-lookup"><span data-stu-id="1be90-109">If you need to set it up, see detailed instructions on [how to set up the development environment](service-fabric-get-started.md).</span></span>
+## <a name="prerequisites"></a><span data-ttu-id="8f431-108">Prerequisites</span><span class="sxs-lookup"><span data-stu-id="8f431-108">Prerequisites</span></span>
 
-## <a name="basic-concepts"></a><span data-ttu-id="1be90-110">Basic concepts</span><span class="sxs-lookup"><span data-stu-id="1be90-110">Basic concepts</span></span>
-<span data-ttu-id="1be90-111">To get started with Reliable Actors, you only need to understand a few basic concepts:</span><span class="sxs-lookup"><span data-stu-id="1be90-111">To get started with Reliable Actors, you only need to understand a few basic concepts:</span></span>
+<span data-ttu-id="8f431-109">Before you start, ensure that you have the Service Fabric development environment, including Visual Studio, set up on your machine.</span><span class="sxs-lookup"><span data-stu-id="8f431-109">Before you start, ensure that you have the Service Fabric development environment, including Visual Studio, set up on your machine.</span></span> <span data-ttu-id="8f431-110">For details, see [how to set up the development environment](service-fabric-get-started.md).</span><span class="sxs-lookup"><span data-stu-id="8f431-110">For details, see [how to set up the development environment](service-fabric-get-started.md).</span></span>
 
-* <span data-ttu-id="1be90-112">**Actor service**.</span><span class="sxs-lookup"><span data-stu-id="1be90-112">**Actor service**.</span></span> <span data-ttu-id="1be90-113">Reliable Actors are packaged in Reliable Services that can be deployed in the Service Fabric infrastructure.</span><span class="sxs-lookup"><span data-stu-id="1be90-113">Reliable Actors are packaged in Reliable Services that can be deployed in the Service Fabric infrastructure.</span></span> <span data-ttu-id="1be90-114">Actor instances are activated in a named service instance.</span><span class="sxs-lookup"><span data-stu-id="1be90-114">Actor instances are activated in a named service instance.</span></span>
-* <span data-ttu-id="1be90-115">**Actor registration**.</span><span class="sxs-lookup"><span data-stu-id="1be90-115">**Actor registration**.</span></span> <span data-ttu-id="1be90-116">As with Reliable Services, a Reliable Actor service needs to be registered with the Service Fabric runtime.</span><span class="sxs-lookup"><span data-stu-id="1be90-116">As with Reliable Services, a Reliable Actor service needs to be registered with the Service Fabric runtime.</span></span> <span data-ttu-id="1be90-117">In addition, the actor type needs to be registered with the Actor runtime.</span><span class="sxs-lookup"><span data-stu-id="1be90-117">In addition, the actor type needs to be registered with the Actor runtime.</span></span>
-* <span data-ttu-id="1be90-118">**Actor interface**.</span><span class="sxs-lookup"><span data-stu-id="1be90-118">**Actor interface**.</span></span> <span data-ttu-id="1be90-119">The actor interface is used to define a strongly typed public interface of an actor.</span><span class="sxs-lookup"><span data-stu-id="1be90-119">The actor interface is used to define a strongly typed public interface of an actor.</span></span> <span data-ttu-id="1be90-120">In the Reliable Actor model terminology, the actor interface defines the types of messages that the actor can understand and process.</span><span class="sxs-lookup"><span data-stu-id="1be90-120">In the Reliable Actor model terminology, the actor interface defines the types of messages that the actor can understand and process.</span></span> <span data-ttu-id="1be90-121">The actor interface is used by other actors and client applications to "send" (asynchronously) messages to the actor.</span><span class="sxs-lookup"><span data-stu-id="1be90-121">The actor interface is used by other actors and client applications to "send" (asynchronously) messages to the actor.</span></span> <span data-ttu-id="1be90-122">Reliable Actors can implement multiple interfaces.</span><span class="sxs-lookup"><span data-stu-id="1be90-122">Reliable Actors can implement multiple interfaces.</span></span>
-* <span data-ttu-id="1be90-123">**ActorProxy class**.</span><span class="sxs-lookup"><span data-stu-id="1be90-123">**ActorProxy class**.</span></span> <span data-ttu-id="1be90-124">The ActorProxy class is used by client applications to invoke the methods exposed through the actor interface.</span><span class="sxs-lookup"><span data-stu-id="1be90-124">The ActorProxy class is used by client applications to invoke the methods exposed through the actor interface.</span></span> <span data-ttu-id="1be90-125">The ActorProxy class provides two important functionalities:</span><span class="sxs-lookup"><span data-stu-id="1be90-125">The ActorProxy class provides two important functionalities:</span></span>
-  
-  * <span data-ttu-id="1be90-126">Name resolution: It is able to locate the actor in the cluster (find the node of the cluster where it is hosted).</span><span class="sxs-lookup"><span data-stu-id="1be90-126">Name resolution: It is able to locate the actor in the cluster (find the node of the cluster where it is hosted).</span></span>
-  * <span data-ttu-id="1be90-127">Failure handling: It can retry method invocations and re-resolve the actor location after, for example, a failure that requires the actor to be relocated to another node in the cluster.</span><span class="sxs-lookup"><span data-stu-id="1be90-127">Failure handling: It can retry method invocations and re-resolve the actor location after, for example, a failure that requires the actor to be relocated to another node in the cluster.</span></span>
+## <a name="create-a-new-project-in-visual-studio"></a><span data-ttu-id="8f431-111">Create a new project in Visual Studio</span><span class="sxs-lookup"><span data-stu-id="8f431-111">Create a new project in Visual Studio</span></span>
 
-<span data-ttu-id="1be90-128">The following rules that pertain to actor interfaces are worth mentioning:</span><span class="sxs-lookup"><span data-stu-id="1be90-128">The following rules that pertain to actor interfaces are worth mentioning:</span></span>
-
-* <span data-ttu-id="1be90-129">Actor interface methods cannot be overloaded.</span><span class="sxs-lookup"><span data-stu-id="1be90-129">Actor interface methods cannot be overloaded.</span></span>
-* <span data-ttu-id="1be90-130">Actor interface methods must not have out, ref, or optional parameters.</span><span class="sxs-lookup"><span data-stu-id="1be90-130">Actor interface methods must not have out, ref, or optional parameters.</span></span>
-* <span data-ttu-id="1be90-131">Generic interfaces are not supported.</span><span class="sxs-lookup"><span data-stu-id="1be90-131">Generic interfaces are not supported.</span></span>
-
-## <a name="create-a-new-project-in-visual-studio"></a><span data-ttu-id="1be90-132">Create a new project in Visual Studio</span><span class="sxs-lookup"><span data-stu-id="1be90-132">Create a new project in Visual Studio</span></span>
-<span data-ttu-id="1be90-133">Launch Visual Studio 2015 or Visual Studio 2017 as an administrator, and create a new Service Fabric application project:</span><span class="sxs-lookup"><span data-stu-id="1be90-133">Launch Visual Studio 2015 or Visual Studio 2017 as an administrator, and create a new Service Fabric application project:</span></span>
+<span data-ttu-id="8f431-112">Launch Visual Studio 2015 or later as an administrator, and then create a new **Service Fabric Application** project:</span><span class="sxs-lookup"><span data-stu-id="8f431-112">Launch Visual Studio 2015 or later as an administrator, and then create a new **Service Fabric Application** project:</span></span>
 
 ![Service Fabric tools for Visual Studio - new project][1]
 
-<span data-ttu-id="1be90-135">In the next dialog box, you can choose the type of project that you want to create.</span><span class="sxs-lookup"><span data-stu-id="1be90-135">In the next dialog box, you can choose the type of project that you want to create.</span></span>
+<span data-ttu-id="8f431-114">In the next dialog box, choose **Actor Service** under **.Net Core 2.0** and enter a name for the service.</span><span class="sxs-lookup"><span data-stu-id="8f431-114">In the next dialog box, choose **Actor Service** under **.Net Core 2.0** and enter a name for the service.</span></span>
 
 ![Service Fabric project templates][5]
 
-<span data-ttu-id="1be90-137">For the HelloWorld project, let's use the Service Fabric Reliable Actors service.</span><span class="sxs-lookup"><span data-stu-id="1be90-137">For the HelloWorld project, let's use the Service Fabric Reliable Actors service.</span></span>
-
-<span data-ttu-id="1be90-138">After you have created the solution, you should see the following structure:</span><span class="sxs-lookup"><span data-stu-id="1be90-138">After you have created the solution, you should see the following structure:</span></span>
+<span data-ttu-id="8f431-116">The created project shows the following structure:</span><span class="sxs-lookup"><span data-stu-id="8f431-116">The created project shows the following structure:</span></span>
 
 ![Service Fabric project structure][2]
 
-## <a name="reliable-actors-basic-building-blocks"></a><span data-ttu-id="1be90-140">Reliable Actors basic building blocks</span><span class="sxs-lookup"><span data-stu-id="1be90-140">Reliable Actors basic building blocks</span></span>
-<span data-ttu-id="1be90-141">A typical Reliable Actors solution is composed of three projects:</span><span class="sxs-lookup"><span data-stu-id="1be90-141">A typical Reliable Actors solution is composed of three projects:</span></span>
+## <a name="examine-the-solution"></a><span data-ttu-id="8f431-118">Examine the solution</span><span class="sxs-lookup"><span data-stu-id="8f431-118">Examine the solution</span></span>
 
-* <span data-ttu-id="1be90-142">**The application project (MyActorApplication)**.</span><span class="sxs-lookup"><span data-stu-id="1be90-142">**The application project (MyActorApplication)**.</span></span> <span data-ttu-id="1be90-143">This is the project that packages all of the services together for deployment.</span><span class="sxs-lookup"><span data-stu-id="1be90-143">This is the project that packages all of the services together for deployment.</span></span> <span data-ttu-id="1be90-144">It contains the *ApplicationManifest.xml* and PowerShell scripts for managing the application.</span><span class="sxs-lookup"><span data-stu-id="1be90-144">It contains the *ApplicationManifest.xml* and PowerShell scripts for managing the application.</span></span>
-* <span data-ttu-id="1be90-145">**The interface project (MyActor.Interfaces)**.</span><span class="sxs-lookup"><span data-stu-id="1be90-145">**The interface project (MyActor.Interfaces)**.</span></span> <span data-ttu-id="1be90-146">This is the project that contains the interface definition for the actor.</span><span class="sxs-lookup"><span data-stu-id="1be90-146">This is the project that contains the interface definition for the actor.</span></span> <span data-ttu-id="1be90-147">In the MyActor.Interfaces project, you can define the interfaces that will be used by the actors in the solution.</span><span class="sxs-lookup"><span data-stu-id="1be90-147">In the MyActor.Interfaces project, you can define the interfaces that will be used by the actors in the solution.</span></span> <span data-ttu-id="1be90-148">Your actor interfaces can be defined in any project with any name, however the interface defines the actor contract that is shared by the actor implementation and the clients calling the actor, so it typically makes sense to define it in an assembly that is separate from the actor implementation and can be shared by multiple other projects.</span><span class="sxs-lookup"><span data-stu-id="1be90-148">Your actor interfaces can be defined in any project with any name, however the interface defines the actor contract that is shared by the actor implementation and the clients calling the actor, so it typically makes sense to define it in an assembly that is separate from the actor implementation and can be shared by multiple other projects.</span></span>
+<span data-ttu-id="8f431-119">The solution contains three projects:</span><span class="sxs-lookup"><span data-stu-id="8f431-119">The solution contains three projects:</span></span>
+
+* <span data-ttu-id="8f431-120">**The application project (MyApplication)**.</span><span class="sxs-lookup"><span data-stu-id="8f431-120">**The application project (MyApplication)**.</span></span> <span data-ttu-id="8f431-121">This project packages all of the services together for deployment.</span><span class="sxs-lookup"><span data-stu-id="8f431-121">This project packages all of the services together for deployment.</span></span> <span data-ttu-id="8f431-122">It contains the *ApplicationManifest.xml* and PowerShell scripts for managing the application.</span><span class="sxs-lookup"><span data-stu-id="8f431-122">It contains the *ApplicationManifest.xml* and PowerShell scripts for managing the application.</span></span>
+
+* <span data-ttu-id="8f431-123">**The interface project (HelloWorld.Interfaces)**.</span><span class="sxs-lookup"><span data-stu-id="8f431-123">**The interface project (HelloWorld.Interfaces)**.</span></span> <span data-ttu-id="8f431-124">This project contains the interface definition for the actor.</span><span class="sxs-lookup"><span data-stu-id="8f431-124">This project contains the interface definition for the actor.</span></span> <span data-ttu-id="8f431-125">Actor interfaces can be defined in any project with any name.</span><span class="sxs-lookup"><span data-stu-id="8f431-125">Actor interfaces can be defined in any project with any name.</span></span>  <span data-ttu-id="8f431-126">The interface defines the actor contract that is shared by the actor implementation and the clients calling the actor.</span><span class="sxs-lookup"><span data-stu-id="8f431-126">The interface defines the actor contract that is shared by the actor implementation and the clients calling the actor.</span></span>  <span data-ttu-id="8f431-127">Because client projects may depend on it, it typically makes sense to define it in an assembly that is separate from the actor implementation.</span><span class="sxs-lookup"><span data-stu-id="8f431-127">Because client projects may depend on it, it typically makes sense to define it in an assembly that is separate from the actor implementation.</span></span>
+
+* <span data-ttu-id="8f431-128">**The actor service project (HelloWorld)**.</span><span class="sxs-lookup"><span data-stu-id="8f431-128">**The actor service project (HelloWorld)**.</span></span> <span data-ttu-id="8f431-129">This project defines the Service Fabric service that is going to host the actor.</span><span class="sxs-lookup"><span data-stu-id="8f431-129">This project defines the Service Fabric service that is going to host the actor.</span></span> <span data-ttu-id="8f431-130">It contains the implementation of the actor, *HellowWorld.cs*.</span><span class="sxs-lookup"><span data-stu-id="8f431-130">It contains the implementation of the actor, *HellowWorld.cs*.</span></span> <span data-ttu-id="8f431-131">An actor implementation is a class that derives from the base type `Actor` and implements the interfaces defined in the *MyActor.Interfaces* project.</span><span class="sxs-lookup"><span data-stu-id="8f431-131">An actor implementation is a class that derives from the base type `Actor` and implements the interfaces defined in the *MyActor.Interfaces* project.</span></span> <span data-ttu-id="8f431-132">An actor class must also implement a constructor that accepts an `ActorService` instance and an `ActorId` and passes them to the base `Actor` class.</span><span class="sxs-lookup"><span data-stu-id="8f431-132">An actor class must also implement a constructor that accepts an `ActorService` instance and an `ActorId` and passes them to the base `Actor` class.</span></span>
+    
+    <span data-ttu-id="8f431-133">This project also contains *Program.cs*, which registers actor classes with the Service Fabric runtime using `ActorRuntime.RegisterActorAsync<T>()`.</span><span class="sxs-lookup"><span data-stu-id="8f431-133">This project also contains *Program.cs*, which registers actor classes with the Service Fabric runtime using `ActorRuntime.RegisterActorAsync<T>()`.</span></span> <span data-ttu-id="8f431-134">The `HelloWorld` class is already registered.</span><span class="sxs-lookup"><span data-stu-id="8f431-134">The `HelloWorld` class is already registered.</span></span> <span data-ttu-id="8f431-135">Any additional actor implementations added to the project must also be registered in the `Main()` method.</span><span class="sxs-lookup"><span data-stu-id="8f431-135">Any additional actor implementations added to the project must also be registered in the `Main()` method.</span></span>
+
+## <a name="customize-the-helloworld-actor"></a><span data-ttu-id="8f431-136">Customize the HelloWorld actor</span><span class="sxs-lookup"><span data-stu-id="8f431-136">Customize the HelloWorld actor</span></span>
+
+<span data-ttu-id="8f431-137">The project template defines some methods in the `IHelloWorld` interface and implements them in the `HelloWorld` actor implementation.</span><span class="sxs-lookup"><span data-stu-id="8f431-137">The project template defines some methods in the `IHelloWorld` interface and implements them in the `HelloWorld` actor implementation.</span></span>  <span data-ttu-id="8f431-138">Replace those methods so the actor service returns a simple "Hello World" string.</span><span class="sxs-lookup"><span data-stu-id="8f431-138">Replace those methods so the actor service returns a simple "Hello World" string.</span></span>
+
+<span data-ttu-id="8f431-139">In the *HelloWorld.Interfaces* project, in the *IHelloWorld.cs* file, replace the interface definition as follows:</span><span class="sxs-lookup"><span data-stu-id="8f431-139">In the *HelloWorld.Interfaces* project, in the *IHelloWorld.cs* file, replace the interface definition as follows:</span></span>
 
 ```csharp
-public interface IMyActor : IActor
+public interface IHelloWorld : IActor
 {
-    Task<string> HelloWorld();
+    Task<string> GetHelloWorldAsync();
 }
 ```
 
-* <span data-ttu-id="1be90-149">**The actor service project (MyActor)**.</span><span class="sxs-lookup"><span data-stu-id="1be90-149">**The actor service project (MyActor)**.</span></span> <span data-ttu-id="1be90-150">This is the project used to define the Service Fabric service that is going to host the actor.</span><span class="sxs-lookup"><span data-stu-id="1be90-150">This is the project used to define the Service Fabric service that is going to host the actor.</span></span> <span data-ttu-id="1be90-151">It contains the implementation of the actor.</span><span class="sxs-lookup"><span data-stu-id="1be90-151">It contains the implementation of the actor.</span></span> <span data-ttu-id="1be90-152">An actor implementation is a class that derives from the base type `Actor` and implements the interface(s) that are defined in the MyActor.Interfaces project.</span><span class="sxs-lookup"><span data-stu-id="1be90-152">An actor implementation is a class that derives from the base type `Actor` and implements the interface(s) that are defined in the MyActor.Interfaces project.</span></span> <span data-ttu-id="1be90-153">An actor class must also implement a constructor that accepts an `ActorService` instance and an `ActorId` and passes them to the base `Actor` class.</span><span class="sxs-lookup"><span data-stu-id="1be90-153">An actor class must also implement a constructor that accepts an `ActorService` instance and an `ActorId` and passes them to the base `Actor` class.</span></span> <span data-ttu-id="1be90-154">This allows for constructor dependency injection of platform dependencies.</span><span class="sxs-lookup"><span data-stu-id="1be90-154">This allows for constructor dependency injection of platform dependencies.</span></span>
+<span data-ttu-id="8f431-140">In the **HelloWorld** project, in **HelloWorld.cs**, replace the entire class definition as follows:</span><span class="sxs-lookup"><span data-stu-id="8f431-140">In the **HelloWorld** project, in **HelloWorld.cs**, replace the entire class definition as follows:</span></span>
 
 ```csharp
 [StatePersistence(StatePersistence.Persisted)]
-class MyActor : Actor, IMyActor
+internal class HelloWorld : Actor, IHelloWorld
 {
-    public MyActor(ActorService actorService, ActorId actorId)
+    public HelloWorld(ActorService actorService, ActorId actorId)
         : base(actorService, actorId)
     {
     }
 
-    public Task<string> HelloWorld()
+    public Task<string> GetHelloWorldAsync()
     {
-        return Task.FromResult("Hello world!");
+        return Task.FromResult("Hello from my reliable actor!");
     }
 }
 ```
 
-<span data-ttu-id="1be90-155">The actor service must be registered with a service type in the Service Fabric runtime.</span><span class="sxs-lookup"><span data-stu-id="1be90-155">The actor service must be registered with a service type in the Service Fabric runtime.</span></span> <span data-ttu-id="1be90-156">In order for the Actor Service to run your actor instances, your actor type must also be registered with the Actor Service.</span><span class="sxs-lookup"><span data-stu-id="1be90-156">In order for the Actor Service to run your actor instances, your actor type must also be registered with the Actor Service.</span></span> <span data-ttu-id="1be90-157">The `ActorRuntime` registration method performs this work for actors.</span><span class="sxs-lookup"><span data-stu-id="1be90-157">The `ActorRuntime` registration method performs this work for actors.</span></span>
+<span data-ttu-id="8f431-141">Press **Ctrl-Shift-B** to build the project and make sure everything compiles.</span><span class="sxs-lookup"><span data-stu-id="8f431-141">Press **Ctrl-Shift-B** to build the project and make sure everything compiles.</span></span>
 
-```csharp
-internal static class Program
-{
-    private static void Main()
+## <a name="add-a-client"></a><span data-ttu-id="8f431-142">Add a client</span><span class="sxs-lookup"><span data-stu-id="8f431-142">Add a client</span></span>
+
+<span data-ttu-id="8f431-143">Create a simple console application to call the actor service.</span><span class="sxs-lookup"><span data-stu-id="8f431-143">Create a simple console application to call the actor service.</span></span>
+
+1. <span data-ttu-id="8f431-144">Right-click on the solution in Solution Explorer > **Add** > **New Project...**.</span><span class="sxs-lookup"><span data-stu-id="8f431-144">Right-click on the solution in Solution Explorer > **Add** > **New Project...**.</span></span>
+
+2. <span data-ttu-id="8f431-145">Under the **.NET Core** project types, choose **Console App (.NET Core)**.</span><span class="sxs-lookup"><span data-stu-id="8f431-145">Under the **.NET Core** project types, choose **Console App (.NET Core)**.</span></span>  <span data-ttu-id="8f431-146">Name the project *ActorClient*.</span><span class="sxs-lookup"><span data-stu-id="8f431-146">Name the project *ActorClient*.</span></span>
+    
+    ![Add New Project dialog][6]    
+    
+    > [!NOTE]
+    > A console application is not the type of app you would typically use as a client in Service Fabric, but it makes a convenient example for debugging and testing using the local Service Fabric cluster.
+
+3. <span data-ttu-id="8f431-149">The console application must be a 64-bit application to maintain compatibility with the interface project and other dependencies.</span><span class="sxs-lookup"><span data-stu-id="8f431-149">The console application must be a 64-bit application to maintain compatibility with the interface project and other dependencies.</span></span>  <span data-ttu-id="8f431-150">In Solution Explorer, right-click the **ActorClient** project, and then click **Properties**.</span><span class="sxs-lookup"><span data-stu-id="8f431-150">In Solution Explorer, right-click the **ActorClient** project, and then click **Properties**.</span></span>  <span data-ttu-id="8f431-151">On the **Build** tab, set **Platform target** to **x64**.</span><span class="sxs-lookup"><span data-stu-id="8f431-151">On the **Build** tab, set **Platform target** to **x64**.</span></span>
+    
+    ![Build properties][8]
+
+4. <span data-ttu-id="8f431-153">The client project requires the reliable actors NuGet package.</span><span class="sxs-lookup"><span data-stu-id="8f431-153">The client project requires the reliable actors NuGet package.</span></span>  <span data-ttu-id="8f431-154">Click **Tools** > **NuGet Package Manager** > **Package Manager Console**.</span><span class="sxs-lookup"><span data-stu-id="8f431-154">Click **Tools** > **NuGet Package Manager** > **Package Manager Console**.</span></span>  <span data-ttu-id="8f431-155">In the Package Manager Console, enter the following command:</span><span class="sxs-lookup"><span data-stu-id="8f431-155">In the Package Manager Console, enter the following command:</span></span>
+    
+    ```powershell
+    Install-Package Microsoft.ServiceFabric.Actors -IncludePrerelease -ProjectName ActorClient
+    ```
+
+    <span data-ttu-id="8f431-156">The NuGet package and all its dependencies are installed in the ActorClient project.</span><span class="sxs-lookup"><span data-stu-id="8f431-156">The NuGet package and all its dependencies are installed in the ActorClient project.</span></span>
+
+5. <span data-ttu-id="8f431-157">The client project also requires a reference to the interfaces project.</span><span class="sxs-lookup"><span data-stu-id="8f431-157">The client project also requires a reference to the interfaces project.</span></span>  <span data-ttu-id="8f431-158">In the ActorClient project, right-click **Dependencies** and then click **Add reference...**.  Select **Projects > Solution** (if not already selected), and then tick the checkbox next to **HelloWorld.Interfaces**.</span><span class="sxs-lookup"><span data-stu-id="8f431-158">In the ActorClient project, right-click **Dependencies** and then click **Add reference...**.  Select **Projects > Solution** (if not already selected), and then tick the checkbox next to **HelloWorld.Interfaces**.</span></span>  <span data-ttu-id="8f431-159">Click **OK**.</span><span class="sxs-lookup"><span data-stu-id="8f431-159">Click **OK**.</span></span>
+    
+    ![Add reference dialog][7]
+
+6. <span data-ttu-id="8f431-161">In the ActorClient project, replace the entire contents of *Program.cs* with the following code:</span><span class="sxs-lookup"><span data-stu-id="8f431-161">In the ActorClient project, replace the entire contents of *Program.cs* with the following code:</span></span>
+    
+    ```csharp
+    using System;
+    using System.Threading.Tasks;
+    using Microsoft.ServiceFabric.Actors;
+    using Microsoft.ServiceFabric.Actors.Client;
+    using HelloWorld.Interfaces;
+    
+    namespace ActorClient
     {
-        try
+        class Program
         {
-            ActorRuntime.RegisterActorAsync<MyActor>(
-                (context, actorType) => new ActorService(context, actorType, () => new MyActor())).GetAwaiter().GetResult();
-
-            Thread.Sleep(Timeout.Infinite);
-        }
-        catch (Exception e)
-        {
-            ActorEventSource.Current.ActorHostInitializationFailed(e.ToString());
-            throw;
+            static void Main(string[] args)
+            {
+                IHelloWorld actor = ActorProxy.Create<IHelloWorld>(ActorId.CreateRandom(), new Uri("fabric:/MyApplication/HelloWorldActorService"));
+                Task<string> retval = actor.GetHelloWorldAsync();
+                Console.Write(retval.Result);
+                Console.ReadLine();
+            }
         }
     }
-}
+    ```
 
-```
+## <a name="running-and-debugging"></a><span data-ttu-id="8f431-162">Running and debugging</span><span class="sxs-lookup"><span data-stu-id="8f431-162">Running and debugging</span></span>
 
-<span data-ttu-id="1be90-158">If you start from a new project in Visual Studio and you have only one actor definition, the registration is included by default in the code that Visual Studio generates.</span><span class="sxs-lookup"><span data-stu-id="1be90-158">If you start from a new project in Visual Studio and you have only one actor definition, the registration is included by default in the code that Visual Studio generates.</span></span> <span data-ttu-id="1be90-159">If you define other actors in the service, you need to add the actor registration by using:</span><span class="sxs-lookup"><span data-stu-id="1be90-159">If you define other actors in the service, you need to add the actor registration by using:</span></span>
-
-```csharp
- ActorRuntime.RegisterActorAsync<MyOtherActor>();
-
-```
-
-> [!TIP]
-> The Service Fabric Actors runtime emits some [events and performance counters related to actor methods](service-fabric-reliable-actors-diagnostics.md#actor-method-events-and-performance-counters). They are useful in diagnostics and performance monitoring.
-> 
-> 
-
-## <a name="debugging"></a><span data-ttu-id="1be90-162">Debugging</span><span class="sxs-lookup"><span data-stu-id="1be90-162">Debugging</span></span>
-<span data-ttu-id="1be90-163">The Service Fabric tools for Visual Studio support debugging on your local machine.</span><span class="sxs-lookup"><span data-stu-id="1be90-163">The Service Fabric tools for Visual Studio support debugging on your local machine.</span></span> <span data-ttu-id="1be90-164">You can start a debugging session by hitting the F5 key.</span><span class="sxs-lookup"><span data-stu-id="1be90-164">You can start a debugging session by hitting the F5 key.</span></span> <span data-ttu-id="1be90-165">Visual Studio builds (if necessary) packages.</span><span class="sxs-lookup"><span data-stu-id="1be90-165">Visual Studio builds (if necessary) packages.</span></span> <span data-ttu-id="1be90-166">It also deploys the application on the local Service Fabric cluster and attaches the debugger.</span><span class="sxs-lookup"><span data-stu-id="1be90-166">It also deploys the application on the local Service Fabric cluster and attaches the debugger.</span></span>
-
-<span data-ttu-id="1be90-167">During the deployment process, you can see the progress in the **Output** window.</span><span class="sxs-lookup"><span data-stu-id="1be90-167">During the deployment process, you can see the progress in the **Output** window.</span></span>
+<span data-ttu-id="8f431-163">Press **F5** to build, deploy, and run the application locally in the Service Fabric development cluster.</span><span class="sxs-lookup"><span data-stu-id="8f431-163">Press **F5** to build, deploy, and run the application locally in the Service Fabric development cluster.</span></span>  <span data-ttu-id="8f431-164">During the deployment process, you can see the progress in the **Output** window.</span><span class="sxs-lookup"><span data-stu-id="8f431-164">During the deployment process, you can see the progress in the **Output** window.</span></span>
 
 ![Service Fabric debugging output window][3]
 
-## <a name="next-steps"></a><span data-ttu-id="1be90-169">Next steps</span><span class="sxs-lookup"><span data-stu-id="1be90-169">Next steps</span></span>
-* [<span data-ttu-id="1be90-170">How Reliable Actors use the Service Fabric platform</span><span class="sxs-lookup"><span data-stu-id="1be90-170">How Reliable Actors use the Service Fabric platform</span></span>](service-fabric-reliable-actors-platform.md)
-* [<span data-ttu-id="1be90-171">Actor state management</span><span class="sxs-lookup"><span data-stu-id="1be90-171">Actor state management</span></span>](service-fabric-reliable-actors-state-management.md)
-* [<span data-ttu-id="1be90-172">Actor lifecycle and garbage collection</span><span class="sxs-lookup"><span data-stu-id="1be90-172">Actor lifecycle and garbage collection</span></span>](service-fabric-reliable-actors-lifecycle.md)
-* [<span data-ttu-id="1be90-173">Actor API reference documentation</span><span class="sxs-lookup"><span data-stu-id="1be90-173">Actor API reference documentation</span></span>](https://msdn.microsoft.com/library/azure/dn971626.aspx)
-* [<span data-ttu-id="1be90-174">Sample code</span><span class="sxs-lookup"><span data-stu-id="1be90-174">Sample code</span></span>](https://github.com/Azure/servicefabric-samples)
+<span data-ttu-id="8f431-166">When the output contains the text, *The application is ready*, it's possible to test the service using the ActorClient application.</span><span class="sxs-lookup"><span data-stu-id="8f431-166">When the output contains the text, *The application is ready*, it's possible to test the service using the ActorClient application.</span></span>  <span data-ttu-id="8f431-167">In Solution Explorer, right-click on the **ActorClient** project, then click **Debug** > **Start new instance**.</span><span class="sxs-lookup"><span data-stu-id="8f431-167">In Solution Explorer, right-click on the **ActorClient** project, then click **Debug** > **Start new instance**.</span></span>  <span data-ttu-id="8f431-168">The command line application should display the output from the actor service.</span><span class="sxs-lookup"><span data-stu-id="8f431-168">The command line application should display the output from the actor service.</span></span>
 
-<!--Image references-->
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-reliable-actors-get-started/reliable-actors-newproject.PNG
-[2]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-reliable-actors-get-started/reliable-actors-projectstructure.PNG
-[3]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-reliable-actors-get-started/debugging-output.PNG
-[4]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-reliable-actors-get-started/vs-context-menu.png
-[5]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-reliable-actors-get-started/reliable-actors-newproject1.PNG
+![Application output][9]
+
+> [!TIP]
+> The Service Fabric Actors runtime emits some [events and performance counters related to actor methods](service-fabric-reliable-actors-diagnostics.md#actor-method-events-and-performance-counters). They are useful in diagnostics and performance monitoring.
+
+## <a name="next-steps"></a><span data-ttu-id="8f431-172">Next steps</span><span class="sxs-lookup"><span data-stu-id="8f431-172">Next steps</span></span>
+<span data-ttu-id="8f431-173">Learn more about [how Reliable Actors use the Service Fabric platform](service-fabric-reliable-actors-platform.md).</span><span class="sxs-lookup"><span data-stu-id="8f431-173">Learn more about [how Reliable Actors use the Service Fabric platform](service-fabric-reliable-actors-platform.md).</span></span>
 
 
-
-
-
+[1]: ./media/service-fabric-reliable-actors-get-started/reliable-actors-newproject.PNG
+[2]: ./media/service-fabric-reliable-actors-get-started/reliable-actors-projectstructure.PNG
+[3]: ./media/service-fabric-reliable-actors-get-started/debugging-output.PNG
+[4]: ./media/service-fabric-reliable-actors-get-started/vs-context-menu.png
+[5]: ./media/service-fabric-reliable-actors-get-started/reliable-actors-newproject1.PNG
+[6]: ./media/service-fabric-reliable-actors-get-started/new-console-app.png
+[7]: ./media/service-fabric-reliable-actors-get-started/add-reference.png
+[8]: ./media/service-fabric-reliable-actors-get-started/build-props.png
+[9]: ./media/service-fabric-reliable-actors-get-started/app-output.png

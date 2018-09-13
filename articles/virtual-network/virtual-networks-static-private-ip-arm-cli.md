@@ -1,11 +1,11 @@
 ---
-title: Configure private IP addresses for VMs - Azure CLI 2.0 | Microsoft Docs
-description: Learn how to configure private IP addresses for virtual machines using the Azure command-line interface (CLI) 2.0.
+title: Configure private IP addresses for VMs - Azure CLI | Microsoft Docs
+description: Learn how to configure private IP addresses for virtual machines using the Azure command-line interface (CLI).
 services: virtual-network
 documentationcenter: na
 author: jimdial
-manager: timlt
-editor: tysonn
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager
 ms.assetid: 40b03a1a-ea00-454c-b716-7574cea49ac0
 ms.service: virtual-network
@@ -16,46 +16,38 @@ ms.workload: infrastructure-services
 ms.date: 02/16/2017
 ms.author: jdial
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 071156367c1f819a00d31f1d0335e301391fda81
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: f4f6a40fde23ee70391c5057762f17ce1eb44123
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44555372"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44783281"
 ---
-# <a name="configure-private-ip-addresses-for-a-virtual-machine-using-the-azure-cli-20"></a><span data-ttu-id="d5610-103">Configure private IP addresses for a virtual machine using the Azure CLI 2.0</span><span class="sxs-lookup"><span data-stu-id="d5610-103">Configure private IP addresses for a virtual machine using the Azure CLI 2.0</span></span>
+# <a name="configure-private-ip-addresses-for-a-virtual-machine-using-the-azure-cli"></a><span data-ttu-id="bb62d-103">Configure private IP addresses for a virtual machine using the Azure CLI</span><span class="sxs-lookup"><span data-stu-id="bb62d-103">Configure private IP addresses for a virtual machine using the Azure CLI</span></span>
 
 [!INCLUDE [virtual-networks-static-private-ip-selectors-arm-include](../../includes/virtual-networks-static-private-ip-selectors-arm-include.md)]
-
-
-## <a name="cli-versions-to-complete-the-task"></a><span data-ttu-id="d5610-104">CLI versions to complete the task</span><span class="sxs-lookup"><span data-stu-id="d5610-104">CLI versions to complete the task</span></span> 
-
-<span data-ttu-id="d5610-105">You can complete the task using one of the following CLI versions:</span><span class="sxs-lookup"><span data-stu-id="d5610-105">You can complete the task using one of the following CLI versions:</span></span> 
-
-- <span data-ttu-id="d5610-106">[Azure CLI 1.0](virtual-networks-static-private-ip-cli-nodejs.md) – our CLI for the classic and resource management deployment models</span><span class="sxs-lookup"><span data-stu-id="d5610-106">[Azure CLI 1.0](virtual-networks-static-private-ip-cli-nodejs.md) – our CLI for the classic and resource management deployment models</span></span> 
-- <span data-ttu-id="d5610-107">[Azure CLI 2.0](#specify-a-static-private-ip-address-when-creating-a-vm) - our next generation CLI for the resource management deployment model (this article)</span><span class="sxs-lookup"><span data-stu-id="d5610-107">[Azure CLI 2.0](#specify-a-static-private-ip-address-when-creating-a-vm) - our next generation CLI for the resource management deployment model (this article)</span></span>
 
 [!INCLUDE [virtual-networks-static-private-ip-intro-include](../../includes/virtual-networks-static-private-ip-intro-include.md)]
 
 [!INCLUDE [azure-arm-classic-important-include](../../includes/azure-arm-classic-important-include.md)]
 
-<span data-ttu-id="d5610-108">This article covers the Resource Manager deployment model.</span><span class="sxs-lookup"><span data-stu-id="d5610-108">This article covers the Resource Manager deployment model.</span></span> <span data-ttu-id="d5610-109">You can also [manage static private IP address in the classic deployment model](virtual-networks-static-private-ip-classic-cli.md).</span><span class="sxs-lookup"><span data-stu-id="d5610-109">You can also [manage static private IP address in the classic deployment model](virtual-networks-static-private-ip-classic-cli.md).</span></span>
+<span data-ttu-id="bb62d-104">This article covers the Resource Manager deployment model.</span><span class="sxs-lookup"><span data-stu-id="bb62d-104">This article covers the Resource Manager deployment model.</span></span> <span data-ttu-id="bb62d-105">You can also [manage static private IP address in the classic deployment model](virtual-networks-static-private-ip-classic-cli.md).</span><span class="sxs-lookup"><span data-stu-id="bb62d-105">You can also [manage static private IP address in the classic deployment model](virtual-networks-static-private-ip-classic-cli.md).</span></span>
 
 [!INCLUDE [virtual-networks-static-ip-scenario-include](../../includes/virtual-networks-static-ip-scenario-include.md)]
 
 > [!NOTE]
-> <span data-ttu-id="d5610-110">The sample Azure CLI 2.0 commands below expect a simple environment already created.</span><span class="sxs-lookup"><span data-stu-id="d5610-110">The sample Azure CLI 2.0 commands below expect a simple environment already created.</span></span> <span data-ttu-id="d5610-111">If you want to run the commands as they are displayed in this document, first build the test environment described in [create a vnet](virtual-networks-create-vnet-arm-cli.md).</span><span class="sxs-lookup"><span data-stu-id="d5610-111">If you want to run the commands as they are displayed in this document, first build the test environment described in [create a vnet](virtual-networks-create-vnet-arm-cli.md).</span></span>
+> <span data-ttu-id="bb62d-106">The following sample Azure CLI commands expect an existing simple environment.</span><span class="sxs-lookup"><span data-stu-id="bb62d-106">The following sample Azure CLI commands expect an existing simple environment.</span></span> <span data-ttu-id="bb62d-107">If you want to run the commands as they are displayed in this document, first build the test environment described in [create a vnet](quick-create-cli.md).</span><span class="sxs-lookup"><span data-stu-id="bb62d-107">If you want to run the commands as they are displayed in this document, first build the test environment described in [create a vnet](quick-create-cli.md).</span></span>
 
-## <a name="specify-a-static-private-ip-address-when-creating-a-vm"></a><span data-ttu-id="d5610-112">Specify a static private IP address when creating a VM</span><span class="sxs-lookup"><span data-stu-id="d5610-112">Specify a static private IP address when creating a VM</span></span>
+## <a name="specify-a-static-private-ip-address-when-creating-a-vm"></a><span data-ttu-id="bb62d-108">Specify a static private IP address when creating a VM</span><span class="sxs-lookup"><span data-stu-id="bb62d-108">Specify a static private IP address when creating a VM</span></span>
 
-<span data-ttu-id="d5610-113">To create a VM named *DNS01* in the *FrontEnd* subnet of a VNet named *TestVNet* with a static private IP of *192.168.1.101*, follow the steps below:</span><span class="sxs-lookup"><span data-stu-id="d5610-113">To create a VM named *DNS01* in the *FrontEnd* subnet of a VNet named *TestVNet* with a static private IP of *192.168.1.101*, follow the steps below:</span></span>
+<span data-ttu-id="bb62d-109">To create a VM named *DNS01* in the *FrontEnd* subnet of a VNet named *TestVNet* with a static private IP of *192.168.1.101*, complete the following steps:</span><span class="sxs-lookup"><span data-stu-id="bb62d-109">To create a VM named *DNS01* in the *FrontEnd* subnet of a VNet named *TestVNet* with a static private IP of *192.168.1.101*, complete the following steps:</span></span>
 
-1. <span data-ttu-id="d5610-114">If you haven't yet, install and configure the latest [Azure CLI 2.0](/cli/azure/install-az-cli2) and log in to an Azure account using [az login](/cli/azure/#login).</span><span class="sxs-lookup"><span data-stu-id="d5610-114">If you haven't yet, install and configure the latest [Azure CLI 2.0](/cli/azure/install-az-cli2) and log in to an Azure account using [az login](/cli/azure/#login).</span></span> 
+1. <span data-ttu-id="bb62d-110">If you haven't yet, install and configure the latest [Azure CLI 2.0](/cli/azure/install-az-cli2) and log in to an Azure account using [az login](/cli/azure/reference-index#az_login).</span><span class="sxs-lookup"><span data-stu-id="bb62d-110">If you haven't yet, install and configure the latest [Azure CLI 2.0](/cli/azure/install-az-cli2) and log in to an Azure account using [az login](/cli/azure/reference-index#az_login).</span></span> 
 
-2. <span data-ttu-id="d5610-115">Create a public IP for the VM with the [az network public-ip create](/cli/azure/network/public-ip#create) command.</span><span class="sxs-lookup"><span data-stu-id="d5610-115">Create a public IP for the VM with the [az network public-ip create](/cli/azure/network/public-ip#create) command.</span></span> <span data-ttu-id="d5610-116">The list shown after the output explains the parameters used.</span><span class="sxs-lookup"><span data-stu-id="d5610-116">The list shown after the output explains the parameters used.</span></span>
+2. <span data-ttu-id="bb62d-111">Create a public IP for the VM with the [az network public-ip create](/cli/azure/network/public-ip#az_network_public_ip_create) command.</span><span class="sxs-lookup"><span data-stu-id="bb62d-111">Create a public IP for the VM with the [az network public-ip create](/cli/azure/network/public-ip#az_network_public_ip_create) command.</span></span> <span data-ttu-id="bb62d-112">The list shown after the output explains the parameters used.</span><span class="sxs-lookup"><span data-stu-id="bb62d-112">The list shown after the output explains the parameters used.</span></span>
 
     > [!NOTE]
-    > <span data-ttu-id="d5610-117">You may want or need to use different values for your arguments in this and subsequent steps, depending upon your environment.</span><span class="sxs-lookup"><span data-stu-id="d5610-117">You may want or need to use different values for your arguments in this and subsequent steps, depending upon your environment.</span></span>
+    > <span data-ttu-id="bb62d-113">You may want or need to use different values for your arguments in this and subsequent steps, depending upon your environment.</span><span class="sxs-lookup"><span data-stu-id="bb62d-113">You may want or need to use different values for your arguments in this and subsequent steps, depending upon your environment.</span></span>
    
     ```azurecli
     az network public-ip create \
@@ -65,7 +57,7 @@ ms.locfileid: "44555372"
     --allocation-method Static
     ```
 
-    <span data-ttu-id="d5610-118">Expected output:</span><span class="sxs-lookup"><span data-stu-id="d5610-118">Expected output:</span></span>
+    <span data-ttu-id="bb62d-114">Expected output:</span><span class="sxs-lookup"><span data-stu-id="bb62d-114">Expected output:</span></span>
    
    ```json
    {
@@ -79,11 +71,11 @@ ms.locfileid: "44555372"
     }
     ```
 
-   * <span data-ttu-id="d5610-119">`--resource-group`: Name of the resource group in which to create the public IP.</span><span class="sxs-lookup"><span data-stu-id="d5610-119">`--resource-group`: Name of the resource group in which to create the public IP.</span></span>
-   * <span data-ttu-id="d5610-120">`--name`: Name of the public IP.</span><span class="sxs-lookup"><span data-stu-id="d5610-120">`--name`: Name of the public IP.</span></span>
-   * <span data-ttu-id="d5610-121">`--location`: Azure region in which to create the public IP.</span><span class="sxs-lookup"><span data-stu-id="d5610-121">`--location`: Azure region in which to create the public IP.</span></span>
+   * <span data-ttu-id="bb62d-115">`--resource-group`: Name of the resource group in which to create the public IP.</span><span class="sxs-lookup"><span data-stu-id="bb62d-115">`--resource-group`: Name of the resource group in which to create the public IP.</span></span>
+   * <span data-ttu-id="bb62d-116">`--name`: Name of the public IP.</span><span class="sxs-lookup"><span data-stu-id="bb62d-116">`--name`: Name of the public IP.</span></span>
+   * <span data-ttu-id="bb62d-117">`--location`: Azure region in which to create the public IP.</span><span class="sxs-lookup"><span data-stu-id="bb62d-117">`--location`: Azure region in which to create the public IP.</span></span>
 
-3. <span data-ttu-id="d5610-122">Run the [az network nic create](/cli/azure/network/nic#create) command to create a NIC with a static private IP.</span><span class="sxs-lookup"><span data-stu-id="d5610-122">Run the [az network nic create](/cli/azure/network/nic#create) command to create a NIC with a static private IP.</span></span> <span data-ttu-id="d5610-123">The list shown after the output explains the parameters used.</span><span class="sxs-lookup"><span data-stu-id="d5610-123">The list shown after the output explains the parameters used.</span></span> 
+3. <span data-ttu-id="bb62d-118">Run the [az network nic create](/cli/azure/network/nic#az_network_nic_create) command to create a NIC with a static private IP.</span><span class="sxs-lookup"><span data-stu-id="bb62d-118">Run the [az network nic create](/cli/azure/network/nic#az_network_nic_create) command to create a NIC with a static private IP.</span></span> <span data-ttu-id="bb62d-119">The list shown after the output explains the parameters used.</span><span class="sxs-lookup"><span data-stu-id="bb62d-119">The list shown after the output explains the parameters used.</span></span> 
    
     ```azurecli
     az network nic create \
@@ -95,7 +87,7 @@ ms.locfileid: "44555372"
     --vnet-name TestVNet
     ```
 
-    <span data-ttu-id="d5610-124">Expected output:</span><span class="sxs-lookup"><span data-stu-id="d5610-124">Expected output:</span></span>
+    <span data-ttu-id="bb62d-120">Expected output:</span><span class="sxs-lookup"><span data-stu-id="bb62d-120">Expected output:</span></span>
    
     ```json
     {
@@ -129,13 +121,13 @@ ms.locfileid: "44555372"
     }
     ```
     
-    <span data-ttu-id="d5610-125">Parameters:</span><span class="sxs-lookup"><span data-stu-id="d5610-125">Parameters:</span></span>
+    <span data-ttu-id="bb62d-121">Parameters:</span><span class="sxs-lookup"><span data-stu-id="bb62d-121">Parameters:</span></span>
 
-    * <span data-ttu-id="d5610-126">`--private-ip-address`: Static private IP address for the NIC.</span><span class="sxs-lookup"><span data-stu-id="d5610-126">`--private-ip-address`: Static private IP address for the NIC.</span></span>
-    * <span data-ttu-id="d5610-127">`--vnet-name`: Name of the VNet in wihch to create the NIC.</span><span class="sxs-lookup"><span data-stu-id="d5610-127">`--vnet-name`: Name of the VNet in wihch to create the NIC.</span></span>
-    * <span data-ttu-id="d5610-128">`--subnet`: Name of the subnet in which to create the NIC.</span><span class="sxs-lookup"><span data-stu-id="d5610-128">`--subnet`: Name of the subnet in which to create the NIC.</span></span>
+    * <span data-ttu-id="bb62d-122">`--private-ip-address`: Static private IP address for the NIC.</span><span class="sxs-lookup"><span data-stu-id="bb62d-122">`--private-ip-address`: Static private IP address for the NIC.</span></span>
+    * <span data-ttu-id="bb62d-123">`--vnet-name`: Name of the VNet in which to create the NIC.</span><span class="sxs-lookup"><span data-stu-id="bb62d-123">`--vnet-name`: Name of the VNet in which to create the NIC.</span></span>
+    * <span data-ttu-id="bb62d-124">`--subnet`: Name of the subnet in which to create the NIC.</span><span class="sxs-lookup"><span data-stu-id="bb62d-124">`--subnet`: Name of the subnet in which to create the NIC.</span></span>
 
-4. <span data-ttu-id="d5610-129">Run the [azure vm create](/cli/azure/vm/nic#create) command to create the VM using the public IP and NIC created above.</span><span class="sxs-lookup"><span data-stu-id="d5610-129">Run the [azure vm create](/cli/azure/vm/nic#create) command to create the VM using the public IP and NIC created above.</span></span> <span data-ttu-id="d5610-130">The list shown after the output explains the parameters used.</span><span class="sxs-lookup"><span data-stu-id="d5610-130">The list shown after the output explains the parameters used.</span></span>
+4. <span data-ttu-id="bb62d-125">Run the [azure vm create](/cli/azure/vm/nic#az_vm_nic_create) command to create the VM using the public IP and NIC created previously.</span><span class="sxs-lookup"><span data-stu-id="bb62d-125">Run the [azure vm create](/cli/azure/vm/nic#az_vm_nic_create) command to create the VM using the public IP and NIC created previously.</span></span> <span data-ttu-id="bb62d-126">The list shown after the output explains the parameters used.</span><span class="sxs-lookup"><span data-stu-id="bb62d-126">The list shown after the output explains the parameters used.</span></span>
    
     ```azurecli
     az vm create \
@@ -148,7 +140,7 @@ ms.locfileid: "44555372"
     --nics TestNIC
     ```
 
-    <span data-ttu-id="d5610-131">Expected output:</span><span class="sxs-lookup"><span data-stu-id="d5610-131">Expected output:</span></span>
+    <span data-ttu-id="bb62d-127">Expected output:</span><span class="sxs-lookup"><span data-stu-id="bb62d-127">Expected output:</span></span>
    
     ```json
     {
@@ -163,26 +155,27 @@ ms.locfileid: "44555372"
     }
     ```
    
-   <span data-ttu-id="d5610-132">Parameters other than the basic [az vm create](/cli/azure/vm#create) parameters.</span><span class="sxs-lookup"><span data-stu-id="d5610-132">Parameters other than the basic [az vm create](/cli/azure/vm#create) parameters.</span></span>
+   <span data-ttu-id="bb62d-128">Parameters other than the basic [az vm create](/cli/azure/vm#az_vm_create) parameters.</span><span class="sxs-lookup"><span data-stu-id="bb62d-128">Parameters other than the basic [az vm create](/cli/azure/vm#az_vm_create) parameters.</span></span>
 
-   * <span data-ttu-id="d5610-133">`--nics`: Name of the NIC to which the VM is attached.</span><span class="sxs-lookup"><span data-stu-id="d5610-133">`--nics`: Name of the NIC to which the VM is attached.</span></span>
+   * <span data-ttu-id="bb62d-129">`--nics`: Name of the NIC to which the VM is attached.</span><span class="sxs-lookup"><span data-stu-id="bb62d-129">`--nics`: Name of the NIC to which the VM is attached.</span></span>
    
+<span data-ttu-id="bb62d-130">It’s recommended that you do not statically assign the private IP assigned to the Azure virtual machine within the operating system of a VM, unless necessary, such as when [assigning multiple IP addresses to a Windows VM](virtual-network-multiple-ip-addresses-cli.md).</span><span class="sxs-lookup"><span data-stu-id="bb62d-130">It’s recommended that you do not statically assign the private IP assigned to the Azure virtual machine within the operating system of a VM, unless necessary, such as when [assigning multiple IP addresses to a Windows VM](virtual-network-multiple-ip-addresses-cli.md).</span></span> <span data-ttu-id="bb62d-131">If you do manually set the private IP address within the operating system, ensure that it is the same address as the private IP address assigned to the Azure [network interface](virtual-network-network-interface-addresses.md#change-ip-address-settings), or you can lose connectivity to the virtual machine.</span><span class="sxs-lookup"><span data-stu-id="bb62d-131">If you do manually set the private IP address within the operating system, ensure that it is the same address as the private IP address assigned to the Azure [network interface](virtual-network-network-interface-addresses.md#change-ip-address-settings), or you can lose connectivity to the virtual machine.</span></span> <span data-ttu-id="bb62d-132">Learn more about [private IP address](virtual-network-network-interface-addresses.md#private) settings.</span><span class="sxs-lookup"><span data-stu-id="bb62d-132">Learn more about [private IP address](virtual-network-network-interface-addresses.md#private) settings.</span></span>
 
-## <a name="retrieve-static-private-ip-address-information-for-a-vm"></a><span data-ttu-id="d5610-134">Retrieve static private IP address information for a VM</span><span class="sxs-lookup"><span data-stu-id="d5610-134">Retrieve static private IP address information for a VM</span></span>
+## <a name="retrieve-static-private-ip-address-information-for-a-vm"></a><span data-ttu-id="bb62d-133">Retrieve static private IP address information for a VM</span><span class="sxs-lookup"><span data-stu-id="bb62d-133">Retrieve static private IP address information for a VM</span></span>
 
-<span data-ttu-id="d5610-135">To view the static private IP address that you created, run the following Azure CLI command and observe the values for *Private IP alloc-method* and *Private IP address*:</span><span class="sxs-lookup"><span data-stu-id="d5610-135">To view the static private IP address that you created, run the following Azure CLI command and observe the values for *Private IP alloc-method* and *Private IP address*:</span></span>
+<span data-ttu-id="bb62d-134">Run the following Azure CLI command to observe the values for *Private IP alloc-method* and *Private IP address*:</span><span class="sxs-lookup"><span data-stu-id="bb62d-134">Run the following Azure CLI command to observe the values for *Private IP alloc-method* and *Private IP address*:</span></span>
 
 ```azurecli
 az vm show -g TestRG -n DNS01 --show-details --query 'privateIps'
 ```
 
-<span data-ttu-id="d5610-136">Expected output:</span><span class="sxs-lookup"><span data-stu-id="d5610-136">Expected output:</span></span>
+<span data-ttu-id="bb62d-135">Expected output:</span><span class="sxs-lookup"><span data-stu-id="bb62d-135">Expected output:</span></span>
 
 ```json
 "192.168.1.101"
 ```
 
-<span data-ttu-id="d5610-137">To display the specific IP information of the NIC for that VM, query the NIC specifically:</span><span class="sxs-lookup"><span data-stu-id="d5610-137">To display the specific IP information of the NIC for that VM, query the NIC specifically:</span></span>
+<span data-ttu-id="bb62d-136">To display the specific IP information of the NIC for that VM, query the NIC specifically:</span><span class="sxs-lookup"><span data-stu-id="bb62d-136">To display the specific IP information of the NIC for that VM, query the NIC specifically:</span></span>
 
 ```azurecli
 az network nic show \
@@ -192,7 +185,7 @@ az network nic show \
 rivateIpAllocationMethod,PublicAddress:publicIpAddress}'
 ```
 
-<span data-ttu-id="d5610-138">The output is something like:</span><span class="sxs-lookup"><span data-stu-id="d5610-138">The output is something like:</span></span>
+<span data-ttu-id="bb62d-137">The output is something like:</span><span class="sxs-lookup"><span data-stu-id="bb62d-137">The output is something like:</span></span>
 
 ```json
 {
@@ -203,15 +196,15 @@ rivateIpAllocationMethod,PublicAddress:publicIpAddress}'
 }
 ```
 
-## <a name="remove-a-static-private-ip-address-from-a-vm"></a><span data-ttu-id="d5610-139">Remove a static private IP address from a VM</span><span class="sxs-lookup"><span data-stu-id="d5610-139">Remove a static private IP address from a VM</span></span>
+## <a name="remove-a-static-private-ip-address-from-a-vm"></a><span data-ttu-id="bb62d-138">Remove a static private IP address from a VM</span><span class="sxs-lookup"><span data-stu-id="bb62d-138">Remove a static private IP address from a VM</span></span>
 
-<span data-ttu-id="d5610-140">You cannot remove a static private IP address from a NIC in Azure CLI for resource manager deployments.</span><span class="sxs-lookup"><span data-stu-id="d5610-140">You cannot remove a static private IP address from a NIC in Azure CLI for resource manager deployments.</span></span> <span data-ttu-id="d5610-141">You must:</span><span class="sxs-lookup"><span data-stu-id="d5610-141">You must:</span></span>
-- <span data-ttu-id="d5610-142">Create a new NIC that uses a dynamic IP</span><span class="sxs-lookup"><span data-stu-id="d5610-142">Create a new NIC that uses a dynamic IP</span></span>
-- <span data-ttu-id="d5610-143">Set the NIC on the VM do the newly created NIC.</span><span class="sxs-lookup"><span data-stu-id="d5610-143">Set the NIC on the VM do the newly created NIC.</span></span> 
+<span data-ttu-id="bb62d-139">You cannot remove a static private IP address from a NIC in Azure CLI for Azure Resource Manager deployments.</span><span class="sxs-lookup"><span data-stu-id="bb62d-139">You cannot remove a static private IP address from a NIC in Azure CLI for Azure Resource Manager deployments.</span></span> <span data-ttu-id="bb62d-140">You must:</span><span class="sxs-lookup"><span data-stu-id="bb62d-140">You must:</span></span>
+- <span data-ttu-id="bb62d-141">Create a new NIC that uses a dynamic IP</span><span class="sxs-lookup"><span data-stu-id="bb62d-141">Create a new NIC that uses a dynamic IP</span></span>
+- <span data-ttu-id="bb62d-142">Set the NIC on the VM do the newly created NIC.</span><span class="sxs-lookup"><span data-stu-id="bb62d-142">Set the NIC on the VM do the newly created NIC.</span></span> 
 
-<span data-ttu-id="d5610-144">To change the NIC for the VM used in the commands above, follow the steps below.</span><span class="sxs-lookup"><span data-stu-id="d5610-144">To change the NIC for the VM used in the commands above, follow the steps below.</span></span>
+<span data-ttu-id="bb62d-143">To change the NIC for the VM used in the previous commands, complete the following steps:</span><span class="sxs-lookup"><span data-stu-id="bb62d-143">To change the NIC for the VM used in the previous commands, complete the following steps:</span></span>
 
-1. <span data-ttu-id="d5610-145">Run the **azure network nic create** command to create a new NIC using dynamic IP allocation with a new IP address.</span><span class="sxs-lookup"><span data-stu-id="d5610-145">Run the **azure network nic create** command to create a new NIC using dynamic IP allocation with a new IP address.</span></span> <span data-ttu-id="d5610-146">Note that because no IP address is specified, the allocation method is **Dynamic**.</span><span class="sxs-lookup"><span data-stu-id="d5610-146">Note that because no IP address is specified, the allocation method is **Dynamic**.</span></span>
+1. <span data-ttu-id="bb62d-144">Run the **azure network nic create** command to create a new NIC using dynamic IP allocation with a new IP address.</span><span class="sxs-lookup"><span data-stu-id="bb62d-144">Run the **azure network nic create** command to create a new NIC using dynamic IP allocation with a new IP address.</span></span> <span data-ttu-id="bb62d-145">Because no IP address is specified, the allocation method is **Dynamic**.</span><span class="sxs-lookup"><span data-stu-id="bb62d-145">Because no IP address is specified, the allocation method is **Dynamic**.</span></span>
 
     ```azurecli
     az network nic create     \
@@ -222,7 +215,7 @@ rivateIpAllocationMethod,PublicAddress:publicIpAddress}'
     --vnet-name TestVNet
     ```        
    
-    <span data-ttu-id="d5610-147">Expected output:</span><span class="sxs-lookup"><span data-stu-id="d5610-147">Expected output:</span></span>
+    <span data-ttu-id="bb62d-146">Expected output:</span><span class="sxs-lookup"><span data-stu-id="bb62d-146">Expected output:</span></span>
 
     ```json
     {
@@ -256,13 +249,13 @@ rivateIpAllocationMethod,PublicAddress:publicIpAddress}'
     }
     ```
 
-2. <span data-ttu-id="d5610-148">Run the **azure vm set** command to change the NIC used by the VM.</span><span class="sxs-lookup"><span data-stu-id="d5610-148">Run the **azure vm set** command to change the NIC used by the VM.</span></span>
+2. <span data-ttu-id="bb62d-147">Run the **azure vm set** command to change the NIC used by the VM.</span><span class="sxs-lookup"><span data-stu-id="bb62d-147">Run the **azure vm set** command to change the NIC used by the VM.</span></span>
    
     ```azurecli
     azure vm set -g TestRG -n DNS01 -N TestNIC2
     ```
 
-    <span data-ttu-id="d5610-149">Expected output:</span><span class="sxs-lookup"><span data-stu-id="d5610-149">Expected output:</span></span>
+    <span data-ttu-id="bb62d-148">Expected output:</span><span class="sxs-lookup"><span data-stu-id="bb62d-148">Expected output:</span></span>
    
     ```json
     [
@@ -275,10 +268,8 @@ rivateIpAllocationMethod,PublicAddress:publicIpAddress}'
     ```
 
     > [!NOTE]
-    > <span data-ttu-id="d5610-150">If the VM is large enough to have more than one NIC, run the **azure network nic delete** command to delete the old NIC.</span><span class="sxs-lookup"><span data-stu-id="d5610-150">If the VM is large enough to have more than one NIC, run the **azure network nic delete** command to delete the old NIC.</span></span>
-   
-## <a name="next-steps"></a><span data-ttu-id="d5610-151">Next steps</span><span class="sxs-lookup"><span data-stu-id="d5610-151">Next steps</span></span>
-* <span data-ttu-id="d5610-152">Learn about [reserved public IP](virtual-networks-reserved-public-ip.md) addresses.</span><span class="sxs-lookup"><span data-stu-id="d5610-152">Learn about [reserved public IP](virtual-networks-reserved-public-ip.md) addresses.</span></span>
-* <span data-ttu-id="d5610-153">Learn about [instance-level public IP (ILPIP)](virtual-networks-instance-level-public-ip.md) addresses.</span><span class="sxs-lookup"><span data-stu-id="d5610-153">Learn about [instance-level public IP (ILPIP)](virtual-networks-instance-level-public-ip.md) addresses.</span></span>
-* <span data-ttu-id="d5610-154">Consult the [Reserved IP REST APIs](https://msdn.microsoft.com/library/azure/dn722420.aspx).</span><span class="sxs-lookup"><span data-stu-id="d5610-154">Consult the [Reserved IP REST APIs](https://msdn.microsoft.com/library/azure/dn722420.aspx).</span></span>
+    > <span data-ttu-id="bb62d-149">If the VM is large enough to have more than one NIC, run the **azure network nic delete** command to delete the old NIC.</span><span class="sxs-lookup"><span data-stu-id="bb62d-149">If the VM is large enough to have more than one NIC, run the **azure network nic delete** command to delete the old NIC.</span></span>
 
+## <a name="next-steps"></a><span data-ttu-id="bb62d-150">Next steps</span><span class="sxs-lookup"><span data-stu-id="bb62d-150">Next steps</span></span>
+
+<span data-ttu-id="bb62d-151">Learn about managing [IP address settings](virtual-network-network-interface-addresses.md).</span><span class="sxs-lookup"><span data-stu-id="bb62d-151">Learn about managing [IP address settings](virtual-network-network-interface-addresses.md).</span></span>

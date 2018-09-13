@@ -1,0 +1,41 @@
+### <a name="install-maintenance-mode-updates-via-windows-powershell-for-storsimple"></a><span data-ttu-id="720e2-101">Install maintenance mode updates via Windows PowerShell for StorSimple</span><span class="sxs-lookup"><span data-stu-id="720e2-101">Install maintenance mode updates via Windows PowerShell for StorSimple</span></span>
+
+<span data-ttu-id="720e2-102">When you apply maintenance mode updates to StorSimple device, all I/O requests are paused.</span><span class="sxs-lookup"><span data-stu-id="720e2-102">When you apply maintenance mode updates to StorSimple device, all I/O requests are paused.</span></span> <span data-ttu-id="720e2-103">Services such as non-volatile random access memory (NVRAM) or the clustering service are stopped.</span><span class="sxs-lookup"><span data-stu-id="720e2-103">Services such as non-volatile random access memory (NVRAM) or the clustering service are stopped.</span></span> <span data-ttu-id="720e2-104">Both controllers reboot when you enter or exit this mode.</span><span class="sxs-lookup"><span data-stu-id="720e2-104">Both controllers reboot when you enter or exit this mode.</span></span> <span data-ttu-id="720e2-105">When you exit this mode, all the services resume and are healthy.</span><span class="sxs-lookup"><span data-stu-id="720e2-105">When you exit this mode, all the services resume and are healthy.</span></span> <span data-ttu-id="720e2-106">(This may take a few minutes.)</span><span class="sxs-lookup"><span data-stu-id="720e2-106">(This may take a few minutes.)</span></span>
+
+> [!IMPORTANT]
+> * <span data-ttu-id="720e2-107">Before entering maintenance mode, verify that both device controllers are healthy in the Azure portal.</span><span class="sxs-lookup"><span data-stu-id="720e2-107">Before entering maintenance mode, verify that both device controllers are healthy in the Azure portal.</span></span> <span data-ttu-id="720e2-108">If the controller is not healthy, [Contact Microsoft Support](../articles/storsimple/storsimple-8000-contact-microsoft-support.md) for the next steps.</span><span class="sxs-lookup"><span data-stu-id="720e2-108">If the controller is not healthy, [Contact Microsoft Support](../articles/storsimple/storsimple-8000-contact-microsoft-support.md) for the next steps.</span></span>
+> * <span data-ttu-id="720e2-109">When you are in maintenance mode, you need to first update one controller and then the other controller.</span><span class="sxs-lookup"><span data-stu-id="720e2-109">When you are in maintenance mode, you need to first update one controller and then the other controller.</span></span>
+
+1. <span data-ttu-id="720e2-110">Use PuTTY to connect to the serial console.</span><span class="sxs-lookup"><span data-stu-id="720e2-110">Use PuTTY to connect to the serial console.</span></span> <span data-ttu-id="720e2-111">Follow the detailed instructions in [Use PuTTy to connect to the serial console](../articles/storsimple/storsimple-8000-deployment-walkthrough-u2.md#use-putty-to-connect-to-the-device-serial-console).</span><span class="sxs-lookup"><span data-stu-id="720e2-111">Follow the detailed instructions in [Use PuTTy to connect to the serial console](../articles/storsimple/storsimple-8000-deployment-walkthrough-u2.md#use-putty-to-connect-to-the-device-serial-console).</span></span> <span data-ttu-id="720e2-112">At the command prompt, press **Enter**.</span><span class="sxs-lookup"><span data-stu-id="720e2-112">At the command prompt, press **Enter**.</span></span> <span data-ttu-id="720e2-113">Select Option 1, **Log in with full access**.</span><span class="sxs-lookup"><span data-stu-id="720e2-113">Select Option 1, **Log in with full access**.</span></span>
+
+2. <span data-ttu-id="720e2-114">To place the controller in maintenance mode, type:</span><span class="sxs-lookup"><span data-stu-id="720e2-114">To place the controller in maintenance mode, type:</span></span>
+    
+    `Enter-HcsMaintenanceMode`
+
+    <span data-ttu-id="720e2-115">Both the controllers restart into maintenance mode.</span><span class="sxs-lookup"><span data-stu-id="720e2-115">Both the controllers restart into maintenance mode.</span></span>
+
+3. <span data-ttu-id="720e2-116">Install your maintenance mode updates.</span><span class="sxs-lookup"><span data-stu-id="720e2-116">Install your maintenance mode updates.</span></span> <span data-ttu-id="720e2-117">Type:</span><span class="sxs-lookup"><span data-stu-id="720e2-117">Type:</span></span>
+
+    `Start-HcsUpdate`
+
+    <span data-ttu-id="720e2-118">You are prompted for confirmation.</span><span class="sxs-lookup"><span data-stu-id="720e2-118">You are prompted for confirmation.</span></span> <span data-ttu-id="720e2-119">After you confirm the updates, they are installed on the controller that you are currently accessing.</span><span class="sxs-lookup"><span data-stu-id="720e2-119">After you confirm the updates, they are installed on the controller that you are currently accessing.</span></span> <span data-ttu-id="720e2-120">After the updates are installed, the controller restarts.</span><span class="sxs-lookup"><span data-stu-id="720e2-120">After the updates are installed, the controller restarts.</span></span>
+
+4. <span data-ttu-id="720e2-121">Monitor the status of updates.</span><span class="sxs-lookup"><span data-stu-id="720e2-121">Monitor the status of updates.</span></span> <span data-ttu-id="720e2-122">Sign in to the peer controller as the current controller is updating and is not able to process any other commands.</span><span class="sxs-lookup"><span data-stu-id="720e2-122">Sign in to the peer controller as the current controller is updating and is not able to process any other commands.</span></span> <span data-ttu-id="720e2-123">Type:</span><span class="sxs-lookup"><span data-stu-id="720e2-123">Type:</span></span>
+
+    `Get-HcsUpdateStatus`
+
+    <span data-ttu-id="720e2-124">If the `RunInProgress` is `True`, the update is still in progress.</span><span class="sxs-lookup"><span data-stu-id="720e2-124">If the `RunInProgress` is `True`, the update is still in progress.</span></span> <span data-ttu-id="720e2-125">If `RunInProgress` is `False`, it indicates that the update has completed.</span><span class="sxs-lookup"><span data-stu-id="720e2-125">If `RunInProgress` is `False`, it indicates that the update has completed.</span></span>
+
+5. <span data-ttu-id="720e2-126">After the disk firmware updates are successfully applied and the updated controller has restarted, verify the disk firmware version.</span><span class="sxs-lookup"><span data-stu-id="720e2-126">After the disk firmware updates are successfully applied and the updated controller has restarted, verify the disk firmware version.</span></span> <span data-ttu-id="720e2-127">On the updated controller, type:</span><span class="sxs-lookup"><span data-stu-id="720e2-127">On the updated controller, type:</span></span>
+
+    `Get-HcsFirmwareVersion`
+   
+    <span data-ttu-id="720e2-128">The expected disk firmware versions are:  `XMGJ, XGEG, KZ50, F6C2, VR08, N003, 0107`</span><span class="sxs-lookup"><span data-stu-id="720e2-128">The expected disk firmware versions are:  `XMGJ, XGEG, KZ50, F6C2, VR08, N003, 0107`</span></span>
+
+6. <span data-ttu-id="720e2-129">Exit the maintenance mode.</span><span class="sxs-lookup"><span data-stu-id="720e2-129">Exit the maintenance mode.</span></span> <span data-ttu-id="720e2-130">Type the following command for each device controller:</span><span class="sxs-lookup"><span data-stu-id="720e2-130">Type the following command for each device controller:</span></span>
+
+    `Exit-HcsMaintenanceMode`
+
+    <span data-ttu-id="720e2-131">The controllers restart when you exit maintenance mode.</span><span class="sxs-lookup"><span data-stu-id="720e2-131">The controllers restart when you exit maintenance mode.</span></span>
+
+7. <span data-ttu-id="720e2-132">Return to the Azure portal.</span><span class="sxs-lookup"><span data-stu-id="720e2-132">Return to the Azure portal.</span></span> <span data-ttu-id="720e2-133">The portal may not show that you installed the maintenance mode updates for 24 hours.</span><span class="sxs-lookup"><span data-stu-id="720e2-133">The portal may not show that you installed the maintenance mode updates for 24 hours.</span></span>
