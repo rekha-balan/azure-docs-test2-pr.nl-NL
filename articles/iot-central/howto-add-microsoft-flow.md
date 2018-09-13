@@ -1,0 +1,124 @@
+---
+title: Build workflows with the IoT Central connector in Microsoft Flow | Microsoft Docs
+description: Use the IoT Central connector in Microsoft Flow to trigger workflows and create, update, and delete devices in workflows.
+services: iot-central
+author: viv-liu
+ms.author: viviali
+ms.date: 06/12/2018
+ms.topic: article
+ms.prod: microsoft-iot-central
+manager: peterpr
+ms.openlocfilehash: 2414fb0576448339b268dce92dafe6c70108ba5d
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44865497"
+---
+# <a name="build-workflows-with-the-iot-central-connector-in-microsoft-flow"></a><span data-ttu-id="e076e-103">Build workflows with the IoT Central connector in Microsoft Flow</span><span class="sxs-lookup"><span data-stu-id="e076e-103">Build workflows with the IoT Central connector in Microsoft Flow</span></span>
+
+<span data-ttu-id="e076e-104">Use Microsoft Flow to automate workflows across the many applications and services that business users rely on.</span><span class="sxs-lookup"><span data-stu-id="e076e-104">Use Microsoft Flow to automate workflows across the many applications and services that business users rely on.</span></span> <span data-ttu-id="e076e-105">Using the IoT Central connector in Microsoft Flow, you can trigger workflows when a rule is fired in IoT Central.</span><span class="sxs-lookup"><span data-stu-id="e076e-105">Using the IoT Central connector in Microsoft Flow, you can trigger workflows when a rule is fired in IoT Central.</span></span> <span data-ttu-id="e076e-106">In a workflow triggered by IoT Central or any other application, you can use the actions in the IoT Central connector to create a device, update a device's properties and settings, or delete a device.</span><span class="sxs-lookup"><span data-stu-id="e076e-106">In a workflow triggered by IoT Central or any other application, you can use the actions in the IoT Central connector to create a device, update a device's properties and settings, or delete a device.</span></span> <span data-ttu-id="e076e-107">Check out [these Microsoft Flow templates](https://aka.ms/iotcentralflowtemplates) that connect IoT Central to other services such as mobile notifications and Microsoft Teams.</span><span class="sxs-lookup"><span data-stu-id="e076e-107">Check out [these Microsoft Flow templates](https://aka.ms/iotcentralflowtemplates) that connect IoT Central to other services such as mobile notifications and Microsoft Teams.</span></span>
+
+> [!NOTE] 
+> <span data-ttu-id="e076e-108">You'll need to sign into Microsoft Flow with a Microsoft personal or work or school account.</span><span class="sxs-lookup"><span data-stu-id="e076e-108">You'll need to sign into Microsoft Flow with a Microsoft personal or work or school account.</span></span> <span data-ttu-id="e076e-109">Learn more about Microsoft Flow plans [here](https://aka.ms/microsoftflowplans).</span><span class="sxs-lookup"><span data-stu-id="e076e-109">Learn more about Microsoft Flow plans [here](https://aka.ms/microsoftflowplans).</span></span>
+
+## <a name="trigger-a-workflow-when-a-rule-is-fired"></a><span data-ttu-id="e076e-110">Trigger a workflow when a rule is fired</span><span class="sxs-lookup"><span data-stu-id="e076e-110">Trigger a workflow when a rule is fired</span></span>
+
+<span data-ttu-id="e076e-111">This section shows you how to trigger a mobile notification in the Flow mobile app when a rule is fired in IoT Central.</span><span class="sxs-lookup"><span data-stu-id="e076e-111">This section shows you how to trigger a mobile notification in the Flow mobile app when a rule is fired in IoT Central.</span></span>
+
+1. <span data-ttu-id="e076e-112">Start by [creating a rule in IoT Central](howto-create-telemetry-rules.md).</span><span class="sxs-lookup"><span data-stu-id="e076e-112">Start by [creating a rule in IoT Central](howto-create-telemetry-rules.md).</span></span> <span data-ttu-id="e076e-113">After you save the rule conditions, choose the **Microsoft Flow action** as a new action.</span><span class="sxs-lookup"><span data-stu-id="e076e-113">After you save the rule conditions, choose the **Microsoft Flow action** as a new action.</span></span> <span data-ttu-id="e076e-114">A new tab or window should open in your browser, taking you into Microsoft Flow.</span><span class="sxs-lookup"><span data-stu-id="e076e-114">A new tab or window should open in your browser, taking you into Microsoft Flow.</span></span>
+
+1. <span data-ttu-id="e076e-115">Sign into Microsoft Flow.</span><span class="sxs-lookup"><span data-stu-id="e076e-115">Sign into Microsoft Flow.</span></span> <span data-ttu-id="e076e-116">This doesn't need to be the same account as the one that you use in IoT Central.</span><span class="sxs-lookup"><span data-stu-id="e076e-116">This doesn't need to be the same account as the one that you use in IoT Central.</span></span> <span data-ttu-id="e076e-117">You'll land on an overview page showing an IoT Central connector connecting to a custom action.</span><span class="sxs-lookup"><span data-stu-id="e076e-117">You'll land on an overview page showing an IoT Central connector connecting to a custom action.</span></span>
+
+1. <span data-ttu-id="e076e-118">Click **Continue**.</span><span class="sxs-lookup"><span data-stu-id="e076e-118">Click **Continue**.</span></span> <span data-ttu-id="e076e-119">You are taken to the Microsoft Flow designer to build your workflow.</span><span class="sxs-lookup"><span data-stu-id="e076e-119">You are taken to the Microsoft Flow designer to build your workflow.</span></span> <span data-ttu-id="e076e-120">The workflow has an IoT Central trigger that has your Application and Rule already filled in.</span><span class="sxs-lookup"><span data-stu-id="e076e-120">The workflow has an IoT Central trigger that has your Application and Rule already filled in.</span></span>
+
+1. <span data-ttu-id="e076e-121">Choose **+ New Step** and **Add an action**.</span><span class="sxs-lookup"><span data-stu-id="e076e-121">Choose **+ New Step** and **Add an action**.</span></span> <span data-ttu-id="e076e-122">At this point you can add any action you want to your workflow.</span><span class="sxs-lookup"><span data-stu-id="e076e-122">At this point you can add any action you want to your workflow.</span></span> <span data-ttu-id="e076e-123">As an example, let's send a mobile notification.</span><span class="sxs-lookup"><span data-stu-id="e076e-123">As an example, let's send a mobile notification.</span></span> <span data-ttu-id="e076e-124">Search for **notification**, and choose **Notifications - Send me a mobile notification**.</span><span class="sxs-lookup"><span data-stu-id="e076e-124">Search for **notification**, and choose **Notifications - Send me a mobile notification**.</span></span>
+
+1. <span data-ttu-id="e076e-125">In the action, fill in the Text field with what you want your notification to say.</span><span class="sxs-lookup"><span data-stu-id="e076e-125">In the action, fill in the Text field with what you want your notification to say.</span></span> <span data-ttu-id="e076e-126">You can include *Dynamic content* from your IoT Central rule, passing along important information such as device name and timestamp to your notification.</span><span class="sxs-lookup"><span data-stu-id="e076e-126">You can include *Dynamic content* from your IoT Central rule, passing along important information such as device name and timestamp to your notification.</span></span>
+
+    > [!NOTE]
+    > <span data-ttu-id="e076e-127">Click the "See more" text in the Dynamic content window to get measurement and property values that triggered the rule.</span><span class="sxs-lookup"><span data-stu-id="e076e-127">Click the "See more" text in the Dynamic content window to get measurement and property values that triggered the rule.</span></span>
+
+    ![Flow editing action with dynamic pane open](./media/howto-add-microsoft-flow/flowdynamicpane.PNG)
+
+1. <span data-ttu-id="e076e-129">When you are done editing your action, click **Save**.</span><span class="sxs-lookup"><span data-stu-id="e076e-129">When you are done editing your action, click **Save**.</span></span> <span data-ttu-id="e076e-130">You'll be directed to your workflow's overview page.</span><span class="sxs-lookup"><span data-stu-id="e076e-130">You'll be directed to your workflow's overview page.</span></span> <span data-ttu-id="e076e-131">Here you can see the run history and share it with other colleagues.</span><span class="sxs-lookup"><span data-stu-id="e076e-131">Here you can see the run history and share it with other colleagues.</span></span>
+
+    > [!NOTE]
+    > <span data-ttu-id="e076e-132">If you want other users in your IoT Central app to edit this rule, you must share it with them in Microsoft Flow.</span><span class="sxs-lookup"><span data-stu-id="e076e-132">If you want other users in your IoT Central app to edit this rule, you must share it with them in Microsoft Flow.</span></span> <span data-ttu-id="e076e-133">Add their Microsoft Flow accounts as owners in your workflow.</span><span class="sxs-lookup"><span data-stu-id="e076e-133">Add their Microsoft Flow accounts as owners in your workflow.</span></span>
+
+1. <span data-ttu-id="e076e-134">If you go back to your IoT Central app, you'll see this rule has a Microsoft Flow action under the Actions area.</span><span class="sxs-lookup"><span data-stu-id="e076e-134">If you go back to your IoT Central app, you'll see this rule has a Microsoft Flow action under the Actions area.</span></span>
+
+<span data-ttu-id="e076e-135">You can always start building a workflow using the IoT Central connector in Microsoft Flow.</span><span class="sxs-lookup"><span data-stu-id="e076e-135">You can always start building a workflow using the IoT Central connector in Microsoft Flow.</span></span> <span data-ttu-id="e076e-136">You can then choose which IoT Central app and which rule to connect to.</span><span class="sxs-lookup"><span data-stu-id="e076e-136">You can then choose which IoT Central app and which rule to connect to.</span></span>
+
+## <a name="create-a-device-in-a-workflow"></a><span data-ttu-id="e076e-137">Create a device in a workflow</span><span class="sxs-lookup"><span data-stu-id="e076e-137">Create a device in a workflow</span></span>
+
+<span data-ttu-id="e076e-138">This section shows you how to create a new device in IoT Central at the push of a button on a mobile device using the Microsoft Flow mobile app.</span><span class="sxs-lookup"><span data-stu-id="e076e-138">This section shows you how to create a new device in IoT Central at the push of a button on a mobile device using the Microsoft Flow mobile app.</span></span> <span data-ttu-id="e076e-139">You can use this action in Flow to integrate ERP systems like Dynamics with IoT Central by creating a new device when a device is added elsewhere.</span><span class="sxs-lookup"><span data-stu-id="e076e-139">You can use this action in Flow to integrate ERP systems like Dynamics with IoT Central by creating a new device when a device is added elsewhere.</span></span>
+
+1. <span data-ttu-id="e076e-140">Start by creating a blank workflow in Microsoft Flow.</span><span class="sxs-lookup"><span data-stu-id="e076e-140">Start by creating a blank workflow in Microsoft Flow.</span></span>
+
+1. <span data-ttu-id="e076e-141">Search for **Flow button for mobile** as a trigger.</span><span class="sxs-lookup"><span data-stu-id="e076e-141">Search for **Flow button for mobile** as a trigger.</span></span>
+
+1. <span data-ttu-id="e076e-142">In this trigger, add a text input called **Device name**.</span><span class="sxs-lookup"><span data-stu-id="e076e-142">In this trigger, add a text input called **Device name**.</span></span> <span data-ttu-id="e076e-143">Change the description text to be **Enter the device name of your new device**.</span><span class="sxs-lookup"><span data-stu-id="e076e-143">Change the description text to be **Enter the device name of your new device**.</span></span>
+
+1. <span data-ttu-id="e076e-144">Add a new action.</span><span class="sxs-lookup"><span data-stu-id="e076e-144">Add a new action.</span></span> <span data-ttu-id="e076e-145">Search for the **Azure IoT Central - Create a device** action.</span><span class="sxs-lookup"><span data-stu-id="e076e-145">Search for the **Azure IoT Central - Create a device** action.</span></span>
+
+1. <span data-ttu-id="e076e-146">Pick your application, and choose a device template to create a device from in the dropdowns.</span><span class="sxs-lookup"><span data-stu-id="e076e-146">Pick your application, and choose a device template to create a device from in the dropdowns.</span></span> <span data-ttu-id="e076e-147">You'll see the action expand to show all the properties and settings of the device.</span><span class="sxs-lookup"><span data-stu-id="e076e-147">You'll see the action expand to show all the properties and settings of the device.</span></span>
+
+1. <span data-ttu-id="e076e-148">Select the Device Name field.</span><span class="sxs-lookup"><span data-stu-id="e076e-148">Select the Device Name field.</span></span> <span data-ttu-id="e076e-149">From the dynamic content pane, choose **Device Name**.</span><span class="sxs-lookup"><span data-stu-id="e076e-149">From the dynamic content pane, choose **Device Name**.</span></span> <span data-ttu-id="e076e-150">This value will be passed from the input the user enters through the mobile app, and will be the name of your new device in IoT Central.</span><span class="sxs-lookup"><span data-stu-id="e076e-150">This value will be passed from the input the user enters through the mobile app, and will be the name of your new device in IoT Central.</span></span> <span data-ttu-id="e076e-151">In this example, the only required field is the device name, indicated by the red asterisk.</span><span class="sxs-lookup"><span data-stu-id="e076e-151">In this example, the only required field is the device name, indicated by the red asterisk.</span></span> <span data-ttu-id="e076e-152">Another device template may have multiple required fields that need to be filled in to create a new device.</span><span class="sxs-lookup"><span data-stu-id="e076e-152">Another device template may have multiple required fields that need to be filled in to create a new device.</span></span>
+
+    ![Flow create device action dynamic pane](./media/howto-add-microsoft-flow/flowcreatedevice.PNG)
+1. <span data-ttu-id="e076e-154">(Optional) Fill in other fields as you see fit for your creating new devices.</span><span class="sxs-lookup"><span data-stu-id="e076e-154">(Optional) Fill in other fields as you see fit for your creating new devices.</span></span> <span data-ttu-id="e076e-155">For example, choose if the device is simulated or not.</span><span class="sxs-lookup"><span data-stu-id="e076e-155">For example, choose if the device is simulated or not.</span></span>
+
+1. <span data-ttu-id="e076e-156">Finally, save your workflow.</span><span class="sxs-lookup"><span data-stu-id="e076e-156">Finally, save your workflow.</span></span>
+
+1. <span data-ttu-id="e076e-157">Try your workflow in the Microsoft Flow mobile app.</span><span class="sxs-lookup"><span data-stu-id="e076e-157">Try your workflow in the Microsoft Flow mobile app.</span></span> <span data-ttu-id="e076e-158">Go to the **Buttons** tab in the app.</span><span class="sxs-lookup"><span data-stu-id="e076e-158">Go to the **Buttons** tab in the app.</span></span> <span data-ttu-id="e076e-159">You should see your Button -> Create a new device workflow.</span><span class="sxs-lookup"><span data-stu-id="e076e-159">You should see your Button -> Create a new device workflow.</span></span> <span data-ttu-id="e076e-160">Enter the name of your new device, and watch it show up in IoT Central!</span><span class="sxs-lookup"><span data-stu-id="e076e-160">Enter the name of your new device, and watch it show up in IoT Central!</span></span>
+
+    ![Flow create device mobile screenshot](./media/howto-add-microsoft-flow/flowmobilescreenshot.png)
+
+## <a name="update-a-device-in-a-workflow"></a><span data-ttu-id="e076e-162">Update a device in a workflow</span><span class="sxs-lookup"><span data-stu-id="e076e-162">Update a device in a workflow</span></span>
+
+<span data-ttu-id="e076e-163">This section shows you how to update device settings and properties in IoT Central at the push of a button on a mobile device using the Microsoft Flow mobile app.</span><span class="sxs-lookup"><span data-stu-id="e076e-163">This section shows you how to update device settings and properties in IoT Central at the push of a button on a mobile device using the Microsoft Flow mobile app.</span></span>
+
+1. <span data-ttu-id="e076e-164">Start by creating a blank workflow in Microsoft Flow.</span><span class="sxs-lookup"><span data-stu-id="e076e-164">Start by creating a blank workflow in Microsoft Flow.</span></span>
+
+1. <span data-ttu-id="e076e-165">Search for **Flow button for mobile** as a trigger.</span><span class="sxs-lookup"><span data-stu-id="e076e-165">Search for **Flow button for mobile** as a trigger.</span></span>
+
+1. <span data-ttu-id="e076e-166">In this trigger, add an input like a **Location** text input that corresponds to a setting or property you want to change.</span><span class="sxs-lookup"><span data-stu-id="e076e-166">In this trigger, add an input like a **Location** text input that corresponds to a setting or property you want to change.</span></span> <span data-ttu-id="e076e-167">Change the description text.</span><span class="sxs-lookup"><span data-stu-id="e076e-167">Change the description text.</span></span>
+
+1. <span data-ttu-id="e076e-168">Add a new action.</span><span class="sxs-lookup"><span data-stu-id="e076e-168">Add a new action.</span></span> <span data-ttu-id="e076e-169">Search for the **Azure IoT Central - Update a device** action.</span><span class="sxs-lookup"><span data-stu-id="e076e-169">Search for the **Azure IoT Central - Update a device** action.</span></span>
+
+1. <span data-ttu-id="e076e-170">Pick your application from the dropdown.</span><span class="sxs-lookup"><span data-stu-id="e076e-170">Pick your application from the dropdown.</span></span> <span data-ttu-id="e076e-171">Now you'll need the Device ID of the existing device you want to update.</span><span class="sxs-lookup"><span data-stu-id="e076e-171">Now you'll need the Device ID of the existing device you want to update.</span></span> <span data-ttu-id="e076e-172">You can get the Device ID from IoT Central in the **Device Explorer**.</span><span class="sxs-lookup"><span data-stu-id="e076e-172">You can get the Device ID from IoT Central in the **Device Explorer**.</span></span>
+
+    ![IoT Central device explorer device ID](./media/howto-add-microsoft-flow/iotcdeviceid.png)
+
+1. <span data-ttu-id="e076e-174">At this point, you can update the device name and if it is a simulated device or not.</span><span class="sxs-lookup"><span data-stu-id="e076e-174">At this point, you can update the device name and if it is a simulated device or not.</span></span> <span data-ttu-id="e076e-175">To update any of the device's properties and settings, you must select the device template of the device you want to update in the **Device Template** dropdown.</span><span class="sxs-lookup"><span data-stu-id="e076e-175">To update any of the device's properties and settings, you must select the device template of the device you want to update in the **Device Template** dropdown.</span></span> <span data-ttu-id="e076e-176">The action tile expands to show all the properties and settings you can update.</span><span class="sxs-lookup"><span data-stu-id="e076e-176">The action tile expands to show all the properties and settings you can update.</span></span>
+
+1. <span data-ttu-id="e076e-177">Select each of the properties and settings you want to update.</span><span class="sxs-lookup"><span data-stu-id="e076e-177">Select each of the properties and settings you want to update.</span></span> <span data-ttu-id="e076e-178">From the dynamic content pane, choose the corresponding input from the trigger.</span><span class="sxs-lookup"><span data-stu-id="e076e-178">From the dynamic content pane, choose the corresponding input from the trigger.</span></span> <span data-ttu-id="e076e-179">In this example, the Location value is propagated down to update the device's Location property.</span><span class="sxs-lookup"><span data-stu-id="e076e-179">In this example, the Location value is propagated down to update the device's Location property.</span></span>
+
+    ![Flow update device action dynamic pane](./media/howto-add-microsoft-flow/flowupdatedevice.PNG)
+
+1. <span data-ttu-id="e076e-181">Finally, save your workflow.</span><span class="sxs-lookup"><span data-stu-id="e076e-181">Finally, save your workflow.</span></span>
+
+1. <span data-ttu-id="e076e-182">Try your workflow in the Microsoft Flow mobile app.</span><span class="sxs-lookup"><span data-stu-id="e076e-182">Try your workflow in the Microsoft Flow mobile app.</span></span> <span data-ttu-id="e076e-183">Go to the **Buttons** tab in the app.</span><span class="sxs-lookup"><span data-stu-id="e076e-183">Go to the **Buttons** tab in the app.</span></span> <span data-ttu-id="e076e-184">You should see your Button -> Update a device workflow.</span><span class="sxs-lookup"><span data-stu-id="e076e-184">You should see your Button -> Update a device workflow.</span></span> <span data-ttu-id="e076e-185">Enter the inputs, and see the device get updated in IoT Central!</span><span class="sxs-lookup"><span data-stu-id="e076e-185">Enter the inputs, and see the device get updated in IoT Central!</span></span>
+
+## <a name="delete-a-device-in-a-workflow"></a><span data-ttu-id="e076e-186">Delete a device in a workflow</span><span class="sxs-lookup"><span data-stu-id="e076e-186">Delete a device in a workflow</span></span>
+
+<span data-ttu-id="e076e-187">You can delete a device by its device ID using the **Azure IoT Central - Delete a device** action.</span><span class="sxs-lookup"><span data-stu-id="e076e-187">You can delete a device by its device ID using the **Azure IoT Central - Delete a device** action.</span></span> <span data-ttu-id="e076e-188">Here is an example workflow that deletes a device at the push of a button in the Microsoft Flow mobile app.</span><span class="sxs-lookup"><span data-stu-id="e076e-188">Here is an example workflow that deletes a device at the push of a button in the Microsoft Flow mobile app.</span></span>
+
+   ![Flow delete device workflow](./media/howto-add-microsoft-flow/flowdeletedevice.PNG)
+    
+## <a name="troubleshooting"></a><span data-ttu-id="e076e-190">Troubleshooting</span><span class="sxs-lookup"><span data-stu-id="e076e-190">Troubleshooting</span></span>
+
+<span data-ttu-id="e076e-191">If you are having trouble creating a connection to the Azure IoT Central connector, here are some tips to help you.</span><span class="sxs-lookup"><span data-stu-id="e076e-191">If you are having trouble creating a connection to the Azure IoT Central connector, here are some tips to help you.</span></span>
+
+1. <span data-ttu-id="e076e-192">Microsoft personal accounts (such as @hotmail.com, @live.com, @outlook.com domains) are not supported at this time.</span><span class="sxs-lookup"><span data-stu-id="e076e-192">Microsoft personal accounts (such as @hotmail.com, @live.com, @outlook.com domains) are not supported at this time.</span></span> <span data-ttu-id="e076e-193">You must use an AAD work or school account.</span><span class="sxs-lookup"><span data-stu-id="e076e-193">You must use an AAD work or school account.</span></span>
+
+2. <span data-ttu-id="e076e-194">If you are receiving an error while using an AAD account, try opening Windows PowerShell and run the following commandlets as an administrator.</span><span class="sxs-lookup"><span data-stu-id="e076e-194">If you are receiving an error while using an AAD account, try opening Windows PowerShell and run the following commandlets as an administrator.</span></span>
+    ``` PowerShell
+    Install-Module AzureAD
+    Connect-AzureAD
+    New-AzureADServicePrincipal -AppId 9edfcdd9-0bc5-4bd4-b287-c3afc716aac7 -DisplayName "Azure IoT Central"
+    ```
+    
+## <a name="next-steps"></a><span data-ttu-id="e076e-195">Next steps</span><span class="sxs-lookup"><span data-stu-id="e076e-195">Next steps</span></span>
+<span data-ttu-id="e076e-196">Now that you have learned how to use Microsoft Flow to build workflows, the suggested next step is to [manage devices](howto-manage-devices.md).</span><span class="sxs-lookup"><span data-stu-id="e076e-196">Now that you have learned how to use Microsoft Flow to build workflows, the suggested next step is to [manage devices](howto-manage-devices.md).</span></span>

@@ -1,0 +1,53 @@
+---
+title: Customer data request features
+description: Summary of customer data request features
+author: dominicbetts
+ms.author: dobett
+manager: timlt
+ms.date: 05/16/2018
+ms.topic: conceptual
+ms.service: iot-hub
+services: iot-hub
+ms.openlocfilehash: c0197b8f0cceab575aa5e830d094ddd2fb6b6b01
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44866492"
+---
+# <a name="summary-of-customer-data-request-features"></a><span data-ttu-id="624e5-103">Summary of customer data request features</span><span class="sxs-lookup"><span data-stu-id="624e5-103">Summary of customer data request features</span></span>
+
+<span data-ttu-id="624e5-104">The Azure IoT Hub is a REST API-based cloud service targeted at enterprise customers that enables secure, bi-directional communication between millions of devices and a partitioned Azure service.</span><span class="sxs-lookup"><span data-stu-id="624e5-104">The Azure IoT Hub is a REST API-based cloud service targeted at enterprise customers that enables secure, bi-directional communication between millions of devices and a partitioned Azure service.</span></span>
+
+[!INCLUDE [gdpr-intro-sentence](../../includes/gdpr-intro-sentence.md)]
+
+<span data-ttu-id="624e5-105">Individual devices are assigned a device identifier (device ID) by a tenant administrator.</span><span class="sxs-lookup"><span data-stu-id="624e5-105">Individual devices are assigned a device identifier (device ID) by a tenant administrator.</span></span> <span data-ttu-id="624e5-106">Device data is based on the assigned device ID.</span><span class="sxs-lookup"><span data-stu-id="624e5-106">Device data is based on the assigned device ID.</span></span> <span data-ttu-id="624e5-107">Microsoft maintains no information and has no access to data that would allow device ID to user correlation.</span><span class="sxs-lookup"><span data-stu-id="624e5-107">Microsoft maintains no information and has no access to data that would allow device ID to user correlation.</span></span>
+
+<span data-ttu-id="624e5-108">Many of the devices managed in Azure IoT Hub are not personal devices, for example an office thermostat or factory robot.</span><span class="sxs-lookup"><span data-stu-id="624e5-108">Many of the devices managed in Azure IoT Hub are not personal devices, for example an office thermostat or factory robot.</span></span> <span data-ttu-id="624e5-109">Customers may, however, consider some devices to be personally identifiable and at their discretion may maintain their own asset or inventory tracking methods that tie devices to individuals.</span><span class="sxs-lookup"><span data-stu-id="624e5-109">Customers may, however, consider some devices to be personally identifiable and at their discretion may maintain their own asset or inventory tracking methods that tie devices to individuals.</span></span> <span data-ttu-id="624e5-110">Azure IoT Hub manages and stores all data associated with devices as if it were personal data.</span><span class="sxs-lookup"><span data-stu-id="624e5-110">Azure IoT Hub manages and stores all data associated with devices as if it were personal data.</span></span>
+
+<span data-ttu-id="624e5-111">Tenant administrators can use either the Azure portal or the service's REST APIs to fulfill information requests by exporting or deleting data associated with a device ID.</span><span class="sxs-lookup"><span data-stu-id="624e5-111">Tenant administrators can use either the Azure portal or the service's REST APIs to fulfill information requests by exporting or deleting data associated with a device ID.</span></span>
+
+<span data-ttu-id="624e5-112">If you use the routing feature of the Azure IoT Hub service to forward device messages to other services, then data requests must be performed by the tenant admin for each routing endpoint in order to complete a full request for a given device.</span><span class="sxs-lookup"><span data-stu-id="624e5-112">If you use the routing feature of the Azure IoT Hub service to forward device messages to other services, then data requests must be performed by the tenant admin for each routing endpoint in order to complete a full request for a given device.</span></span> <span data-ttu-id="624e5-113">See each endpoint's reference documentation for further details.</span><span class="sxs-lookup"><span data-stu-id="624e5-113">See each endpoint's reference documentation for further details.</span></span> <span data-ttu-id="624e5-114">For more information about supported endpoints, see [Reference - IoT Hub endpoints](iot-hub-devguide-endpoints.md).</span><span class="sxs-lookup"><span data-stu-id="624e5-114">For more information about supported endpoints, see [Reference - IoT Hub endpoints](iot-hub-devguide-endpoints.md).</span></span>
+
+<span data-ttu-id="624e5-115">If you use the Azure Event Grid integration feature of the Azure IoT Hub service, then data requests must be performed by the tenant admin for each subscriber of these events.</span><span class="sxs-lookup"><span data-stu-id="624e5-115">If you use the Azure Event Grid integration feature of the Azure IoT Hub service, then data requests must be performed by the tenant admin for each subscriber of these events.</span></span> <span data-ttu-id="624e5-116">For more information, see [React to IoT Hub events by using Event Grid](iot-hub-event-grid.md).</span><span class="sxs-lookup"><span data-stu-id="624e5-116">For more information, see [React to IoT Hub events by using Event Grid](iot-hub-event-grid.md).</span></span>
+
+<span data-ttu-id="624e5-117">If you use the Azure Monitor integration feature of the Azure IoT Hub service to create diagnostic logs, then data requests must be performed by the tenant admin against the stored logs.</span><span class="sxs-lookup"><span data-stu-id="624e5-117">If you use the Azure Monitor integration feature of the Azure IoT Hub service to create diagnostic logs, then data requests must be performed by the tenant admin against the stored logs.</span></span> <span data-ttu-id="624e5-118">For more information, see [Monitor the health of Azure IoT Hub](iot-hub-monitor-resource-health.md).</span><span class="sxs-lookup"><span data-stu-id="624e5-118">For more information, see [Monitor the health of Azure IoT Hub](iot-hub-monitor-resource-health.md).</span></span>
+
+## <a name="deleting-customer-data"></a><span data-ttu-id="624e5-119">Deleting customer data</span><span class="sxs-lookup"><span data-stu-id="624e5-119">Deleting customer data</span></span>
+
+<span data-ttu-id="624e5-120">Tenant administrators can use the IoT devices blade of the Azure IoT Hub extension in the Azure portal to delete a device, which deletes the data associated with that device.</span><span class="sxs-lookup"><span data-stu-id="624e5-120">Tenant administrators can use the IoT devices blade of the Azure IoT Hub extension in the Azure portal to delete a device, which deletes the data associated with that device.</span></span>
+
+<span data-ttu-id="624e5-121">It is also possible to perform delete operations for devices using REST APIs.</span><span class="sxs-lookup"><span data-stu-id="624e5-121">It is also possible to perform delete operations for devices using REST APIs.</span></span> <span data-ttu-id="624e5-122">For more information, see [Service - Delete Device](https://docs.microsoft.com/rest/api/iothub/service/deletedevice).</span><span class="sxs-lookup"><span data-stu-id="624e5-122">For more information, see [Service - Delete Device](https://docs.microsoft.com/rest/api/iothub/service/deletedevice).</span></span>
+
+## <a name="exporting-customer-data"></a><span data-ttu-id="624e5-123">Exporting customer data</span><span class="sxs-lookup"><span data-stu-id="624e5-123">Exporting customer data</span></span>
+
+<span data-ttu-id="624e5-124">Tenant administrators can utilize copy and paste within the IoT devices blade of the Azure IoT Hub extension in the Azure portal to export data associated with a device.</span><span class="sxs-lookup"><span data-stu-id="624e5-124">Tenant administrators can utilize copy and paste within the IoT devices blade of the Azure IoT Hub extension in the Azure portal to export data associated with a device.</span></span>
+
+<span data-ttu-id="624e5-125">It is also possible to perform export operations for devices using REST APIs.</span><span class="sxs-lookup"><span data-stu-id="624e5-125">It is also possible to perform export operations for devices using REST APIs.</span></span> <span data-ttu-id="624e5-126">For more information, see [Service - Get Device](https://docs.microsoft.com/rest/api/iothub/service/getdevice).</span><span class="sxs-lookup"><span data-stu-id="624e5-126">For more information, see [Service - Get Device](https://docs.microsoft.com/rest/api/iothub/service/getdevice).</span></span>
+
+> [!NOTE]
+> <span data-ttu-id="624e5-127">When you use Microsoft's enterprise services, Microsoft generates some information, known as system-generated logs.</span><span class="sxs-lookup"><span data-stu-id="624e5-127">When you use Microsoft's enterprise services, Microsoft generates some information, known as system-generated logs.</span></span> <span data-ttu-id="624e5-128">Some Azure IoT Hub system-generated logs are not accessible or exportable by tenant administrators.</span><span class="sxs-lookup"><span data-stu-id="624e5-128">Some Azure IoT Hub system-generated logs are not accessible or exportable by tenant administrators.</span></span> <span data-ttu-id="624e5-129">These logs constitute factual actions conducted within the service and diagnostic data related to individual devices.</span><span class="sxs-lookup"><span data-stu-id="624e5-129">These logs constitute factual actions conducted within the service and diagnostic data related to individual devices.</span></span>
+
+## <a name="links-to-additional-documentation"></a><span data-ttu-id="624e5-130">Links to additional documentation</span><span class="sxs-lookup"><span data-stu-id="624e5-130">Links to additional documentation</span></span>
+
+<span data-ttu-id="624e5-131">Full documentation for Azure IoT Hub Service APIs is located at [https://docs.microsoft.com/rest/api/iothub/service](https://docs.microsoft.com/rest/api/iothub/service).</span><span class="sxs-lookup"><span data-stu-id="624e5-131">Full documentation for Azure IoT Hub Service APIs is located at [https://docs.microsoft.com/rest/api/iothub/service](https://docs.microsoft.com/rest/api/iothub/service).</span></span>

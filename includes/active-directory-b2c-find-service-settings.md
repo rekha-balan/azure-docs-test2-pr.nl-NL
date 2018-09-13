@@ -1,0 +1,3 @@
+[!INCLUDE [active-directory-b2c-switch-b2c-tenant](active-directory-b2c-switch-b2c-tenant.md)]
+
+<span data-ttu-id="ac3eb-101">Choose **All services** in the top-left corner of the Azure portal, search for and select **Azure AD B2C**.</span><span class="sxs-lookup"><span data-stu-id="ac3eb-101">Choose **All services** in the top-left corner of the Azure portal, search for and select **Azure AD B2C**.</span></span> <span data-ttu-id="ac3eb-102">You should now be using the tenant that you created in the previous tutorial.</span><span class="sxs-lookup"><span data-stu-id="ac3eb-102">You should now be using the tenant that you created in the previous tutorial.</span></span>

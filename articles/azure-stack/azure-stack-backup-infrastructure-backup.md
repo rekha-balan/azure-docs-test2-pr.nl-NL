@@ -1,0 +1,64 @@
+---
+title: Backup and data recovery for Azure Stack with the Infrastructure Backup Service | Microsoft Docs
+description: You can back up and restore configuration and service data using the Infrastructure Backup Service.
+services: azure-stack
+documentationcenter: ''
+author: mattbriggs
+manager: femila
+editor: ''
+ms.assetid: 9B51A3FB-EEFC-4CD8-84A8-38C52CFAD2E4
+ms.service: azure-stack
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 9/10/2018
+ms.author: mabrigg
+ms.reviewer: hectorl
+ms.openlocfilehash: 9f2668ff84ade4ba99b7aa7dcd67feafadc1c6c4
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44866477"
+---
+# <a name="backup-and-data-recovery-for-azure-stack-with-the-infrastructure-backup-service"></a><span data-ttu-id="e3083-103">Backup and data recovery for Azure Stack with the Infrastructure Backup Service</span><span class="sxs-lookup"><span data-stu-id="e3083-103">Backup and data recovery for Azure Stack with the Infrastructure Backup Service</span></span>
+
+<span data-ttu-id="e3083-104">*Applies to: Azure Stack integrated systems and Azure Stack Development Kit*</span><span class="sxs-lookup"><span data-stu-id="e3083-104">*Applies to: Azure Stack integrated systems and Azure Stack Development Kit*</span></span>
+
+<span data-ttu-id="e3083-105">You can back up and restore configuration and service data using the Infrastructure Backup Service.</span><span class="sxs-lookup"><span data-stu-id="e3083-105">You can back up and restore configuration and service data using the Infrastructure Backup Service.</span></span> <span data-ttu-id="e3083-106">Each Azure Stack installation contains an instance of the service.</span><span class="sxs-lookup"><span data-stu-id="e3083-106">Each Azure Stack installation contains an instance of the service.</span></span> <span data-ttu-id="e3083-107">You can use backups created by the service for the redeployment of the Azure Stack Cloud to restore identity, security, and Azure Resource Manager data.</span><span class="sxs-lookup"><span data-stu-id="e3083-107">You can use backups created by the service for the redeployment of the Azure Stack Cloud to restore identity, security, and Azure Resource Manager data.</span></span>
+
+<span data-ttu-id="e3083-108">You can enable backup when you are ready to put your cloud into production.</span><span class="sxs-lookup"><span data-stu-id="e3083-108">You can enable backup when you are ready to put your cloud into production.</span></span> <span data-ttu-id="e3083-109">Do not enable backup if you plan to perform testing and validation for a long period of time.</span><span class="sxs-lookup"><span data-stu-id="e3083-109">Do not enable backup if you plan to perform testing and validation for a long period of time.</span></span>
+
+<span data-ttu-id="e3083-110">Before you enable your backup service, make sure you have [requirements in place](#verify-requirements-for-the-infrastructure-backup-service).</span><span class="sxs-lookup"><span data-stu-id="e3083-110">Before you enable your backup service, make sure you have [requirements in place](#verify-requirements-for-the-infrastructure-backup-service).</span></span>
+
+> [!Note]  
+> <span data-ttu-id="e3083-111">The Infrastructure Backup Service does not include user data and applications.</span><span class="sxs-lookup"><span data-stu-id="e3083-111">The Infrastructure Backup Service does not include user data and applications.</span></span> <span data-ttu-id="e3083-112">See the following articles for instructions on backing up and restore [App Services](https://aka.ms/azure-stack-app-service), [SQL](https://aka.ms/azure-stack-ms-sql), and [MySQL](https://aka.ms/azure-stack-mysql) resource providers and associated user data..</span><span class="sxs-lookup"><span data-stu-id="e3083-112">See the following articles for instructions on backing up and restore [App Services](https://aka.ms/azure-stack-app-service), [SQL](https://aka.ms/azure-stack-ms-sql), and [MySQL](https://aka.ms/azure-stack-mysql) resource providers and associated user data..</span></span>
+
+## <a name="the-infrastructure-backup-service"></a><span data-ttu-id="e3083-113">The Infrastructure Backup Service</span><span class="sxs-lookup"><span data-stu-id="e3083-113">The Infrastructure Backup Service</span></span>
+
+<span data-ttu-id="e3083-114">The services contain the following features.</span><span class="sxs-lookup"><span data-stu-id="e3083-114">The services contain the following features.</span></span>
+
+| <span data-ttu-id="e3083-115">Feature</span><span class="sxs-lookup"><span data-stu-id="e3083-115">Feature</span></span>                                            | <span data-ttu-id="e3083-116">Description</span><span class="sxs-lookup"><span data-stu-id="e3083-116">Description</span></span>                                                                                                                                                |
+|----------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <span data-ttu-id="e3083-117">Backup Infrastructure Services</span><span class="sxs-lookup"><span data-stu-id="e3083-117">Backup Infrastructure Services</span></span>                     | <span data-ttu-id="e3083-118">Coordinate backup across a subset of infrastructure services in Azure Stack.</span><span class="sxs-lookup"><span data-stu-id="e3083-118">Coordinate backup across a subset of infrastructure services in Azure Stack.</span></span> <span data-ttu-id="e3083-119">If there is a disaster, the data can be restored as part of redeployment.</span><span class="sxs-lookup"><span data-stu-id="e3083-119">If there is a disaster, the data can be restored as part of redeployment.</span></span> |
+| <span data-ttu-id="e3083-120">Compression and Encryption of Exported Backup Data</span><span class="sxs-lookup"><span data-stu-id="e3083-120">Compression and Encryption of Exported Backup Data</span></span> | <span data-ttu-id="e3083-121">Backup data is compressed and encrypted by the system before it is exported to the external storage location provided by the administrator.</span><span class="sxs-lookup"><span data-stu-id="e3083-121">Backup data is compressed and encrypted by the system before it is exported to the external storage location provided by the administrator.</span></span>                |
+| <span data-ttu-id="e3083-122">Backup Job Monitoring</span><span class="sxs-lookup"><span data-stu-id="e3083-122">Backup Job Monitoring</span></span>                              | <span data-ttu-id="e3083-123">System notifies when backup jobs fail and remediation steps.</span><span class="sxs-lookup"><span data-stu-id="e3083-123">System notifies when backup jobs fail and remediation steps.</span></span>                                                                                                |
+| <span data-ttu-id="e3083-124">Backup management experience</span><span class="sxs-lookup"><span data-stu-id="e3083-124">Backup management experience</span></span>                       | <span data-ttu-id="e3083-125">Backup RP supports enabling backup.</span><span class="sxs-lookup"><span data-stu-id="e3083-125">Backup RP supports enabling backup.</span></span>                                                                                                                         |
+| <span data-ttu-id="e3083-126">Cloud Recovery</span><span class="sxs-lookup"><span data-stu-id="e3083-126">Cloud Recovery</span></span>                                     | <span data-ttu-id="e3083-127">If there is a catastrophic data loss, backups can be used to restore core Azure Stack information as part of deployment.</span><span class="sxs-lookup"><span data-stu-id="e3083-127">If there is a catastrophic data loss, backups can be used to restore core Azure Stack information as part of deployment.</span></span>                                 |
+
+## <a name="verify-requirements-for-the-infrastructure-backup-service"></a><span data-ttu-id="e3083-128">Verify requirements for the Infrastructure Backup Service</span><span class="sxs-lookup"><span data-stu-id="e3083-128">Verify requirements for the Infrastructure Backup Service</span></span>
+
+- <span data-ttu-id="e3083-129">**Storage location**</span><span class="sxs-lookup"><span data-stu-id="e3083-129">**Storage location**</span></span>  
+  <span data-ttu-id="e3083-130">You need a file share accessible from Azure Stack that can contain seven backups.</span><span class="sxs-lookup"><span data-stu-id="e3083-130">You need a file share accessible from Azure Stack that can contain seven backups.</span></span> <span data-ttu-id="e3083-131">Each backup is about 10 GB.</span><span class="sxs-lookup"><span data-stu-id="e3083-131">Each backup is about 10 GB.</span></span> <span data-ttu-id="e3083-132">Your share should be able to store 140 GB of backups.</span><span class="sxs-lookup"><span data-stu-id="e3083-132">Your share should be able to store 140 GB of backups.</span></span> <span data-ttu-id="e3083-133">For more information about selecting a storage location for the Azure Stack Infrastructure Backup Service, see [Backup Controller requirements](azure-stack-backup-reference.md#backup-controller-requirements).</span><span class="sxs-lookup"><span data-stu-id="e3083-133">For more information about selecting a storage location for the Azure Stack Infrastructure Backup Service, see [Backup Controller requirements](azure-stack-backup-reference.md#backup-controller-requirements).</span></span>
+- <span data-ttu-id="e3083-134">**Credentials**</span><span class="sxs-lookup"><span data-stu-id="e3083-134">**Credentials**</span></span>  
+  <span data-ttu-id="e3083-135">You need a domain user account and credentials, for example, you may use the Azure Stack administrator credentials.</span><span class="sxs-lookup"><span data-stu-id="e3083-135">You need a domain user account and credentials, for example, you may use the Azure Stack administrator credentials.</span></span>
+- <span data-ttu-id="e3083-136">**Encryption key**</span><span class="sxs-lookup"><span data-stu-id="e3083-136">**Encryption key**</span></span>  
+  <span data-ttu-id="e3083-137">Backup files are encrypted using this key.</span><span class="sxs-lookup"><span data-stu-id="e3083-137">Backup files are encrypted using this key.</span></span> <span data-ttu-id="e3083-138">Make sure to store this key in a secure location.</span><span class="sxs-lookup"><span data-stu-id="e3083-138">Make sure to store this key in a secure location.</span></span> <span data-ttu-id="e3083-139">Once you set this key for the first time or rotate the key in the future, you cannot view this key from this interface.</span><span class="sxs-lookup"><span data-stu-id="e3083-139">Once you set this key for the first time or rotate the key in the future, you cannot view this key from this interface.</span></span> <span data-ttu-id="e3083-140">For more instructions to generate a pre-shared key, follow the scripts at [Enable Backup for Azure Stack with PowerShell](azure-stack-backup-enable-backup-powershell.md).</span><span class="sxs-lookup"><span data-stu-id="e3083-140">For more instructions to generate a pre-shared key, follow the scripts at [Enable Backup for Azure Stack with PowerShell](azure-stack-backup-enable-backup-powershell.md).</span></span>
+
+## <a name="next-steps"></a><span data-ttu-id="e3083-141">Next steps</span><span class="sxs-lookup"><span data-stu-id="e3083-141">Next steps</span></span>
+
+- <span data-ttu-id="e3083-142">Learn how to [Enable Backup for Azure Stack from the administration portal](azure-stack-backup-enable-backup-console.md).</span><span class="sxs-lookup"><span data-stu-id="e3083-142">Learn how to [Enable Backup for Azure Stack from the administration portal](azure-stack-backup-enable-backup-console.md).</span></span>
+- <span data-ttu-id="e3083-143">Learn how to [Enable Backup for Azure Stack with PowerShell](azure-stack-backup-enable-backup-powershell.md).</span><span class="sxs-lookup"><span data-stu-id="e3083-143">Learn how to [Enable Backup for Azure Stack with PowerShell](azure-stack-backup-enable-backup-powershell.md).</span></span>
+- <span data-ttu-id="e3083-144">Learn how to [Back up Azure Stack](azure-stack-backup-back-up-azure-stack.md )</span><span class="sxs-lookup"><span data-stu-id="e3083-144">Learn how to [Back up Azure Stack](azure-stack-backup-back-up-azure-stack.md )</span></span>
+- <span data-ttu-id="e3083-145">Learn how to [Recover from catastrophic data loss](azure-stack-backup-recover-data.md)</span><span class="sxs-lookup"><span data-stu-id="e3083-145">Learn how to [Recover from catastrophic data loss](azure-stack-backup-recover-data.md)</span></span>
