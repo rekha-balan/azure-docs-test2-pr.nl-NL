@@ -1,127 +1,95 @@
 ---
-title: Analyze Twitter data with Apache Hive on HDInsight | Microsoft Docs
-description: Learn how to use Python to store Tweets that contain specific keywords, then use Hive and Hadoop on HDInsight to transform the raw TWitter data into a searchable Hive table.
+title: Analyze Twitter data with Apache Hive - Azure HDInsight
+description: Learn how to use Hive and Hadoop on HDInsight to transform raw TWitter data into a searchable Hive table.
 services: hdinsight
-documentationcenter: ''
-author: Blackmist
-manager: jhubbard
-editor: cgronlun
-tags: azure-portal
-ms.assetid: e1e249ed-5f57-40d6-b3bc-a1b4d9a871d3
+author: jasonwhowell
+ms.reviewer: jasonh
 ms.service: hdinsight
-ms.workload: big-data
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
-ms.date: 02/17/2017
-ms.author: larryfr
+ms.topic: conceptual
+ms.date: 06/26/2018
+ms.author: jasonh
 ms.custom: H1Hack27Feb2017,hdinsightactive
-ms.openlocfilehash: 75368be1bb5da28df8bc29ca2d8811a822c0816e
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: a20f9ef6e42027cf3f499654ac8a43eee7b41854
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44563876"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44805680"
 ---
-# <a name="analyze-twitter-data-using-hive-on-linux-based-hdinsight"></a><span data-ttu-id="ab5a8-103">Analyze Twitter data using Hive on Linux-based HDInsight</span><span class="sxs-lookup"><span data-stu-id="ab5a8-103">Analyze Twitter data using Hive on Linux-based HDInsight</span></span>
+# <a name="analyze-twitter-data-using-hive-and-hadoop-on-hdinsight"></a><span data-ttu-id="3e81f-103">Analyze Twitter data using Hive and Hadoop on HDInsight</span><span class="sxs-lookup"><span data-stu-id="3e81f-103">Analyze Twitter data using Hive and Hadoop on HDInsight</span></span>
 
-<span data-ttu-id="ab5a8-104">Learn how to use Apache Hive on an HDInsight cluster to process the Twitter data.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-104">Learn how to use Apache Hive on an HDInsight cluster to process the Twitter data.</span></span> <span data-ttu-id="ab5a8-105">The result is a list of Twitter users who sent the most tweets that contain a certain word.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-105">The result is a list of Twitter users who sent the most tweets that contain a certain word.</span></span>
+<span data-ttu-id="3e81f-104">Learn how to use Apache Hive to process Twitter data.</span><span class="sxs-lookup"><span data-stu-id="3e81f-104">Learn how to use Apache Hive to process Twitter data.</span></span> <span data-ttu-id="3e81f-105">The result is a list of Twitter users who sent the most tweets that contain a certain word.</span><span class="sxs-lookup"><span data-stu-id="3e81f-105">The result is a list of Twitter users who sent the most tweets that contain a certain word.</span></span>
 
 > [!IMPORTANT]
-> <span data-ttu-id="ab5a8-106">The steps in this document were tested on a Linux-based HDInsight cluster.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-106">The steps in this document were tested on a Linux-based HDInsight cluster.</span></span>
+> <span data-ttu-id="3e81f-106">The steps in this document were tested on HDInsight 3.6.</span><span class="sxs-lookup"><span data-stu-id="3e81f-106">The steps in this document were tested on HDInsight 3.6.</span></span>
 >
-> <span data-ttu-id="ab5a8-107">Linux is the only operating system used on HDInsight version 3.4 or greater.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-107">Linux is the only operating system used on HDInsight version 3.4 or greater.</span></span> <span data-ttu-id="ab5a8-108">For more information, see [HDInsight Deprecation on Windows](hdinsight-component-versioning.md#hdi-version-33-nearing-deprecation-date).</span><span class="sxs-lookup"><span data-stu-id="ab5a8-108">For more information, see [HDInsight Deprecation on Windows](hdinsight-component-versioning.md#hdi-version-33-nearing-deprecation-date).</span></span>
+> <span data-ttu-id="3e81f-107">Linux is the only operating system used on HDInsight version 3.4 or greater.</span><span class="sxs-lookup"><span data-stu-id="3e81f-107">Linux is the only operating system used on HDInsight version 3.4 or greater.</span></span> <span data-ttu-id="3e81f-108">For more information, see [HDInsight retirement on Windows](hdinsight-component-versioning.md#hdinsight-windows-retirement).</span><span class="sxs-lookup"><span data-stu-id="3e81f-108">For more information, see [HDInsight retirement on Windows](hdinsight-component-versioning.md#hdinsight-windows-retirement).</span></span>
 
-## <a name="prerequisites"></a><span data-ttu-id="ab5a8-109">Prerequisites</span><span class="sxs-lookup"><span data-stu-id="ab5a8-109">Prerequisites</span></span>
+## <a name="get-the-data"></a><span data-ttu-id="3e81f-109">Get the data</span><span class="sxs-lookup"><span data-stu-id="3e81f-109">Get the data</span></span>
 
-* <span data-ttu-id="ab5a8-110">A **Linux-based Azure HDInsight cluster**.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-110">A **Linux-based Azure HDInsight cluster**.</span></span> <span data-ttu-id="ab5a8-111">For information on creating a cluster, see [Get Started with Linux-based HDInsight](hdinsight-hadoop-linux-tutorial-get-started.md) for steps on creating a cluster.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-111">For information on creating a cluster, see [Get Started with Linux-based HDInsight](hdinsight-hadoop-linux-tutorial-get-started.md) for steps on creating a cluster.</span></span>
-* <span data-ttu-id="ab5a8-112">An **SSH client**.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-112">An **SSH client**.</span></span> <span data-ttu-id="ab5a8-113">For more information on using SSH with Linux-based HDInsight, see the following articles:</span><span class="sxs-lookup"><span data-stu-id="ab5a8-113">For more information on using SSH with Linux-based HDInsight, see the following articles:</span></span>
+<span data-ttu-id="3e81f-110">Twitter allows you to retrieve the data for each tweet as a JavaScript Object Notation (JSON) document through a REST API.</span><span class="sxs-lookup"><span data-stu-id="3e81f-110">Twitter allows you to retrieve the data for each tweet as a JavaScript Object Notation (JSON) document through a REST API.</span></span> <span data-ttu-id="3e81f-111">[OAuth](http://oauth.net) is required for authentication to the API.</span><span class="sxs-lookup"><span data-stu-id="3e81f-111">[OAuth](http://oauth.net) is required for authentication to the API.</span></span>
 
-  * [<span data-ttu-id="ab5a8-114">Use SSH with Linux-based Hadoop on HDInsight from Linux, Unix, or OS X</span><span class="sxs-lookup"><span data-stu-id="ab5a8-114">Use SSH with Linux-based Hadoop on HDInsight from Linux, Unix, or OS X</span></span>](hdinsight-hadoop-linux-use-ssh-unix.md)
-  * [<span data-ttu-id="ab5a8-115">Use SSH with Linux-based Hadoop on HDInsight from Windows</span><span class="sxs-lookup"><span data-stu-id="ab5a8-115">Use SSH with Linux-based Hadoop on HDInsight from Windows</span></span>](hdinsight-hadoop-linux-use-ssh-windows.md)
-* <span data-ttu-id="ab5a8-116">**Python** and [pip](https://pypi.python.org/pypi/pip)</span><span class="sxs-lookup"><span data-stu-id="ab5a8-116">**Python** and [pip](https://pypi.python.org/pypi/pip)</span></span>
+### <a name="create-a-twitter-application"></a><span data-ttu-id="3e81f-112">Create a Twitter application</span><span class="sxs-lookup"><span data-stu-id="3e81f-112">Create a Twitter application</span></span>
 
-## <a name="get-a-twitter-feed"></a><span data-ttu-id="ab5a8-117">Get a Twitter feed</span><span class="sxs-lookup"><span data-stu-id="ab5a8-117">Get a Twitter feed</span></span>
+1. <span data-ttu-id="3e81f-113">From a web browser, sign in to [https://apps.twitter.com/](https://apps.twitter.com/).</span><span class="sxs-lookup"><span data-stu-id="3e81f-113">From a web browser, sign in to [https://apps.twitter.com/](https://apps.twitter.com/).</span></span> <span data-ttu-id="3e81f-114">Click the **Sign-up now** link if you don't have a Twitter account.</span><span class="sxs-lookup"><span data-stu-id="3e81f-114">Click the **Sign-up now** link if you don't have a Twitter account.</span></span>
 
-<span data-ttu-id="ab5a8-118">Twitter allows you to retrieve the [data for each tweet](https://dev.twitter.com/docs/platform-objects/tweets) as a JavaScript Object Notation (JSON) document through a REST API.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-118">Twitter allows you to retrieve the [data for each tweet](https://dev.twitter.com/docs/platform-objects/tweets) as a JavaScript Object Notation (JSON) document through a REST API.</span></span> <span data-ttu-id="ab5a8-119">[OAuth](http://oauth.net) is required for authentication to the API.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-119">[OAuth](http://oauth.net) is required for authentication to the API.</span></span>
+2. <span data-ttu-id="3e81f-115">Click **Create New App**.</span><span class="sxs-lookup"><span data-stu-id="3e81f-115">Click **Create New App**.</span></span>
 
-### <a name="create-a-twitter-application"></a><span data-ttu-id="ab5a8-120">Create a Twitter application</span><span class="sxs-lookup"><span data-stu-id="ab5a8-120">Create a Twitter application</span></span>
+3. <span data-ttu-id="3e81f-116">Enter **Name**, **Description**, **Website**.</span><span class="sxs-lookup"><span data-stu-id="3e81f-116">Enter **Name**, **Description**, **Website**.</span></span> <span data-ttu-id="3e81f-117">You can make up a URL for the **Website** field.</span><span class="sxs-lookup"><span data-stu-id="3e81f-117">You can make up a URL for the **Website** field.</span></span> <span data-ttu-id="3e81f-118">The following table shows some sample values to use:</span><span class="sxs-lookup"><span data-stu-id="3e81f-118">The following table shows some sample values to use:</span></span>
 
-1. <span data-ttu-id="ab5a8-121">From a web browser, sign in to [https://apps.twitter.com/](https://apps.twitter.com/).</span><span class="sxs-lookup"><span data-stu-id="ab5a8-121">From a web browser, sign in to [https://apps.twitter.com/](https://apps.twitter.com/).</span></span> <span data-ttu-id="ab5a8-122">Click the **Sign-up now** link if you don't have a Twitter account.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-122">Click the **Sign-up now** link if you don't have a Twitter account.</span></span>
-
-2. <span data-ttu-id="ab5a8-123">Click **Create New App**.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-123">Click **Create New App**.</span></span>
-
-3. <span data-ttu-id="ab5a8-124">Enter **Name**, **Description**, **Website**.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-124">Enter **Name**, **Description**, **Website**.</span></span> <span data-ttu-id="ab5a8-125">You can make up a URL for the **Website** field.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-125">You can make up a URL for the **Website** field.</span></span> <span data-ttu-id="ab5a8-126">The following table shows some sample values to use:</span><span class="sxs-lookup"><span data-stu-id="ab5a8-126">The following table shows some sample values to use:</span></span>
-
-   | <span data-ttu-id="ab5a8-127">Field</span><span class="sxs-lookup"><span data-stu-id="ab5a8-127">Field</span></span> | <span data-ttu-id="ab5a8-128">Value</span><span class="sxs-lookup"><span data-stu-id="ab5a8-128">Value</span></span> |
+   | <span data-ttu-id="3e81f-119">Field</span><span class="sxs-lookup"><span data-stu-id="3e81f-119">Field</span></span> | <span data-ttu-id="3e81f-120">Value</span><span class="sxs-lookup"><span data-stu-id="3e81f-120">Value</span></span> |
    |:--- |:--- |
-   | <span data-ttu-id="ab5a8-129">Name</span><span class="sxs-lookup"><span data-stu-id="ab5a8-129">Name</span></span> |<span data-ttu-id="ab5a8-130">MyHDInsightApp</span><span class="sxs-lookup"><span data-stu-id="ab5a8-130">MyHDInsightApp</span></span> |
-   | <span data-ttu-id="ab5a8-131">Description</span><span class="sxs-lookup"><span data-stu-id="ab5a8-131">Description</span></span> |<span data-ttu-id="ab5a8-132">MyHDInsightApp</span><span class="sxs-lookup"><span data-stu-id="ab5a8-132">MyHDInsightApp</span></span> |
-   | <span data-ttu-id="ab5a8-133">Website</span><span class="sxs-lookup"><span data-stu-id="ab5a8-133">Website</span></span> |http://www.myhdinsightapp.com |
+   | <span data-ttu-id="3e81f-121">Name</span><span class="sxs-lookup"><span data-stu-id="3e81f-121">Name</span></span> |<span data-ttu-id="3e81f-122">MyHDInsightApp</span><span class="sxs-lookup"><span data-stu-id="3e81f-122">MyHDInsightApp</span></span> |
+   | <span data-ttu-id="3e81f-123">Description</span><span class="sxs-lookup"><span data-stu-id="3e81f-123">Description</span></span> |<span data-ttu-id="3e81f-124">MyHDInsightApp</span><span class="sxs-lookup"><span data-stu-id="3e81f-124">MyHDInsightApp</span></span> |
+   | <span data-ttu-id="3e81f-125">Website</span><span class="sxs-lookup"><span data-stu-id="3e81f-125">Website</span></span> |http://www.myhdinsightapp.com |
 
-4. <span data-ttu-id="ab5a8-134">Check **Yes, I agree**, and then click **Create your Twitter application**.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-134">Check **Yes, I agree**, and then click **Create your Twitter application**.</span></span>
+4. <span data-ttu-id="3e81f-126">Check **Yes, I agree**, and then click **Create your Twitter application**.</span><span class="sxs-lookup"><span data-stu-id="3e81f-126">Check **Yes, I agree**, and then click **Create your Twitter application**.</span></span>
 
-5. <span data-ttu-id="ab5a8-135">Click the **Permissions** tab. The default permission is **Read only**.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-135">Click the **Permissions** tab. The default permission is **Read only**.</span></span>
+5. <span data-ttu-id="3e81f-127">Click the **Permissions** tab. The default permission is **Read only**.</span><span class="sxs-lookup"><span data-stu-id="3e81f-127">Click the **Permissions** tab. The default permission is **Read only**.</span></span>
 
-6. <span data-ttu-id="ab5a8-136">Click the **Keys and Access Tokens** tab.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-136">Click the **Keys and Access Tokens** tab.</span></span>
+6. <span data-ttu-id="3e81f-128">Click the **Keys and Access Tokens** tab.</span><span class="sxs-lookup"><span data-stu-id="3e81f-128">Click the **Keys and Access Tokens** tab.</span></span>
 
-7. <span data-ttu-id="ab5a8-137">Click **Create my access token**.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-137">Click **Create my access token**.</span></span>
+7. <span data-ttu-id="3e81f-129">Click **Create my access token**.</span><span class="sxs-lookup"><span data-stu-id="3e81f-129">Click **Create my access token**.</span></span>
 
-8. <span data-ttu-id="ab5a8-138">Click **Test OAuth** in the upper-right corner of the page.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-138">Click **Test OAuth** in the upper-right corner of the page.</span></span>
+8. <span data-ttu-id="3e81f-130">Click **Test OAuth** in the upper-right corner of the page.</span><span class="sxs-lookup"><span data-stu-id="3e81f-130">Click **Test OAuth** in the upper-right corner of the page.</span></span>
 
-9. <span data-ttu-id="ab5a8-139">Write down **consumer key**, **Consumer secret**, **Access token**, and **Access token secret**.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-139">Write down **consumer key**, **Consumer secret**, **Access token**, and **Access token secret**.</span></span>
+9. <span data-ttu-id="3e81f-131">Write down **consumer key**, **Consumer secret**, **Access token**, and **Access token secret**.</span><span class="sxs-lookup"><span data-stu-id="3e81f-131">Write down **consumer key**, **Consumer secret**, **Access token**, and **Access token secret**.</span></span>
 
-> [!NOTE]
-> <span data-ttu-id="ab5a8-140">When you use the curl command in Windows, use double quotes instead of single quotes for the option values.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-140">When you use the curl command in Windows, use double quotes instead of single quotes for the option values.</span></span>
+### <a name="download-tweets"></a><span data-ttu-id="3e81f-132">Download tweets</span><span class="sxs-lookup"><span data-stu-id="3e81f-132">Download tweets</span></span>
 
-
-### <a name="download-tweets"></a><span data-ttu-id="ab5a8-141">Download tweets</span><span class="sxs-lookup"><span data-stu-id="ab5a8-141">Download tweets</span></span>
-
-<span data-ttu-id="ab5a8-142">The following Python code downloads 10,000 tweets from Twitter and save them to a file named **tweets.txt**.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-142">The following Python code downloads 10,000 tweets from Twitter and save them to a file named **tweets.txt**.</span></span>
+<span data-ttu-id="3e81f-133">The following Python code downloads 10,000 tweets from Twitter and save them to a file named **tweets.txt**.</span><span class="sxs-lookup"><span data-stu-id="3e81f-133">The following Python code downloads 10,000 tweets from Twitter and save them to a file named **tweets.txt**.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="ab5a8-143">The following steps are performed on the HDInsight cluster, since Python is already installed.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-143">The following steps are performed on the HDInsight cluster, since Python is already installed.</span></span>
->
->
+> <span data-ttu-id="3e81f-134">The following steps are performed on the HDInsight cluster, since Python is already installed.</span><span class="sxs-lookup"><span data-stu-id="3e81f-134">The following steps are performed on the HDInsight cluster, since Python is already installed.</span></span>
 
-1. <span data-ttu-id="ab5a8-144">Connect to the HDInsight cluster using SSH:</span><span class="sxs-lookup"><span data-stu-id="ab5a8-144">Connect to the HDInsight cluster using SSH:</span></span>
+1. <span data-ttu-id="3e81f-135">Connect to the HDInsight cluster using SSH:</span><span class="sxs-lookup"><span data-stu-id="3e81f-135">Connect to the HDInsight cluster using SSH:</span></span>
 
-        ssh USERNAME@CLUSTERNAME-ssh.azurehdinsight.net
+    ```bash
+    ssh USERNAME@CLUSTERNAME-ssh.azurehdinsight.net
+    ```
 
-    <span data-ttu-id="ab5a8-145">If you used a password to secure your SSH user account, you are prompted to enter it.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-145">If you used a password to secure your SSH user account, you are prompted to enter it.</span></span> <span data-ttu-id="ab5a8-146">If you used a public key, you may have to use the `-i` parameter to specify the matching private key.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-146">If you used a public key, you may have to use the `-i` parameter to specify the matching private key.</span></span> <span data-ttu-id="ab5a8-147">For example, `ssh -i ~/.ssh/id_rsa USERNAME@CLUSTERNAME-ssh.azurehdinsight.net`.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-147">For example, `ssh -i ~/.ssh/id_rsa USERNAME@CLUSTERNAME-ssh.azurehdinsight.net`.</span></span>
+    <span data-ttu-id="3e81f-136">For more information, see [Use SSH with HDInsight](hdinsight-hadoop-linux-use-ssh-unix.md).</span><span class="sxs-lookup"><span data-stu-id="3e81f-136">For more information, see [Use SSH with HDInsight](hdinsight-hadoop-linux-use-ssh-unix.md).</span></span>
 
-    <span data-ttu-id="ab5a8-148">For more information on using SSH with Linux-based HDInsight, see the following articles:</span><span class="sxs-lookup"><span data-stu-id="ab5a8-148">For more information on using SSH with Linux-based HDInsight, see the following articles:</span></span>
-
-   * [<span data-ttu-id="ab5a8-149">Use SSH with Linux-based Hadoop on HDInsight from Linux, Unix, or OS X</span><span class="sxs-lookup"><span data-stu-id="ab5a8-149">Use SSH with Linux-based Hadoop on HDInsight from Linux, Unix, or OS X</span></span>](hdinsight-hadoop-linux-use-ssh-unix.md)
-   * [<span data-ttu-id="ab5a8-150">Use SSH with Linux-based Hadoop on HDInsight from Windows</span><span class="sxs-lookup"><span data-stu-id="ab5a8-150">Use SSH with Linux-based Hadoop on HDInsight from Windows</span></span>](hdinsight-hadoop-linux-use-ssh-windows.md)
-
-2. <span data-ttu-id="ab5a8-151">By default, the **pip** utility is not installed on the HDInsight head node.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-151">By default, the **pip** utility is not installed on the HDInsight head node.</span></span> <span data-ttu-id="ab5a8-152">Use the following to install, and then update this utility:</span><span class="sxs-lookup"><span data-stu-id="ab5a8-152">Use the following to install, and then update this utility:</span></span>
+3. <span data-ttu-id="3e81f-137">Use the following commands to install [Tweepy](http://www.tweepy.org/), [Progressbar](https://pypi.python.org/pypi/progressbar/2.2), and other required packages:</span><span class="sxs-lookup"><span data-stu-id="3e81f-137">Use the following commands to install [Tweepy](http://www.tweepy.org/), [Progressbar](https://pypi.python.org/pypi/progressbar/2.2), and other required packages:</span></span>
 
    ```bash
-   sudo apt-get install python-pip
-   sudo pip install --upgrade pip
+   sudo apt install python-dev libffi-dev libssl-dev
+   sudo apt remove python-openssl
+   pip install virtualenv
+   mkdir gettweets
+   cd gettweets
+   virtualenv gettweets
+   source gettweets/bin/activate
+   pip install tweepy progressbar pyOpenSSL requests[security]
    ```
 
-3. <span data-ttu-id="ab5a8-153">Use the following commands to install [Tweepy](http://www.tweepy.org/) and [Progressbar](https://pypi.python.org/pypi/progressbar/2.2):</span><span class="sxs-lookup"><span data-stu-id="ab5a8-153">Use the following commands to install [Tweepy](http://www.tweepy.org/) and [Progressbar](https://pypi.python.org/pypi/progressbar/2.2):</span></span>
-
-   ```bash
-   sudo apt-get install python-dev libffi-dev libssl-dev
-   sudo apt-get remove python-openssl
-   sudo pip install tweepy progressbar pyOpenSSL requests[security]
-   ```
-
-   > [!NOTE]
-   > <span data-ttu-id="ab5a8-154">The bits about removing python-openssl, installing python-dev, libffi-dev, libssl-dev, pyOpenSSL, and requests[security] is to avoid an InsecurePlatform warning when connecting to Twitter via SSL from Python.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-154">The bits about removing python-openssl, installing python-dev, libffi-dev, libssl-dev, pyOpenSSL, and requests[security] is to avoid an InsecurePlatform warning when connecting to Twitter via SSL from Python.</span></span>
-   >
-   > <span data-ttu-id="ab5a8-155">Tweepy v3.2.0 is used to avoid [an error](https://github.com/tweepy/tweepy/issues/576) that can occur when processing tweets.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-155">Tweepy v3.2.0 is used to avoid [an error](https://github.com/tweepy/tweepy/issues/576) that can occur when processing tweets.</span></span>
-
-4. <span data-ttu-id="ab5a8-156">Use the following command to create a file named **gettweets.py**:</span><span class="sxs-lookup"><span data-stu-id="ab5a8-156">Use the following command to create a file named **gettweets.py**:</span></span>
+4. <span data-ttu-id="3e81f-138">Use the following command to create a file named **gettweets.py**:</span><span class="sxs-lookup"><span data-stu-id="3e81f-138">Use the following command to create a file named **gettweets.py**:</span></span>
 
    ```bash
    nano gettweets.py
    ```
 
-5. <span data-ttu-id="ab5a8-157">Use the following text as the contents of the **gettweets.py** file.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-157">Use the following text as the contents of the **gettweets.py** file.</span></span> <span data-ttu-id="ab5a8-158">Replace the placeholder information for **consumer\_secret**, **consumer\_key**, **access/\_token**, and **access\_token\_secret** with the information from your Twitter application.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-158">Replace the placeholder information for **consumer\_secret**, **consumer\_key**, **access/\_token**, and **access\_token\_secret** with the information from your Twitter application.</span></span>
+5. <span data-ttu-id="3e81f-139">Use the following text as the contents of the **gettweets.py** file:</span><span class="sxs-lookup"><span data-stu-id="3e81f-139">Use the following text as the contents of the **gettweets.py** file:</span></span>
 
    ```python
    #!/usr/bin/python
@@ -177,39 +145,50 @@ ms.locfileid: "44563876"
    twitterStream.filter(track=["azure","cloud","hdinsight"])
    ```
 
-6. <span data-ttu-id="ab5a8-159">Use **Ctrl + X**, then **Y** to save the file.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-159">Use **Ctrl + X**, then **Y** to save the file.</span></span>
+    > [!IMPORTANT]
+    > <span data-ttu-id="3e81f-140">Replace the placeholder text for the following items with the information from your twitter application:</span><span class="sxs-lookup"><span data-stu-id="3e81f-140">Replace the placeholder text for the following items with the information from your twitter application:</span></span>
+    >
+    > * `consumer_secret`
+    > * `consumer_key`
+    > * `access_token`
+    > * `access_token_secret`
 
-7. <span data-ttu-id="ab5a8-160">Use the following command to run the file and download tweets:</span><span class="sxs-lookup"><span data-stu-id="ab5a8-160">Use the following command to run the file and download tweets:</span></span>
+    > [!TIP]
+    > <span data-ttu-id="3e81f-141">Adjust the topics filter on the last line to track popular keywords.</span><span class="sxs-lookup"><span data-stu-id="3e81f-141">Adjust the topics filter on the last line to track popular keywords.</span></span> <span data-ttu-id="3e81f-142">Using keywords popular at the time you run the script allows for faster capture of data.</span><span class="sxs-lookup"><span data-stu-id="3e81f-142">Using keywords popular at the time you run the script allows for faster capture of data.</span></span>
+
+6. <span data-ttu-id="3e81f-143">Use **Ctrl + X**, then **Y** to save the file.</span><span class="sxs-lookup"><span data-stu-id="3e81f-143">Use **Ctrl + X**, then **Y** to save the file.</span></span>
+
+7. <span data-ttu-id="3e81f-144">Use the following command to run the file and download tweets:</span><span class="sxs-lookup"><span data-stu-id="3e81f-144">Use the following command to run the file and download tweets:</span></span>
 
     ```bash
     python gettweets.py
     ```
 
-    <span data-ttu-id="ab5a8-161">A progress indicator should appear, and count up to 100% as the tweets are downloaded and saved to file.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-161">A progress indicator should appear, and count up to 100% as the tweets are downloaded and saved to file.</span></span>
+    <span data-ttu-id="3e81f-145">A progress indicator appears.</span><span class="sxs-lookup"><span data-stu-id="3e81f-145">A progress indicator appears.</span></span> <span data-ttu-id="3e81f-146">It counts up to 100% as the tweets are downloaded.</span><span class="sxs-lookup"><span data-stu-id="3e81f-146">It counts up to 100% as the tweets are downloaded.</span></span>
 
    > [!NOTE]
-   > <span data-ttu-id="ab5a8-162">If it is taking a long time for the progress bar to advance, you should change the filter to track trending topics.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-162">If it is taking a long time for the progress bar to advance, you should change the filter to track trending topics.</span></span> <span data-ttu-id="ab5a8-163">When there are many tweets about the topic in your filter, you can quickly get the 10000 tweets needed.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-163">When there are many tweets about the topic in your filter, you can quickly get the 10000 tweets needed.</span></span>
+   > <span data-ttu-id="3e81f-147">If it is taking a long time for the progress bar to advance, you should change the filter to track trending topics.</span><span class="sxs-lookup"><span data-stu-id="3e81f-147">If it is taking a long time for the progress bar to advance, you should change the filter to track trending topics.</span></span> <span data-ttu-id="3e81f-148">When there are many tweets about the topic in your filter, you can quickly get the 10000 tweets needed.</span><span class="sxs-lookup"><span data-stu-id="3e81f-148">When there are many tweets about the topic in your filter, you can quickly get the 10000 tweets needed.</span></span>
 
-### <a name="upload-the-data"></a><span data-ttu-id="ab5a8-164">Upload the data</span><span class="sxs-lookup"><span data-stu-id="ab5a8-164">Upload the data</span></span>
+### <a name="upload-the-data"></a><span data-ttu-id="3e81f-149">Upload the data</span><span class="sxs-lookup"><span data-stu-id="3e81f-149">Upload the data</span></span>
 
-<span data-ttu-id="ab5a8-165">To upload the data to HDInsight storage, use the following commands:</span><span class="sxs-lookup"><span data-stu-id="ab5a8-165">To upload the data to HDInsight storage, use the following commands:</span></span>
+<span data-ttu-id="3e81f-150">To upload the data to HDInsight storage, use the following commands:</span><span class="sxs-lookup"><span data-stu-id="3e81f-150">To upload the data to HDInsight storage, use the following commands:</span></span>
 
-   ```bash
-   hdfs dfs -mkdir -p /tutorials/twitter/data
-   hdfs dfs -put tweets.txt /tutorials/twitter/data/tweets.txt
+```bash
+hdfs dfs -mkdir -p /tutorials/twitter/data
+hdfs dfs -put tweets.txt /tutorials/twitter/data/tweets.txt
 ```
 
-<span data-ttu-id="ab5a8-166">These commands store the data in a location that all nodes in the cluster can access.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-166">These commands store the data in a location that all nodes in the cluster can access.</span></span>
+<span data-ttu-id="3e81f-151">These commands store the data in a location that all nodes in the cluster can access.</span><span class="sxs-lookup"><span data-stu-id="3e81f-151">These commands store the data in a location that all nodes in the cluster can access.</span></span>
 
-## <a name="run-the-hiveql-job"></a><span data-ttu-id="ab5a8-167">Run the HiveQL job</span><span class="sxs-lookup"><span data-stu-id="ab5a8-167">Run the HiveQL job</span></span>
+## <a name="run-the-hiveql-job"></a><span data-ttu-id="3e81f-152">Run the HiveQL job</span><span class="sxs-lookup"><span data-stu-id="3e81f-152">Run the HiveQL job</span></span>
 
-1. <span data-ttu-id="ab5a8-168">Use the following command to create a file containing HiveQL statements:</span><span class="sxs-lookup"><span data-stu-id="ab5a8-168">Use the following command to create a file containing HiveQL statements:</span></span>
+1. <span data-ttu-id="3e81f-153">Use the following command to create a file containing HiveQL statements:</span><span class="sxs-lookup"><span data-stu-id="3e81f-153">Use the following command to create a file containing HiveQL statements:</span></span>
 
    ```bash
    nano twitter.hql
    ```
 
-    <span data-ttu-id="ab5a8-169">Use the following text as the contents of the file:</span><span class="sxs-lookup"><span data-stu-id="ab5a8-169">Use the following text as the contents of the file:</span></span>
+    <span data-ttu-id="3e81f-154">Use the following text as the contents of the file:</span><span class="sxs-lookup"><span data-stu-id="3e81f-154">Use the following text as the contents of the file:</span></span>
 
    ```hiveql
    set hive.exec.dynamic.partition = true;
@@ -317,38 +296,40 @@ ms.locfileid: "44563876"
    WHERE (length(json_response) > 500);
    ```
 
-2. <span data-ttu-id="ab5a8-170">Press **Ctrl + X**, then press **Y** to save the file.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-170">Press **Ctrl + X**, then press **Y** to save the file.</span></span>
-3. <span data-ttu-id="ab5a8-171">Use the following command to run the HiveQL contained in the file:</span><span class="sxs-lookup"><span data-stu-id="ab5a8-171">Use the following command to run the HiveQL contained in the file:</span></span>
+2. <span data-ttu-id="3e81f-155">Press **Ctrl + X**, then press **Y** to save the file.</span><span class="sxs-lookup"><span data-stu-id="3e81f-155">Press **Ctrl + X**, then press **Y** to save the file.</span></span>
+3. <span data-ttu-id="3e81f-156">Use the following command to run the HiveQL contained in the file:</span><span class="sxs-lookup"><span data-stu-id="3e81f-156">Use the following command to run the HiveQL contained in the file:</span></span>
 
    ```bash
-   beeline -u 'jdbc:hive2://localhost:10001/;transportMode=http' -n admin -i twitter.hql
+   beeline -u 'jdbc:hive2://headnodehost:10001/;transportMode=http' -i twitter.hql
    ```
 
-    <span data-ttu-id="ab5a8-172">This command runs the the **twitter.hql** file.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-172">This command runs the the **twitter.hql** file.</span></span> <span data-ttu-id="ab5a8-173">Once the query completes, you see a `jdbc:hive2//localhost:10001/>` prompt.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-173">Once the query completes, you see a `jdbc:hive2//localhost:10001/>` prompt.</span></span>
+    <span data-ttu-id="3e81f-157">This command runs the **twitter.hql** file.</span><span class="sxs-lookup"><span data-stu-id="3e81f-157">This command runs the **twitter.hql** file.</span></span> <span data-ttu-id="3e81f-158">Once the query completes, you see a `jdbc:hive2//localhost:10001/>` prompt.</span><span class="sxs-lookup"><span data-stu-id="3e81f-158">Once the query completes, you see a `jdbc:hive2//localhost:10001/>` prompt.</span></span>
 
-4. <span data-ttu-id="ab5a8-174">From the beeline prompt, use the following to verify that you can select data from the **tweets** table created by the HiveQL in the **twitter.hql** file:</span><span class="sxs-lookup"><span data-stu-id="ab5a8-174">From the beeline prompt, use the following to verify that you can select data from the **tweets** table created by the HiveQL in the **twitter.hql** file:</span></span>
+4. <span data-ttu-id="3e81f-159">From the beeline prompt, use the following query to verify that data was imported:</span><span class="sxs-lookup"><span data-stu-id="3e81f-159">From the beeline prompt, use the following query to verify that data was imported:</span></span>
 
    ```hiveql
    SELECT name, screen_name, count(1) as cc
-       FROM tweets
-       WHERE text like "%Azure%"
-       GROUP BY name,screen_name
-       ORDER BY cc DESC LIMIT 10;
+   FROM tweets
+   WHERE text like "%Azure%"
+   GROUP BY name,screen_name
+   ORDER BY cc DESC LIMIT 10;
    ```
 
-    <span data-ttu-id="ab5a8-175">This query returns a maximum of 10 tweets that contain the word **Azure** in the message text.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-175">This query returns a maximum of 10 tweets that contain the word **Azure** in the message text.</span></span>
+    <span data-ttu-id="3e81f-160">This query returns a maximum of 10 tweets that contain the word **Azure** in the message text.</span><span class="sxs-lookup"><span data-stu-id="3e81f-160">This query returns a maximum of 10 tweets that contain the word **Azure** in the message text.</span></span>
 
-## <a name="next-steps"></a><span data-ttu-id="ab5a8-176">Next steps</span><span class="sxs-lookup"><span data-stu-id="ab5a8-176">Next steps</span></span>
+    > [!NOTE]
+    > <span data-ttu-id="3e81f-161">If you changed the filter in the `gettweets.py` script, replace **Azure** with one of the filters you used.</span><span class="sxs-lookup"><span data-stu-id="3e81f-161">If you changed the filter in the `gettweets.py` script, replace **Azure** with one of the filters you used.</span></span>
 
-<span data-ttu-id="ab5a8-177">You have learned how to transform an unstructured JSON dataset into a structured Hive table.</span><span class="sxs-lookup"><span data-stu-id="ab5a8-177">You have learned how to transform an unstructured JSON dataset into a structured Hive table.</span></span> <span data-ttu-id="ab5a8-178">To learn more about Hive on HDInsight, see the following documents:</span><span class="sxs-lookup"><span data-stu-id="ab5a8-178">To learn more about Hive on HDInsight, see the following documents:</span></span>
+## <a name="next-steps"></a><span data-ttu-id="3e81f-162">Next steps</span><span class="sxs-lookup"><span data-stu-id="3e81f-162">Next steps</span></span>
 
-* [<span data-ttu-id="ab5a8-179">Get started with HDInsight</span><span class="sxs-lookup"><span data-stu-id="ab5a8-179">Get started with HDInsight</span></span>](hdinsight-hadoop-linux-tutorial-get-started.md)
-* [<span data-ttu-id="ab5a8-180">Analyze flight delay data using HDInsight</span><span class="sxs-lookup"><span data-stu-id="ab5a8-180">Analyze flight delay data using HDInsight</span></span>](hdinsight-analyze-flight-delay-data-linux.md)
+<span data-ttu-id="3e81f-163">You have learned how to transform an unstructured JSON dataset into a structured Hive table.</span><span class="sxs-lookup"><span data-stu-id="3e81f-163">You have learned how to transform an unstructured JSON dataset into a structured Hive table.</span></span> <span data-ttu-id="3e81f-164">To learn more about Hive on HDInsight, see the following documents:</span><span class="sxs-lookup"><span data-stu-id="3e81f-164">To learn more about Hive on HDInsight, see the following documents:</span></span>
+
+* [<span data-ttu-id="3e81f-165">Get started with HDInsight</span><span class="sxs-lookup"><span data-stu-id="3e81f-165">Get started with HDInsight</span></span>](hadoop/apache-hadoop-linux-tutorial-get-started.md)
+* [<span data-ttu-id="3e81f-166">Analyze flight delay data using HDInsight</span><span class="sxs-lookup"><span data-stu-id="3e81f-166">Analyze flight delay data using HDInsight</span></span>](hdinsight-analyze-flight-delay-data-linux.md)
 
 [curl]: http://curl.haxx.se
 [curl-download]: http://curl.haxx.se/download.html
 
 [apache-hive-tutorial]: https://cwiki.apache.org/confluence/display/Hive/Tutorial
 
-[twitter-streaming-api]: https://dev.twitter.com/docs/streaming-apis
 [twitter-statuses-filter]: https://dev.twitter.com/docs/api/1.1/post/statuses/filter

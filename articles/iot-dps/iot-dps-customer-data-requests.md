@@ -1,0 +1,67 @@
+---
+title: Customer data request features
+author: dominicbetts
+ms.author: dobett
+manager: timlt
+ms.date: 05/16/2018
+ms.topic: conceptual
+ms.service: iot-dps
+services: iot-dps
+ms.openlocfilehash: d6355926c8fac62b01c36d28265842b1233ce213
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44869442"
+---
+# <a name="summary-of-customer-data-request-features"></a><span data-ttu-id="93694-102">Summary of customer data request features</span><span class="sxs-lookup"><span data-stu-id="93694-102">Summary of customer data request features</span></span>
+
+<span data-ttu-id="93694-103">The Azure IoT Hub Device Provisioning Service is a REST API-based cloud service targeted at enterprise customers that enables seamless, automated zero-touch provisioning of devices to Azure IoT Hub with security that begins at the device and ends with the cloud.</span><span class="sxs-lookup"><span data-stu-id="93694-103">The Azure IoT Hub Device Provisioning Service is a REST API-based cloud service targeted at enterprise customers that enables seamless, automated zero-touch provisioning of devices to Azure IoT Hub with security that begins at the device and ends with the cloud.</span></span>
+
+[!INCLUDE [gdpr-intro-sentence](../../includes/gdpr-intro-sentence.md)]
+
+<span data-ttu-id="93694-104">Individual devices are assigned a registration ID and device ID by a tenant administrator.</span><span class="sxs-lookup"><span data-stu-id="93694-104">Individual devices are assigned a registration ID and device ID by a tenant administrator.</span></span> <span data-ttu-id="93694-105">Data from and about these devices is based on these IDs.</span><span class="sxs-lookup"><span data-stu-id="93694-105">Data from and about these devices is based on these IDs.</span></span> <span data-ttu-id="93694-106">Microsoft maintains no information and has no access to data that would allow correlation of these devices to an individual.</span><span class="sxs-lookup"><span data-stu-id="93694-106">Microsoft maintains no information and has no access to data that would allow correlation of these devices to an individual.</span></span>
+
+<span data-ttu-id="93694-107">Many of the devices managed in Device Provisioning Service are not personal devices, for example an office thermostat or factory robot.</span><span class="sxs-lookup"><span data-stu-id="93694-107">Many of the devices managed in Device Provisioning Service are not personal devices, for example an office thermostat or factory robot.</span></span> <span data-ttu-id="93694-108">Customers may, however, consider some devices to be personally identifiable and at their discretion may maintain their own asset or inventory tracking methods that tie devices to individuals.</span><span class="sxs-lookup"><span data-stu-id="93694-108">Customers may, however, consider some devices to be personally identifiable and at their discretion may maintain their own asset or inventory tracking methods that tie devices to individuals.</span></span> <span data-ttu-id="93694-109">Device Provisioning Service manages and stores all data associated with devices as if it were personal data.</span><span class="sxs-lookup"><span data-stu-id="93694-109">Device Provisioning Service manages and stores all data associated with devices as if it were personal data.</span></span>
+
+<span data-ttu-id="93694-110">Tenant administrators can use either the Azure portal or the service's REST APIs to fulfill information requests by exporting or deleting data associated with a device ID or registration ID.</span><span class="sxs-lookup"><span data-stu-id="93694-110">Tenant administrators can use either the Azure portal or the service's REST APIs to fulfill information requests by exporting or deleting data associated with a device ID or registration ID.</span></span>
+
+> [!NOTE]
+> <span data-ttu-id="93694-111">Devices that have been provisioned in Azure IoT Hub through Device Provisioning Service have additional data stored in the Azure IoT Hub service.</span><span class="sxs-lookup"><span data-stu-id="93694-111">Devices that have been provisioned in Azure IoT Hub through Device Provisioning Service have additional data stored in the Azure IoT Hub service.</span></span> <span data-ttu-id="93694-112">See the [Azure IoT Hub reference documentation](../iot-hub/iot-hub-customer-data-requests.md) in order to complete a full request for a given device.</span><span class="sxs-lookup"><span data-stu-id="93694-112">See the [Azure IoT Hub reference documentation](../iot-hub/iot-hub-customer-data-requests.md) in order to complete a full request for a given device.</span></span>
+
+## <a name="deleting-customer-data"></a><span data-ttu-id="93694-113">Deleting customer data</span><span class="sxs-lookup"><span data-stu-id="93694-113">Deleting customer data</span></span>
+
+<span data-ttu-id="93694-114">Device Provisioning Service stores enrollments and registration records.</span><span class="sxs-lookup"><span data-stu-id="93694-114">Device Provisioning Service stores enrollments and registration records.</span></span> <span data-ttu-id="93694-115">Enrollments contain information about devices that are allowed to be provisioned, and registration records show which devices have already gone through the provisioning process.</span><span class="sxs-lookup"><span data-stu-id="93694-115">Enrollments contain information about devices that are allowed to be provisioned, and registration records show which devices have already gone through the provisioning process.</span></span>
+
+<span data-ttu-id="93694-116">Tenant administrators may remove enrollments from the Azure portal, and this removes any associated registration records as well.</span><span class="sxs-lookup"><span data-stu-id="93694-116">Tenant administrators may remove enrollments from the Azure portal, and this removes any associated registration records as well.</span></span>
+
+<span data-ttu-id="93694-117">For more information, see [How to manage device enrollments](how-to-manage-enrollments.md).</span><span class="sxs-lookup"><span data-stu-id="93694-117">For more information, see [How to manage device enrollments](how-to-manage-enrollments.md).</span></span>
+
+<span data-ttu-id="93694-118">It is also possible to perform delete operations for enrollments and registration records using REST APIs:</span><span class="sxs-lookup"><span data-stu-id="93694-118">It is also possible to perform delete operations for enrollments and registration records using REST APIs:</span></span>
+
+* <span data-ttu-id="93694-119">To delete enrollment information for a single device, you can use [Device Enrollment - Delete](https://docs.microsoft.com/rest/api/iot-dps/deviceenrollment/delete).</span><span class="sxs-lookup"><span data-stu-id="93694-119">To delete enrollment information for a single device, you can use [Device Enrollment - Delete](https://docs.microsoft.com/rest/api/iot-dps/deviceenrollment/delete).</span></span>
+* <span data-ttu-id="93694-120">To delete enrollment information for a group of devices, you can use [Device Enrollment Group - Delete](https://docs.microsoft.com/rest/api/iot-dps/deviceenrollmentgroup/delete).</span><span class="sxs-lookup"><span data-stu-id="93694-120">To delete enrollment information for a group of devices, you can use [Device Enrollment Group - Delete](https://docs.microsoft.com/rest/api/iot-dps/deviceenrollmentgroup/delete).</span></span>
+* <span data-ttu-id="93694-121">To delete information about devices that have been provisioned, you can use [Registration State - Delete Registration State](https://docs.microsoft.com/rest/api/iot-dps/registrationstate/deleteregistrationstate).</span><span class="sxs-lookup"><span data-stu-id="93694-121">To delete information about devices that have been provisioned, you can use [Registration State - Delete Registration State](https://docs.microsoft.com/rest/api/iot-dps/registrationstate/deleteregistrationstate).</span></span>
+
+## <a name="exporting-customer-data"></a><span data-ttu-id="93694-122">Exporting customer data</span><span class="sxs-lookup"><span data-stu-id="93694-122">Exporting customer data</span></span>
+
+<span data-ttu-id="93694-123">Device Provisioning Service stores enrollments and registration records.</span><span class="sxs-lookup"><span data-stu-id="93694-123">Device Provisioning Service stores enrollments and registration records.</span></span> <span data-ttu-id="93694-124">Enrollments contain information about devices that are allowed to be provisioned, and registration records show which devices have already gone through the provisioning process.</span><span class="sxs-lookup"><span data-stu-id="93694-124">Enrollments contain information about devices that are allowed to be provisioned, and registration records show which devices have already gone through the provisioning process.</span></span>
+
+<span data-ttu-id="93694-125">Tenant administrators can view enrollments and registration records through the Azure portal and export them using copy and paste.</span><span class="sxs-lookup"><span data-stu-id="93694-125">Tenant administrators can view enrollments and registration records through the Azure portal and export them using copy and paste.</span></span>
+
+<span data-ttu-id="93694-126">For more information on how to manage enrollments, see [How to manage device enrollments](how-to-manage-enrollments.md).</span><span class="sxs-lookup"><span data-stu-id="93694-126">For more information on how to manage enrollments, see [How to manage device enrollments](how-to-manage-enrollments.md).</span></span>
+
+<span data-ttu-id="93694-127">It is also possible to perform export operations for enrollments and registration records using REST APIs:</span><span class="sxs-lookup"><span data-stu-id="93694-127">It is also possible to perform export operations for enrollments and registration records using REST APIs:</span></span>
+
+* <span data-ttu-id="93694-128">To export enrollment information for a single device, you can use [Device Enrollment - Get](https://docs.microsoft.com/rest/api/iot-dps/deviceenrollment/get).</span><span class="sxs-lookup"><span data-stu-id="93694-128">To export enrollment information for a single device, you can use [Device Enrollment - Get](https://docs.microsoft.com/rest/api/iot-dps/deviceenrollment/get).</span></span>
+* <span data-ttu-id="93694-129">To export enrollment information for a group of devices, you can use [Device Enrollment Group - Get](https://docs.microsoft.com/rest/api/iot-dps/deviceenrollmentgroup/get).</span><span class="sxs-lookup"><span data-stu-id="93694-129">To export enrollment information for a group of devices, you can use [Device Enrollment Group - Get](https://docs.microsoft.com/rest/api/iot-dps/deviceenrollmentgroup/get).</span></span>
+* <span data-ttu-id="93694-130">To export information about devices that have already been provisioned, you can use [Registration State - Get Registration State](https://docs.microsoft.com/rest/api/iot-dps/registrationstate/getregistrationstate).</span><span class="sxs-lookup"><span data-stu-id="93694-130">To export information about devices that have already been provisioned, you can use [Registration State - Get Registration State](https://docs.microsoft.com/rest/api/iot-dps/registrationstate/getregistrationstate).</span></span>
+
+> [!NOTE]
+> <span data-ttu-id="93694-131">When you use Microsoft's enterprise services, Microsoft generates some information, known as system-generated logs.</span><span class="sxs-lookup"><span data-stu-id="93694-131">When you use Microsoft's enterprise services, Microsoft generates some information, known as system-generated logs.</span></span> <span data-ttu-id="93694-132">Some Device Provisioning Service system-generated logs are not accessible or exportable by tenant administrators.</span><span class="sxs-lookup"><span data-stu-id="93694-132">Some Device Provisioning Service system-generated logs are not accessible or exportable by tenant administrators.</span></span> <span data-ttu-id="93694-133">These logs constitute factual actions conducted within the service and diagnostic data related to individual devices.</span><span class="sxs-lookup"><span data-stu-id="93694-133">These logs constitute factual actions conducted within the service and diagnostic data related to individual devices.</span></span>
+
+## <a name="links-to-additional-documentation"></a><span data-ttu-id="93694-134">Links to additional documentation</span><span class="sxs-lookup"><span data-stu-id="93694-134">Links to additional documentation</span></span>
+
+<span data-ttu-id="93694-135">Full documentation for Device Provisioning Service APIs is located at [https://docs.microsoft.com/rest/api/iot-dps](https://docs.microsoft.com/rest/api/iot-dps).</span><span class="sxs-lookup"><span data-stu-id="93694-135">Full documentation for Device Provisioning Service APIs is located at [https://docs.microsoft.com/rest/api/iot-dps](https://docs.microsoft.com/rest/api/iot-dps).</span></span>
+
+<span data-ttu-id="93694-136">Azure IoT Hub [customer data request features](../iot-hub/iot-hub-customer-data-requests.md).</span><span class="sxs-lookup"><span data-stu-id="93694-136">Azure IoT Hub [customer data request features](../iot-hub/iot-hub-customer-data-requests.md).</span></span>

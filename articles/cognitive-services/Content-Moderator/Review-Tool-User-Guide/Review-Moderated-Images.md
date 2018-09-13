@@ -1,49 +1,45 @@
 ---
-title: Review moderated images in Content Moderator | Microsoft Docs
-description: After Content Moderator provides auto-moderated imaged, you can review images, adjust tags, and submit reviews.
+title: Review images in Azure Content Moderator | Microsoft Docs
+description: The review tool allows human moderators to review images.
 services: cognitive-services
 author: sanjeev3
 manager: mikemcca
 ms.service: cognitive-services
-ms.technology: content-moderator
+ms.component: content-moderator
 ms.topic: article
-ms.date: 02/03/2017
+ms.date: 08/06/2017
 ms.author: sajagtap
-ms.openlocfilehash: de01e9a317154b3382bfd06d0cf0f5a166bd1fff
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 97879747bbfde2247e41847d8d68bf7f19530ecb
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44552086"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44809174"
 ---
-# <a name="review-moderated-images"></a><span data-ttu-id="d59b0-103">Review moderated images</span><span class="sxs-lookup"><span data-stu-id="d59b0-103">Review moderated images</span></span> #
+# <a name="review-moderated-images"></a><span data-ttu-id="09855-103">Review moderated images</span><span class="sxs-lookup"><span data-stu-id="09855-103">Review moderated images</span></span>
 
-<span data-ttu-id="d59b0-104">Click the **Review** TAB to browse the auto-moderated images that are ready for review.</span><span class="sxs-lookup"><span data-stu-id="d59b0-104">Click the **Review** TAB to browse the auto-moderated images that are ready for review.</span></span> <span data-ttu-id="d59b0-105">Any labels assigned to the images are based on the default score thresholds for tagging the images.</span><span class="sxs-lookup"><span data-stu-id="d59b0-105">Any labels assigned to the images are based on the default score thresholds for tagging the images.</span></span> <span data-ttu-id="d59b0-106">These thresholds are configurable.</span><span class="sxs-lookup"><span data-stu-id="d59b0-106">These thresholds are configurable.</span></span>
+<span data-ttu-id="09855-104">After you have signed up for Content Moderation and obtained a subscription key, you can try out the image review features.</span><span class="sxs-lookup"><span data-stu-id="09855-104">After you have signed up for Content Moderation and obtained a subscription key, you can try out the image review features.</span></span>
 
-![Review Images](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cognitive-services/Content-Moderator/Review-Tool-User-Guide/images/2-Image-Review-2.PNG)
+1.  <span data-ttu-id="09855-105">Open the [human review tool](https://contentmoderator.cognitive.microsoft.com/) and sign in.</span><span class="sxs-lookup"><span data-stu-id="09855-105">Open the [human review tool](https://contentmoderator.cognitive.microsoft.com/) and sign in.</span></span> 
+2.  <span data-ttu-id="09855-106">Click the Try tab, and upload some images to review.</span><span class="sxs-lookup"><span data-stu-id="09855-106">Click the Try tab, and upload some images to review.</span></span>
+3.  <span data-ttu-id="09855-107">Click the Review tab and select Image.</span><span class="sxs-lookup"><span data-stu-id="09855-107">Click the Review tab and select Image.</span></span>
 
-<span data-ttu-id="d59b0-108">Note that the images that you see on your screen are not available to other reviewers in your team while you are reviewing them.</span><span class="sxs-lookup"><span data-stu-id="d59b0-108">Note that the images that you see on your screen are not available to other reviewers in your team while you are reviewing them.</span></span>
+  ![Review Images Option](images/review-images-1.png)
 
-## <a name="zoom-inzoom-out-to-adjust-the-number-of-images"></a><span data-ttu-id="d59b0-109">Zoom in/Zoom out to adjust the number of images</span><span class="sxs-lookup"><span data-stu-id="d59b0-109">Zoom in/Zoom out to adjust the number of images</span></span> ##
+  <span data-ttu-id="09855-109">The images display with any labels that have been assigned by the review tool.</span><span class="sxs-lookup"><span data-stu-id="09855-109">The images display with any labels that have been assigned by the review tool.</span></span> <span data-ttu-id="09855-110">The images are not available to other reviewers in your team while you are reviewing them.</span><span class="sxs-lookup"><span data-stu-id="09855-110">The images are not available to other reviewers in your team while you are reviewing them.</span></span>
 
-<span data-ttu-id="d59b0-110">You can move the Reviews to display slider at the top of the screen to adjust the number of images displayed on the screen.</span><span class="sxs-lookup"><span data-stu-id="d59b0-110">You can move the Reviews to display slider at the top of the screen to adjust the number of images displayed on the screen.</span></span> <span data-ttu-id="d59b0-111">Click on the tagged or untagged links to sort the images by tagged or untagged status respectively.</span><span class="sxs-lookup"><span data-stu-id="d59b0-111">Click on the tagged or untagged links to sort the images by tagged or untagged status respectively.</span></span> <span data-ttu-id="d59b0-112">Click the tags to toggle their selection status.</span><span class="sxs-lookup"><span data-stu-id="d59b0-112">Click the tags to toggle their selection status.</span></span> <span data-ttu-id="d59b0-113">You can also select any custom tags that you may have created.</span><span class="sxs-lookup"><span data-stu-id="d59b0-113">You can also select any custom tags that you may have created.</span></span>
+4.  <span data-ttu-id="09855-111">Move the “Reviews to display” slider (1) to adjust the number of images displayed on the screen.</span><span class="sxs-lookup"><span data-stu-id="09855-111">Move the “Reviews to display” slider (1) to adjust the number of images displayed on the screen.</span></span> <span data-ttu-id="09855-112">Click on the tagged or untagged buttons (2) to sort the images accordingly.</span><span class="sxs-lookup"><span data-stu-id="09855-112">Click on the tagged or untagged buttons (2) to sort the images accordingly.</span></span> <span data-ttu-id="09855-113">Click on a tag (3) to toggle it on or off.</span><span class="sxs-lookup"><span data-stu-id="09855-113">Click on a tag (3) to toggle it on or off.</span></span>
 
-![Zoomin to Images](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cognitive-services/Content-Moderator/Review-Tool-User-Guide/images/4-Review-2.PNG)
+  ![Browse Image Reviews](images/review-images-2.png)
+ 
+5.  <span data-ttu-id="09855-115">To see more information about an image, click on the ellipsis on a thumbnail, followed by the **View details** option.</span><span class="sxs-lookup"><span data-stu-id="09855-115">To see more information about an image, click on the ellipsis on a thumbnail, followed by the **View details** option.</span></span> <span data-ttu-id="09855-116">To assign the image to a subteam, select the **Move to** option.</span><span class="sxs-lookup"><span data-stu-id="09855-116">To assign the image to a subteam, select the **Move to** option.</span></span>
+ 
+  ![View details and Move to subteam option](images/review-images-3.png)
 
-## <a name="click-a-thumbnail-to-view-details"></a><span data-ttu-id="d59b0-115">Click a thumbnail to view details</span><span class="sxs-lookup"><span data-stu-id="d59b0-115">Click a thumbnail to view details</span></span> ##
+6. <span data-ttu-id="09855-118">Browse the image moderation information on the details page.</span><span class="sxs-lookup"><span data-stu-id="09855-118">Browse the image moderation information on the details page.</span></span>
 
-<span data-ttu-id="d59b0-116">If you have thumbnails showing on your screen, click a thumbnail to bring up the detailed view.</span><span class="sxs-lookup"><span data-stu-id="d59b0-116">If you have thumbnails showing on your screen, click a thumbnail to bring up the detailed view.</span></span> <span data-ttu-id="d59b0-117">Click the tags to toggle their selection status.</span><span class="sxs-lookup"><span data-stu-id="d59b0-117">Click the tags to toggle their selection status.</span></span> <span data-ttu-id="d59b0-118">You can also select any custom tags that you may have created.</span><span class="sxs-lookup"><span data-stu-id="d59b0-118">You can also select any custom tags that you may have created.</span></span>
+  ![View Image Details](images/review-images-4.png)
+ 
+7.  <span data-ttu-id="09855-120">Once you have reviewed and updated the tag assignments as needed, click **Next** to submit your reviews.</span><span class="sxs-lookup"><span data-stu-id="09855-120">Once you have reviewed and updated the tag assignments as needed, click **Next** to submit your reviews.</span></span>
 
-![Use Thumbnail](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cognitive-services/Content-Moderator/Review-Tool-User-Guide/images/4-Review-3.PNG)
-
-## <a name="submit-image-reviews"></a><span data-ttu-id="d59b0-120">Submit image reviews</span><span class="sxs-lookup"><span data-stu-id="d59b0-120">Submit image reviews</span></span> ##
-
-<span data-ttu-id="d59b0-121">Once you have reviewed and updated the tag selections, click the **Next** button to submit your reviews.</span><span class="sxs-lookup"><span data-stu-id="d59b0-121">Once you have reviewed and updated the tag selections, click the **Next** button to submit your reviews.</span></span>
-
-![Submit Image Reviews](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cognitive-services/Content-Moderator/Review-Tool-User-Guide/images/5-Submit-1.PNG)
-
-<span data-ttu-id="d59b0-123">After you submit, you have about 5 seconds to use the Previous button to go back to your previous screen if you wanted to review them again.</span><span class="sxs-lookup"><span data-stu-id="d59b0-123">After you submit, you have about 5 seconds to use the Previous button to go back to your previous screen if you wanted to review them again.</span></span> <span data-ttu-id="d59b0-124">After that, the images will be out of the Submit queue and the **Previous** button will disappear from the screen.</span><span class="sxs-lookup"><span data-stu-id="d59b0-124">After that, the images will be out of the Submit queue and the **Previous** button will disappear from the screen.</span></span>
-
-
-
-
+<span data-ttu-id="09855-121">After you submit, you have about five seconds to click the **Prev** button to return to the previous screen and review images again.</span><span class="sxs-lookup"><span data-stu-id="09855-121">After you submit, you have about five seconds to click the **Prev** button to return to the previous screen and review images again.</span></span> <span data-ttu-id="09855-122">After that, the images are no longer in the Submit queue and the **Prev** button is no longer available.</span><span class="sxs-lookup"><span data-stu-id="09855-122">After that, the images are no longer in the Submit queue and the **Prev** button is no longer available.</span></span>

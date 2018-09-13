@@ -1,146 +1,274 @@
 ---
-title: Enable logging & alerts, check the run history, track inputs and outputs - Azure Logic Apps | Microsoft Docs
-description: Monitor the status of your logic app workflows using logging, tracking, and viewing the history and diagnostics
-author: jeffhollan
-manager: anneta
-editor: ''
+title: Check status, set up logging, and get alerts - Azure Logic Apps | Microsoft Docs
+description: Monitor status, log diagnostics data, and set up alerts for Azure Logic Apps
 services: logic-apps
-documentationcenter: ''
-ms.assetid: 5c1b1e15-3b6c-49dc-98a6-bdbe7cb75339
 ms.service: logic-apps
-ms.workload: integration
-ms.tgt_pltfrm: na
-ms.devlang: na
+ms.suite: integration
+author: divyaswarnkar
+ms.author: divswa
+ms.reviewer: jonfan, estfan, LADocs
 ms.topic: article
-ms.date: 10/18/2016
-ms.author: jehollan
-ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 14b0c017dd5ce5c7cc3e77a15f1e7ad64497838f
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.assetid: 5c1b1e15-3b6c-49dc-98a6-bdbe7cb75339
+ms.date: 07/21/2017
+ms.openlocfilehash: a08cd6289fc85b79ccec731126a33a9549d60546
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44552508"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44803509"
 ---
-# <a name="check-the-performance-and-start-diagnostic-logging-and-alerts-of-your-workflows-in-logic-apps"></a><span data-ttu-id="d3b05-103">Check the performance, and start diagnostic logging and alerts of your workflows in logic apps</span><span class="sxs-lookup"><span data-stu-id="d3b05-103">Check the performance, and start diagnostic logging and alerts of your workflows in logic apps</span></span>
-<span data-ttu-id="d3b05-104">After you [create a logic app](../logic-apps/logic-apps-create-a-logic-app.md), you can see the full history of its execution in the Azure portal.</span><span class="sxs-lookup"><span data-stu-id="d3b05-104">After you [create a logic app](../logic-apps/logic-apps-create-a-logic-app.md), you can see the full history of its execution in the Azure portal.</span></span>  <span data-ttu-id="d3b05-105">You can also set up services like Azure Diagnostics and Azure Alerts to monitor events real-time, and alert you for events like "when more than 5 runs fail within an hour."</span><span class="sxs-lookup"><span data-stu-id="d3b05-105">You can also set up services like Azure Diagnostics and Azure Alerts to monitor events real-time, and alert you for events like "when more than 5 runs fail within an hour."</span></span>
+# <a name="monitor-status-set-up-diagnostics-logging-and-turn-on-alerts-for-azure-logic-apps"></a><span data-ttu-id="4120f-103">Monitor status, set up diagnostics logging, and turn on alerts for Azure Logic Apps</span><span class="sxs-lookup"><span data-stu-id="4120f-103">Monitor status, set up diagnostics logging, and turn on alerts for Azure Logic Apps</span></span>
 
-## <a name="monitor-in-the-azure-portal"></a><span data-ttu-id="d3b05-106">Monitor in the Azure Portal</span><span class="sxs-lookup"><span data-stu-id="d3b05-106">Monitor in the Azure Portal</span></span>
-<span data-ttu-id="d3b05-107">To view the history, select **Browse**, and select **Logic Apps**.</span><span class="sxs-lookup"><span data-stu-id="d3b05-107">To view the history, select **Browse**, and select **Logic Apps**.</span></span> <span data-ttu-id="d3b05-108">A list of all logic apps in your subscription is displayed.</span><span class="sxs-lookup"><span data-stu-id="d3b05-108">A list of all logic apps in your subscription is displayed.</span></span>  <span data-ttu-id="d3b05-109">Select the logic app you want to monitor.</span><span class="sxs-lookup"><span data-stu-id="d3b05-109">Select the logic app you want to monitor.</span></span>  <span data-ttu-id="d3b05-110">You will see a list of all actions and triggers that have occurred for this logic app.</span><span class="sxs-lookup"><span data-stu-id="d3b05-110">You will see a list of all actions and triggers that have occurred for this logic app.</span></span>
+<span data-ttu-id="4120f-104">After you [create and run a logic app](../logic-apps/quickstart-create-first-logic-app-workflow.md), you can check its runs history, trigger history, status, and performance.</span><span class="sxs-lookup"><span data-stu-id="4120f-104">After you [create and run a logic app](../logic-apps/quickstart-create-first-logic-app-workflow.md), you can check its runs history, trigger history, status, and performance.</span></span> <span data-ttu-id="4120f-105">For real-time event monitoring and richer debugging, set up [diagnostics logging](#azure-diagnostics) for your logic app.</span><span class="sxs-lookup"><span data-stu-id="4120f-105">For real-time event monitoring and richer debugging, set up [diagnostics logging](#azure-diagnostics) for your logic app.</span></span> <span data-ttu-id="4120f-106">That way, you can [find and view events](#find-events), like trigger events, run events, and action events.</span><span class="sxs-lookup"><span data-stu-id="4120f-106">That way, you can [find and view events](#find-events), like trigger events, run events, and action events.</span></span> <span data-ttu-id="4120f-107">You can also use this [diagnostics data with other services](#extend-diagnostic-data), like Azure Storage and Azure Event Hubs.</span><span class="sxs-lookup"><span data-stu-id="4120f-107">You can also use this [diagnostics data with other services](#extend-diagnostic-data), like Azure Storage and Azure Event Hubs.</span></span> 
 
-![Overview](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-monitor-your-logic-apps/overview.png)
+<span data-ttu-id="4120f-108">To get notifications about failures or other possible problems, set up [alerts](#add-azure-alerts).</span><span class="sxs-lookup"><span data-stu-id="4120f-108">To get notifications about failures or other possible problems, set up [alerts](#add-azure-alerts).</span></span> <span data-ttu-id="4120f-109">For example, you can create an alert that detects "when more than five runs fail in an hour."</span><span class="sxs-lookup"><span data-stu-id="4120f-109">For example, you can create an alert that detects "when more than five runs fail in an hour."</span></span> <span data-ttu-id="4120f-110">You can also set up monitoring, tracking, and logging programmatically by using [Azure Diagnostics event settings and properties](#diagnostic-event-properties).</span><span class="sxs-lookup"><span data-stu-id="4120f-110">You can also set up monitoring, tracking, and logging programmatically by using [Azure Diagnostics event settings and properties](#diagnostic-event-properties).</span></span>
 
-<span data-ttu-id="d3b05-112">There are a few sections on this blade that are helpful:</span><span class="sxs-lookup"><span data-stu-id="d3b05-112">There are a few sections on this blade that are helpful:</span></span>
+## <a name="view-runs-and-trigger-history-for-your-logic-app"></a><span data-ttu-id="4120f-111">View runs and trigger history for your logic app</span><span class="sxs-lookup"><span data-stu-id="4120f-111">View runs and trigger history for your logic app</span></span>
 
-* <span data-ttu-id="d3b05-113">**Summary** lists **All runs** and the **Trigger History**</span><span class="sxs-lookup"><span data-stu-id="d3b05-113">**Summary** lists **All runs** and the **Trigger History**</span></span>
-  * <span data-ttu-id="d3b05-114">**All runs** list the latest logic app runs.</span><span class="sxs-lookup"><span data-stu-id="d3b05-114">**All runs** list the latest logic app runs.</span></span>  <span data-ttu-id="d3b05-115">You can click any row for details on the run, or click on the tile to list more runs.</span><span class="sxs-lookup"><span data-stu-id="d3b05-115">You can click any row for details on the run, or click on the tile to list more runs.</span></span>
-  * <span data-ttu-id="d3b05-116">**Trigger History** lists all the trigger activity for this logic app.</span><span class="sxs-lookup"><span data-stu-id="d3b05-116">**Trigger History** lists all the trigger activity for this logic app.</span></span>  <span data-ttu-id="d3b05-117">Trigger activity could be a "Skipped" check for new data (e.g. looking to see if a new file was added to FTP), "Succeeded" meaning data was returned to fire a logic app, or "Failed" corresponding an error in configuration.</span><span class="sxs-lookup"><span data-stu-id="d3b05-117">Trigger activity could be a "Skipped" check for new data (e.g. looking to see if a new file was added to FTP), "Succeeded" meaning data was returned to fire a logic app, or "Failed" corresponding an error in configuration.</span></span>
-* <span data-ttu-id="d3b05-118">**Diagnostics** allows you to view runtime details and events, and subscribe to [Azure Alerts](#adding-azure-alerts)</span><span class="sxs-lookup"><span data-stu-id="d3b05-118">**Diagnostics** allows you to view runtime details and events, and subscribe to [Azure Alerts](#adding-azure-alerts)</span></span>
+1. <span data-ttu-id="4120f-112">To find your logic app in the [Azure portal](https://portal.azure.com), on the main Azure menu, choose **All services**.</span><span class="sxs-lookup"><span data-stu-id="4120f-112">To find your logic app in the [Azure portal](https://portal.azure.com), on the main Azure menu, choose **All services**.</span></span> <span data-ttu-id="4120f-113">In the search box, type "logic apps", and choose **Logic apps**.</span><span class="sxs-lookup"><span data-stu-id="4120f-113">In the search box, type "logic apps", and choose **Logic apps**.</span></span>
+
+   ![Find your logic app](./media/logic-apps-monitor-your-logic-apps/find-your-logic-app.png)
+
+   <span data-ttu-id="4120f-115">The Azure portal shows all the logic apps that are associated with your Azure subscription.</span><span class="sxs-lookup"><span data-stu-id="4120f-115">The Azure portal shows all the logic apps that are associated with your Azure subscription.</span></span> 
+
+2. <span data-ttu-id="4120f-116">Select your logic app, then choose **Overview**.</span><span class="sxs-lookup"><span data-stu-id="4120f-116">Select your logic app, then choose **Overview**.</span></span>
+
+   <span data-ttu-id="4120f-117">The Azure portal shows the runs history and trigger history for your logic app.</span><span class="sxs-lookup"><span data-stu-id="4120f-117">The Azure portal shows the runs history and trigger history for your logic app.</span></span> <span data-ttu-id="4120f-118">For example:</span><span class="sxs-lookup"><span data-stu-id="4120f-118">For example:</span></span>
+
+   ![Logic app runs history and trigger history](media/logic-apps-monitor-your-logic-apps/overview.png)
+
+   * <span data-ttu-id="4120f-120">**Runs history** shows all the runs for your logic app.</span><span class="sxs-lookup"><span data-stu-id="4120f-120">**Runs history** shows all the runs for your logic app.</span></span> 
+   * <span data-ttu-id="4120f-121">**Trigger History** shows all the trigger activity for your logic app.</span><span class="sxs-lookup"><span data-stu-id="4120f-121">**Trigger History** shows all the trigger activity for your logic app.</span></span>
+
+   <span data-ttu-id="4120f-122">For status descriptions, see [Troubleshoot your logic app](../logic-apps/logic-apps-diagnosing-failures.md).</span><span class="sxs-lookup"><span data-stu-id="4120f-122">For status descriptions, see [Troubleshoot your logic app](../logic-apps/logic-apps-diagnosing-failures.md).</span></span>
+
+   > [!TIP]
+   > <span data-ttu-id="4120f-123">If you don't find the data that you expect, on the toolbar, choose **Refresh**.</span><span class="sxs-lookup"><span data-stu-id="4120f-123">If you don't find the data that you expect, on the toolbar, choose **Refresh**.</span></span>
+
+3. <span data-ttu-id="4120f-124">To view the steps from a specific run, under **Runs history**, select that run.</span><span class="sxs-lookup"><span data-stu-id="4120f-124">To view the steps from a specific run, under **Runs history**, select that run.</span></span> 
+
+   <span data-ttu-id="4120f-125">The monitor view shows each step in that run.</span><span class="sxs-lookup"><span data-stu-id="4120f-125">The monitor view shows each step in that run.</span></span> <span data-ttu-id="4120f-126">For example:</span><span class="sxs-lookup"><span data-stu-id="4120f-126">For example:</span></span>
+
+   ![Actions for a specific run](media/logic-apps-monitor-your-logic-apps/monitor-view-updated.png)
+
+4. <span data-ttu-id="4120f-128">To get more details about the run, choose **Run Details**.</span><span class="sxs-lookup"><span data-stu-id="4120f-128">To get more details about the run, choose **Run Details**.</span></span> <span data-ttu-id="4120f-129">This information summarizes the steps, status, inputs, and outputs for the run.</span><span class="sxs-lookup"><span data-stu-id="4120f-129">This information summarizes the steps, status, inputs, and outputs for the run.</span></span> 
+
+   ![Choose "Run Details"](media/logic-apps-monitor-your-logic-apps/run-details.png)
+
+   <span data-ttu-id="4120f-131">For example, you can get the run's **Correlation ID**, which you might need when you use the [REST API for Logic Apps](https://docs.microsoft.com/rest/api/logic).</span><span class="sxs-lookup"><span data-stu-id="4120f-131">For example, you can get the run's **Correlation ID**, which you might need when you use the [REST API for Logic Apps](https://docs.microsoft.com/rest/api/logic).</span></span>
+
+5. <span data-ttu-id="4120f-132">To get details about a specific step, choose that step.</span><span class="sxs-lookup"><span data-stu-id="4120f-132">To get details about a specific step, choose that step.</span></span> <span data-ttu-id="4120f-133">You can now review details like inputs, outputs, and any errors that happened for that step.</span><span class="sxs-lookup"><span data-stu-id="4120f-133">You can now review details like inputs, outputs, and any errors that happened for that step.</span></span> <span data-ttu-id="4120f-134">For example:</span><span class="sxs-lookup"><span data-stu-id="4120f-134">For example:</span></span>
+
+   ![Step details](media/logic-apps-monitor-your-logic-apps/monitor-view-details.png)
+   
+   > [!NOTE]
+   > <span data-ttu-id="4120f-136">All runtime details and events are encrypted within the Logic Apps service.</span><span class="sxs-lookup"><span data-stu-id="4120f-136">All runtime details and events are encrypted within the Logic Apps service.</span></span> <span data-ttu-id="4120f-137">They are decrypted only when a user requests to view that data.</span><span class="sxs-lookup"><span data-stu-id="4120f-137">They are decrypted only when a user requests to view that data.</span></span> <span data-ttu-id="4120f-138">You can also control access to these events with [Azure Role-Based Access Control (RBAC)](../role-based-access-control/overview.md).</span><span class="sxs-lookup"><span data-stu-id="4120f-138">You can also control access to these events with [Azure Role-Based Access Control (RBAC)](../role-based-access-control/overview.md).</span></span>
+
+6. <span data-ttu-id="4120f-139">To get details about a specific trigger event, go back to the **Overview** pane.</span><span class="sxs-lookup"><span data-stu-id="4120f-139">To get details about a specific trigger event, go back to the **Overview** pane.</span></span> <span data-ttu-id="4120f-140">Under **Trigger history**, select the trigger event.</span><span class="sxs-lookup"><span data-stu-id="4120f-140">Under **Trigger history**, select the trigger event.</span></span> <span data-ttu-id="4120f-141">You can now review details like inputs and outputs, for example:</span><span class="sxs-lookup"><span data-stu-id="4120f-141">You can now review details like inputs and outputs, for example:</span></span>
+
+   ![Trigger event output details](media/logic-apps-monitor-your-logic-apps/trigger-details.png)
+
+<a name="azure-diagnostics"></a>
+
+## <a name="turn-on-diagnostics-logging-for-your-logic-app"></a><span data-ttu-id="4120f-143">Turn on diagnostics logging for your logic app</span><span class="sxs-lookup"><span data-stu-id="4120f-143">Turn on diagnostics logging for your logic app</span></span>
+
+<span data-ttu-id="4120f-144">For richer debugging with runtime details and events, you can set up diagnostics logging with [Azure Log Analytics](../log-analytics/log-analytics-overview.md).</span><span class="sxs-lookup"><span data-stu-id="4120f-144">For richer debugging with runtime details and events, you can set up diagnostics logging with [Azure Log Analytics](../log-analytics/log-analytics-overview.md).</span></span> <span data-ttu-id="4120f-145">Log Analytics is a service in Azure that monitors your cloud and on-premises environments to help you maintain their availability and performance.</span><span class="sxs-lookup"><span data-stu-id="4120f-145">Log Analytics is a service in Azure that monitors your cloud and on-premises environments to help you maintain their availability and performance.</span></span> 
+
+<span data-ttu-id="4120f-146">Before you start, you need to have a Log Analytics workspace.</span><span class="sxs-lookup"><span data-stu-id="4120f-146">Before you start, you need to have a Log Analytics workspace.</span></span> <span data-ttu-id="4120f-147">Learn [how to create a Log Analytics workspace](../log-analytics/log-analytics-quick-create-workspace.md).</span><span class="sxs-lookup"><span data-stu-id="4120f-147">Learn [how to create a Log Analytics workspace](../log-analytics/log-analytics-quick-create-workspace.md).</span></span>
+
+1. <span data-ttu-id="4120f-148">In the [Azure portal](https://portal.azure.com), find and select your logic app.</span><span class="sxs-lookup"><span data-stu-id="4120f-148">In the [Azure portal](https://portal.azure.com), find and select your logic app.</span></span> 
+
+2. <span data-ttu-id="4120f-149">On the logic app blade menu, under **Monitoring**, choose **Diagnostics** > **Diagnostic Settings**.</span><span class="sxs-lookup"><span data-stu-id="4120f-149">On the logic app blade menu, under **Monitoring**, choose **Diagnostics** > **Diagnostic Settings**.</span></span>
+
+   ![Go to Monitoring, Diagnostics, Diagnostic Settings](media/logic-apps-monitor-your-logic-apps/logic-app-diagnostics.png)
+
+3. <span data-ttu-id="4120f-151">Under **Diagnostics settings**, choose **On**.</span><span class="sxs-lookup"><span data-stu-id="4120f-151">Under **Diagnostics settings**, choose **On**.</span></span>
+
+   ![Turn on diagnostic logs](media/logic-apps-monitor-your-logic-apps/turn-on-diagnostics-logic-app.png)
+
+4. <span data-ttu-id="4120f-153">Now select the Log Analytics workspace and event category for logging as shown:</span><span class="sxs-lookup"><span data-stu-id="4120f-153">Now select the Log Analytics workspace and event category for logging as shown:</span></span>
+
+   1. <span data-ttu-id="4120f-154">Select **Send to Log Analytics**.</span><span class="sxs-lookup"><span data-stu-id="4120f-154">Select **Send to Log Analytics**.</span></span> 
+   2. <span data-ttu-id="4120f-155">Under **Log Analytics**, choose **Configure**.</span><span class="sxs-lookup"><span data-stu-id="4120f-155">Under **Log Analytics**, choose **Configure**.</span></span> 
+   3. <span data-ttu-id="4120f-156">Under **OMS Workspaces**, select the Log Analytics workspace to use for logging.</span><span class="sxs-lookup"><span data-stu-id="4120f-156">Under **OMS Workspaces**, select the Log Analytics workspace to use for logging.</span></span>
+   4. <span data-ttu-id="4120f-157">Under **Log**, select the **WorkflowRuntime** category.</span><span class="sxs-lookup"><span data-stu-id="4120f-157">Under **Log**, select the **WorkflowRuntime** category.</span></span>
+   5. <span data-ttu-id="4120f-158">Choose the metric interval.</span><span class="sxs-lookup"><span data-stu-id="4120f-158">Choose the metric interval.</span></span>
+   6. <span data-ttu-id="4120f-159">When you're done, choose **Save**.</span><span class="sxs-lookup"><span data-stu-id="4120f-159">When you're done, choose **Save**.</span></span>
+
+   ![Select Log Analytics workspace and data for logging](media/logic-apps-monitor-your-logic-apps/send-diagnostics-data-log-analytics-workspace.png)
+
+<span data-ttu-id="4120f-161">Now, you can find events and other data for trigger events, run events, and action events.</span><span class="sxs-lookup"><span data-stu-id="4120f-161">Now, you can find events and other data for trigger events, run events, and action events.</span></span>
+
+<a name="find-events"></a>
+
+## <a name="find-events-and-data-for-your-logic-app"></a><span data-ttu-id="4120f-162">Find events and data for your logic app</span><span class="sxs-lookup"><span data-stu-id="4120f-162">Find events and data for your logic app</span></span>
+
+<span data-ttu-id="4120f-163">To find and view events in your logic app, like trigger events, run events, and action events, follow these steps.</span><span class="sxs-lookup"><span data-stu-id="4120f-163">To find and view events in your logic app, like trigger events, run events, and action events, follow these steps.</span></span>
+
+1. <span data-ttu-id="4120f-164">In the [Azure portal](https://portal.azure.com), choose **All Services**.</span><span class="sxs-lookup"><span data-stu-id="4120f-164">In the [Azure portal](https://portal.azure.com), choose **All Services**.</span></span> <span data-ttu-id="4120f-165">Search for "log analytics", then choose **Log Analytics** as shown here:</span><span class="sxs-lookup"><span data-stu-id="4120f-165">Search for "log analytics", then choose **Log Analytics** as shown here:</span></span>
+
+   ![Choose "Log Analytics"](media/logic-apps-monitor-your-logic-apps/browseloganalytics.png)
+
+2. <span data-ttu-id="4120f-167">Under **Log Analytics**, find and select your Log Analytics workspace.</span><span class="sxs-lookup"><span data-stu-id="4120f-167">Under **Log Analytics**, find and select your Log Analytics workspace.</span></span> 
+
+   ![Select your Log Analytics workspace](media/logic-apps-monitor-your-logic-apps/selectla.png)
+
+3. <span data-ttu-id="4120f-169">Under **Management**, choose **Log Search**.</span><span class="sxs-lookup"><span data-stu-id="4120f-169">Under **Management**, choose **Log Search**.</span></span>
+
+   ![Choose "Log Search"](media/logic-apps-monitor-your-logic-apps/log-search.png)
+
+4. <span data-ttu-id="4120f-171">In the search box, specify a field that you want to find, and press **Enter**.</span><span class="sxs-lookup"><span data-stu-id="4120f-171">In the search box, specify a field that you want to find, and press **Enter**.</span></span> <span data-ttu-id="4120f-172">When you start typing, you see possible matches and operations that you can use.</span><span class="sxs-lookup"><span data-stu-id="4120f-172">When you start typing, you see possible matches and operations that you can use.</span></span> 
+
+   <span data-ttu-id="4120f-173">For example, to find the top 10 events that happened, enter and select this search query: **search Category == "WorkflowRuntime" | limit 10**</span><span class="sxs-lookup"><span data-stu-id="4120f-173">For example, to find the top 10 events that happened, enter and select this search query: **search Category == "WorkflowRuntime" | limit 10**</span></span>
+
+   ![Enter search string](media/logic-apps-monitor-your-logic-apps/oms-start-query.png)
+
+   <span data-ttu-id="4120f-175">Learn more about [how to find data in Log Analytics](../log-analytics/log-analytics-log-searches.md).</span><span class="sxs-lookup"><span data-stu-id="4120f-175">Learn more about [how to find data in Log Analytics](../log-analytics/log-analytics-log-searches.md).</span></span>
+
+5. <span data-ttu-id="4120f-176">On the results page, in the left bar, choose the timeframe that you want to view.</span><span class="sxs-lookup"><span data-stu-id="4120f-176">On the results page, in the left bar, choose the timeframe that you want to view.</span></span>
+<span data-ttu-id="4120f-177">To refine your query by adding a filter, choose **+Add**.</span><span class="sxs-lookup"><span data-stu-id="4120f-177">To refine your query by adding a filter, choose **+Add**.</span></span>
+
+   ![Choose timeframe for query results](media/logic-apps-monitor-your-logic-apps/query-results.png)
+
+6. <span data-ttu-id="4120f-179">Under **Add Filters**, enter the filter name so you can find the filter you want.</span><span class="sxs-lookup"><span data-stu-id="4120f-179">Under **Add Filters**, enter the filter name so you can find the filter you want.</span></span> <span data-ttu-id="4120f-180">Select the filter, and choose **+Add**.</span><span class="sxs-lookup"><span data-stu-id="4120f-180">Select the filter, and choose **+Add**.</span></span>
+
+   <span data-ttu-id="4120f-181">This example uses the word "status" to find failed events under **AzureDiagnostics**.</span><span class="sxs-lookup"><span data-stu-id="4120f-181">This example uses the word "status" to find failed events under **AzureDiagnostics**.</span></span>
+   <span data-ttu-id="4120f-182">Here the filter for **status_s** is already selected.</span><span class="sxs-lookup"><span data-stu-id="4120f-182">Here the filter for **status_s** is already selected.</span></span>
+
+   ![Select filter](media/logic-apps-monitor-your-logic-apps/log-search-add-filter.png)
+
+7. <span data-ttu-id="4120f-184">In the left bar, select the filter value that you want to use, and choose **Apply**.</span><span class="sxs-lookup"><span data-stu-id="4120f-184">In the left bar, select the filter value that you want to use, and choose **Apply**.</span></span>
+
+   ![Select filter value, choose "Apply"](media/logic-apps-monitor-your-logic-apps/log-search-apply-filter.png)
+
+8. <span data-ttu-id="4120f-186">Now return to the query that you're building.</span><span class="sxs-lookup"><span data-stu-id="4120f-186">Now return to the query that you're building.</span></span> <span data-ttu-id="4120f-187">Your query is updated with your selected filter and value.</span><span class="sxs-lookup"><span data-stu-id="4120f-187">Your query is updated with your selected filter and value.</span></span> <span data-ttu-id="4120f-188">Your previous results are now filtered too.</span><span class="sxs-lookup"><span data-stu-id="4120f-188">Your previous results are now filtered too.</span></span>
+
+   ![Return to your query with filtered results](media/logic-apps-monitor-your-logic-apps/log-search-query-filtered-results.png)
+
+9. <span data-ttu-id="4120f-190">To save your query for future use, choose **Save**.</span><span class="sxs-lookup"><span data-stu-id="4120f-190">To save your query for future use, choose **Save**.</span></span> <span data-ttu-id="4120f-191">Learn [how to save your query](../logic-apps/logic-apps-track-b2b-messages-omsportal-query-filter-control-number.md#save-oms-query).</span><span class="sxs-lookup"><span data-stu-id="4120f-191">Learn [how to save your query](../logic-apps/logic-apps-track-b2b-messages-omsportal-query-filter-control-number.md#save-oms-query).</span></span>
+
+<a name="extend-diagnostic-data"></a>
+
+## <a name="extend-how-and-where-you-use-diagnostic-data-with-other-services"></a><span data-ttu-id="4120f-192">Extend how and where you use diagnostic data with other services</span><span class="sxs-lookup"><span data-stu-id="4120f-192">Extend how and where you use diagnostic data with other services</span></span>
+
+<span data-ttu-id="4120f-193">Along with Azure Log Analytics, you can extend how you use your logic app's diagnostic data with other Azure services, for example:</span><span class="sxs-lookup"><span data-stu-id="4120f-193">Along with Azure Log Analytics, you can extend how you use your logic app's diagnostic data with other Azure services, for example:</span></span> 
+
+* [<span data-ttu-id="4120f-194">Archive Azure Diagnostics Logs in Azure Storage</span><span class="sxs-lookup"><span data-stu-id="4120f-194">Archive Azure Diagnostics Logs in Azure Storage</span></span>](../monitoring-and-diagnostics/monitoring-archive-diagnostic-logs.md)
+* [<span data-ttu-id="4120f-195">Stream Azure Diagnostics Logs to Azure Event Hubs</span><span class="sxs-lookup"><span data-stu-id="4120f-195">Stream Azure Diagnostics Logs to Azure Event Hubs</span></span>](../monitoring-and-diagnostics/monitoring-stream-diagnostic-logs-to-event-hubs.md) 
+
+<span data-ttu-id="4120f-196">You can then get real-time monitoring by using telemetry and analytics from other services, like [Azure Stream Analytics](../stream-analytics/stream-analytics-introduction.md) and [Power BI](../log-analytics/log-analytics-powerbi.md).</span><span class="sxs-lookup"><span data-stu-id="4120f-196">You can then get real-time monitoring by using telemetry and analytics from other services, like [Azure Stream Analytics](../stream-analytics/stream-analytics-introduction.md) and [Power BI](../log-analytics/log-analytics-powerbi.md).</span></span> <span data-ttu-id="4120f-197">For example:</span><span class="sxs-lookup"><span data-stu-id="4120f-197">For example:</span></span>
+
+* [<span data-ttu-id="4120f-198">Stream data from Event Hubs to Stream Analytics</span><span class="sxs-lookup"><span data-stu-id="4120f-198">Stream data from Event Hubs to Stream Analytics</span></span>](../stream-analytics/stream-analytics-define-inputs.md)
+* [<span data-ttu-id="4120f-199">Analyze streaming data with Stream Analytics and create a real-time analytics dashboard in Power BI</span><span class="sxs-lookup"><span data-stu-id="4120f-199">Analyze streaming data with Stream Analytics and create a real-time analytics dashboard in Power BI</span></span>](../stream-analytics/stream-analytics-power-bi-dashboard.md)
+
+<span data-ttu-id="4120f-200">Based on the options that you want set up, make sure that you first [create an Azure storage account](../storage/common/storage-create-storage-account.md) or [create an Azure event hub](../event-hubs/event-hubs-create.md).</span><span class="sxs-lookup"><span data-stu-id="4120f-200">Based on the options that you want set up, make sure that you first [create an Azure storage account](../storage/common/storage-create-storage-account.md) or [create an Azure event hub](../event-hubs/event-hubs-create.md).</span></span> <span data-ttu-id="4120f-201">Then select the options for where you want to send diagnostic data:</span><span class="sxs-lookup"><span data-stu-id="4120f-201">Then select the options for where you want to send diagnostic data:</span></span>
+
+![Send data to Azure storage account or event hub](./media/logic-apps-monitor-your-logic-apps/storage-account-event-hubs.png)
 
 > [!NOTE]
-> <span data-ttu-id="d3b05-119">All runtime details and events are encrypted at rest within the Logic App service.</span><span class="sxs-lookup"><span data-stu-id="d3b05-119">All runtime details and events are encrypted at rest within the Logic App service.</span></span> <span data-ttu-id="d3b05-120">They are only decrypted upon a view request from a user.</span><span class="sxs-lookup"><span data-stu-id="d3b05-120">They are only decrypted upon a view request from a user.</span></span> <span data-ttu-id="d3b05-121">Access to these events can also be controlled by Azure Role-Based Access Control (RBAC).</span><span class="sxs-lookup"><span data-stu-id="d3b05-121">Access to these events can also be controlled by Azure Role-Based Access Control (RBAC).</span></span>
+> <span data-ttu-id="4120f-203">Retention periods apply only when you choose to use a storage account.</span><span class="sxs-lookup"><span data-stu-id="4120f-203">Retention periods apply only when you choose to use a storage account.</span></span>
+
+<a name="add-azure-alerts"></a>
+
+## <a name="set-up-alerts-for-your-logic-app"></a><span data-ttu-id="4120f-204">Set up alerts for your logic app</span><span class="sxs-lookup"><span data-stu-id="4120f-204">Set up alerts for your logic app</span></span>
+
+<span data-ttu-id="4120f-205">To monitor specific metrics or exceeded thresholds for your logic app, set up [alerts in Azure](../monitoring-and-diagnostics/monitoring-overview-alerts.md).</span><span class="sxs-lookup"><span data-stu-id="4120f-205">To monitor specific metrics or exceeded thresholds for your logic app, set up [alerts in Azure](../monitoring-and-diagnostics/monitoring-overview-alerts.md).</span></span> <span data-ttu-id="4120f-206">Learn about [metrics in Azure](../monitoring-and-diagnostics/monitoring-overview-metrics.md).</span><span class="sxs-lookup"><span data-stu-id="4120f-206">Learn about [metrics in Azure](../monitoring-and-diagnostics/monitoring-overview-metrics.md).</span></span> 
+
+<span data-ttu-id="4120f-207">To set up alerts without [Azure Log Analytics](../log-analytics/log-analytics-overview.md), follow these steps.</span><span class="sxs-lookup"><span data-stu-id="4120f-207">To set up alerts without [Azure Log Analytics](../log-analytics/log-analytics-overview.md), follow these steps.</span></span> <span data-ttu-id="4120f-208">For more advanced alerts criteria and actions, [set up Log Analytics](#azure-diagnostics) too.</span><span class="sxs-lookup"><span data-stu-id="4120f-208">For more advanced alerts criteria and actions, [set up Log Analytics](#azure-diagnostics) too.</span></span>
+
+1. <span data-ttu-id="4120f-209">On the logic app blade menu, under **Monitoring**, choose **Diagnostics** > **Alert rules** > **Add alert** as shown here:</span><span class="sxs-lookup"><span data-stu-id="4120f-209">On the logic app blade menu, under **Monitoring**, choose **Diagnostics** > **Alert rules** > **Add alert** as shown here:</span></span>
+
+   ![Add an alert for your logic app](media/logic-apps-monitor-your-logic-apps/set-up-alerts.png)
+
+2. <span data-ttu-id="4120f-211">On the **Add an alert rule** blade, create your alert as shown:</span><span class="sxs-lookup"><span data-stu-id="4120f-211">On the **Add an alert rule** blade, create your alert as shown:</span></span>
+
+   1. <span data-ttu-id="4120f-212">Under **Resource**, select your logic app, if not already selected.</span><span class="sxs-lookup"><span data-stu-id="4120f-212">Under **Resource**, select your logic app, if not already selected.</span></span> 
+   2. <span data-ttu-id="4120f-213">Give a name and description for your alert.</span><span class="sxs-lookup"><span data-stu-id="4120f-213">Give a name and description for your alert.</span></span>
+   3. <span data-ttu-id="4120f-214">Select a **Metric** or event that you want to track.</span><span class="sxs-lookup"><span data-stu-id="4120f-214">Select a **Metric** or event that you want to track.</span></span>
+   4. <span data-ttu-id="4120f-215">Select a **Condition**, specify a **Threshold** for the metric, and select the **Period** for monitoring this metric.</span><span class="sxs-lookup"><span data-stu-id="4120f-215">Select a **Condition**, specify a **Threshold** for the metric, and select the **Period** for monitoring this metric.</span></span>
+   5. <span data-ttu-id="4120f-216">Select whether to send mail for the alert.</span><span class="sxs-lookup"><span data-stu-id="4120f-216">Select whether to send mail for the alert.</span></span> 
+   6. <span data-ttu-id="4120f-217">Specify any other email addresses for sending the alert.</span><span class="sxs-lookup"><span data-stu-id="4120f-217">Specify any other email addresses for sending the alert.</span></span> 
+   <span data-ttu-id="4120f-218">You can also specify a webhook URL where you want to send the alert.</span><span class="sxs-lookup"><span data-stu-id="4120f-218">You can also specify a webhook URL where you want to send the alert.</span></span>
+
+   <span data-ttu-id="4120f-219">For example, this rule sends an alert when five or more runs fail in an hour:</span><span class="sxs-lookup"><span data-stu-id="4120f-219">For example, this rule sends an alert when five or more runs fail in an hour:</span></span>
+
+   ![Create metric alert rule](media/logic-apps-monitor-your-logic-apps/create-alert-rule.png)
+
+> [!TIP]
+> <span data-ttu-id="4120f-221">To run a logic app from an alert, you can include the [request trigger](../connectors/connectors-native-reqres.md) in your workflow, which lets you perform tasks like these examples:</span><span class="sxs-lookup"><span data-stu-id="4120f-221">To run a logic app from an alert, you can include the [request trigger](../connectors/connectors-native-reqres.md) in your workflow, which lets you perform tasks like these examples:</span></span>
 > 
-> 
+> * [<span data-ttu-id="4120f-222">Post to Slack</span><span class="sxs-lookup"><span data-stu-id="4120f-222">Post to Slack</span></span>](https://github.com/Azure/azure-quickstart-templates/tree/master/201-alert-to-slack-with-logic-app)
+> * [<span data-ttu-id="4120f-223">Send a text</span><span class="sxs-lookup"><span data-stu-id="4120f-223">Send a text</span></span>](https://github.com/Azure/azure-quickstart-templates/tree/master/201-alert-to-text-message-with-logic-app)
+> * [<span data-ttu-id="4120f-224">Add a message to a queue</span><span class="sxs-lookup"><span data-stu-id="4120f-224">Add a message to a queue</span></span>](https://github.com/Azure/azure-quickstart-templates/tree/master/201-alert-to-queue-with-logic-app)
 
-### <a name="view-the-run-details"></a><span data-ttu-id="d3b05-122">View the run details</span><span class="sxs-lookup"><span data-stu-id="d3b05-122">View the run details</span></span>
-<span data-ttu-id="d3b05-123">This list of runs shows the **Status**, the **Start Time**, and the **Duration** of the particular run.</span><span class="sxs-lookup"><span data-stu-id="d3b05-123">This list of runs shows the **Status**, the **Start Time**, and the **Duration** of the particular run.</span></span> <span data-ttu-id="d3b05-124">Select any row to see details on that run.</span><span class="sxs-lookup"><span data-stu-id="d3b05-124">Select any row to see details on that run.</span></span>
+<a name="diagnostic-event-properties"></a>
 
-<span data-ttu-id="d3b05-125">The monitoring view shows you each step of the run, the inputs and outputs, and any error messages that may have occurre.</span><span class="sxs-lookup"><span data-stu-id="d3b05-125">The monitoring view shows you each step of the run, the inputs and outputs, and any error messages that may have occurre.</span></span>
+## <a name="azure-diagnostics-event-settings-and-details"></a><span data-ttu-id="4120f-225">Azure Diagnostics event settings and details</span><span class="sxs-lookup"><span data-stu-id="4120f-225">Azure Diagnostics event settings and details</span></span>
 
-![Run and Actions](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-monitor-your-logic-apps/monitor-view.png)
+<span data-ttu-id="4120f-226">Each diagnostic event has details about your logic app and that event, for example, the status, start time, end time, and so on.</span><span class="sxs-lookup"><span data-stu-id="4120f-226">Each diagnostic event has details about your logic app and that event, for example, the status, start time, end time, and so on.</span></span> <span data-ttu-id="4120f-227">To programmatically set up monitoring, tracking, and logging, you can use these details with the [REST API for Azure Logic Apps](https://docs.microsoft.com/rest/api/logic) and the [REST API for Azure Diagnostics](../monitoring-and-diagnostics/monitoring-supported-metrics.md#microsoftlogicworkflows).</span><span class="sxs-lookup"><span data-stu-id="4120f-227">To programmatically set up monitoring, tracking, and logging, you can use these details with the [REST API for Azure Logic Apps](https://docs.microsoft.com/rest/api/logic) and the [REST API for Azure Diagnostics](../monitoring-and-diagnostics/monitoring-supported-metrics.md#microsoftlogicworkflows).</span></span>
 
-<span data-ttu-id="d3b05-127">If you need any additional details like the run **Correlation ID** (that can be used for the REST API), you can click the **Run Details** button.</span><span class="sxs-lookup"><span data-stu-id="d3b05-127">If you need any additional details like the run **Correlation ID** (that can be used for the REST API), you can click the **Run Details** button.</span></span>  <span data-ttu-id="d3b05-128">This includes all steps, status, and inputs/outputs for the run.</span><span class="sxs-lookup"><span data-stu-id="d3b05-128">This includes all steps, status, and inputs/outputs for the run.</span></span>
+<span data-ttu-id="4120f-228">For example, the `ActionCompleted` event has the `clientTrackingId` and `trackedProperties` properties that you can use for tracking and monitoring:</span><span class="sxs-lookup"><span data-stu-id="4120f-228">For example, the `ActionCompleted` event has the `clientTrackingId` and `trackedProperties` properties that you can use for tracking and monitoring:</span></span>
 
-## <a name="azure-diagnostics-and-alerts"></a><span data-ttu-id="d3b05-129">Azure Diagnostics and alerts</span><span class="sxs-lookup"><span data-stu-id="d3b05-129">Azure Diagnostics and alerts</span></span>
-<span data-ttu-id="d3b05-130">In addition to the details provided by the Azure Portal and REST API above, you can configure your logic app to use Azure Diagnostics for more rich details and debugging.</span><span class="sxs-lookup"><span data-stu-id="d3b05-130">In addition to the details provided by the Azure Portal and REST API above, you can configure your logic app to use Azure Diagnostics for more rich details and debugging.</span></span>
-
-1. <span data-ttu-id="d3b05-131">Click the **Diagnostics** section of the logic app blade</span><span class="sxs-lookup"><span data-stu-id="d3b05-131">Click the **Diagnostics** section of the logic app blade</span></span>
-2. <span data-ttu-id="d3b05-132">Click to configure the **Diagnostic Settings**</span><span class="sxs-lookup"><span data-stu-id="d3b05-132">Click to configure the **Diagnostic Settings**</span></span>
-3. <span data-ttu-id="d3b05-133">Configure an Event Hub or Storage Account to emit data to</span><span class="sxs-lookup"><span data-stu-id="d3b05-133">Configure an Event Hub or Storage Account to emit data to</span></span>
-   
-    ![Azure Diagnostics settings](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-monitor-your-logic-apps/diagnostics.png)
-
-### <a name="adding-azure-alerts"></a><span data-ttu-id="d3b05-135">Adding Azure Alerts</span><span class="sxs-lookup"><span data-stu-id="d3b05-135">Adding Azure Alerts</span></span>
-<span data-ttu-id="d3b05-136">Once diagnostics are configured, you can add Azure Alerts to fire when certain thresholds are crossed.</span><span class="sxs-lookup"><span data-stu-id="d3b05-136">Once diagnostics are configured, you can add Azure Alerts to fire when certain thresholds are crossed.</span></span>  <span data-ttu-id="d3b05-137">In the **Diagnostics** blade, select the **Alerts** tile and **Add alert**.</span><span class="sxs-lookup"><span data-stu-id="d3b05-137">In the **Diagnostics** blade, select the **Alerts** tile and **Add alert**.</span></span>  <span data-ttu-id="d3b05-138">This will walk you through configuring an alert based on a number of thresholds and metrics.</span><span class="sxs-lookup"><span data-stu-id="d3b05-138">This will walk you through configuring an alert based on a number of thresholds and metrics.</span></span>
-
-![Azure Alert Metrics](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-monitor-your-logic-apps/alerts.png)
-
-<span data-ttu-id="d3b05-140">You can configure the **Condition**, **Threshold**, and **Period** as desired.</span><span class="sxs-lookup"><span data-stu-id="d3b05-140">You can configure the **Condition**, **Threshold**, and **Period** as desired.</span></span>  <span data-ttu-id="d3b05-141">Finally, you can configure an email address to send a notification to, or configure a webhook.</span><span class="sxs-lookup"><span data-stu-id="d3b05-141">Finally, you can configure an email address to send a notification to, or configure a webhook.</span></span>  <span data-ttu-id="d3b05-142">You can use the [request trigger](../connectors/connectors-native-reqres.md) in a logic app to run on an alert as well (to do things like [post to Slack](https://github.com/Azure/azure-quickstart-templates/tree/master/201-alert-to-slack-with-logic-app), [send a text](https://github.com/Azure/azure-quickstart-templates/tree/master/201-alert-to-text-message-with-logic-app), or [add a message to a queue](https://github.com/Azure/azure-quickstart-templates/tree/master/201-alert-to-queue-with-logic-app)).</span><span class="sxs-lookup"><span data-stu-id="d3b05-142">You can use the [request trigger](../connectors/connectors-native-reqres.md) in a logic app to run on an alert as well (to do things like [post to Slack](https://github.com/Azure/azure-quickstart-templates/tree/master/201-alert-to-slack-with-logic-app), [send a text](https://github.com/Azure/azure-quickstart-templates/tree/master/201-alert-to-text-message-with-logic-app), or [add a message to a queue](https://github.com/Azure/azure-quickstart-templates/tree/master/201-alert-to-queue-with-logic-app)).</span></span>
-
-### <a name="azure-diagnostics-settings"></a><span data-ttu-id="d3b05-143">Azure Diagnostics Settings</span><span class="sxs-lookup"><span data-stu-id="d3b05-143">Azure Diagnostics Settings</span></span>
-<span data-ttu-id="d3b05-144">Each of these events contains details about the logic app and event like status.</span><span class="sxs-lookup"><span data-stu-id="d3b05-144">Each of these events contains details about the logic app and event like status.</span></span>  <span data-ttu-id="d3b05-145">Here is an example of a *ActionCompleted* event:</span><span class="sxs-lookup"><span data-stu-id="d3b05-145">Here is an example of a *ActionCompleted* event:</span></span>
-
-```javascript
+``` json
 {
-            "time": "2016-07-09T17:09:54.4773148Z",
-            "workflowId": "/SUBSCRIPTIONS/80D4FE69-ABCD-EFGH-A938-9250F1C8AB03/RESOURCEGROUPS/MYRESOURCEGROUP/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/MYLOGICAPP",
-            "resourceId": "/SUBSCRIPTIONS/80D4FE69-ABCD-EFGH-A938-9250F1C8AB03/RESOURCEGROUPS/MYRESOURCEGROUP/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/MYLOGICAPP/RUNS/08587361146922712057/ACTIONS/HTTP",
-            "category": "WorkflowRuntime",
-            "level": "Information",
-            "operationName": "Microsoft.Logic/workflows/workflowActionCompleted",
-            "properties": {
-                "$schema": "2016-06-01",
-                "startTime": "2016-07-09T17:09:53.4336305Z",
-                "endTime": "2016-07-09T17:09:53.5430281Z",
-                "status": "Succeeded",
-                "code": "OK",
-                "resource": {
-                    "subscriptionId": "80d4fe69-ABCD-EFGH-a938-9250f1c8ab03",
-                    "resourceGroupName": "MyResourceGroup",
-                    "workflowId": "cff00d5458f944d5a766f2f9ad142553",
-                    "workflowName": "MyLogicApp",
-                    "runId": "08587361146922712057",
-                    "location": "eastus",
-                    "actionName": "Http"
-                },
-                "correlation": {
-                    "actionTrackingId": "e1931543-906d-4d1d-baed-dee72ddf1047",
-                    "clientTrackingId": "my-custom-tracking-id"
-                },
-                "trackedProperties": {
-                    "myProperty": "<value>"
-                }
-            }
-        }
-```
-
-<span data-ttu-id="d3b05-146">The two properties that are especially useful for tracking and monitoring are *clientTrackingId* and *trackedProperties*.</span><span class="sxs-lookup"><span data-stu-id="d3b05-146">The two properties that are especially useful for tracking and monitoring are *clientTrackingId* and *trackedProperties*.</span></span>  
-
-#### <a name="client-tracking-id"></a><span data-ttu-id="d3b05-147">Client tracking ID</span><span class="sxs-lookup"><span data-stu-id="d3b05-147">Client tracking ID</span></span>
-<span data-ttu-id="d3b05-148">The client tracking ID is a value that will correlate events across a logic app run, including any nested workflows called as a part of a logic app.</span><span class="sxs-lookup"><span data-stu-id="d3b05-148">The client tracking ID is a value that will correlate events across a logic app run, including any nested workflows called as a part of a logic app.</span></span>  <span data-ttu-id="d3b05-149">This ID will be auto-generated if not provided, but you can manually specify the client tracking ID from a trigger by passing a `x-ms-client-tracking-id` header with the ID value in the trigger request (request trigger, HTTP trigger, or webhook trigger).</span><span class="sxs-lookup"><span data-stu-id="d3b05-149">This ID will be auto-generated if not provided, but you can manually specify the client tracking ID from a trigger by passing a `x-ms-client-tracking-id` header with the ID value in the trigger request (request trigger, HTTP trigger, or webhook trigger).</span></span>
-
-#### <a name="tracked-properties"></a><span data-ttu-id="d3b05-150">Tracked properties</span><span class="sxs-lookup"><span data-stu-id="d3b05-150">Tracked properties</span></span>
-<span data-ttu-id="d3b05-151">Tracked properties can be added onto actions in the workflow definition to track inputs or outputs in diagnostics data.</span><span class="sxs-lookup"><span data-stu-id="d3b05-151">Tracked properties can be added onto actions in the workflow definition to track inputs or outputs in diagnostics data.</span></span>  <span data-ttu-id="d3b05-152">This can be useful if you wish to track data like an "order ID" in your telemetry.</span><span class="sxs-lookup"><span data-stu-id="d3b05-152">This can be useful if you wish to track data like an "order ID" in your telemetry.</span></span>  <span data-ttu-id="d3b05-153">To add a tracked property, include the `trackedProperties` property on an action.</span><span class="sxs-lookup"><span data-stu-id="d3b05-153">To add a tracked property, include the `trackedProperties` property on an action.</span></span>  <span data-ttu-id="d3b05-154">Tracked properties can only track a single actions inputs and outputs, but you can use the `correlation` properties of the events to correlate across actions in a run.</span><span class="sxs-lookup"><span data-stu-id="d3b05-154">Tracked properties can only track a single actions inputs and outputs, but you can use the `correlation` properties of the events to correlate across actions in a run.</span></span>
-
-```javascript
-{
-    "myAction": {
-        "type": "http",
-        "inputs": {
-            "uri": "http://uri",
-            "headers": {
-                "Content-Type": "application/json"
-            },
-            "body": "@triggerBody()"
+    "time": "2016-07-09T17:09:54.4773148Z",
+    "workflowId": "/SUBSCRIPTIONS/<subscription-ID>/RESOURCEGROUPS/MYRESOURCEGROUP/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/MYLOGICAPP",
+    "resourceId": "/SUBSCRIPTIONS/<subscription-ID>/RESOURCEGROUPS/MYRESOURCEGROUP/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/MYLOGICAPP/RUNS/08587361146922712057/ACTIONS/HTTP",
+    "category": "WorkflowRuntime",
+    "level": "Information",
+    "operationName": "Microsoft.Logic/workflows/workflowActionCompleted",
+    "properties": {
+        "$schema": "2016-06-01",
+        "startTime": "2016-07-09T17:09:53.4336305Z",
+        "endTime": "2016-07-09T17:09:53.5430281Z",
+        "status": "Succeeded",
+        "code": "OK",
+        "resource": {
+            "subscriptionId": "<subscription-ID>",
+            "resourceGroupName": "MyResourceGroup",
+            "workflowId": "cff00d5458f944d5a766f2f9ad142553",
+            "workflowName": "MyLogicApp",
+            "runId": "08587361146922712057",
+            "location": "westus",
+            "actionName": "Http"
         },
-        "trackedProperties":{
-            "myActionHTTPStatusCode": "@action()['outputs']['statusCode']",
-            "myActionHTTPValue": "@action()['outputs']['body']['foo']",
-            "transactionId": "@action()['inputs']['body']['bar']"
+        "correlation": {
+            "actionTrackingId": "e1931543-906d-4d1d-baed-dee72ddf1047",
+            "clientTrackingId": "<my-custom-tracking-ID>"
+        },
+        "trackedProperties": {
+            "myTrackedProperty": "<value>"
         }
     }
 }
 ```
 
-### <a name="extending-your-solutions"></a><span data-ttu-id="d3b05-155">Extending your solutions</span><span class="sxs-lookup"><span data-stu-id="d3b05-155">Extending your solutions</span></span>
-<span data-ttu-id="d3b05-156">You can leverage this telemetry from the Event Hub or Storage into other services like [Operations Management Suite](https://www.microsoft.com/cloud-platform/operations-management-suite), [Azure Stream Analytics](https://azure.microsoft.com/services/stream-analytics/), and [Power BI](https://powerbi.com) to have real time monitoring of your integration workflows.</span><span class="sxs-lookup"><span data-stu-id="d3b05-156">You can leverage this telemetry from the Event Hub or Storage into other services like [Operations Management Suite](https://www.microsoft.com/cloud-platform/operations-management-suite), [Azure Stream Analytics](https://azure.microsoft.com/services/stream-analytics/), and [Power BI](https://powerbi.com) to have real time monitoring of your integration workflows.</span></span>
+* <span data-ttu-id="4120f-229">`clientTrackingId`: If not provided, Azure automatically generates this ID and correlates events across a logic app run, including any nested workflows that are called from the logic app.</span><span class="sxs-lookup"><span data-stu-id="4120f-229">`clientTrackingId`: If not provided, Azure automatically generates this ID and correlates events across a logic app run, including any nested workflows that are called from the logic app.</span></span> <span data-ttu-id="4120f-230">You can manually specify this ID from a trigger by passing a `x-ms-client-tracking-id` header with your custom ID value in the trigger request.</span><span class="sxs-lookup"><span data-stu-id="4120f-230">You can manually specify this ID from a trigger by passing a `x-ms-client-tracking-id` header with your custom ID value in the trigger request.</span></span> <span data-ttu-id="4120f-231">You can use a request trigger, HTTP trigger, or webhook trigger.</span><span class="sxs-lookup"><span data-stu-id="4120f-231">You can use a request trigger, HTTP trigger, or webhook trigger.</span></span>
 
-## <a name="next-steps"></a><span data-ttu-id="d3b05-157">Next Steps</span><span class="sxs-lookup"><span data-stu-id="d3b05-157">Next Steps</span></span>
-* [<span data-ttu-id="d3b05-158">Common examples and scenarios for logic apps</span><span class="sxs-lookup"><span data-stu-id="d3b05-158">Common examples and scenarios for logic apps</span></span>](../logic-apps/logic-apps-examples-and-scenarios.md)
-* [<span data-ttu-id="d3b05-159">Creating a Logic App Deployment Template</span><span class="sxs-lookup"><span data-stu-id="d3b05-159">Creating a Logic App Deployment Template</span></span>](../logic-apps/logic-apps-create-deploy-template.md)
-* [<span data-ttu-id="d3b05-160">Enterprise integration features</span><span class="sxs-lookup"><span data-stu-id="d3b05-160">Enterprise integration features</span></span>](../logic-apps/logic-apps-enterprise-integration-overview.md)
+* <span data-ttu-id="4120f-232">`trackedProperties`: To track inputs or outputs in diagnostics data, you can add tracked properties to actions in your logic app's JSON definition.</span><span class="sxs-lookup"><span data-stu-id="4120f-232">`trackedProperties`: To track inputs or outputs in diagnostics data, you can add tracked properties to actions in your logic app's JSON definition.</span></span> <span data-ttu-id="4120f-233">Tracked properties can track only a single action's inputs and outputs, but you can use the `correlation` properties of events to correlate across actions in a run.</span><span class="sxs-lookup"><span data-stu-id="4120f-233">Tracked properties can track only a single action's inputs and outputs, but you can use the `correlation` properties of events to correlate across actions in a run.</span></span>
 
+  <span data-ttu-id="4120f-234">To track one or more properties, add the `trackedProperties` section and the properties you want to the action definition.</span><span class="sxs-lookup"><span data-stu-id="4120f-234">To track one or more properties, add the `trackedProperties` section and the properties you want to the action definition.</span></span> <span data-ttu-id="4120f-235">For example, suppose you want to track data like an "order ID" in your telemetry:</span><span class="sxs-lookup"><span data-stu-id="4120f-235">For example, suppose you want to track data like an "order ID" in your telemetry:</span></span>
 
+  ``` json
+  "myAction": {
+    "type": "http",
+    "inputs": {
+        "uri": "http://uri",
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "body": "@triggerBody()"
+    },
+    "trackedProperties": {
+        "myActionHTTPStatusCode": "@action()['outputs']['statusCode']",
+        "myActionHTTPValue": "@action()['outputs']['body']['<content>']",
+        "transactionId": "@action()['inputs']['body']['<content>']"
+    }
+  }
+  ```
 
+## <a name="next-steps"></a><span data-ttu-id="4120f-236">Next steps</span><span class="sxs-lookup"><span data-stu-id="4120f-236">Next steps</span></span>
 
-
+* [<span data-ttu-id="4120f-237">Create templates for logic app deployment and release management</span><span class="sxs-lookup"><span data-stu-id="4120f-237">Create templates for logic app deployment and release management</span></span>](../logic-apps/logic-apps-create-deploy-template.md)
+* [<span data-ttu-id="4120f-238">B2B scenarios with Enterprise Integration Pack</span><span class="sxs-lookup"><span data-stu-id="4120f-238">B2B scenarios with Enterprise Integration Pack</span></span>](../logic-apps/logic-apps-enterprise-integration-overview.md)
+* [<span data-ttu-id="4120f-239">Monitor B2B messages</span><span class="sxs-lookup"><span data-stu-id="4120f-239">Monitor B2B messages</span></span>](../logic-apps/logic-apps-monitor-b2b-message.md)

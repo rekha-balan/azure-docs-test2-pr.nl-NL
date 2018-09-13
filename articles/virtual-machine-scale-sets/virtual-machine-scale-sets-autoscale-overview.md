@@ -1,10 +1,10 @@
 ---
-title: Automatic scaling and virtual machine scale sets | Microsoft Docs
-description: Learn about using diagnostics and autoscale resources to automatically scale virtual machines in a scale set.
+title: Overview of autoscale with Azure virtual machine scale sets | Microsoft Docs
+description: Learn about the different ways that you can automatically scale an Azure virtual machine scale set based on performance or on a fixed schedule
 services: virtual-machine-scale-sets
 documentationcenter: ''
-author: Thraka
-manager: timlt
+author: cynthn
+manager: jeconnoc
 editor: ''
 tags: azure-resource-manager
 ms.assetid: d29a3385-179e-4331-a315-daa7ea5701df
@@ -13,217 +13,137 @@ ms.workload: infrastructure-services
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 10/18/2016
-ms.author: adegeo
+ms.date: 05/29/2018
+ms.author: cynthn
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: cd797ecdb46dfa23ee129e8b55e41749712cc4a8
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 48e64f0cc65ade870425f73989209e8bef8ec8d5
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44554995"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44810263"
 ---
-# <a name="how-to-use-automatic-scaling-and-virtual-machine-scale-sets"></a><span data-ttu-id="5eef4-103">How to use automatic scaling and Virtual Machine Scale Sets</span><span class="sxs-lookup"><span data-stu-id="5eef4-103">How to use automatic scaling and Virtual Machine Scale Sets</span></span>
-<span data-ttu-id="5eef4-104">Automatic scaling of virtual machines in a scale set is the creation or deletion of machines in the set as needed to match performance requirements.</span><span class="sxs-lookup"><span data-stu-id="5eef4-104">Automatic scaling of virtual machines in a scale set is the creation or deletion of machines in the set as needed to match performance requirements.</span></span> <span data-ttu-id="5eef4-105">As the volume of work grows, an application may require additional resources to enable it to effectively perform tasks.</span><span class="sxs-lookup"><span data-stu-id="5eef4-105">As the volume of work grows, an application may require additional resources to enable it to effectively perform tasks.</span></span>
-
-<span data-ttu-id="5eef4-106">Automatic scaling is an automated process that helps ease management overhead.</span><span class="sxs-lookup"><span data-stu-id="5eef4-106">Automatic scaling is an automated process that helps ease management overhead.</span></span> <span data-ttu-id="5eef4-107">By reducing overhead, you don't need to continually monitor system performance or decide how to manage resources.</span><span class="sxs-lookup"><span data-stu-id="5eef4-107">By reducing overhead, you don't need to continually monitor system performance or decide how to manage resources.</span></span> <span data-ttu-id="5eef4-108">Scaling is an elastic process.</span><span class="sxs-lookup"><span data-stu-id="5eef4-108">Scaling is an elastic process.</span></span> <span data-ttu-id="5eef4-109">More resources can be added as the load increases, but as demand decreases resources can be removed to minimize costs and maintain performance levels.</span><span class="sxs-lookup"><span data-stu-id="5eef4-109">More resources can be added as the load increases, but as demand decreases resources can be removed to minimize costs and maintain performance levels.</span></span>
-
-<span data-ttu-id="5eef4-110">Set up automatic scaling on a scale set by using an Azure Resource Manager template, Azure PowerShell, Azure CLI, or the Azure portal.</span><span class="sxs-lookup"><span data-stu-id="5eef4-110">Set up automatic scaling on a scale set by using an Azure Resource Manager template, Azure PowerShell, Azure CLI, or the Azure portal.</span></span>
-
-## <a name="set-up-scaling-by-using-resource-manager-templates"></a><span data-ttu-id="5eef4-111">Set up scaling by using Resource Manager templates</span><span class="sxs-lookup"><span data-stu-id="5eef4-111">Set up scaling by using Resource Manager templates</span></span>
-<span data-ttu-id="5eef4-112">Rather than deploying and managing each resource of your application separately, use a template that deploys all resources in a single, coordinated operation.</span><span class="sxs-lookup"><span data-stu-id="5eef4-112">Rather than deploying and managing each resource of your application separately, use a template that deploys all resources in a single, coordinated operation.</span></span> <span data-ttu-id="5eef4-113">In the template, application resources are defined and deployment parameters are specified for different environments.</span><span class="sxs-lookup"><span data-stu-id="5eef4-113">In the template, application resources are defined and deployment parameters are specified for different environments.</span></span> <span data-ttu-id="5eef4-114">The template consists of JSON and expressions that you can use to construct values for your deployment.</span><span class="sxs-lookup"><span data-stu-id="5eef4-114">The template consists of JSON and expressions that you can use to construct values for your deployment.</span></span> <span data-ttu-id="5eef4-115">To learn more, look at [Authoring Azure Resource Manager templates](../azure-resource-manager/resource-group-authoring-templates.md).</span><span class="sxs-lookup"><span data-stu-id="5eef4-115">To learn more, look at [Authoring Azure Resource Manager templates](../azure-resource-manager/resource-group-authoring-templates.md).</span></span>
-
-<span data-ttu-id="5eef4-116">In the template, you specify the capacity element:</span><span class="sxs-lookup"><span data-stu-id="5eef4-116">In the template, you specify the capacity element:</span></span>
-
-    "sku": {
-      "name": "Standard_A0",
-      "tier": "Standard",
-      "capacity": 3
-    },
-
-<span data-ttu-id="5eef4-117">Capacity identifies the number of virtual machines in the set.</span><span class="sxs-lookup"><span data-stu-id="5eef4-117">Capacity identifies the number of virtual machines in the set.</span></span> <span data-ttu-id="5eef4-118">You can manually change the capacity by deploying a template with a different value.</span><span class="sxs-lookup"><span data-stu-id="5eef4-118">You can manually change the capacity by deploying a template with a different value.</span></span> <span data-ttu-id="5eef4-119">If you are deploying a template to only change the capacity, you can include only the SKU element with the updated capacity.</span><span class="sxs-lookup"><span data-stu-id="5eef4-119">If you are deploying a template to only change the capacity, you can include only the SKU element with the updated capacity.</span></span>
-
-<span data-ttu-id="5eef4-120">Automatically change the capacity of your scale set by using the combination of the autoscaleSettings resource and the diagnostics extension.</span><span class="sxs-lookup"><span data-stu-id="5eef4-120">Automatically change the capacity of your scale set by using the combination of the autoscaleSettings resource and the diagnostics extension.</span></span>
-
-### <a name="configure-the-azure-diagnostics-extension"></a><span data-ttu-id="5eef4-121">Configure the Azure Diagnostics extension</span><span class="sxs-lookup"><span data-stu-id="5eef4-121">Configure the Azure Diagnostics extension</span></span>
-<span data-ttu-id="5eef4-122">Automatic scaling can only be done if metrics collection is successful on each virtual machine in the scale set.</span><span class="sxs-lookup"><span data-stu-id="5eef4-122">Automatic scaling can only be done if metrics collection is successful on each virtual machine in the scale set.</span></span> <span data-ttu-id="5eef4-123">The Azure Diagnostics Extension provides the monitoring and diagnostics capabilities that meets the metrics collection needs of the autoscale resource.</span><span class="sxs-lookup"><span data-stu-id="5eef4-123">The Azure Diagnostics Extension provides the monitoring and diagnostics capabilities that meets the metrics collection needs of the autoscale resource.</span></span> <span data-ttu-id="5eef4-124">You can install the extension as part of the Resource Manager template.</span><span class="sxs-lookup"><span data-stu-id="5eef4-124">You can install the extension as part of the Resource Manager template.</span></span>
-
-<span data-ttu-id="5eef4-125">This example shows the variables that are used in the template to configure the diagnostics extension:</span><span class="sxs-lookup"><span data-stu-id="5eef4-125">This example shows the variables that are used in the template to configure the diagnostics extension:</span></span>
-
-    "diagnosticsStorageAccountName": "[concat(parameters('resourcePrefix'), 'saa')]",
-    "accountid": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/', resourceGroup().name,'/providers/', 'Microsoft.Storage/storageAccounts/', variables('diagnosticsStorageAccountName'))]",
-    "wadlogs": "<WadCfg> <DiagnosticMonitorConfiguration overallQuotaInMB=\"4096\" xmlns=\"http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration\"> <DiagnosticInfrastructureLogs scheduledTransferLogLevelFilter=\"Error\"/> <WindowsEventLog scheduledTransferPeriod=\"PT1M\" > <DataSource name=\"Application!*[System[(Level = 1 or Level = 2)]]\" /> <DataSource name=\"Security!*[System[(Level = 1 or Level = 2)]]\" /> <DataSource name=\"System!*[System[(Level = 1 or Level = 2)]]\" /></WindowsEventLog>",
-    "wadperfcounter": "<PerformanceCounters scheduledTransferPeriod=\"PT1M\"><PerformanceCounterConfiguration counterSpecifier=\"\\Processor(_Total)\\Thread Count\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"Thread Count\" locale=\"en-us\"/></PerformanceCounterConfiguration></PerformanceCounters>",
-    "wadcfgxstart": "[concat(variables('wadlogs'),variables('wadperfcounter'),'<Metrics resourceId=\"')]",
-    "wadmetricsresourceid": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/',resourceGroup().name ,'/providers/','Microsoft.Compute/virtualMachineScaleSets/',parameters('vmssName'))]",
-    "wadcfgxend": "[concat('\"><MetricAggregation scheduledTransferPeriod=\"PT1H\"/><MetricAggregation scheduledTransferPeriod=\"PT1M\"/></Metrics></DiagnosticMonitorConfiguration></WadCfg>')]"
-
-<span data-ttu-id="5eef4-126">Parameters are provided when the template is deployed.</span><span class="sxs-lookup"><span data-stu-id="5eef4-126">Parameters are provided when the template is deployed.</span></span> <span data-ttu-id="5eef4-127">In this example, the name of the storage account where data is stored and the name of the scale set from which data is collected are provided.</span><span class="sxs-lookup"><span data-stu-id="5eef4-127">In this example, the name of the storage account where data is stored and the name of the scale set from which data is collected are provided.</span></span> <span data-ttu-id="5eef4-128">Also in this Windows Server example, only the Thread Count performance counter is collected.</span><span class="sxs-lookup"><span data-stu-id="5eef4-128">Also in this Windows Server example, only the Thread Count performance counter is collected.</span></span> <span data-ttu-id="5eef4-129">All the available performance counters in Windows or Linux can be used to collect diagnostics information and can be included in the extension configuration.</span><span class="sxs-lookup"><span data-stu-id="5eef4-129">All the available performance counters in Windows or Linux can be used to collect diagnostics information and can be included in the extension configuration.</span></span>
-
-<span data-ttu-id="5eef4-130">This example shows the definition of the extension in the template:</span><span class="sxs-lookup"><span data-stu-id="5eef4-130">This example shows the definition of the extension in the template:</span></span>
-
-    "extensionProfile": {
-      "extensions": [
-        {
-          "name": "Microsoft.Insights.VMDiagnosticsSettings",
-          "properties": {
-            "publisher": "Microsoft.Azure.Diagnostics",
-            "type": "IaaSDiagnostics",
-            "typeHandlerVersion": "1.5",
-            "autoUpgradeMinorVersion": true,
-            "settings": {
-              "xmlCfg": "[base64(concat(variables('wadcfgxstart'),variables('wadmetricsresourceid'),variables('wadcfgxend')))]",
-              "storageAccount": "[variables('diagnosticsStorageAccountName')]"
-            },
-            "protectedSettings": {
-              "storageAccountName": "[variables('diagnosticsStorageAccountName')]",
-              "storageAccountKey": "[listkeys(variables('accountid'), variables('apiVersion')).key1]",
-              "storageAccountEndPoint": "https://core.windows.net"
-            }
-          }
-        }
-      ]
-    }
-
-<span data-ttu-id="5eef4-131">When the diagnostics extension runs, the data is collected in a table that is located in the storage account that you specify.</span><span class="sxs-lookup"><span data-stu-id="5eef4-131">When the diagnostics extension runs, the data is collected in a table that is located in the storage account that you specify.</span></span> <span data-ttu-id="5eef4-132">In the WADPerformanceCounters table, you can find the collected data:</span><span class="sxs-lookup"><span data-stu-id="5eef4-132">In the WADPerformanceCounters table, you can find the collected data:</span></span>
-
-![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machine-scale-sets/media/virtual-machine-scale-sets-autoscale-overview/ThreadCountBefore2.png)
-
-### <a name="configure-the-autoscalesettings-resource"></a><span data-ttu-id="5eef4-133">Configure the autoScaleSettings resource</span><span class="sxs-lookup"><span data-stu-id="5eef4-133">Configure the autoScaleSettings resource</span></span>
-<span data-ttu-id="5eef4-134">The autoscaleSettings resource uses the information from the diagnostics extension to decide whether to increase or decrease the number of virtual machines in the scale set.</span><span class="sxs-lookup"><span data-stu-id="5eef4-134">The autoscaleSettings resource uses the information from the diagnostics extension to decide whether to increase or decrease the number of virtual machines in the scale set.</span></span>
-
-<span data-ttu-id="5eef4-135">This example shows the configuration of the resource in the template:</span><span class="sxs-lookup"><span data-stu-id="5eef4-135">This example shows the configuration of the resource in the template:</span></span>
-
-    {
-      "type": "Microsoft.Insights/autoscaleSettings",
-      "apiVersion": "2015-04-01",
-      "name": "[concat(parameters('resourcePrefix'),'as1')]",
-      "location": "[resourceGroup().location]",
-      "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachineScaleSets/',parameters('vmSSName'))]"
-      ],
-      "properties": {
-        "enabled": true,
-        "name": "[concat(parameters('resourcePrefix'),'as1')]",
-        "profiles": [
-          {
-            "name": "Profile1",
-            "capacity": {
-              "minimum": "1",
-              "maximum": "10",
-              "default": "1"
-            },
-            "rules": [
-              {
-                "metricTrigger": {
-                  "metricName": "\\Process(_Total)\\Thread Count",
-                  "metricNamespace": "",
-                  "metricResourceUri": "[concat('/subscriptions/',subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Compute/virtualMachineScaleSets/', parameters('vmSSName'))]",
-                  "timeGrain": "PT1M",
-                  "statistic": "Average",
-                  "timeWindow": "PT5M",
-                  "timeAggregation": "Average",
-                  "operator": "GreaterThan",
-                  "threshold": 650
-                },
-                "scaleAction": {
-                  "direction": "Increase",
-                  "type": "ChangeCount",
-                  "value": "1",
-                  "cooldown": "PT5M"
-                }
-              },
-              {
-                "metricTrigger": {
-                  "metricName": "\\Process(_Total)\\Thread Count",
-                  "metricNamespace": "",
-                  "metricResourceUri": "[concat('/subscriptions/',subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Compute/virtualMachineScaleSets/', parameters('vmSSName'))]",
-                  "timeGrain": "PT1M",
-                  "statistic": "Average",
-                  "timeWindow": "PT5M",
-                  "timeAggregation": "Average",
-                  "operator": "LessThan",
-                  "threshold": 550
-                },
-                "scaleAction": {
-                  "direction": "Decrease",
-                  "type": "ChangeCount",
-                  "value": "1",
-                  "cooldown": "PT5M"
-                }
-              }
-            ]
-          }
-        ],
-        "targetResourceUri": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Compute/virtualMachineScaleSets/', parameters('vmSSName'))]"
-      }
-    }
-
-<span data-ttu-id="5eef4-136">In the example above, two rules are created for defining the automatic scaling actions.</span><span class="sxs-lookup"><span data-stu-id="5eef4-136">In the example above, two rules are created for defining the automatic scaling actions.</span></span> <span data-ttu-id="5eef4-137">The first rule defines the scale-out action and the second rule defines the scale-in action.</span><span class="sxs-lookup"><span data-stu-id="5eef4-137">The first rule defines the scale-out action and the second rule defines the scale-in action.</span></span> <span data-ttu-id="5eef4-138">These values are provided in the rules:</span><span class="sxs-lookup"><span data-stu-id="5eef4-138">These values are provided in the rules:</span></span>
-
-* <span data-ttu-id="5eef4-139">**metricName** - This value is the same as the performance counter that you defined in the wadperfcounter variable for the diagnostics extension.</span><span class="sxs-lookup"><span data-stu-id="5eef4-139">**metricName** - This value is the same as the performance counter that you defined in the wadperfcounter variable for the diagnostics extension.</span></span> <span data-ttu-id="5eef4-140">In the example above, the Thread Count counter is used.</span><span class="sxs-lookup"><span data-stu-id="5eef4-140">In the example above, the Thread Count counter is used.</span></span>  
-* <span data-ttu-id="5eef4-141">**metricResourceUri** - This value is the resource identifier of the virtual machine scale set.</span><span class="sxs-lookup"><span data-stu-id="5eef4-141">**metricResourceUri** - This value is the resource identifier of the virtual machine scale set.</span></span> <span data-ttu-id="5eef4-142">This identifier contains the name of the resource group, the name of the resource provider, and the name of the scale set to scale.</span><span class="sxs-lookup"><span data-stu-id="5eef4-142">This identifier contains the name of the resource group, the name of the resource provider, and the name of the scale set to scale.</span></span>
-* <span data-ttu-id="5eef4-143">**timeGrain** – This value is the granularity of the metrics that are collected.</span><span class="sxs-lookup"><span data-stu-id="5eef4-143">**timeGrain** – This value is the granularity of the metrics that are collected.</span></span> <span data-ttu-id="5eef4-144">In the preceding example, data is collected on an interval of one minute.</span><span class="sxs-lookup"><span data-stu-id="5eef4-144">In the preceding example, data is collected on an interval of one minute.</span></span> <span data-ttu-id="5eef4-145">This value is used with timeWindow.</span><span class="sxs-lookup"><span data-stu-id="5eef4-145">This value is used with timeWindow.</span></span>
-* <span data-ttu-id="5eef4-146">**statistic** – This value determines how the metrics are combined to accommodate the automatic scaling action.</span><span class="sxs-lookup"><span data-stu-id="5eef4-146">**statistic** – This value determines how the metrics are combined to accommodate the automatic scaling action.</span></span> <span data-ttu-id="5eef4-147">The possible values are: Average, Min, Max.</span><span class="sxs-lookup"><span data-stu-id="5eef4-147">The possible values are: Average, Min, Max.</span></span>
-* <span data-ttu-id="5eef4-148">**timeWindow** – This value is the range of time in which instance data is collected.</span><span class="sxs-lookup"><span data-stu-id="5eef4-148">**timeWindow** – This value is the range of time in which instance data is collected.</span></span> <span data-ttu-id="5eef4-149">It must be between 5 minutes and 12 hours.</span><span class="sxs-lookup"><span data-stu-id="5eef4-149">It must be between 5 minutes and 12 hours.</span></span>
-* <span data-ttu-id="5eef4-150">**timeAggregation** –This value determines how the data that is collected should be combined over time.</span><span class="sxs-lookup"><span data-stu-id="5eef4-150">**timeAggregation** –This value determines how the data that is collected should be combined over time.</span></span> <span data-ttu-id="5eef4-151">The default value is Average.</span><span class="sxs-lookup"><span data-stu-id="5eef4-151">The default value is Average.</span></span> <span data-ttu-id="5eef4-152">The possible values are: Average, Minimum, Maximum, Last, Total, Count.</span><span class="sxs-lookup"><span data-stu-id="5eef4-152">The possible values are: Average, Minimum, Maximum, Last, Total, Count.</span></span>
-* <span data-ttu-id="5eef4-153">**operator** – This value is the operator that is used to compare the metric data and the threshold.</span><span class="sxs-lookup"><span data-stu-id="5eef4-153">**operator** – This value is the operator that is used to compare the metric data and the threshold.</span></span> <span data-ttu-id="5eef4-154">The possible values are: Equals, NotEquals, GreaterThan, GreaterThanOrEqual, LessThan, LessThanOrEqual.</span><span class="sxs-lookup"><span data-stu-id="5eef4-154">The possible values are: Equals, NotEquals, GreaterThan, GreaterThanOrEqual, LessThan, LessThanOrEqual.</span></span>
-* <span data-ttu-id="5eef4-155">**threshold** – This value is the value that triggers the scale action.</span><span class="sxs-lookup"><span data-stu-id="5eef4-155">**threshold** – This value is the value that triggers the scale action.</span></span> <span data-ttu-id="5eef4-156">Be sure to provide a sufficient difference between the threshold for the scale-out action and the threshold for the scale-in action.</span><span class="sxs-lookup"><span data-stu-id="5eef4-156">Be sure to provide a sufficient difference between the threshold for the scale-out action and the threshold for the scale-in action.</span></span> <span data-ttu-id="5eef4-157">If you set the values to be the same, the system anticipates constant change, which prevents it from implementing a scaling action.</span><span class="sxs-lookup"><span data-stu-id="5eef4-157">If you set the values to be the same, the system anticipates constant change, which prevents it from implementing a scaling action.</span></span> <span data-ttu-id="5eef4-158">For example, setting both to 600 threads in the preceding example doesn't work.</span><span class="sxs-lookup"><span data-stu-id="5eef4-158">For example, setting both to 600 threads in the preceding example doesn't work.</span></span>
-* <span data-ttu-id="5eef4-159">**direction** – This value determines the action that is taken when the threshold value is achieved.</span><span class="sxs-lookup"><span data-stu-id="5eef4-159">**direction** – This value determines the action that is taken when the threshold value is achieved.</span></span> <span data-ttu-id="5eef4-160">The possible values are Increase or Decrease.</span><span class="sxs-lookup"><span data-stu-id="5eef4-160">The possible values are Increase or Decrease.</span></span>
-* <span data-ttu-id="5eef4-161">**type** – This value is the type of action that should occur and must be set to ChangeCount.</span><span class="sxs-lookup"><span data-stu-id="5eef4-161">**type** – This value is the type of action that should occur and must be set to ChangeCount.</span></span>
-* <span data-ttu-id="5eef4-162">**value** – This value is the number of virtual machines that are added to or removed from the scale set.</span><span class="sxs-lookup"><span data-stu-id="5eef4-162">**value** – This value is the number of virtual machines that are added to or removed from the scale set.</span></span> <span data-ttu-id="5eef4-163">This value must be 1 or greater.</span><span class="sxs-lookup"><span data-stu-id="5eef4-163">This value must be 1 or greater.</span></span>
-* <span data-ttu-id="5eef4-164">**cooldown** – This value is the amount of time to wait since the last scaling action before the next action occurs.</span><span class="sxs-lookup"><span data-stu-id="5eef4-164">**cooldown** – This value is the amount of time to wait since the last scaling action before the next action occurs.</span></span> <span data-ttu-id="5eef4-165">This value must be between one minute and one week.</span><span class="sxs-lookup"><span data-stu-id="5eef4-165">This value must be between one minute and one week.</span></span>
-
-<span data-ttu-id="5eef4-166">Depending on the performance counter you are using, some of the elements in the template configuration are used differently.</span><span class="sxs-lookup"><span data-stu-id="5eef4-166">Depending on the performance counter you are using, some of the elements in the template configuration are used differently.</span></span> <span data-ttu-id="5eef4-167">In the preceding example, the performance counter is Thread Count, the threshold value is 650 for a scale-out action, and the threshold value is 550 for the scale-in action.</span><span class="sxs-lookup"><span data-stu-id="5eef4-167">In the preceding example, the performance counter is Thread Count, the threshold value is 650 for a scale-out action, and the threshold value is 550 for the scale-in action.</span></span> <span data-ttu-id="5eef4-168">If you use a counter such as %Processor Time, the threshold value is set to the percentage of CPU usage that determines a scaling action.</span><span class="sxs-lookup"><span data-stu-id="5eef4-168">If you use a counter such as %Processor Time, the threshold value is set to the percentage of CPU usage that determines a scaling action.</span></span>
-
-<span data-ttu-id="5eef4-169">When a load is created on the virtual machines that triggers a scaling action, the capacity of the set is increased based on the value in the template.</span><span class="sxs-lookup"><span data-stu-id="5eef4-169">When a load is created on the virtual machines that triggers a scaling action, the capacity of the set is increased based on the value in the template.</span></span> <span data-ttu-id="5eef4-170">For example, in a scale set where the capacity is set to 3 and the scale action value is set to 1:</span><span class="sxs-lookup"><span data-stu-id="5eef4-170">For example, in a scale set where the capacity is set to 3 and the scale action value is set to 1:</span></span>
-
-![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machine-scale-sets/media/virtual-machine-scale-sets-autoscale-overview/ResourceExplorerBefore.png)
-
-<span data-ttu-id="5eef4-171">When the load is created that causes the average thread count to go above the threshold of 650:</span><span class="sxs-lookup"><span data-stu-id="5eef4-171">When the load is created that causes the average thread count to go above the threshold of 650:</span></span>
-
-![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machine-scale-sets/media/virtual-machine-scale-sets-autoscale-overview/ThreadCountAfter.png)
-
-<span data-ttu-id="5eef4-172">A scale-out action is triggered that causes the capacity of the set to be increased by one:</span><span class="sxs-lookup"><span data-stu-id="5eef4-172">A scale-out action is triggered that causes the capacity of the set to be increased by one:</span></span>
-
-    "sku": {
-      "name": "Standard_A0",
-      "tier": "Standard",
-      "capacity": 4
-    },
-
-<span data-ttu-id="5eef4-173">And a virtual machine is added to the scale set:</span><span class="sxs-lookup"><span data-stu-id="5eef4-173">And a virtual machine is added to the scale set:</span></span>
-
-![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machine-scale-sets/media/virtual-machine-scale-sets-autoscale-overview/ResourceExplorerAfter.png)
-
-<span data-ttu-id="5eef4-174">After a cooldown period of five minutes, if the average number of threads on the machines stays over 600, another machine is added to the set.</span><span class="sxs-lookup"><span data-stu-id="5eef4-174">After a cooldown period of five minutes, if the average number of threads on the machines stays over 600, another machine is added to the set.</span></span> <span data-ttu-id="5eef4-175">If the average thread count stays below 550, the capacity of the scale set is reduced by one and a machine is removed from the set.</span><span class="sxs-lookup"><span data-stu-id="5eef4-175">If the average thread count stays below 550, the capacity of the scale set is reduced by one and a machine is removed from the set.</span></span>
-
-## <a name="set-up-scaling-using-azure-powershell"></a><span data-ttu-id="5eef4-176">Set up scaling using Azure PowerShell</span><span class="sxs-lookup"><span data-stu-id="5eef4-176">Set up scaling using Azure PowerShell</span></span>
-<span data-ttu-id="5eef4-177">To see examples of using PowerShell to set up autoscaling, look at [Azure Monitor PowerShell quick start samples](../monitoring-and-diagnostics/insights-powershell-samples.md).</span><span class="sxs-lookup"><span data-stu-id="5eef4-177">To see examples of using PowerShell to set up autoscaling, look at [Azure Monitor PowerShell quick start samples](../monitoring-and-diagnostics/insights-powershell-samples.md).</span></span>
-
-## <a name="set-up-scaling-using-azure-cli"></a><span data-ttu-id="5eef4-178">Set up scaling using Azure CLI</span><span class="sxs-lookup"><span data-stu-id="5eef4-178">Set up scaling using Azure CLI</span></span>
-<span data-ttu-id="5eef4-179">To see examples of using Azure CLI to set up autoscaling, look at [Azure Monitor Cross-platform CLI quick start samples](../monitoring-and-diagnostics/insights-cli-samples.md).</span><span class="sxs-lookup"><span data-stu-id="5eef4-179">To see examples of using Azure CLI to set up autoscaling, look at [Azure Monitor Cross-platform CLI quick start samples](../monitoring-and-diagnostics/insights-cli-samples.md).</span></span>
-
-## <a name="set-up-scaling-using-the-azure-portal"></a><span data-ttu-id="5eef4-180">Set up scaling using the Azure portal</span><span class="sxs-lookup"><span data-stu-id="5eef4-180">Set up scaling using the Azure portal</span></span>
-<span data-ttu-id="5eef4-181">To see an example of using the Azure portal to set up autoscaling, look at [Create a Virtual Machine Scale Set using the Azure portal](virtual-machine-scale-sets-portal-create.md).</span><span class="sxs-lookup"><span data-stu-id="5eef4-181">To see an example of using the Azure portal to set up autoscaling, look at [Create a Virtual Machine Scale Set using the Azure portal](virtual-machine-scale-sets-portal-create.md).</span></span>
-
-## <a name="investigate-scaling-actions"></a><span data-ttu-id="5eef4-182">Investigate scaling actions</span><span class="sxs-lookup"><span data-stu-id="5eef4-182">Investigate scaling actions</span></span>
-* <span data-ttu-id="5eef4-183">Azure portal - You can currently get a limited amount of information using the portal.</span><span class="sxs-lookup"><span data-stu-id="5eef4-183">Azure portal - You can currently get a limited amount of information using the portal.</span></span>
-* <span data-ttu-id="5eef4-184">Azure Resource Explorer - This tool is the best for exploring the current state of your scale set.</span><span class="sxs-lookup"><span data-stu-id="5eef4-184">Azure Resource Explorer - This tool is the best for exploring the current state of your scale set.</span></span> <span data-ttu-id="5eef4-185">Follow this path and you should see the instance view of the scale set that you created: Subscriptions > {your subscription} > resourceGroups > {your resource group} > providers > Microsoft.Compute > virtualMachineScaleSets > {your scale set} > virtualMachines</span><span class="sxs-lookup"><span data-stu-id="5eef4-185">Follow this path and you should see the instance view of the scale set that you created: Subscriptions > {your subscription} > resourceGroups > {your resource group} > providers > Microsoft.Compute > virtualMachineScaleSets > {your scale set} > virtualMachines</span></span>
-* <span data-ttu-id="5eef4-186">Azure PowerShell - Use this command to get some information:</span><span class="sxs-lookup"><span data-stu-id="5eef4-186">Azure PowerShell - Use this command to get some information:</span></span>
-  
-        Get-AzureRmResource -name vmsstest1 -ResourceGroupName vmsstestrg1 -ResourceType Microsoft.Compute/virtualMachineScaleSets -ApiVersion 2015-06-15
-        Get-Autoscalesetting -ResourceGroup rainvmss -DetailedOutput
-* <span data-ttu-id="5eef4-187">Connect to the jumpbox virtual machine just like you would any other machine and then you can remotely access the virtual machines in the scale set to monitor individual processes.</span><span class="sxs-lookup"><span data-stu-id="5eef4-187">Connect to the jumpbox virtual machine just like you would any other machine and then you can remotely access the virtual machines in the scale set to monitor individual processes.</span></span>
-
-## <a name="next-steps"></a><span data-ttu-id="5eef4-188">Next Steps</span><span class="sxs-lookup"><span data-stu-id="5eef4-188">Next Steps</span></span>
-* <span data-ttu-id="5eef4-189">Look at [Automatically scale machines in a Virtual Machine Scale Set](virtual-machine-scale-sets-windows-autoscale.md) to see an example of how to create a scale set with automatic scaling configured.</span><span class="sxs-lookup"><span data-stu-id="5eef4-189">Look at [Automatically scale machines in a Virtual Machine Scale Set](virtual-machine-scale-sets-windows-autoscale.md) to see an example of how to create a scale set with automatic scaling configured.</span></span>
-* <span data-ttu-id="5eef4-190">Find examples of Azure Monitor monitoring features in [Azure Monitor PowerShell quick start samples](../monitoring-and-diagnostics/insights-powershell-samples.md)</span><span class="sxs-lookup"><span data-stu-id="5eef4-190">Find examples of Azure Monitor monitoring features in [Azure Monitor PowerShell quick start samples](../monitoring-and-diagnostics/insights-powershell-samples.md)</span></span>
-* <span data-ttu-id="5eef4-191">Learn about notification features in [Use autoscale actions to send email and webhook alert notifications in Azure Monitor](../monitoring-and-diagnostics/insights-autoscale-to-webhook-email.md).</span><span class="sxs-lookup"><span data-stu-id="5eef4-191">Learn about notification features in [Use autoscale actions to send email and webhook alert notifications in Azure Monitor](../monitoring-and-diagnostics/insights-autoscale-to-webhook-email.md).</span></span>
-* <span data-ttu-id="5eef4-192">Learn about how to [Use audit logs to send email and webhook alert notifications in Azure Monitor](../monitoring-and-diagnostics/insights-auditlog-to-webhook-email.md)</span><span class="sxs-lookup"><span data-stu-id="5eef4-192">Learn about how to [Use audit logs to send email and webhook alert notifications in Azure Monitor](../monitoring-and-diagnostics/insights-auditlog-to-webhook-email.md)</span></span>
-* <span data-ttu-id="5eef4-193">Learn about [advanced autoscale scenarios](virtual-machine-scale-sets-advanced-autoscale.md).</span><span class="sxs-lookup"><span data-stu-id="5eef4-193">Learn about [advanced autoscale scenarios](virtual-machine-scale-sets-advanced-autoscale.md).</span></span>
+# <a name="overview-of-autoscale-with-azure-virtual-machine-scale-sets"></a><span data-ttu-id="684f0-103">Overview of autoscale with Azure virtual machine scale sets</span><span class="sxs-lookup"><span data-stu-id="684f0-103">Overview of autoscale with Azure virtual machine scale sets</span></span>
+<span data-ttu-id="684f0-104">An Azure virtual machine scale set can automatically increase or decrease the number of VM instances that run your application.</span><span class="sxs-lookup"><span data-stu-id="684f0-104">An Azure virtual machine scale set can automatically increase or decrease the number of VM instances that run your application.</span></span> <span data-ttu-id="684f0-105">This automated and elastic behavior reduces the management overhead to monitor and optimize the performance of your application.</span><span class="sxs-lookup"><span data-stu-id="684f0-105">This automated and elastic behavior reduces the management overhead to monitor and optimize the performance of your application.</span></span> <span data-ttu-id="684f0-106">You create rules that define the acceptable performance for a positive customer experience.</span><span class="sxs-lookup"><span data-stu-id="684f0-106">You create rules that define the acceptable performance for a positive customer experience.</span></span> <span data-ttu-id="684f0-107">When those defined thresholds are met, autoscale rules take action to adjust the capacity of your scale set.</span><span class="sxs-lookup"><span data-stu-id="684f0-107">When those defined thresholds are met, autoscale rules take action to adjust the capacity of your scale set.</span></span> <span data-ttu-id="684f0-108">You can also schedule events to automatically increase or decrease the capacity of your scale set at fixed times.</span><span class="sxs-lookup"><span data-stu-id="684f0-108">You can also schedule events to automatically increase or decrease the capacity of your scale set at fixed times.</span></span> <span data-ttu-id="684f0-109">This article provides an overview of which performance metrics are available and what actions autoscale can perform.</span><span class="sxs-lookup"><span data-stu-id="684f0-109">This article provides an overview of which performance metrics are available and what actions autoscale can perform.</span></span>
 
 
+## <a name="benefits-of-autoscale"></a><span data-ttu-id="684f0-110">Benefits of autoscale</span><span class="sxs-lookup"><span data-stu-id="684f0-110">Benefits of autoscale</span></span>
+<span data-ttu-id="684f0-111">If your application demand increases, the load on the VM instances in your scale set increases.</span><span class="sxs-lookup"><span data-stu-id="684f0-111">If your application demand increases, the load on the VM instances in your scale set increases.</span></span> <span data-ttu-id="684f0-112">If this increased load is consistent, rather than just a brief demand, you can configure autoscale rules to increase the number of VM instances in the scale set.</span><span class="sxs-lookup"><span data-stu-id="684f0-112">If this increased load is consistent, rather than just a brief demand, you can configure autoscale rules to increase the number of VM instances in the scale set.</span></span>
+
+<span data-ttu-id="684f0-113">When these VM instances are created and your applications are deployed, the scale set starts to distribute traffic to them through the load balancer.</span><span class="sxs-lookup"><span data-stu-id="684f0-113">When these VM instances are created and your applications are deployed, the scale set starts to distribute traffic to them through the load balancer.</span></span> <span data-ttu-id="684f0-114">You control what metrics to monitor, such as CPU or memory, how long the application load must meet a given threshold, and how many VM instances to add to the scale set.</span><span class="sxs-lookup"><span data-stu-id="684f0-114">You control what metrics to monitor, such as CPU or memory, how long the application load must meet a given threshold, and how many VM instances to add to the scale set.</span></span>
+
+<span data-ttu-id="684f0-115">On an evening or weekend, your application demand may decrease.</span><span class="sxs-lookup"><span data-stu-id="684f0-115">On an evening or weekend, your application demand may decrease.</span></span> <span data-ttu-id="684f0-116">If this decreased load is consistent over a period of time, you can configure autoscale rules to decrease the number of VM instances in the scale set.</span><span class="sxs-lookup"><span data-stu-id="684f0-116">If this decreased load is consistent over a period of time, you can configure autoscale rules to decrease the number of VM instances in the scale set.</span></span> <span data-ttu-id="684f0-117">This scale-in action reduces the cost to run your scale set as you only run the number of instances required to meet the current demand.</span><span class="sxs-lookup"><span data-stu-id="684f0-117">This scale-in action reduces the cost to run your scale set as you only run the number of instances required to meet the current demand.</span></span>
 
 
+## <a name="use-host-based-metrics"></a><span data-ttu-id="684f0-118">Use host-based metrics</span><span class="sxs-lookup"><span data-stu-id="684f0-118">Use host-based metrics</span></span>
+<span data-ttu-id="684f0-119">You can create autoscale rules that built-in host metrics available from your VM instances.</span><span class="sxs-lookup"><span data-stu-id="684f0-119">You can create autoscale rules that built-in host metrics available from your VM instances.</span></span> <span data-ttu-id="684f0-120">Host metrics give you visibility into the performance of the VM instances in a scale set without the need to install or configure additional agents and data collections.</span><span class="sxs-lookup"><span data-stu-id="684f0-120">Host metrics give you visibility into the performance of the VM instances in a scale set without the need to install or configure additional agents and data collections.</span></span> <span data-ttu-id="684f0-121">Autoscale rules that use these metrics can scale out or in the number of VM instances in response to CPU usage, memory demand, or disk access.</span><span class="sxs-lookup"><span data-stu-id="684f0-121">Autoscale rules that use these metrics can scale out or in the number of VM instances in response to CPU usage, memory demand, or disk access.</span></span>
 
+<span data-ttu-id="684f0-122">Autoscale rules that use host-based metrics can be created with one of the following tools:</span><span class="sxs-lookup"><span data-stu-id="684f0-122">Autoscale rules that use host-based metrics can be created with one of the following tools:</span></span>
+
+- [<span data-ttu-id="684f0-123">Azure portal</span><span class="sxs-lookup"><span data-stu-id="684f0-123">Azure portal</span></span>](virtual-machine-scale-sets-autoscale-portal.md)
+- [<span data-ttu-id="684f0-124">Azure PowerShell</span><span class="sxs-lookup"><span data-stu-id="684f0-124">Azure PowerShell</span></span>](tutorial-autoscale-powershell.md)
+- [<span data-ttu-id="684f0-125">Azure CLI 2.0</span><span class="sxs-lookup"><span data-stu-id="684f0-125">Azure CLI 2.0</span></span>](tutorial-autoscale-cli.md)
+- [<span data-ttu-id="684f0-126">Azure template</span><span class="sxs-lookup"><span data-stu-id="684f0-126">Azure template</span></span>](tutorial-autoscale-template.md)
+
+<span data-ttu-id="684f0-127">To create autoscale rules that use more detailed performance metrics, you can [install and configure the Azure diagnostics extension](#in-guest-vm-metrics-with-the-azure-diagnostics-extension) on VM instances, or [configure your application use App Insights](#application-level-metrics-with-app-insights).</span><span class="sxs-lookup"><span data-stu-id="684f0-127">To create autoscale rules that use more detailed performance metrics, you can [install and configure the Azure diagnostics extension](#in-guest-vm-metrics-with-the-azure-diagnostics-extension) on VM instances, or [configure your application use App Insights](#application-level-metrics-with-app-insights).</span></span>
+
+<span data-ttu-id="684f0-128">Autoscale rules that use host-based metrics, in-guest VM metrics with the Azure diagnostic extension, and App Insights can use the following configuration settings.</span><span class="sxs-lookup"><span data-stu-id="684f0-128">Autoscale rules that use host-based metrics, in-guest VM metrics with the Azure diagnostic extension, and App Insights can use the following configuration settings.</span></span>
+
+### <a name="metric-sources"></a><span data-ttu-id="684f0-129">Metric sources</span><span class="sxs-lookup"><span data-stu-id="684f0-129">Metric sources</span></span>
+<span data-ttu-id="684f0-130">Autoscale rules can use metrics from one of the following sources:</span><span class="sxs-lookup"><span data-stu-id="684f0-130">Autoscale rules can use metrics from one of the following sources:</span></span>
+
+| <span data-ttu-id="684f0-131">Metric source</span><span class="sxs-lookup"><span data-stu-id="684f0-131">Metric source</span></span>        | <span data-ttu-id="684f0-132">Use case</span><span class="sxs-lookup"><span data-stu-id="684f0-132">Use case</span></span>                                                                                                                     |
+|----------------------|------------------------------------------------------------------------------------------------------------------------------|
+| <span data-ttu-id="684f0-133">Current scale set</span><span class="sxs-lookup"><span data-stu-id="684f0-133">Current scale set</span></span>    | <span data-ttu-id="684f0-134">For host-based metrics that do not require additional agents to be installed or configured.</span><span class="sxs-lookup"><span data-stu-id="684f0-134">For host-based metrics that do not require additional agents to be installed or configured.</span></span>                                  |
+| <span data-ttu-id="684f0-135">Storage account</span><span class="sxs-lookup"><span data-stu-id="684f0-135">Storage account</span></span>      | <span data-ttu-id="684f0-136">The Azure diagnostic extension writes performance metrics to Azure storage that is then consumed to trigger autoscale rules.</span><span class="sxs-lookup"><span data-stu-id="684f0-136">The Azure diagnostic extension writes performance metrics to Azure storage that is then consumed to trigger autoscale rules.</span></span> |
+| <span data-ttu-id="684f0-137">Service Bus Queue</span><span class="sxs-lookup"><span data-stu-id="684f0-137">Service Bus Queue</span></span>    | <span data-ttu-id="684f0-138">Your application or other components can transmit messages on an Azure Service Bus queue to trigger rules.</span><span class="sxs-lookup"><span data-stu-id="684f0-138">Your application or other components can transmit messages on an Azure Service Bus queue to trigger rules.</span></span>                   |
+| <span data-ttu-id="684f0-139">Application Insights</span><span class="sxs-lookup"><span data-stu-id="684f0-139">Application Insights</span></span> | <span data-ttu-id="684f0-140">An instrumentation package installed in your application that streams metrics directly from the app.</span><span class="sxs-lookup"><span data-stu-id="684f0-140">An instrumentation package installed in your application that streams metrics directly from the app.</span></span>                         |
+
+
+### <a name="autoscale-rule-criteria"></a><span data-ttu-id="684f0-141">Autoscale rule criteria</span><span class="sxs-lookup"><span data-stu-id="684f0-141">Autoscale rule criteria</span></span>
+<span data-ttu-id="684f0-142">The following host-based metrics are available for use when you create autoscale rules.</span><span class="sxs-lookup"><span data-stu-id="684f0-142">The following host-based metrics are available for use when you create autoscale rules.</span></span> <span data-ttu-id="684f0-143">If you use the Azure diagnostic extension or App Insights, you define which metrics to monitor and use with autoscale rules.</span><span class="sxs-lookup"><span data-stu-id="684f0-143">If you use the Azure diagnostic extension or App Insights, you define which metrics to monitor and use with autoscale rules.</span></span>
+
+| <span data-ttu-id="684f0-144">Metric name</span><span class="sxs-lookup"><span data-stu-id="684f0-144">Metric name</span></span>               |
+|---------------------------|
+| <span data-ttu-id="684f0-145">Percentage CPU</span><span class="sxs-lookup"><span data-stu-id="684f0-145">Percentage CPU</span></span>            |
+| <span data-ttu-id="684f0-146">Network In</span><span class="sxs-lookup"><span data-stu-id="684f0-146">Network In</span></span>                |
+| <span data-ttu-id="684f0-147">Network Out</span><span class="sxs-lookup"><span data-stu-id="684f0-147">Network Out</span></span>               |
+| <span data-ttu-id="684f0-148">Disk Read Bytes</span><span class="sxs-lookup"><span data-stu-id="684f0-148">Disk Read Bytes</span></span>           |
+| <span data-ttu-id="684f0-149">Disk Write Bytes</span><span class="sxs-lookup"><span data-stu-id="684f0-149">Disk Write Bytes</span></span>          |
+| <span data-ttu-id="684f0-150">Disk Read Operations/Sec</span><span class="sxs-lookup"><span data-stu-id="684f0-150">Disk Read Operations/Sec</span></span>  |
+| <span data-ttu-id="684f0-151">Disk Write Operations/Sec</span><span class="sxs-lookup"><span data-stu-id="684f0-151">Disk Write Operations/Sec</span></span> |
+| <span data-ttu-id="684f0-152">CPU Credits Remaining</span><span class="sxs-lookup"><span data-stu-id="684f0-152">CPU Credits Remaining</span></span>     |
+| <span data-ttu-id="684f0-153">CPU Credits Consumed</span><span class="sxs-lookup"><span data-stu-id="684f0-153">CPU Credits Consumed</span></span>      |
+
+<span data-ttu-id="684f0-154">When you create autoscale rules to monitor a given metric, the rules look at one of the following metrics aggregation actions:</span><span class="sxs-lookup"><span data-stu-id="684f0-154">When you create autoscale rules to monitor a given metric, the rules look at one of the following metrics aggregation actions:</span></span>
+
+| <span data-ttu-id="684f0-155">Aggregation type</span><span class="sxs-lookup"><span data-stu-id="684f0-155">Aggregation type</span></span> |
+|------------------|
+| <span data-ttu-id="684f0-156">Average</span><span class="sxs-lookup"><span data-stu-id="684f0-156">Average</span></span>          |
+| <span data-ttu-id="684f0-157">Minimum</span><span class="sxs-lookup"><span data-stu-id="684f0-157">Minimum</span></span>          |
+| <span data-ttu-id="684f0-158">Maximum</span><span class="sxs-lookup"><span data-stu-id="684f0-158">Maximum</span></span>          |
+| <span data-ttu-id="684f0-159">Total</span><span class="sxs-lookup"><span data-stu-id="684f0-159">Total</span></span>            |
+| <span data-ttu-id="684f0-160">Last</span><span class="sxs-lookup"><span data-stu-id="684f0-160">Last</span></span>             |
+| <span data-ttu-id="684f0-161">Count</span><span class="sxs-lookup"><span data-stu-id="684f0-161">Count</span></span>            |
+
+<span data-ttu-id="684f0-162">The autoscale rules are then triggered when the metrics are compared against your defined threshold with one of the following operators:</span><span class="sxs-lookup"><span data-stu-id="684f0-162">The autoscale rules are then triggered when the metrics are compared against your defined threshold with one of the following operators:</span></span>
+
+| <span data-ttu-id="684f0-163">Operator</span><span class="sxs-lookup"><span data-stu-id="684f0-163">Operator</span></span>                 |
+|--------------------------|
+| <span data-ttu-id="684f0-164">Greater than</span><span class="sxs-lookup"><span data-stu-id="684f0-164">Greater than</span></span>             |
+| <span data-ttu-id="684f0-165">Greater than or equal to</span><span class="sxs-lookup"><span data-stu-id="684f0-165">Greater than or equal to</span></span> |
+| <span data-ttu-id="684f0-166">Less than</span><span class="sxs-lookup"><span data-stu-id="684f0-166">Less than</span></span>                |
+| <span data-ttu-id="684f0-167">Less than or equal to</span><span class="sxs-lookup"><span data-stu-id="684f0-167">Less than or equal to</span></span>    |
+| <span data-ttu-id="684f0-168">Equal to</span><span class="sxs-lookup"><span data-stu-id="684f0-168">Equal to</span></span>                 |
+| <span data-ttu-id="684f0-169">Not equal to</span><span class="sxs-lookup"><span data-stu-id="684f0-169">Not equal to</span></span>             |
+
+
+### <a name="actions-when-rules-trigger"></a><span data-ttu-id="684f0-170">Actions when rules trigger</span><span class="sxs-lookup"><span data-stu-id="684f0-170">Actions when rules trigger</span></span>
+<span data-ttu-id="684f0-171">When an autoscale rule triggers, your scale set can automatically scale in one of the following ways:</span><span class="sxs-lookup"><span data-stu-id="684f0-171">When an autoscale rule triggers, your scale set can automatically scale in one of the following ways:</span></span>
+
+| <span data-ttu-id="684f0-172">Scale operation</span><span class="sxs-lookup"><span data-stu-id="684f0-172">Scale operation</span></span>     | <span data-ttu-id="684f0-173">Use case</span><span class="sxs-lookup"><span data-stu-id="684f0-173">Use case</span></span>                                                                                                                               |
+|---------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| <span data-ttu-id="684f0-174">Increase count by</span><span class="sxs-lookup"><span data-stu-id="684f0-174">Increase count by</span></span>   | <span data-ttu-id="684f0-175">A fixed number of VM instances to create.</span><span class="sxs-lookup"><span data-stu-id="684f0-175">A fixed number of VM instances to create.</span></span> <span data-ttu-id="684f0-176">Useful in scale sets with a smaller number of VMs.</span><span class="sxs-lookup"><span data-stu-id="684f0-176">Useful in scale sets with a smaller number of VMs.</span></span>                                           |
+| <span data-ttu-id="684f0-177">Increase percent by</span><span class="sxs-lookup"><span data-stu-id="684f0-177">Increase percent by</span></span> | <span data-ttu-id="684f0-178">A percentage-based increase of VM instances.</span><span class="sxs-lookup"><span data-stu-id="684f0-178">A percentage-based increase of VM instances.</span></span> <span data-ttu-id="684f0-179">Good for larger scale sets where a fixed increase may not noticeably improve performance.</span><span class="sxs-lookup"><span data-stu-id="684f0-179">Good for larger scale sets where a fixed increase may not noticeably improve performance.</span></span> |
+| <span data-ttu-id="684f0-180">Increase count to</span><span class="sxs-lookup"><span data-stu-id="684f0-180">Increase count to</span></span>   | <span data-ttu-id="684f0-181">Create as many VM instances are required to reach a desired maximum amount.</span><span class="sxs-lookup"><span data-stu-id="684f0-181">Create as many VM instances are required to reach a desired maximum amount.</span></span>                                                            |
+| <span data-ttu-id="684f0-182">Decrease count to</span><span class="sxs-lookup"><span data-stu-id="684f0-182">Decrease count to</span></span>   | <span data-ttu-id="684f0-183">A fixed number of VM instances to remove.</span><span class="sxs-lookup"><span data-stu-id="684f0-183">A fixed number of VM instances to remove.</span></span> <span data-ttu-id="684f0-184">Useful in scale sets with a smaller number of VMs.</span><span class="sxs-lookup"><span data-stu-id="684f0-184">Useful in scale sets with a smaller number of VMs.</span></span>                                           |
+| <span data-ttu-id="684f0-185">Decrease percent by</span><span class="sxs-lookup"><span data-stu-id="684f0-185">Decrease percent by</span></span> | <span data-ttu-id="684f0-186">A percentage-based decrease of VM instances.</span><span class="sxs-lookup"><span data-stu-id="684f0-186">A percentage-based decrease of VM instances.</span></span> <span data-ttu-id="684f0-187">Good for larger scale sets where a fixed increase may not noticeably reduce resource consumption and costs.</span><span class="sxs-lookup"><span data-stu-id="684f0-187">Good for larger scale sets where a fixed increase may not noticeably reduce resource consumption and costs.</span></span> |
+| <span data-ttu-id="684f0-188">Decrease count to</span><span class="sxs-lookup"><span data-stu-id="684f0-188">Decrease count to</span></span>   | <span data-ttu-id="684f0-189">Remove as many VM instances are required to reach a desired minimum amount.</span><span class="sxs-lookup"><span data-stu-id="684f0-189">Remove as many VM instances are required to reach a desired minimum amount.</span></span>                                                            |
+
+
+## <a name="in-guest-vm-metrics-with-the-azure-diagnostics-extension"></a><span data-ttu-id="684f0-190">In-guest VM metrics with the Azure diagnostics extension</span><span class="sxs-lookup"><span data-stu-id="684f0-190">In-guest VM metrics with the Azure diagnostics extension</span></span>
+<span data-ttu-id="684f0-191">The Azure diagnostics extension is an agent that runs inside a VM instance.</span><span class="sxs-lookup"><span data-stu-id="684f0-191">The Azure diagnostics extension is an agent that runs inside a VM instance.</span></span> <span data-ttu-id="684f0-192">The agent monitors and saves performance metrics to Azure storage.</span><span class="sxs-lookup"><span data-stu-id="684f0-192">The agent monitors and saves performance metrics to Azure storage.</span></span> <span data-ttu-id="684f0-193">These performance metrics contain more detailed information about the status of the VM, such as *AverageReadTime* for disks or *PercentIdleTime* for CPU.</span><span class="sxs-lookup"><span data-stu-id="684f0-193">These performance metrics contain more detailed information about the status of the VM, such as *AverageReadTime* for disks or *PercentIdleTime* for CPU.</span></span> <span data-ttu-id="684f0-194">You can create autoscale rules based on a more detailed awareness of the VM performance, not just the percentage of CPU usage or memory consumption.</span><span class="sxs-lookup"><span data-stu-id="684f0-194">You can create autoscale rules based on a more detailed awareness of the VM performance, not just the percentage of CPU usage or memory consumption.</span></span>
+
+<span data-ttu-id="684f0-195">To use the Azure diagnostics extension, you must create Azure storage accounts for your VM instances, install the Azure diagnostics agent, then configure the VMs to stream specific performance counters to the storage account.</span><span class="sxs-lookup"><span data-stu-id="684f0-195">To use the Azure diagnostics extension, you must create Azure storage accounts for your VM instances, install the Azure diagnostics agent, then configure the VMs to stream specific performance counters to the storage account.</span></span>
+
+<span data-ttu-id="684f0-196">For more information, see the articles for how to enable the Azure diagnostics extension on a [Linux VM](../virtual-machines/extensions/diagnostics-linux.md) or [Windows VM](../virtual-machines/extensions/diagnostics-windows.md).</span><span class="sxs-lookup"><span data-stu-id="684f0-196">For more information, see the articles for how to enable the Azure diagnostics extension on a [Linux VM](../virtual-machines/extensions/diagnostics-linux.md) or [Windows VM](../virtual-machines/extensions/diagnostics-windows.md).</span></span>
+
+
+## <a name="application-level-metrics-with-app-insights"></a><span data-ttu-id="684f0-197">Application-level metrics with App Insights</span><span class="sxs-lookup"><span data-stu-id="684f0-197">Application-level metrics with App Insights</span></span>
+<span data-ttu-id="684f0-198">To gain more visibility in to the performance of your applications, you can use Application Insights.</span><span class="sxs-lookup"><span data-stu-id="684f0-198">To gain more visibility in to the performance of your applications, you can use Application Insights.</span></span> <span data-ttu-id="684f0-199">You install a small instrumentation package in your application that monitors the app and sends telemetry to Azure.</span><span class="sxs-lookup"><span data-stu-id="684f0-199">You install a small instrumentation package in your application that monitors the app and sends telemetry to Azure.</span></span> <span data-ttu-id="684f0-200">You can monitor metrics such as the response times of your application, the page load performance, and the session counts.</span><span class="sxs-lookup"><span data-stu-id="684f0-200">You can monitor metrics such as the response times of your application, the page load performance, and the session counts.</span></span> <span data-ttu-id="684f0-201">These application metrics can be used to create autoscale rules at a granular and embedded level as you trigger rules based on actionable insights that may impact the customer experience.</span><span class="sxs-lookup"><span data-stu-id="684f0-201">These application metrics can be used to create autoscale rules at a granular and embedded level as you trigger rules based on actionable insights that may impact the customer experience.</span></span>
+
+<span data-ttu-id="684f0-202">For more information about App Insights, see [What is Application Insights](../application-insights/app-insights-overview.md).</span><span class="sxs-lookup"><span data-stu-id="684f0-202">For more information about App Insights, see [What is Application Insights](../application-insights/app-insights-overview.md).</span></span>
+
+
+## <a name="scheduled-autoscale"></a><span data-ttu-id="684f0-203">Scheduled autoscale</span><span class="sxs-lookup"><span data-stu-id="684f0-203">Scheduled autoscale</span></span>
+<span data-ttu-id="684f0-204">You can also create autoscale rules based on schedules.</span><span class="sxs-lookup"><span data-stu-id="684f0-204">You can also create autoscale rules based on schedules.</span></span> <span data-ttu-id="684f0-205">These schedule-based rules allow you to automatically scale the number of VM instances at fixed times.</span><span class="sxs-lookup"><span data-stu-id="684f0-205">These schedule-based rules allow you to automatically scale the number of VM instances at fixed times.</span></span> <span data-ttu-id="684f0-206">With performance-based rules, there may be a performance impact on the application before the autoscale rules trigger and the new VM instances are provisioned.</span><span class="sxs-lookup"><span data-stu-id="684f0-206">With performance-based rules, there may be a performance impact on the application before the autoscale rules trigger and the new VM instances are provisioned.</span></span> <span data-ttu-id="684f0-207">If you can anticipate such demand, the additional VM instances are provisioned and ready for the additional customer use and application demand.</span><span class="sxs-lookup"><span data-stu-id="684f0-207">If you can anticipate such demand, the additional VM instances are provisioned and ready for the additional customer use and application demand.</span></span>
+
+<span data-ttu-id="684f0-208">The following examples are scenarios that may benefit the use of schedule-based autoscale rules:</span><span class="sxs-lookup"><span data-stu-id="684f0-208">The following examples are scenarios that may benefit the use of schedule-based autoscale rules:</span></span>
+
+- <span data-ttu-id="684f0-209">Automatically scale out the number of VM instances at the start of the work day when customer demand increases.</span><span class="sxs-lookup"><span data-stu-id="684f0-209">Automatically scale out the number of VM instances at the start of the work day when customer demand increases.</span></span> <span data-ttu-id="684f0-210">At the end of the work day, automatically scale in the number of VM instances to minimize resource costs overnight when application use is low.</span><span class="sxs-lookup"><span data-stu-id="684f0-210">At the end of the work day, automatically scale in the number of VM instances to minimize resource costs overnight when application use is low.</span></span>
+- <span data-ttu-id="684f0-211">If a department uses an application heavily at certain parts of the month or fiscal cycle, automatically scale the number of VM instances to accommodate their additional demands.</span><span class="sxs-lookup"><span data-stu-id="684f0-211">If a department uses an application heavily at certain parts of the month or fiscal cycle, automatically scale the number of VM instances to accommodate their additional demands.</span></span>
+- <span data-ttu-id="684f0-212">When there is a marketing event, promotion, or holiday sale, you can automatically scale the number of VM instances ahead of anticipated customer demand.</span><span class="sxs-lookup"><span data-stu-id="684f0-212">When there is a marketing event, promotion, or holiday sale, you can automatically scale the number of VM instances ahead of anticipated customer demand.</span></span> 
+
+
+## <a name="next-steps"></a><span data-ttu-id="684f0-213">Next steps</span><span class="sxs-lookup"><span data-stu-id="684f0-213">Next steps</span></span>
+<span data-ttu-id="684f0-214">You can create autoscale rules that use host-based metrics with one of the following tools:</span><span class="sxs-lookup"><span data-stu-id="684f0-214">You can create autoscale rules that use host-based metrics with one of the following tools:</span></span>
+
+- [<span data-ttu-id="684f0-215">Azure PowerShell</span><span class="sxs-lookup"><span data-stu-id="684f0-215">Azure PowerShell</span></span>](tutorial-autoscale-powershell.md)
+- [<span data-ttu-id="684f0-216">Azure CLI 2.0</span><span class="sxs-lookup"><span data-stu-id="684f0-216">Azure CLI 2.0</span></span>](tutorial-autoscale-cli.md)
+- [<span data-ttu-id="684f0-217">Azure template</span><span class="sxs-lookup"><span data-stu-id="684f0-217">Azure template</span></span>](tutorial-autoscale-template.md)
+
+<span data-ttu-id="684f0-218">This overview detailed how to use autoscale rules to scale horizontally and increase or decrease the *number* of VM instances in your scale set.</span><span class="sxs-lookup"><span data-stu-id="684f0-218">This overview detailed how to use autoscale rules to scale horizontally and increase or decrease the *number* of VM instances in your scale set.</span></span> <span data-ttu-id="684f0-219">You can also scale vertically to increase or decrease the VM instance *size*.</span><span class="sxs-lookup"><span data-stu-id="684f0-219">You can also scale vertically to increase or decrease the VM instance *size*.</span></span> <span data-ttu-id="684f0-220">For more information, see [Vertical autoscale with Virtual Machine Scale sets](virtual-machine-scale-sets-vertical-scale-reprovision.md).</span><span class="sxs-lookup"><span data-stu-id="684f0-220">For more information, see [Vertical autoscale with Virtual Machine Scale sets](virtual-machine-scale-sets-vertical-scale-reprovision.md).</span></span>
+
+<span data-ttu-id="684f0-221">For information on how to manage your VM instances, see [Manage virtual machine scale sets with Azure PowerShell](virtual-machine-scale-sets-windows-manage.md).</span><span class="sxs-lookup"><span data-stu-id="684f0-221">For information on how to manage your VM instances, see [Manage virtual machine scale sets with Azure PowerShell](virtual-machine-scale-sets-windows-manage.md).</span></span>
+
+<span data-ttu-id="684f0-222">To learn how to generate alerts when your autoscale rules trigger, see [Use autoscale actions to send email and webhook alert notifications in Azure Monitor](../monitoring-and-diagnostics/insights-autoscale-to-webhook-email.md).</span><span class="sxs-lookup"><span data-stu-id="684f0-222">To learn how to generate alerts when your autoscale rules trigger, see [Use autoscale actions to send email and webhook alert notifications in Azure Monitor](../monitoring-and-diagnostics/insights-autoscale-to-webhook-email.md).</span></span> <span data-ttu-id="684f0-223">You can also [Use audit logs to send email and webhook alert notifications in Azure Monitor](../monitoring-and-diagnostics/insights-auditlog-to-webhook-email.md).</span><span class="sxs-lookup"><span data-stu-id="684f0-223">You can also [Use audit logs to send email and webhook alert notifications in Azure Monitor](../monitoring-and-diagnostics/insights-auditlog-to-webhook-email.md).</span></span>

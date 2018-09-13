@@ -5,35 +5,35 @@ services: cognitive-services
 author: alch-msft
 manager: kuansanw
 ms.service: cognitive-services
-ms.technology: academic-knowledge
+ms.component: academic-knowledge
 ms.topic: article
 ms.date: 03/27/2017
 ms.author: alch
-ms.openlocfilehash: 9240dda95ce06d9f31340afe9ae8fc48593f211c
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: f771969c3c6f05e5d2c99b1fbf593ae039ccb12c
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44552491"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44818355"
 ---
-# <a name="entity-attributes"></a><span data-ttu-id="44a97-103">Entity Attributes</span><span class="sxs-lookup"><span data-stu-id="44a97-103">Entity Attributes</span></span>
+# <a name="entity-attributes"></a><span data-ttu-id="358d7-103">Entity Attributes</span><span class="sxs-lookup"><span data-stu-id="358d7-103">Entity Attributes</span></span>
 
-<span data-ttu-id="44a97-104">The academic graph is composed of 7 types of entity.</span><span class="sxs-lookup"><span data-stu-id="44a97-104">The academic graph is composed of 7 types of entity.</span></span> <span data-ttu-id="44a97-105">All entities will have a Entity ID and a Entity type.</span><span class="sxs-lookup"><span data-stu-id="44a97-105">All entities will have a Entity ID and a Entity type.</span></span>
+<span data-ttu-id="358d7-104">The academic graph is composed of 7 types of entity.</span><span class="sxs-lookup"><span data-stu-id="358d7-104">The academic graph is composed of 7 types of entity.</span></span> <span data-ttu-id="358d7-105">All entities will have a Entity ID and a Entity type.</span><span class="sxs-lookup"><span data-stu-id="358d7-105">All entities will have a Entity ID and a Entity type.</span></span>
 
-## <a name="common-entity-attributes"></a><span data-ttu-id="44a97-106">Common Entity Attributes</span><span class="sxs-lookup"><span data-stu-id="44a97-106">Common Entity Attributes</span></span>
-<span data-ttu-id="44a97-107">Name</span><span class="sxs-lookup"><span data-stu-id="44a97-107">Name</span></span>    |<span data-ttu-id="44a97-108">Description</span><span class="sxs-lookup"><span data-stu-id="44a97-108">Description</span></span>                |<span data-ttu-id="44a97-109">Type</span><span class="sxs-lookup"><span data-stu-id="44a97-109">Type</span></span>       | <span data-ttu-id="44a97-110">Operations</span><span class="sxs-lookup"><span data-stu-id="44a97-110">Operations</span></span>
+## <a name="common-entity-attributes"></a><span data-ttu-id="358d7-106">Common Entity Attributes</span><span class="sxs-lookup"><span data-stu-id="358d7-106">Common Entity Attributes</span></span>
+<span data-ttu-id="358d7-107">Name</span><span class="sxs-lookup"><span data-stu-id="358d7-107">Name</span></span>    |<span data-ttu-id="358d7-108">Description</span><span class="sxs-lookup"><span data-stu-id="358d7-108">Description</span></span>                |<span data-ttu-id="358d7-109">Type</span><span class="sxs-lookup"><span data-stu-id="358d7-109">Type</span></span>       | <span data-ttu-id="358d7-110">Operations</span><span class="sxs-lookup"><span data-stu-id="358d7-110">Operations</span></span>
 ------- | ------------------------- | --------- | ----------------------------
-<span data-ttu-id="44a97-111">Id</span><span class="sxs-lookup"><span data-stu-id="44a97-111">Id</span></span>      |<span data-ttu-id="44a97-112">Entity ID</span><span class="sxs-lookup"><span data-stu-id="44a97-112">Entity ID</span></span>                  |<span data-ttu-id="44a97-113">Int64</span><span class="sxs-lookup"><span data-stu-id="44a97-113">Int64</span></span>      |<span data-ttu-id="44a97-114">Equals</span><span class="sxs-lookup"><span data-stu-id="44a97-114">Equals</span></span>
-<span data-ttu-id="44a97-115">Ty</span><span class="sxs-lookup"><span data-stu-id="44a97-115">Ty</span></span>      |<span data-ttu-id="44a97-116">Entity type</span><span class="sxs-lookup"><span data-stu-id="44a97-116">Entity type</span></span>                |<span data-ttu-id="44a97-117">enum</span><span class="sxs-lookup"><span data-stu-id="44a97-117">enum</span></span>   |<span data-ttu-id="44a97-118">Equals</span><span class="sxs-lookup"><span data-stu-id="44a97-118">Equals</span></span>
+<span data-ttu-id="358d7-111">Id</span><span class="sxs-lookup"><span data-stu-id="358d7-111">Id</span></span>      |<span data-ttu-id="358d7-112">Entity ID</span><span class="sxs-lookup"><span data-stu-id="358d7-112">Entity ID</span></span>                  |<span data-ttu-id="358d7-113">Int64</span><span class="sxs-lookup"><span data-stu-id="358d7-113">Int64</span></span>      |<span data-ttu-id="358d7-114">Equals</span><span class="sxs-lookup"><span data-stu-id="358d7-114">Equals</span></span>
+<span data-ttu-id="358d7-115">Ty</span><span class="sxs-lookup"><span data-stu-id="358d7-115">Ty</span></span>      |<span data-ttu-id="358d7-116">Entity type</span><span class="sxs-lookup"><span data-stu-id="358d7-116">Entity type</span></span>                |<span data-ttu-id="358d7-117">enum</span><span class="sxs-lookup"><span data-stu-id="358d7-117">enum</span></span>   |<span data-ttu-id="358d7-118">Equals</span><span class="sxs-lookup"><span data-stu-id="358d7-118">Equals</span></span>
 
-## <a name="entity-type-enum"></a><span data-ttu-id="44a97-119">Entity type enum</span><span class="sxs-lookup"><span data-stu-id="44a97-119">Entity type enum</span></span>
-<span data-ttu-id="44a97-120">Name</span><span class="sxs-lookup"><span data-stu-id="44a97-120">Name</span></span>                                                            |<span data-ttu-id="44a97-121">value</span><span class="sxs-lookup"><span data-stu-id="44a97-121">value</span></span>
+## <a name="entity-type-enum"></a><span data-ttu-id="358d7-119">Entity type enum</span><span class="sxs-lookup"><span data-stu-id="358d7-119">Entity type enum</span></span>
+<span data-ttu-id="358d7-120">Name</span><span class="sxs-lookup"><span data-stu-id="358d7-120">Name</span></span>                                                            |<span data-ttu-id="358d7-121">value</span><span class="sxs-lookup"><span data-stu-id="358d7-121">value</span></span>
 ----------------------------------------------------------------|-----
-[<span data-ttu-id="44a97-122">Paper</span><span class="sxs-lookup"><span data-stu-id="44a97-122">Paper</span></span>](PaperEntityAttributes.md)                               |<span data-ttu-id="44a97-123">0</span><span class="sxs-lookup"><span data-stu-id="44a97-123">0</span></span>
-[<span data-ttu-id="44a97-124">Author</span><span class="sxs-lookup"><span data-stu-id="44a97-124">Author</span></span>](AuthorEntityAttributes.md)                             |<span data-ttu-id="44a97-125">1</span><span class="sxs-lookup"><span data-stu-id="44a97-125">1</span></span>
-[<span data-ttu-id="44a97-126">Journal</span><span class="sxs-lookup"><span data-stu-id="44a97-126">Journal</span></span>](JournalEntityAttributes.md)                           |<span data-ttu-id="44a97-127">2</span><span class="sxs-lookup"><span data-stu-id="44a97-127">2</span></span>
-[<span data-ttu-id="44a97-128">Conference Series</span><span class="sxs-lookup"><span data-stu-id="44a97-128">Conference Series</span></span>](JournalEntityAttributes.md)                 |<span data-ttu-id="44a97-129">3</span><span class="sxs-lookup"><span data-stu-id="44a97-129">3</span></span>
-[<span data-ttu-id="44a97-130">Conference Instance</span><span class="sxs-lookup"><span data-stu-id="44a97-130">Conference Instance</span></span>](ConferenceInstanceEntityAttributes.md)    |<span data-ttu-id="44a97-131">4</span><span class="sxs-lookup"><span data-stu-id="44a97-131">4</span></span>
-[<span data-ttu-id="44a97-132">Affiliation</span><span class="sxs-lookup"><span data-stu-id="44a97-132">Affiliation</span></span>](AffiliationEntityAttributes.md)                   |<span data-ttu-id="44a97-133">5</span><span class="sxs-lookup"><span data-stu-id="44a97-133">5</span></span>
-[<span data-ttu-id="44a97-134">Field Of Study</span><span class="sxs-lookup"><span data-stu-id="44a97-134">Field Of Study</span></span>](FieldsOfStudyEntityAttributes.md)                      |<span data-ttu-id="44a97-135">6</span><span class="sxs-lookup"><span data-stu-id="44a97-135">6</span></span>
+[<span data-ttu-id="358d7-122">Paper</span><span class="sxs-lookup"><span data-stu-id="358d7-122">Paper</span></span>](PaperEntityAttributes.md)                               |<span data-ttu-id="358d7-123">0</span><span class="sxs-lookup"><span data-stu-id="358d7-123">0</span></span>
+[<span data-ttu-id="358d7-124">Author</span><span class="sxs-lookup"><span data-stu-id="358d7-124">Author</span></span>](AuthorEntityAttributes.md)                             |<span data-ttu-id="358d7-125">1</span><span class="sxs-lookup"><span data-stu-id="358d7-125">1</span></span>
+[<span data-ttu-id="358d7-126">Journal</span><span class="sxs-lookup"><span data-stu-id="358d7-126">Journal</span></span>](JournalEntityAttributes.md)                           |<span data-ttu-id="358d7-127">2</span><span class="sxs-lookup"><span data-stu-id="358d7-127">2</span></span>
+[<span data-ttu-id="358d7-128">Conference Series</span><span class="sxs-lookup"><span data-stu-id="358d7-128">Conference Series</span></span>](JournalEntityAttributes.md)                 |<span data-ttu-id="358d7-129">3</span><span class="sxs-lookup"><span data-stu-id="358d7-129">3</span></span>
+[<span data-ttu-id="358d7-130">Conference Instance</span><span class="sxs-lookup"><span data-stu-id="358d7-130">Conference Instance</span></span>](ConferenceInstanceEntityAttributes.md)    |<span data-ttu-id="358d7-131">4</span><span class="sxs-lookup"><span data-stu-id="358d7-131">4</span></span>
+[<span data-ttu-id="358d7-132">Affiliation</span><span class="sxs-lookup"><span data-stu-id="358d7-132">Affiliation</span></span>](AffiliationEntityAttributes.md)                   |<span data-ttu-id="358d7-133">5</span><span class="sxs-lookup"><span data-stu-id="358d7-133">5</span></span>
+[<span data-ttu-id="358d7-134">Field Of Study</span><span class="sxs-lookup"><span data-stu-id="358d7-134">Field Of Study</span></span>](FieldsOfStudyEntityAttributes.md)                      |<span data-ttu-id="358d7-135">6</span><span class="sxs-lookup"><span data-stu-id="358d7-135">6</span></span>
 
