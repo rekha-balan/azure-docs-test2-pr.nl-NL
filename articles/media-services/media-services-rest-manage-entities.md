@@ -1,0 +1,183 @@
+---
+title: Managing Media Services entities with REST  | Microsoft Docs
+description: Learn how to manage Media Services entities with REST API.
+author: juliako
+manager: erikre
+editor: ''
+services: media-services
+documentationcenter: ''
+ms.assetid: 95262a32-0f2a-4286-b9e2-1a1ca6399b5b
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 02/09/2017
+ms.author: juliako
+ms.openlocfilehash: a63cd18ec3478618d8e8b2471ea7e3ed15a053cc
+ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 08/02/2018
+ms.locfileid: "44671448"
+---
+# <a name="managing-media-services-entities-with-rest"></a><span data-ttu-id="6a72e-103">Managing Media Services entities with REST</span><span class="sxs-lookup"><span data-stu-id="6a72e-103">Managing Media Services entities with REST</span></span> 
+> [!div class="op_single_selector"]
+> * [REST](media-services-rest-manage-entities.md)
+> * [.NET](media-services-dotnet-manage-entities.md)
+> 
+> 
+
+<span data-ttu-id="6a72e-106">Microsoft Azure Media Services is a REST-based service built on OData v3.</span><span class="sxs-lookup"><span data-stu-id="6a72e-106">Microsoft Azure Media Services is a REST-based service built on OData v3.</span></span> <span data-ttu-id="6a72e-107">Because of this, you can add, query, update, and delete entities in much the same way as you can on any other OData service.</span><span class="sxs-lookup"><span data-stu-id="6a72e-107">Because of this, you can add, query, update, and delete entities in much the same way as you can on any other OData service.</span></span> <span data-ttu-id="6a72e-108">Exceptions will be called out when applicable.</span><span class="sxs-lookup"><span data-stu-id="6a72e-108">Exceptions will be called out when applicable.</span></span> <span data-ttu-id="6a72e-109">For more information on OData, see [Open Data Protocol documentation](http://www.odata.org/documentation/).</span><span class="sxs-lookup"><span data-stu-id="6a72e-109">For more information on OData, see [Open Data Protocol documentation](http://www.odata.org/documentation/).</span></span>
+
+<span data-ttu-id="6a72e-110">This topic shows you how to manage Azure Media Services entities with REST.</span><span class="sxs-lookup"><span data-stu-id="6a72e-110">This topic shows you how to manage Azure Media Services entities with REST.</span></span>
+
+
+>[!NOTE]
+> Starting April 1, 2017, any Job record in your account older than 90 days will be automatically deleted, along with its associated Task records, even if the total number of records is below the maximum quota. For example, on April 1, 2017, any Job record in your account older than December 31, 2016, will be automatically deleted. If you need to archive the job/task information, you can use the code described in this topic.
+
+## <a name="considerations-when-working-with-ams-rest"></a><span data-ttu-id="6a72e-114">Considerations when working with AMS REST</span><span class="sxs-lookup"><span data-stu-id="6a72e-114">Considerations when working with AMS REST</span></span>
+
+<span data-ttu-id="6a72e-115">When working with the Media Services REST API, the following considerations apply:</span><span class="sxs-lookup"><span data-stu-id="6a72e-115">When working with the Media Services REST API, the following considerations apply:</span></span>
+
+> [!NOTE]
+> When accessing entities in Media Services, you must set specific header fields and values in your HTTP requests. For more information, see [Setup for Media Services REST API Development](media-services-rest-how-to-use.md).
+> 
+> After successfully connecting to https://media.windows.net, you will receive a 301 redirect specifying another Media Services URI. You must make subsequent calls to the new URI as described in [Connecting to Media Services using REST API](media-services-rest-connect-programmatically.md). 
+> 
+> 
+
+## <a name="adding-entities"></a><span data-ttu-id="6a72e-120">Adding entities</span><span class="sxs-lookup"><span data-stu-id="6a72e-120">Adding entities</span></span>
+<span data-ttu-id="6a72e-121">Every entity in Media Services is added to an entity set, such as Assets, through a POST HTTP request.</span><span class="sxs-lookup"><span data-stu-id="6a72e-121">Every entity in Media Services is added to an entity set, such as Assets, through a POST HTTP request.</span></span>
+
+<span data-ttu-id="6a72e-122">The following example shows how to create an AccessPolicy.</span><span class="sxs-lookup"><span data-stu-id="6a72e-122">The following example shows how to create an AccessPolicy.</span></span>
+
+    POST https://media.windows.net/API/AccessPolicies HTTP/1.1
+    Content-Type: application/json;odata=verbose
+    Accept: application/json;odata=verbose
+    DataServiceVersion: 3.0
+    MaxDataServiceVersion: 3.0
+    x-ms-version: 2.11
+    Authorization: Bearer http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=youraccountname&urn%3aSubscriptionId=2f84471d-b1ae-4e75-aa09-010f0fc0cf5b&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&Audience=urn%3aWindowsAzureMediaServices&ExpiresOn=1337067658&Issuer=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&HMACSHA256=dithjGvlXR9HlyAf5DE99N5OCYkPAxsHIcsTSjm9%2fVE%3d
+    Host: media.windows.net
+    Content-Length: 74
+    Expect: 100-continue
+
+    {"Name": "DownloadPolicy", "DurationInMinutes" : "300", "Permissions" : 1}
+
+
+## <a name="querying-entities"></a><span data-ttu-id="6a72e-123">Querying entities</span><span class="sxs-lookup"><span data-stu-id="6a72e-123">Querying entities</span></span>
+<span data-ttu-id="6a72e-124">Querying and listing entities is straightforward and only involves a GET HTTP request and optional OData operations.</span><span class="sxs-lookup"><span data-stu-id="6a72e-124">Querying and listing entities is straightforward and only involves a GET HTTP request and optional OData operations.</span></span>
+<span data-ttu-id="6a72e-125">The following example retrieves a list of all MediaProcessor entities.</span><span class="sxs-lookup"><span data-stu-id="6a72e-125">The following example retrieves a list of all MediaProcessor entities.</span></span>
+
+    GET https://media.windows.net/API/MediaProcessors HTTP/1.1
+    Content-Type: application/json;odata=verbose
+    Accept: application/json;odata=verbose
+    DataServiceVersion: 3.0
+    MaxDataServiceVersion: 3.0
+    x-ms-version: 2.11
+    Authorization: Bearer http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=youraccountname&urn%3aSubscriptionId=2f84471d-b1ae-4e75-aa09-010f0fc0cf5b&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&Audience=urn%3aWindowsAzureMediaServices&ExpiresOn=1337078831&Issuer=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&HMACSHA256=suFkxhvPWxQVMjOYelOJfYEWkyTWJCBc02pF0N7NghI%3d
+    Host: media.windows.net
+
+<span data-ttu-id="6a72e-126">You can also retrieve a specific entity or all entity sets associated with a specific entity, such as in the following examples:</span><span class="sxs-lookup"><span data-stu-id="6a72e-126">You can also retrieve a specific entity or all entity sets associated with a specific entity, such as in the following examples:</span></span>
+
+    GET https://media.windows.net/API/JobTemplates('nb:jtid:UUID:e81192f5-576f-b247-b781-70a790c20e7c') HTTP/1.1
+    Content-Type: application/json;odata=verbose
+    Accept: application/json;odata=verbose
+    DataServiceVersion: 3.0
+    MaxDataServiceVersion: 3.0
+    x-ms-version: 2.11
+    Authorization: Bearer http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=youraccountname&urn%3aSubscriptionId=2f84471d-b1ae-4e75-aa09-010f0fc0cf5b&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&Audience=urn%3aWindowsAzureMediaServices&ExpiresOn=1336907474&Issuer=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&HMACSHA256=OpuY0CeTylqFFcFaP4pKUVGesT4PGx4CP55zDf2zXnc%3d
+    Host: media.windows.net
+
+    GET https://media.windows.net/API/JobTemplates('nb:jtid:UUID:e81192f5-576f-b247-b781-70a790c20e7c')/TaskTemplates HTTP/1.1
+    Content-Type: application/json;odata=verbose
+    Accept: application/json;odata=verbose
+    DataServiceVersion: 3.0
+    MaxDataServiceVersion: 3.0
+    x-ms-version: 2.11
+    Authorization: Bearer http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=youraccountname&urn%3aSubscriptionId=2f84471d-b1ae-4e75-aa09-010f0fc0cf5b&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&Audience=urn%3aWindowsAzureMediaServices&ExpiresOn=1336907474&Issuer=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&HMACSHA256=OpuY0CeTylqFFcFaP4pKUVGesT4PGx4CP55zDf2zXnc%3d
+    Host: media.windows.net
+
+<span data-ttu-id="6a72e-127">The following example returns only the State property of all Jobs.</span><span class="sxs-lookup"><span data-stu-id="6a72e-127">The following example returns only the State property of all Jobs.</span></span>
+
+    GET https://media.windows.net/API/Jobs?$select=State HTTP/1.1
+    Content-Type: application/json;odata=verbose
+    Accept: application/json;odata=verbose
+    DataServiceVersion: 3.0
+    MaxDataServiceVersion: 3.0
+    x-ms-version: 2.11
+    Authorization: Bearer http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=youraccountname&urn%3aSubscriptionId=2f84471d-b1ae-4e75-aa09-010f0fc0cf5b&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&Audience=urn%3aWindowsAzureMediaServices&ExpiresOn=1337078831&Issuer=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&HMACSHA256=suFkxhvPWxQVMjOYelOJfYEWkyTWJCBc02pF0N7NghI%3d
+    Host: media.windows.net
+
+<span data-ttu-id="6a72e-128">The following example returns all JobTemplates with the name "SampleTemplate."</span><span class="sxs-lookup"><span data-stu-id="6a72e-128">The following example returns all JobTemplates with the name "SampleTemplate."</span></span>
+
+    GET https://media.windows.net/API/JobTemplates?$filter=startswith(Name,%20'SampleTemplate') HTTP/1.1
+    Content-Type: application/json;odata=verbose
+    Accept: application/json;odata=verbose
+    DataServiceVersion: 3.0
+    MaxDataServiceVersion: 3.0
+    x-ms-version: 2.11
+    Authorization: Bearer http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=youraccountname&urn%3aSubscriptionId=2f84471d-b1ae-4e75-aa09-010f0fc0cf5b&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&Audience=urn%3aWindowsAzureMediaServices&ExpiresOn=1337078831&Issuer=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&HMACSHA256=suFkxhvPWxQVMjOYelOJfYEWkyTWJCBc02pF0N7NghI%3d
+    Host: media.windows.net
+
+> [!NOTE]
+> The $expand operation is not supported in Media Services as well as the unsupported LINQ methods described in LINQ Considerations (WCF Data Services).
+> 
+> 
+
+## <a name="enumerating-through-large-collections-of-entities"></a><span data-ttu-id="6a72e-130">Enumerating through large collections of entities</span><span class="sxs-lookup"><span data-stu-id="6a72e-130">Enumerating through large collections of entities</span></span>
+<span data-ttu-id="6a72e-131">When querying entities, there is a limit of 1000 entities returned at one time because public REST v2 limits query results to 1000 results.</span><span class="sxs-lookup"><span data-stu-id="6a72e-131">When querying entities, there is a limit of 1000 entities returned at one time because public REST v2 limits query results to 1000 results.</span></span> <span data-ttu-id="6a72e-132">Use **skip** and **top** to enumerate through the large collection of entities.</span><span class="sxs-lookup"><span data-stu-id="6a72e-132">Use **skip** and **top** to enumerate through the large collection of entities.</span></span> 
+
+<span data-ttu-id="6a72e-133">The following example shows how to use **skip** and **top** to skip the first 2000 jobs and get the next 1000 jobs.</span><span class="sxs-lookup"><span data-stu-id="6a72e-133">The following example shows how to use **skip** and **top** to skip the first 2000 jobs and get the next 1000 jobs.</span></span>  
+
+    GET https://media.windows.net/api/Jobs()?$skip=2000&$top=1000 HTTP/1.1
+    Content-Type: application/json;odata=verbose
+    Accept: application/json;odata=verbose
+    DataServiceVersion: 3.0
+    MaxDataServiceVersion: 3.0
+    x-ms-version: 2.11
+    Authorization: Bearer http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=youraccountname&urn%3aSubscriptionId=2f84471d-b1ae-4e75-aa09-010f0fc0cf5b&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&Audience=urn%3aWindowsAzureMediaServices&ExpiresOn=1337078831&Issuer=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&HMACSHA256=suFkxhvPWxQVMjOYelOJfYEWkyTWJCBc02pF0N7NghI%3d
+    Host: media.windows.net
+
+## <a name="updating-entities"></a><span data-ttu-id="6a72e-134">Updating entities</span><span class="sxs-lookup"><span data-stu-id="6a72e-134">Updating entities</span></span>
+<span data-ttu-id="6a72e-135">Depending on the entity type and the state that it is in, you can update properties on that entity through a PATCH, PUT, or MERGE HTTP requests.</span><span class="sxs-lookup"><span data-stu-id="6a72e-135">Depending on the entity type and the state that it is in, you can update properties on that entity through a PATCH, PUT, or MERGE HTTP requests.</span></span> <span data-ttu-id="6a72e-136">For more information about these operations, see [PATCH/PUT/MERGE](https://msdn.microsoft.com/library/dd541276.aspx).</span><span class="sxs-lookup"><span data-stu-id="6a72e-136">For more information about these operations, see [PATCH/PUT/MERGE](https://msdn.microsoft.com/library/dd541276.aspx).</span></span>
+
+<span data-ttu-id="6a72e-137">The following code example shows how to update the Name property on an Asset entity.</span><span class="sxs-lookup"><span data-stu-id="6a72e-137">The following code example shows how to update the Name property on an Asset entity.</span></span>
+
+    MERGE https://media.windows.net/API/Assets('nb:cid:UUID:80782407-3f87-4e60-a43e-5e4454232f60') HTTP/1.1
+    Content-Type: application/json;odata=verbose
+    Accept: application/json;odata=verbose
+    DataServiceVersion: 3.0
+    MaxDataServiceVersion: 3.0
+    x-ms-version: 2.11
+    Authorization: Bearer http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=youraccountname&urn%3aSubscriptionId=2f84471d-b1ae-4e75-aa09-010f0fc0cf5b&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&Audience=urn%3aWindowsAzureMediaServices&ExpiresOn=1337083279&Issuer=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&HMACSHA256=DMLQXWah4jO0icpfwyws5k%2b1aCDfz9KDGIGao20xk6g%3d
+    Host: media.windows.net
+    Content-Length: 21
+    Expect: 100-continue
+
+    {"Name" : "NewName" }
+
+## <a name="deleting-entities"></a><span data-ttu-id="6a72e-138">Deleting entities</span><span class="sxs-lookup"><span data-stu-id="6a72e-138">Deleting entities</span></span>
+<span data-ttu-id="6a72e-139">Entities can be deleted in Media Services by using a DELETE HTTP request.</span><span class="sxs-lookup"><span data-stu-id="6a72e-139">Entities can be deleted in Media Services by using a DELETE HTTP request.</span></span> <span data-ttu-id="6a72e-140">Depending on the entity, the order in which you delete entities may be important.</span><span class="sxs-lookup"><span data-stu-id="6a72e-140">Depending on the entity, the order in which you delete entities may be important.</span></span> <span data-ttu-id="6a72e-141">For example, entities such as Assets require that you revoke (or delete) all Locators that reference that particular Asset before deleting the Asset.</span><span class="sxs-lookup"><span data-stu-id="6a72e-141">For example, entities such as Assets require that you revoke (or delete) all Locators that reference that particular Asset before deleting the Asset.</span></span>
+
+<span data-ttu-id="6a72e-142">The following example shows how to delete a Locator that was used to upload a file into blob storage.</span><span class="sxs-lookup"><span data-stu-id="6a72e-142">The following example shows how to delete a Locator that was used to upload a file into blob storage.</span></span>
+
+    DELETE https://media.windows.net/API/Locators('nb:lid:UUID:76dcc8e8-4230-463d-97b0-ce25c41b5c8d') HTTP/1.1
+    Content-Type: application/json;odata=verbose
+    Accept: application/json;odata=verbose
+    DataServiceVersion: 3.0
+    MaxDataServiceVersion: 3.0
+    x-ms-version: 2.11
+    Authorization: Bearer http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=youraccountname&urn%3aSubscriptionId=2f84471d-b1ae-4e75-aa09-010f0fc0cf5b&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&Audience=urn%3aWindowsAzureMediaServices&ExpiresOn=1337067658&Issuer=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&HMACSHA256=dithjGvlXR9HlyAf5DE99N5OCYkPAxsHIcsTSjm9%2fVE%3d
+    Host: media.windows.net
+    Content-Length: 0
+
+
+
+## <a name="media-services-learning-paths"></a><span data-ttu-id="6a72e-143">Media Services learning paths</span><span class="sxs-lookup"><span data-stu-id="6a72e-143">Media Services learning paths</span></span>
+[!INCLUDE [media-services-learning-paths-include](../../includes/media-services-learning-paths-include.md)]
+
+## <a name="provide-feedback"></a><span data-ttu-id="6a72e-144">Provide feedback</span><span class="sxs-lookup"><span data-stu-id="6a72e-144">Provide feedback</span></span>
+[!INCLUDE [media-services-user-voice-include](../../includes/media-services-user-voice-include.md)]
+

@@ -1,0 +1,323 @@
+---
+title: Manage certificates in an Azure Service Fabric cluster | Microsoft Docs
+description: Describes how to add new certificates, rollover certificate, and remove certificate to or from a Service Fabric cluster.
+services: service-fabric
+documentationcenter: .net
+author: ChackDan
+manager: timlt
+editor: ''
+ms.assetid: 91adc3d3-a4ca-46cf-ac5f-368fb6458d74
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 03/09/2017
+ms.author: chackdan
+ms.openlocfilehash: 77257a30a3e9ccc7f54e51abf8dd86154cebf346
+ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
+ms.translationtype: HT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 08/02/2018
+ms.locfileid: "44671208"
+---
+# <a name="add-or-remove-certificates-for-a-service-fabric-cluster-in-azure"></a><span data-ttu-id="2a7b9-103">Add or remove certificates for a Service Fabric cluster in Azure</span><span class="sxs-lookup"><span data-stu-id="2a7b9-103">Add or remove certificates for a Service Fabric cluster in Azure</span></span>
+<span data-ttu-id="2a7b9-104">It is recommended that you familiarize yourself with how Service Fabric uses X.509 certificates and be familiar with the [Cluster security scenarios](service-fabric-cluster-security.md).</span><span class="sxs-lookup"><span data-stu-id="2a7b9-104">It is recommended that you familiarize yourself with how Service Fabric uses X.509 certificates and be familiar with the [Cluster security scenarios](service-fabric-cluster-security.md).</span></span> <span data-ttu-id="2a7b9-105">You must understand what a cluster certificate is and what is used for, before you proceed further.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-105">You must understand what a cluster certificate is and what is used for, before you proceed further.</span></span>
+
+<span data-ttu-id="2a7b9-106">Service fabric lets you specify two cluster certificates, a primary and a secondary, when you configure certificate security during cluster creation, in addition to client certificates.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-106">Service fabric lets you specify two cluster certificates, a primary and a secondary, when you configure certificate security during cluster creation, in addition to client certificates.</span></span> <span data-ttu-id="2a7b9-107">Refer to [creating an azure cluster via portal](service-fabric-cluster-creation-via-portal.md) or [creating an azure cluster via Azure Resource Manager](service-fabric-cluster-creation-via-arm.md) for details on setting them up at create time.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-107">Refer to [creating an azure cluster via portal](service-fabric-cluster-creation-via-portal.md) or [creating an azure cluster via Azure Resource Manager](service-fabric-cluster-creation-via-arm.md) for details on setting them up at create time.</span></span> <span data-ttu-id="2a7b9-108">If you specify only one cluster certificate at create time, then that is used as the primary certificate.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-108">If you specify only one cluster certificate at create time, then that is used as the primary certificate.</span></span> <span data-ttu-id="2a7b9-109">After cluster creation, you can add a new certificate as a secondary.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-109">After cluster creation, you can add a new certificate as a secondary.</span></span>
+
+> [!NOTE]
+> <span data-ttu-id="2a7b9-110">For a secure cluster, you will always need at least one valid (not revoked and not expired) cluster certificate (primary or secondary) deployed (if not, the cluster stops functioning).</span><span class="sxs-lookup"><span data-stu-id="2a7b9-110">For a secure cluster, you will always need at least one valid (not revoked and not expired) cluster certificate (primary or secondary) deployed (if not, the cluster stops functioning).</span></span> <span data-ttu-id="2a7b9-111">90 days before all valid certificates reach expiration, the system generates a warning trace and also a warning health event on the node.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-111">90 days before all valid certificates reach expiration, the system generates a warning trace and also a warning health event on the node.</span></span> <span data-ttu-id="2a7b9-112">There is currently no email or any other notification that service fabric sends out on this topic.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-112">There is currently no email or any other notification that service fabric sends out on this topic.</span></span> 
+> 
+> 
+
+## <a name="add-a-secondary-cluster-certificate-using-the-portal"></a><span data-ttu-id="2a7b9-113">Add a secondary cluster certificate using the portal</span><span class="sxs-lookup"><span data-stu-id="2a7b9-113">Add a secondary cluster certificate using the portal</span></span>
+
+<span data-ttu-id="2a7b9-114">Secondary cluster certificate cannot be added through the Azure portal.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-114">Secondary cluster certificate cannot be added through the Azure portal.</span></span> <span data-ttu-id="2a7b9-115">You have to use Azure powershell for that.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-115">You have to use Azure powershell for that.</span></span> <span data-ttu-id="2a7b9-116">The process is outlined later in this document.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-116">The process is outlined later in this document.</span></span>
+
+## <a name="swap-the-cluster-certificates-using-the-portal"></a><span data-ttu-id="2a7b9-117">Swap the cluster certificates using the portal</span><span class="sxs-lookup"><span data-stu-id="2a7b9-117">Swap the cluster certificates using the portal</span></span>
+
+<span data-ttu-id="2a7b9-118">After you have successfully deployed a secondary cluster certificate, if you want to swap the primary and secondary, then navigate to the Security blade, and select the 'Swap with primary' option from the context menu to swap the secondary cert with the primary cert.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-118">After you have successfully deployed a secondary cluster certificate, if you want to swap the primary and secondary, then navigate to the Security blade, and select the 'Swap with primary' option from the context menu to swap the secondary cert with the primary cert.</span></span>
+
+![Swap certificate][Delete_Swap_Cert]
+
+## <a name="remove-a-cluster-certificate-using-the-portal"></a><span data-ttu-id="2a7b9-120">Remove a cluster certificate using the portal</span><span class="sxs-lookup"><span data-stu-id="2a7b9-120">Remove a cluster certificate using the portal</span></span>
+
+<span data-ttu-id="2a7b9-121">For a secure cluster, you will always need at least one valid (not revoked and not expired) certificate (primary or secondary) deployed if not, the cluster stops functioning.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-121">For a secure cluster, you will always need at least one valid (not revoked and not expired) certificate (primary or secondary) deployed if not, the cluster stops functioning.</span></span>
+
+<span data-ttu-id="2a7b9-122">To remove a secondary certificate from being used for cluster security, Navigate to the Security blade and select the 'Delete' option from the context menu on the secondary certificate.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-122">To remove a secondary certificate from being used for cluster security, Navigate to the Security blade and select the 'Delete' option from the context menu on the secondary certificate.</span></span>
+
+<span data-ttu-id="2a7b9-123">If your intent is to remove the certificate that is marked primary, then you will need to swap it with the secondary first, and then delete the secondary after the upgrade has completed.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-123">If your intent is to remove the certificate that is marked primary, then you will need to swap it with the secondary first, and then delete the secondary after the upgrade has completed.</span></span>
+
+## <a name="add-a-secondary-certificate-using-resource-manager-powershell"></a><span data-ttu-id="2a7b9-124">Add a secondary certificate using Resource Manager Powershell</span><span class="sxs-lookup"><span data-stu-id="2a7b9-124">Add a secondary certificate using Resource Manager Powershell</span></span>
+
+<span data-ttu-id="2a7b9-125">These steps assume that you are familiar with how Resource Manager works and have deployed atleast one Service Fabric cluster using a Resource Manager template, and have the template that you used to set up the cluster handy.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-125">These steps assume that you are familiar with how Resource Manager works and have deployed atleast one Service Fabric cluster using a Resource Manager template, and have the template that you used to set up the cluster handy.</span></span> <span data-ttu-id="2a7b9-126">It is also assumed that you are comfortable using JSON.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-126">It is also assumed that you are comfortable using JSON.</span></span>
+
+> [!NOTE]
+> <span data-ttu-id="2a7b9-127">If you are looking for a sample template and parameters that you can use to follow along or as a starting point, then download it from this [git-repo](https://github.com/ChackDan/Service-Fabric/tree/master/ARM%20Templates/Cert%20Rollover%20Sample).</span><span class="sxs-lookup"><span data-stu-id="2a7b9-127">If you are looking for a sample template and parameters that you can use to follow along or as a starting point, then download it from this [git-repo](https://github.com/ChackDan/Service-Fabric/tree/master/ARM%20Templates/Cert%20Rollover%20Sample).</span></span> 
+> 
+> 
+
+### <a name="edit-your-resource-manager-template"></a><span data-ttu-id="2a7b9-128">Edit your Resource Manager template</span><span class="sxs-lookup"><span data-stu-id="2a7b9-128">Edit your Resource Manager template</span></span>
+
+<span data-ttu-id="2a7b9-129">For ease of following along, sample 5-VM-1-NodeTypes-Secure_Step2.JSON contains all the edits we will be making.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-129">For ease of following along, sample 5-VM-1-NodeTypes-Secure_Step2.JSON contains all the edits we will be making.</span></span> <span data-ttu-id="2a7b9-130">the sample is available at [git-repo](https://github.com/ChackDan/Service-Fabric/tree/master/ARM%20Templates/Cert%20Rollover%20Sample).</span><span class="sxs-lookup"><span data-stu-id="2a7b9-130">the sample is available at [git-repo](https://github.com/ChackDan/Service-Fabric/tree/master/ARM%20Templates/Cert%20Rollover%20Sample).</span></span>
+
+<span data-ttu-id="2a7b9-131">**Make sure to follow all the steps**</span><span class="sxs-lookup"><span data-stu-id="2a7b9-131">**Make sure to follow all the steps**</span></span>
+
+<span data-ttu-id="2a7b9-132">**Step 1:** Open up the Resource Manager template you used to deploy you Cluster.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-132">**Step 1:** Open up the Resource Manager template you used to deploy you Cluster.</span></span> <span data-ttu-id="2a7b9-133">(If you have downloaded the sample from the above repo, then Use 5-VM-1-NodeTypes-Secure_Step1.JSON to deploy a secure cluster and then open up that template).</span><span class="sxs-lookup"><span data-stu-id="2a7b9-133">(If you have downloaded the sample from the above repo, then Use 5-VM-1-NodeTypes-Secure_Step1.JSON to deploy a secure cluster and then open up that template).</span></span>
+
+<span data-ttu-id="2a7b9-134">**Step 2:** Add **two new parameters** "secCertificateThumbprint" and "secCertificateUrlValue" of type "string" to the parameter section of your template.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-134">**Step 2:** Add **two new parameters** "secCertificateThumbprint" and "secCertificateUrlValue" of type "string" to the parameter section of your template.</span></span> <span data-ttu-id="2a7b9-135">You can copy the following code snippet and add it to the template.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-135">You can copy the following code snippet and add it to the template.</span></span> <span data-ttu-id="2a7b9-136">Depending on the source of your template, you may already have these defined, if so move to the next step.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-136">Depending on the source of your template, you may already have these defined, if so move to the next step.</span></span> 
+ 
+```JSON
+   "secCertificateThumbprint": {
+      "type": "string",
+      "metadata": {
+        "description": "Certificate Thumbprint"
+      }
+    },
+    "secCertificateUrlValue": {
+      "type": "string",
+      "metadata": {
+        "description": "Refers to the location URL in your key vault where the certificate was uploaded, it is should be in the format of https://<name of the vault>.vault.azure.net:443/secrets/<exact location>"
+      }
+    },
+
+```
+
+<span data-ttu-id="2a7b9-137">**Step 3:** Make changes to the **Microsoft.ServiceFabric/clusters** resource - Locate the "Microsoft.ServiceFabric/clusters" resource definition in your template.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-137">**Step 3:** Make changes to the **Microsoft.ServiceFabric/clusters** resource - Locate the "Microsoft.ServiceFabric/clusters" resource definition in your template.</span></span> <span data-ttu-id="2a7b9-138">Under properties of that definition, you will find "Certificate" JSON tag, which should look something like the following JSON snippet:</span><span class="sxs-lookup"><span data-stu-id="2a7b9-138">Under properties of that definition, you will find "Certificate" JSON tag, which should look something like the following JSON snippet:</span></span>
+
+   
+```JSON
+      "properties": {
+        "certificate": {
+          "thumbprint": "[parameters('certificateThumbprint')]",
+          "x509StoreName": "[parameters('certificateStoreValue')]"
+     }
+``` 
+
+<span data-ttu-id="2a7b9-139">Add a new tag "thumbprintSecondary" and give it a value "[parameters('secCertificateThumbprint')]".</span><span class="sxs-lookup"><span data-stu-id="2a7b9-139">Add a new tag "thumbprintSecondary" and give it a value "[parameters('secCertificateThumbprint')]".</span></span>  
+
+<span data-ttu-id="2a7b9-140">So now the resource definition should look like the following (depending on your source of the template, it may not be exactly like the snippet below).</span><span class="sxs-lookup"><span data-stu-id="2a7b9-140">So now the resource definition should look like the following (depending on your source of the template, it may not be exactly like the snippet below).</span></span> 
+
+```JSON
+      "properties": {
+        "certificate": {
+          "thumbprint": "[parameters('certificateThumbprint')]",
+          "thumbprintSecondary": "[parameters('secCertificateThumbprint')]",
+          "x509StoreName": "[parameters('certificateStoreValue')]"
+     }
+``` 
+
+<span data-ttu-id="2a7b9-141">If you want to **rollover the cert**, then specify the new cert as primary and moving the current primary as secondary.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-141">If you want to **rollover the cert**, then specify the new cert as primary and moving the current primary as secondary.</span></span> <span data-ttu-id="2a7b9-142">This results in the rollover of your current primary certificate to the new certificate in one deployment step.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-142">This results in the rollover of your current primary certificate to the new certificate in one deployment step.</span></span>
+
+```JSON
+      "properties": {
+        "certificate": {
+          "thumbprint": "[parameters('secCertificateThumbprint')]",
+          "thumbprintSecondary": "[parameters('certificateThumbprint')]",
+          "x509StoreName": "[parameters('certificateStoreValue')]"
+     }
+``` 
+
+
+<span data-ttu-id="2a7b9-143">**Step 4:** Make changes to **all** the **Microsoft.Compute/virtualMachineScaleSets** resource definitions - Locate the Microsoft.Compute/virtualMachineScaleSets resource definition.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-143">**Step 4:** Make changes to **all** the **Microsoft.Compute/virtualMachineScaleSets** resource definitions - Locate the Microsoft.Compute/virtualMachineScaleSets resource definition.</span></span> <span data-ttu-id="2a7b9-144">Scroll to the "publisher": "Microsoft.Azure.ServiceFabric", under "virtualMachineProfile".</span><span class="sxs-lookup"><span data-stu-id="2a7b9-144">Scroll to the "publisher": "Microsoft.Azure.ServiceFabric", under "virtualMachineProfile".</span></span>
+
+<span data-ttu-id="2a7b9-145">In the service fabric publisher settings, you should see something like this.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-145">In the service fabric publisher settings, you should see something like this.</span></span>
+
+![Json_Pub_Setting1][Json_Pub_Setting1]
+
+<span data-ttu-id="2a7b9-147">Add the new cert entries to it</span><span class="sxs-lookup"><span data-stu-id="2a7b9-147">Add the new cert entries to it</span></span>
+
+```JSON
+               "certificateSecondary": {
+                    "thumbprint": "[parameters('secCertificateThumbprint')]",
+                    "x509StoreName": "[parameters('certificateStoreValue')]"
+                    }
+                  },
+
+```
+
+<span data-ttu-id="2a7b9-148">The properties should now look like this</span><span class="sxs-lookup"><span data-stu-id="2a7b9-148">The properties should now look like this</span></span>
+
+![Json_Pub_Setting2][Json_Pub_Setting2]
+
+<span data-ttu-id="2a7b9-150">If you want to **rollover the cert**, then specify the new cert as primary and moving the current primary as secondary.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-150">If you want to **rollover the cert**, then specify the new cert as primary and moving the current primary as secondary.</span></span> <span data-ttu-id="2a7b9-151">This results in the rollover of your current certificate to the new certificate in one deployment step.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-151">This results in the rollover of your current certificate to the new certificate in one deployment step.</span></span> 
+
+
+```JSON
+               "certificate": {
+                   "thumbprint": "[parameters('secCertificateThumbprint')]",
+                   "x509StoreName": "[parameters('certificateStoreValue')]"
+                     },
+               "certificateSecondary": {
+                    "thumbprint": "[parameters('certificateThumbprint')]",
+                    "x509StoreName": "[parameters('certificateStoreValue')]"
+                    }
+                  },
+
+```
+<span data-ttu-id="2a7b9-152">The properties should now look like this</span><span class="sxs-lookup"><span data-stu-id="2a7b9-152">The properties should now look like this</span></span>
+
+![Json_Pub_Setting3][Json_Pub_Setting3]
+
+
+<span data-ttu-id="2a7b9-154">**Step 5:** Make Changes to **all** the **Microsoft.Compute/virtualMachineScaleSets** resource definitions - Locate the Microsoft.Compute/virtualMachineScaleSets resource definition.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-154">**Step 5:** Make Changes to **all** the **Microsoft.Compute/virtualMachineScaleSets** resource definitions - Locate the Microsoft.Compute/virtualMachineScaleSets resource definition.</span></span> <span data-ttu-id="2a7b9-155">Scroll to the "vaultCertificates": , under "OSProfile".</span><span class="sxs-lookup"><span data-stu-id="2a7b9-155">Scroll to the "vaultCertificates": , under "OSProfile".</span></span> <span data-ttu-id="2a7b9-156">it should look something like this.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-156">it should look something like this.</span></span>
+
+
+![Json_Pub_Setting4][Json_Pub_Setting4]
+
+<span data-ttu-id="2a7b9-158">Add the secCertificateUrlValue to it.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-158">Add the secCertificateUrlValue to it.</span></span> <span data-ttu-id="2a7b9-159">use the following snippet:</span><span class="sxs-lookup"><span data-stu-id="2a7b9-159">use the following snippet:</span></span>
+
+```Json
+                  {
+                    "certificateStore": "[parameters('certificateStoreValue')]",
+                    "certificateUrl": "[parameters('secCertificateUrlValue')]"
+                  }
+
+```
+<span data-ttu-id="2a7b9-160">Now the resulting Json should look something like this.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-160">Now the resulting Json should look something like this.</span></span>
+<span data-ttu-id="2a7b9-161">![Json_Pub_Setting5][Json_Pub_Setting5]</span><span class="sxs-lookup"><span data-stu-id="2a7b9-161">![Json_Pub_Setting5][Json_Pub_Setting5]</span></span>
+
+
+> [!NOTE]
+> <span data-ttu-id="2a7b9-162">Make sure that you have repeated steps 4 and 5 for all the Nodetypes/Microsoft.Compute/virtualMachineScaleSets resource definitions in your template.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-162">Make sure that you have repeated steps 4 and 5 for all the Nodetypes/Microsoft.Compute/virtualMachineScaleSets resource definitions in your template.</span></span> <span data-ttu-id="2a7b9-163">If you miss one of them, the certificate will not get installed on that VMSS and you will have unpredictable results in your cluster, including the cluster going down (if you end up with no valid certificates that the cluster can use for security.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-163">If you miss one of them, the certificate will not get installed on that VMSS and you will have unpredictable results in your cluster, including the cluster going down (if you end up with no valid certificates that the cluster can use for security.</span></span> <span data-ttu-id="2a7b9-164">So please double check, before proceeding further.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-164">So please double check, before proceeding further.</span></span>
+> 
+> 
+
+
+### <a name="edit-your-template-file-to-reflect-the-new-parameters-you-added-above"></a><span data-ttu-id="2a7b9-165">Edit your template file to reflect the new parameters you added above</span><span class="sxs-lookup"><span data-stu-id="2a7b9-165">Edit your template file to reflect the new parameters you added above</span></span>
+<span data-ttu-id="2a7b9-166">If you are using the sample from the [git-repo](https://github.com/ChackDan/Service-Fabric/tree/master/ARM%20Templates/Cert%20Rollover%20Sample) to follow along, you can start to make changes in The sample 5-VM-1-NodeTypes-Secure.paramters_Step2.JSON</span><span class="sxs-lookup"><span data-stu-id="2a7b9-166">If you are using the sample from the [git-repo](https://github.com/ChackDan/Service-Fabric/tree/master/ARM%20Templates/Cert%20Rollover%20Sample) to follow along, you can start to make changes in The sample 5-VM-1-NodeTypes-Secure.paramters_Step2.JSON</span></span> 
+
+<span data-ttu-id="2a7b9-167">Edit your Resource Manager Template parameter File, add the two new parameters for secCertificateThumbprint and secCertificateUrlValue.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-167">Edit your Resource Manager Template parameter File, add the two new parameters for secCertificateThumbprint and secCertificateUrlValue.</span></span> 
+
+```JSON
+    "secCertificateThumbprint": {
+      "value": "thumbprint value"
+    },
+    "secCertificateUrlValue": {
+      "value": "Refers to the location URL in your key vault where the certificate was uploaded, it is should be in the format of https://<name of the vault>.vault.azure.net:443/secrets/<exact location>"
+     },
+
+```
+
+### <a name="deploy-the-template-to-azure"></a><span data-ttu-id="2a7b9-168">Deploy the template to Azure</span><span class="sxs-lookup"><span data-stu-id="2a7b9-168">Deploy the template to Azure</span></span>
+
+- <span data-ttu-id="2a7b9-169">You are now ready to deploy your template to Azure.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-169">You are now ready to deploy your template to Azure.</span></span> <span data-ttu-id="2a7b9-170">Open an Azure PS version 1+ command prompt.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-170">Open an Azure PS version 1+ command prompt.</span></span>
+- <span data-ttu-id="2a7b9-171">Log in to your Azure Account and select the specific azure subscription.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-171">Log in to your Azure Account and select the specific azure subscription.</span></span> <span data-ttu-id="2a7b9-172">This is an important step for folks who have access to more than one azure subscription.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-172">This is an important step for folks who have access to more than one azure subscription.</span></span>
+
+```powershell
+Login-AzureRmAccount
+Select-AzureRmSubscription -SubscriptionId <Subcription ID> 
+
+```
+
+<span data-ttu-id="2a7b9-173">Test the template prior to deploying it.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-173">Test the template prior to deploying it.</span></span> <span data-ttu-id="2a7b9-174">Use the same Resource Group that your cluster is currently deployed to.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-174">Use the same Resource Group that your cluster is currently deployed to.</span></span>
+
+```powershell
+Test-AzureRmResourceGroupDeployment -ResourceGroupName <Resource Group that your cluster is currently deployed to> -TemplateFile <PathToTemplate>
+
+```
+
+<span data-ttu-id="2a7b9-175">Deploy the template to your resource group.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-175">Deploy the template to your resource group.</span></span> <span data-ttu-id="2a7b9-176">Use the same Resource Group that your cluster is currently deployed to.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-176">Use the same Resource Group that your cluster is currently deployed to.</span></span> <span data-ttu-id="2a7b9-177">Run the New-AzureRmResourceGroupDeployment command.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-177">Run the New-AzureRmResourceGroupDeployment command.</span></span> <span data-ttu-id="2a7b9-178">You do not need to specify the mode, since the default value is **incremental**.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-178">You do not need to specify the mode, since the default value is **incremental**.</span></span>
+
+> [!NOTE]
+> <span data-ttu-id="2a7b9-179">If you set Mode to Complete, you can inadvertently delete resources that are not in your template.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-179">If you set Mode to Complete, you can inadvertently delete resources that are not in your template.</span></span> <span data-ttu-id="2a7b9-180">So do not use it in this scenario.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-180">So do not use it in this scenario.</span></span>
+> 
+> 
+
+```powershell
+New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName <Resource Group that your cluster is currently deployed to> -TemplateFile <PathToTemplate>
+```
+
+<span data-ttu-id="2a7b9-181">Here is a filled out example of the same powershell.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-181">Here is a filled out example of the same powershell.</span></span>
+
+```powershell
+$ResouceGroup2 = "chackosecure5"
+$TemplateFile = "C:\GitHub\Service-Fabric\ARM Templates\Cert Rollover Sample\5-VM-1-NodeTypes-Secure_Step2.json"
+$TemplateParmFile = "C:\GitHub\Service-Fabric\ARM Templates\Cert Rollover Sample\5-VM-1-NodeTypes-Secure.parameters_Step2.json"
+
+New-AzureRmResourceGroupDeployment -ResourceGroupName $ResouceGroup2 -TemplateParameterFile $TemplateParmFile -TemplateUri $TemplateFile -clusterName $ResouceGroup2
+
+```
+
+<span data-ttu-id="2a7b9-182">Once the deployment is complete, connect to your cluster using the new Certificate and perform some queries.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-182">Once the deployment is complete, connect to your cluster using the new Certificate and perform some queries.</span></span> <span data-ttu-id="2a7b9-183">If you are able to do.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-183">If you are able to do.</span></span> <span data-ttu-id="2a7b9-184">Then you can delete the old certificate.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-184">Then you can delete the old certificate.</span></span> 
+
+<span data-ttu-id="2a7b9-185">If you are using a self-signed certificate, do not forget to import them into your local TrustedPeople cert store.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-185">If you are using a self-signed certificate, do not forget to import them into your local TrustedPeople cert store.</span></span>
+
+```powershell
+######## Set up the certs on your local box
+Import-PfxCertificate -Exportable -CertStoreLocation Cert:\CurrentUser\TrustedPeople -FilePath c:\Mycertificates\chackdanTestCertificate9.pfx -Password (ConvertTo-SecureString -String abcd123 -AsPlainText -Force)
+Import-PfxCertificate -Exportable -CertStoreLocation Cert:\CurrentUser\My -FilePath c:\Mycertificates\chackdanTestCertificate9.pfx -Password (ConvertTo-SecureString -String abcd123 -AsPlainText -Force)
+
+```
+<span data-ttu-id="2a7b9-186">For quick reference here is the command to connect to a secure cluster</span><span class="sxs-lookup"><span data-stu-id="2a7b9-186">For quick reference here is the command to connect to a secure cluster</span></span> 
+
+```powershell
+$ClusterName= "chackosecure5.westus.cloudapp.azure.com:19000"
+$CertThumbprint= "70EF5E22ADB649799DA3C8B6A6BF7SD1D630F8F3" 
+
+Connect-serviceFabricCluster -ConnectionEndpoint $ClusterName -KeepAliveIntervalInSec 10 `
+    -X509Credential `
+    -ServerCertThumbprint $CertThumbprint  `
+    -FindType FindByThumbprint `
+    -FindValue $CertThumbprint `
+    -StoreLocation CurrentUser `
+    -StoreName My
+```
+<span data-ttu-id="2a7b9-187">For quick reference here is the command to get cluster health</span><span class="sxs-lookup"><span data-stu-id="2a7b9-187">For quick reference here is the command to get cluster health</span></span>
+
+```powershell
+Get-ServiceFabricClusterHealth 
+```
+
+## <a name="deploying-application-certificates-to-the-cluster"></a><span data-ttu-id="2a7b9-188">Deploying Application certificates to the cluster.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-188">Deploying Application certificates to the cluster.</span></span>
+
+<span data-ttu-id="2a7b9-189">You can use the same steps as outlined in Steps 5 above to have the certificates deployed from a keyvault to the Nodes.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-189">You can use the same steps as outlined in Steps 5 above to have the certificates deployed from a keyvault to the Nodes.</span></span> <span data-ttu-id="2a7b9-190">you just need define and use different parameters.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-190">you just need define and use different parameters.</span></span>
+
+
+## <a name="adding-or-removing-client-certificates"></a><span data-ttu-id="2a7b9-191">Adding or removing Client certificates</span><span class="sxs-lookup"><span data-stu-id="2a7b9-191">Adding or removing Client certificates</span></span>
+
+<span data-ttu-id="2a7b9-192">In addition to the cluster certificates, you can add client certificates to perform management operations on a service fabric cluster.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-192">In addition to the cluster certificates, you can add client certificates to perform management operations on a service fabric cluster.</span></span>
+
+<span data-ttu-id="2a7b9-193">You can add two kinds of client certificates - Admin or Read-only.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-193">You can add two kinds of client certificates - Admin or Read-only.</span></span> <span data-ttu-id="2a7b9-194">These then can be used to control access to the admin operations and Query operations on the cluster.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-194">These then can be used to control access to the admin operations and Query operations on the cluster.</span></span> <span data-ttu-id="2a7b9-195">By default, the cluster certificates are added to the allowed Admin certificates list.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-195">By default, the cluster certificates are added to the allowed Admin certificates list.</span></span>
+
+<span data-ttu-id="2a7b9-196">you can specify any number of client certificates.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-196">you can specify any number of client certificates.</span></span> <span data-ttu-id="2a7b9-197">Each addition/deletion results in a configuration update to the service fabric cluster</span><span class="sxs-lookup"><span data-stu-id="2a7b9-197">Each addition/deletion results in a configuration update to the service fabric cluster</span></span>
+
+
+### <a name="adding-client-certificates---admin-or-read-only-via-portal"></a><span data-ttu-id="2a7b9-198">Adding client certificates - Admin or Read-Only via portal</span><span class="sxs-lookup"><span data-stu-id="2a7b9-198">Adding client certificates - Admin or Read-Only via portal</span></span>
+
+1. <span data-ttu-id="2a7b9-199">Navigate to the Security blade, and select the '+ Authentication' button on top of the security blade.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-199">Navigate to the Security blade, and select the '+ Authentication' button on top of the security blade.</span></span>
+2. <span data-ttu-id="2a7b9-200">On the 'Add Authentication' blade, choose the 'Authentication Type' - 'Read-only client' or 'Admin client'</span><span class="sxs-lookup"><span data-stu-id="2a7b9-200">On the 'Add Authentication' blade, choose the 'Authentication Type' - 'Read-only client' or 'Admin client'</span></span>
+3. <span data-ttu-id="2a7b9-201">Now choose the Authorization method.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-201">Now choose the Authorization method.</span></span> <span data-ttu-id="2a7b9-202">This indicates to Service Fabric whether it should look up this certificate by using the subject name or the thumbprint.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-202">This indicates to Service Fabric whether it should look up this certificate by using the subject name or the thumbprint.</span></span> <span data-ttu-id="2a7b9-203">In general, it is not a good security practice to use the authorization method of subject name.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-203">In general, it is not a good security practice to use the authorization method of subject name.</span></span> 
+
+![Add Client certificate][Add_Client_Cert]
+
+### <a name="deletion-of-client-certificates---admin-or-read-only-using-the-portal"></a><span data-ttu-id="2a7b9-205">Deletion of Client Certificates - Admin or Read-Only using the portal</span><span class="sxs-lookup"><span data-stu-id="2a7b9-205">Deletion of Client Certificates - Admin or Read-Only using the portal</span></span>
+
+<span data-ttu-id="2a7b9-206">To remove a secondary certificate from being used for cluster security, Navigate to the Security blade and select the 'Delete' option from the context menu on the specific certificate.</span><span class="sxs-lookup"><span data-stu-id="2a7b9-206">To remove a secondary certificate from being used for cluster security, Navigate to the Security blade and select the 'Delete' option from the context menu on the specific certificate.</span></span>
+
+
+
+## <a name="next-steps"></a><span data-ttu-id="2a7b9-207">Next steps</span><span class="sxs-lookup"><span data-stu-id="2a7b9-207">Next steps</span></span>
+<span data-ttu-id="2a7b9-208">Read these articles for more information on cluster management:</span><span class="sxs-lookup"><span data-stu-id="2a7b9-208">Read these articles for more information on cluster management:</span></span>
+
+* [<span data-ttu-id="2a7b9-209">Service Fabric Cluster upgrade process and expectations from you</span><span class="sxs-lookup"><span data-stu-id="2a7b9-209">Service Fabric Cluster upgrade process and expectations from you</span></span>](service-fabric-cluster-upgrade.md)
+* [<span data-ttu-id="2a7b9-210">Setup role-based access for clients</span><span class="sxs-lookup"><span data-stu-id="2a7b9-210">Setup role-based access for clients</span></span>](service-fabric-cluster-security-roles.md)
+
+<!--Image references-->
+[Delete_Swap_Cert]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-cluster-security-update-certs-azure/SecurityConfigurations_09.PNG
+[Add_Client_Cert]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-cluster-security-update-certs-azure/SecurityConfigurations_13.PNG
+[Json_Pub_Setting1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-cluster-security-update-certs-azure/SecurityConfigurations_14.PNG
+[Json_Pub_Setting2]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-cluster-security-update-certs-azure/SecurityConfigurations_15.PNG
+[Json_Pub_Setting3]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-cluster-security-update-certs-azure/SecurityConfigurations_16.PNG
+[Json_Pub_Setting4]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-cluster-security-update-certs-azure/SecurityConfigurations_17.PNG
+[Json_Pub_Setting5]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-cluster-security-update-certs-azure/SecurityConfigurations_18.PNG
+
+
+
+
+
+
+
+
+

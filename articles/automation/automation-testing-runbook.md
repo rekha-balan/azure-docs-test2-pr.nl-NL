@@ -1,0 +1,47 @@
+---
+title: Testing a runbook in Azure Automation | Microsoft Docs
+description: Before you publish a runbook in Azure Automation, you can test it to ensure that works as expected.  This article describes how to test a runbook and view its output.
+services: automation
+documentationcenter: ''
+author: mgoedtel
+manager: jwhit
+editor: tysonn
+ms.assetid: 7f7db785-52c0-4613-aa12-b02fd32a5182
+ms.service: automation
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 09/12/2016
+ms.author: magoedte;bwren
+ms.openlocfilehash: 5186eb8f1732d533cbceb397b4d8b5224ad773cd
+ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
+ms.translationtype: HT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 08/02/2018
+ms.locfileid: "44669599"
+---
+# <a name="testing-a-runbook-in-azure-automation"></a><span data-ttu-id="26311-104">Testing a runbook in Azure Automation</span><span class="sxs-lookup"><span data-stu-id="26311-104">Testing a runbook in Azure Automation</span></span>
+<span data-ttu-id="26311-105">When you test a runbook, the [Draft version](automation-creating-importing-runbook.md#publishing-a-runbook) is executed and any actions that it performs are completed.</span><span class="sxs-lookup"><span data-stu-id="26311-105">When you test a runbook, the [Draft version](automation-creating-importing-runbook.md#publishing-a-runbook) is executed and any actions that it performs are completed.</span></span> <span data-ttu-id="26311-106">No job history is created, but the [Output](automation-runbook-output-and-messages.md#output-stream) and [Warning and Error](automation-runbook-output-and-messages.md#message-streams) streams are displayed in the Test output Pane.</span><span class="sxs-lookup"><span data-stu-id="26311-106">No job history is created, but the [Output](automation-runbook-output-and-messages.md#output-stream) and [Warning and Error](automation-runbook-output-and-messages.md#message-streams) streams are displayed in the Test output Pane.</span></span> <span data-ttu-id="26311-107">Messages to the [Verbose Stream](automation-runbook-output-and-messages.md#message-streams) are displayed in the Output Pane only if the [$VerbosePreference variable](automation-runbook-output-and-messages.md#preference-variables) is set to Continue.</span><span class="sxs-lookup"><span data-stu-id="26311-107">Messages to the [Verbose Stream](automation-runbook-output-and-messages.md#message-streams) are displayed in the Output Pane only if the [$VerbosePreference variable](automation-runbook-output-and-messages.md#preference-variables) is set to Continue.</span></span>
+
+<span data-ttu-id="26311-108">Even though the draft version is being run, the runbook still executes the workflow normally and performs any actions against resources in the environment.</span><span class="sxs-lookup"><span data-stu-id="26311-108">Even though the draft version is being run, the runbook still executes the workflow normally and performs any actions against resources in the environment.</span></span> <span data-ttu-id="26311-109">For this reason, you should only test runbooks at non-production resources.</span><span class="sxs-lookup"><span data-stu-id="26311-109">For this reason, you should only test runbooks at non-production resources.</span></span>
+
+<span data-ttu-id="26311-110">The procedure to test each [type of runbook](automation-runbook-types.md) is the same, and there is no difference in testing between the textual editor and the graphical editor in the Azure portal.</span><span class="sxs-lookup"><span data-stu-id="26311-110">The procedure to test each [type of runbook](automation-runbook-types.md) is the same, and there is no difference in testing between the textual editor and the graphical editor in the Azure portal.</span></span>  
+
+## <a name="to-test-a-runbook-in-the-azure-portal"></a><span data-ttu-id="26311-111">To test a runbook in the Azure portal</span><span class="sxs-lookup"><span data-stu-id="26311-111">To test a runbook in the Azure portal</span></span>
+<span data-ttu-id="26311-112">You can work with any [runbook type](automation-runbook-types.md) in the Azure portal.</span><span class="sxs-lookup"><span data-stu-id="26311-112">You can work with any [runbook type](automation-runbook-types.md) in the Azure portal.</span></span>
+
+1. <span data-ttu-id="26311-113">Open the Draft version of the runbook in either the [textual editor](automation-edit-textual-runbook.md) or [graphical editor](automation-graphical-authoring-intro.md).</span><span class="sxs-lookup"><span data-stu-id="26311-113">Open the Draft version of the runbook in either the [textual editor](automation-edit-textual-runbook.md) or [graphical editor](automation-graphical-authoring-intro.md).</span></span>
+2. <span data-ttu-id="26311-114">Click the **Test** button to open the Test blade.</span><span class="sxs-lookup"><span data-stu-id="26311-114">Click the **Test** button to open the Test blade.</span></span>
+3. <span data-ttu-id="26311-115">If the runbook has parameters, they will be listed in the left pane where you can provide values to be used for the test.</span><span class="sxs-lookup"><span data-stu-id="26311-115">If the runbook has parameters, they will be listed in the left pane where you can provide values to be used for the test.</span></span>
+4. <span data-ttu-id="26311-116">If you want to run the test on a [Hybrid Runbook Worker](automation-hybrid-runbook-worker.md), then change **Run Settings** to **Hybrid Worker** and select the name of the target group.</span><span class="sxs-lookup"><span data-stu-id="26311-116">If you want to run the test on a [Hybrid Runbook Worker](automation-hybrid-runbook-worker.md), then change **Run Settings** to **Hybrid Worker** and select the name of the target group.</span></span>  <span data-ttu-id="26311-117">Otherwise, keep the default **Azure** to run the test in the cloud.</span><span class="sxs-lookup"><span data-stu-id="26311-117">Otherwise, keep the default **Azure** to run the test in the cloud.</span></span>
+5. <span data-ttu-id="26311-118">Click the **Start** button to start the test.</span><span class="sxs-lookup"><span data-stu-id="26311-118">Click the **Start** button to start the test.</span></span>
+6. <span data-ttu-id="26311-119">If the runbook is [PowerShell Workflow](automation-runbook-types.md#powershell-workflow-runbooks) or [Graphical](automation-runbook-types.md#graphical-runbooks), then you can stop or suspend it while it is being tested with the buttons underneath the Output Pane.</span><span class="sxs-lookup"><span data-stu-id="26311-119">If the runbook is [PowerShell Workflow](automation-runbook-types.md#powershell-workflow-runbooks) or [Graphical](automation-runbook-types.md#graphical-runbooks), then you can stop or suspend it while it is being tested with the buttons underneath the Output Pane.</span></span> <span data-ttu-id="26311-120">When you suspend the runbook, it completes the current activity before being suspended.</span><span class="sxs-lookup"><span data-stu-id="26311-120">When you suspend the runbook, it completes the current activity before being suspended.</span></span> <span data-ttu-id="26311-121">Once the runbook is suspended, you can stop it or restart it.</span><span class="sxs-lookup"><span data-stu-id="26311-121">Once the runbook is suspended, you can stop it or restart it.</span></span>
+7. <span data-ttu-id="26311-122">Inspect the output from the runbook in the output pane.</span><span class="sxs-lookup"><span data-stu-id="26311-122">Inspect the output from the runbook in the output pane.</span></span>
+
+## <a name="next-steps"></a><span data-ttu-id="26311-123">Next Steps</span><span class="sxs-lookup"><span data-stu-id="26311-123">Next Steps</span></span>
+* <span data-ttu-id="26311-124">To learn how to create or import a runbook, see [Creating or importing a runbook in Azure Automation](automation-creating-importing-runbook.md)</span><span class="sxs-lookup"><span data-stu-id="26311-124">To learn how to create or import a runbook, see [Creating or importing a runbook in Azure Automation](automation-creating-importing-runbook.md)</span></span>
+* <span data-ttu-id="26311-125">To learn more about Graphical Authoring, see [Graphical authoring in Azure Automation](automation-graphical-authoring-intro.md)</span><span class="sxs-lookup"><span data-stu-id="26311-125">To learn more about Graphical Authoring, see [Graphical authoring in Azure Automation](automation-graphical-authoring-intro.md)</span></span>
+* <span data-ttu-id="26311-126">To get started with PowerShell workflow runbooks, see [My first PowerShell workflow runbook](automation-first-runbook-textual.md)</span><span class="sxs-lookup"><span data-stu-id="26311-126">To get started with PowerShell workflow runbooks, see [My first PowerShell workflow runbook](automation-first-runbook-textual.md)</span></span>
+* <span data-ttu-id="26311-127">To learn more about configuring runboks to return status messages and errors, including recommended practices, see [Runbook output and messages in Azure Automation](automation-runbook-output-and-messages.md)</span><span class="sxs-lookup"><span data-stu-id="26311-127">To learn more about configuring runboks to return status messages and errors, including recommended practices, see [Runbook output and messages in Azure Automation](automation-runbook-output-and-messages.md)</span></span>
+
