@@ -3,26 +3,26 @@ title: Redeploy Linux Virtual Machines in Azure | Microsoft Docs
 description: How to redeploy Linux virtual machines in Azure to mitigate SSH connection issues.
 services: virtual-machines-linux
 documentationcenter: virtual-machines
-author: iainfoulds
-manager: timlt
+author: cynthn
+manager: jeconnoc
 tags: azure-resource-manager,top-support-issue
 ms.assetid: e9530dd6-f5b0-4160-b36b-d75151d99eb7
 ms.service: virtual-machines-linux
 ms.devlang: azurecli
-ms.topic: support-article
+ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
-ms.date: 12/16/2016
-ms.author: iainfou
-ms.openlocfilehash: e185680119c49b88a13e1265584e22d2eee12658
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 12/14/2017
+ms.author: cynthn
+ms.openlocfilehash: 8c3532232d796b96f9ed583504ba7ab28b499e6d
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44563368"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44812044"
 ---
 # <a name="redeploy-linux-virtual-machine-to-new-azure-node"></a>Redeploy Linux virtual machine to new Azure node
-If you have been facing difficulties troubleshooting SSH or application access to a Linux virtual machine (VM) in Azure, redeploying the VM may help. When you redeploy a VM, it moves the VM to a new node within the Azure infrastructure and then powers it back on, retaining all your configuration options and associated resources. This article shows you how to redeploy a VM using Azure CLI or the Azure portal.
+If you face difficulties troubleshooting SSH or application access to a Linux virtual machine (VM) in Azure, redeploying the VM may help. When you redeploy a VM, it moves the VM to a new node within the Azure infrastructure and then powers it back on. All your configuration options and associated resources are retained. This article shows you how to redeploy a VM using Azure CLI or the Azure portal.
 
 > [!NOTE]
 > After you redeploy a VM, the temporary disk is lost and dynamic IP addresses associated with virtual network interface are updated. 
@@ -33,19 +33,19 @@ You can redeploy a VM using one of the following options. You only need to choos
 - [Azure CLI 1.0](#azure-cli-10)
 - [Azure portal](#using-azure-portal)
 
-## <a name="azure-cli-20"></a>Azure CLI 2.0
-Install the latest [Azure CLI 2.0](/cli/azure/install-az-cli2) and log in to an Azure account using [az login](/cli/azure/#login).
+## <a name="use-the-azure-cli-20"></a>Use the Azure CLI 2.0
+Install the latest [Azure CLI 2.0](/cli/azure/install-az-cli2) and log in to your Azure account using [az login](/cli/azure/reference-index#az_login).
 
-Redeploy your VM with [az vm redeploy](/cli/azure/vm#redeploy). The following example redeploys the VM named `myVM` in the resource group named `myResourceGroup`:
+Redeploy your VM with [az vm redeploy](/cli/azure/vm#az_vm_redeploy). The following example redeploys the VM named *myVM* in the resource group named *myResourceGroup*:
 
 ```azurecli
 az vm redeploy --resource-group myResourceGroup --name myVM 
 ```
 
-## <a name="azure-cli-10"></a>Azure CLI 1.0
-Install the [latest Azure CLI 1.0](../../cli-install-nodejs.md), log in to an Azure account, and make sure that you are in Resource Manager mode (`azure config mode arm`).
+## <a name="use-the-azure-cli-10"></a>Use the Azure CLI 1.0
+Install the [latest Azure CLI 1.0](../../cli-install-nodejs.md) and log in to your Azure account. Make sure that you are in Resource Manager mode (`azure config mode arm`).
 
-The following example redeploys the VM named `myVM` in the resource group named `myResourceGroup`:
+The following example redeploys the VM named *myVM* in the resource group named *myResourceGroup*:
 
 ```azurecli
 azure vm redeploy --resource-group myResourceGroup --vm-name myVM 

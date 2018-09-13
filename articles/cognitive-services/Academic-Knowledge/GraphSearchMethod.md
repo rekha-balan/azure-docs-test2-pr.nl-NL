@@ -5,16 +5,16 @@ services: cognitive-services
 author: alch-msft
 manager: kuansanw
 ms.service: cognitive-services
-ms.technology: academic-knowledge
+ms.component: academic-knowledge
 ms.topic: article
 ms.date: 03/23/2017
 ms.author: alch
-ms.openlocfilehash: 9f519daa0f782e9b13a134f0f67d00f3078a7e5e
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: d811db117c934c0d41fbfea1220d241cc022e4a8
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44551795"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44812161"
 ---
 # <a name="graph-search-method"></a>Graph Search Method
 
@@ -23,7 +23,7 @@ The **graph search** REST API is used to return a set of academic entities based
 
 **REST endpoint:**  
 ```
-https://westus.api.cognitive.microsoft.com/academic/graph/v1.0/search?
+https://westus.api.cognitive.microsoft.com/academic/v1.0/graph/search?
 ```   
 <br>
 
@@ -58,7 +58,7 @@ If a query cannot be processed within _800 ms_, a _timeout_ error will be return
 
 ##### <a name="json-search"></a>JSON Search
 ```
-https://westus.api.cognitive.microsoft.com/academic/graph/v1.0/search?mode=json
+https://westus.api.cognitive.microsoft.com/academic/v1.0/graph/search?mode=json
 ```
 <br>
 For the *json* search, if we want to get the papers whose titles contain "graph engine" and written by "bin shao", we can specify the query as follows.
@@ -130,7 +130,7 @@ The output of a query is an array of graph paths. A graph path is an array of no
 ##### <a name="lambda-search"></a>Lambda Search 
 
 ```
-https://westus.api.cognitive.microsoft.com/academic/graph/v1.0/search?mode=lambda
+https://westus.api.cognitive.microsoft.com/academic/v1.0/graph/search?mode=lambda
 ```
 <br>
 For the *lambda* search, if we want to get the author IDs of a given paper, we can write a query like the following one.
@@ -181,5 +181,4 @@ The output of a *lambda* search query is also an array of graph paths:
 
 Graph schema is useful for writing graph search queries. It is shown in the following figure.
 
-![Microsoft Academic Graph Schema](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cognitive-services/Academic-Knowledge/Images/AcademicGraphSchema.png)
-
+![Microsoft Academic Graph Schema](./Images/AcademicGraphSchema.png)

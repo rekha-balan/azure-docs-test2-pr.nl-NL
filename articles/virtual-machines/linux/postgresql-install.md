@@ -3,8 +3,8 @@ title: Set up PostgreSQL on a Linux VM | Microsoft Docs
 description: Learn how to install and configure PostgreSQL on a Linux virtual machine in Azure
 services: virtual-machines-linux
 documentationcenter: ''
-author: SuperScottz
-manager: timlt
+author: cynthn
+manager: jeconnoc
 editor: ''
 tags: azure-resource-manager,azure-service-management
 ms.assetid: 1a747363-0cc5-4ba3-9be7-084dfeb04651
@@ -14,13 +14,13 @@ ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 02/01/2016
-ms.author: mingzhan
-ms.openlocfilehash: 7c22323e7ce726d4765ae84785a17d9274b8cb87
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: cynthn
+ms.openlocfilehash: 2c21086d1a2178fdb59b2fb65d0eef8f70fe000c
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44563943"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44810146"
 ---
 # <a name="install-and-configure-postgresql-on-azure"></a>Install and configure PostgreSQL on Azure
 PostgreSQL is an advanced open-source database similar to Oracle and DB2. It includes enterprise-ready features such as full ACID compliance, reliable transactional processing, and multi-version concurrency control. It also supports standards such as ANSI SQL and SQL/MED (including foreign data wrappers for Oracle, MySQL, MongoDB, and many others). It is highly extensible with support for over 12 procedural languages, GIN and GiST indexes, spatial data support, and multiple NoSQL-like features for JSON or key-value-based applications.
@@ -125,7 +125,7 @@ Connect to the Linux VM you created via PuTTY. If this is the first time you're 
    
     You should receive the following output:
 
-![image](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/media/postgresql-install/no1.png)
+![image](./media/postgresql-install/no1.png)
 
 ## <a name="set-up-postgresql"></a>Set up PostgreSQL
 <!--    [postgres@ test ~]$ exit -->
@@ -142,7 +142,7 @@ Modify two variables in the /etc/init.d/postgresql file. The prefix is set to th
 
     # sed -i '35s#usr/local/pgsql/data#opt/pgsql_data#' /etc/init.d/postgresql
 
-![image](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/media/postgresql-install/no2.png)
+![image](./media/postgresql-install/no2.png)
 
 Change the file to make it executable:
 
@@ -158,7 +158,7 @@ Check if the endpoint of PostgreSQL is on:
 
 You should see the following output:
 
-![image](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/media/postgresql-install/no3.png)
+![image](./media/postgresql-install/no3.png)
 
 ## <a name="connect-to-the-postgres-database"></a>Connect to the Postgres database
 Switch to the postgres user once again:
@@ -189,11 +189,11 @@ You have now set up a four-column table with the following column names and rest
 
 You should see the following if your table has been successfully created:
 
-![image](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/media/postgresql-install/no4.png)
+![image](./media/postgresql-install/no4.png)
 
 You can also check the table structure by using the following command:
 
-![image](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/media/postgresql-install/no5.png)
+![image](./media/postgresql-install/no5.png)
 
 ### <a name="add-data-to-a-table"></a>Add data to a table
 First, insert information into a row:
@@ -202,7 +202,7 @@ First, insert information into a row:
 
 You should see this output:
 
-![image](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/media/postgresql-install/no6.png)
+![image](./media/postgresql-install/no6.png)
 
 You can add a couple more people to the table as well. Here are some options, or you can create your own:
 
@@ -219,7 +219,7 @@ Use the following command to show a table:
 
 The output is:
 
-![image](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/media/postgresql-install/no7.png)
+![image](./media/postgresql-install/no7.png)
 
 ### <a name="delete-data-in-a-table"></a>Delete data in a table
 Use the following command to delete data in a table:
@@ -228,7 +228,7 @@ Use the following command to delete data in a table:
 
 This deletes all the information in the "John" row. The output is:
 
-![image](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/media/postgresql-install/no8.png)
+![image](./media/postgresql-install/no8.png)
 
 ### <a name="update-data-in-a-table"></a>Update data in a table
 Use the following command to update data in a table. For this one, Sandy has confirmed that she is attending, so we will change her RSVP from "N" to "Y":
@@ -238,12 +238,4 @@ Use the following command to update data in a table. For this one, Sandy has con
 
 ## <a name="get-more-information-about-postgresql"></a>Get more information about PostgreSQL
 Now that you have completed the installation of PostgreSQL in an Azure Linux VM, you can enjoy using it in Azure. To learn more about PostgreSQL, visit the [PostgreSQL website](http://www.postgresql.org/).
-
-
-
-
-
-
-
-
 

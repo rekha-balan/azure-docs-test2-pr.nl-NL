@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 10/10/2016
 ms.author: cherylmc
-ms.openlocfilehash: 6fefb9cfa96b0a6b7acfe4d7fcb17cb13ec240a0
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 032e584dc5abf59e9e3e8d80673b402f1fbf721b
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44550389"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44812200"
 ---
 # <a name="router-configuration-samples-to-set-up-and-manage-routing"></a>Router configuration samples to set up and manage routing
 This page provides interface and routing configuration samples for Cisco IOS-XE and Juniper MX series routers. These are intended to be samples for guidance only and must not be used as is. You can work with your vendor to come up with appropriate configurations for your network. 
@@ -29,7 +29,12 @@ This page provides interface and routing configuration samples for Cisco IOS-XE 
 > 
 > 
 
+## <a name="mtu-and-tcp-mss-settings-on-router-interfaces"></a>MTU and TCP MSS settings on router interfaces
+* The MTU for the ExpressRoute interface is 1500, which is the typical default MTU for an Ethernet interface on a router. Unless your router has a different MTU by default, there is no need to specify a value on the router interface.
+* Unlike an Azure VPN Gateway, the TCP MSS for an ExpressRoute circuit does not need to be specified.
+
 Router configuration samples below apply to all peerings. Review [ExpressRoute peerings](expressroute-circuit-peerings.md) and [ExpressRoute routing requirements](expressroute-routing.md) for more details on routing.
+
 
 ## <a name="cisco-ios-xe-based-routers"></a>Cisco IOS-XE based routers
 The samples in this section apply for any router running the IOS-XE OS family.

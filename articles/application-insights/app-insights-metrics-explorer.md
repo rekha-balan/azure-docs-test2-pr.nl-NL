@@ -3,22 +3,22 @@ title: Exploring Metrics in Azure Application Insights | Microsoft Docs
 description: How to interpret charts on metric explorer, and how to customize metric explorer blades.
 services: application-insights
 documentationcenter: ''
-author: alancameronwills
-manager: douge
+author: mrbullwinkle
+manager: carmonm
 ms.assetid: 1f471176-38f3-40b3-bc6d-3f47d0cbaaa2
 ms.service: application-insights
 ms.workload: tbd
 ms.tgt_pltfrm: ibiza
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.date: 03/08/2017
-ms.author: awills
-ms.openlocfilehash: 33c8f0d6efa20d8fa9b45e019b4bc52322ff9c79
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: mbullwin
+ms.openlocfilehash: 4c35f4366b2290164036316be8de730e20aa99bf
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44553769"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44805628"
 ---
 # <a name="exploring-metrics-in-application-insights"></a>Exploring Metrics in Application Insights
 Metrics in [Application Insights][start] are measured values and counts of events that are sent in telemetry from your application. They help you detect performance issues and watch trends in how your application is being used. There's a wide range of standard metrics, and you can also create your own custom metrics and events.
@@ -27,37 +27,37 @@ Metrics and event counts are displayed in charts of aggregated values such as su
 
 Here's a sample set of charts:
 
-![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-metrics-explorer/01-overview.png)
+![](./media/app-insights-metrics-explorer/01-overview.png)
 
 You find metrics charts everywhere in the Application Insights portal. In most cases, they can be customized, and you can add more charts to the blade. From the Overview blade, click through to more detailed charts (which have titles such as "Servers"), or click **Metrics Explorer** to open a new blade where you can create custom charts.
 
 ## <a name="time-range"></a>Time range
 You can change the Time range covered by the charts or grids on any blade.
 
-![Open the overview blade of your application in the Azure portal](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-metrics-explorer/03-range.png)
+![Open the overview blade of your application in the Azure portal](./media/app-insights-metrics-explorer/03-range.png)
 
 If you're expecting some data that hasn't appeared yet, click Refresh. Charts refresh themselves at intervals, but the intervals are longer for larger time ranges. It can take a while for data to come through the analysis pipeline onto a chart.
 
 To zoom into part of a chart, drag over it:
 
-![Drag across part of a chart.](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-metrics-explorer/12-drag.png)
+![Drag across part of a chart.](./media/app-insights-metrics-explorer/12-drag.png)
 
 Click the Undo Zoom button to restore it.
 
 ## <a name="granularity-and-point-values"></a>Granularity and point values
 Hover your mouse over the chart to display the values of the metrics at that point.
 
-![Hover the mouse over a chart](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-metrics-explorer/02-focus.png)
+![Hover the mouse over a chart](./media/app-insights-metrics-explorer/02-focus.png)
 
 The value of the metric at a particular point is aggregated over the preceding sampling interval.
 
 The sampling interval or "granularity" is shown at the top of the blade.
 
-![The header of a blade.](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-metrics-explorer/11-grain.png)
+![The header of a blade.](./media/app-insights-metrics-explorer/11-grain.png)
 
 You can adjust the granularity in the Time range blade:
 
-![The header of a blade.](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-metrics-explorer/grain.png)
+![The header of a blade.](./media/app-insights-metrics-explorer/grain.png)
 
 The granularities available depend on the time range you select. The explicit granularities are alternatives to the "automatic" granularity for the time range.
 
@@ -65,11 +65,11 @@ The granularities available depend on the time range you select. The explicit gr
 ## <a name="editing-charts-and-grids"></a>Editing charts and grids
 To add a new chart to the blade:
 
-![In Metrics Explorer, choose Add Chart](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-metrics-explorer/04-add.png)
+![In Metrics Explorer, choose Add Chart](./media/app-insights-metrics-explorer/04-add.png)
 
 Select **Edit** on an existing or new chart to edit what it shows:
 
-![Select one or more metrics](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-metrics-explorer/08-select.png)
+![Select one or more metrics](./media/app-insights-metrics-explorer/08-select.png)
 
 You can display more than one metric on a chart, though there are restrictions about the combinations that can be displayed together. As soon as you choose one metric, some of the others are disabled.
 
@@ -80,7 +80,7 @@ You can split a metric by property - for example, to compare page views on clien
 
 Select a chart or grid, switch on grouping and pick a property to group by:
 
-![Select Grouping On, then set select a property in Group By](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-metrics-explorer/15-segment.png)
+![Select Grouping On, then set select a property in Group By](./media/app-insights-metrics-explorer/15-segment.png)
 
 > [!NOTE]
 > When you use grouping, the Area and Bar chart types provide a stacked display. This is suitable where the Aggregation method is Sum. But where the aggregation type is Average, choose the Line or Grid display types.
@@ -91,7 +91,7 @@ If you coded [custom metrics][track] into your app and they include property val
 
 Is the chart too small for segmented data? Adjust its height:
 
-![Adjust the slider](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-metrics-explorer/18-height.png)
+![Adjust the slider](./media/app-insights-metrics-explorer/18-height.png)
 
 ## <a name="aggregation-types"></a>Aggregation types
 The legend at the side by default usually shows the aggregated value over the period of the chart. If you hover over the chart, it shows the value at that point.
@@ -106,26 +106,26 @@ Metrics can be aggregated in different ways:
 * **Unique** counts are used for counts of users and accounts. Over the sampling interval, or over the period of the chart, the figure shows the count of different users seen in that time.
 * **%** - percentage versions of each aggregation are used only with segmented charts. The total always adds up to 100%, and the chart shows the relative contribution of different components of a total.
 
-    ![Percentage aggregation](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-metrics-explorer/percentage-aggregation.png)
+    ![Percentage aggregation](./media/app-insights-metrics-explorer/percentage-aggregation.png)
 
 ### <a name="change-the-aggregation-type"></a>Change the aggregation type
 
-![Edit the chart and then select Aggregation](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-metrics-explorer/05-aggregation.png)
+![Edit the chart and then select Aggregation](./media/app-insights-metrics-explorer/05-aggregation.png)
 
 The default method for each metric is shown when you create a new chart or when all metrics are deselected:
 
-![Deselect all metrics to see the defaults](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-metrics-explorer/06-total.png)
+![Deselect all metrics to see the defaults](./media/app-insights-metrics-explorer/06-total.png)
 
 ## <a name="pin-y-axis"></a>Pin Y-axis 
 By default a chart shows Y axis values starting from zero till maximum values in the data range, to give a visual representation of quantum of the values. But in some cases more than the quantum it might be interesting to visually inspect minor changes in values. For customizations like this use the Y-axis range editing feature to pin the Y-axis minimum or maximum value at desired place.
 Click on "Advanced Settings" check box to bring up the Y-axis range Settings
 
-![Click Advanced Settings, select Custom range, and specify min max values](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-metrics-explorer/y-axis-range.png)
+![Click Advanced Settings, select Custom range, and specify min max values](./media/app-insights-metrics-explorer/y-axis-range.png)
 
 ## <a name="filter-your-data"></a>Filter your data
 To see just the metrics for a selected set of property values:
 
-![Click Filter, expand a property, and check some values](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-metrics-explorer/19-filter.png)
+![Click Filter, expand a property, and check some values](./media/app-insights-metrics-explorer/19-filter.png)
 
 If you don't select any values for a particular property, it's the same as selecting them all: there is no filter on that property.
 
@@ -146,23 +146,23 @@ Would you like to filter telemetry on a category of your own choosing? For examp
 ## <a name="edit-the-chart-type"></a>Edit the chart type
 Notice that you can switch between grids and graphs:
 
-![Select a grid or graph, then choose a chart type](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-metrics-explorer/16-chart-grid.png)
+![Select a grid or graph, then choose a chart type](./media/app-insights-metrics-explorer/16-chart-grid.png)
 
 ## <a name="save-your-metrics-blade"></a>Save your metrics blade
 When you've created some charts, save them as a favorite. You can choose whether to share it with other team members, if you use an organizational account.
 
-![Choose Favorite](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-metrics-explorer/21-favorite-save.png)
+![Choose Favorite](./media/app-insights-metrics-explorer/21-favorite-save.png)
 
 To see the blade again, **go to the overview blade** and open Favorites:
 
-![In the Overview blade, choose Favorites](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-metrics-explorer/22-favorite-get.png)
+![In the Overview blade, choose Favorites](./media/app-insights-metrics-explorer/22-favorite-get.png)
 
 If you chose Relative time range when you saved, the blade will be updated with the latest metrics. If you chose Absolute time range, it will show the same data every time.
 
 ## <a name="reset-the-blade"></a>Reset the blade
 If you edit a blade but then you'd like to get back to the original saved set, just click Reset.
 
-![In the buttons at the top of Metric Explorer](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-metrics-explorer/17-reset.png)
+![In the buttons at the top of Metric Explorer](./media/app-insights-metrics-explorer/17-reset.png)
 
 ## <a name="live-metrics-stream"></a>Live metrics stream
 
@@ -171,7 +171,7 @@ For a much more immediate view of your telemetry, open [Live Stream](app-insight
 ## <a name="set-alerts"></a>Set alerts
 To be notified by email of unusual values of any metric, add an alert. You can choose either to send the email to the account administrators, or to specific email addresses.
 
-![In Metrics Explorer, choose Alert rules, Add Alert](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-metrics-explorer/appinsights-413setMetricAlert.png)
+![In Metrics Explorer, choose Alert rules, Add Alert](./media/app-insights-metrics-explorer/appinsights-413setMetricAlert.png)
 
 [Learn more about alerts][alerts].
 
@@ -209,23 +209,3 @@ From a metric chart, you can click the Analytics icon to get directly to the equ
 [alerts]: app-insights-alerts.md
 [start]: app-insights-overview.md
 [track]: app-insights-api-custom-events-metrics.md
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

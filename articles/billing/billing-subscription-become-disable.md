@@ -5,7 +5,7 @@ keywords: azure subscription disabled
 services: ''
 documentationcenter: ''
 author: genlin
-manager: narmstr
+manager: jlian
 editor: ''
 tags: billing
 ms.assetid: 4529d685-3a87-49d9-8d7a-49baad552d76
@@ -13,56 +13,54 @@ ms.service: billing
 ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 02/03/2017
+ms.topic: conceptual
+ms.date: 05/11/2018
 ms.author: genli
-ms.openlocfilehash: 50fbd39963604556fb2422d93ca5e1fe5ef8aa9c
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: d76d02ba326cf93582c03937b3ab54d806acaff1
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44563691"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44803678"
 ---
 # <a name="why-is-my-azure-subscription-disabled-and-how-do-i-reactivate-it"></a>Why is my Azure subscription disabled and how do I reactivate it?
-You might have your Azure subscription disabled because you reached your spending limit, have an overdue bill, hit your credit card limit, or because the subscription was canceled by the account administrator. See what issue applies to you and follow the steps in this article to get your subscription reactivated.
+
+You might have your Azure subscription disabled because your credit is expired, you reached your spending limit, have an overdue bill, hit your credit card limit, or because the subscription was canceled by the Account Administrator. See what issue applies to you and follow the steps in this article to get your subscription reactivated.
+
+## <a name="your-credit-is-expired"></a>Your credit is expired
+
+When you sign up for an Azure free account, you get a Free Trial subscription, which provides you $200 in Azure credits for 30 days and 12 months of free services. At the end of 30 days, Azure disables your subscription. Your subscription is disabled to protect you from accidentally incurring charges for usage beyond the credit and free services included with your subscription. To continue using Azure services, you must [upgrade your subscription to a Pay-As-You-Go subscription](billing-upgrade-azure-subscription.md). After you upgrade, your subscription still has access to free services for 12 months. You only get charged for usage beyond the free services and quantities.
 
 ## <a name="you-reached-your-spending-limit"></a>You reached your spending limit
-When your usage exhausts the monthly amounts included with your subscription, we disable your service for the remainder of that billing month. Your service is disabled to protect you from accidentally incurring charges for usage beyond the amount included with your subscription. You can remove the spending limit and [set up billing alerts for your Microsoft Azure subscriptions](billing-set-up-alerts.md) to help you monitor and manage billing activity for your Azure accounts.
 
-To remove your spending limit,
+Azure subscriptions with credit such as Free Trial and Visual Studio Enterprise have spending limits on them. This means you can only use services up to the included credit. When your usage reaches the spending limit, Azure disables your subscription for the remainder of that billing period. Your subscription is disabled to protect you from accidentally incurring charges for usage beyond the credit included with your subscription. To remove your spending limit, see [Remove the spending limit in Account Center](billing-spending-limit.md#remove).
 
-1. Log in to the [Azure Account Center](https://account.windowsazure.com/Home/Index).
-2. Click **Subscriptions**.
-3. Select a subscription.
-4. Click **Subscription reached the Spending Limit and has been disabled to prevent charges**.
+> [!NOTE] 
+> If you have a Free Trial subscription and you remove the spending limit, your subscription converts to Pay-As-You-Go at the end of the Free Trial. You keep your remaining credit for the full 30 days after you created the subscription. You also have access to free services for 12 months.
 
-    If you don't see that option, click **Remove spending limit** in the subscription **Status** area.
-5. Select one of the following options:
+To monitor and manage billing activity for Azure, see [Prevent unexpected costs with Azure billing and cost management](billing-getting-started.md) and [Set up billing alerts for your Microsoft Azure subscriptions](billing-set-up-alerts.md).
 
-| Option | Effect |
-| --- | --- |
-| Remove spending limit indefinitely |Removes the spending limit until you turn it back on. |
-| Remove spending limit for the current billing period |Removes the spending limit but the spending limit restarts for the next billing period. |
-
-If you have a Free Trial subscription and you remove the spending limits, your subscription converts to Pay-As-You-Go at the end of the free trial.
 
 ## <a name="your-bill-is-past-due"></a>Your bill is past due
-Pay your outstanding balance in full. See the article [Why have you received a notification that your Azure subscription has a past due balance?](billing-azure-subscription-past-due-balance.md#how-to-resolve-the-issue)
+
+To resolve past due balance, see [Resolve past due balance for your Azure subscription after getting an email from Azure](billing-azure-subscription-past-due-balance.md).
 
 ## <a name="the-bill-exceeds-your-credit-card-limit"></a>The bill exceeds your credit card limit
-To resolve this issue, [switch to a different credit card](billing-how-to-change-credit-card.md). Or if you're representing a business, you can [switch to pay by invoice](https://azure.microsoft.com/pricing/invoicing/).
 
-## <a name="the-subscription-was-canceled-by-the-account-administrator"></a>The subscription was canceled by the Account Administrator
-If you're the account administrator, reactivate your Pay-As-You-Go subscription by using the following steps:
+To resolve this issue, [switch to a different credit card](billing-how-to-change-credit-card.md). Or if you're representing a business, you can [switch to pay by invoice](billing-how-to-pay-by-invoice.md).
 
-1. Log in to the [Azure Account Center](https://account.windowsazure.com/Home/Index).
-2. Select the canceled subscription.
-3. Click **Reactivate**.
+## <a name="the-subscription-was-accidentally-canceled-and-you-want-to-reactivate"></a>The subscription was accidentally canceled and you want to reactivate
 
-![Screenshot that shows reactivate links on the right pane.](https://docstestmedia1.blob.core.windows.net/azure-media/articles/billing/media/billing-how-to-cancel-azure-subscription/reactivate-sub.png)
+If you're the Account Administrator and accidentally canceled a Pay-As-You-Go subscription, you can reactivate it in the Account Center.
+
+1. Sign in to the [Account Center](https://account.windowsazure.com/Subscriptions).
+1. Select the canceled subscription.
+1. Click **Reactivate**.
+
+    ![Screenshot that shows reactivate links on the right pane](./media/billing-how-to-cancel-azure-subscription/reactivate-sub.png)
 
 For other subscription types, [contact support](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) to have your subscription reactivated.
 
-## <a name="need-help-contact-support"></a>Need help? Contact support.
-If you still need help, [contact support](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) to get your issue resolved quickly.
+## <a name="need-help-contact-support"></a>Need help? Contact support
 
+If you still need help, [contact support](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) to get your issue resolved quickly.

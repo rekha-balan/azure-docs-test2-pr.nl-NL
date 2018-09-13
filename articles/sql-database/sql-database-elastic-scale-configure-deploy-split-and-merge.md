@@ -1,51 +1,43 @@
 ---
 title: Deploy a split-merge service | Microsoft Docs
-description: Splitting and Merging with elastic database tools
+description: Use the split-merge too to move data between sharded databases.
 services: sql-database
-documentationcenter: ''
-author: ddove
-manager: jhubbard
-editor: ''
-ms.assetid: 9a993c0f-7052-46cd-aa59-073bea8d535a
+author: stevestein
+manager: craigg
 ms.service: sql-database
-ms.custom: multiple databases
-ms.workload: sql-database
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
-ms.date: 10/24/2016
-ms.author: ddove
-ms.openlocfilehash: dc1cbeb56d116689d072c9aeeee38289d7c53713
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.custom: scale out apps
+ms.topic: conceptual
+ms.date: 04/01/2018
+ms.author: sstein
+ms.openlocfilehash: c7682b63689d9b47fce5fa65a3c0a2301d53502a
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44549492"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44803327"
 ---
 # <a name="deploy-a-split-merge-service"></a>Deploy a split-merge service
 The split-merge tool lets you move data between sharded databases. See [Moving data between scaled-out cloud databases](sql-database-elastic-scale-overview-split-and-merge.md)
 
 ## <a name="download-the-split-merge-packages"></a>Download the Split-Merge packages
 1. Download the latest NuGet version from [NuGet](http://docs.nuget.org/docs/start-here/installing-nuget).
-2. Open a command prompt and navigate to the directory where you downloaded nuget.exe. The download includes PowerShell commmands.
+2. Open a command prompt and navigate to the directory where you downloaded nuget.exe. The download includes PowerShell commands.
 3. Download the latest Split-Merge package into the current directory with the below command:
    ```
    nuget install Microsoft.Azure.SqlDatabase.ElasticScale.Service.SplitMerge
    ```  
 
-The files are placed in a directory named **Microsoft.Azure.SqlDatabase.ElasticScale.Service.SplitMerge.x.x.xxx.x** where *x.x.xxx.x* reflects the version number. Find the split-merge Service files in the **content\splitmerge\service** sub-directory, and the Split-Merge PowerShell scripts (and required client .dlls) in the **content\splitmerge\powershell** sub-directory.
+The files are placed in a directory named **Microsoft.Azure.SqlDatabase.ElasticScale.Service.SplitMerge.x.x.xxx.x** where *x.x.xxx.x* reflects the version number. Find the split-merge Service files in the **content\splitmerge\service** sub-directory, and the Split-Merge PowerShell scripts (and required client dlls) in the **content\splitmerge\powershell** sub-directory.
 
 ## <a name="prerequisites"></a>Prerequisites
 1. Create an Azure SQL DB database that will be used as the split-merge status database. Go to the [Azure portal](https://portal.azure.com). Create a new **SQL Database**. Give the database a name and create a new administrator and password. Be sure to record the name and password for later use.
-2. Ensure that your Azure SQL DB server allows Azure Services to connect to it. In the portal, in the **Firewall Settings**, ensure that the **Allow access to Azure Services** setting is set to **On**. Click the "save" icon.
-   
-   ![Allowed services][1]
-3. Create an Azure Storage account that will be used for diagnostics output. Go to the Azure Portal. In the left bar, click **New**, click **Data + Storage**, then **Storage**.
-4. Create an Azure Cloud Service that will contain your Split-Merge service.  Go to the Azure Portal. In the left bar, click **New**, then **Compute**, **Cloud Service**, and **Create**. 
+2. Ensure that your Azure SQL DB server allows Azure Services to connect to it. In the portal, in the **Firewall Settings**, ensure the **Allow access to Azure Services** setting is set to **On**. Click the "save" icon.
+3. Create an Azure Storage account for diagnostics output.
+4. Create an Azure Cloud Service for your Split-Merge service.
 
 ## <a name="configure-your-split-merge-service"></a>Configure your Split-Merge service
 ### <a name="split-merge-service-configuration"></a>Split-Merge service configuration
-1. In the folder where you downloaded the Split-Merge assemblies, create a copy of the **ServiceConfiguration.Template.cscfg** file that shipped alongside **SplitMergeService.cspkg** and rename it **ServiceConfiguration.cscfg**.
+1. In the folder into which you downloaded the Split-Merge assemblies, create a copy of the **ServiceConfiguration.Template.cscfg** file that shipped alongside **SplitMergeService.cspkg** and rename it **ServiceConfiguration.cscfg**.
 2. Open **ServiceConfiguration.cscfg** in a text editor such as Visual Studio that validates inputs such as the format of certificate thumbprints.
 3. Create a new database or choose an existing database to serve as the status database for Split-Merge operations and retrieve the connection string of that database. 
    
@@ -94,7 +86,7 @@ Execute the following command from the same window where makecert was executed; 
 6. Click **Finish** and **OK**.
 
 ### <a name="upload-the-pfx-file-to-the-cloud-service"></a>Upload the PFX file to the cloud service
-1. Go to the [Azure Portal](https://portal.azure.com).
+1. Go to the [Azure portal](https://portal.azure.com).
 2. Select **Cloud Services**.
 3. Select the cloud service you created above for the Split/Merge service.
 4. Click **Certificates** on the top menu.
@@ -124,24 +116,21 @@ For the web role:
 Please note that for production deployments separate certificates should be used for the CA, for encryption, the Server certificate and client certificates. For detailed instructions on this, see [Security Configuration](sql-database-elastic-scale-split-merge-security-configuration.md).
 
 ## <a name="deploy-your-service"></a>Deploy your service
-1. Go to the [Azure portal](https://manage.windowsazure.com).
-2. Click the **Cloud Services** tab on the left, and select the cloud service that you created earlier.
-3. Click **Dashboard**.
-4. Choose the staging environment, then click **Upload a new staging deployment**.
-   
-   ![Staging][3]
-5. In the dialog box, enter a deployment label. For both 'Package' and 'Configuration', click 'From Local' and choose the **SplitMergeService.cspkg** file and your .cscfg file that you configured earlier.
+1. Go to the [Azure portal](https://portal.azure.com)
+2. Select the cloud service that you created earlier.
+3. Click **Overview**.
+4. Choose the staging environment, then click **Upload**.
+5. In the dialog box, enter a deployment label. For both 'Package' and 'Configuration', click 'From Local' and choose the **SplitMergeService.cspkg** file and your cscfg file that you configured earlier.
 6. Ensure that the checkbox labeled **Deploy even if one or more roles contain a single instance** is checked.
 7. Hit the tick button in the bottom right to begin the deployment. Expect it to take a few minutes to complete.
 
-   ![Upload][4]
 
 ## <a name="troubleshoot-the-deployment"></a>Troubleshoot the deployment
 If your web role fails to come online, it is likely a problem with the security configuration. Check that the SSL is configured as described above.
 
 If your worker role fails to come online, but your web role succeeds, it is most likely a problem connecting to the status database that you created earlier.
 
-* Make sure that the connection string in your .cscfg is accurate.
+* Make sure that the connection string in your cscfg is accurate.
 * Check that the server and database exist, and that the user id and password are correct.
 * For Azure SQL DB, the connection string should be of the form:
 
@@ -150,11 +139,11 @@ If your worker role fails to come online, but your web role succeeds, it is most
    ```
 
 * Ensure that the server name does not begin with **https://**.
-* Ensure that your Azure SQL DB server allows Azure Services to connect to it. To do this, open https://manage.windowsazure.com, click “SQL Databases” on the left, click “Servers” at the top, and select your server. Click **Configure** at the top and ensure that the **Azure Services** setting is set to “Yes”. (See the Prerequisites section at the top of this article).
+* Ensure that your Azure SQL DB server allows Azure Services to connect to it. To do this, open your database in the portal and ensure that the **Allow access to Azure Services** setting is set to **On****.
 
 ## <a name="test-the-service-deployment"></a>Test the service deployment
 ### <a name="connect-with-a-web-browser"></a>Connect with a web browser
-Determine the web endpoint of your Split-Merge service. You can find this in the Azure Classic Portal by going to the **Dashboard** of your cloud service and looking under **Site URL** on the right side. Replace **http://** with **https://** since the default security settings disable the HTTP endpoint. Load the page for this URL into your browser.
+Determine the web endpoint of your Split-Merge service. You can find this in the portal by going to the **Overview** of your cloud service and looking under **Site URL** on the right side. Replace **http://** with **https://** since the default security settings disable the HTTP endpoint. Load the page for this URL into your browser.
 
 ### <a name="test-with-powershell-scripts"></a>Test with PowerShell scripts
 The deployment and your environment can be tested by running the included sample PowerShell scripts.
@@ -180,7 +169,7 @@ The script files included are:
        <td>2.    Creates 2 shard databases.
      </tr>
      <tr>
-       <td>3.    Creates a shard map for those database (deletes any existing shard maps on those databases). </td>
+       <td>3.    Creates a shard map for those databases (deletes any existing shard maps on those databases). </td>
      </tr>
      <tr>
        <td>4.    Creates a small sample table in both the shards, and populates the table in one of the shards.</td>
@@ -338,12 +327,9 @@ In this case, check your configuration file, in particular the setting for **Wor
 [!INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
 
 <!--Image references-->
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-database/media/sql-database-elastic-scale-configure-deploy-split-and-merge/allowed-services.png
+[1]: ./media/sql-database-elastic-scale-configure-deploy-split-and-merge/allowed-services.png
 [2]: ./media/sql-database-elastic-scale-configure-deploy-split-and-merge/manage.png
-[3]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-database/media/sql-database-elastic-scale-configure-deploy-split-and-merge/staging.png
-[4]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-database/media/sql-database-elastic-scale-configure-deploy-split-and-merge/upload.png
+[3]: ./media/sql-database-elastic-scale-configure-deploy-split-and-merge/staging.png
+[4]: ./media/sql-database-elastic-scale-configure-deploy-split-and-merge/upload.png
 [5]: ./media/sql-database-elastic-scale-configure-deploy-split-and-merge/storage.png
-
-
-
 

@@ -14,12 +14,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 06/14/2016
 ms.author: douglasl
-ms.openlocfilehash: 38e1909713cbd1c9302cdefa519ec7f17f79752b
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: ceb355d2ba872ed5d3886c6dc82ca75b1854db0a
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44555347"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44819811"
 ---
 # <a name="enable-transparent-data-encryption-tde-for-stretch-database-on-azure"></a>Enable Transparent Data Encryption (TDE) for Stretch Database on Azure
 > [!div class="op_single_selector"]
@@ -54,10 +54,8 @@ To disable TDE for an Azure database that's storing the data migrated from a Str
 
 
 <!--Image references-->
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-server-stretch-database/media/sql-server-stretch-database-encryption-tde/stretchtde1.png
-[2]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-server-stretch-database/media/sql-server-stretch-database-encryption-tde/stretchtde2.png
+[1]: ./media/sql-server-stretch-database-encryption-tde/stretchtde1.png
+[2]: ./media/sql-server-stretch-database-encryption-tde/stretchtde2.png
 
 
 <!--Link references-->
-
-

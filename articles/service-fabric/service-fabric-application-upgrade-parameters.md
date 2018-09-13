@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: a4170ac6-192e-44a8-b93d-7e39c92a347e
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 03/02/2017
+ms.date: 2/23/2018
 ms.author: subramar
-ms.openlocfilehash: aa26d72524f035cca92cd39062873ceb15bffac1
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: eb319b0f4e910163572ee62d8bdee735f27be592
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44562768"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44824543"
 ---
 # <a name="application-upgrade-parameters"></a>Application upgrade parameters
 This article describes the various parameters that apply during the upgrade of an Azure Service Fabric application. The parameters include the name and version of the application. They are knobs that control the time-outs and health checks that are applied during the upgrade, and they specify the policies that must be applied when an upgrade fails.
@@ -53,7 +53,7 @@ The health evaluation criteria are optional. If the health evaluation criteria a
 | MaxPercentUnhealthyServices |Default and recommended value is 0. Specify the maximum number of services in the application instance that can be unhealthy before the application is considered unhealthy and fails the upgrade. |
 | MaxPercentUnhealthyPartitionsPerService |Default and recommended value is 0. Specify the maximum number of partitions in a service that can be unhealthy before the service is considered unhealthy. |
 | MaxPercentUnhealthyReplicasPerPartition |Default and recommended value is 0. Specify the maximum number of replicas in partition that can be unhealthy before the partition is considered unhealthy. |
-| UpgradeReplicaSetCheckTimeout |**Stateless service**--Within a single upgrade domain, Service Fabric tries to ensure that additional instances of the service are available. If the target instance count is more than one, Service Fabric waits for more than one instance to be available, up to a maximum time-out value. This time-out is specified by using the UpgradeReplicaSetCheckTimeout property. If the time-out expires, Service Fabric proceeds with the upgrade, regardless of the number of service instances. If the target instance count is one, Service Fabric does not wait, and immediately proceeds with the upgrade. **Stateful service**--Within a single upgrade domain, Service Fabric tries to ensure that the replica set has a quorum. Service Fabric waits for a quorum to be available, up to a maximum time-out value (specified by the UpgradeReplicaSetCheckTimeout property). If the time-out expires, Service Fabric proceeds with the upgrade, regardless of quorum. This setting is set as never (infinite) when rolling forward, and 900 seconds when rolling back. |
+| UpgradeReplicaSetCheckTimeout |<p>**Stateless service**--Within a single upgrade domain, Service Fabric tries to ensure that additional instances of the service are available. If the target instance count is more than one, Service Fabric waits for more than one instance to be available, up to a maximum time-out value. This time-out is specified by using the UpgradeReplicaSetCheckTimeout property. If the time-out expires, Service Fabric proceeds with the upgrade, regardless of the number of service instances. If the target instance count is one, Service Fabric does not wait, and immediately proceeds with the upgrade.</p><p>**Stateful service**--Within a single upgrade domain, Service Fabric tries to ensure that the replica set has a quorum. Service Fabric waits for a quorum to be available, up to a maximum time-out value (specified by the UpgradeReplicaSetCheckTimeout property). If the time-out expires, Service Fabric proceeds with the upgrade, regardless of quorum. This setting is set as never (infinite) when rolling forward, and 1200 seconds when rolling back.</p> |
 | ForceRestart |If you update a configuration or data package without updating the service code, the service is restarted only if the ForceRestart property is set to true. When the update is complete, Service Fabric notifies the service that a new configuration package or data package is available. The service is responsible for applying the changes. If necessary, the service can restart itself. |
 
 <br>
@@ -65,7 +65,7 @@ The MaxPercentUnhealthyServices, MaxPercentUnhealthyPartitionsPerService, and Ma
 
 [Upgrading your Application Using Powershell](service-fabric-application-upgrade-tutorial-powershell.md) walks you through an application upgrade using PowerShell.
 
-[Upgrading your Application using Azure CLI on Linux](service-fabric-azure-cli.md#upgrading-your-application) walks you through an application upgrade using Azure CLI.
+[Upgrading your Application using Service Fabric CLI on Linux](service-fabric-application-lifecycle-sfctl.md#upgrade-application) walks you through an application upgrade using Service Fabric CLI.
 
 [Upgrading your application using Service Fabric Eclipse Plugin](service-fabric-get-started-eclipse.md#upgrade-your-service-fabric-java-application)
 

@@ -3,22 +3,22 @@ title: PowerShell script to create an Application Insights resource | Microsoft 
 description: Automate creation of Application Insights resources.
 services: application-insights
 documentationcenter: windows
-author: alancameronwills
-manager: douge
+author: mrbullwinkle
+manager: carmonm
 ms.assetid: f0082c9b-43ad-4576-a417-4ea8e0daf3d9
 ms.service: application-insights
 ms.workload: tbd
 ms.tgt_pltfrm: ibiza
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.date: 11/19/2016
-ms.author: awills
-ms.openlocfilehash: 8df9b57333995a93bacf17d58c38c1087b58f32a
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: mbullwin
+ms.openlocfilehash: 0f2bf1e318729ae8ccb0f4f521b2a795cf932a86
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44670151"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44803938"
 ---
 # <a name="powershell-script-to-create-an-application-insights-resource"></a>PowerShell script to create an Application Insights resource
 
@@ -52,7 +52,7 @@ See the relevant cmdlet specs:
 # If running manually, uncomment before the first 
 # execution to login to the Azure Portal:
 
-# Add-AzureRmAccount
+# Connect-AzureRmAccount / Connect-AzureRmAccount
 
 # Set the name of the Application Insights Resource
 
@@ -78,10 +78,10 @@ Select-AzureSubscription -SubscriptionName "MySubscription"
 
 $resource = New-AzureRmResource `
   -ResourceName $appInsightsName `
-  -ResourceGroupName Fabrikam `
-  -Tag @{ applicationType = "web", applicationName = $applicationTagName} `
+  -ResourceGroupName $resourceGroupName `
+  -Tag @{ applicationType = "web"; applicationName = $applicationTagName} `
   -ResourceType "Microsoft.Insights/components" `
-  -Location "East US" `  // or North Europe, West Europe, South Central US
+  -Location "East US" `  # or North Europe, West Europe, South Central US
   -PropertyObject @{"Application_Type"="web"} `
   -Force
 

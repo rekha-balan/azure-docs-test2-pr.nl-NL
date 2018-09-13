@@ -1,0 +1,36 @@
+items:
+- name: Project Answer Search Documentation
+- name: Overview
+  items:
+  - name: What is Project Answer Search?
+    href: overview.md
+  expanded: true
+- name: Quickstarts
+  items:
+  - name: C#
+    href: c-sharp-quickstart.md
+  - name: Java
+    href: java-quickstart.md
+  - name: Node
+    href: node-quickstart.md
+  - name: Python
+    href: python-quickstart.md
+  expanded: true
+- name: Concepts
+  items:
+  - name: Fact queries
+    href: fact-queries.md
+  - name: Entity queries
+    href: entity-queries.md
+- name: Reference
+  items:
+  - name: Use and Display Requirements
+    href: use-display-requirements.md
+  - name: Project Answer Search reference
+    href: reference.md
+ms.openlocfilehash: f1a35a7e5066adc7a805f57820ef56b5414e6035
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44870222"

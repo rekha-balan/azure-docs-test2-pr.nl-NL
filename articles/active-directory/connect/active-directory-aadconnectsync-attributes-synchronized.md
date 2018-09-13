@@ -3,8 +3,8 @@ title: Attributes synchronized by Azure AD Connect | Microsoft Docs
 description: Lists the attributes that are synchronized to Azure Active Directory.
 services: active-directory
 documentationcenter: ''
-author: andkjell
-manager: femila
+author: billmath
+manager: mtillman
 editor: ''
 ms.assetid: c2bb36e0-5205-454c-b9b6-f4990bcedf51
 ms.service: active-directory
@@ -12,14 +12,15 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 01/23/2017
-ms.author: markvi;andkjell
-ms.openlocfilehash: 209f959c8ad24595d9be1ce0a9f5550d51406b6f
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 03/05/2018
+ms.component: hybrid
+ms.author: billmath
+ms.openlocfilehash: 973b11cd7bcb46bfb113998ff4a4e0b9c6317042
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44563930"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44815593"
 ---
 # <a name="azure-ad-connect-sync-attributes-synchronized-to-azure-active-directory"></a>Azure AD Connect sync: Attributes synchronized to Azure Active Directory
 This topic lists the attributes that are synchronized by Azure AD Connect sync.  
@@ -27,7 +28,7 @@ The attributes are grouped by the related Azure AD app.
 
 ## <a name="attributes-to-synchronize"></a>Attributes to synchronize
 A common question is *what is the list of minimum attributes to synchronize*. The default and recommended approach is to keep the default attributes so a full GAL (Global Address List) can be constructed in the cloud and to get all features in Office 365 workloads. In some cases, there are some attributes that your organization does not want synchronized to the cloud since these attributes contain sensitive or PII (Personally identifiable information) data, like in this example:  
-![bad attributes](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnectsync-attributes-synchronized/badextensionattribute.png)
+![bad attributes](./media/active-directory-aadconnectsync-attributes-synchronized/badextensionattribute.png)
 
 In this case, start with the list of attributes in this topic and identify those attributes that would contain sensitive or PII data and cannot be synchronized. Then deselect those attributes during installation using [Azure AD app and attribute filtering](active-directory-aadconnect-get-started-custom.md#azure-ad-app-and-attribute-filtering).
 
@@ -43,7 +44,7 @@ In this case, start with the list of attributes in this topic and identify those
 | cn |X | |
 | displayName |X | |
 | objectSID |X |mechanical property. AD user identifier used to maintain sync between Azure AD and AD. |
-| pwdLastSet |X |mechanical property. Used to know when to invalidate already issued tokens. Used by both password sync and federation. |
+| pwdLastSet |X |mechanical property. Used to know when to invalidate already issued tokens. Used by both password hash sync, pass-through authentication and federation. |
 | sourceAnchor |X |mechanical property. Immutable identifier to maintain relationship between ADDS and Azure AD. |
 | usageLocation |X |mechanical property. The user’s country. Used for license assignment. |
 | userPrincipalName |X |UPN is the login ID for the user. Most often the same as [mail] value. |
@@ -53,6 +54,7 @@ In this case, start with the list of attributes in this topic and identify those
 | --- |:---:|:---:|:---:| --- |
 | accountEnabled |X | | |Defines if an account is enabled. |
 | assistant |X |X | | |
+| altRecipient |X | | |Requires Azure AD Connect build 1.1.552.0 or after. |
 | authOrig |X |X |X | |
 | c |X |X | | |
 | cn |X | |X | |
@@ -87,7 +89,7 @@ In this case, start with the list of attributes in this topic and identify those
 | l |X |X | | |
 | legacyExchangeDN |X |X |X | |
 | mailNickname |X |X |X | |
-| mangedBy | | |X | |
+| managedBy | | |X | |
 | manager |X |X | | |
 | member | | |X | |
 | mobile |X |X | | |
@@ -102,6 +104,7 @@ In this case, start with the list of attributes in this topic and identify those
 | msExchAuditOwner |X | | | |
 | msExchBlockedSendersHash |X |X | | |
 | msExchBypassAudit |X | | | |
+| msExchBypassModerationLink | | |X |Available in Azure AD Connect version 1.1.524.0 |
 | msExchCoManagedByLink | | |X | |
 | msExchDelegateListLink |X | | | |
 | msExchELCExpirySuspensionEnd |X | | | |
@@ -230,10 +233,10 @@ In this case, start with the list of attributes in this topic and identify those
 | pager |X |X | | |
 | physicalDeliveryOfficeName |X |X | | |
 | postalCode |X |X | | |
-| postOfficeBox |X |X | | |
+| postOfficeBox |X |X | |This attribute is currently not consumed by SharePoint Online. |
 | preferredLanguage |X | | | |
 | proxyAddresses |X |X |X | |
-| pwdLastSet |X | | |mechanical property. Used to know when to invalidate already issued tokens. Used by both password sync and federation. |
+| pwdLastSet |X | | |mechanical property. Used to know when to invalidate already issued tokens. Used by both password hash sync, pass-through authentication and federation. |
 | reportToOriginator | | |X | |
 | reportToOwner | | |X | |
 | securityEnabled | | |X |Derived from groupType |
@@ -252,7 +255,7 @@ In this case, start with the list of attributes in this topic and identify those
 | userPrincipalName |X | | |UPN is the login ID for the user. Most often the same as [mail] value. |
 | wWWHomePage |X |X | | |
 
-## <a name="lync-online"></a>Lync Online
+## <a name="lync-online-subsequently-known-as-skype-for-business"></a>Lync Online (subsequently known as Skype for Business)
 | Attribute Name | User | Contact | Group | Comment |
 | --- |:---:|:---:|:---:| --- |
 | accountEnabled |X | | |Defines if an account is enabled. |
@@ -288,7 +291,7 @@ In this case, start with the list of attributes in this topic and identify those
 | postalCode |X |X | | |
 | preferredLanguage |X | | | |
 | proxyAddresses |X |X |X | |
-| pwdLastSet |X | | |mechanical property. Used to know when to invalidate already issued tokens. Used by both password sync and federation. |
+| pwdLastSet |X | | |mechanical property. Used to know when to invalidate already issued tokens. Used by both password hash sync, pass-through authentication and federation. |
 | securityEnabled | | |X |Derived from groupType |
 | sn |X |X | | |
 | sourceAnchor |X |X |X |mechanical property. Immutable identifier to maintain relationship between ADDS and Azure AD. |
@@ -330,7 +333,7 @@ In this case, start with the list of attributes in this topic and identify those
 | member | | |X | |
 | objectSID |X | |X |mechanical property. AD user identifier used to maintain sync between Azure AD and AD. |
 | proxyAddresses |X |X |X | |
-| pwdLastSet |X | | |mechanical property. Used to know when to invalidate already issued tokens. Used by both password sync and federation. |
+| pwdLastSet |X | | |mechanical property. Used to know when to invalidate already issued tokens. Used by both password hash sync, pass-through authentication and federation. |
 | securityEnabled | | |X |Derived from groupType |
 | sourceAnchor |X |X |X |mechanical property. Immutable identifier to maintain relationship between ADDS and Azure AD. |
 | usageLocation |X | | |mechanical property. The user’s country. Used for license assignment. |
@@ -358,7 +361,7 @@ In this case, start with the list of attributes in this topic and identify those
 | physicalDeliveryOfficeName |X |X | | |
 | postalCode |X |X | | |
 | preferredLanguage |X | | | |
-| pwdLastSet |X | | |mechanical property. Used to know when to invalidate already issued tokens. Used by both password sync and federation. |
+| pwdLastSet |X | | |mechanical property. Used to know when to invalidate already issued tokens. Used by both password hash sync, pass-through authentication and federation. |
 | securityEnabled | | |X |Derived from groupType |
 | sn |X |X | | |
 | sourceAnchor |X |X |X |mechanical property. Immutable identifier to maintain relationship between ADDS and Azure AD. |
@@ -389,7 +392,7 @@ This group is a set of attributes that can be used if the Azure AD directory is 
 | member | | |X | |
 | objectSID |X | | |mechanical property. AD user identifier used to maintain sync between Azure AD and AD. |
 | proxyAddresses |X |X |X | |
-| pwdLastSet |X | | |mechanical property. Used to know when to invalidate already issued tokens. Used by both password sync and federation. |
+| pwdLastSet |X | | |mechanical property. Used to know when to invalidate already issued tokens. Used by both password hash sync, pass-through authentication and federation. |
 | sn |X |X | | |
 | sourceAnchor |X |X |X |mechanical property. Immutable identifier to maintain relationship between ADDS and Azure AD. |
 | usageLocation |X | | |mechanical property. The user’s country. Used for license assignment. |
@@ -416,20 +419,34 @@ These attributes for **user** are in addition to the other apps you have selecte
 | --- |:---:| --- |
 | domainFQDN |X |Also called dnsDomainName. For example, contoso.com. |
 | domainNetBios |X |Also called netBiosName. For example, CONTOSO. |
+| msDS-KeyCredentialLink |X |Once the user is enrolled in Windows Hello for Business. | 
 
 ## <a name="exchange-hybrid-writeback"></a>Exchange hybrid writeback
 These attributes are written back from Azure AD to on-premises Active Directory when you select to enable **Exchange hybrid**. Depending on your Exchange version, fewer attributes might be synchronized.
 
-| Attribute Name | User | Contact | Group | Comment |
-| --- |:---:|:---:|:---:| --- |
-| msDS-ExternalDirectoryObjectID |X | | |Derived from cloudAnchor in Azure AD. This attribute is new in Exchange 2016 and Windows Server 2016 AD. |
-| msExchArchiveStatus |X | | |Online Archive: Enables customers to archive mail. |
-| msExchBlockedSendersHash |X | | |Filtering: Writes back on-premises filtering and online safe and blocked sender data from clients. |
-| msExchSafeRecipientsHash |X | | |Filtering: Writes back on-premises filtering and online safe and blocked sender data from clients. |
-| msExchSafeSendersHash |X | | |Filtering: Writes back on-premises filtering and online safe and blocked sender data from clients. |
-| msExchUCVoiceMailSettings |X | | |Enable Unified Messaging (UM) - Online voice mail: Used by Microsoft Lync Server integration to indicate to Lync Server on-premises that the user has voice mail in online services. |
-| msExchUserHoldPolicies |X | | |Litigation Hold: Enables cloud services to determine which users are under Litigation Hold. |
-| proxyAddresses |X |X |X |Only the x500 address from Exchange Online is inserted. |
+| Attribute Name (Connect UI) |Attribute Name (On-premises AD) | User | Contact | Group | Comment |
+| --- |:---:|:---:|:---:| --- |---|
+| msDS-ExternalDirectoryObjectID| ms-DS-External-Directory-Object-Id |X | | |Derived from cloudAnchor in Azure AD. This attribute is new in Exchange 2016 and Windows Server 2016 AD. |
+| msExchArchiveStatus| ms-Exch-ArchiveStatus |X | | |Online Archive: Enables customers to archive mail. |
+| msExchBlockedSendersHash| ms-Exch-BlockedSendersHash |X | | |Filtering: Writes back on-premises filtering and online safe and blocked sender data from clients. |
+| msExchSafeRecipientsHash| ms-Exch-SafeRecipientsHash  |X | | |Filtering: Writes back on-premises filtering and online safe and blocked sender data from clients. |
+| msExchSafeSendersHash| ms-Exch-SafeSendersHash  |X | | |Filtering: Writes back on-premises filtering and online safe and blocked sender data from clients. |
+| msExchUCVoiceMailSettings| ms-Exch-UCVoiceMailSettings |X | | |Enable Unified Messaging (UM) - Online voice mail: Used by Microsoft Lync Server integration to indicate to Lync Server on-premises that the user has voice mail in online services. |
+| msExchUserHoldPolicies| ms-Exc-hUserHoldPolicies |X | | |Litigation Hold: Enables cloud services to determine which users are under Litigation Hold. |
+| proxyAddresses| proxyAddresses |X |X |X |Only the x500 address from Exchange Online is inserted. |
+| publicDelegates| ms-Exch-Public-Delegates  |X | | |Allows an Exchange Online mailbox to be granted SendOnBehalfTo rights to users with on-premises Exchange mailbox. Requires Azure AD Connect build 1.1.552.0 or after. |
+
+## <a name="exchange-mail-public-folder"></a>Exchange Mail Public Folder
+These attributes are synchronized from on-premises Active Directory to Azure AD when you select to enable **Exchange Mail Public Folder**.
+
+| Attribute Name | PublicFolder | Comment |
+| --- | :---:| --- |
+| displayName | X |  |
+| mail | X |  |
+| msExchRecipientTypeDetails | X |  |
+| objectGUID | X |  |
+| proxyAddresses | X |  |
+| targetAddress | X |  |
 
 ## <a name="device-writeback"></a>Device writeback
 Device objects are created in Active Directory. These objects can be devices joined to Azure AD or domain-joined Windows 10 computers.
@@ -459,4 +476,3 @@ Device objects are created in Active Directory. These objects can be devices joi
 Learn more about the [Azure AD Connect sync](active-directory-aadconnectsync-whatis.md) configuration.
 
 Learn more about [Integrating your on-premises identities with Azure Active Directory](active-directory-aadconnect.md).
-

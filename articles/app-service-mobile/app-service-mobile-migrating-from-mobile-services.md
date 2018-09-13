@@ -3,8 +3,8 @@ title: Migrate from Mobile Services to an App Service Mobile App
 description: Learn how to easily migrate your Mobile Services application to an App Service Mobile App
 services: app-service\mobile
 documentationcenter: ''
-author: adrianhall
-manager: adrianha
+author: conceptdev
+manager: crdun
 editor: ''
 ms.assetid: 07507ea2-690f-4f79-8776-3375e2adeb9e
 ms.service: app-service-mobile
@@ -13,13 +13,13 @@ ms.tgt_pltfrm: mobile
 ms.devlang: na
 ms.topic: article
 ms.date: 10/03/2016
-ms.author: adrianha
-ms.openlocfilehash: 01e1879fefb50381bcb6096f23c0a5e8b12e0e16
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: crdun
+ms.openlocfilehash: 5001704f47af0c7b07744f1dceb7aa58bdb6448c
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44554811"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44808898"
 ---
 # <a name="article-top"></a>Migrate your existing Azure Mobile Service to Azure App Service
 With the [general availability of Azure App Service], Azure Mobile Services sites can be easily migrated in-place to take advantage of all the features of the Azure App Service.  This document explains what to expect when migrating your site from Azure Mobile Services to Azure App Service.
@@ -33,8 +33,7 @@ Migration of your Azure Mobile Service turns your Mobile Service into an [Azure 
 Microsoft is recommending that you migrate your Azure Mobile Service to take advantage of the features of Azure App Service, including:
 
 * New host features, including [WebJobs] and [custom domain names].
-* Connectivity to your on-premise resources using [VNet] in addition to [Hybrid Connections].
-* Monitoring and troubleshooting with New Relic or [Application Insights].
+* Monitoring and troubleshooting with [Application Insights].
 * Built-in DevOps tooling, including [staging slots], roll-back, and in-production testing.
 * [Auto-scale], load balancing, and [performance monitoring].
 
@@ -51,7 +50,7 @@ To migrate your site:
 1. Log in to the [Azure Classic Portal].
 2. Select a Mobile Service in the region you wish to migrate.
 3. Click the **Migrate to App Service** button.
-   
+
    ![The Migrate Button][0]
 4. Read the Migrate to App Service dialog.
 5. Enter the name of your Mobile Service in the box provided.  For example, if your domain name is contoso.azure-mobile.net, then enter *contoso* in the box provided.
@@ -89,8 +88,8 @@ There is considerable flexibility in choosing the right pricing tier for your ap
 
 > [!TIP]
 > The App Service Standard tier contains access to many features that you may want to use, including [staging slots], automatic backups, and auto-scaling.  Check out the new capabilities while you are there!
-> 
-> 
+>
+>
 
 ### <a name="review-migration-scheduler-jobs"></a>Review the Migrated Scheduler Jobs
 Scheduler Jobs will not be visible until approximately 30 minutes after migration.  Scheduled jobs continue to run in the background.
@@ -115,8 +114,8 @@ Your migrated CORS settings are available as the **MS_CrossDomainWhitelist** App
 
 > [!TIP]
 > One of the advantages of using an Azure App Service is that you can run your web site and mobile service on the same site.  For more information, see the [next steps](#next-steps) section.
-> 
-> 
+>
+>
 
 ### <a name="download-publish-profile"></a>Download a new Publishing Profile
 The publishing profile of your site is changed when migrating to Azure App Service.  If you intend to publish your site from within Visual Studio, you need a new publishing profile.  To download the new publishing profile:
@@ -163,8 +162,8 @@ You can update multiple app settings at the same time.
 
 > [!TIP]
 > There are two Application Settings with the same value.  For example, you may see *ApplicationKey* and *MS\_ApplicationKey*.  Update both application settings at the same time.
-> 
-> 
+>
+>
 
 ### <a name="authentication"></a>Authentication
 All authentication settings are available as App Settings in your migrated site.  To update your authentication settings, you must alter the appropriate app settings.  The following table shows the appropriate app settings for your authentication provider:
@@ -181,10 +180,10 @@ Note: **MS\_AadTenants** is stored as a comma-separated list of tenant domains (
 
 > [!WARNING]
 > **Do not use the authentication mechanisms in the Settings menu**
-> 
+>
 > Azure App Service provides a separate "no-code" Authentication and Authorization system under the *Authentication / Authorization* Settings menu and the (deprecated) *Mobile Authentication* option under the Settings menu.  These options are incompatible with a migrated Azure Mobile Service.  You can [upgrade your site](app-service-mobile-net-upgrading-from-mobile-services.md) to take advantage of the Azure App Service authentication.
-> 
-> 
+>
+>
 
 ### <a name="easytables"></a>Data
 The *Data* tab in Mobile Services has been replaced by *Easy Tables* within the Azure portal.  To access Easy Tables:
@@ -250,15 +249,15 @@ Your Notification Hub is managed through the [Azure portal].  Note the Notificat
 
 > [!NOTE]
 > If your Notification HUb is a "Mixed" type, it is not visible.  "Mixed" type notification hubs utilize both Notification Hubs and legacy Service Bus features.  [Convert your Mixed namespaces] before continuing.  Once the conversion is complete, your notification hub appears in the [Azure portal].
-> 
-> 
+>
+>
 
 For more information, review the [Notification Hubs] documentation.
 
 > [!TIP]
 > Notification Hubs management features in the [Azure portal] are still in preview.  The [Azure Classic Portal] remains available for managing all your Notification Hubs.
-> 
-> 
+>
+>
 
 ### <a name="legacy-push"></a>Legacy Push Settings
 If you configured Push on your mobile service before the introduction on Notification Hubs, you are using *legacy push*.  If you are using Push and you do not see a Notification Hub listed in your configuration, then it is likely you are using *legacy push*.  This feature is migrated with all the other features.  However, we recommend that you upgrade to Notification Hubs soon after the migration is complete.
@@ -369,38 +368,33 @@ Now that your application is migrated to App Service, there are even more featur
 * For .NET-based server projects, the new [Mobile Apps SDK NuGet packages](https://www.nuget.org/packages/Microsoft.Azure.Mobile.Server/) have more flexibility on NuGet dependencies.  These packages support the new App Service authentication, and compose with any ASP.NET project. To learn more about upgrading, see [Upgrade your existing .NET Mobile Service to App Service](app-service-mobile-net-upgrading-from-mobile-services.md).
 
 <!-- Images -->
-[0]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/app-service-mobile/media/app-service-mobile-migrating-from-mobile-services/migrate-to-app-service-button.PNG
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/app-service-mobile/media/app-service-mobile-migrating-from-mobile-services/migration-activity-monitor.png
-[2]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/app-service-mobile/media/app-service-mobile-migrating-from-mobile-services/triggering-job-with-postman.png
+[0]: ./media/app-service-mobile-migrating-from-mobile-services/migrate-to-app-service-button.PNG
+[1]: ./media/app-service-mobile-migrating-from-mobile-services/migration-activity-monitor.png
+[2]: ./media/app-service-mobile-migrating-from-mobile-services/triggering-job-with-postman.png
 
 <!-- Links -->
-[App Service pricing]: https://azure.microsoft.com/en-us/pricing/details/app-service/
+[App Service pricing]: https://azure.microsoft.com/pricing/details/app-service/
 [Application Insights]: ../application-insights/app-insights-overview.md
-[Auto-scale]: ../app-service-web/web-sites-scale.md
-[Azure App Service]: ../app-service/app-service-value-prop-what-is.md
-[Azure App Service deployment documentation]: ../app-service-web/web-sites-deploy.md
+[Auto-scale]: ../app-service/web-sites-scale.md
+[Azure App Service]: ../app-service/app-service-web-overview.md
 [Azure Classic Portal]: https://manage.windowsazure.com
 [Azure portal]: https://portal.azure.com
-[Azure Region]: https://azure.microsoft.com/en-us/regions/
+[Azure Region]: https://azure.microsoft.com/regions/
 [Azure Scheduler Plans]: ../scheduler/scheduler-plans-billing.md
-[continuously deploy]: ../app-service-web/app-service-continuous-deployment.md
-[Convert your Mixed namespaces]: https://azure.microsoft.com/en-us/blog/updates-from-notification-hubs-independent-nuget-installation-model-pmt-and-more/
+[continuously deploy]: ../app-service/app-service-continuous-deployment.md
+[Convert your Mixed namespaces]: https://azure.microsoft.com/blog/updates-from-notification-hubs-independent-nuget-installation-model-pmt-and-more/
 [curl]: http://curl.haxx.se/
-[custom domain names]: ../app-service-web/web-sites-custom-domain-name.md
+[custom domain names]: ../app-service/app-service-web-tutorial-custom-domain.md
 [Fiddler]: http://www.telerik.com/fiddler
 [general availability of Azure App Service]: https://azure.microsoft.com/blog/announcing-general-availability-of-app-service-mobile-apps/
-[Hybrid Connections]: ../app-service-web/web-sites-hybrid-connection-get-started.md
-[Logging]: ../app-service-web/web-sites-enable-diagnostic-log.md
+[Hybrid Connections]: ../app-service/app-service-hybrid-connections.md
+[Logging]: ../app-service/web-sites-enable-diagnostic-log.md
 [Mobile Apps Node.js SDK]: https://github.com/azure/azure-mobile-apps-node
 [Mobile Services vs. App Service]: app-service-mobile-value-prop-migration-from-mobile-services.md
 [Notification Hubs]: ../notification-hubs/notification-hubs-push-notification-overview.md
-[performance monitoring]: ../app-service-web/web-sites-monitor.md
+[performance monitoring]: ../app-service/web-sites-monitor.md
 [Postman]: http://www.getpostman.com/
-[staging slots]: ../app-service-web/web-sites-staged-publishing.md
-[VNet]: ../app-service-web/web-sites-integrate-with-vnet.md
-[WebJobs]: ../app-service-web/websites-webjobs-resources.md
+[staging slots]: ../app-service/web-sites-staged-publishing.md
+[VNet]: ../app-service/web-sites-integrate-with-vnet.md
 [XDT Transform Samples]: https://github.com/projectkudu/kudu/wiki/Xdt-transform-samples
 [Functions]: ../azure-functions/functions-overview.md
-
-
-

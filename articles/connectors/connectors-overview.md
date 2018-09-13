@@ -15,12 +15,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 07/15/2016
 ms.author: jehollan
-ms.openlocfilehash: 4ebdc50f305136c6931527a0f63ef8bfe2875a4a
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 6f7d8f99bfa09847c01831a06efa8b94c1c0a89a
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44553633"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44803743"
 ---
 # <a name="using-connectors-in-a-logic-app"></a>Using connectors in a logic app
 Connectors provide quick access to events, data, and actions across services, protocols, and platforms.  The full list of connectors that Logic Apps supports can [be found here](apis-list.md).  Connectors can be used as a trigger or an action in a logic app, and may require a configured *connection* to use (for example: authorizing a Twitter account to access or post on your behalf).
@@ -57,12 +57,10 @@ Most connectors require you to configure a *connection* before you can use the c
 Connections can be viewed and managed in Azure by clicking **Browse** and selecting **API Connections**.  From the API Connections resource you can view, edit, update, or re-authorize any connections you have created.
 
 ## <a name="next-steps"></a>Next Steps
-* [Create your first logic app](../logic-apps/logic-apps-create-a-logic-app.md)
+* [Create your first logic app](../logic-apps/quickstart-create-first-logic-app-workflow.md)
 * [Learn common uses and examples of logic apps](../logic-apps/logic-apps-examples-and-scenarios.md)
 * [Get started with enterprise integration triggers and actions](../logic-apps/logic-apps-enterprise-integration-overview.md)
 
 <!--Image References -->
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/connectors-overview/addAction.png
-[2]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/connectors-overview/configureAction.png
-
-
+[1]: ./media/connectors-overview/addAction.png
+[2]: ./media/connectors-overview/configureAction.png

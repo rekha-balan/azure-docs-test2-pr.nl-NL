@@ -4,7 +4,7 @@ description: Deploy a Microsoft HPC Pack cluster on Azure and run a NAMD simulat
 services: virtual-machines-linux
 documentationcenter: ''
 author: dlepow
-manager: timlt
+manager: jeconnoc
 editor: ''
 tags: azure-service-management,azure-resource-manager,hpc-pack
 ms.assetid: 76072c6b-ac35-4729-ba67-0d16f9443bd7
@@ -15,12 +15,12 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: big-compute
 ms.date: 10/13/2016
 ms.author: danlep
-ms.openlocfilehash: c92e10fde73c3734714e53104e0ee166ffd6f91a
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 61dd49d4bd3183b6b9a78036d6d7d01798e4dc89
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44554771"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44816093"
 ---
 # <a name="run-namd-with-microsoft-hpc-pack-on-linux-compute-nodes-in-azure"></a>Run NAMD with Microsoft HPC Pack on Linux compute nodes in Azure
 This article shows you one way to run a Linux high-performance computing (HPC) workload on Azure virtual machines. Here, you set up a [Microsoft HPC Pack](https://technet.microsoft.com/library/cc514029) cluster on Azure with Linux compute nodes and run a [NAMD](http://www.ks.uiuc.edu/Research/namd/) simulation to calculate and visualize the structure of a large biomolecular system.  
@@ -29,8 +29,6 @@ This article shows you one way to run a Linux high-performance computing (HPC) w
 
 * **NAMD** (for Nanoscale Molecular Dynamics program) is a parallel molecular dynamics package designed for high-performance simulation of large biomolecular systems containing up to millions of atoms. Examples of these systems include viruses, cell structures, and large proteins. NAMD scales to hundreds of cores for typical simulations and to more than 500,000 cores for the largest simulations.
 * **Microsoft HPC Pack** provides features to run large-scale HPC and parallel applications in clusters of on-premises computers or Azure virtual machines. Originally developed as a solution for Windows HPC workloads, HPC Pack now supports running Linux HPC applications on Linux compute node VMs deployed in an HPC Pack cluster. See [Get started with Linux compute nodes in an HPC Pack cluster in Azure](hpcpack-cluster.md) for an introduction.
-
-For other options to run Linux HPC workloads in Azure, see [Technical resources for batch and high-performance computing](../../../batch/batch-hpc-solutions.md).
 
 ## <a name="prerequisites"></a>Prerequisites
 * **HPC Pack cluster with Linux compute nodes** - Deploy an HPC Pack cluster with Linux compute nodes on Azure using either an [Azure Resource Manager template](https://azure.microsoft.com/marketplace/partners/microsofthpc/newclusterlinuxcn/) or an [Azure PowerShell script](hpcpack-cluster-powershell-script.md). See [Get started with Linux compute nodes in an HPC Pack cluster in Azure](hpcpack-cluster.md) for the prerequisites and steps for either option. If you choose the PowerShell script deployment option, see the sample configuration file in the sample files at the end of this article. This file configures an Azure-based HPC Pack cluster consisting of a Windows Server 2012 R2 head node and four size Large CentOS 6.6 compute nodes. Customize this file as needed for your environment.
@@ -87,7 +85,7 @@ It's easy to generate an RSA key pair, which contains a public key and a private
 > 
 
 ## <a name="set-up-a-file-share-for-linux-nodes"></a>Set up a file share for Linux nodes
-Now set up an SMB file share, and mount the shared folder on all Linux nodes to allow the Linux nodes to access NAMD files with a common path. Following are steps to mount a shared folder on the head node. A share is recommended for distributions such as CentOS 6.6 that currently don’t support the Azure File service. If your Linux nodes support an Azure File share, see [How to use Azure File Storage with Linux](../../../storage/storage-how-to-use-files-linux.md). For additional file sharing options with HPC Pack, see [Get started with Linux compute nodes in an HPC Pack Cluster in Azure](hpcpack-cluster.md).
+Now set up an SMB file share, and mount the shared folder on all Linux nodes to allow the Linux nodes to access NAMD files with a common path. Following are steps to mount a shared folder on the head node. A share is recommended for distributions such as CentOS 6.6 that currently don’t support the Azure File service. If your Linux nodes support an Azure File share, see [How to use Azure File storage with Linux](../../../storage/files/storage-how-to-use-files-linux.md). For additional file sharing options with HPC Pack, see [Get started with Linux compute nodes in an HPC Pack Cluster in Azure](hpcpack-cluster.md).
 
 1. Create a folder on the head node, and share it to Everyone by setting Read/Write privileges. In this example, \\\\CentOS66HN\Namd is the name of the folder, where CentOS66HN is the host name of the head node.
 2. Create a subfolder named namd2 in the shared folder. In namd2, create another subfolder named namdsample.
@@ -392,17 +390,10 @@ exit ${RTNSTS}
  
 
 <!--Image references-->
-[keygen]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/hpcpack-cluster-namd/keygen.png
-[keys]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/hpcpack-cluster-namd/keys.png
-[namd_job]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/hpcpack-cluster-namd/namd_job.png
-[job_resources]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/hpcpack-cluster-namd/job_resources.png
-[creds]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/hpcpack-cluster-namd/creds.png
-[task_details]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/hpcpack-cluster-namd/task_details.png
-[vmd_view]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/hpcpack-cluster-namd/vmd_view.png
-
-
-
-
-
-
-
+[keygen]:media/hpcpack-cluster-namd/keygen.png
+[keys]:media/hpcpack-cluster-namd/keys.png
+[namd_job]:media/hpcpack-cluster-namd/namd_job.png
+[job_resources]:media/hpcpack-cluster-namd/job_resources.png
+[creds]:media/hpcpack-cluster-namd/creds.png
+[task_details]:media/hpcpack-cluster-namd/task_details.png
+[vmd_view]:media/hpcpack-cluster-namd/vmd_view.png

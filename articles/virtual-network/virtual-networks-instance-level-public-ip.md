@@ -3,8 +3,8 @@ title: Azure Instance level Public IP (Classic) addresses | Microsoft Docs
 description: Understand instance level public IP (ILPIP) addresses and how to manage them using PowerShell.
 services: virtual-network
 documentationcenter: na
-author: jimdial
-manager: timlt
+author: genlin
+manager: cshepard
 editor: tysonn
 ms.assetid: 07eef6ec-7dfe-4c4d-a2c2-be0abfb48ec5
 ms.service: virtual-network
@@ -12,14 +12,14 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 02/10/2016
-ms.author: jdial
-ms.openlocfilehash: f99b36a206f50272c53446d154479fbd87d93911
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 08/03/2018
+ms.author: genli
+ms.openlocfilehash: cb8ba5169a6ebfbb11ba0acfa9b9f463b7cdf6a1
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44554809"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44814410"
 ---
 # <a name="instance-level-public-ip-classic-overview"></a>Instance level public IP (Classic) overview
 An instance level public IP (ILPIP) is a public IP address that you can assign directly to a VM or Cloud Services role instance, rather than to the cloud service that your VM or role instance reside in. An ILPIP doesn’t take the place of the virtual IP (VIP) that is assigned to your cloud service. Rather, it’s an additional IP address that you can use to connect directly to your VM or role instance.
@@ -27,7 +27,7 @@ An instance level public IP (ILPIP) is a public IP address that you can assign d
 > [!IMPORTANT]
 > Azure has two different deployment models for creating and working with resources:  [Resource Manager and classic](../azure-resource-manager/resource-manager-deployment-model.md?toc=%2fazure%2fvirtual-network%2ftoc.json). This article covers using the classic deployment model. Microsoft recommends creating VMs through Resource Manager. Make sure you understand how [IP addresses](virtual-network-ip-addresses-overview-classic.md) work in Azure.
 
-![Difference between ILPIP and VIP](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-network/media/virtual-networks-instance-level-public-ip/Figure1.png)
+![Difference between ILPIP and VIP](./media/virtual-networks-instance-level-public-ip/Figure1.png)
 
 As shown in Figure 1, the cloud service is accessed using a VIP, while the individual VMs are normally accessed using VIP:&lt;port number&gt;. By assigning an ILPIP to a specific VM, that VM can be accessed directly using that IP address.
 
@@ -44,7 +44,7 @@ When you create a cloud service in Azure, corresponding DNS A records are create
 ## <a name="why-would-i-request-an-ilpip"></a>Why would I request an ILPIP?
 If you want to be able to connect to your VM or role instance by an IP address assigned directly to it, rather than using the cloud service VIP:&lt;port number&gt;, request an ILPIP for your VM or your role instance.
 
-* **Active FTP** - By assigning an ILPIP to a VM, it can receive traffic on any port. Endpoints are not required for the VM to receive traffic.  See (https://en.wikipedia.org/wiki/File_Transfer_Protocol#Protocol_overview)[FTP Protocol Overview] for details on the FTP protocol.
+* **Active FTP** - By assigning an ILPIP to a VM, it can receive traffic on any port. Endpoints are not required for the VM to receive traffic.  See [FTP Protocol Overview] (https://en.wikipedia.org/wiki/File_Transfer_Protocol#Protocol_overview) for details on the FTP protocol.
 * **Outbound IP** - Outbound traffic originating from the VM is mapped to the ILPIP as the source and the ILPIP uniquely identifies the VM to external entities.
 
 > [!NOTE]
@@ -60,10 +60,26 @@ The following PowerShell script creates a cloud service named *FTPService*, retr
 ```powershell
 New-AzureService -ServiceName FTPService -Location "Central US"
 
-$image = Get-AzureVMImage|?{$_.ImageName -like "*RightImage-Windows-2012R2-x64*"} `
+$image = Get-AzureVMImage|?{$_.ImageName -like "*RightImage-Windows-2012R2-x64*"}
+
+#Set "current" storage account for the subscription. It will be used as the location of new VM disk
+
+Set-AzureSubscription -SubscriptionName <SubName> -CurrentStorageAccountName <StorageAccountName>
+
+#Create a new VM configuration object
+
 New-AzureVMConfig -Name FTPInstance -InstanceSize Small -ImageName $image.ImageName `
 | Add-AzureProvisioningConfig -Windows -AdminUsername adminuser -Password MyP@ssw0rd!! `
 | Set-AzurePublicIP -PublicIPName ftpip | New-AzureVM -ServiceName FTPService -Location "Central US"
+
+```
+If you want to specify another storage account as the location of new VM disk, you can use **MediaLocation** parameter:
+
+```powershell
+    New-AzureVMConfig -Name FTPInstance -InstanceSize Small -ImageName $image.ImageName `
+     -MediaLocation https://management.core.windows.net/<SubscriptionID>/services/storageservices/<StorageAccountName> `
+    | Add-AzureProvisioningConfig -Windows -AdminUsername adminuser -Password MyP@ssw0rd!! `
+    | Set-AzurePublicIP -PublicIPName ftpip | New-AzureVM -ServiceName FTPService -Location "Central US"
 ```
 
 ### <a name="how-to-retrieve-ilpip-information-for-a-vm"></a>How to retrieve ILPIP information for a VM
@@ -145,7 +161,16 @@ To add an ILPIP to a Cloud Services role instance, complete the following steps:
     ```
 3. Upload the .cscfg file for the cloud service by completing the steps in the [How to Configure Cloud Services](../cloud-services/cloud-services-how-to-configure-portal.md?toc=%2fazure%2fvirtual-network%2ftoc.json#reconfigure-your-cscfg) article.
 
+### <a name="how-to-retrieve-ilpip-information-for-a-cloud-service"></a>How to retrieve ILPIP information for a Cloud Service
+To view the ILPIP information per role instance, run the following PowerShell command and observe the values for *PublicIPAddress* and *PublicIPName*:
+
+```powershell
+$roles = Get-AzureRole -ServiceName PaaSFTPService -Slot Production -RoleName WorkerRole1 -InstanceDetails
+
+$roles[0].PublicIPAddress
+$roles[1].PublicIPAddress
+```
+
 ## <a name="next-steps"></a>Next steps
 * Understand how [IP addressing](virtual-network-ip-addresses-overview-classic.md) works in the classic deployment model.
 * Learn about [Reserved IPs](virtual-networks-reserved-public-ip.md).
-

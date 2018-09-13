@@ -2,24 +2,22 @@
 title: Constructing filter strings for the table designer | Microsoft Docs
 description: Constructing filter strings for the table designer
 services: visual-studio-online
-documentationcenter: na
-author: TomArcher
+author: ghogen
 manager: douge
-editor: ''
-ms.assetid: a1a10ea1-687a-4ee1-a952-6b24c2fe1a22
-ms.service: storage
-ms.devlang: multiple
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
+assetId: a1a10ea1-687a-4ee1-a952-6b24c2fe1a22
+ms.prod: visual-studio-dev15
+ms.technology: vs-azure
+ms.custom: vs-azure
+ms.workload: azure-vs
+ms.topic: conceptual
 ms.date: 11/18/2016
-ms.author: tarcher
-ms.openlocfilehash: fb2fa8e147ad32ba01db67a79526c9b500564a21
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: ghogen
+ms.openlocfilehash: 3ed3e0829932a6db37b4bd48627b68480f5d7343
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44670753"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44811459"
 ---
 # <a name="constructing-filter-strings-for-the-table-designer"></a>Constructing Filter Strings for the Table Designer
 ## <a name="overview"></a>Overview

@@ -3,8 +3,8 @@ title: Install MongoDB on a Windows VM in Azure | Microsoft Docs
 description: Learn how to install MongoDB on an Azure VM running Windows Server 2012 R2 created with the Resource Manager deployment model.
 services: virtual-machines-windows
 documentationcenter: ''
-author: iainfoulds
-manager: timlt
+author: cynthn
+manager: jeconnoc
 editor: ''
 ms.assetid: 53faf630-8da5-4955-8d0b-6e829bf30cba
 ms.service: virtual-machines-windows
@@ -12,49 +12,49 @@ ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-windows
 ms.devlang: na
 ms.topic: article
-ms.date: 12/20/2016
-ms.author: iainfou
-ms.openlocfilehash: 06a2d21759ef6d3670b930808097a3894f0d8155
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 12/15/2017
+ms.author: cynthn
+ms.openlocfilehash: 9fa6242910e912872184401d4cc345006cbac13b
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44540761"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44801013"
 ---
 # <a name="install-and-configure-mongodb-on-a-windows-vm-in-azure"></a>Install and configure MongoDB on a Windows VM in Azure
-[MongoDB](http://www.mongodb.org) is a popular open-source, high-performance NoSQL database. This article guides you through installing and configuring MongoDB on a Windows Server 2012 R2 virtual machine (VM) in Azure. You can also [install MongoDB on a Linux VM in Azure](../linux/install-mongodb.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
+[MongoDB](http://www.mongodb.org) is a popular open-source, high-performance NoSQL database. This article guides you through installing and configuring MongoDB on a Windows Server 2016 virtual machine (VM) in Azure. You can also [install MongoDB on a Linux VM in Azure](../linux/install-mongodb.md).
 
 ## <a name="prerequisites"></a>Prerequisites
 Before you install and configure MongoDB, you need to create a VM and, ideally, add a data disk to it. See the following articles to create a VM and add a data disk:
 
-* [Create a Windows Server VM using the Azure portal](../virtual-machines-windows-hero-tutorial.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) or [Create a Windows Server VM using Azure PowerShell](../virtual-machines-windows-ps-create.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
-* [Attach a data disk to a Windows Server VM using the Azure portal](attach-disk-portal.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) or [Attach a data disk to a Windows Server VM using Azure PowerShell](https://msdn.microsoft.com/library/mt603673.aspx)
+* Create a Windows Server VM using [the Azure portal](quick-create-portal.md) or [Azure PowerShell](quick-create-powershell.md).
+* Attach a data disk to a Windows Server VM using [the Azure portal](attach-managed-disk-portal.md) or [Azure PowerShell](attach-disk-ps.md).
 
-To begin installing and configuring MongoDB, [log on to your Windows Server VM](connect-logon.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) by using Remote Desktop.
+To begin installing and configuring MongoDB, [log on to your Windows Server VM](connect-logon.md) by using Remote Desktop.
 
 ## <a name="install-mongodb"></a>Install MongoDB
 > [!IMPORTANT]
 > MongoDB security features, such as authentication and IP address binding, are not enabled by default. Security features should be enabled before deploying MongoDB to a production environment. For more information, see [MongoDB Security and Authentication](http://www.mongodb.org/display/DOCS/Security+and+Authentication).
-> 
-> 
 
-1. After you've connected to your VM using Remote Desktop, open Internet Explorer from the **Start** menu on the VM.
+
+1. After you've connected to your VM using Remote Desktop, open Internet Explorer from the taskbar.
 2. Select **Use recommended security, privacy, and compatibility settings** when Internet Explorer first opens, and click **OK**.
 3. Internet Explorer enhanced security configuration is enabled by default. Add the MongoDB website to the list of allowed sites:
    
    * Select the **Tools** icon in the upper-right corner.
    * In **Internet Options**, select the **Security** tab, and then select the **Trusted Sites** icon.
-   * Click the **Sites** button. Add *https://\*.mongodb.org* to the list of trusted sites, and then close the dialog box.
+   * Click the **Sites** button. Add *https://\*.mongodb.com* to the list of trusted sites, and then close the dialog box.
      
-     ![Configure Internet Explorer security settings](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/media/install-mongodb/configure-internet-explorer-security.png)
-4. Browse to the [MongoDB - Downloads](http://www.mongodb.org/downloads) page (http://www.mongodb.org/downloads).
-5. If needed, select the **Community Server** edition and then select the latest current stable release for Windows Server 2008 R2 64-bit and later. To download the installer, click **DOWNLOAD (msi)**.
+     ![Configure Internet Explorer security settings](./media/install-mongodb/configure-internet-explorer-security.png)
+4. Browse to the [MongoDB - Downloads](http://www.mongodb.com/downloads) page (http://www.mongodb.com/downloads).
+5. If needed, select the **Community Server** edition and then select the latest current stable release for*Windows Server 2008 R2 64-bit and later*. To download the installer, click **DOWNLOAD (msi)**.
    
-    ![Download MongoDB installer](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/media/install-mongodb/download-mongodb.png)
+    ![Download MongoDB installer](./media/install-mongodb/download-mongodb.png)
    
     Run the installer after the download is complete.
 6. Read and accept the license agreement. When you're prompted, select **Complete** install.
-7. On the final screen, click **Install**.
+7. If desired, you can choose to also install Compass, a graphical interface for MongoDB.
+8. On the final screen, click **Install**.
 
 ## <a name="configure-the-vm-and-mongodb"></a>Configure the VM and MongoDB
 1. The path variables are not updated by the MongoDB installer. Without the MongoDB `bin` location in your path variable, you need to specify the full path each time you use a MongoDB executable. To add the location to your path variable:
@@ -63,18 +63,17 @@ To begin installing and configuring MongoDB, [log on to your Windows Server VM](
    * Click **Advanced system settings**, and then click **Environment Variables**.
    * Under **System variables**, select **Path**, and then click **Edit**.
      
-     ![Configure PATH variables](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/media/install-mongodb/configure-path-variables.png)
+     ![Configure PATH variables](./media/install-mongodb/configure-path-variables.png)
      
-     Add the path to your MongoDB `bin` folder. MongoDB is typically installed in `C:\Program Files\MongoDB`. Verify the installation path on your VM. The following example adds the default MongoDB install location to the `PATH` variable:
+     Add the path to your MongoDB `bin` folder. MongoDB is typically installed in *C:\Program Files\MongoDB*. Verify the installation path on your VM. The following example adds the default MongoDB install location to the `PATH` variable:
      
      ```
-     ;C:\Program Files\MongoDB\Server\3.2\bin
+     ;C:\Program Files\MongoDB\Server\3.6\bin
      ```
      
      > [!NOTE]
      > Be sure to add the leading semicolon (`;`) to indicate that you are adding a location to your `PATH` variable.
-     > 
-     > 
+
 2. Create MongoDB data and log directories on your data disk. From the **Start** menu, select **Command Prompt**. The following examples create the directories on drive F:
    
     ```
@@ -91,13 +90,11 @@ To begin installing and configuring MongoDB, [log on to your Windows Server VM](
    
    > [!NOTE]
    > The command prompt stays focused on this task while your MongoDB instance is running. Leave the command prompt window open to continue running MongoDB. Or, install MongoDB as service, as detailed in the next step.
-   > 
-   > 
+
 4. For a more robust MongoDB experience, install the `mongod.exe` as a service. Creating a service means you don't need to leave a command prompt running each time you want to use MongoDB. Create the service as follows, adjusting the path to your data and log directories accordingly:
    
     ```
-    mongod --dbpath F:\MongoData\ --logpath F:\MongoLogs\mongolog.log `
-        --logappend  --install
+    mongod --dbpath F:\MongoData\ --logpath F:\MongoLogs\mongolog.log --logappend  --install
     ```
    
     The preceding command creates a service named MongoDB, with a description of "Mongo DB". The following parameters are also specified:
@@ -148,23 +145,23 @@ exit
 ## <a name="configure-firewall-and-network-security-group-rules"></a>Configure firewall and Network Security Group rules
 Now that MongoDB is installed and running, open a port in Windows Firewall so you can remotely connect to MongoDB. To create a new inbound rule to allow TCP port 27017, open an administrative PowerShell prompt and enter the following command:
 
-```powerShell
-New-NetFirewallRule -DisplayName "Allow MongoDB" -Direction Inbound `
-    -Protocol TCP -LocalPort 27017 -Action Allow
+```powerahell
+New-NetFirewallRule `
+    -DisplayName "Allow MongoDB" `
+    -Direction Inbound `
+    -Protocol TCP `
+    -LocalPort 27017 `
+    -Action Allow
 ```
 
 You can also create the rule by using the **Windows Firewall with Advanced Security** graphical management tool. Create a new inbound rule to allow TCP port 27017.
 
-If needed, create a Network Security Group rule to allow access to MongoDB from outside of the existing Azure virtual network subnet. You can create the Network Security Group rules by using the [Azure portal](nsg-quickstart-portal.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) or [Azure PowerShell](nsg-quickstart-powershell.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). As with the Windows Firewall rules, allow TCP port 27017 to the virtual network interface of your MongoDB VM.
+If needed, create a Network Security Group rule to allow access to MongoDB from outside of the existing Azure virtual network subnet. You can create the Network Security Group rules by using the [Azure portal](nsg-quickstart-portal.md) or [Azure PowerShell](nsg-quickstart-powershell.md). As with the Windows Firewall rules, allow TCP port 27017 to the virtual network interface of your MongoDB VM.
 
 > [!NOTE]
 > TCP port 27017 is the default port used by MongoDB. You can change this port by using the `--port` parameter when starting `mongod.exe` manually or from a service. If you change the port, make sure to update the Windows Firewall and Network Security Group rules in the preceding steps.
-> 
-> 
+
 
 ## <a name="next-steps"></a>Next steps
 In this tutorial, you learned how to install and configure MongoDB on your Windows VM. You can now access MongoDB on your Windows VM, by following the advanced topics in the [MongoDB documentation](https://docs.mongodb.com/manual/).
-
-
-
 

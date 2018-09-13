@@ -3,7 +3,7 @@ title: Azure Service Bus SQLFilter syntax reference | Microsoft Docs
 description: Details about SQLFilter grammar.
 services: service-bus-messaging
 documentationcenter: na
-author: sethmanheim
+author: spelluru
 manager: timlt
 editor: ''
 ms.assetid: ''
@@ -12,18 +12,18 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 03/23/2017
-ms.author: sethm
-ms.openlocfilehash: c5127a457e99772a52b76e28e7fd3a3e4dd861b0
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 02/05/2018
+ms.author: spelluru
+ms.openlocfilehash: c94ffed753ebf8fddbd553977c5d733f2306971d
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44556278"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44824335"
 ---
 # <a name="sqlfilter-syntax"></a>SQLFilter syntax
 
-A *SqlFilter* is an instance of the [SqlFilter Class](/dotnet/api/microsoft.servicebus.messaging.sqlfilter), and represents a SQL language-based filter expression that is evaluated against a [BrokeredMessage](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage). A SqlFilter supports a subset of the SQL-92 standard.  
+A *SqlFilter* object is an instance of the [SqlFilter class](/dotnet/api/microsoft.servicebus.messaging.sqlfilter), and represents a SQL language-based filter expression that is evaluated against a [BrokeredMessage](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage). A SqlFilter supports a subset of the SQL-92 standard.  
   
  This topic lists details about SqlFilter grammar.  
   
@@ -60,7 +60,7 @@ A *SqlFilter* is an instance of the [SqlFilter Class](/dotnet/api/microsoft.serv
   
 ## <a name="arguments"></a>Arguments  
   
--   `<scope>` is an optional string indicating the scope of the `<property_name>`. Valid values are `sys` or `user`. The `sys` value indicates system scope where `<property_name>` is a public property name of the [BrokeredMessage Class](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage). `user` indicates user scope where `<property_name>` is a key of the [BrokeredMessage Class](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage) dictionary. `user` scope is the default scope if `<scope>` is not specified.  
+-   `<scope>` is an optional string indicating the scope of the `<property_name>`. Valid values are `sys` or `user`. The `sys` value indicates system scope where `<property_name>` is a public property name of the [BrokeredMessage class](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage). `user` indicates user scope where `<property_name>` is a key of the [BrokeredMessage class](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage) dictionary. `user` scope is the default scope if `<scope>` is not specified.  
   
 ## <a name="remarks"></a>Remarks
 
@@ -86,7 +86,7 @@ An attempt to access a non-existent system property is an error, while an attemp
 [[:IsLetter:]][_[:IsLetter:][:IsDigit:]]*  
 ```  
   
-This means any string that starts with a letter and is followed by one or more underscore/letter/digit.  
+This grammar means any string that starts with a letter and is followed by one or more underscore/letter/digit.  
   
 `[:IsLetter:]` means any Unicode character that is categorized as a Unicode letter. `System.Char.IsLetter(c)` returns `true` if `c` is a Unicode letter.  
   
@@ -147,7 +147,7 @@ A `<regular_identifier>` cannot be a reserved keyword.
   
 -   `<integer_constant>` is a string of numbers that are not enclosed in quotation marks and do not contain decimal points. The values are stored as `System.Int64` internally, and follow the same range.  
   
-     The following are examples of long constants:  
+     These are examples of long constants:  
   
     ```  
     1894  
@@ -223,7 +223,7 @@ Consider the following [SqlFilter](/dotnet/api/microsoft.servicebus.messaging.sq
   
 ### <a name="property-evaluation-semantics"></a>Property evaluation semantics  
   
--   An attempt to evaluate a non-existent system property will throw a [FilterException](/dotnet/api/microsoft.servicebus.messaging.filterexception) exception.  
+-   An attempt to evaluate a non-existent system property throws a [FilterException](/dotnet/api/microsoft.servicebus.messaging.filterexception) exception.  
   
 -   A property that does not exist is internally evaluated as **unknown**.  
   
@@ -239,11 +239,11 @@ Consider the following [SqlFilter](/dotnet/api/microsoft.servicebus.messaging.sq
   
  Unknown evaluation in `[NOT] LIKE`:  
   
--   If any operand is evaluated as **unknown** then the result is **unknown**.  
+-   If any operand is evaluated as **unknown**, then the result is **unknown**.  
   
  Unknown evaluation in `[NOT] IN`:  
   
--   If the left operand is evaluated as **unknown** then the result is **unknown**.  
+-   If the left operand is evaluated as **unknown**, then the result is **unknown**.  
   
  Unknown evaluation in **AND** operator:  
   
@@ -281,5 +281,6 @@ Consider the following [SqlFilter](/dotnet/api/microsoft.servicebus.messaging.sq
 
 ## <a name="next-steps"></a>Next steps
 
-- [SQLFilter class](/dotnet/api/microsoft.servicebus.messaging.sqlfilter)
+- [SQLFilter class (.NET Framework)](/dotnet/api/microsoft.servicebus.messaging.sqlfilter)
+- [SQLFilter class (.NET Standard)](/dotnet/api/microsoft.azure.servicebus.sqlfilter)
 - [SQLRuleAction class](/dotnet/api/microsoft.servicebus.messaging.sqlruleaction)

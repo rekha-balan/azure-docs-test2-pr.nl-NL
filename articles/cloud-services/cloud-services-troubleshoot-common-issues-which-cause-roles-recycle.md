@@ -10,17 +10,17 @@ tags: top-support-issue
 ms.assetid: 533930d1-8035-4402-b16a-cf887b2c4f85
 ms.service: cloud-services
 ms.devlang: na
-ms.topic: article
+ms.topic: troubleshooting
 ms.tgt_pltfrm: na
 ms.workload: tbd
-ms.date: 4/6/2017
+ms.date: 06/15/2018
 ms.author: v-six
-ms.openlocfilehash: 0313d229a9f86d8550e9c6d9e5394ec61ff0fe60
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 20b98fa9656c9c66a81ff98a70fcdbfb29d4dad6
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44556497"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44815963"
 ---
 # <a name="common-issues-that-cause-roles-to-recycle"></a>Common issues that cause roles to recycle
 This article discusses some of the common causes of deployment problems and provides troubleshooting tips to help you resolve these problems. An indication that a problem exists with an application is when the role instance fails to start, or it cycles between the initializing, busy, and stopping states.
@@ -52,7 +52,7 @@ To ensure that your `DiagnosticsConnectionString` setting is correct before you 
 
 * The `DiagnosticsConnectionString` setting points to a valid storage account in Azure.  
   By default, this setting points to the emulated storage account, so you must explicitly change this setting before you deploy your application package. If you do not change this setting, an exception is thrown when the role instance attempts to start the diagnostic monitor. This may cause the role instance to recycle indefinitely.
-* The connection string is specified in the following [format](../storage/storage-configure-connection-string.md). (The protocol must be specified as HTTPS.) Replace *MyAccountName* with the name of your storage account, and *MyAccountKey* with your access key:    
+* The connection string is specified in the following [format](../storage/common/storage-configure-connection-string.md). (The protocol must be specified as HTTPS.) Replace *MyAccountName* with the name of your storage account, and *MyAccountKey* with your access key:    
 
         DefaultEndpointsProtocol=https;AccountName=MyAccountName;AccountKey=MyAccountKey
 

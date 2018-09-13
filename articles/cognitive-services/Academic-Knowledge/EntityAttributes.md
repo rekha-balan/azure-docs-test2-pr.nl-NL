@@ -5,16 +5,16 @@ services: cognitive-services
 author: alch-msft
 manager: kuansanw
 ms.service: cognitive-services
-ms.technology: academic-knowledge
+ms.component: academic-knowledge
 ms.topic: article
 ms.date: 03/27/2017
 ms.author: alch
-ms.openlocfilehash: 9240dda95ce06d9f31340afe9ae8fc48593f211c
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: f771969c3c6f05e5d2c99b1fbf593ae039ccb12c
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44552491"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44818355"
 ---
 # <a name="entity-attributes"></a>Entity Attributes
 
