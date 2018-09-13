@@ -4,7 +4,7 @@ description: How to set up Key Vault for use with an Azure Resource Manager virt
 services: virtual-machines-linux
 documentationcenter: ''
 author: singhkays
-manager: timlt
+manager: jeconnoc
 editor: ''
 tags: azure-resource-manager
 ms.assetid: bccdd5ab-5ccf-4760-9039-92c6eafb15bd
@@ -15,28 +15,28 @@ ms.tgt_pltfrm: vm-linux
 ms.topic: article
 ms.date: 02/24/2017
 ms.author: singhkay
-ms.openlocfilehash: 8d8400c30a1bd0b31626781c1ab61ab65f60f734
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 782bb535991343a5951b6413bee11495ccb1441c
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44553903"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44825799"
 ---
 # <a name="how-to-set-up-key-vault-for-virtual-machines-with-the-azure-cli-20"></a>How to set up Key Vault for virtual machines with the Azure CLI 2.0
 
-In the Azure Resource Manager stack, secrets/certificates are modeled as resources that are provided by Key Vault. To learn more about Azure Key Vault, see [What is Azure Key Vault?](../../key-vault/key-vault-whatis.md) In order for Key Vault to be used with Azure Resource Manager VMs, the *EnabledForDeployment* property on Key Vault must be set to true. This article shows you how to set up Key Vault for use with Azure virtual machines (VMs) using the Azure CLI 2.0. You can also perform these steps with the [Azure CLI 1.0](key-vault-setup-cli-nodejs.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
+In the Azure Resource Manager stack, secrets/certificates are modeled as resources that are provided by Key Vault. To learn more about Azure Key Vault, see [What is Azure Key Vault?](../../key-vault/key-vault-whatis.md) In order for Key Vault to be used with Azure Resource Manager VMs, the *EnabledForDeployment* property on Key Vault must be set to true. This article shows you how to set up Key Vault for use with Azure virtual machines (VMs) using the Azure CLI 2.0. 
 
-To perform these steps, you need the latest [Azure CLI 2.0](/cli/azure/install-az-cli2) installed and logged in to an Azure account using [az login](/cli/azure/#login).
+To perform these steps, you need the latest [Azure CLI 2.0](/cli/azure/install-az-cli2) installed and logged in to an Azure account using [az login](/cli/azure/reference-index#az_login).
 
 ## <a name="create-a-key-vault"></a>Create a Key Vault
-Create a key vault and assign the deployment policy with [az keyvault create](/cli/azure/keyvault#create). The following example creates a key vault named `myKeyVault` in the `myResourceGroup` resource group:
+Create a key vault and assign the deployment policy with [az keyvault create](/cli/azure/keyvault#az_keyvault_create). The following example creates a key vault named `myKeyVault` in the `myResourceGroup` resource group:
 
 ```azurecli
 az keyvault create -l westus -n myKeyVault -g myResourceGroup --enabled-for-deployment true
 ```
 
 ## <a name="update-a-key-vault-for-use-with-vms"></a>Update a Key Vault for use with VMs
-Set the deployment policy on an existing key vault with [az keyvault update](/cli/azure/keyvault#update). The following updates the key vault named `myKeyVault` in the `myResourceGroup` resource group:
+Set the deployment policy on an existing key vault with [az keyvault update](/cli/azure/keyvault#az_keyvault_update). The following updates the key vault named `myKeyVault` in the `myResourceGroup` resource group:
 
 ```azurecli
 az keyvault update -n myKeyVault -g myResourceGroup --set properties.enabledForDeployment=true

@@ -9,17 +9,17 @@ editor: msfussell
 ms.assetid: 7d1052ec-2c9f-443d-8b99-b75c97266e6c
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 02/10/2017
+ms.date: 11/01/2017
 ms.author: vturecek
-ms.openlocfilehash: c721dc2a396b065b80e3c83270831cdaaf115068
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: bc20e3e488b866eb519a6ddc2c6fbd7cc090236f
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44548754"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44828269"
 ---
 # <a name="connect-and-communicate-with-services-in-service-fabric"></a>Connect and communicate with services in Service Fabric
 In Service Fabric, a service runs somewhere in a Service Fabric cluster, typically distributed across multiple VMs. It can be moved from one place to another, either by the service owner, or automatically by Service Fabric. Services are not statically tied to a particular machine or address.
@@ -27,7 +27,7 @@ In Service Fabric, a service runs somewhere in a Service Fabric cluster, typical
 A Service Fabric application is generally composed of many different services, where each service performs a specialized task. These services may communicate with each other to form a complete function, such as rendering different parts of a web application. There are also client applications that connect to and communicate with services. This document discusses how to set up communication with and between your services in Service Fabric.
 
 This Microsoft Virtual Academy video also discusses service communication: <center><a target="_blank" href="https://mva.microsoft.com/en-US/training-courses/building-microservices-applications-on-azure-service-fabric-16747?l=iYFCk76yC_6706218965">  
-<img src="https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-connect-and-communicate-with-services/CommunicationVid.png" WIDTH="360" HEIGHT="244">  
+<img src="./media/service-fabric-connect-and-communicate-with-services/CommunicationVid.png" WIDTH="360" HEIGHT="244">  
 </a></center>
 
 ## <a name="bring-your-own-protocol"></a>Bring your own protocol
@@ -50,8 +50,28 @@ Resolving and connecting to services involves the following steps run in a loop:
 * **Connect**: Connect to the service over whatever protocol it uses on that endpoint.
 * **Retry**: A connection attempt may fail for any number of reasons, for example if the service has moved since the last time the endpoint address was resolved. In that case, the preceding resolve and connect steps need to be retried, and this cycle is repeated until the connection succeeds.
 
+## <a name="connecting-to-other-services"></a>Connecting to other services
+Services connecting to each other inside a cluster generally can directly access the endpoints of other services because the nodes in a cluster are on the same local network. To make is easier to connect between services, Service Fabric provides additional services that use the Naming Service. A DNS service and a reverse proxy service.
+
+
+### <a name="dns-service"></a>DNS service
+Since many services, especially containerized services, can have an existing URL name, being able to resolve these using the standard DNS protocol (rather than the Naming Service protocol) is very convenient, especially in application "lift and shift" scenarios. This is exactly what the DNS service does. It enables you to map DNS names to a service name and hence resolve endpoint IP addresses. 
+
+As shown in the following diagram, the DNS service, running in the Service Fabric cluster, maps DNS names to service names which are then resolved by the Naming Service to return the endpoint addresses to connect to. The DNS name for the service is provided at the time of creation. 
+
+![service endpoints][9]
+
+For more details on how to use the DNS service see [DNS service in Azure Service Fabric](service-fabric-dnsservice.md) article.
+
+### <a name="reverse-proxy-service"></a>Reverse proxy service
+The reverse proxy addresses services in the cluster that exposes HTTP endpoints including HTTPS. The reverse proxy greatly simplifies calling other services and their methods by having a specific URI format and handles the resolve, connect, retry steps required for one service to communicate with another using the Naming Service. In other words, it hides the Naming Service from you when calling other services by making this as simple as calling a URL.
+
+![service endpoints][10]
+
+For more details on how to use the reverse proxy service see [Reverse proxy in Azure Service Fabric](service-fabric-reverseproxy.md) article.
+
 ## <a name="connections-from-external-clients"></a>Connections from external clients
-Services connecting to each other inside a cluster generally can directly access the endpoints of other services because the nodes in a cluster are usually on the same local network. In some environments, however, a cluster may be behind a load balancer that routes external ingress traffic through a limited set of ports. In these cases, services can still communicate with each other and resolve addresses using the Naming Service, but extra steps must be taken to allow external clients to connect to services.
+Services connecting to each other inside a cluster generally can directly access the endpoints of other services because the nodes in a cluster are on the same local network. In some environments, however, a cluster may be behind a load balancer that routes external ingress traffic through a limited set of ports. In these cases, services can still communicate with each other and resolve addresses using the Naming Service, but extra steps must be taken to allow external clients to connect to services.
 
 ## <a name="service-fabric-in-azure"></a>Service Fabric in Azure
 A Service Fabric cluster in Azure is placed behind an Azure Load Balancer. All external traffic to the cluster must pass through the load balancer. The load balancer will automatically forward traffic inbound on a given port to a random *node* that has the same port open. The Azure Load Balancer only knows about ports open on the *nodes*, it does not know about ports open by individual *services*.
@@ -152,7 +172,7 @@ For example, in order to accept external traffic on port **80**, the following t
 
 It's important to remember that the Azure Load Balancer and the probe only know about the *nodes*, not the *services* running on the nodes. The Azure Load Balancer will always send traffic to nodes that respond to the probe, so care must be taken to ensure services are available on the nodes that are able to respond to the probe.
 
-## <a name="built-in-communication-api-options"></a>Built-in communication API options
+## <a name="reliable-services-built-in-communication-api-options"></a>Reliable Services: Built-in communication API options
 The Reliable Services framework ships with several pre-built communication options. The decision about which one will work best for you depends on the choice of the programming model, the communication framework, and the programming language that your services are written in.
 
 * **No specific protocol:**  If you don't have a particular choice of communication framework, but you want to get something up and running quickly, then the ideal option for you is [service remoting](service-fabric-reliable-services-communication-remoting.md), which allows strongly-typed remote procedure calls for Reliable Services and Reliable Actors. This is the easiest and fastest way to get started with service communication. Service remoting handles resolution of service addresses, connection, retry, and error handling. This is available for both C# and Java applications.
@@ -165,18 +185,12 @@ Services can use any protocol or framework for communication, whether its a cust
 ## <a name="next-steps"></a>Next steps
 Learn more about the concepts and APIs available in the [Reliable Services communication model](service-fabric-reliable-services-communication.md), then get started quickly with [service remoting](service-fabric-reliable-services-communication-remoting.md) or go in-depth to learn how to write a communication listener using [Web API with OWIN self-host](service-fabric-reliable-services-communication-webapi.md).
 
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-connect-and-communicate-with-services/serviceendpoints.png
-[2]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-connect-and-communicate-with-services/namingservice.png
-[3]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-connect-and-communicate-with-services/loadbalancertopology.png
-[4]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-connect-and-communicate-with-services/nodeport.png
-[5]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-connect-and-communicate-with-services/loadbalancerport.png
-[7]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-connect-and-communicate-with-services/distributedservices.png
-[8]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-connect-and-communicate-with-services/loadbalancerprobe.png
-
-
-
-
-
-
-
-
+[1]: ./media/service-fabric-connect-and-communicate-with-services/serviceendpoints.png
+[2]: ./media/service-fabric-connect-and-communicate-with-services/namingservice.png
+[3]: ./media/service-fabric-connect-and-communicate-with-services/loadbalancertopology.png
+[4]: ./media/service-fabric-connect-and-communicate-with-services/nodeport.png
+[5]: ./media/service-fabric-connect-and-communicate-with-services/loadbalancerport.png
+[7]: ./media/service-fabric-connect-and-communicate-with-services/distributedservices.png
+[8]: ./media/service-fabric-connect-and-communicate-with-services/loadbalancerprobe.png
+[9]: ./media/service-fabric-connect-and-communicate-with-services/dns.png
+[10]: ./media/service-fabric-reverseproxy/internal-communication.png
