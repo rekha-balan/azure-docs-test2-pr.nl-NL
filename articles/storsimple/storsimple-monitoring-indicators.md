@@ -4,7 +4,7 @@ description: Describes the light-emitting diodes (LEDs) and audible alarms used 
 services: storsimple
 documentationcenter: NA
 author: alkohli
-manager: carmonm
+manager: timlt
 editor: ''
 ms.assetid: 59dee7b9-ca6d-4fd9-96e6-a0071e8d248e
 ms.service: storsimple
@@ -12,16 +12,18 @@ ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: TBD
-ms.date: 08/18/2016
+ms.date: 11/03/2017
 ms.author: alkohli
-ms.openlocfilehash: f8b7ec76d59a3662b3d7fb91ee759d9cb6507bb2
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 9ae0caec211dc1199f0abd2ce9bc0c7ad11c02ec
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44550023"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44783528"
 ---
 # <a name="use-storsimple-monitoring-indicators-to-manage-your-device"></a>Use StorSimple monitoring indicators to manage your device
+
+
 ## <a name="overview"></a>Overview
 Your StorSimple device includes light-emitting diodes (LEDs) and alarms that you can use to monitor the modules and overall status of the StorSimple device. The monitoring indicators can be found on the hardware components of the device's primary enclosure and the EBOD enclosure. The monitoring indicators can be either LEDs or audible alarms.
 
@@ -136,7 +138,7 @@ Use the following table to determine whether the controller module is operating 
 ### <a name="controller-indicator-leds"></a>Controller indicator LEDs
 | LED | Description |
 | --- | --- |
-| ID LED (blue) |Indicates that the module is being identified. If the blue LED is blinking on a running controller, then the controller is the active controller and the other one is the standby controller. For more information, see [Identify the active controller on your device](storsimple-controller-replacement.md#identify-the-active-controller-on-your-device). |
+| ID LED (blue) |Indicates that the module is being identified. If the blue LED is blinking on a running controller, then the controller is the active controller and the other one is the standby controller. For more information, see [Identify the active controller on your device](storsimple-8000-controller-replacement.md#identify-the-active-controller-on-your-device). |
 | Fault LED (amber) |Indicates a fault in the controller. |
 | OK LED (green) |Steady green indicates that the controller is OK. Flashing green indicates a controller VPD configuration error. |
 | SAS activity LEDs (green) |Steady green indicates a connection with no current activity. Flashing green indicates the connection has ongoing activity. |
@@ -210,12 +212,11 @@ The following table describes the various alarm states.
 > * In alarm state S1, if you do not press mute within 2 minutes, the state automatically transitions to S2 or S3.  
 > * Alarm states S1 to S4 return to S0 after the fault condition is cleared.  
 > * Critical fault state S4 can be entered from any other state.  
-> 
-> 
 
-You can mute the audible alarm by pressing the mute button on the ops panel. Automatic muting will occur after two minutes if the mute switch is not manually operated. When the alarm is muted, it will continue to sound with short intermittent beeps to indicate that a problem still exists. The alarm will be silent when all the problems are cleared.  
 
-The following table describes the various alarm conditions.  
+You can mute the audible alarm by pressing the mute button on the ops panel. Automatic muting will occur after two minutes if the mute switch is not manually operated. When the alarm is muted, it will continue to sound with short intermittent beeps to indicate that a problem still exists. The alarm will be silent when all the problems are cleared.
+
+The following table describes the various alarm conditions.
 
 ### <a name="alarm-conditions"></a>Alarm conditions
 | Status | Severity | Alarm | Ops panel LED |
@@ -241,19 +242,13 @@ The following table describes the various alarm conditions.
 | Insufficient power available |Warning |none |Module fault |
 
 ## <a name="next-steps"></a>Next steps
-Learn more about [StorSimple hardware components and status](storsimple-monitor-hardware-status.md).
+Learn more about [StorSimple hardware components and status](storsimple-8000-monitor-hardware-status.md).
 
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-monitoring-indicators/storsimple-monitoring-indicators-IMAGE01.png
-[2]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-monitoring-indicators/storsimple-monitoring-indicators-IMAGE02.png
-[3]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-monitoring-indicators/storsimple-monitoring-indicators-IMAGE03.png
-[4]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-monitoring-indicators/storsimple-monitoring-indicators-IMAGE04.png
-[5]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-monitoring-indicators/storsimple-monitoring-indicators-IMAGE05.png
-[6]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-monitoring-indicators/storsimple-monitoring-indicators-IMAGE06.png
-
-
-
-
-
-
+[1]: ./media/storsimple-monitoring-indicators/storsimple-monitoring-indicators-IMAGE01.png
+[2]: ./media/storsimple-monitoring-indicators/storsimple-monitoring-indicators-IMAGE02.png
+[3]: ./media/storsimple-monitoring-indicators/storsimple-monitoring-indicators-IMAGE03.png
+[4]: ./media/storsimple-monitoring-indicators/storsimple-monitoring-indicators-IMAGE04.png
+[5]: ./media/storsimple-monitoring-indicators/storsimple-monitoring-indicators-IMAGE05.png
+[6]: ./media/storsimple-monitoring-indicators/storsimple-monitoring-indicators-IMAGE06.png
 
 

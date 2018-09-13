@@ -5,19 +5,19 @@ services: cognitive-services
 author: alch-msft
 manager: kuansanw
 ms.service: cognitive-services
-ms.technology: academic-knowledge
+ms.component: academic-knowledge
 ms.topic: article
 ms.date: 03/23/2017
 ms.author: alch
-ms.openlocfilehash: cf7a0bd3f1ece12ee2b00d32ae80e5b4c82f6bcf
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: afcc3257c49522a4631c4aae0e0c2b88373f9af1
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44563010"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44782462"
 ---
 # <a name="author-entity"></a>Author Entity
-<sub> *Below attributes are specific to author entity. (Ty = '1') </sub>
+<sub> *Following attributes are specific to author entity. (Ty = '1') </sub>
 
 Name    |Description                            |Type       | Operations
 ------- | ------------------------------------- | --------- | ----------------------------
@@ -26,8 +26,8 @@ AuN     |Author normalized name                 |String     |Equals
 DAuN    |Author display name                    |String     |none
 CC      |Author total citation count            |Int32      |none  
 ECC     |Author total estimated citation count  |Int32      |none
-E       |Extended metadata (see table below)    |String     |none  
-SSD     |Satori data                            |String     |none
+E       |Extended metadata (see "Extended Meta Attributes" table )  |String     |none  
+
 
 ## <a name="extended-metadata-attributes"></a>Extended Metadata Attributes ##
 

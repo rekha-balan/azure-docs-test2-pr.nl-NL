@@ -1,6 +1,6 @@
 ---
-title: Custom fields in Log Analytics | Microsoft Docs
-description: The Custom Fields feature of Log Analytics allows you to create your own searchable fields from OMS data that add to the properties of a collected record.  This article describes the process to create a custom field and provides a detailed walkthrough with a sample event.
+title: Custom fields in Azure Log Analytics | Microsoft Docs
+description: The Custom Fields feature of Log Analytics allows you to create your own searchable fields from Log Analytics records that add to the properties of a collected record.  This article describes the process to create a custom field and provides a detailed walkthrough with a sample event.
 services: log-analytics
 documentationcenter: ''
 author: bwren
@@ -9,26 +9,27 @@ editor: tysonn
 ms.assetid: 31572b51-6b57-4945-8208-ecfc3b5304fc
 ms.service: log-analytics
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 10/18/2016
+ms.date: 01/23/2018
 ms.author: bwren
-ms.openlocfilehash: 802bf774eebc973b74a847379584c62c9e664104
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.component: na
+ms.openlocfilehash: 164b071a47c13f7c5586bd287adc41bea54a1198
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44551990"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44792459"
 ---
 # <a name="custom-fields-in-log-analytics"></a>Custom fields in Log Analytics
-The **Custom Fields** feature of Log Analytics allows you to extend existing records in the OMS repository by adding your own searchable fields.  Custom fields are automatically populated from data extracted from other properties in the same record.
+The **Custom Fields** feature of Log Analytics allows you to extend existing records in Log Analytics by adding your own searchable fields.  Custom fields are automatically populated from data extracted from other properties in the same record.
 
-![Custom Fields overview](https://docstestmedia1.blob.core.windows.net/azure-media/articles/log-analytics/media/log-analytics-custom-fields/overview.png)
+![Custom Fields overview](media/log-analytics-custom-fields/overview.png)
 
 For example, the sample record below has useful data buried in the event description.  Extracting this data into separate properties makes it available for such actions as sorting and filtering.
 
-![Log Search button](https://docstestmedia1.blob.core.windows.net/azure-media/articles/log-analytics/media/log-analytics-custom-fields/sample-extract.png)
+![Log Search button](media/log-analytics-custom-fields/sample-extract.png)
 
 > [!NOTE]
 > In the Preview, you are limited to 100 custom fields in your workspace.  This limit will be expanded when this feature reaches general availability.
@@ -41,8 +42,7 @@ When you create a custom field, Log Analytics must understand which data to use 
 The following sections provide the procedure for creating a custom field.  At the bottom of this article is a walkthrough of a sample extraction.
 
 > [!NOTE]
-> The custom field is populated as records matching the specified criteria are added to the OMS data store, so it will only appear on records collected after the custom field is created.  The custom field will not be added to records that are already in the data store when it’s created.
-> 
+> The custom field is populated as records matching the specified criteria are added to Log Analytics, so it will only appear on records collected after the custom field is created.  The custom field will not be added to records that are already in the data store when it’s created.
 > 
 
 ### <a name="step-1--identify-records-that-will-have-the-custom-field"></a>Step 1 – Identify records that will have the custom field
@@ -73,9 +73,9 @@ Once you have performed the initial extract, Log Analytics will display its resu
 7. Use the custom field like any other record property.  You can use it to aggregate and group data and even use it to produce new insights.
 
 ## <a name="viewing-custom-fields"></a>Viewing custom fields
-You can view a list of all custom fields in your management group from the **Settings** tile of the OMS dashboard.  Select **Data** and then **Custom fields** for a list of all custom fields in your workspace.  
+You can view a list of all custom fields in your management group from the **Advanced Settings** menu of your Log Analytics workspace in the Azure portal.  Select **Data** and then **Custom fields** for a list of all custom fields in your workspace.  
 
-![Custom fields](https://docstestmedia1.blob.core.windows.net/azure-media/articles/log-analytics/media/log-analytics-custom-fields/list.png)
+![Custom fields](media/log-analytics-custom-fields/list.png)
 
 ## <a name="removing-a-custom-field"></a>Removing a custom field
 There are two ways to remove a custom field.  The first is the **Remove** option for each field when viewing the complete list as described above.  The other method is to retrieve a record and click the button to the left of the field.  The menu will have an option to remove the custom field.
@@ -85,78 +85,61 @@ The following section walks through a complete example of creating a custom fiel
 
 We enter the following query to return all events from Service Control Manager that have an Event ID of 7036 which is the event that indicates a service starting or stopping.
 
-![Query](https://docstestmedia1.blob.core.windows.net/azure-media/articles/log-analytics/media/log-analytics-custom-fields/query.png)
+![Query](media/log-analytics-custom-fields/query.png)
 
 We then select any record with event ID 7036.
 
-![Source record](https://docstestmedia1.blob.core.windows.net/azure-media/articles/log-analytics/media/log-analytics-custom-fields/source-record.png)
+![Source record](media/log-analytics-custom-fields/source-record.png)
 
 We want the service name that appears in the **RenderedDescription** property and select the button next to this property.
 
-![Extract fields](https://docstestmedia1.blob.core.windows.net/azure-media/articles/log-analytics/media/log-analytics-custom-fields/extract-fields.png)
+![Extract fields](media/log-analytics-custom-fields/extract-fields.png)
 
 The **Field Extraction Wizard** is opened, and the **EventLog** and **EventID** fields are selected in the **Main Example** column.  This indicates that the custom field will be defined for events from the System log with an event ID of 7036.  This is sufficient so we don’t need to select any other fields.
 
-![Main example](https://docstestmedia1.blob.core.windows.net/azure-media/articles/log-analytics/media/log-analytics-custom-fields/main-example.png)
+![Main example](media/log-analytics-custom-fields/main-example.png)
 
 We highlight the name of the service in the **RenderedDescription** property and use **Service** to identify the service name.  The custom field will be called **Service_CF**.
 
-![Field Title](https://docstestmedia1.blob.core.windows.net/azure-media/articles/log-analytics/media/log-analytics-custom-fields/field-title.png)
+![Field Title](media/log-analytics-custom-fields/field-title.png)
 
 We see that the service name is identified properly for some records but not for others.   The **Search Results** show that part of the name for the **WMI Performance Adapter** wasn’t selected.  The **Summary** shows that four records with **DPRMA** service incorrectly included an extra word, and two records identified **Modules Installer** instead of **Windows Modules Installer**.  
 
-![Search results](https://docstestmedia1.blob.core.windows.net/azure-media/articles/log-analytics/media/log-analytics-custom-fields/search-results-01.png)
+![Search results](media/log-analytics-custom-fields/search-results-01.png)
 
 We start with the **WMI Performance Adapter** record.  We click its edit icon and then **Modify this highlight**.  
 
-![Modify highlight](https://docstestmedia1.blob.core.windows.net/azure-media/articles/log-analytics/media/log-analytics-custom-fields/modify-highlight.png)
+![Modify highlight](media/log-analytics-custom-fields/modify-highlight.png)
 
 We increase    the highlight to include the word **WMI** and then rerun the extract.  
 
-![Additional example](https://docstestmedia1.blob.core.windows.net/azure-media/articles/log-analytics/media/log-analytics-custom-fields/additional-example-01.png)
+![Additional example](media/log-analytics-custom-fields/additional-example-01.png)
 
 We can see that the entries for **WMI Performance Adapter** have been corrected, and Log Analytics also used that information to correct the records for **Windows Module Installer**.  We can see in the **Summary** section though that **DPMRA** is still not being identified correctly.
 
-![Search results](https://docstestmedia1.blob.core.windows.net/azure-media/articles/log-analytics/media/log-analytics-custom-fields/search-results-02.png)
+![Search results](media/log-analytics-custom-fields/search-results-02.png)
 
 We scroll to a record with the DPMRA service and use the same process to correct that record.
 
-![Additional example](https://docstestmedia1.blob.core.windows.net/azure-media/articles/log-analytics/media/log-analytics-custom-fields/additional-example-02.png)
+![Additional example](media/log-analytics-custom-fields/additional-example-02.png)
 
  When we run the extraction, we can see that all of our results are now accurate.
 
-![Search results](https://docstestmedia1.blob.core.windows.net/azure-media/articles/log-analytics/media/log-analytics-custom-fields/search-results-03.png)
+![Search results](media/log-analytics-custom-fields/search-results-03.png)
 
 We can see that **Service_CF** is created but is not yet added to any records.
 
-![Initial count](https://docstestmedia1.blob.core.windows.net/azure-media/articles/log-analytics/media/log-analytics-custom-fields/initial-count.png)
+![Initial count](media/log-analytics-custom-fields/initial-count.png)
 
-After some time has passed so new events are collected, we can see that that the **Service_CF** field is now being added to records that match our criteria.
+After some time has passed so new events are collected, we can see that the **Service_CF** field is now being added to records that match our criteria.
 
-![Final results](https://docstestmedia1.blob.core.windows.net/azure-media/articles/log-analytics/media/log-analytics-custom-fields/final-results.png)
+![Final results](media/log-analytics-custom-fields/final-results.png)
 
 We can now use the custom field like any other record property.  To illustrate this, we create a query that groups by the new **Service_CF** field to inspect which services are the most active.
 
-![Group by query](https://docstestmedia1.blob.core.windows.net/azure-media/articles/log-analytics/media/log-analytics-custom-fields/query-group.png)
+![Group by query](media/log-analytics-custom-fields/query-group.png)
 
 ## <a name="next-steps"></a>Next steps
 * Learn about [log searches](log-analytics-log-searches.md) to build queries using custom fields for criteria.
 * Monitor [custom log files](log-analytics-data-sources-custom-logs.md) that you parse using custom fields.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

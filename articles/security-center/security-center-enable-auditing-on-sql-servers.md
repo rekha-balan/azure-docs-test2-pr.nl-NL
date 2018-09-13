@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: 042fca4d-7dab-4172-8614-e8c21ccb4960
 ms.service: security-center
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 03/30/2017
 ms.author: terrylan
-ms.openlocfilehash: 38b40fcdbe85f7b0b33d88cc4154a31644cb62e4
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: fade8de73a35b75f6096a25af13335d679caffac
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44671827"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44780694"
 ---
 # <a name="enable-auditing-and-threat-detection-on-sql-servers-in-azure-security-center"></a>Enable auditing and threat detection on SQL servers in Azure Security Center
 Azure Security Center will recommend that you turn on auditing and threat detection for all databases on your Azure SQL servers if auditing is not already enabled. Auditing and threat detection can help you maintain regulatory compliance, understand database activity, and gain insight into discrepancies and anomalies that could indicate business concerns or suspected security violations.
@@ -61,7 +61,5 @@ To learn more about Security Center, see the following:
 * [Azure Security blog](http://blogs.msdn.com/b/azuresecurity/) -- Get the latest Azure security news and information.
 
 <!--Image references-->
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/security-center/media/security-center-enable-auditing-on-sql-server/enable-auditing-on-sql-servers.png
-[2]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/security-center/media/security-center-enable-auditing-on-sql-server/auditing-settings-blade.png
-
-
+[1]: ./media/security-center-enable-auditing-on-sql-server/enable-auditing-on-sql-servers.png
+[2]: ./media/security-center-enable-auditing-on-sql-server/auditing-settings-blade.png

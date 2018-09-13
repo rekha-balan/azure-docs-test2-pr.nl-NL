@@ -1,26 +1,20 @@
 ---
 title: How to model complex data types in Azure Search | Microsoft Docs
 description: Nested or hierarchical data structures can be modeled in an Azure Search index using flattened rowset and Collections data type.
-services: search
-documentationcenter: ''
-author: LiamCa
-manager: pablocas
-editor: ''
+author: brjohnstmsft
+manager: jlembicz
+ms.author: brjohnst
 tags: complex data types; compound data types; aggregate data types
-ms.assetid: e4bf86b4-497a-4179-b09f-c1b56c3c0bb2
+services: search
 ms.service: search
-ms.devlang: na
-ms.workload: search
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.date: 09/07/2016
-ms.author: liamca
-ms.openlocfilehash: d4e7b9f80c1986cb6268d6f2fcbe0d09c998b429
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.topic: conceptual
+ms.date: 05/01/2017
+ms.openlocfilehash: 81298bedd43a89ea948753dffc5f80248f5429ca
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44661518"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44803795"
 ---
 # <a name="how-to-model-complex-data-types-in-azure-search"></a>How to model complex data types in Azure Search
 External datasets used to populate an Azure Search index sometimes include hierarchical or nested substructures that do not break down neatly into a tabular rowset. Examples of such structures might include multiple locations and phone numbers for a single customer, multiple colors and sizes for a single SKU, multiple authors of a single book, and so on. In modeling terms, you might see these structures referred to as *complex data types*, *compound data types*, *composite data types*, or *aggregate data types*, to name a few.
@@ -28,7 +22,7 @@ External datasets used to populate an Azure Search index sometimes include hiera
 Complex data types are not natively supported in Azure Search, but a proven workaround includes a two-step process of flattening the structure and then using a **Collection** data type to reconstitute the interior structure. Following the technique described in this article allows the content to be searched, faceted, filtered, and sorted.
 
 ## <a name="example-of-a-complex-data-structure"></a>Example of a complex data structure
-Typically, the data in question resides as a set of JSON or XML documents, or as items in a NoSQL store such as DocumentDB. Structurally, the challenge stems from having multiple child items that need to be searched and filtered.  As a starting point for illustrating the workaround, take the following JSON document that lists a set of contacts as an example:
+Typically, the data in question resides as a set of JSON or XML documents, or as items in a NoSQL store such as Azure Cosmos DB. Structurally, the challenge stems from having multiple child items that need to be searched and filtered.  As a starting point for illustrating the workaround, take the following JSON document that lists a set of contacts as an example:
 
 ~~~~~
 [
@@ -67,7 +61,7 @@ Typically, the data in question resides as a set of JSON or XML documents, or as
 While the fields named ‘id’, ‘name’ and ‘company’ can easily be mapped one-to-one as fields within an Azure Search index, the ‘locations’ field contains an array of locations, having both a set of location IDs as well as location descriptions. Given that Azure Search does not have a data type that supports this, we need a different way to model this in Azure Search. 
 
 > [!NOTE]
-> This technique is also described by Kirk Evans in a blog post [Indexing DocumentDB with Azure Search](https://blogs.msdn.microsoft.com/kaevans/2015/03/09/indexing-documentdb-with-azure-seach/), which shows a technique called "flattening the data", whereby you would have a field called `locationsID` and `locationsDescription` that are both [collections](https://msdn.microsoft.com/library/azure/dn798938.aspx) (or an array of strings).   
+> This technique is also described by Kirk Evans in a blog post [Indexing Azure Cosmos DB with Azure Search](https://blogs.msdn.microsoft.com/kaevans/2015/03/09/indexing-documentdb-with-azure-seach/), which shows a technique called "flattening the data", whereby you would have a field called `locationsID` and `locationsDescription` that are both [collections](https://msdn.microsoft.com/library/azure/dn798938.aspx) (or an array of strings).   
 > 
 > 
 
@@ -76,7 +70,7 @@ To create an Azure Search index that accommodates this dataset, create individua
 
 Your data within Azure Search would look like this: 
 
-![sample data, 2 rows](https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-howto-complex-data-types/sample-data.png)
+![sample data, 2 rows](./media/search-howto-complex-data-types/sample-data.png)
 
 ## <a name="part-2-add-a-collection-field-in-the-index-definition"></a>Part 2: Add a collection field in the index definition
 In the index schema, the field definitions might look similar to this example.
@@ -120,7 +114,7 @@ However, now that we have separated the data into separate fields, we have no wa
 
 To handle this case, define another field in the index that combines all of the data into a single collection.  For our example, we will call this field `locationsCombined` and we will separate the content with a `||` although you can choose any separator that you think would be a unique set of characters for your content. For example: 
 
-![sample data, 2 rows with separator](https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-howto-complex-data-types/sample-data-2.png)
+![sample data, 2 rows with separator](./media/search-howto-complex-data-types/sample-data-2.png)
 
 Using this `locationsCombined` field, we can now accommodate even more queries, such as:
 
@@ -138,6 +132,4 @@ You can see an example on how to index a complex JSON data set into Azure Search
 
 ## <a name="next-step"></a>Next step
 [Vote for native support for complex data types](https://feedback.azure.com/forums/263029-azure-search) on the Azure Search UserVoice page and provide any additional input that you’d like us to consider regarding feature implementation. You can also reach out to me directly on Twitter at @liamca.
-
-
 

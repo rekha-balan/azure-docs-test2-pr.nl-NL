@@ -3,7 +3,7 @@ title: Perform network intrusion detection with Azure Network Watcher and open s
 description: This article describes how to use Azure Network Watcher and open source tools to perform network intrusion detection
 services: network-watcher
 documentationcenter: na
-author: georgewallace
+author: jimdial
 manager: timlt
 editor: ''
 ms.assetid: 0f043f08-19e1-4125-98b0-3e335ba69681
@@ -13,13 +13,13 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
-ms.author: gwallace
-ms.openlocfilehash: 78a1b41ffaab3350597eba38f9b1c1896119f9a9
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: jdial
+ms.openlocfilehash: aff1b5f9e8860d3b8dc09b37684bb8a4ac2bf134
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44671213"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44814358"
 ---
 # <a name="perform-network-intrusion-detection-with-network-watcher-and-open-source-tools"></a>Perform network intrusion detection with Network Watcher and open source tools
 
@@ -289,17 +289,10 @@ Learn how to visualize your NSG flow logs with Power BI by visiting [Visualize N
 
 
 <!-- images -->
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/network-watcher/media/network-watcher-intrusion-detection-open-source-tools/figure1.png
-[2]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/network-watcher/media/network-watcher-intrusion-detection-open-source-tools/figure2.png
-[3]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/network-watcher/media/network-watcher-intrusion-detection-open-source-tools/figure3.png
-[4]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/network-watcher/media/network-watcher-intrusion-detection-open-source-tools/figure4.png
-[5]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/network-watcher/media/network-watcher-intrusion-detection-open-source-tools/figure5.png
-[6]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/network-watcher/media/network-watcher-intrusion-detection-open-source-tools/figure6.png
-[7]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/network-watcher/media/network-watcher-intrusion-detection-open-source-tools/figure7.png
-
-
-
-
-
-
-
+[1]: ./media/network-watcher-intrusion-detection-open-source-tools/figure1.png
+[2]: ./media/network-watcher-intrusion-detection-open-source-tools/figure2.png
+[3]: ./media/network-watcher-intrusion-detection-open-source-tools/figure3.png
+[4]: ./media/network-watcher-intrusion-detection-open-source-tools/figure4.png
+[5]: ./media/network-watcher-intrusion-detection-open-source-tools/figure5.png
+[6]: ./media/network-watcher-intrusion-detection-open-source-tools/figure6.png
+[7]: ./media/network-watcher-intrusion-detection-open-source-tools/figure7.png

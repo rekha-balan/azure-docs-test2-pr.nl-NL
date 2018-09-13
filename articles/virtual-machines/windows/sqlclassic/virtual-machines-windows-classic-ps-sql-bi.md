@@ -3,7 +3,7 @@ title: SQL Server Business Intelligence | Microsoft Docs
 description: This topic uses resources created with the classic deployment model, and describes the Business Intelligence (BI) features available for SQL Server running on Azure Virtual Machines (VMs).
 services: virtual-machines-windows
 documentationcenter: na
-author: guyinacube
+author: markingmyname
 manager: erikre
 editor: monicar
 tags: azure-service-management
@@ -13,14 +13,14 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows-sql-server
 ms.workload: iaas-sql-server
-ms.date: 01/11/2017
-ms.author: asaxton
-ms.openlocfilehash: bda295d4ab760e2eba5c4f13287a3458a8cb64b9
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 05/30/2017
+ms.author: maghan
+ms.openlocfilehash: a41dcd5f2c93e5c1279e1c7511e10e6d72574b3b
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44551189"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44780993"
 ---
 # <a name="sql-server-business-intelligence-in-azure-virtual-machines"></a>SQL Server Business Intelligence in Azure Virtual Machines
 > [!IMPORTANT] 
@@ -34,16 +34,17 @@ There are two ways to license SQL Server in Microsoft Azure Virtual Machines:
 1. License mobility benefits that are part of Software Assurance. For more information, see [License Mobility through Software Assurance on Azure](https://azure.microsoft.com/pricing/license-mobility/).
 2. Pay per hour rate of Azure Virtual Machines with SQL Server installed. See the “SQL Server” section in [Virtual Machines Pricing](https://azure.microsoft.com/pricing/details/virtual-machines/#Sql).
 
-For more information on licensing and current rates, see [Virtual Machines Licensing FAQ](https://azure.microsoft.com/pricing/licensing-faq/%20/).
+For more information on licensing and current rates, see [Virtual Machines Licensing FAQ](https://azure.microsoft.com/pricing/licensing-faq/).
 
 ## <a name="sql-server-images-available-in-azure-virtual-machine-gallery"></a>SQL Server Images Available in Azure Virtual Machine Gallery
 The Microsoft Azure Virtual Machine gallery includes several images that contain Microsoft SQL Server. The software installed on the virtual machine images varies based on the version of the operating system and the version of SQL Server. The list of images available in the Azure virtual machine gallery changes frequently.
 
-![SQL image in azure VM gallery](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/sqlclassic/media/virtual-machines-windows-classic-ps-sql-bi/IC741367.png)
+<!--![SQL image in azure VM gallery](./media/virtual-machines-windows-classic-ps-sql-bi/IC741367.png)-->
+![SQL image in Azure VM gallery](./media/virtual-machines-windows-classic-ps-sql-bi/vm-sql-images.png)
 
-![PowerShell](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/sqlclassic/media/virtual-machines-windows-classic-ps-sql-bi/IC660119.gif) The following PowerShell script returns the list of Azure images that contain “SQL-Server” in the ImageName:
+![PowerShell](./media/virtual-machines-windows-classic-ps-sql-bi/IC660119.gif) The following PowerShell script returns the list of Azure images that contain “SQL-Server” in the ImageName:
 
-    # assumes you have already uploaded a management certificate to your Microsoft Azure Subscription. View the thumbprint value from the "settings" menu in Azure classic portal.
+    # assumes you have already uploaded a management certificate to your Microsoft Azure Subscription. View the thumbprint value from the "Subscriptions" menu in Azure portal.
 
     $subscriptionID = ""    # REQUIRED: Provide your subscription ID.
     $subscriptionName = "" # REQUIRED: Provide your subscription name.
@@ -62,11 +63,11 @@ The Microsoft Azure Virtual Machine gallery includes several images that contain
 
 For more information on editions and features supported by SQL Server, see the following:
 
-* [SQL Server Editions](https://www.microsoft.com/server-cloud/products/sql-server-editions/#fbid=Zae0-E6r5oh)
+* [SQL Server Editions](https://www.microsoft.com/sql-server/sql-server-2017-editions)
 * [Features Supported by the Editions of SQL Server 2016](https://msdn.microsoft.com/library/cc645993.aspx)
 
 ### <a name="bi-features-installed-on-the-sql-server-virtual-machine-gallery-images"></a>BI Features Installed on the SQL Server Virtual Machine Gallery Images
-The following table summarizes the Business Intelligence features installed on the common Microsoft Azure Virtual Machine gallery images for SQL Server”
+The following table summarizes the Business Intelligence features installed on the common Microsoft Azure Virtual Machine gallery images for SQL Server:
 
 * SQL Server 2016 SP1 Enterprise
 * SQL Server 2016 SP1 Standard
@@ -85,7 +86,7 @@ The following table summarizes the Business Intelligence features installed on t
 
 <sup>1</sup> For additional information on SharePoint and Azure virtual machines, see [Microsoft Azure Architectures for SharePoint 2013](https://technet.microsoft.com/library/dn635309.aspx) and [SharePoint Deployment on Microsoft Azure Virtual Machines](https://www.microsoft.com/download/details.aspx?id=34598).
 
-![PowerShell](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/sqlclassic/media/virtual-machines-windows-classic-ps-sql-bi/IC660119.gif) Run the following PowerShell command to get a list of installed services that contain “SQL” in the service name.
+![PowerShell](./media/virtual-machines-windows-classic-ps-sql-bi/IC660119.gif) Run the following PowerShell command to get a list of installed services that contain “SQL” in the service name.
 
     get-service | Where-Object{ $_.DisplayName -like '*SQL*' } | Select DisplayName, status, servicetype, dependentservices | format-Table -AutoSize
 
@@ -98,10 +99,10 @@ The following table summarizes the Business Intelligence features installed on t
   * The drive caching policy for the default drive **C**: is not optimal for working with data.
   * The **D**: drive is a temporary drive that is used primarily for the page file. The **D**: drive is not persisted and is not saved in blob storage. Management tasks such as a change to the virtual machine size reset the **D**: drive. It is recommended to **NOT** use the **D**: drive for database files, including tempdb.
     
-    For more information on creating and attaching disks, see [How to Attach a Data Disk to a Virtual Machine](../classic/attach-disk.md?toc=%2fazure%2fvirtual-machines%2fwindows%2fclassic%2ftoc.json).
+    For more information on creating and attaching disks, see [How to Attach a Data Disk to a Virtual Machine](../classic/attach-disk-classic.md?toc=%2fazure%2fvirtual-machines%2fwindows%2fclassic%2ftoc.json).
 * Stop or uninstall services you do not plan to use. For example if the virtual machine is only used for Reporting Services, stop or uninstall Analysis Services and SQL Server Integration Services. The following image is an example of the services that are started by default.
   
-    ![SQL Server services](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/sqlclassic/media/virtual-machines-windows-classic-ps-sql-bi/IC650107.gif)
+    ![SQL Server services](./media/virtual-machines-windows-classic-ps-sql-bi/IC650107.gif)
   
   > [!NOTE]
   > The SQL Server database engine is required in the supported BI scenarios. In a single server VM topology, the database engine is required to be running on the same VM.
@@ -115,25 +116,25 @@ The following are example deployments that use Microsoft Azure Virtual Machines.
 ### <a name="single-virtual-machine"></a>Single Virtual Machine
 Analysis Services, Reporting Services, SQL Server Database Engine, and data sources on a single virtual machine.
 
-![bi iass scenario with 1 virtual machine](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/sqlclassic/media/virtual-machines-windows-classic-ps-sql-bi/IC650108.gif)
+![bi iass scenario with 1 virtual machine](./media/virtual-machines-windows-classic-ps-sql-bi/IC650108.gif)
 
 ### <a name="two-virtual-machines"></a>Two Virtual Machines
 * Analysis Services, Reporting Services, and the SQL Server Database Engine on a single virtual machine. This deployment includes the report server databases.
 * Data sources on a second VM. The second VM includes SQL Server Database Engine as a data source.
 
-![bi  iaas scenario with 2 virtual machines](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/sqlclassic/media/virtual-machines-windows-classic-ps-sql-bi/IC650109.gif)
+![bi  iaas scenario with 2 virtual machines](./media/virtual-machines-windows-classic-ps-sql-bi/IC650109.gif)
 
 ### <a name="mixed-azure--data-on-azure-sql-database"></a>Mixed Azure – data on Azure SQL database
 * Analysis Services, Reporting Services, and the SQL Server Database Engine on a single virtual machine. This deployment includes the report server databases.
 * Data source is Azure SQL database.
 
-![bi iaas scenarios vm and AzureSQL as data source](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/sqlclassic/media/virtual-machines-windows-classic-ps-sql-bi/IC650110.gif)
+![bi iaas scenarios vm and AzureSQL as data source](./media/virtual-machines-windows-classic-ps-sql-bi/IC650110.gif)
 
 ### <a name="hybrid-data-on-premises"></a>Hybrid –data on-premises
 * In this example deployment Analysis Services, Reporting Services, and the SQL Server Database Engine run on a single virtual machine. The virtual machine hosts the report server databases. The virtual machine is joined to an on-premises Domain through Azure Virtual Networking, or some other VPN tunneling solution.
 * Data source is on-premises.
 
-![bi iaas scenarios vm and on premise data sources](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/sqlclassic/media/virtual-machines-windows-classic-ps-sql-bi/IC654384.gif)
+![bi iaas scenarios vm and on-premises data sources](./media/virtual-machines-windows-classic-ps-sql-bi/IC654384.gif)
 
 ## <a name="reporting-services-native-mode-configuration"></a>Reporting Services Native Mode Configuration
 The virtual machine gallery image for SQL Server includes Reporting Services Native mode installed, however the report server is not configured. The steps in this section configure the Reporting Services report server. For more detailed information on configuring Reporting Services Native mode, see [Install Reporting Services Native Mode Report Server (SSRS)](https://msdn.microsoft.com/library/ms143711.aspx).
@@ -146,7 +147,7 @@ There are two common workflows for connecting to an Azure Virtual Machine:
 
 * To connect in the , click the name of the virtual machine and then click **Connect**. A Remote desktop connection opens and the computer name is automatically populated.
   
-    ![connect to azure virtual machine](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/sqlclassic/media/virtual-machines-windows-classic-ps-sql-bi/IC650112.gif)
+    ![connect to azure virtual machine](./media/virtual-machines-windows-classic-ps-sql-bi/IC650112.gif)
 * Connect to the virtual machine with Windows Remote Desktop Connection. In the user interface of the remote desktop:
   
   1. Type the **cloud service name** as the computer name.
@@ -156,24 +157,28 @@ There are two common workflows for connecting to an Azure Virtual Machine:
      
       For more information, see [What is a cloud service?](https://azure.microsoft.com/manage/services/cloud-services/what-is-a-cloud-service/).
 
-**Start Reporting Services Configuration Manager.**
 
-1. In **Windows Server 2012/2016**:
-2. From the **Start** screen, type **Reporting Services** to see a list of Apps.
-3. Right-click **Reporting Services Configuration Manager** and click **Run as Administrator**.
-4. In **Windows Server 2008 R2**:
-5. Click **Start**, and then click **ALL Programs**.
-6. Click **Microsoft SQL Server 2016**.
-7. Click **Configuration Tools**.
-8. Right-click **Reporting Services Configuration Manager** and click **Run as Administrator**.
+**Start Reporting Services Configuration Manager**
 
-Or
+In **Windows Server 2012/2016**:
+
+1. From the **Start** screen, type **Reporting Services** to see a list of Apps.
+2. Right-click **Reporting Services Configuration Manager** and click **Run as Administrator**.
+
+In **Windows Server 2008 R2**:
+
+1. Click **Start**, and then click **ALL Programs**.
+2. Click **Microsoft SQL Server 2016**.
+3. Click **Configuration Tools**.
+4. Right-click **Reporting Services Configuration Manager** and click **Run as Administrator**.
+
+Or:
 
 1. Click **Start**.
 2. In the **Search programs and Files** dialog type **reporting services**. If the VM is running Windows Server 2012, type **reporting services** on the Windows Server 2012 Start screen.
 3. Right-click **Reporting Services Configuration Manager** and click **Run as Administrator**.
    
-    ![search for ssrs configuration manager](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/sqlclassic/media/virtual-machines-windows-classic-ps-sql-bi/IC650113.gif)
+    ![search for ssrs configuration manager](./media/virtual-machines-windows-classic-ps-sql-bi/IC650113.gif)
 
 ### <a name="configure-reporting-services"></a>Configure Reporting Services
 **Service account and web service URL:**
@@ -238,7 +243,7 @@ The following table summarizes some of the options available to publish existing
 * **SQL Server Data Tools**: VM:  SQL Server Data Tools is installed on the virtual machine and can be used to create **Report Server Projects** and reports on the virtual machine. SQL Server Data Tools can publish the reports to the report server on the virtual machine.
 * **SQL Server Data Tools: Remote**:  On your local computer, create a Reporting Services project in SQL Server Data Tools that contains Reporting Services reports. Configure the project to connect to the web service URL.
   
-    ![ssdt project properties for SSRS project](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/sqlclassic/media/virtual-machines-windows-classic-ps-sql-bi/IC650114.gif)
+    ![ssdt project properties for SSRS project](./media/virtual-machines-windows-classic-ps-sql-bi/IC650114.gif)
 * Create a .VHD hard drive that contains reports and then upload and attach the drive.
   
   1. Create a .VHD hard drive on your local computer that contains your reports.
@@ -328,14 +333,14 @@ For more information on creating endpoints, see the following:
 
 The following diagram illustrates the ports to open in the VM firewall to allow remote access to features and components on the VM.
 
-![ports to open for bi applications in Azure VMs](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/sqlclassic/media/virtual-machines-windows-classic-ps-sql-bi/IC654385.gif)
+![ports to open for bi applications in Azure VMs](./media/virtual-machines-windows-classic-ps-sql-bi/IC654385.gif)
 
 ## <a name="resources"></a>Resources
 * Review the support policy for Microsoft server software used in the Azure Virtual Machine environment. The following topic summarizes support for features such as BitLocker, Failover Clustering, and Network Load Balancing. [Microsoft server software support for Azure Virtual Machines](http://support.microsoft.com/kb/2721672).
 * [SQL Server on Azure Virtual Machines Overview](../sql/virtual-machines-windows-sql-server-iaas-overview.md)
 * [Virtual Machines](https://azure.microsoft.com/documentation/services/virtual-machines/)
 * [Provisioning a SQL Server Virtual Machine on Azure](../sql/virtual-machines-windows-portal-sql-server-provision.md)
-* [How to Attach a Data Disk to a Virtual Machine](../classic/attach-disk.md?toc=%2fazure%2fvirtual-machines%2fwindows%2fclassic%2ftoc.json)
+* [How to Attach a Data Disk to a Virtual Machine](../classic/attach-disk-classic.md?toc=%2fazure%2fvirtual-machines%2fwindows%2fclassic%2ftoc.json)
 * [Migrating a Database to SQL Server on an Azure VM](../sql/virtual-machines-windows-migrate-sql.md?toc=%2fazure%2fvirtual-machines%2fwindows%2fsqlclassic%2ftoc.json)
 * [Determine the Server Mode of an Analysis Services Instance](https://msdn.microsoft.com/library/gg471594.aspx)
 * [Multidimensional Modeling (Adventure Works Tutorial)](https://technet.microsoft.com/library/ms170208.aspx)
@@ -346,17 +351,5 @@ The following diagram illustrates the ports to open in the VM firewall to allow 
 > [Submit feedback and contact information through Microsoft SQL Server Connect](https://connect.microsoft.com/SQLServer/Feedback)
 
 ### <a name="community-content"></a>Community Content
-* [Azure SQL Database Management with PowerShell](http://blogs.msdn.com/b/windowsazure/archive/2013/02/07/windows-azure-sql-database-management-with-powershell.aspx)
-
-
-
-
-
-
-
-
-
-
-
-
+* [Azure SQL Database Management with PowerShell](https://azure.microsoft.com/blog/windows-azure-sql-database-management-with-powershell/)
 

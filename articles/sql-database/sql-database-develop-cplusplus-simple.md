@@ -2,25 +2,20 @@
 title: Connect to SQL Database using C and C++ | Microsoft Docs
 description: Use the sample code in this quick start to build a modern application with C++ and backed by a powerful relational database in the cloud with Azure SQL Database.
 services: sql-database
-documentationcenter: ''
-author: asthana86
-manager: danmoth
-editor: ''
-ms.assetid: 07d9e0b1-3234-4f17-a252-a7559160a9db
+author: edmacauley
+manager: craigg
 ms.service: sql-database
-ms.custom: development
-ms.workload: drivers
-ms.tgt_pltfrm: na
+ms.custom: develop apps
 ms.devlang: cpp
-ms.topic: article
-ms.date: 03/06/2017
-ms.author: tobiast
-ms.openlocfilehash: 026bd59d04beacb8512f981b68b485f06d35118c
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.topic: conceptual
+ms.date: 04/01/2018
+ms.author: edmacauley
+ms.openlocfilehash: c37fdaa9f7aa2a0d243fe6cbc175060156967c61
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44554953"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44785192"
 ---
 # <a name="connect-to-sql-database-using-c-and-c"></a>Connect to SQL Database using C and C++
 This post is aimed at C and C++ developers trying to connect to Azure SQL DB. It is broken down into sections so you can jump to the section that best captures your interest. 
@@ -48,33 +43,33 @@ After your Azure SQL database has been provisioned, you need to carry out the fo
 
 In [Azure portal](https://portal.azure.com/), go to your Azure SQL database ODBC connection string by using the **Show database connection strings** listed as a part of the overview section for your database: 
 
-![ODBCConnectionString](https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-database/media/sql-database-develop-cplusplus-simple/azureportal.png)
+![ODBCConnectionString](./media/sql-database-develop-cplusplus-simple/azureportal.png)
 
-![ODBCConnectionStringProps](https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-database/media/sql-database-develop-cplusplus-simple/dbconnection.png)
+![ODBCConnectionStringProps](./media/sql-database-develop-cplusplus-simple/dbconnection.png)
 
 Copy the contents of the **ODBC (Includes Node.js) [SQL authentication]** string. We use this string later to connect from our C++ ODBC command-line interpreter. This string provides details such as the driver, server, and other database connection parameters. 
 
 ## <a id="Firewall"></a>Step 3:  Add your IP to the firewall
 Go to the firewall section for your Database server and add your [client IP to the firewall using these steps](sql-database-configure-firewall-settings.md) to make sure we can establish a successful connection: 
 
-![AddyourIPWindow](https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-database/media/sql-database-develop-cplusplus-simple/ip.png)
+![AddyourIPWindow](./media/sql-database-develop-cplusplus-simple/ip.png)
 
 At this point, you have configured your Azure SQL DB and are ready to connect from your C++ code. 
 
 ## <a id="Windows"></a>Step 4: Connecting from a Windows C/C++ application
 You can easily connect to your [Azure SQL DB using ODBC on Windows using this sample](https://github.com/Microsoft/VCSamples/tree/master/VC2015Samples/ODBC%20database%20sample%20%28windows%29) that builds with Visual Studio. The sample implements an ODBC command-line interpreter that can be used to connect to our Azure SQL DB. This sample takes either a Database source name file (DSN) file as a command-line argument or the verbose connection string that we copied earlier from the Azure portal. Bring up the property page for this project and paste the connection string as a command argument as shown here: 
 
-![DSN Propsfile](https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-database/media/sql-database-develop-cplusplus-simple/props.png)
+![DSN Propsfile](./media/sql-database-develop-cplusplus-simple/props.png)
 
 Make sure you provide the right authentication details for your database as a part of that database connection string. 
 
 Launch the application to build it. You should see the following window validating a successful connection. You can even run some basic SQL commands like **create table** to validate your database connectivity:
 
-![SQL Commands](https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-database/media/sql-database-develop-cplusplus-simple/sqlcommands.png)
+![SQL Commands](./media/sql-database-develop-cplusplus-simple/sqlcommands.png)
 
 Alternatively, you could create a DSN file using the wizard that is launched when no command arguments are provided. We recommend that you try this option as well. You can use this DSN file for automation and protecting your authentication settings: 
 
-![Create DSN File](https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-database/media/sql-database-develop-cplusplus-simple/datasource.png)
+![Create DSN File](./media/sql-database-develop-cplusplus-simple/datasource.png)
 
 Congratulations! You have now successfully connected to Azure SQL using C++ and ODBC on Windows. You can continue reading to do the same for Linux platform as well. 
 
@@ -94,11 +89,11 @@ The following steps install the libraries needed for SQL and ODBC for your distr
 
 Launch Visual Studio. Under Tools -> Options -> Cross Platform -> Connection Manager, add a connection to your Linux box: 
 
-![Tools Options](https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-database/media/sql-database-develop-cplusplus-simple/tools.png)
+![Tools Options](./media/sql-database-develop-cplusplus-simple/tools.png)
 
 After connection over SSH is established, create an Empty project (Linux) template: 
 
-![New project template](https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-database/media/sql-database-develop-cplusplus-simple/template.png)
+![New project template](./media/sql-database-develop-cplusplus-simple/template.png)
 
 You can then add a [new C source file and replace it with this content](https://github.com/Microsoft/VCSamples/blob/master/VC2015Samples/ODBC%20database%20sample%20%28linux%29/odbcconnector/odbcconnector.c). Using the ODBC APIs SQLAllocHandle, SQLSetConnectAttr, and SQLDriverConnect, you should be able to initialize and establish a connection to your database. Like with the Windows ODBC sample, you need to replace the SQLDriverConnect call with the details from your database connection string parameters copied from the Azure portal previously. 
 
@@ -110,15 +105,15 @@ You can then add a [new C source file and replace it with this content](https://
 
 The last thing to do before compiling is to add **odbc** as a library dependency: 
 
-![Adding ODBC as an input library](https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-database/media/sql-database-develop-cplusplus-simple/lib.png)
+![Adding ODBC as an input library](./media/sql-database-develop-cplusplus-simple/lib.png)
 
 To launch your application, bring up the Linux Console from the **Debug** menu: 
 
-![Linux Console](https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-database/media/sql-database-develop-cplusplus-simple/linuxconsole.png)
+![Linux Console](./media/sql-database-develop-cplusplus-simple/linuxconsole.png)
 
 If your connection was successful, you should now see the current database name printed in the Linux Console: 
 
-![Linux Console Window Output](https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-database/media/sql-database-develop-cplusplus-simple/linuxconsolewindow.png)
+![Linux Console Window Output](./media/sql-database-develop-cplusplus-simple/linuxconsolewindow.png)
 
 Congratulations! You have successfully completed the tutorial and can now connect to your Azure SQL DB from C++ on Windows and Linux platforms.
 
@@ -135,15 +130,4 @@ You can find the GetStarted solution that contains all the samples in this artic
 ## <a name="additional-resources"></a>Additional resources
 * [Design Patterns for Multi-tenant SaaS Applications with Azure SQL Database](sql-database-design-patterns-multi-tenancy-saas-applications.md)
 * Explore all the [capabilities of SQL Database](https://azure.microsoft.com/services/sql-database/)
-
-
-
-
-
-
-
-
-
-
-
 

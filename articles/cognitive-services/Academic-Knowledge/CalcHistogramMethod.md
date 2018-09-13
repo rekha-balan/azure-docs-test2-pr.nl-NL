@@ -5,16 +5,16 @@ services: cognitive-services
 author: alch-msft
 manager: kuansanw
 ms.service: cognitive-services
-ms.technology: academic-knowledge
+ms.component: academic-knowledge
 ms.topic: article
 ms.date: 03/27/2017
 ms.author: alch
-ms.openlocfilehash: 2c68a2669319670a807a0855bf5b0cbfb790b5bc
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: e0b773fb9791ee638c8cfdbbc9dca40543e50ec0
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44540894"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44827307"
 ---
 # <a name="calchistogram-method"></a>CalcHistogram Method
 

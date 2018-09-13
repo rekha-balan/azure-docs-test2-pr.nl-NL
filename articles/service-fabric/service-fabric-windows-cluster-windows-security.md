@@ -3,23 +3,23 @@ title: Secure a cluster running on Windows by using Windows security | Microsoft
 description: Learn how to configure node-to-node and client-to-node security on a standalone cluster running on Windows by using Windows security.
 services: service-fabric
 documentationcenter: .net
-author: rwike77
+author: dkkapur
 manager: timlt
 editor: ''
 ms.assetid: ce3bf686-ffc4-452f-b15a-3c812aa9e672
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 01/17/2017
-ms.author: ryanwi
-ms.openlocfilehash: b8842047351da6fdb547e0b09492b89fad962bee
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 08/24/2017
+ms.author: dekapur
+ms.openlocfilehash: a94891b8a88873f91cd82632c45971524e8c8e41
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44555076"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44818147"
 ---
 # <a name="secure-a-standalone-cluster-on-windows-by-using-windows-security"></a>Secure a standalone cluster on Windows by using Windows security
 To prevent unauthorized access to a Service Fabric cluster, you must secure the cluster. Security is especially important when the cluster runs production workloads. This article describes how to configure node-to-node and client-to-node security by using Windows security in the *ClusterConfig.JSON* file.  The process corresponds to the configure security step of [Create a standalone cluster running on Windows](service-fabric-cluster-creation-for-windows-server.md). For more information about how Service Fabric uses Windows security, see [Cluster security scenarios](service-fabric-cluster-security.md).
@@ -33,11 +33,12 @@ To prevent unauthorized access to a Service Fabric cluster, you must secure the 
 The sample *ClusterConfig.gMSA.Windows.MultiMachine.JSON* configuration file downloaded with the [Microsoft.Azure.ServiceFabric.WindowsServer.<version>.zip](http://go.microsoft.com/fwlink/?LinkId=730690) standalone cluster package contains a template for configuring Windows security using [Group Managed Service Account (gMSA)](https://technet.microsoft.com/library/hh831782.aspx):  
 
 ```  
-"security": {  
-            "ServerCredentialType": "Windows",  
+"security": {
+            "ClusterCredentialType": "Windows",
+            "ServerCredentialType": "Windows",
             "WindowsIdentities": {  
-                "ClustergMSAIdentity": "accountname@fqdn"  
-                "ClusterSPN": "fqdn"  
+                "ClustergMSAIdentity": "[gMSA Identity]", 
+                "ClusterSPN": "[Registered SPN for the gMSA account]",
                 "ClientIdentities": [  
                     {  
                         "Identity": "domain\\username",  
@@ -47,16 +48,18 @@ The sample *ClusterConfig.gMSA.Windows.MultiMachine.JSON* configuration file dow
             }  
         }  
 ```  
-  
-| **Configuration Setting** | **Description** |  
-| --- | --- |  
+
+| **Configuration setting** | **Description** |
+| --- | --- |
+| ClusterCredentialType |Set to *Windows* to enable Windows security for node-node communication.  | 
+| ServerCredentialType |Set to *Windows* to enable Windows security for client-node communication. |  
 | WindowsIdentities |Contains the cluster and client identities. |  
 | ClustergMSAIdentity |Configures node-to-node security. A group managed service account. |  
-| ClusterSPN |Fully qualified domain SPN for gMSA account|  
-| ClientIdentities |Configures client-to-node security. An array of client user accounts. |  
-| Identity |The client identity, a domain user. |  
-| IsAdmin |True specifies that the domain user has administrator client access, false for user client access. |  
-  
+| ClusterSPN |Registered SPN for gMSA account|  
+| ClientIdentities |Configures client-to-node security. An array of client user accounts. | 
+| Identity |Add the domain user, domain\username, for the client identity. |  
+| IsAdmin |Set to true to specify that the domain user has administrator client access or false for user client access. |  
+
 [Node to node security](service-fabric-cluster-security.md#node-to-node-security) is configured by setting **ClustergMSAIdentity** when service fabric needs to run under gMSA. In order to build trust relationships between nodes, they must be made aware of each other. This can be accomplished in two different ways: Specify the Group Managed Service Account that includes all nodes in the cluster or Specify the domain machine group that includes all nodes in the cluster. We strongly recommend using the [Group Managed Service Account (gMSA)](https://technet.microsoft.com/library/hh831782.aspx) approach, particularly for larger clusters (more than 10 nodes) or for clusters that are likely to grow or shrink.  
 This approach does not require the creation of a domain group for which cluster administrators have been granted access rights to add and remove members. These accounts are also useful for automatic password management. For more information, see [Getting Started with Group Managed Service Accounts](http://technet.microsoft.com/library/jj128431.aspx).  
  
@@ -65,10 +68,12 @@ This approach does not require the creation of a domain group for which cluster 
 The following example **security** section configures Windows security using gMSA and specifies that the machines in *ServiceFabric.clusterA.contoso.com* gMSA are part of the cluster and that *CONTOSO\usera* has admin client access:  
   
 ```  
-"security": {  
+"security": {
+    "ClusterCredentialType": "Windows",            
+    "ServerCredentialType": "Windows",
     "WindowsIdentities": {  
         "ClustergMSAIdentity" : "ServiceFabric.clusterA.contoso.com",  
-        "ClusterSPN" : "clusterA.contoso.com",  
+        "ClusterSPN" : "http/servicefabric/clusterA.contoso.com",  
         "ClientIdentities": [{  
             "Identity": "CONTOSO\\usera",  
             "IsAdmin": true  
@@ -78,7 +83,7 @@ The following example **security** section configures Windows security using gMS
 ```  
   
 ## <a name="configure-windows-security-using-a-machine-group"></a>Configure Windows security using a machine group  
-The sample *ClusterConfig.Windows.MultiMachine.JSON* configuration file downloaded with the [Microsoft.Azure.ServiceFabric.WindowsServer.<version>.zip](http://go.microsoft.com/fwlink/?LinkId=730690) standalone cluster package contains a template for configuring Windows security.  Windows security is configured in the **Properties** section: 
+This model is being deprecated. The recommendation is to use gMSA as detailed above. The sample *ClusterConfig.Windows.MultiMachine.JSON* configuration file downloaded with the [Microsoft.Azure.ServiceFabric.WindowsServer.<version>.zip](http://go.microsoft.com/fwlink/?LinkId=730690) standalone cluster package contains a template for configuring Windows security.  Windows security is configured in the **Properties** section: 
 
 ```
 "security": {
@@ -96,8 +101,8 @@ The sample *ClusterConfig.Windows.MultiMachine.JSON* configuration file download
 
 | **Configuration setting** | **Description** |
 | --- | --- |
-| ClusterCredentialType |**ClusterCredentialType** is set to *Windows* if ClusterIdentity specifies an Active Directory Machine Group Name. |  
-| ServerCredentialType |Set to *Windows* to enable Windows security for clients.<br /><br />This indicates that the clients of the cluster and the cluster itself are running within an Active Directory domain. |  
+| ClusterCredentialType |Set to *Windows* to enable Windows security for node-node communication.  | 
+| ServerCredentialType |Set to *Windows* to enable Windows security for client-node communication. |  
 | WindowsIdentities |Contains the cluster and client identities. |  
 | ClusterIdentity |Use a machine group name, domain\machinegroup, to configure node-to-node security. |  
 | ClientIdentities |Configures client-to-node security. An array of client user accounts. |  

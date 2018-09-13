@@ -1,10 +1,10 @@
 ---
-title: Node.js application using Socket.io | Microsoft Docs
+title: Node.js application using Socket.io - Azure
 description: Learn how to use socket.io in a node.js application hosted on Azure.
 services: cloud-services
 documentationcenter: nodejs
-author: rmcmurray
-manager: erikre
+author: jpconnock
+manager: timlt
 editor: ''
 ms.assetid: 7f9435e0-7732-4aa1-a4df-ea0e894b847f
 ms.service: cloud-services
@@ -12,17 +12,18 @@ ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: nodejs
 ms.topic: article
-ms.date: 12/22/2016
-ms.author: robmcm
-ms.openlocfilehash: c8e91db2dbcd71770dd38bae2b4fd46c6f2a997d
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 08/17/2017
+ms.author: jeconnoc
+ms.openlocfilehash: ef22c2a74cb710eacf85e36242097cda2fcfaa9d
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44552449"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44782449"
 ---
-# <a name="build-a-nodejs-chat-application-with-socketio-on-an-azure-cloud-service"></a>Build a Node.js Chat Application with Socket.IO on an Azure Cloud Service
-Socket.IO provides realtime communication between between your node.js server and clients. This tutorial will walk you through hosting a socket.IO based chat application on Azure. For more information on Socket.IO, see <http://socket.io/>.
+# <a name="build-a-nodejs-chat-application-with-socketio-on-an-azure-cloud-service"></a>Build a Node.js chat application with Socket.IO on an Azure Cloud Service
+
+Socket.IO provides realtime communication between your node.js server and clients. This tutorial walks you through hosting a socket.IO based chat application on Azure. For more information on Socket.IO, see [socket.io](http://socket.io).
 
 A screenshot of the completed application is below:
 
@@ -54,7 +55,7 @@ The following steps create the cloud service project that will host the Socket.I
    
     You will see the following response:
    
-    ![The output of the new-azureservice and add-azurenodeworkerrolecmdlets](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cloud-services/media/cloud-services-nodejs-chat-app-socketio/socketio-1.png)
+    ![The output of the new-azureservice and add-azurenodeworkerrolecmdlets](./media/cloud-services-nodejs-chat-app-socketio/socketio-1.png)
 
 ## <a name="download-the-chat-example"></a>Download the Chat Example
 For this project, we will use the chat example from the [Socket.IO GitHub repository]. Perform the following steps to download the example and add it to the project you previously created.
@@ -80,6 +81,7 @@ Before testing the application in the Azure emulator, we must make some minor mo
          , nib = require('nib')
        //, sio = require('..//..//lib//socket.io'); //Original
          , sio = require('socket.io');                //Updated
+         var port = process.env.PORT || 3000;         //Updated
 3. To ensure the application listens on the correct port, open server.js in Notepad or your favorite editor, and then change the following line by replacing **3000** with **process.env.port** as shown below:
    
        //app.listen(3000, function () {            //Original
@@ -105,11 +107,20 @@ After saving the changes to **server.js**, use the following steps to install re
 1. Launch the emulator by issuing the following command:
    
        PS C:\node\chatapp\WorkerRole1> Start-AzureEmulator -Launch
+   
+   > [!NOTE]
+   > If you encounter issues with launching emulator, eg.: Start-AzureEmulator : An unexpected failure occurred.  Details: Encountered an unexpected error The communication object,  System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+   
+      reinstall AzureAuthoringTools v 2.7.1 and AzureComputeEmulator v 2.7 - make sure that version matches.
+   >
+   >
+
+
 2. Open a browser and navigate to **http://127.0.0.1**.
 3. When the browser window opens, enter a nickname and then hit enter.
-   This will all you to post messages as a specific nickname. To test multi-user functionality, open additional browser windows using the same URL and enter different nicknames.
+   This will allow you to post messages as a specific nickname. To test multi-user functionality, open additional browser windows using the same URL and enter different nicknames.
    
-   ![Two browser windows displaying chat messages from User1 and User2](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cloud-services/media/cloud-services-nodejs-chat-app-socketio/socketio-8.png)
+   ![Two browser windows displaying chat messages from User1 and User2](./media/cloud-services-nodejs-chat-app-socketio/socketio-8.png)
 4. After testing the application, stop the emulator by issuing the following command:
    
        PS C:\node\chatapp\WorkerRole1> Stop-AzureEmulator
@@ -141,34 +152,27 @@ Your application is now running on Azure, and can relay chat messages between di
 ## <a name="next-steps"></a>Next steps
 In this tutorial you learned how to create a basic chat application hosted in an Azure Cloud Service. To learn how to host this application in an Azure Website, see [Build a Node.js Chat Application with Socket.IO on an Azure Web Site][chatwebsite].
 
-For more information, see also the [Node.js Developer Center](/develop/nodejs/).
+For more information, see also the [Node.js Developer Center](https://docs.microsoft.com/javascript/azure/?view=azure-node-latest).
 
-[chatwebsite]: /develop/nodejs/tutorials/website-using-socketio/
+[chatwebsite]: https://docs.microsoft.com/azure/cloud-services/cloud-services-nodejs-develop-deploy-app
 
 [Azure SLA]: http://www.windowsazure.com/support/sla/
 [Azure SDK for Node.js GitHub repository]: https://github.com/WindowsAzure/azure-sdk-for-node
-[completed-app]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/cloud-services/media/cloud-services-nodejs-chat-app-socketio/socketio-10.png
+[completed-app]: ./media/cloud-services-nodejs-chat-app-socketio/socketio-10.png
 [Azure SDK for Node.js]: https://www.windowsazure.com/develop/nodejs/
 [Node.js Web Application]: https://www.windowsazure.com/develop/nodejs/tutorials/getting-started/
 [Socket.IO GitHub repository]: https://github.com/LearnBoost/socket.io/tree/0.9.14
 [Azure Considerations]: #windowsazureconsiderations
 [Hosting the Chat Example in a Worker Role]: #hostingthechatexampleinawebrole
 [Summary and Next Steps]: #summary
-[powershell-menu]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/cloud-services/media/cloud-services-nodejs-chat-app-socketio/azure-powershell-start.png
+[powershell-menu]: ./media/cloud-services-nodejs-chat-app-socketio/azure-powershell-start.png
 
 [chat example]: https://github.com/LearnBoost/socket.io/tree/master/examples/chat
-[chat-example-view]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/cloud-services/media/cloud-services-nodejs-chat-app-socketio/socketio-22.png
+[chat-example-view]: ./media/cloud-services-nodejs-chat-app-socketio/socketio-22.png
 
 
-[chat-contents]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/cloud-services/media/cloud-services-nodejs-chat-app-socketio/socketio-5.png
-[The-output-of-the-npm-install-command]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/cloud-services/media/cloud-services-nodejs-chat-app-socketio/socketio-7.png
+[chat-contents]: ./media/cloud-services-nodejs-chat-app-socketio/socketio-5.png
+[The-output-of-the-npm-install-command]: ./media/cloud-services-nodejs-chat-app-socketio/socketio-7.png
 [The output of the Publish-AzureService command]: ./media/cloud-services-nodejs-chat-app-socketio/socketio-9.png
-
-
-
-
-
-
-
 
 

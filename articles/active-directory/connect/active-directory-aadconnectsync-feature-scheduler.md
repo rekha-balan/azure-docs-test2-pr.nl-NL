@@ -3,8 +3,8 @@ title: 'Azure AD Connect sync: Scheduler | Microsoft Docs'
 description: This topic describes the built-in scheduler feature in Azure AD Connect sync.
 services: active-directory
 documentationcenter: ''
-author: AndKjell
-manager: femila
+author: billmath
+manager: mtillman
 editor: ''
 ms.assetid: 6b1a598f-89c0-4244-9b20-f4aaad5233cf
 ms.service: active-directory
@@ -12,14 +12,15 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 02/28/2017
+ms.date: 07/12/2017
+ms.component: hybrid
 ms.author: billmath
-ms.openlocfilehash: 30ae6c4ad894b52eb341e9489e8e8f53cc7e342d
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: fa99de4aac11e7310085cc37e6ebaee441415c61
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44550096"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44781214"
 ---
 # <a name="azure-ad-connect-sync-scheduler"></a>Azure AD Connect sync: Scheduler
 This topic describes the built-in scheduler in Azure AD Connect sync (a.k.a. sync engine).
@@ -41,11 +42,11 @@ The scheduler itself is always running, but it can be configured to only run one
 ## <a name="scheduler-configuration"></a>Scheduler configuration
 To see your current configuration settings, go to PowerShell and run `Get-ADSyncScheduler`. It shows you something like this picture:
 
-![GetSyncScheduler](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnectsync-feature-scheduler/getsynccyclesettings2016.png)
+![GetSyncScheduler](./media/active-directory-aadconnectsync-feature-scheduler/getsynccyclesettings2016.png)
 
 If you see **The sync command or cmdlet is not available** when you run this cmdlet, then the PowerShell module is not loaded. This problem could happen if you run Azure AD Connect on a domain controller or on a server with higher PowerShell restriction levels than the default settings. If you see this error, then run `Import-Module ADSync` to make the cmdlet available.
 
-* **AllowedSyncCycleInterval**. The most frequently interval Azure AD allows synchronizations to occur. You cannot synchronize more frequently than this setting and still be supported.
+* **AllowedSyncCycleInterval**. The shortest time interval between synchronization cycles allowed by Azure AD. You cannot synchronize more frequently than this setting and still be supported.
 * **CurrentlyEffectiveSyncCycleInterval**. The schedule currently in effect. It has the same value as CustomizedSyncInterval (if set) if it is not more frequent than AllowedSyncInterval. If you use a build before 1.1.281 and you change CustomizedSyncCycleInterval, this change takes effect after next synchronization cycle. From build 1.1.281 the change takes effect immediately.
 * **CustomizedSyncCycleInterval**. If you want the scheduler to run at any other frequency than the default 30 minutes, then you configure this setting. In the picture above, the scheduler has been set to run every hour instead. If you set this setting to a value lower than AllowedSyncInterval, then the latter is used.
 * **NextSyncCyclePolicyType**. Either Delta or Initial. Defines if the next run should only process delta changes, or if the next run should do a full import and sync. The latter would also reprocess any new or changed rules.
@@ -83,7 +84,7 @@ If you need to make configuration changes, then you want to disable the schedule
 
 To disable the scheduler, run `Set-ADSyncScheduler -SyncCycleEnabled $false`.
 
-![Disable the scheduler](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnectsync-change-the-configuration/schedulerdisable.png)
+![Disable the scheduler](./media/active-directory-aadconnectsync-change-the-configuration/schedulerdisable.png)
 
 When you've made your changes, do not forget to enable the scheduler again with `Set-ADSyncScheduler -SyncCycleEnabled $true`.
 
@@ -117,12 +118,12 @@ To initiate a full sync cycle, run `Start-ADSyncSyncCycle -PolicyType Initial` f
 ## <a name="stop-the-scheduler"></a>Stop the scheduler
 If the scheduler is currently running a synchronization cycle, you might need to stop it. For example if you start the installation wizard and you get this error:
 
-![SyncCycleRunningError](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnectsync-feature-scheduler/synccyclerunningerror.png)
+![SyncCycleRunningError](./media/active-directory-aadconnectsync-feature-scheduler/synccyclerunningerror.png)
 
 When a sync cycle is running, you cannot make configuration changes. You could wait until the scheduler has finished the process, but you can also stop it so you can make your changes immediately. Stopping the current cycle is not harmful and pending changes are processed with next run.
 
 1. Start by telling the scheduler to stop its current cycle with the PowerShell cmdlet `Stop-ADSyncSyncCycle`.
-2. If you use a build before 1.1.281, then stopping the scheduler does not stop the current Connector from its current task. To force the Connector to stop, take the following actions: ![StopAConnector](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnectsync-feature-scheduler/stopaconnector.png)
+2. If you use a build before 1.1.281, then stopping the scheduler does not stop the current Connector from its current task. To force the Connector to stop, take the following actions: ![StopAConnector](./media/active-directory-aadconnectsync-feature-scheduler/stopaconnector.png)
    * Start **Synchronization Service** from the start menu. Go to **Connectors**, highlight the Connector with the state **Running**, and select **Stop** from the Actions.
 
 The scheduler is still active and starts again on next opportunity.
@@ -141,7 +142,7 @@ Invoke-ADSyncRunProfile -ConnectorName "name of connector" -RunProfileName "name
 
 The names to use for [Connector names](active-directory-aadconnectsync-service-manager-ui-connectors.md) and [Run Profile Names](active-directory-aadconnectsync-service-manager-ui-connectors.md#configure-run-profiles) can be found in the [Synchronization Service Manager UI](active-directory-aadconnectsync-service-manager-ui.md).
 
-![Invoke Run Profile](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnectsync-feature-scheduler/invokerunprofile.png)  
+![Invoke Run Profile](./media/active-directory-aadconnectsync-feature-scheduler/invokerunprofile.png)  
 
 The `Invoke-ADSyncRunProfile` cmdlet is synchronous, that is, it does not return control until the Connector has completed the operation, either successfully or with an error.
 
@@ -163,7 +164,7 @@ You can also monitor the sync engine to see if it is busy or idle. This cmdlet r
 Get-ADSyncConnectorRunStatus
 ```
 
-![Connector Run Status](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnectsync-feature-scheduler/getconnectorrunstatus.png)  
+![Connector Run Status](./media/active-directory-aadconnectsync-feature-scheduler/getconnectorrunstatus.png)  
 In the picture above, the first line is from a state where the sync engine is idle. The second line from when the Azure AD Connector is running.
 
 ## <a name="scheduler-and-installation-wizard"></a>Scheduler and installation wizard
@@ -173,9 +174,3 @@ If you start the installation wizard, then the scheduler is temporarily suspende
 Learn more about the [Azure AD Connect sync](active-directory-aadconnectsync-whatis.md) configuration.
 
 Learn more about [Integrating your on-premises identities with Azure Active Directory](active-directory-aadconnect.md).
-
-
-
-
-
-

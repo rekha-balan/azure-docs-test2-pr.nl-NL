@@ -1,27 +1,20 @@
 ---
-title: Monitor and manage Azure HDInsight using Ambari Web UI | Microsoft Docs
+title: Monitor and manage Azure HDInsight using Ambari Web UI
 description: Learn how to use Ambari to monitor and manage Linux-based HDInsight clusters. In this document, you learn how to use the Ambari Web UI included with HDInsight clusters.
 services: hdinsight
-documentationcenter: ''
-author: Blackmist
-manager: jhubbard
-editor: cgronlun
-tags: azure-portal
-ms.assetid: 4787f3cc-a650-4dc3-9d96-a19a67aad046
+author: jasonwhowell
+ms.reviewer: jasonh
 ms.service: hdinsight
 ms.custom: hdinsightactive
-ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: big-data
-ms.date: 02/08/2017
-ms.author: larryfr
-ms.openlocfilehash: 6c0bee83da0164777e9152c54009e4c8d6baacbb
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.topic: conceptual
+ms.date: 03/23/2018
+ms.author: jasonh
+ms.openlocfilehash: 51507dde0d027723f7bcbe18b64f791ec49e1de7
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44553998"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44784932"
 ---
 # <a name="manage-hdinsight-clusters-by-using-the-ambari-web-ui"></a>Manage HDInsight clusters by using the Ambari Web UI
 
@@ -33,40 +26,40 @@ In this document, you learn how to use the Ambari Web UI with an HDInsight clust
 
 ## <a id="whatis"></a>What is Ambari?
 
-[Apache Ambari](http://ambari.apache.org) makes Hadoop management simpler by providing an easy-to-use web UI that can be used to provision, manage, and monitor Hadoop clusters. Developers can integrate these capabilities into their applications by using the [Ambari REST APIs](https://github.com/apache/ambari/blob/trunk/ambari-server/docs/api/v1/index.md).
+[Apache Ambari](http://ambari.apache.org) simplifies Hadoop management by providing an easy-to-use web UI. You can use Ambari to manage and monitor Hadoop clusters. Developers can integrate these capabilities into their applications by using the [Ambari REST APIs](https://github.com/apache/ambari/blob/trunk/ambari-server/docs/api/v1/index.md).
 
 The Ambari Web UI is provided by default with HDInsight clusters that use the Linux operating system.
 
 > [!IMPORTANT]
-> Linux is the only operating system used on HDInsight version 3.4 or greater. For more information, see [HDInsight Deprecation on Windows](hdinsight-component-versioning.md#hdi-version-33-nearing-deprecation-date). 
+> Linux is the only operating system used on HDInsight version 3.4 or greater. For more information, see [HDInsight retirement on Windows](hdinsight-component-versioning.md#hdinsight-windows-retirement). 
 
 ## <a name="connectivity"></a>Connectivity
 
-The Ambari Web UI is available on your HDInsight cluster at HTTPS://CLUSTERNAME.azurehdidnsight.net, where **CLUSTERNAME** is the name of your cluster.
+The Ambari Web UI is available on your HDInsight cluster at HTTPS://CLUSTERNAME.azurehdinsight.net, where **CLUSTERNAME** is the name of your cluster.
 
 > [!IMPORTANT]
-> Connecting to Ambari on HDInsight requires HTTPS. You must also authenticate to Ambari using the admin account name (the default is **admin**,) and password you provided when the cluster was created.
+> Connecting to Ambari on HDInsight requires HTTPS. When prompted for authentication, use the admin account name and password you provided when the cluster was created.
 
 ## <a name="ssh-tunnel-proxy"></a>SSH tunnel (proxy)
 
-> [!NOTE]
-> While Ambari for your cluster is accessible directly over the Internet, some links from the Ambari Web UI (such as to the JobTracker,) are not exposed on the internet. So you receive "server not found" errors when trying to access these features unless you use a Secure Shell (SSH) tunnel to proxy web traffic to the cluster head node.
-
-For information on creating an SSH tunnel to work with Ambari, see [Use SSH Tunneling to access Ambari web UI, ResourceManager, JobHistory, NameNode, Oozie, and other web UI's](hdinsight-linux-ambari-ssh-tunnel.md).
+While Ambari for your cluster is accessible directly over the Internet, some links from the Ambari Web UI (such as to the JobTracker) are not exposed on the internet. To access these services, you must create an SSH tunnel. For more information, see [Use SSH Tunneling with HDInsight](hdinsight-linux-ambari-ssh-tunnel.md).
 
 ## <a name="ambari-web-ui"></a>Ambari Web UI
 
-When connecting to the Ambari Web UI, you are prompted to authenticate to the page. Use the cluster admin user (default Admin,) and password you used during cluster creation.
+> [!WARNING]
+> Not all features of the Ambari Web UI are supported on HDInsight. For more information, see the [Unsupported operations](#unsupported-operations) section of this document.
 
-When the page opens, note the bar at the top. This contains the following information and controls:
+When connecting to the Ambari Web UI, you are prompted to authenticate to the page. Use the cluster admin user (default Admin) and password you used during cluster creation.
 
-![ambari-nav](https://docstestmedia1.blob.core.windows.net/azure-media/articles/hdinsight/media/hdinsight-hadoop-manage-ambari/ambari-nav.png)
+When the page opens, note the bar at the top. This bar contains the following information and controls:
+
+![ambari-nav](./media/hdinsight-hadoop-manage-ambari/ambari-nav.png)
 
 * **Ambari logo** - Opens the dashboard, which can be used to monitor the cluster.
 
 * **Cluster name # ops** - Displays the number of ongoing Ambari operations. Selecting the cluster name or **# ops** displays a list of background operations.
 
-* **# alerts** - Warnings or critical alerts, if any, for the cluster. Selecting this displays a list of alerts.
+* **# alerts** - Displays warnings or critical alerts, if any, for the cluster.
 
 * **Dashboard** - Displays the dashboard.
 
@@ -84,7 +77,7 @@ When the page opens, note the bar at the top. This contains the following inform
 
 ### <a name="alerts"></a>Alerts
 
-Ambari provides many alerts, which have one of the following as the status:
+The following list contains the common alert statuses used by Ambari:
 
 * **OK**
 * **Warning**
@@ -95,44 +88,44 @@ Alerts other than **OK** cause the **# alerts** entry at the top of the page to 
 
 Alerts are organized into several default groups, which can be viewed from the **Alerts** page.
 
-![alerts page](https://docstestmedia1.blob.core.windows.net/azure-media/articles/hdinsight/media/hdinsight-hadoop-manage-ambari/alerts.png)
+![alerts page](./media/hdinsight-hadoop-manage-ambari/alerts.png)
 
-You can manage the groups by using the **Actions** menu and selecting **Manage Alert Groups**. This allows you to modify existing groups, or create new groups.
+You can manage the groups by using the **Actions** menu and selecting **Manage Alert Groups**.
 
-![manage alert groups dialog](https://docstestmedia1.blob.core.windows.net/azure-media/articles/hdinsight/media/hdinsight-hadoop-manage-ambari/manage-alerts.png)
+![manage alert groups dialog](./media/hdinsight-hadoop-manage-ambari/manage-alerts.png)
 
-You can also manage alerting methods, and create alert notifications from the **Actions** menu by selecting __Manage Alert Notifications__. This displays any current notifications, and allows you to create new notifications. Notifications can be sent via **EMAIL** or **SNMP** when specific alert/severity combinations occur. For example, you can send an alert when any of the alerts in the **YARN Default** group is set to **Critical**.
+You can also manage alerting methods, and create alert notifications from the **Actions** menu by selecting __Manage Alert Notifications__. Any current notifications are displayed. You can also create notifications from here. Notifications can be sent via **EMAIL** or **SNMP** when specific alert/severity combinations occur. For example, you can send an email message when any of the alerts in the **YARN Default** group is set to **Critical**.
 
-![Create alert dialog](https://docstestmedia1.blob.core.windows.net/azure-media/articles/hdinsight/media/hdinsight-hadoop-manage-ambari/create-alert-notification.png)
+![Create alert dialog](./media/hdinsight-hadoop-manage-ambari/create-alert-notification.png)
 
-Finally, selecting __Manage Alert Settings__ from the __Actions__ menu allows you tos et the number of times an alert must occur before a notification is sent. This can be used to prevent notifications for transient errors, such as when a service fails on one head node and restarts on the other head node.
+Finally, selecting __Manage Alert Settings__ from the __Actions__ menu allows you to set the number of times an alert must occur before a notification is sent. This setting can be used to prevent notifications for transient errors.
 
 ### <a name="cluster"></a>Cluster
 
 The **Metrics** tab of the dashboard contains a series of widgets that make it easy to monitor the status of your cluster at a glance. Several widgets, such as **CPU Usage**, provide additional information when clicked.
 
-![dashboard with metrics](https://docstestmedia1.blob.core.windows.net/azure-media/articles/hdinsight/media/hdinsight-hadoop-manage-ambari/metrics.png)
+![dashboard with metrics](./media/hdinsight-hadoop-manage-ambari/metrics.png)
 
 The **Heatmaps** tab displays metrics as colored heatmaps, going from green to red.
 
-![dashboard with heatmaps](https://docstestmedia1.blob.core.windows.net/azure-media/articles/hdinsight/media/hdinsight-hadoop-manage-ambari/heatmap.png)
+![dashboard with heatmaps](./media/hdinsight-hadoop-manage-ambari/heatmap.png)
 
-For more detailed information on the nodes within the cluster, select **Hosts**, and then select the specific node you are interested in.
+For more information on the nodes within the cluster, select **Hosts**. Then select the specific node you are interested in.
 
-![host details](https://docstestmedia1.blob.core.windows.net/azure-media/articles/hdinsight/media/hdinsight-hadoop-manage-ambari/host-details.png)
+![host details](./media/hdinsight-hadoop-manage-ambari/host-details.png)
 
 ### <a name="services"></a>Services
 
-The **Services** sidebar on the dashboard provides quick insight into the status of the services running on the cluster. Various icons are used to indicate status or actions that should be taken, such as a yellow recycle symbol if a service needs to be recycled.
+The **Services** sidebar on the dashboard provides quick insight into the status of the services running on the cluster. Various icons are used to indicate status or actions that should be taken. For example, a yellow recycle symbol is displayed if a service needs to be recycled.
 
-![services side-bar](https://docstestmedia1.blob.core.windows.net/azure-media/articles/hdinsight/media/hdinsight-hadoop-manage-ambari/service-bar.png)
+![services side-bar](./media/hdinsight-hadoop-manage-ambari/service-bar.png)
 
 > [!NOTE]
 > The services displayed differ between HDInsight cluster types and versions. The services displayed here may be different than the services displayed for your cluster.
 
 Selecting a service displays more detailed information on the service.
 
-![service summary information](https://docstestmedia1.blob.core.windows.net/azure-media/articles/hdinsight/media/hdinsight-hadoop-manage-ambari/service-details.png)
+![service summary information](./media/hdinsight-hadoop-manage-ambari/service-details.png)
 
 #### <a name="quick-links"></a>Quick links
 
@@ -146,15 +139,13 @@ Some services display a **Quick Links** link at the top of the page. This can be
 Selecting any of these links opens a new tab in your browser, which displays the selected page.
 
 > [!NOTE]
-> Selecting a **Quick Links** link for any service results in a "server not found" error unless you are using a Secure Sockets Layer (SSL) tunnel to proxy web traffic to the cluster. This is because the web applications used to display this information are not exposed on the internet.
->
-> For information on using an SSL tunnel with HDInsight, see [Use SSH Tunneling to access Ambari web UI, ResourceManager, JobHistory, NameNode, Oozie, and other web UI's](hdinsight-linux-ambari-ssh-tunnel.md)
+> Selecting the **Quick Links** entry for a service may return a "server not found" error. If you encounter this error, you must use an SSH tunnel when using the **Quick Links** entry for this service. For information, see [Use SSH Tunneling with HDInsight](hdinsight-linux-ambari-ssh-tunnel.md)
 
 ## <a name="management"></a>Management
 
 ### <a name="ambari-users-groups-and-permissions"></a>Ambari users, groups, and permissions
 
-Working with users, groups, and permissions is supported when using a [domain joined](hdinsight-domain-joined-introduction.md) HDInsight cluster. For information on using the Ambari Management UI on a domain-joined cluster, see [Manage domain-joined HDInsight clusters](hdinsight-domain-joined-introduction.md).
+Working with users, groups, and permissions are supported when using a [domain joined](./domain-joined/apache-domain-joined-introduction.md) HDInsight cluster. For information on using the Ambari Management UI on a domain-joined cluster, see [Manage domain-joined HDInsight clusters](./domain-joined/apache-domain-joined-introduction.md).
 
 > [!WARNING]
 > Do not change the password of the Ambari watchdog (hdinsightwatchdog) on your Linux-based HDInsight cluster. Changing the password breaks the ability to use script actions or perform scaling operations with your cluster.
@@ -163,12 +154,12 @@ Working with users, groups, and permissions is supported when using a [domain jo
 
 The **Hosts** page lists all hosts in the cluster. To manage hosts, follow these steps.
 
-![hosts page](https://docstestmedia1.blob.core.windows.net/azure-media/articles/hdinsight/media/hdinsight-hadoop-manage-ambari/hosts.png)
+![hosts page](./media/hdinsight-hadoop-manage-ambari/hosts.png)
 
 > [!NOTE]
-> Adding, decommissioning or recommissioning a host should not be used with HDInsight clusters.
+> Adding, decommissioning, and recommissioning a host should not be used with HDInsight clusters.
 
-1. Select the host(s) that you wish to manage.
+1. Select the host that you wish to manage.
 
 2. Use the **Actions** menu to select the action that you wish to perform:
 
@@ -178,7 +169,7 @@ The **Hosts** page lists all hosts in the cluster. To manage hosts, follow these
 
    * **Restart all components** - Stop and start all components on the host.
 
-   * **Turn on maintenance mode** - Suppresses alerts for the host. This should be enabled if you are performing actions that generate alerts, such as restarting a service that running services rely on.
+   * **Turn on maintenance mode** - Suppresses alerts for the host. This mode should be enabled if you are performing actions that generate alerts. For example, stopping and starting a service.
 
    * **Turn off maintenance mode** - Returns the host to normal alerting.
 
@@ -202,7 +193,7 @@ The **Hosts** page lists all hosts in the cluster. To manage hosts, follow these
 
 From the **Dashboard** or **Services** page, use the **Actions** button at the bottom of the list of services to stop and start all services.
 
-![service actions](https://docstestmedia1.blob.core.windows.net/azure-media/articles/hdinsight/media/hdinsight-hadoop-manage-ambari/service-actions.png)
+![service actions](./media/hdinsight-hadoop-manage-ambari/service-actions.png)
 
 > [!WARNING]
 > While **Add Service** is listed in this menu, it should not be used to add services to the HDInsight cluster. New services should be added using a Script Action during cluster provisioning. For more information on using Script Actions, see [Customize HDInsight clusters using Script Actions](hdinsight-hadoop-customize-cluster-linux.md).
@@ -213,10 +204,10 @@ While the **Actions** button can restart all services, often you want to start, 
 
 2. From the top of the **Summary** tab, use the **Service Actions** button and select the action to take. This restarts the service on all nodes.
 
-    ![service action](https://docstestmedia1.blob.core.windows.net/azure-media/articles/hdinsight/media/hdinsight-hadoop-manage-ambari/individual-service-actions.png)
+    ![service action](./media/hdinsight-hadoop-manage-ambari/individual-service-actions.png)
 
    > [!NOTE]
-   > Restarting some services while the cluster is running may generate alerts. To avoid this, you can use the **Service Actions** button to enable **Maintenance mode** for the service before performing the restart.
+   > Restarting some services while the cluster is running may generate alerts. To avoid alerts, you can use the **Service Actions** button to enable **Maintenance mode** for the service before performing the restart.
 
 3. Once an action has been selected, the **# op** entry at the top of the page increments to show that a background operation is occurring. If configured to display, the list of background operations is displayed.
 
@@ -229,7 +220,7 @@ To configure a service, use the following steps:
 
 2. Select the **Configs** tab. The current configuration is displayed. A list of previous configurations is also displayed.
 
-    ![configurations](https://docstestmedia1.blob.core.windows.net/azure-media/articles/hdinsight/media/hdinsight-hadoop-manage-ambari/service-configs.png)
+    ![configurations](./media/hdinsight-hadoop-manage-ambari/service-configs.png)
 
 3. Use the fields displayed to modify the configuration, and then select **Save**. Or select a previous configuration and then select **Make current** to roll back to the previous settings.
 
@@ -237,21 +228,17 @@ To configure a service, use the following steps:
 
 Ambari Views allow developers to plug UI elements into the Ambari Web UI using the [Ambari Views Framework](https://cwiki.apache.org/confluence/display/AMBARI/Views). HDInsight provides the following views with Hadoop cluster types:
 
-* Yarn Queue Manager: The queue manager provides a simple UI for viewing and modifying YARN queues.
 
-* Hive View: The Hive View allows you to run Hive queries directly from your web browser. You can save queries, view results, save results to the cluster storage, or download results to your local system. For more information on using Hive Views, see [Use Hive Views with HDInsight](hdinsight-hadoop-use-hive-ambari-view.md).
+* Hive View: The Hive View allows you to run Hive queries directly from your web browser. You can save queries, view results, save results to the cluster storage, or download results to your local system. For more information on using Hive Views, see [Use Hive Views with HDInsight](hadoop/apache-hadoop-use-hive-ambari-view.md).
 
-* Tez View: The Tez View allows you to better understand and optimize jobs by viewing information on how Tez jobs are executed and what resources are used by the job.
+* Tez View: The Tez View allows you to better understand and optimize jobs. You can view information on how Tez jobs are executed and what resources are used.
 
+## <a name="unsupported-operations"></a>Unsupported operations
 
+The following Ambari operations are not supported on HDInsight:
 
+* __Moving the Metrics Collector service__. When viewing information on the Metrics Collector service, one of the actions available from the Service Actions menu is __Move Metrics collector__. This is not supported with HDInsight.
 
+## <a name="next-steps"></a>Next steps
 
-
-
-
-
-
-
-
-
+Learn how to use the [Ambari REST API](hdinsight-hadoop-manage-ambari-rest-api.md) with HDInsight.

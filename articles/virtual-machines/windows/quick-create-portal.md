@@ -1,107 +1,100 @@
 ---
-title: Azure Quick Start - Create Windows VM Portal | Microsoft Docs
-description: Azure Quick Start - Create Windows VM Portal
+title: Quickstart - Create a Windows VM in the Azure portal | Microsoft Docs
+description: In this quickstart, you learn how to use the Azure portal to create a Windows virtual machine
 services: virtual-machines-windows
 documentationcenter: virtual-machines
-author: neilpeterson
-manager: timlt
+author: cynthn
+manager: jeconnoc
 editor: tysonn
 tags: azure-resource-manager
 ms.assetid: ''
 ms.service: virtual-machines-windows
 ms.devlang: na
-ms.topic: hero-article
+ms.topic: quickstart
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
-ms.date: 04/13/2017
-ms.author: nepeters
-ms.openlocfilehash: a8008475ec6ee39a91a9c93c835ca5e4dcc3fa91
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 07/03/2018
+ms.author: cynthn
+ms.custom: mvc
+ms.openlocfilehash: 808619949947f200668d0db6c0576093ce5598f8
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44564424"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44809639"
 ---
-# <a name="create-a-windows-virtual-machine-with-the-azure-portal"></a>Create a Windows virtual machine with the Azure portal
+# <a name="quickstart-create-a-windows-virtual-machine-in-the-azure-portal"></a>Quickstart: Create a Windows virtual machine in the Azure portal
 
-Azure virtual machines can be created through the Azure portal. This method provides a browser-based user interface for creating and configuring virtual machines and all related resources. This Quickstart steps through creating a virtual machine using the Azure portal. Once deployment is complete, we connect to the server and install IIS.
+Azure virtual machines (VMs) can be created through the Azure portal. This method provides a browser-based user interface to create VMs and their associated resources. This quickstart shows you how to use the Azure portal to deploy a virtual machine (VM) in Azure that runs Windows Server 2016. To see your VM in action, you then RDP to the VM and install the IIS web server.
 
-If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/en-us/free/?WT.mc_id=A261C142F) before you begin.
+If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
 
-## <a name="log-in-to-azure"></a>Log in to Azure
+## <a name="sign-in-to-azure"></a>Sign in to Azure
 
-Log in to the Azure portal at http://portal.azure.com.
+Sign in to the Azure portal at https://portal.azure.com.
 
 ## <a name="create-virtual-machine"></a>Create virtual machine
 
-2. Click the **New** button found on the upper left-hand corner of the Azure portal.
+1. Choose **Create a resource** in the upper left-hand corner of the Azure portal.
 
-3. Select **Compute** from the **New** blade, select **Windows Server 2016 Datacenter** from the **Compute** blade, and then click the **Create** button.
+2. In the search box above the list of Azure Marketplace resources, search for and select **Windows Server 2016 Datacenter**, then choose **Create**.
 
-4. Fill out the virtual machine **Basics** form. The user name and password entered here is used to log in to the virtual machine. For **Resource group**, create a new one. A resource group is a logical container into which Azure resources are created and collectively managed. When complete, click **OK**.
+3. Provide a VM name, such as *myVM*, leave the disk type as *SSD*, then provide a username, such as *azureuser*. The password must be at least 12 characters long and meet the [defined complexity requirements](faq.md#what-are-the-password-requirements-when-creating-a-vm).
 
-    ![Enter basic information about your VM in the portal blade](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/media/quick-create-portal/create-windows-vm-portal-basic-blade.png)  
+    ![Enter basic information about your VM in the portal blade](./media/quick-create-portal/create-windows-vm-portal-basic-blade.png)
 
-5. Choose a size for the VM. To see more sizes, select **View all** or change the **Supported disk type** filter. 
+5. Choose to **Create new** resource group, then provide a name, such as *myResourceGroup*. Choose your **Location**, then select **OK**.
 
-    ![Screenshot that shows VM sizes](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/media/quick-create-portal/create-windows-vm-portal-sizes.png)  
+4. Select a size for the VM. You can filter by *Compute type* or *Disk type*, for example. A suggested VM size is *D2s_v3*. Click **Select** after you have chosen a size.
 
-6. On the settings blade, select **Yes** under **Use managed disks**, keep the defaults for the rest of the settings, and click **OK**.
+    ![Screenshot that shows VM sizes](./media/quick-create-portal/create-windows-vm-portal-sizes.png)
 
-7. On the summary page, click **Ok** to start the virtual machine deployment.
+5. On the **Settings** page, in **Network** > **Network Security Group** > **Select public inbound ports**, select **HTTP** and **RDP (3389)** from the drop-down. Leave the rest of the defaults and select **OK**.
 
-8. To monitor deployment status, click the virtual machine. The VM can be found on the Azure portal dashboard, or by selecting **Virtual Machines** from the left-hand menu. When the VM has been created, the status changes from **Deploying** to **Running**.
+6. On the summary page, select **Create** to start the VM deployment.
 
-## <a name="open-port-80-for-web-traffic"></a>Open port 80 for web traffic 
-
-To allow traffic for IIS, you need to open port 80 to web traffic. This step walks you through creating a network security group (NSG) rule to allow inbound connections on port 80.
-
-1. On the blade for the virtual machine, in the **Essentials** section, click the name of the **Resource group**.
-2. In the blade for the resource group, click the **Network security group** in the list of resources. The NSG name should be the VM name with -nsg appended to the end.
-3. Click the **Inbound Security Rule** heading to open the list of inbound rules. You should see a rule for RDP already in the list.
-4. Click **+ Add** to open the **Add inbound security rule** blade.
-5. In **Name**, type **IIS**. Make sure **Port range** is set to 80 and **Action** is set to **Allow**. Click **OK**.
-
+7. The VM is pinned to the Azure portal dashboard. Once the deployment has completed, the VM summary automatically opens.
 
 ## <a name="connect-to-virtual-machine"></a>Connect to virtual machine
 
-After the deployment has completed, create a remote desktop connection to the virtual machine.
+Create a remote desktop connection to the virtual machine. These directions tell you how to connect to your VM from a Windows computer. On a Mac, you need an RDP client such as this [Remote Desktop Client](https://itunes.apple.com/us/app/microsoft-remote-desktop/id715768417?mt=12) from the Mac App Store.
 
-1. Click the **Connect** button on the virtual machine blade. A Remote Desktop Protocol file (.rdp file) is created and downloaded.
+1. Click the **Connect** button on the virtual machine properties page. 
 
-    ![Portal 9](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/media/quick-create-portal/quick-create-portal/portal-quick-start-9.png) 
+    ![Connect to an Azure VM from the portal](./media/quick-create-portal/quick-create-portal/portal-quick-start-9.png)
+    
+2. In the **Connect to virtual machine** page, keep the default options to connect by DNS name over port 3389 and click **Download RDP file**.
 
-2. To connect to your VM, open the downloaded RDP file. If prompted, click **Connect**. On a Mac, you need an RDP client such as this [Remote Desktop Client](https://itunes.apple.com/us/app/microsoft-remote-desktop/id715768417?mt=12) from the Mac App Store.
+2. Open the downloaded RDP file and click **Connect** when prompted. 
 
-3. Enter the user name and password you specified when creating the virtual machine, then click **Ok**.
+3. In the **Windows Security** window, select **More choices** and then **Use a different account**. Type the username as *vmname*\\*username*, enter password you created for the virtual machine, and then click **OK**.
 
-4. You may receive a certificate warning during the sign-in process. Click **Yes** or **Continue** to proceed with the connection.
+4. You may receive a certificate warning during the sign-in process. Click **Yes** or **Continue** to create the connection.
 
+## <a name="install-web-server"></a>Install web server
 
-## <a name="install-iis-using-powershell"></a>Install IIS using PowerShell
-
-On the virtual machine, open a PowerShell prompt and run the following command to install IIS and enable the local firewall rule to allow web traffic:
+To see your VM in action, install the IIS web server. Open a PowerShell prompt on the VM and run the following command:
 
 ```powershell
 Install-WindowsFeature -name Web-Server -IncludeManagementTools
 ```
 
+When done, close the RDP connection to the VM.
+
+
 ## <a name="view-the-iis-welcome-page"></a>View the IIS welcome page
 
-With IIS installed and port 80 now open on your VM from the Internet, you can use a web browser of your choice to view the default IIS welcome page. Get the **Public IP address** from the blade for the VM and use it to visit the default web page. 
+In the portal, select the VM and in the overview of the VM, use the **Click to copy** button to the right of the IP address to copy it and paste it into a browser tab. The default IIS welcome page will open, and should look like this:
 
-![IIS default site](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/media/quick-create-powershell/default-iis-website.png) 
+![IIS default site](./media/quick-create-powershell/default-iis-website.png)
 
-## <a name="delete-virtual-machine"></a>Delete virtual machine
+## <a name="clean-up-resources"></a>Clean up resources
 
-When no longer needed, delete the resource group, virtual machine, and all related resources. To do so, select the resource group from the virtual machine blade and click **Delete**.
+When no longer needed, you can delete the resource group, virtual machine, and all related resources. To do so, select the resource group for the virtual machine, select **Delete**, then confirm the name of the resource group to delete.
 
 ## <a name="next-steps"></a>Next steps
 
-[Install a role and configure firewall tutorial](hero-role.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+In this quickstart, you deployed a simple virtual machine, open a network port for web traffic, and installed a basic web server. To learn more about Azure virtual machines, continue to the tutorial for Windows VMs.
 
-[Explore VM deployment CLI samples](cli-samples.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
-
-
-
-
+> [!div class="nextstepaction"]
+> [Azure Windows virtual machine tutorials](./tutorial-manage-vm.md)

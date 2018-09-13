@@ -2,19 +2,19 @@
 title: Frequently asked questions for the Face API Service | Microsoft Docs
 description: Here are answers to the most popular questions about the Face API Service.
 services: cognitive-services
-author: v-royhar
-manager: yutkuo
+author: SteveMSFT
+manager: corncar
 ms.service: cognitive-services
-ms.technology: face
+ms.component: face-api
 ms.topic: article
 ms.date: 01/26/2017
-ms.author: anroth
-ms.openlocfilehash: 1dde783e81fd49d4eb8cbc33c6f74eb47c7c9f5b
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: sbowles
+ms.openlocfilehash: da2f75deef8a8beea3ba23b6a39eb6d2fe104b54
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44540892"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44800155"
 ---
 # <a name="face-api-frequently-asked-questions"></a>Face API Frequently Asked Questions
 ### <a name="if-you-cant-find-answers-to-your-questions-in-this-faq-try-asking-the-face-api-community-on-stackoverflowhttpsstackoverflowcomquestionstaggedproject-oxfordormicrosoft-cognitive-or-contact-help-and-support-on-uservoicehttpscognitiveuservoicecom"></a>If you can't find answers to your questions in this FAQ, try asking the Face API community on [StackOverflow](https://stackoverflow.com/questions/tagged/project-oxford+or+microsoft-cognitive) or contact Help and Support on [UserVoice](https://cognitive.uservoice.com/).

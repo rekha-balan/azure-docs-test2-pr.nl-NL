@@ -3,8 +3,8 @@ title: Virtual machines in an Azure Resource Manager template | Microsoft Azure
 description: Learn more about how the virtual machine resource is defined in an Azure Resource Manager template.
 services: virtual-machines-windows
 documentationcenter: ''
-author: davidmu1
-manager: timlt
+author: cynthn
+manager: jeconnoc
 editor: ''
 tags: azure-resource-manager
 ms.assetid: f63ab5cc-45b8-43aa-a4e7-69dc42adbb99
@@ -13,14 +13,14 @@ ms.workload: na
 ms.tgt_pltfrm: vm-windows
 ms.devlang: na
 ms.topic: article
-ms.date: 03/07/2017
-ms.author: davidmu
-ms.openlocfilehash: 588d1667b1bc8873d8ad1c99a7d0bc4dc00ae1df
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 07/18/2017
+ms.author: cynthn
+ms.openlocfilehash: ede6a0c4b981dcd06cbebdef3298bbbb05229c15
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44551857"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44803314"
 ---
 # <a name="virtual-machines-in-an-azure-resource-manager-template"></a>Virtual machines in an Azure Resource Manager template
 
@@ -46,7 +46,7 @@ This example shows a typical resource section of a template for creating a speci
     ], 
     "properties": { 
       "hardwareProfile": { 
-        "vmSize": "Standard_DS1_v2" 
+        "vmSize": "Standard_DS1" 
       }, 
       "osProfile": { 
         "computername": "[concat('myVM', copyindex())]", 
@@ -61,10 +61,10 @@ This example shows a typical resource section of a template for creating a speci
           "version": "latest" 
         }, 
         "osDisk": { 
-          "name": "[concat('myOSDisk', copyindex())]" 
+          "name": "[concat('myOSDisk', copyindex())]",
           "caching": "ReadWrite", 
           "createOption": "FromImage" 
-        }
+        },
         "dataDisks": [
           {
             "name": "[concat('myDataDisk', copyindex())]",
@@ -78,15 +78,14 @@ This example shows a typical resource section of a template for creating a speci
         "networkInterfaces": [ 
           { 
             "id": "[resourceId('Microsoft.Network/networkInterfaces',
-              concat('myNIC', copyindex())]" 
+              concat('myNIC', copyindex()))]" 
           } 
         ] 
-      }
+      },
       "diagnosticsProfile": {
         "bootDiagnostics": {
           "enabled": "true",
-          "storageUri": "[concat('https://', variables('storageName'), 
-            '.blob.core.windows.net"
+          "storageUri": "[concat('https://', variables('storageName'), '.blob.core.windows.net')]"
         }
       } 
     },
@@ -164,8 +163,8 @@ The version of the API you specify in your template affects which properties you
 Use these opportunities for getting the latest API versions:
 
 - REST API - [List all resource providers](https://docs.microsoft.com/rest/api/resources/providers#Providers_List)
-- PowerShell - [Get-AzureRmResourceProvider](https://docs.microsoft.com/powershell/resourcemanager/Azurerm.Resources/v3.1.0/Get-AzureRmResourceProvider?redirectedfrom=msdn)
-- Azure CLI 2.0 - [az provider show](https://docs.microsoft.com/cli/azure/provider#show)
+- PowerShell - [Get-AzureRmResourceProvider](/powershell/module/azurerm.resources/get-azurermresourceprovider)
+- Azure CLI 2.0 - [az provider show](https://docs.microsoft.com/cli/azure/provider#az_provider_show)
 
 ## <a name="parameters-and-variables"></a>Parameters and variables
 
@@ -231,7 +230,7 @@ Also, notice in the example that the loop index is used when specifying some of 
 
 ```
 "osDisk": { 
-  "name": "[concat('myOSDisk', copyindex())]" 
+  "name": "[concat('myOSDisk', copyindex())]",
   "caching": "ReadWrite", 
   "createOption": "FromImage" 
 }
@@ -271,7 +270,7 @@ How do you know if a dependency is required? Look at the values you set in the t
     "id": "[resourceId('Microsoft.Network/networkInterfaces',
       concat('myNIC', copyindex())]" 
   } ] 
-}
+},
 ```
 
 To set this property, the network interface must exist. Therefore, you need a dependency. You also need to set a dependency when one resource (a child) is defined within another resource (a parent). For example, the diagnostic settings and custom script extensions are both defined as child resources of the virtual machine. They cannot be created until the virtual machine exists. Therefore, both resources are marked as dependent on the virtual machine.
@@ -281,14 +280,14 @@ To set this property, the network interface must exist. Therefore, you need a de
 Several profile elements are used when defining a virtual machine resource. Some are required and some are optional. For example, the hardwareProfile, osProfile, storageProfile, and networkProfile elements are required, but the diagnosticsProfile is optional. These profiles define settings such as:
    
 - [size](sizes.md)
-- [name](../linux/infrastructure-naming-guidelines.md) and credentials
+- [name](/azure/architecture/best-practices/naming-conventions) and credentials
 - disk and [operating system settings](cli-ps-findimage.md)
-- [network interface](../../virtual-network/virtual-networks-multiple-nics.md) 
+- [network interface](../../virtual-network/virtual-network-deploy-multinic-classic-ps.md) 
 - boot diagnostics
 
 ## <a name="disks-and-images"></a>Disks and images
    
-In Azure, vhd files can represent [disks or images](../../storage/storage-about-disks-and-vhds-windows.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). When the operating system in a vhd file is specialized to be a specific VM, it is referred to as a disk. When the operating system in a vhd file is generalized to be used to create many VMs, it is referred to as an image.   
+In Azure, vhd files can represent [disks or images](about-disks-and-vhds.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). When the operating system in a vhd file is specialized to be a specific VM, it is referred to as a disk. When the operating system in a vhd file is generalized to be used to create many VMs, it is referred to as an image.   
     
 ### <a name="create-new-virtual-machines-and-new-disks-from-a-platform-image"></a>Create new virtual machines and new disks from a platform image
 
@@ -321,7 +320,7 @@ Configuration settings for the operating system disk are assigned with the osDis
   "name": "[concat('myOSDisk', copyindex())]",
   "caching": "ReadWrite", 
   "createOption": "FromImage" 
-}
+},
 ```
 
 ### <a name="create-new-virtual-machines-from-existing-managed-disks"></a>Create new virtual machines from existing managed disks
@@ -336,7 +335,7 @@ If you want to create virtual machines from existing disks, remove the imageRefe
   }, 
   "caching": "ReadWrite",
   "createOption": "Attach" 
-}
+},
 ```
 
 ### <a name="create-new-virtual-machines-from-a-managed-image"></a>Create new virtual machines from a managed image
@@ -354,7 +353,7 @@ If you want to create a virtual machine from a managed image, change the imageRe
     "caching": "ReadWrite", 
     "createOption": "FromImage" 
   }
-}
+},
 ```
 
 ### <a name="attach-data-disks"></a>Attach data disks
@@ -370,7 +369,7 @@ You can optionally add data disks to the VMs. The [number of disks](sizes.md) de
     "caching": "ReadWrite",
     "createOption": "Empty"
   }
-]
+],
 ```
 
 ## <a name="extensions"></a>Extensions
@@ -441,7 +440,7 @@ The start.ps1 script can accomplish many configuration tasks. For example, the d
 
 You can see the status of the installed extensions from the Extensions settings in the portal:
 
-![Get extension status](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/media/template-description/virtual-machines-show-extensions.png)
+![Get extension status](./media/template-description/virtual-machines-show-extensions.png)
 
 You can also get extension information by using the **Get-AzureRmVMExtension** PowerShell command, the **vm extension get** Azure CLI 2.0 command, or the **Get extension information** REST API.
 
@@ -451,7 +450,7 @@ When you deploy a template, Azure tracks the resources that you deployed as a gr
 
 If you are curious about the status of resources in the deployment, you can use the Resource Group blade in the Azure portal:
 
-![Get deployment information](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/media/template-description/virtual-machines-deployment-info.png)
+![Get deployment information](./media/template-description/virtual-machines-deployment-info.png)
     
 It’s not a problem to use the same template to create resources or to update existing resources. When you use commands to deploy templates, you have the opportunity to say which [mode](../../resource-group-template-deploy.md) you want to use. The mode can be set to either **Complete** or **Incremental**. The default is to do incremental updates. Be careful when using the **Complete** mode because you may accidentally delete resources. When you set the mode to **Complete**, Resource Manager deletes any resources in the resource group that are not in the template.
 
@@ -459,5 +458,4 @@ It’s not a problem to use the same template to create resources or to update e
 
 - Create your own template using [Authoring Azure Resource Manager templates](../../resource-group-authoring-templates.md).
 - Deploy the template that you created using [Create a Windows virtual machine with a Resource Manager template](ps-template.md).
-- Learn how to manage the VMs that you created by reviewing [Manage virtual machines using Azure Resource Manager and PowerShell](ps-manage.md).
-
+- Learn how to manage the VMs that you created by reviewing [Create and manage Windows VMs with the Azure PowerShell module](tutorial-manage-vm.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).

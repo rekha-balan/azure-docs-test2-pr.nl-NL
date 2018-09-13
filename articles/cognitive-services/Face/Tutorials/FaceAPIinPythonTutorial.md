@@ -1,20 +1,21 @@
 ---
 title: Face API Python tutorial | Microsoft Docs
+titleSuffix: Microsoft Cognitive Services
 description: Learn how to use the Face API with the Python SDK to detect human faces in an image in Cognitive Services.
 services: cognitive-services
-author: v-royhar
-manager: yutkuo
+author: SteveMSFT
+manager: corncar
 ms.service: cognitive-services
-ms.technology: face
+ms.component: face-api
 ms.topic: article
-ms.date: 02/24/2017
-ms.author: anroth
-ms.openlocfilehash: c8f47c62d86c8066d02813d387065d9dadf087b8
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 03/01/2018
+ms.author: sbowles
+ms.openlocfilehash: 90d74d8df2ed59e6f3313ef7c620284d1022a667
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44661278"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44808267"
 ---
 # <a name="getting-started-with-face-api-in-python-tutorial"></a>Getting Started with Face API in Python Tutorial
 
@@ -32,31 +33,69 @@ To use the tutorial, you will need to do the following:
 pip install cognitive_face
 ```
 
-- Obtain a [subscription key](https://www.microsoft.com/cognitive-services/en-us/sign-up) for Microsoft Cognitive Services (formerly Project Oxford). You can use either your primary or your secondary key in this tutorial. (Note that to use any Face API, you must have a valid subscription key.)
+- Obtain a [subscription key](https://azure.microsoft.com/try/cognitive-services/) for Microsoft Cognitive Services. You can use either your primary or your secondary key in this tutorial. (Note that to use any Face API, you must have a valid subscription key.)
 
 ## <a name="sdk-example"></a> Detect a Face in an Image
 
 ```python
 import cognitive_face as CF
 
-KEY = 'subscription key'  # Replace with a valid subscription key (keeping the quotes in place).
+KEY = '<Subscription Key>'  # Replace with a valid subscription key (keeping the quotes in place).
 CF.Key.set(KEY)
+
+BASE_URL = 'https://westus.api.cognitive.microsoft.com/face/v1.0/'  # Replace with your regional Base URL
+CF.BaseUrl.set(BASE_URL)
 
 # You can use this example JPG or replace the URL below with your own URL to a JPEG image.
 img_url = 'https://raw.githubusercontent.com/Microsoft/Cognitive-Face-Windows/master/Data/detection1.jpg'
-result = CF.face.detect(img_url)
-print result
+faces = CF.face.detect(img_url)
+print(faces)
 ```
 
-Below is an example result. It's a `list` of detected faces. Each item in the list is a `dict` instance where `faceId` is a unique ID for the detected face and `faceRectangle` describes the postion of the detected face. A face ID expires in 24 hours.
+Below is an example result. It's a `list` of detected faces. Each item in the list is a `dict` instance where `faceId` is a unique ID for the detected face and `faceRectangle` describes the position of the detected face. A face ID expires in 24 hours.
 
 ```python
 [{u'faceId': u'68a0f8cf-9dba-4a25-afb3-f9cdf57cca51', u'faceRectangle': {u'width': 89, u'top': 66, u'height': 89, u'left': 446}}]
 ```
 
+## <a name="draw-rectangles-around-the-faces"></a>Draw rectangles around the faces
+
+Using the json coordinates that you received from the previous command, you can draw rectangles on the image to visually represent each face. You will need to `pip install Pillow` to use the `PIL` imaging module.  At the top of the file, add the following:
+
+```python
+import requests
+from io import BytesIO
+from PIL import Image, ImageDraw
+```
+
+Then, after `print(faces)`, include the following in your script:
+
+```python
+#Convert width height to a point in a rectangle
+def getRectangle(faceDictionary):
+    rect = faceDictionary['faceRectangle']
+    left = rect['left']
+    top = rect['top']
+    bottom = left + rect['height']
+    right = top + rect['width']
+    return ((left, top), (bottom, right))
+
+#Download the image from the url
+response = requests.get(img_url)
+img = Image.open(BytesIO(response.content))
+
+#For each face returned use the face rectangle and draw a red box.
+draw = ImageDraw.Draw(img)
+for face in faces:
+    draw.rectangle(getRectangle(face), outline='red')
+
+#Display the image in the users default image browser.
+img.show()
+```
+
 ## <a name='further'></a> Further Exploration
 
-To help you further explore the Face API, this tutorial provides a GUI sample. To run it, first install [wxPython](https://wxpython.org/) then run the commands below.
+To help you further explore the Face API, this tutorial provides a GUI sample. To run it, first install [wxPython](https://wxpython.org/pages/downloads/) then run the commands below.
 
 ```bash
 git clone https://github.com/Microsoft/Cognitive-Face-Python.git

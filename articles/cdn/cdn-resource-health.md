@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: integration
 ms.date: 01/23/2017
 ms.author: mazha
-ms.openlocfilehash: b560eb877c57ebdcc02b7a9457c44a4acff3851e
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 37fe208f5087f318e665e76825127854b4a11c98
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44555481"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44811368"
 ---
 # <a name="monitor-the-health-of-azure-cdn-resources"></a>Monitor the health of Azure CDN resources
   
@@ -36,16 +36,16 @@ Azure CDN Resource health is a subset of [Azure resource health](../resource-hea
 
 2. Click the **Settings** button.
 
-    ![Settings button](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-resource-health/cdn-profile-settings.png)
+    ![Settings button](./media/cdn-resource-health/cdn-profile-settings.png)
 
 3. Under *Support + troubleshooting*, click **Resource health**.
 
-    ![CDN resource health](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-resource-health/cdn-resource-health3.png)
+    ![CDN resource health](./media/cdn-resource-health/cdn-resource-health3.png)
 
 >[!TIP] 
 >You can also find CDN resources listed in the *Resource health* tile in the *Help + support* blade.  You can quickly get to *Help + support* by clicking the circled **?** in the upper right corner of the portal.
 >
-> ![Help + support](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-resource-health/cdn-help-support.png)
+> ![Help + support](./media/cdn-resource-health/cdn-help-support.png)
 
 ## <a name="azure-cdn-specific-messages"></a>Azure CDN-specific messages
 
@@ -65,5 +65,3 @@ We are sorry, we are experiencing issues with some of our CDN providers | Check 
 - [Read an overview of Azure resource health](../resource-health/resource-health-overview.md)
 - [Troubleshoot issues with CDN compression](./cdn-troubleshoot-compression.md)
 - [Troubleshoot issues with 404 errors](./cdn-troubleshoot-endpoint.md)
-
-

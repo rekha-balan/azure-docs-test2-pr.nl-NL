@@ -14,12 +14,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/23/2017
 ms.author: rli
-ms.openlocfilehash: b1af344b0d1c27345e63c425e84ff1984973c70c
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 57e56c38e003cb83dcf44f455c4451d159db8a59
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44663074"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44774377"
 ---
 # <a name="azure-cdn-rules-engine-conditional-expressions"></a>Azure CDN rules engine conditional expressions
 This topic lists detailed descriptions of the Conditional Expressions for Azure Content Delivery Network (CDN) [Rules Engine](cdn-rules-engine.md).
@@ -32,7 +32,7 @@ IF | An IF expression is always a part of the first statement in a rule. Like al
 AND IF | An AND IF expression may only be added after the following types of conditional expressions:IF,AND IF. It indicates that there is another condition that must be met for the initial IF statement.
 ELSE IF| An ELSE IF expression specifies an alternative condition that must be met before a set of features specific to this ELSE IF statement takes place. The presence of an ELSE IF statement indicates the end of the previous statement. The only conditional expression that may be placed after an ELSE IF statement is another ELSE IF statement. This means that an ELSE IF statement may only be used to specify a single additional condition that has to be met.
 
-**Example**: ![CDN match condition](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-rules-engine-reference/cdn-rules-engine-conditional-expression.png)
+**Example**: ![CDN match condition](./media/cdn-rules-engine-reference/cdn-rules-engine-conditional-expression.png)
 
  > [!TIP]
    > A subsequent rule may override the actions specified by a previous rule. Example: A catch-all rule secures all requests via Token-Based Authentication. Another rule may be created directly below it to make an exception for certain types of requests.
@@ -43,4 +43,3 @@ ELSE IF| An ELSE IF expression specifies an alternative condition that must be m
 * [Rules Engine Match Conditions](cdn-rules-engine-reference-match-conditions.md)
 * [Rules Engine Features](cdn-rules-engine-reference-features.md)
 * [Overriding default HTTP behavior using the rules engine](cdn-rules-engine.md)
-

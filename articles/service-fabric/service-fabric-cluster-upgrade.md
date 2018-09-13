@@ -3,23 +3,23 @@ title: Upgrade an Azure Service Fabric cluster | Microsoft Docs
 description: Upgrade the Service Fabric code and/or configuration that runs a Service Fabric cluster, including setting cluster update mode, upgrading certificates, adding application ports, doing OS patches, and so on. What can you expect when the upgrades are performed?
 services: service-fabric
 documentationcenter: .net
-author: ChackDan
+author: aljo-microsoft
 manager: timlt
 editor: ''
 ms.assetid: 15190ace-31ed-491f-a54b-b5ff61e718db
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 02/22/2017
-ms.author: chackdan
-ms.openlocfilehash: 939d2ce82f94368da00def54a9c040dfb10c62c7
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 8/10/2017
+ms.author: aljo
+ms.openlocfilehash: 3e5ef2cbc9d7bec82cadc0c7663de52636938505
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44661938"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44815885"
 ---
 # <a name="upgrade-an-azure-service-fabric-cluster"></a>Upgrade an Azure Service Fabric cluster
 > [!div class="op_single_selector"]
@@ -31,7 +31,7 @@ ms.locfileid: "44661938"
 For any modern system, designing for upgradability is key to achieving long-term success of your product. An Azure Service Fabric cluster is a resource that you own, but is partly managed by Microsoft. This article describes what is managed automatically and what you can configure yourself.
 
 ## <a name="controlling-the-fabric-version-that-runs-on-your-cluster"></a>Controlling the fabric version that runs on your Cluster
-You can set your cluster to receive automatic fabric upgrades, when Microsoft releases a new version or choose to select a supported fabric version you want your cluster to be on.
+You can set your cluster to receive automatic fabric upgrades as they are released by Microsoft or you can select a supported fabric version you want your cluster to be on.
 
 You do this by setting the "upgradeMode" cluster configuration on the portal or using Resource Manager at the time of creation or later on a live cluster 
 
@@ -206,7 +206,7 @@ You can specify the custom health policies or review the current settings under 
 Refer to [service fabric cluster fabric settings](service-fabric-cluster-fabric-settings.md) on what and how you can customize them.
 
 ### <a name="os-patches-on-the-vms-that-make-up-the-cluster"></a>OS patches on the VMs that make up the cluster
-This capability is planned for the future as an automated feature. But currently, you are responsible to patch your VMs. You must do this one VM at a time, so that you do not take down more than one at a time.
+Refer to [Patch Orchestration Application](service-fabric-patch-orchestration-application.md) which can be deployed on your cluster to install patches from Windows Update in an orchestrated manner, keeping the services available all the time. 
 
 ### <a name="os-upgrades-on-the-vms-that-make-up-the-cluster"></a>OS upgrades on the VMs that make up the cluster
 If you must upgrade the OS image on the virtual machines of the cluster, you must do it one VM at a time. You are responsible for this upgrade--there is currently no automation for this.
@@ -217,17 +217,10 @@ If you must upgrade the OS image on the virtual machines of the cluster, you mus
 * Learn about [application upgrades](service-fabric-application-upgrade.md)
 
 <!--Image references-->
-[CertificateUpgrade]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-cluster-upgrade/CertificateUpgrade2.png
-[AddingProbes]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-cluster-upgrade/addingProbes2.PNG
-[AddingLBRules]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-cluster-upgrade/addingLBRules.png
-[HealthPolices]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-cluster-upgrade/Manage_AutomodeWadvSettings.PNG
-[ARMUpgradeMode]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-cluster-upgrade/ARMUpgradeMode.PNG
-[Create_Manualmode]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-cluster-upgrade/Create_Manualmode.PNG
-[Manage_Automaticmode]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-cluster-upgrade/Manage_Automaticmode.PNG
-
-
-
-
-
-
-
+[CertificateUpgrade]: ./media/service-fabric-cluster-upgrade/CertificateUpgrade2.png
+[AddingProbes]: ./media/service-fabric-cluster-upgrade/addingProbes2.PNG
+[AddingLBRules]: ./media/service-fabric-cluster-upgrade/addingLBRules.png
+[HealthPolices]: ./media/service-fabric-cluster-upgrade/Manage_AutomodeWadvSettings.PNG
+[ARMUpgradeMode]: ./media/service-fabric-cluster-upgrade/ARMUpgradeMode.PNG
+[Create_Manualmode]: ./media/service-fabric-cluster-upgrade/Create_Manualmode.PNG
+[Manage_Automaticmode]: ./media/service-fabric-cluster-upgrade/Manage_Automaticmode.PNG

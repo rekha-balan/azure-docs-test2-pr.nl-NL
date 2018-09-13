@@ -3,8 +3,8 @@ title: Visualizing Azure Network Security Group flow logs with Power BI | Micros
 description: This page describes how to visualize NSG flow logs with Power BI.
 services: network-watcher
 documentationcenter: na
-author: georgewallace
-manager: timlt
+author: mattreatMSFT
+manager: vitinnan
 editor: ''
 ms.assetid: 1e4f95fa-f5f0-4e03-bc25-008fbfc4934c
 ms.service: network-watcher
@@ -13,13 +13,13 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
-ms.author: gwallace
-ms.openlocfilehash: 9a10852ac716145ed80b789f1f30a5bb3251e057
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: mareat
+ms.openlocfilehash: 8f5bb54e12348fd915b2c4413bbacdc083a2a879
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44555320"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44811784"
 ---
 # <a name="visualizing-network-security-group-flow-logs-with-power-bi"></a>Visualizing Network Security Group flow logs with Power BI
 
@@ -120,31 +120,18 @@ Feel free to customize this template for your needs. There are many numerous way
 
 ## <a name="next-steps"></a>Next Steps
 
-Learn how to visualize your NSG flow logs with the Elastick Stack by visiting [Visualize network traffic patterns to and from your VMs using open source tools](network-watcher-using-open-source-tools.md)
+Learn how to visualize your NSG flow logs with the Elastick Stack by visiting [Visualize Azure Network Watcher NSG flow logs using open source tools](network-watcher-visualize-nsg-flow-logs-open-source-tools.md)
 
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/network-watcher/media/network-watcher-visualize-nsg-flow-logs-power-bi/figure1.png
-[2]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/network-watcher/media/network-watcher-visualize-nsg-flow-logs-power-bi/figure2.png
-[3]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/network-watcher/media/network-watcher-visualize-nsg-flow-logs-power-bi/figure3.png
-[4]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/network-watcher/media/network-watcher-visualize-nsg-flow-logs-power-bi/figure4.png
-[5]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/network-watcher/media/network-watcher-visualize-nsg-flow-logs-power-bi/figure5.png
-[6]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/network-watcher/media/network-watcher-visualize-nsg-flow-logs-power-bi/figure6.png
-[7]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/network-watcher/media/network-watcher-visualize-nsg-flow-logs-power-bi/figure7.png
-[8]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/network-watcher/media/network-watcher-visualize-nsg-flow-logs-power-bi/figure8.png
-[9]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/network-watcher/media/network-watcher-visualize-nsg-flow-logs-power-bi/figure9.png
-[10]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/network-watcher/media/network-watcher-visualize-nsg-flow-logs-power-bi/figure10.png
-[11]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/network-watcher/media/network-watcher-visualize-nsg-flow-logs-power-bi/figure11.png
-[12]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/network-watcher/media/network-watcher-visualize-nsg-flow-logs-power-bi/figure12.png
-[13]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/network-watcher/media/network-watcher-visualize-nsg-flow-logs-power-bi/figure13.png
-
-
-
-
-
-
-
-
-
-
-
-
-
+[1]: ./media/network-watcher-visualize-nsg-flow-logs-power-bi/figure1.png
+[2]: ./media/network-watcher-visualize-nsg-flow-logs-power-bi/figure2.png
+[3]: ./media/network-watcher-visualize-nsg-flow-logs-power-bi/figure3.png
+[4]: ./media/network-watcher-visualize-nsg-flow-logs-power-bi/figure4.png
+[5]: ./media/network-watcher-visualize-nsg-flow-logs-power-bi/figure5.png
+[6]: ./media/network-watcher-visualize-nsg-flow-logs-power-bi/figure6.png
+[7]: ./media/network-watcher-visualize-nsg-flow-logs-power-bi/figure7.png
+[8]: ./media/network-watcher-visualize-nsg-flow-logs-power-bi/figure8.png
+[9]: ./media/network-watcher-visualize-nsg-flow-logs-power-bi/figure9.png
+[10]: ./media/network-watcher-visualize-nsg-flow-logs-power-bi/figure10.png
+[11]: ./media/network-watcher-visualize-nsg-flow-logs-power-bi/figure11.png
+[12]: ./media/network-watcher-visualize-nsg-flow-logs-power-bi/figure12.png
+[13]: ./media/network-watcher-visualize-nsg-flow-logs-power-bi/figure13.png

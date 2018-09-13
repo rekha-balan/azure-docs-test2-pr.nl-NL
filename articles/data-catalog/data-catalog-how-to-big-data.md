@@ -1,32 +1,25 @@
 ---
-title: How to work with 'big data' data sources | Microsoft Docs
+title: How to work with 'big data' data sources in Azure Data Catalog
 description: How-to article highlighting patterns for using Azure Data Catalog  with 'big data' data sources, including Azure Blob Storage, Azure Data Lake, and Hadoop HDFS.
 services: data-catalog
-documentationcenter: ''
 author: steelanddata
-manager: NA
-editor: ''
-tags: ''
+ms.author: maroche
 ms.assetid: 626d1568-0780-4726-bad1-9c5000c6b31a
 ms.service: data-catalog
-ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: data-catalog
-ms.date: 01/23/2017
-ms.author: maroche
-ms.openlocfilehash: cc494c70c76e3ca21bb0eecef84b6857a9c8db32
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.topic: conceptual
+ms.date: 01/18/2018
+ms.openlocfilehash: d59b637d1c5ad2335492883503e738a80071a8dd
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44554928"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44803197"
 ---
 # <a name="how-to-work-with-big-data-sources-in-azure-data-catalog"></a>How to work with big data sources in Azure Data Catalog
 ## <a name="introduction"></a>Introduction
-**Microsoft Azure Data Catalog** is a fully managed cloud service that serves as a system of registration and system of discovery for enterprise data sources. In other words, **Azure Data Catalog** is all about helping people discover, understand, and use data sources, and helping organizations to get more value from their existing data sources, including big data.
+**Microsoft Azure Data Catalog** is a fully managed cloud service that serves as a system of registration and system of discovery for enterprise data sources. It is all about helping people discover, understand, and use data sources, and helping organizations to get more value from their existing data sources, including big data.
 
-**Azure Data Catalog** supports the registration of Azure Blog Storage blobs and directories as well as Hadoop HDFS files and directories. The semi-structured nature of these data sources provides great flexibility, but it also means that users must consider how the data sources are organized in order to get the most value from registering them with **Azure Data Catalog**.
+**Azure Data Catalog** supports the registration of Azure Blog Storage blobs and directories as well as Hadoop HDFS files and directories. The semi-structured nature of these data sources provides great flexibility. However, to get the most value from registering them with **Azure Data Catalog**, users must consider how the data sources are organized.
 
 ## <a name="directories-as-logical-data-sets"></a>Directories as logical data sets
 A common pattern for organizing big data sources is to treat directories as logical data sets. Top-level directories are used to define a data set, while subfolders define partitions, and the files they contain store the data itself.
@@ -46,9 +39,9 @@ An example of this pattern might be:
         \2013
         ...
 
-In this example, vehicle_maintenance_events and location_tracking_events represent logical data sets. Each of these folders contains data files which are organized by year and month into subfolders. Each of these folders could potentially contain hundreds or thousands of files.
+In this example, vehicle_maintenance_events and location_tracking_events represent logical data sets. Each of these folders contains data files that are organized by year and month into subfolders. Each of these folders could potentially contain hundreds or thousands of files.
 
-In this pattern, registering individual files with **Azure Data Catalog** probably does not make sense. Instead, register the directories that represent the data sets that will be meaningful to the users working with the data.
+In this pattern, registering individual files with **Azure Data Catalog** probably does not make sense. Instead, register the directories that represent the data sets that be meaningful to the users working with the data.
 
 ## <a name="reference-data-files"></a>Reference data files
 A complementary pattern is to store reference data sets as individual files. These data sets may be thought of as the 'small' side of big data, and are often similar to dimensions in an analytical data model. Reference data files contain records that are used to provide context for the bulk of the data files stored elsewhere in the big data store.
@@ -61,10 +54,10 @@ An example of this pattern might be:
 
 When an analyst or data scientist is working with the data contained in the larger directory structures, the data in these reference files can be used to provide more detailed information for entities that are referred to only by name or ID in the larger data set.
 
-In this pattern, it will make sense to register the individual reference data files with **Azure Data Catalog**. Each file represents a data set, and each one can be annotated and discovered individually.
+In this pattern, it makes sense to register the individual reference data files with **Azure Data Catalog**. Each file represents a data set, and each one can be annotated and discovered individually.
 
 ## <a name="alternate-patterns"></a>Alternate patterns
-The patterns described above are just two possible ways a big data store may be organized, but each implementation will be different. Regardless of how your data sources are structured, when registering big data sources with **Azure Data Catalog**, focus on registering the files and directories that represent the data sets that will be of value to others within your organization. Registering all files and directories can clutter the catalog, making it harder for users to find what they need.
+The patterns described in the preceding section are just two possible ways a big data store may be organized, but each implementation is different. Regardless of how your data sources are structured, when registering big data sources with **Azure Data Catalog**, focus on registering the files and directories that represent the data sets that are of value to others within your organization. Registering all files and directories can clutter the catalog, making it harder for users to find what they need.
 
 ## <a name="summary"></a>Summary
 Registering data sources with **Azure Data Catalog** makes them easier to discover and understand. By registering and annotating the big data files and directories that represent logical data sets, you can help users find and use the big data sources they need.

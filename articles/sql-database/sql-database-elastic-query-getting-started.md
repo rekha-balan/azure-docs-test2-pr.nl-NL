@@ -1,25 +1,20 @@
 ---
 title: Report across scaled-out cloud databases (horizontal partitioning) | Microsoft Docs
-description: how to use cross database database queries
+description: Use cross database database queries to report across multiple databases.
 services: sql-database
-documentationcenter: ''
-manager: jhubbard
-author: ddove
-ms.assetid: c81ef5e3-41e9-4fd2-8631-868f2e168147
+manager: craigg
+author: MladjoA
 ms.service: sql-database
-ms.custom: multiple databases
-ms.workload: sql-database
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
-ms.date: 05/23/2016
-ms.author: ddove
-ms.openlocfilehash: e21c338c03d89d34d7508d6f92f8450d9744c735
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.custom: scale out apps
+ms.topic: conceptual
+ms.date: 04/01/2018
+ms.author: mlandzic
+ms.openlocfilehash: e2393980d966d5a476a2fedf0e70b0614e803e06
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44661379"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44825188"
 ---
 # <a name="report-across-scaled-out-cloud-databases-preview"></a>Report across scaled-out cloud databases (preview)
 You can create reports from multiple Azure SQL databases from a single connection point using an [elastic query](sql-database-elastic-query-overview.md). The databases must be horizontally partitioned (also known as "sharded").
@@ -139,14 +134,9 @@ For pricing information see [SQL Database Pricing Details](https://azure.microso
 
 
 <!--Image references-->
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-database/media/sql-database-elastic-query-getting-started/cmd-prompt.png
-[2]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-database/media/sql-database-elastic-query-getting-started/portal.png
-[3]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-database/media/sql-database-elastic-query-getting-started/tiers.png
-[4]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-database/media/sql-database-elastic-query-getting-started/details.png
-[5]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-database/media/sql-database-elastic-query-getting-started/exel-sources.png
+[1]: ./media/sql-database-elastic-query-getting-started/cmd-prompt.png
+[2]: ./media/sql-database-elastic-query-getting-started/portal.png
+[3]: ./media/sql-database-elastic-query-getting-started/tiers.png
+[4]: ./media/sql-database-elastic-query-getting-started/details.png
+[5]: ./media/sql-database-elastic-query-getting-started/exel-sources.png
 <!--anchors-->
-
-
-
-
-

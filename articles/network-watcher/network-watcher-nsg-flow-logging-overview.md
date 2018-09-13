@@ -1,9 +1,9 @@
 ---
-title: Introduction to flow logging for Network Security Groups with Azure Network Watcher | Microsoft Docs
-description: This page explains how to use NSG flow logs a feature of Azure Network Watcher
+title: Introduction to flow logging for network security groups with Azure Network Watcher | Microsoft Docs
+description: This article explains how to use the NSG flow logs feature of Azure Network Watcher.
 services: network-watcher
 documentationcenter: na
-author: georgewallace
+author: jimdial
 manager: timlt
 editor: ''
 ms.assetid: 47d91341-16f1-45ac-85a5-e5a640f5d59e
@@ -13,35 +13,35 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
-ms.author: gwallace
-ms.openlocfilehash: 3bf9a5b34c27f4943f28e47b8287397e4d90d866
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: jdial
+ms.openlocfilehash: ae4edb82fa5e192a30d297dae82199bb7efca0c2
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44553083"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44809548"
 ---
-# <a name="introduction-to-flow-logging-for-network-security-groups"></a>Introduction to flow logging for Network Security Groups
+# <a name="introduction-to-flow-logging-for-network-security-groups"></a>Introduction to flow logging for network security groups
 
-Network Security Group flow logs are a feature of Network Watcher that allows you to view information about ingress and egress IP traffic through a Network Security Group. These flow logs are written in json format and show outbound and inbound flows on a per rule basis, the NIC the flow applies to, 5-tuple information about the flow (Source/Destination IP, Source/Destination Port, Protocol), and if the traffic was allowed or denied.
+Network security group (NSG) flow logs are a feature of Network Watcher that allows you to view information about ingress and egress IP traffic through an NSG. Flow logs are written in json format, and show outbound and inbound flows on a per rule basis, the network interface (NIC) the flow applies to, 5-tuple information about the flow (Source/destination IP, source/destination port, and protocol), and if the traffic was allowed or denied.
 
-![flow logs overview][1]
+![flow logs overview](./media/network-watcher-nsg-flow-logging-overview/figure1.png)
 
-While flow logs target Network Security Groups, they are not displayed the same as the other logs. Flow logs are stored only within a storage account and following the logging path as shown in the following example:
+While flow logs target NSGs, they are not displayed the same as the other logs. Flow logs are stored only within a storage account and follow the logging path shown in the following example:
 
 ```
-https://{storageAccountName}.blob.core.windows.net/insights-logs-networksecuritygroupflowevent/resourceId%3D/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.network/networksecuritygroups/{nsgName}/{year}/{month}/{day}/PT1H.json
+https://{storageAccountName}.blob.core.windows.net/insights-logs-networksecuritygroupflowevent/resourceId=/SUBSCRIPTIONS/{subscriptionID}/RESOURCEGROUPS/{resourceGroupName}/PROVIDERS/MICROSOFT.NETWORK/NETWORKSECURITYGROUPS/{nsgName}/y={year}/m={month}/d={day}/h={hour}/m=00/macAddress={macAddress}/PT1H.json
 ```
 
-The same retention policies as seen on other logs apply to flow logs. Logs have a retention policy that can be set from 1 day to 365 days. If a retention policy is not set, the logs are maintained forever.
+The same retention policies seen for other logs apply to flow logs. You can set log retention policy from 1 day to 2147483647 days. If a retention policy is not set, the logs are maintained forever.
 
 ## <a name="log-file"></a>Log file
 
-Flow logs have multiple properties. The following list is a listing of the properties that are returned within the NSG flow log:
+Flow logs include the following properties:
 
 * **time** - Time when the event was logged
 * **systemId** - Network Security Group resource Id.
-* **category** - The category of the event, this is always be NetworkSecurityGroupFlowEvent
+* **category** - The category of the event. The category is always **NetworkSecurityGroupFlowEvent**
 * **resourceid** - The resource Id of the NSG
 * **operationName** - Always NetworkSecurityGroupFlowEvents
 * **properties** - A collection of properties of the flow
@@ -60,15 +60,14 @@ Flow logs have multiple properties. The following list is a listing of the prope
                     * **Traffic Flow** - The direction of the traffic flow. Valid values are **I** for inbound and **O** for outbound.
                     * **Traffic** - Whether traffic was allowed or denied. Valid values are **A** for allowed and **D** for denied.
 
-
-The following is an example of a Flow log. As you can see there are multiple records that follow the property list described in the preceding section. 
+The text that follows is an example of a flow log. As you can see, there are multiple records that follow the property list described in the preceding section.
 
 > [!NOTE]
-> Values in the flowTuples property are a comma-separated list.
+> Values in the **flowTuples* property are a comma-separated list.
  
 ```json
 {
-    "records": 
+    "records":
     [
         
         {
@@ -103,13 +102,6 @@ The following is an example of a Flow log. As you can see there are multiple rec
 
 ## <a name="next-steps"></a>Next steps
 
-Learn how to enable Flow logs by visiting [Enabling Flow logging](network-watcher-nsg-flow-logging-portal.md).
-
-Learn about NSG logging by visiting [Log analytics for network security groups (NSGs)](../virtual-network/virtual-network-nsg-manage-log.md).
-
-Find out if traffic is allowed or denied on a VM by visiting [Verify traffic with IP flow verify](network-watcher-check-ip-flow-verify-portal.md)
-
-<!-- Image references -->
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/network-watcher/media/network-watcher-nsg-flow-logging-overview/figure1.png
-
-
+- To learn how to enable flow logs, see [Enabling NSG flow logging](network-watcher-nsg-flow-logging-portal.md).
+- To learn more about NSG logging, see [Log analytics for network security groups (NSGs)](../virtual-network/virtual-network-nsg-manage-log.md?toc=%2fazure%2fnetwork-watcher%2ftoc.json).
+- To determine whether traffic is allowed or denied to or from a VM, see [Diagnose a VM network traffic filter problem](diagnose-vm-network-traffic-filtering-problem.md)

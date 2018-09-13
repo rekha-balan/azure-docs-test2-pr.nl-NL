@@ -15,12 +15,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 07/20/2016
 ms.author: jehollan
-ms.openlocfilehash: 207971c29112c1cb4c7c1074a9f35f9baf0d4bc7
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 05dd4ae3c4ee439d66401a3f5595f9104051f8ee
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44554925"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44790951"
 ---
 # <a name="get-started-with-the-query-action"></a>Get started with the query action
 By using the query action, you can work with batches and arrays to accomplish workflows to:
@@ -28,7 +28,7 @@ By using the query action, you can work with batches and arrays to accomplish wo
 * Create a task for all high-priority records from a database.
 * Save all PDF attachments for emails into an Azure blob.
 
-To get started using the query action in a logic app, see [Create a logic app](../logic-apps/logic-apps-create-a-logic-app.md).
+To get started using the query action in a logic app, see [Create a logic app](../logic-apps/quickstart-create-first-logic-app-workflow.md).
 
 ## <a name="use-the-query-action"></a>Use the query action
 An action is an operation that is carried out by the workflow that is defined in a logic app. [Learn more about actions](connectors-overview.md).  
@@ -41,14 +41,16 @@ Here's how you can add it in a logic app:
 2. Choose **Add an action**.
 3. In the action search box, type **filter** to list the **Filter array** action.
    
-    ![Select the query action](https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/connectors-native-query/using-action-1.png)
+    ![Select the query action](./media/connectors-native-query/using-action-1.png)
 4. Select an array to filter. (The following screenshot shows the array of results from a Twitter search.)
 5. Create a condition to evaluate on each item. (The following screenshot filters tweets from users who have more than 100 followers.)
    
-    ![Complete the query action](https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/connectors-native-query/using-action-2.png)
+    ![Complete the query action](./media/connectors-native-query/using-action-2.png)
    
     The action will output a new array that contains only results that met the filter requirements.
 6. Click the upper-left corner of the toolbar to save, and your logic app will both save and publish (activate).
+
+\* If you're calling an HTTP endpoint, and receiving a JSON response, use the _Parse JSON_ action to parse the JSON response. Without taking this step, _Filter Array_ will see only Body and not understand the structure of the JSON payload.
 
 ## <a name="query-action"></a>Query action
 Here are the details for the action that this connector supports. The connector has one possible action.
@@ -79,7 +81,5 @@ The following are output details for the HTTP response.
 | Filtered array |array |An array that contains an object for each filtered result |
 
 ## <a name="next-steps"></a>Next steps
-Now, try out the platform and [create a logic app](../logic-apps/logic-apps-create-a-logic-app.md). You can explore the other available connectors in logic apps by looking at our [APIs list](apis-list.md).
-
-
+Now, try out the platform and [create a logic app](../logic-apps/quickstart-create-first-logic-app-workflow.md). You can explore the other available connectors in logic apps by looking at our [APIs list](apis-list.md).
 

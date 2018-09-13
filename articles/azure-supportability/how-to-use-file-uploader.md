@@ -8,19 +8,19 @@ manager: mbaldwin
 editor: ''
 tags: billing
 ms.assetid: 86697fdf-3499-4cab-ab3f-10d40d3c1f70
-ms.service: billing
+ms.service: azure-supportability
 ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 02/03/2017
+ms.date: 05/11/2018
 ms.author: genli
-ms.openlocfilehash: 7676e3100eefca2e75f669d5f105dee30322a1a3
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 6edcf9ae8135de8bf82d819e50d3d336b641166e
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44662443"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44805316"
 ---
 # <a name="microsoft-azure-new-support-request-file-upload-utility-guidelines"></a>Microsoft Azure new support request File Upload utility guidelines
 When you [create a support request](https://portal.azure.com/#create/Microsoft.Support), the File Upload utility can help you easily upload diagnostic files or any other files that you think are relevant to the incident.  

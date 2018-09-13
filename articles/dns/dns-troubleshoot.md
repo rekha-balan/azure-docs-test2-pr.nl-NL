@@ -3,8 +3,8 @@ title: Azure DNS troubleshooting guide | Microsoft Docs
 description: How to troubleshoot common issues with Azure DNS
 services: dns
 documentationcenter: na
-author: jtuliani
-manager: carmonm
+author: genlin
+manager: cshepard
 editor: ''
 ms.assetid: 95b01dc3-ee69-4575-a259-4227131e4f9c
 ms.service: dns
@@ -13,13 +13,13 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 01/20/2017
-ms.author: jonatul
-ms.openlocfilehash: 1d9bb681a864bdc3e5a2f9c9a531d9566b16ada4
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: genli
+ms.openlocfilehash: 816ad6c0079e9272286cdc072ff71bf15313eb8e
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44661995"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44784100"
 ---
 # <a name="azure-dns-troubleshooting-guide"></a>Azure DNS troubleshooting guide
 

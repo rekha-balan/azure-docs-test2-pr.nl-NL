@@ -1,82 +1,78 @@
 ---
-title: Overview of Alerts in Microsoft Azure and Azure Monitor | Microsoft Docs
+title: Overview of classic alerts in Microsoft Azure and Azure Monitor
 description: Alerts enable you to monitor Azure resource metrics, events, or logs and be notified when a condition you specify is met.
 author: rboucher
-manager: carolz
-editor: ''
-services: monitoring-and-diagnostics
-documentationcenter: monitoring-and-diagnostics
-ms.assetid: a6dea224-57bf-43d8-a292-06523037d70b
-ms.service: monitoring-and-diagnostics
-ms.workload: na
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
-ms.date: 03/02/2017
+services: azure-monitor
+ms.service: azure-monitor
+ms.topic: conceptual
+ms.date: 05/15/2018
 ms.author: robb
-ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: cb13cb84b742e9ba646811d5ff041fc8ba8cc60c
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.component: alerts
+ms.openlocfilehash: a0abcbdaa7e998413efb717be6e0addc5607ec5c
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44556005"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44809574"
 ---
-# <a name="what-are-alerts-in-microsoft-azure"></a>What are alerts in Microsoft Azure?
-This article describes what alerts are, their benefits, and how to get started with using them. It specifically applies to Azure Monitor, but provides pointers to other services.  
+# <a name="what-are-classic-alerts-in-microsoft-azure"></a>What are classic alerts in Microsoft Azure?
 
-Alerts are a method of monitoring Azure resource metrics, events, or logs and being notified when a condition you specify is met.  
+> [!NOTE]
+> This article describes how to create older, classic metric alerts. Azure Monitor now supports [newer, near-real time metric alerts, and a new alerts experience](monitoring-overview-unified-alerts.md). 
+>
 
-## <a name="alerts-in-different-azure-services"></a>Alerts in different Azure services
-Alerts are available across different services, including:
+By using alerts, you can configure conditions over data and get notified when the conditions match the latest monitoring data.
 
-* **Application Insights**: Enables web test and metric alerts. See [Set alerts in Application Insights](../application-insights/app-insights-alerts.md) and [Monitor availability and responsiveness of any website](../application-insights/app-insights-monitor-web-app-availability.md).
-* **Log Analytics (Operations Management Suite)**: Enables the routing of Activity and Diagnostic Logs to Log Analytics. Operations Management Suite allows metric, log, and other alert types. For more information, see [Alerts in Log Analytics](../log-analytics/log-analytics-alerts.md).  
-* **Azure Monitor**: Enables alerts based on both metric values and activity log events. You can use the [Azure Monitor REST API](https://msdn.microsoft.com/library/dn931943.aspx) to manage alerts.  For more information, see [Using the Azure portal, PowerShell, or the command-line interface to create alerts](insights-alerts-portal.md).
 
-## <a name="visual-summary"></a>Visual Summary
-The following diagram summarizes alerts and what you can do with them specifically in "Azure Monitor". Other actions may be available for the services listed previously. For example, currently alerts on Diagnostics Logs are only available in Log Analytics.
+## <a name="alerts-on-azure-monitor-data"></a>Alerts on Azure Monitor data
+There are two types of classic alerts available: metric alerts and activity log alerts.
 
-![Alerts explained](https://docstestmedia1.blob.core.windows.net/azure-media/articles/monitoring-and-diagnostics/media/monitoring-overview-alerts/Alerts_Overview_Resource_v4.png)
+* **Classic metric alerts**: This alert triggers when the value of a specified metric crosses a threshold that you assign. The alert generates a notification when the it's "activated" (when the threshold is crossed and the alert condition is met). It also generates an alert when it is "resolved" (when the threshold is crossed again and the condition is no longer met). 
 
-## <a name="what-can-trigger-alerts-in-azure-monitor"></a>What can trigger alerts in Azure Monitor
+* **Classic activity log alerts**: This streaming log alert triggers when an activity log event is generated that matches filter criteria that you've assigned. These alerts have only one state, "activated," because the alert engine simply applies the filter criteria to any new event. These alerts can notify you when a new Service Health incident occurs or when a user or application performs an operation in your subscription such as "Delete virtual machine."
 
-You can receive alerts based on:
+To receive diagnostic log data available that's available through Azure Monitor, route the data into Log Analytics (formerly Operations Management Suite) and use a Log Analytics query alert. Log Analytics now uses the [new alerting method](monitoring-overview-unified-alerts.md). 
 
-* **Metric values**: This alert triggers when the value of a specified metric crosses a threshold that you assign in either direction. That is, it triggers both when the condition is first met and then afterward when that condition is no longer being met. For a growing list of available metrics supported by Azure monitor, see [List of metrics supported on Azure Monitor](monitoring-supported-metrics.md).
-* **Activity log events**: This alert can trigger when a particular event occurs on a resource, or when a service notification is posted to your subscription.
+The following diagram summarizes sources of data in Azure Monitor and suggests how you can alert off this data.
 
-## <a name="what-can-metric-alerts-do"></a>What can Metric Alerts do?
-You can configure an alert to do the following actions:
+![Alerts explained](./media/monitoring-overview-alerts/Alerts_Overview_Resource_v4.png)
 
-* Send email notifications to the service administrator, to co-administrators, or to additional email addresses that you specify.
-* Call a webhook, which enables you to launch additional automation actions. Examples include calling:
-    - Azure Automation Runbook
-    - Azure Function
-    - Azure Logic App
-    - a third-party service
+## <a name="taxonomy-of-azure-monitor-alerts-classic"></a>Taxonomy of Azure Monitor alerts (classic)
+Azure uses the following terms to describe classic alerts and their functions:
+* **Alert**: The definition of criteria (one or more rules or conditions) that becomes activated when met.
+* **Active**: The state that occurs when the criteria that's defined by a classic alert is met.
+* **Resolved**: The state that occurs when the criteria that's defined by a classic alert is no longer met after previously having been met.
+* **Notification**: The action that's taken based on when a classic alert becomes active.
+* **Action**: The specific call that's sent to the receiver of a notification (for example, an email or a post to a webhook URL). Notifications can usually trigger multiple actions.
 
-## <a name="what-can-activity-log-alerts-do"></a>What can Activity Log Alerts do?
-You can configure an alert to do the following actions:
-* Trigger whenever a specific event occurs one of the resources under your subscription
-* Trigger whenever a service notification is posted to your subscription
-* Alert members of an action group via
-    * SMS
-    * Email
-    * Webhook
+## <a name="how-do-i-receive-notifications-from-an-azure-monitor-classic-alert"></a>How do I receive notifications from an Azure Monitor classic alert?
+Historically, Azure alerts from different services used their own built-in notification methods. 
+
+Now Azure Monitor offers reusable notification grouping called *action groups*. Action groups specify a set of receivers for a notification. When an alert is activated that references the action group, all receivers receive that notification. This functionality enables you to reuse a grouping of receivers (for example, your on-call engineer list) across many alert objects. Action groups support notification through various methods. These methods can include posting to a webhook URL, sending emails, SMS messages, and a number of other actions. For more information, see [Create and manage action groups in the Azure portal](monitoring-action-groups.md). 
+
+Older classic activity log alerts use action groups.
+
+However, the older metric alerts don't use action groups. Instead, you can configure the following actions: 
+* Send email notifications to the service administrator, co-administrators, or to additional email addresses that you specify.
+* Call a webhook, which enables you to launch additional automation actions.
+
+Webhooks enable automation and remediation, for example, using the following services:
+- Azure Automation Runbook
+- Azure Functions
+- Azure Logic App
+- A third-party service
 
 ## <a name="next-steps"></a>Next steps
-Get information about alert rules and configuring them by using:
+Get information about alert rules and how to configure them by using the following documentation:
 
-* Learn more about [Metrics](monitoring-overview-metrics.md)
-* Configure [Metric Alerts via Azure portal](insights-alerts-portal.md)
-* Configure [Metric Alerts PowerShell](insights-alerts-powershell.md)
-* Configure [Metric Alerts Command-line interface (CLI)](insights-alerts-command-line-interface.md)
-* Configure [Metric Alerts Azure Monitor REST API](https://msdn.microsoft.com/library/azure/dn931945.aspx)
-* Learn more about [Activity Log](monitoring-overview-activity-logs.md)
-* Configure [Activity Log Alerts via Azure portal](monitoring-activity-log-alerts.md)
-* Configure [Activity Log Alerts via Resource Manager](monitoring-create-activity-log-alerts-with-resource-manager-template.md)
+* Learn more about [metrics](monitoring-overview-metrics.md)
+* Configure [classic metric alerts by using the Azure portal](insights-alerts-portal.md)
+* Configure [classic metric alerts by using PowerShell](insights-alerts-powershell.md)
+* Configure [classic metric alerts by using the Azure CLI](insights-alerts-command-line-interface.md)
+* Configure [classic metric alerts by using the Azure Monitor REST API](https://msdn.microsoft.com/library/azure/dn931945.aspx)
+* Learn more about [activity logs](monitoring-overview-activity-logs.md)
+* Configure [activity log alerts by using the Azure portal](monitoring-activity-log-alerts.md)
+* Configure [activity log alerts by using Resource Manager](monitoring-create-activity-log-alerts-with-resource-manager-template.md)
 * Review the [activity log alert webhook schema](monitoring-activity-log-alerts-webhook.md)
-* Learn more about [Service Notifications](monitoring-service-notifications.md)
-* Learn more about [Action Groups](monitoring-action-groups.md)
-
+* Learn more about [action groups](monitoring-action-groups.md)
+* Configure [newer alerts](monitor-alerts-unified-usage.md)

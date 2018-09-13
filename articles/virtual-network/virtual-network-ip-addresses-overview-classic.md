@@ -3,8 +3,8 @@ title: IP address types in Azure (Classic) | Microsoft Docs
 description: Learn about public and private IP addresses (Classic) in Azure.
 services: virtual-network
 documentationcenter: na
-author: jimdial
-manager: carmonm
+author: genlin
+manager: cshepard
 editor: tysonn
 tags: azure-service-management
 ms.assetid: 2f8664ab-2daf-43fa-bbeb-be9773efc978
@@ -14,13 +14,13 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/11/2016
-ms.author: jdial
-ms.openlocfilehash: dfc34435ad6e8982c0298301bdefe489c37db8f1
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: genli
+ms.openlocfilehash: 6a63099bf2a8bc818c88ccec1d5f44bb9ffc32de
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44549302"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44814163"
 ---
 # <a name="ip-address-types-and-allocation-methods-classic-in-azure"></a>IP address types and allocation methods (classic) in Azure
 You can assign IP addresses to Azure resources to communicate with other Azure resources, your on-premises network, and the Internet. There are two types of IP addresses you can use in Azure: public and private.
@@ -33,7 +33,7 @@ Private IP addresses are used for communication within an Azure virtual network 
 > Azure has two different deployment models for creating and working with resources:  [Resource Manager and classic](../resource-manager-deployment-model.md).  This article covers using the classic deployment model. Microsoft recommends that most new deployments use Resource Manager. Learn about IP addresses in Resource Manager by reading the [IP addresses](virtual-network-ip-addresses-overview-arm.md) article.
 
 ## <a name="public-ip-addresses"></a>Public IP addresses
-Public IP addresses allow Azure resources to communicate with Internet and Azure public-facing services such as [Azure Redis Cache](https://azure.microsoft.com/services/cache/), [Azure Event Hubs](https://azure.microsoft.com/services/event-hubs/), [SQL databases](../sql-database/sql-database-technical-overview.md), and [Azure storage](../storage/storage-introduction.md).
+Public IP addresses allow Azure resources to communicate with Internet and Azure public-facing services such as [Azure Redis Cache](https://azure.microsoft.com/services/cache/), [Azure Event Hubs](https://azure.microsoft.com/services/event-hubs/), [SQL databases](../sql-database/sql-database-technical-overview.md), and [Azure storage](../storage/common/storage-introduction.md).
 
 A public IP address is associated with the following resource types:
 
@@ -142,9 +142,8 @@ The table below shows each resource type with the possible allocation methods (d
 
 | Resource | Dynamic | Static | Multiple IP addresses |
 | --- | --- | --- | --- |
-| VM (in a *standalone* cloud service) |Yes |Yes |Yes |
-| PaaS role instance (in a *standalone* cloud service) |Yes |No |Yes |
-| VM or PaaS role instance (in a VNet) |Yes |Yes |Yes |
+| VM (in a *standalone* cloud service or VNet) |Yes |Yes |Yes |
+| PaaS role instance (in a *standalone* cloud service or VNet) |Yes |No |No |
 | Internal load balancer front end |Yes |Yes |Yes |
 | Application gateway front end |Yes |Yes |Yes |
 
@@ -168,15 +167,15 @@ Below is a comparison of IP addressing features in Resource Manager and the clas
 
 |  | Resource | Classic | Resource Manager |
 | --- | --- | --- | --- |
-| **Public IP Address** |VM |Referred to as an ILPIP (dynamic only) |Referred to as a public IP (dynamic or static) |
-|  |Assigned to an IaaS VM or a PaaS role instance |Associated to the VM's NIC | |
-| Internet facing load balancer |Referred to as VIP (dynamic) or Reserved IP (static) |Referred to as a public IP (dynamic or static) | |
-|  |Assigned to a cloud service |Associated to the load balancer's front end config | |
+| **Public IP Address** |***VM*** |Referred to as an ILPIP (dynamic only) |Referred to as a public IP (dynamic or static) |
+|  ||Assigned to an IaaS VM or a PaaS role instance |Associated to the VM's NIC | |
+|  |***Internet facing load balancer*** |Referred to as VIP (dynamic) or Reserved IP (static) |Referred to as a public IP (dynamic or static) | |
+|  ||Assigned to a cloud service |Associated to the load balancer's front end config | |
 |  | | | |
-| **Private IP Address** |VM |Referred to as a DIP |Referred to as a private IP address |
-|  |Assigned to an IaaS VM or a PaaS role instance |Assigned to the VM's NIC | |
-| Internal load balancer (ILB) |Assigned to the ILB (dynamic or static) |Assigned to the ILB's front end configuration (dynamic or static) | |
+| **Private IP Address** |***VM*** |Referred to as a DIP |Referred to as a private IP address |
+|  ||Assigned to an IaaS VM or a PaaS role instance |Assigned to the VM's NIC | |
+|  |***Internal load balancer (ILB)*** |Assigned to the ILB (dynamic or static) |Assigned to the ILB's front end configuration (dynamic or static) | |
 
 ## <a name="next-steps"></a>Next steps
-* [Deploy a VM with a static private IP address](virtual-networks-static-private-ip-classic-pportal.md) using the classic portal.
+* [Deploy a VM with a static private IP address](virtual-networks-static-private-ip-classic-pportal.md) using the Azure portal.
 

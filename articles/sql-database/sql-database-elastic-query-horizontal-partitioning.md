@@ -3,23 +3,19 @@ title: Reporting across scaled-out cloud databases | Microsoft Docs
 description: how to set up elastic queries over horizontal partitions
 services: sql-database
 documentationcenter: ''
-manager: jhubbard
-author: torsteng
-ms.assetid: f86eccb8-6323-4ba7-8559-8a7c039049f3
+manager: craigg
+author: MladjoA
 ms.service: sql-database
-ms.custom: multiple databases
-ms.workload: sql-database
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
-ms.date: 05/27/2016
-ms.author: torsteng
-ms.openlocfilehash: afca34b93e3523c9203cd0a0f8e953e7db5b39a4
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.custom: scale out apps
+ms.topic: conceptual
+ms.date: 04/01/2018
+ms.author: mlandzic
+ms.openlocfilehash: 6efc9da60017914eeeb06bdf3309cae79fac36d6
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44563397"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44819057"
 ---
 # <a name="reporting-across-scaled-out-cloud-databases-preview"></a>Reporting across scaled-out cloud databases (preview)
 ![Query across shards][1]
@@ -53,7 +49,7 @@ The credential is used by the elastic query to connect to your remote databases.
     [;]
 
 > [!NOTE]
-> Make sure that the *"\<username\>"* does not include any *"@servername"* suffix. 
+> Make sure that the *"\<username\>"* does not include any *"\@servername"* suffix. 
 > 
 > 
 
@@ -202,6 +198,5 @@ Use regular SQL Server connection strings to connect your application, your BI a
 
 
 <!--Image references-->
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-database/media/sql-database-elastic-query-horizontal-partitioning/horizontalpartitioning.png
+[1]: ./media/sql-database-elastic-query-horizontal-partitioning/horizontalpartitioning.png
 <!--anchors-->
-

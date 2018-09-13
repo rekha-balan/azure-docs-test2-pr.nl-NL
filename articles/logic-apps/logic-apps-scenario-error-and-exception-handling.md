@@ -1,27 +1,21 @@
 ---
 title: Exception handling & error logging scenario - Azure Logic Apps | Microsoft Docs
-description: Describes a real use case about advanced exception handling and error logging for Azure Logic Apps
-keywords: ''
+description: Here's a real use case about advanced exception handling and error logging in Azure Logic Apps
 services: logic-apps
-author: hedidin
-manager: anneta
-editor: ''
-documentationcenter: ''
-ms.assetid: 63b0b843-f6b0-4d9a-98d0-17500be17385
 ms.service: logic-apps
-ms.workload: na
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
-ms.custom: H1Hack27Feb2017
-ms.date: 07/29/2016
+ms.suite: integration
+author: hedidin
 ms.author: b-hoedid
-ms.openlocfilehash: 8b6b1e379245cc93ef5a9d17b8a55d6ab54d0cc3
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.reviewer: estfan, LADocs
+ms.assetid: 63b0b843-f6b0-4d9a-98d0-17500be17385
+ms.topic: article
+ms.date: 07/29/2016
+ms.openlocfilehash: 0c6062fb9e9708b0fa6aef7a6d7390287cbf69d4
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44662158"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44775859"
 ---
 # <a name="scenario-exception-handling-and-error-logging-for-logic-apps"></a>Scenario: Exception handling and error logging for logic apps
 
@@ -46,12 +40,12 @@ The project had two major requirements:
 
 ## <a name="how-we-solved-the-problem"></a>How we solved the problem
 
-We chose [Azure DocumentDB](https://azure.microsoft.com/services/documentdb/ "Azure DocumentDB") as a repository for the log and error records (DocumentDB refers to records as documents). Because Azure Logic Apps has a standard template for all responses, we would not have to create a custom schema. We could create an API app to **Insert** and **Query** for both error and log records. We could also define a schema for each within the API app.  
+We chose [Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db/ "Azure Cosmos DB") As a repository for the log and error records (Cosmos DB refers to records as documents). Because Azure Logic Apps has a standard template for all responses, we would not have to create a custom schema. We could create an API app to **Insert** and **Query** for both error and log records. We could also define a schema for each within the API app.  
 
-Another requirement was to purge records after a certain date. DocumentDB has a property called [Time to Live](https://azure.microsoft.com/blog/documentdb-now-supports-time-to-live-ttl/ "Time to Live") (TTL), which allowed us to set a **Time to Live** value for each record or collection. This capability eliminated the need to manually delete records in DocumentDB.
+Another requirement was to purge records after a certain date. Cosmos DB has a property called [Time to Live](https://azure.microsoft.com/blog/documentdb-now-supports-time-to-live-ttl/ "Time to Live") (TTL), which allowed us to set a **Time to Live** value for each record or collection. This capability eliminated the need to manually delete records in Cosmos DB.
 
 > [!IMPORTANT]
-> To complete this tutorial, you need to create a DocumentDB database and two collections (Logging and Errors).
+> To complete this tutorial, you need to create a Cosmos DB database and two collections (Logging and Errors).
 
 ## <a name="create-the-logic-app"></a>Create the logic app
 
@@ -108,19 +102,19 @@ We must log the source (request) of the patient record from the Dynamics CRM Onl
    The trigger coming from CRM provides us with the **CRM PatentId**, **record type**, **New or Updated Record** (new or update Boolean value), and **SalesforceId**. The **SalesforceId** can be null because it's only used for an update.
    We get the CRM record by using the CRM **PatientID** and the **Record Type**.
 
-2. Next, we need to add our DocumentDB API app **InsertLogEntry** operation as shown here in Logic App Designer.
+2. Next, we need to add our Azure Cosmos DB SQL API app **InsertLogEntry** operation as shown here in Logic App Designer.
 
    **Insert log entry**
 
-   ![Insert Log Entry](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-scenario-error-and-exception-handling/lognewpatient.png)
+   ![Insert Log Entry](media/logic-apps-scenario-error-and-exception-handling/lognewpatient.png)
 
    **Insert error entry**
 
-   ![Insert Log Entry](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-scenario-error-and-exception-handling/insertlogentry.png)
+   ![Insert Log Entry](media/logic-apps-scenario-error-and-exception-handling/insertlogentry.png)
 
    **Check for create record failure**
 
-   ![Condition](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-scenario-error-and-exception-handling/condition.png)
+   ![Condition](media/logic-apps-scenario-error-and-exception-handling/condition.png)
 
 ## <a name="logic-app-source-code"></a>Logic app source code
 
@@ -258,7 +252,7 @@ Here is the logic app source code for creating an error record.
 }             
 ```
 
-#### <a name="insert-error-into-documentdb--request"></a>Insert error into DocumentDB--request
+#### <a name="insert-error-into-cosmos-db--request"></a>Insert error into Cosmos DB--request
 
 ``` json
 
@@ -281,7 +275,7 @@ Here is the logic app source code for creating an error record.
 }
 ```
 
-#### <a name="insert-error-into-documentdb--response"></a>Insert error into DocumentDB--response
+#### <a name="insert-error-into-cosmos-db--response"></a>Insert error into Cosmos DB--response
 
 ``` json
 {
@@ -399,31 +393,31 @@ After you get the response, you can pass the response back to the parent logic a
 ```
 
 
-## <a name="documentdb-repository-and-portal"></a>DocumentDB repository and portal
+## <a name="cosmos-db-repository-and-portal"></a>Cosmos DB repository and portal
 
-Our solution added capabilities with [DocumentDB](https://azure.microsoft.com/services/documentdb).
+Our solution added capabilities with [Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db).
 
 ### <a name="error-management-portal"></a>Error management portal
 
-To view the errors, you can create an MVC web app to display the error records from DocumentDB. The **List**, **Details**, **Edit**, and **Delete** operations are included in the current version.
+To view the errors, you can create an MVC web app to display the error records from Cosmos DB. The **List**, **Details**, **Edit**, and **Delete** operations are included in the current version.
 
 > [!NOTE]
-> Edit operation: DocumentDB replaces the entire document. The records shown in the **List** and **Detail** views are samples only. They are not actual patient appointment records.
+> Edit operation: Cosmos DB replaces the entire document. The records shown in the **List** and **Detail** views are samples only. They are not actual patient appointment records.
 
 Here are examples of our MVC app details created with the previously described approach.
 
 #### <a name="error-management-list"></a>Error management list
-![Error List](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-scenario-error-and-exception-handling/errorlist.png)
+![Error List](media/logic-apps-scenario-error-and-exception-handling/errorlist.png)
 
 #### <a name="error-management-detail-view"></a>Error management detail view
-![Error Details](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-scenario-error-and-exception-handling/errordetails.png)
+![Error Details](media/logic-apps-scenario-error-and-exception-handling/errordetails.png)
 
 ### <a name="log-management-portal"></a>Log management portal
 
 To view the logs, we also created an MVC web app. Here are examples of our MVC app details created with the previously described approach.
 
 #### <a name="sample-log-detail-view"></a>Sample log detail view
-![Log Detail View](https://docstestmedia1.blob.core.windows.net/azure-media/articles/logic-apps/media/logic-apps-scenario-error-and-exception-handling/samplelogdetail.png)
+![Log Detail View](media/logic-apps-scenario-error-and-exception-handling/samplelogdetail.png)
 
 ### <a name="api-app-details"></a>API app details
 
@@ -431,16 +425,16 @@ To view the logs, we also created an MVC web app. Here are examples of our MVC a
 
 Our open-source Azure Logic Apps exception management API app provides functionality as described here - there are two controllers:
 
-* **ErrorController** inserts an error record (document) in a DocumentDB collection.
-* **LogController** Inserts a log record (document) in a DocumentDB collection.
+* **ErrorController** inserts an error record (document) in an Azure Cosmos DB collection.
+* **LogController** Inserts a log record (document) in an Azure Cosmos DB collection.
 
 > [!TIP]
-> Both controllers use `async Task<dynamic>` operations, allowing operations to resolve at runtime, so we can create the DocumentDB schema in the body of the operation. 
+> Both controllers use `async Task<dynamic>` operations, allowing operations to resolve at runtime, so we can create the Azure Cosmos DB schema in the body of the operation. 
 > 
 
-Every document in DocumentDB must have a unique ID. We are using `PatientId` and adding a timestamp that is converted to a Unix timestamp value (double). We truncate the value to remove the fractional value.
+Every document in Azure Cosmos DB must have a unique ID. We are using `PatientId` and adding a timestamp that is converted to a Unix timestamp value (double). We truncate the value to remove the fractional value.
 
-You can view the source code of our error controller API [from GitHub](https://github.com/HEDIDIN/LogicAppsExceptionManagementApi/blob/master/Logic App Exception Management API/Controllers/ErrorController.cs).
+You can view the source code of our error controller API from [GitHub](https://github.com/HEDIDIN/LogicAppsExceptionManagementApi/blob/master/LogicAppsExceptionManagementApi/Controllers/LogController.cs).
 
 We call the API from a logic app by using the following syntax:
 
@@ -480,7 +474,7 @@ The expression in the preceding code sample checks for the *Create_NewPatientRec
 ## <a name="summary"></a>Summary
 
 * You can easily implement logging and error handling in a logic app.
-* You can use DocumentDB as the repository for log and error records (documents).
+* You can use Azure Cosmos DB as the repository for log and error records (documents).
 * You can use MVC to create a portal to display log and error records.
 
 ### <a name="source-code"></a>Source code
@@ -492,8 +486,3 @@ The source code for the Logic Apps exception management API application is avail
 * [View more logic app examples and scenarios](../logic-apps/logic-apps-examples-and-scenarios.md)
 * [Learn about monitoring logic apps](../logic-apps/logic-apps-monitor-your-logic-apps.md)
 * [Create automated deployment templates for logic apps](../logic-apps/logic-apps-create-deploy-template.md)
-
-
-
-
-

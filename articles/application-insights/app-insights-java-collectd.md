@@ -3,22 +3,22 @@ title: Monitor Java web app performance on Linux - Azure | Microsoft Docs
 description: Extended application performance monitoring of your Java website with the CollectD plug-in for Application Insights.
 services: application-insights
 documentationcenter: java
-author: harelbr
-manager: douge
+author: mrbullwinkle
+manager: carmonm
 ms.assetid: 40c68f45-197a-4624-bf89-541eb7323002
 ms.service: application-insights
 ms.workload: tbd
 ms.tgt_pltfrm: ibiza
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.date: 08/24/2016
-ms.author: awills
-ms.openlocfilehash: 46116233e842d9dcd78ae270e8b8d44bc677393e
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: mbullwin
+ms.openlocfilehash: fd8c45bf3d7fd9e392d55a82001aa8768fcce8ba
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44553885"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44771777"
 ---
 # <a name="collectd-linux-performance-metrics-in-application-insights"></a>collectd: Linux performance metrics in Application Insights
 
@@ -27,14 +27,14 @@ To explore Linux system performance metrics in [Application Insights](app-insigh
 
 Typically you'll use collectd if you have already [instrumented your Java web service with Application Insights][java]. It gives you more data to help you to enhance your app's performance or diagnose problems. 
 
-![Sample charts](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-java-collectd/sample.png)
+![Sample charts](./media/app-insights-java-collectd/sample.png)
 
 ## <a name="get-your-instrumentation-key"></a>Get your instrumentation key
 In the [Microsoft Azure portal](https://portal.azure.com), open the [Application Insights](app-insights-overview.md) resource where you want the data to appear. (Or [create a new resource](app-insights-create-new-resource.md).)
 
 Take a copy of the instrumentation key, which identifies the resource.
 
-![Browse all, open your resource, and then in the Essentials drop-down, select, and copy the Instrumentation Key](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-java-collectd/02-props.png)
+![Browse all, open your resource, and then in the Essentials drop-down, select, and copy the Instrumentation Key](./media/app-insights-java-collectd/02-props.png)
 
 ## <a name="install-collectd-and-the-plug-in"></a>Install collectd and the plug-in
 On your Linux server machines:
@@ -96,7 +96,7 @@ Restart collectd according to its [manual](https://collectd.org/wiki/index.php/F
 ## <a name="view-the-data-in-application-insights"></a>View the data in Application Insights
 In your Application Insights resource, open [Metrics Explorer and add charts][metrics], selecting the metrics you want to see from the Custom category.
 
-![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-java-collectd/result.png)
+![](./media/app-insights-java-collectd/result.png)
 
 By default, the metrics are aggregated across all host machines from which the metrics were collected. To view the metrics per host, in the Chart details blade, turn on Grouping and then choose to group by CollectD-Host.
 
@@ -143,8 +143,5 @@ Workaround: Exclude data collected by the problem Write plugins.
 [java]: app-insights-java-get-started.md
 [javalogs]: app-insights-java-trace-logs.md
 [metrics]: app-insights-metrics-explorer.md
-
-
-
 
 

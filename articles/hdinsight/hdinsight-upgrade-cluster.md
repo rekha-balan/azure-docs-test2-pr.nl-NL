@@ -1,39 +1,32 @@
 ---
-title: Upgrade HDInsight cluster to a newer version -Azure | Microsoft Docs
+title: Upgrade HDInsight cluster to a newer version -Azure
 description: Learn how to Upgrade HDInsight cluster to a newer version.
 services: hdinsight
-documentationcenter: ''
-author: bhanupr
-manager: asadk
-editor: bhanupr
-ms.assetid: 60eb573c-e639-4815-9fc6-ea8b106d8dbc
 ms.service: hdinsight
+author: omidm1
+ms.author: omidm
 ms.custom: hdinsightactive
-ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: big-data
+ms.topic: conceptual
 ms.date: 04/04/2017
-ms.author: bhanupr
-ms.openlocfilehash: ce4e5d8b3dc1c06258dda9bffa9b018c90904476
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: cab2c7aabf23ba8636f46a92c8d864b1c9b74120
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44555683"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44804081"
 ---
 # <a name="upgrade-hdinsight-cluster-to-a-newer-version"></a>Upgrade HDInsight cluster to a newer version
 To take advantage of the latest HDInsight features, we recommend that HDInsight clusters be upgraded to latest version. Follow the below guidelines to upgrade your HDInsight cluster versions.
 
 > [!NOTE]
-> HDInsight clusters version 3.2 and 3.3 are nearing deprecation date. For information on supported version of HDInsight, see [HDInsight component versions](hdinsight-component-versioning.md#supported-hdinsight-versions).
+> For information on supported versions of HDInsight, see [HDInsight component versions](hdinsight-component-versioning.md#supported-hdinsight-versions).
 >
 >
 
 ## <a name="upgrade-tasks"></a>Upgrade tasks
 The workflow to upgrade HDInsight Cluster is as follows.
 
-![Upgrade workflow diagram](https://docstestmedia1.blob.core.windows.net/azure-media/articles/hdinsight/media/hdinsight-upgrade-cluster/upgrade-workflow.png)
+![Upgrade workflow diagram](./media/hdinsight-upgrade-cluster/upgrade-workflow.png)
 
 1. Read each section of this document to understand changes that may be required when upgrading your HDInsight cluster.
 2. Create a cluster as a test/quality assurance environment. For more information on creating a cluster, see [Learn how to create Linux-based HDInsight clusters](hdinsight-hadoop-provision-linux-clusters.md)
@@ -53,5 +46,4 @@ Once you have verified that everything works as expected, schedule downtime for 
 * [Learn how to create Linux-based HDInsight clusters](hdinsight-hadoop-provision-linux-clusters.md)
 * [Connect to HDInsight using SSH](hdinsight-hadoop-linux-use-ssh-unix.md)
 * [Manage a Linux-based cluster using Ambari](hdinsight-hadoop-manage-ambari.md)
-
 

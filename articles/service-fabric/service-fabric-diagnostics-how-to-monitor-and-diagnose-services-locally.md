@@ -1,5 +1,5 @@
 ---
-title: Debug Azure microservices in Windows | Microsoft Docs
+title: Debug Azure Service Fabric apps in Windows | Microsoft Docs
 description: Learn how to monitor and diagnose your services written using Microsoft Azure Service Fabric on a local development machine.
 services: service-fabric
 documentationcenter: .net
@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: edcc0631-ed2d-45a3-851d-2c4fa0f4a326
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 01/04/2017
+ms.date: 10/15/2017
 ms.author: dekapur
-ms.openlocfilehash: 1405f4a9f267ec700f3b0b6c5083c89dbf03b78d
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 351a9825d080c34cfd405d3c60d7d13a4730ed0b
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44556385"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44785088"
 ---
 # <a name="monitor-and-diagnose-services-in-a-local-machine-development-setup"></a>Monitor and diagnose services in a local machine development setup
 > [!div class="op_single_selector"]
@@ -30,13 +30,13 @@ ms.locfileid: "44556385"
 
 Monitoring, detecting, diagnosing, and troubleshooting allow for services to continue with minimal disruption to the user experience. While monitoring and diagnostics are critical in an actual deployed production environment, the efficiency will depend on adopting a similar model during development of services to ensure they work when you move to a real-world setup. Service Fabric makes it easy for service developers to implement diagnostics that can seamlessly work across both single-machine local development setups and real-world production cluster setups.
 
-## <a name="the-benefits-of-event-tracing-for-windows"></a>The benefits of Event Tracing for Windows
-[Event Tracing for Windows](https://msdn.microsoft.com/library/windows/desktop/bb968803.aspx) (ETW) is the recommended technology for tracing messages in Service Fabric. Reasons for this are:
+## <a name="event-tracing-for-windows"></a>Event Tracing for Windows
+[Event Tracing for Windows](https://msdn.microsoft.com/library/windows/desktop/bb968803.aspx) (ETW) is the recommended technology for tracing messages in Service Fabric. Some benefits of using ETW are:
 
 * **ETW is fast.** It was built as a tracing technology that has minimal impact on code execution times.
 * **ETW tracing works seamlessly across local development environments and also real-world cluster setups.** This  means you don't have to rewrite your tracing code when you are ready to deploy your code to a real cluster.
 * **Service Fabric system code also uses ETW for internal tracing.** This allows you to view your application traces interleaved with Service Fabric system traces. It also helps you to more easily understand the sequences and interrelationships between your application code and events in the underlying system.
-* **There is built-in support in Service Fabric Visual Studio tools to view ETW events.**
+* **There is built-in support in Service Fabric Visual Studio tools to view ETW events.** ETW events appear in the Diagnostic Events view of Visual Studio once Visual Studio is correctly configured with Service Fabric. 
 
 ## <a name="view-service-fabric-system-events-in-visual-studio"></a>View Service Fabric system events in Visual Studio
 Service Fabric emits ETW events to help application developers understand what's happening in the platform. If you haven't already done so, go ahead and follow the steps in [Creating your first application in Visual Studio](service-fabric-create-your-first-application-in-visual-studio.md). This information will help you get an application up and running with the Diagnostics Events Viewer showing the trace messages.
@@ -44,7 +44,7 @@ Service Fabric emits ETW events to help application developers understand what's
 1. If the diagnostics events window does not automatically show, Go to the **View** tab in Visual Studio, choose **Other Windows** and then **Diagnostic Events Viewer**.
 2. Each event has standard metadata information that tells you the node, application and service the event is coming from. You can also filter the list of events by using the **Filter events** box at the top of the events window. For example, you can filter on **Node Name** or **Service Name.** And when you're looking at event details, you can also pause by using the **Pause** button at the top of the events window and resume later without any loss of events.
    
-   ![Visual Studio Diagnostics Events Viewer](https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-diagnostics-how-to-monitor-and-diagnose-services-locally/DiagEventsExamples2.png)
+   ![Visual Studio Diagnostics Events Viewer](./media/service-fabric-diagnostics-how-to-monitor-and-diagnose-services-locally/DiagEventsExamples2.png)
 
 ## <a name="add-your-own-custom-traces-to-the-application-code"></a>Add your own custom traces to the application code
 The Service Fabric Visual Studio project templates contain sample code. The code shows how to add custom application code ETW traces that show up in the Visual Studio ETW viewer alongside system traces from Service Fabric. The advantage of this method is that metadata is automatically added to traces, and the Visual Studio Diagnostic Events Viewer is already configured to display them.
@@ -66,6 +66,5 @@ After adding custom ETW tracing to your service code, you can build, deploy, and
 The same tracing code that you added to your application above for local diagnostics will work with tools that you can use to view these events when running your application on an Azure cluster. Check out these articles that discuss the different options for the tools and describe how you can set them up.
 
 * [How to collect logs with Azure Diagnostics](service-fabric-diagnostics-how-to-setup-wad.md)
-* [Collect logs directly from service process](service-fabric-diagnostic-collect-logs-without-an-agent.md)
-
+* [Event aggregation and collection using EventFlow](service-fabric-diagnostics-event-aggregation-eventflow.md)
 

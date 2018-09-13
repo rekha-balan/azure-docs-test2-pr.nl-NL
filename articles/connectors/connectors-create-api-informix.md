@@ -1,34 +1,25 @@
 ---
-title: Add the Informix connector in your Logic Apps | Microsoft Docs
-description: Overview of Informix connector with REST API parameters
-services: ''
-documentationcenter: ''
+title: Connect to IBM Informix database - Azure Logic Apps | Microsoft Docs
+description: Manage resources with IBM Informix REST APIs and Azure Logic Apps
 author: gplarsen
-manager: erikre
-editor: ''
-tags: connectors
-ms.assetid: ca2393f0-3073-4dc2-8438-747f5bc59689
-ms.service: logic-apps
-ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: integration
-ms.date: 09/26/2016
+manager: jeconnoc
 ms.author: plarsen
-ms.openlocfilehash: 71d427d23c88059f747b407b92bb930e10eeaf9e
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 09/26/2016
+ms.topic: article
+ms.service: logic-apps
+services: logic-apps
+ms.reviewer: klam, LADocs
+ms.suite: integration
+tags: connectors
+ms.openlocfilehash: d0008c19ed96f731f7b57c5d8aa41cd9f128bc20
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44550411"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44783645"
 ---
 # <a name="get-started-with-the-informix-connector"></a>Get started with the Informix connector
 Microsoft connector for Informix connects Logic Apps to resources stored in an IBM Informix database. The Informix connector includes a Microsoft client to communicate to remote Informix server computers across a TCP/IP network. This includes cloud databases, such as IBM Informix for Windows running in Azure virtualization, and on-premises databases using the on-premises data gateway. See the [supported list](connectors-create-api-informix.md#supported-informix-platforms-and-versions) of IBM Informix platforms and versions (in this topic).
-
-> [!NOTE]
-> This version of the article applies to Logic Apps general availability (GA). 
-> 
-> 
 
 The connector supports the following database operations:
 
@@ -41,7 +32,7 @@ The connector supports the following database operations:
 
 This topic shows you how to use the connector in a logic app to process database operations.
 
-To learn more about Logic Apps, see [create a logic app](../logic-apps/logic-apps-create-a-logic-app.md).
+To learn more about Logic Apps, see [create a logic app](../logic-apps/quickstart-create-first-logic-app-workflow.md).
 
 ## <a name="available-actions"></a>Available actions
 This connector supports the following logic app actions:
@@ -69,7 +60,7 @@ Within the logic app, you can add an action to list tables in a Informix databas
 4. Select the **+ New step** box, and then select **Add an action**.
 5. In the **actions** list, type **informix** in the **Search for more actions** edit box, and then select **Informix - Get tables (Preview)**.
    
-   ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/connectors-create-api-informix/InformixconnectorActions.png)  
+   ![](./media/connectors-create-api-informix/InformixconnectorActions.png)  
 6. In the **Informix - Get tables** configuration pane, select **checkbox** to enable **Connect via on-premises data gateway**. Notice that the settings change from cloud to on-premises.
    
    * Type value for **Server**, in the form of address or alias colon port number. For example, type `ibmserver01:9089`.
@@ -80,11 +71,11 @@ Within the logic app, you can add an action to list tables in a Informix databas
    * Select value for **Gateway**. For example, select **datagateway01**.
 7. Select **Create**, and then select **Save**. 
    
-    ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/connectors-create-api-informix/InformixconnectorOnPremisesDataGatewayConnection.png)
+    ![](./media/connectors-create-api-informix/InformixconnectorOnPremisesDataGatewayConnection.png)
 8. In the **InformixgetTables** blade, within the **All runs** list under **Summary**, select the first-listed item (most recent run).
 9. In the **Logic app run** blade, select **Run Details**. Within the **Action** list, select **Get_tables**. See the value for **Status**, which should be **Succeeded**. Select the **Inputs link** to view the inputs. Select the **Outputs link**, and view the outputs; which should include a list of tables.
    
-   ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/connectors-create-api-informix/InformixconnectorGetTablesLogicAppRunOutputs.png)
+   ![](./media/connectors-create-api-informix/InformixconnectorGetTablesLogicAppRunOutputs.png)
 
 ## <a name="create-the-connections"></a>Create the connections
 This connector supports connections to database on-premises and in the cloud using the following connection properties. 
@@ -110,7 +101,7 @@ This connector can access an on-premises Informix database using the on-premises
 7. Select value for **Gateway**. For example, select **datagateway01**.
 8. Select **Create** to continue. 
    
-    ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/connectors-create-api-informix/InformixconnectorOnPremisesDataGatewayConnection.png)
+    ![](./media/connectors-create-api-informix/InformixconnectorOnPremisesDataGatewayConnection.png)
 
 ## <a name="create-the-cloud-connection"></a>Create the cloud connection
 This connector can access a cloud Informix database. 
@@ -123,7 +114,7 @@ This connector can access a cloud Informix database.
 6. Type value for **Password**. For example, type `Password1`.
 7. Select **Create** to continue. 
    
-    ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/connectors-create-api-informix/InformixconnectorCloudConnection.png)
+    ![](./media/connectors-create-api-informix/InformixconnectorCloudConnection.png)
 
 ## <a name="fetch-all-rows-using-select"></a>Fetch all rows using SELECT
 You can create a logic app action to fetch all rows in the Informix table. This action instructs the connector to process an Informix SELECT statement, such as `SELECT * FROM AREA`.
@@ -141,7 +132,7 @@ You can create a logic app action to fetch all rows in the Informix table. This 
 6. In the **Get rows (Preview)** action, select **Change connection**.
 7. In the **Connections** configuration pane, select **Create new**. 
    
-    ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/connectors-create-api-informix/InformixconnectorNewConnection.png)
+    ![](./media/connectors-create-api-informix/InformixconnectorNewConnection.png)
 8. In the **Gateways** configuration pane, leave the **checkbox** disabled (unclicked) **Connect via gateway**.
    
    * Type value for **Connection name**. For example, type `HISDEMO2`.
@@ -151,16 +142,16 @@ You can create a logic app action to fetch all rows in the Informix table. This 
    * Type value for **Password**. For example, type `Password1`.
 9. Select **Create** to continue.
    
-    ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/connectors-create-api-informix/InformixconnectorCloudConnection.png)
+    ![](./media/connectors-create-api-informix/InformixconnectorCloudConnection.png)
 10. In the **Table name** list, select the **down arrow**, and then select **AREA**.
 11. Optionally, select **Show advanced options** to specify query options.
 12. Select **Save**. 
     
-    ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/connectors-create-api-informix/InformixconnectorGetRowsTableName.png)
+    ![](./media/connectors-create-api-informix/InformixconnectorGetRowsTableName.png)
 13. In the **InformixgetRows** blade, within the **All runs** list under **Summary**, select the first-listed item (most recent run).
 14. In the **Logic app run** blade, select **Run Details**. Within the **Action** list, select **Get_rows**. See the value for **Status**, which should be **Succeeded**. Select the **Inputs link** to view the inputs. Select the **Outputs link**, and view the outputs; which should include a list of rows.
     
-    ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/connectors-create-api-informix/InformixconnectorGetRowsOutputs.png)
+    ![](./media/connectors-create-api-informix/InformixconnectorGetRowsOutputs.png)
 
 ## <a name="add-one-row-using-insert"></a>Add one row using INSERT
 You can create a logic app action to add one row in a Informix table. This action instructs the connector to process a Informix INSERT statement, such as `INSERT INTO AREA (AREAID, AREADESC, REGIONID) VALUES ('99999', 'Area 99999', 102)`.
@@ -178,16 +169,16 @@ You can create a logic app action to add one row in a Informix table. This actio
 6. In the **Get rows (Preview)** action, select **Change connection**. 
 7. In the **Connections** configuration pane, select to select an connection. For example, select **hisdemo2**.
    
-    ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/connectors-create-api-informix/InformixconnectorChangeConnection.png)
+    ![](./media/connectors-create-api-informix/InformixconnectorChangeConnection.png)
 8. In the **Table name** list, select the **down arrow**, and then select **AREA**.
 9. Enter values for all required columns (see red asterisk). For example, type `99999` for **AREAID**, type `Area 99999`, and type `102` for **REGIONID**. 
 10. Select **Save**.
     
-    ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/connectors-create-api-informix/InformixconnectorInsertRowValues.png)
+    ![](./media/connectors-create-api-informix/InformixconnectorInsertRowValues.png)
 11. In the **InformixinsertRow** blade, within the **All runs** list under **Summary**, select the first-listed item (most recent run).
 12. In the **Logic app run** blade, select **Run Details**. Within the **Action** list, select **Get_rows**. See the value for **Status**, which should be **Succeeded**. Select the **Inputs link** to view the inputs. Select the **Outputs link**, and view the outputs; which should include the new row.
     
-    ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/connectors-create-api-informix/InformixconnectorInsertRowOutputs.png)
+    ![](./media/connectors-create-api-informix/InformixconnectorInsertRowOutputs.png)
 
 ## <a name="fetch-one-row-using-select"></a>Fetch one row using SELECT
 You can create a logic app action to fetch one row in a Informix table. This action instructs the connector to process a Informix SELECT WHERE statement, such as `SELECT FROM AREA WHERE AREAID = '99999'`.
@@ -205,17 +196,17 @@ You can create a logic app action to fetch one row in a Informix table. This act
 6. In the **Get rows (Preview)** action, select **Change connection**. 
 7. In the **Connections** configurations pane, select to select an existing connection. For example, select **hisdemo2**.
    
-    ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/connectors-create-api-informix/InformixconnectorChangeConnection.png)
+    ![](./media/connectors-create-api-informix/InformixconnectorChangeConnection.png)
 8. In the **Table name** list, select the **down arrow**, and then select **AREA**.
 9. Enter values for all required columns (see red asterisk). For example, type `99999` for **AREAID**. 
 10. Optionally, select **Show advanced options** to specify query options.
 11. Select **Save**. 
     
-    ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/connectors-create-api-informix/InformixconnectorGetRowValues.png)
+    ![](./media/connectors-create-api-informix/InformixconnectorGetRowValues.png)
 12. In the **InformixgetRow** blade, within the **All runs** list under **Summary**, select the first-listed item (most recent run).
 13. In the **Logic app run** blade, select **Run Details**. Within the **Action** list, select **Get_rows**. See the value for **Status**, which should be **Succeeded**. Select the **Inputs link** to view the inputs. Select the **Outputs link**, and view the outputs; which should include row.
     
-    ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/connectors-create-api-informix/InformixconnectorGetRowOutputs.png)
+    ![](./media/connectors-create-api-informix/InformixconnectorGetRowOutputs.png)
 
 ## <a name="change-one-row-using-update"></a>Change one row using UPDATE
 You can create a logic app action to change one row in a Informix table. This action instructs the connector to process a Informix UPDATE statement, such as `UPDATE AREA SET AREAID = '99999', AREADESC = 'Area 99999', REGIONID = 102)`.
@@ -233,16 +224,16 @@ You can create a logic app action to change one row in a Informix table. This ac
 6. In the **Get rows (Preview)** action, select **Change connection**. 
 7. In the **Connections** configurations pane, select to select an existing connection. For example, select **hisdemo2**.
    
-    ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/connectors-create-api-informix/InformixconnectorChangeConnection.png)
+    ![](./media/connectors-create-api-informix/InformixconnectorChangeConnection.png)
 8. In the **Table name** list, select the **down arrow**, and then select **AREA**.
 9. Enter values for all required columns (see red asterisk). For example, type `99999` for **AREAID**, type `Updated 99999`, and type `102` for **REGIONID**. 
 10. Select **Save**. 
     
-    ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/connectors-create-api-informix/InformixconnectorUpdateRowValues.png)
+    ![](./media/connectors-create-api-informix/InformixconnectorUpdateRowValues.png)
 11. In the **InformixupdateRow** blade, within the **All runs** list under **Summary**, select the first-listed item (most recent run).
 12. In the **Logic app run** blade, select **Run Details**. Within the **Action** list, select **Get_rows**. See the value for **Status**, which should be **Succeeded**. Select the **Inputs link** to view the inputs. Select the **Outputs link**, and view the outputs; which should include the new row.
     
-    ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/connectors-create-api-informix/InformixconnectorUpdateRowOutputs.png)
+    ![](./media/connectors-create-api-informix/InformixconnectorUpdateRowOutputs.png)
 
 ## <a name="remove-one-row-using-delete"></a>Remove one row using DELETE
 You can create a logic app action to remove one row in a Informix table. This action instructs the connector to process a Informix DELETE statement, such as `DELETE FROM AREA WHERE AREAID = '99999'`.
@@ -260,143 +251,16 @@ You can create a logic app action to remove one row in a Informix table. This ac
 6. In the **Get rows (Preview)** action, select **Change connection**. 
 7. In the **Connections** configurations pane, select an existing connection. For example, select **hisdemo2**.
    
-    ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/connectors-create-api-informix/InformixconnectorChangeConnection.png)
+    ![](./media/connectors-create-api-informix/InformixconnectorChangeConnection.png)
 8. In the **Table name** list, select the **down arrow**, and then select **AREA**.
 9. Enter values for all required columns (see red asterisk). For example, type `99999` for **AREAID**. 
 10. Select **Save**. 
     
-    ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/connectors-create-api-informix/InformixconnectorDeleteRowValues.png)
+    ![](./media/connectors-create-api-informix/InformixconnectorDeleteRowValues.png)
 11. In the **InformixdeleteRow** blade, within the **All runs** list under **Summary**, select the first-listed item (most recent run).
 12. In the **Logic app run** blade, select **Run Details**. Within the **Action** list, select **Get_rows**. See the value for **Status**, which should be **Succeeded**. Select the **Inputs link** to view the inputs. Select the **Outputs link**, and view the outputs; which should include the deleted row.
     
-    ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/connectors/media/connectors-create-api-informix/InformixconnectorDeleteRowOutputs.png)
-
-## <a name="technical-details"></a>Technical Details
-## <a name="actions"></a>Actions
-An action is an operation carried out by the workflow defined in a logic app. The Informix database connector includes the following actions. 
-
-| Action | Description |
-| --- | --- |
-| [GetRow](connectors-create-api-informix.md#get-row) |Retrieves a single row from a Informix table |
-| [GetRows](connectors-create-api-informix.md#get-rows) |Retrieves rows from a Informix table |
-| [InsertRow](connectors-create-api-informix.md#insert-row) |Inserts a new row into a Informix table |
-| [DeleteRow](connectors-create-api-informix.md#delete-row) |Deletes a row from a Informix table |
-| [GetTables](connectors-create-api-informix.md#get-tables) |Retrieves tables from a Informix database |
-| [UpdateRow](connectors-create-api-informix.md#update-row) |Updates an existing row in a Informix table |
-
-### <a name="action-details"></a>Action Details
-In this section, see the specific details about each action, including any required or optional input properties, and any corresponding output associated with the connector.
-
-#### <a name="get-row"></a>Get row
-Retrieves a single row from a Informix table.  
-
-| Property Name | Display Name | Description |
-| --- | --- | --- |
-| table * |Table name |Name of Informix table |
-| id * |Row id |Unique identifier of the row to retrieve |
-
-An asterisk (*) means the property is required.
-
-##### <a name="output-details"></a>Output Details
-Item
-
-| Property Name | Data Type |
-| --- | --- |
-| ItemInternalId |string |
-
-#### <a name="get-rows"></a>Get rows
-Retrieves rows from a Informix table.  
-
-| Property Name | Display Name | Description |
-| --- | --- | --- |
-| table* |Table name |Name of Informix table |
-| $skip |Skip Count |Number of entries to skip (default = 0) |
-| $top |Maximum Get Count |Maximum number of entries to retrieve (default = 256) |
-| $filter |Filter Query |An ODATA filter query to restrict the number of entries |
-| $orderby |Order By |An ODATA orderBy query for specifying the order of entries |
-
-An asterisk (*) means the property is required.
-
-##### <a name="output-details"></a>Output Details
-ItemsList
-
-| Property Name | Data Type |
-| --- | --- |
-| value |array |
-
-#### <a name="insert-row"></a>Insert row
-Inserts a new row into a Informix table.  
-
-| Property Name | Display Name | Description |
-| --- | --- | --- |
-| table* |Table name |Name of Informix table |
-| item* |Row |Row to insert into the specified table in Informix |
-
-An asterisk (*) means the property is required.
-
-##### <a name="output-details"></a>Output Details
-Item
-
-| Property Name | Data Type |
-| --- | --- |
-| ItemInternalId |string |
-
-#### <a name="delete-row"></a>Delete row
-Deletes a row from a Informix table.  
-
-| Property Name | Display Name | Description |
-| --- | --- | --- |
-| table* |Table name |Name of Informix table |
-| id* |Row id |Unique identifier of the row to delete |
-
-An asterisk (*) means the property is required.
-
-##### <a name="output-details"></a>Output Details
-None.
-
-#### <a name="get-tables"></a>Get tables
-Retrieves tables from a Informix database.  
-
-There are no parameters for this call. 
-
-##### <a name="output-details"></a>Output Details
-TablesList
-
-| Property Name | Data Type |
-| --- | --- |
-| value |array |
-
-#### <a name="update-row"></a>Update row
-Updates an existing row in a Informix table.  
-
-| Property Name | Display Name | Description |
-| --- | --- | --- |
-| table* |Table name |Name of Informix table |
-| id* |Row id |Unique identifier of the row to update |
-| item* |Row |Row with updated values |
-
-An asterisk (*) means the property is required.
-
-##### <a name="output-details"></a>Output Details
-Item
-
-| Property Name | Data Type |
-| --- | --- |
-| ItemInternalId |string |
-
-### <a name="http-responses"></a>HTTP Responses
-When making calls to the different actions, you may get certain responses. The following table outlines the responses and their descriptions:  
-
-| Name | Description |
-| --- | --- |
-| 200 |OK |
-| 202 |Accepted |
-| 400 |Bad Request |
-| 401 |Unauthorized |
-| 403 |Forbidden |
-| 404 |Not Found |
-| 500 |Internal Server Error. Unknown error occurred |
-| default |Operation Failed. |
+    ![](./media/connectors-create-api-informix/InformixconnectorDeleteRowOutputs.png)
 
 ## <a name="supported-informix-platforms-and-versions"></a>Supported Informix platforms and versions
 This connector supports the following IBM Informix versions, when configured to support Distributed Relational Database Architecture (DRDA) client connections.
@@ -404,27 +268,10 @@ This connector supports the following IBM Informix versions, when configured to 
 * IBM Informix 12.1
 * IBM Informix 11.7
 
+## <a name="connector-specific-details"></a>Connector-specific details
+
+View any triggers and actions defined in the swagger, and also see any limits in the [connector details](/connectors/informix/). 
+
 ## <a name="next-steps"></a>Next steps
-[Create a logic app](../logic-apps/logic-apps-create-a-logic-app.md). Explore the other available connectors in Logic Apps at our [APIs list](apis-list.md).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+[Create a logic app](../logic-apps/quickstart-create-first-logic-app-workflow.md). Explore the other available connectors in Logic Apps at our [APIs list](apis-list.md).
 

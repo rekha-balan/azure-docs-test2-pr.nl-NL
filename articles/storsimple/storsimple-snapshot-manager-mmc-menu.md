@@ -4,7 +4,7 @@ description: Describes how to use the standard Microsoft Management Console (MMC
 services: storsimple
 documentationcenter: NA
 author: SharS
-manager: carmonm
+manager: timlt
 editor: ''
 ms.assetid: 78ef81af-0d3a-4802-be54-ad192f9ac8a6
 ms.service: storsimple
@@ -12,18 +12,19 @@ ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: TBD
-ms.date: 04/25/2016
+ms.date: 06/05/2017
 ms.author: v-sharos
-ms.openlocfilehash: 0a98825e225f5102f9539f877917f38ebdfc308d
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 48f439a566a8067e153aab4fb789937d2f91268d
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44660918"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44804276"
 ---
 # <a name="use-the-mmc-menu-actions-in-storsimple-snapshot-manager"></a>Use the MMC menu actions in StorSimple Snapshot Manager
+
 ## <a name="overview"></a>Overview
-In StorSimple Snapshot Manager, you will see the following actions listed on all action menus and all variations of the **Actions** pane. 
+In StorSimple Snapshot Manager, you will see the following actions listed on all action menus and all variations of the **Actions** pane.
 
 * View
 * New Window from Here 
@@ -41,7 +42,7 @@ You can use the **View** option to change the **Results** pane view and to chang
 2. In the **Scope** pane, right-click any node or expand the node and right-click an item in the **Results** pane, and then click the **View** option. 
 3. To add or remove the columns that appear in the **Results** pane, click **Add/Remove Columns**. The **Add/Remove Columns** dialog box appears.
    
-    ![Add or remove columns from Results pane](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-snapshot-manager-mmc-menu/HCS_SSM_Add_remove_columns.png) 
+    ![Add or remove columns from Results pane](./media/storsimple-snapshot-manager-mmc-menu/HCS_SSM_Add_remove_columns.png) 
 4. Complete the form as follows:
    
    * Select items from the **Available** columns list and click **Add** to add them to the **Displayed columns** list. 
@@ -54,7 +55,7 @@ You can use the **View** option to change the **Results** pane view and to chang
 1. Click the desktop icon to start StorSimple Snapshot Manager.
 2. In the **Scope** pane, right-click any node, click **View**, and then click **Customize**. The **Customize** dialog box appears.
    
-    ![Customize the console window](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-snapshot-manager-mmc-menu/HCS_SSM_Customize.png) 
+    ![Customize the console window](./media/storsimple-snapshot-manager-mmc-menu/HCS_SSM_Customize.png) 
 3. Select or clear the check boxes to show or hide items in the console window. When you are finished with your selections, click **OK**.
 
 ## <a name="new-window-from-here"></a>New Window from Here
@@ -66,7 +67,7 @@ You can use the **New Window from Here** option to open a new console window.
    
     A new window appears, showing only the scope that you selected. For example, if you right-click the **Backup Policies** node, the new window will show only the **Backup Policies** node in the **Scope** pane and a list of defined backup policies in the **Results** pane. See the following example.
    
-    ![New Window from Here](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-snapshot-manager-mmc-menu/HCS_SSM_NewWindow.png) 
+    ![New Window from Here](./media/storsimple-snapshot-manager-mmc-menu/HCS_SSM_NewWindow.png) 
 
 ## <a name="refresh"></a>Refresh
 You can use the **Refresh** action to update the console window.
@@ -88,7 +89,7 @@ You can use the **Export List** action to save a list in a comma-separated value
    3. To save only selected items, select the rows and then click the **Save Only Selected Rows** check box. To save all exported lists, clear the **Save Only Selected Rows** check box.
    4. Click **Save**.
       
-      ![Export list as a comma-separated value file](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-snapshot-manager-mmc-menu/HCS_SSM_Export_List.png) 
+      ![Export list as a comma-separated value file](./media/storsimple-snapshot-manager-mmc-menu/HCS_SSM_Export_List.png) 
 
 ## <a name="help"></a>Help
 You can use the **Help** menu to view available online help for StorSimple Snapshot Manager and the MMC.
@@ -100,8 +101,4 @@ You can use the **Help** menu to view available online help for StorSimple Snaps
 ## <a name="next-steps"></a>Next steps
 * Learn more about the [StorSimple Snapshot Manager user interface](storsimple-use-snapshot-manager.md).
 * Learn more about [using StorSimple Snapshot Manager to administer your StorSimple solution](storsimple-snapshot-manager-admin.md).
-
-
-
-
 

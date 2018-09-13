@@ -3,23 +3,23 @@ title: Routing and Tag Expressions
 description: This topic explains routing and tag expressions for Azure notification hubs.
 services: notification-hubs
 documentationcenter: .net
-author: ysxu
-manager: erikre
-editor: ''
+author: dimazaid
+manager: kpiteira
+editor: spelluru
 ms.assetid: 0fffb3bb-8ed8-4e0f-89e8-0de24a47f644
 ms.service: notification-hubs
 ms.workload: mobile
 ms.tgt_pltfrm: mobile-multiple
 ms.devlang: dotnet
 ms.topic: article
-ms.date: 06/29/2016
-ms.author: yuaxu
-ms.openlocfilehash: 376d3ed2cdc7fd3eb586b78ab09941ffe7ece5f6
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 04/14/2018
+ms.author: dimazaid
+ms.openlocfilehash: e08fca0b6b57d654f2b2ff7b935f38d8c517487b
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44552027"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44798023"
 ---
 # <a name="routing-and-tag-expressions"></a>Routing and tag expressions
 ## <a name="overview"></a>Overview
@@ -34,9 +34,9 @@ The application backend can choose the registrations to target with a specific n
 3. **Tag expression**: all registrations whose set of tags match the specified expression receive the notification.
 
 ## <a name="tags"></a>Tags
-A tag can be any string, up to 120 characters, containing alphanumeric and the following non-alphanumeric characters: ‘_’, ‘@’, ‘#’, ‘.’, ‘:’, ‘-’. The following example shows an application from which you can receive toast notifications about specific music groups. In this scenario, a simple way to route notifications is to label registrations with tags that represent the different bands, as in the following picture.
+A tag can be any string, up to 120 characters, containing alphanumeric and the following non-alphanumeric characters: ‘_’, ‘@’, ‘#’, ‘.’, ‘:’, ‘-’. The following example shows an application from which you can receive toast notifications about specific music groups. In this scenario, a simple way to route notifications is to label registrations with tags that represent the different bands, as in the following picture:
 
-![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/notification-hubs/media/notification-hubs-routing-tag-expressions/notification-hubs-tags.png)
+![](./media/notification-hubs-routing-tag-expressions/notification-hubs-tags.png)
 
 In this picture, the message tagged **Beatles** reaches only the tablet that registered with the tag **Beatles**.
 
@@ -61,7 +61,7 @@ You can send notifications to tags using the send notifications methods of the `
 
 Tags do not have to be pre-provisioned and can refer to multiple app-specific concepts. For example, users of this example application can comment on bands and want to receive toasts, not only for the comments on their favorite bands, but also for all comments from their friends, regardless of the band on which they are commenting. The following picture shows an example of this scenario:
 
-![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/notification-hubs/media/notification-hubs-routing-tag-expressions/notification-hubs-tags2.png)
+![](./media/notification-hubs-routing-tag-expressions/notification-hubs-tags2.png)
 
 In this picture, Alice is interested in updates for the Beatles, and Bob is interested in updates for the Wailers. Bob is also interested in Charlie’s comments, and Charlie is in interested in the Wailers. When a notification is sent for Charlie’s comment on the Beatles, both Alice and Bob receive it.
 
@@ -70,11 +70,11 @@ While you can encode multiple concerns in tags (for example, “band_Beatles” 
 For a full step-by-step tutorial on how to use tags for sending to interest groups, see [Breaking News](notification-hubs-windows-notification-dotnet-push-xplat-segmented-wns.md).
 
 ## <a name="using-tags-to-target-users"></a>Using tags to target users
-Another way to use tags is to identify all the devices of a particular user. Registrations can be tagged with a tag that contains a user id, as in the following picture:
+Another way to use tags is to identify all the devices of a particular user. Registrations can be tagged with a tag that contains a user ID, as in the following picture:
 
-![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/notification-hubs/media/notification-hubs-routing-tag-expressions/notification-hubs-tags3.png)
+![](./media/notification-hubs-routing-tag-expressions/notification-hubs-tags3.png)
 
-In this picture, the message tagged uid:Alice reaches all registrations tagged uid:Alice; hence, all of Alice’s devices.
+In this picture, the message tagged uid: Alice reaches all registrations tagged uid:Alice; hence, all of Alice’s devices.
 
 ## <a name="tag-expressions"></a>Tag expressions
 There are cases in which a notification has to target a set of registrations that is identified not by a single tag, but by a Boolean expression on tags.
@@ -84,7 +84,7 @@ Consider a sports application that sends a reminder to everyone in Boston about 
     (follows_RedSox || follows_Cardinals) && location_Boston
 
 
-![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/notification-hubs/media/notification-hubs-routing-tag-expressions/notification-hubs-tags4.png)
+![](./media/notification-hubs-routing-tag-expressions/notification-hubs-tags4.png)
 
 Tag expressions can contain all Boolean operators, such as AND (&&), OR (||), and NOT (!). They can also contain parentheses. Tag expressions are limited to 20 tags if they contain only ORs; otherwise they are limited to 6 tags.
 
@@ -96,14 +96,10 @@ Here's an example for sending notifications with tag expressions using the SDK.
 
     // Windows 8.1 / Windows Phone 8.1
     var toast = @"<toast><visual><binding template=""ToastText01""><text id=""1"">" +
-    "You want info on the Red Socks</text></binding></visual></toast>";
+    "You want info on the Red Sox</text></binding></visual></toast>";
     outcome = await Notifications.Instance.Hub.SendWindowsNativeNotificationAsync(toast, userTag);
 
     // Windows 10
     toast = @"<toast><visual><binding template=""ToastGeneric""><text id=""1"">" +
-    "You want info on the Red Socks</text></binding></visual></toast>";
+    "You want info on the Red Sox</text></binding></visual></toast>";
     outcome = await Notifications.Instance.Hub.SendWindowsNativeNotificationAsync(toast, userTag);
-
-
-
-

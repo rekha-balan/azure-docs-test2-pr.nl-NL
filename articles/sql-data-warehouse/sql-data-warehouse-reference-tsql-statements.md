@@ -1,28 +1,25 @@
 ---
-title: SQL Data Warehouse Transact-SQL reference | Microsoft Docs
-description: Links to reference content for the Transact-SQL topics used by SQL Data Warehouse.
+title: T-SQL statements - Azure SQL Data Warehouse | Microsoft Docs
+description: Links to the documentation for T-SQL statements supported in Azure SQL Data Warehouse.
 services: sql-data-warehouse
-documentationcenter: NA
-author: barbkess
-manager: jhubbard
-editor: ''
-ms.assetid: 0abc5934-1e67-491a-b7d7-8b520d1ae98e
+author: twounder
+manager: craigg
 ms.service: sql-data-warehouse
-ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: data-services
-ms.custom: reference
-ms.date: 10/31/2016
-ms.author: barbkess
-ms.openlocfilehash: 5aca3011fc67e009bc3d543235049a4d5dd3a69b
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.topic: conceptual
+ms.component: implement
+ms.date: 06/13/2018
+ms.author: twounder
+ms.reviewer: igorstan
+ms.openlocfilehash: fa497979349346016e1c176ace98407d98eebdca
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44555900"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44804458"
 ---
-# <a name="transact-sql-topics"></a>Transact-SQL topics
+# <a name="t-sql-statements-supported-in-azure-sql-data-warehouse"></a>T-SQL statements supported in Azure SQL Data Warehouse
+Links to the documentation for T-SQL statements supported in Azure SQL Data Warehouse.
+
 ## <a name="data-definition-language-ddl-statements"></a>Data Definition Language (DDL) statements
 * [ALTER DATABASE](https://msdn.microsoft.com/library/mt204042.aspx)
 * [ALTER INDEX](https://msdn.microsoft.com/library/ms188388.aspx)
@@ -114,14 +111,4 @@ ms.locfileid: "44555900"
 * [OPEN MASTER KEY](https://msdn.microsoft.com/library/ms174433.aspx)
 
 ## <a name="next-steps"></a>Next steps
-For more TSQL examples, see [SQL Data Warehouse reference overview][SQL Data Warehouse reference overview].
-
-<!--Image references-->
-
-<!--Article references-->
-[SQL Data Warehouse reference overview]: sql-data-warehouse-overview-reference.md
-
-<!--MSDN references-->
-
-
-<!--Other Web references-->
+For more reference information, see [T-SQL language elements in Azure SQL Data Warehouse](sql-data-warehouse-reference-tsql-language-elements.md), and [System views in Azure SQL Data Warehouse](sql-data-warehouse-reference-tsql-system-views.md).

@@ -1,25 +1,21 @@
 ---
 title: Agreements for B2B communication - Azure Logic Apps | Microsoft Docs
-description: Create agreements so partners can communicate in B2B scenarios for Azure Logic Apps and the Enterprise Integration Pack
+description: Create agreements for B2B trading partner communication with Azure Logic Apps and Enterprise Integration Pack
 services: logic-apps
-documentationcenter: .net,nodejs,java
-author: msftman
-manager: anneta
-editor: cgronlun
-ms.assetid: 447ffb8e-3e91-4403-872b-2f496495899d
 ms.service: logic-apps
-ms.workload: integration
-ms.tgt_pltfrm: na
-ms.devlang: na
+ms.suite: integration
+author: divyaswarnkar
+ms.author: divswa
+ms.reviewer: jonfan, estfan, LADocs
 ms.topic: article
+ms.assetid: 447ffb8e-3e91-4403-872b-2f496495899d
 ms.date: 06/29/2016
-ms.author: estfan
-ms.openlocfilehash: 1068b5bd5f2c86de0c82f5a96cb2718645c0a3d3
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 09bee10649e2bc0d745e42b8aa13ae9c21df35aa
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44551677"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44772934"
 ---
 # <a name="partner-agreements-for-b2b-communication-with-azure-logic-apps-and-enterprise-integration-pack"></a>Partner agreements for B2B communication with Azure Logic Apps and Enterprise Integration Pack
 
@@ -47,7 +43,7 @@ Here are some common benefits when using agreements:
 
 ## <a name="how-to-use-an-agreement"></a>How to use an agreement
 
-You can create [logic apps](logic-apps-what-are-logic-apps.md "Learn about Logic apps") with B2B capabilities by using an agreement that you created.
+You can create [logic apps](logic-apps-overview.md "Learn about Logic apps") with B2B capabilities by using an agreement that you created.
 
 ## <a name="how-to-edit-an-agreement"></a>How to edit an agreement
 

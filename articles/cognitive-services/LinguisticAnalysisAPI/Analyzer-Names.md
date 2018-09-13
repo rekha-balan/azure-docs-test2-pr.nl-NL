@@ -5,16 +5,16 @@ services: cognitive-services
 author: RichardSunMS
 manager: wkwok
 ms.service: cognitive-services
-ms.technology: linguistic-analysis-api
+ms.component: linguistic-analysis
 ms.topic: article
 ms.date: 03/23/2016
 ms.author: lesun
-ms.openlocfilehash: c5bd0580e3b0362693a30a2b1b51c2ad6c8d23db
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 2729b7126e82862660fc8e1a995cc87ae996ea03
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44552092"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44804783"
 ---
 # <a name="analyzer-names"></a>Analyzer Names
 

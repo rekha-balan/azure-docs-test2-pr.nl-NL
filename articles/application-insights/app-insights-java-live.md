@@ -3,25 +3,24 @@ title: Application Insights for Java web apps that are already live
 description: Start monitoring a web application that is already running on your server
 services: application-insights
 documentationcenter: java
-author: harelbr
-manager: douge
+author: mrbullwinkle
+manager: carmonm
 ms.assetid: 12f3dbb9-915f-4087-87c9-807286030b0b
 ms.service: application-insights
 ms.workload: tbd
 ms.tgt_pltfrm: ibiza
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.date: 11/10/2016
-ms.author: awills
-ms.openlocfilehash: f48c940cf60ce45aa22b26d0184155dc51991963
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: mbullwin
+ms.openlocfilehash: 92b13c27d5f9c110dbcb4aa70aa9b8ddde17531a
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44554817"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44815976"
 ---
 # <a name="application-insights-for-java-web-apps-that-are-already-live"></a>Application Insights for Java web apps that are already live
-
 
 If you have a web application that is already running on your J2EE server, you can start monitoring it with [Application Insights](app-insights-overview.md) without the need to make code changes or recompile your project. With this option, you get information about HTTP requests sent to your server, unhandled exceptions, and performance counters.
 
@@ -36,13 +35,13 @@ You'll need a subscription to [Microsoft Azure](https://azure.com).
 1. Sign in to the [Microsoft Azure portal](https://portal.azure.com)
 2. Create a new Application Insights resource and set the application type to Java web application.
    
-    ![Fill a name, choose Java web app, and click Create](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-java-live/02-create.png)
+    ![Fill a name, choose Java web app, and click Create](./media/app-insights-java-live/02-create.png)
 
     The resource is created in a few seconds.
 
 4. Open the new resource and get its instrumentation key. You'll need to paste this key into your code project shortly.
    
-    ![In the new resource overview, click Properties and copy the Instrumentation Key](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-java-live/03-key.png)
+    ![In the new resource overview, click Properties and copy the Instrumentation Key](./media/app-insights-java-live/03-key.png)
 
 ## <a name="2-download-the-sdk"></a>2. Download the SDK
 1. Download the [Application Insights SDK for Java](https://aka.ms/aijavasdk). 
@@ -120,15 +119,15 @@ Return to your Application Insights resource in [Microsoft Azure portal](https:/
 
 Telemetry about HTTP requests appears on the overview blade. (If it isn't there, wait a few seconds and then click Refresh.)
 
-![sample data](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-java-live/5-results.png)
+![sample data](./media/app-insights-java-live/5-results.png)
 
 Click through any chart to see more detailed metrics. 
 
-![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-java-live/6-barchart.png)
+![](./media/app-insights-java-live/6-barchart.png)
 
 And when viewing the properties of a request, you can see the telemetry events associated with it such as requests and exceptions.
 
-![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-insights/media/app-insights-java-live/7-instance.png)
+![](./media/app-insights-java-live/7-instance.png)
 
 [Learn more about metrics.](app-insights-metrics-explorer.md)
 
@@ -137,9 +136,4 @@ And when viewing the properties of a request, you can see the telemetry events a
 * [Set up web tests](app-insights-monitor-web-app-availability.md) to make sure your application stays live and responsive.
 * [Capture log traces](app-insights-java-trace-logs.md)
 * [Search events and logs](app-insights-diagnostic-search.md) to help diagnose problems.
-
-
-
-
-
-
+* [Configure a Spring Boot initializer app](https://docs.microsoft.com/java/azure/spring-framework/configure-spring-boot-java-applicationinsights)

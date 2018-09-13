@@ -3,7 +3,7 @@ title: Capacity and Performance solution in Azure Log Analytics | Microsoft Docs
 description: Use the Capacity and Performance solution in Log Analytics to help you understand the capacity of your Hyper-V servers.
 services: log-analytics
 documentationcenter: ''
-author: bandersmsft
+author: mgoedtel
 manager: carmonm
 editor: ''
 ms.assetid: 51617a6f-ffdd-4ed2-8b74-1257149ce3d4
@@ -11,19 +11,25 @@ ms.service: log-analytics
 ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 04/17/2017
-ms.author: banders
-ms.openlocfilehash: 62a1facda3770718911b48fdf482ebf2e6b6ee8e
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.topic: conceptual
+ms.date: 07/13/2017
+ms.author: magoedte
+ms.component: na
+ms.openlocfilehash: ecc75d21badcb2d1914e0a34be3ca05320299bf6
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44563747"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44800961"
 ---
 # <a name="plan-hyper-v-virtual-machine-capacity-with-the-capacity-and-performance-solution-preview"></a>Plan Hyper-V virtual machine capacity with the Capacity and Performance solution (Preview)
 
-![Capacity and Performance solution](https://docstestmedia1.blob.core.windows.net/azure-media/articles/log-analytics/media/log-analytics-capacity/capacity-solution.png) You can use the Capacity and Performance solution in Log Analytics to help you understand the capacity of your Hyper-V servers. The solution provides insights into your Hyper-V environment by showing you the overall utilization (CPU, memory, and disk) of the hosts and the VMs running on those Hyper-V hosts. Metrics are collected for CPU, memory, and disks across all your hosts and the VMs running on them.
+![Capacity and Performance symbol](./media/log-analytics-capacity/capacity-solution.png)
+
+> [!NOTE]
+> The Capacity and Performance solution has been deprecated.  Customers who have already installed the solution can continue to use it, but Capacity and Performance can not be added to any new workspaces.
+
+You can use the Capacity and Performance solution in Log Analytics to help you understand the capacity of your Hyper-V servers. The solution provides insights into your Hyper-V environment by showing you the overall utilization (CPU, memory, and disk) of the hosts and the VMs running on those Hyper-V hosts. Metrics are collected for CPU, memory, and disks across all your hosts and the VMs running on them.
 
 The solution:
 
@@ -44,9 +50,9 @@ The following table describes the connected sources that are supported by this s
 
 | Connected Source | Support | Description |
 |---|---|---|
-| [Windows agents](log-analytics-windows-agents.md) | Yes | The solution collects capacity and performance data information from Windows agents. |
+| [Windows agents](log-analytics-windows-agent.md) | Yes | The solution collects capacity and performance data information from Windows agents. |
 | [Linux agents](log-analytics-linux-agents.md) | No    | The solution does not collect capacity and performance data information from direct Linux agents.|
-| [SCOM management group](log-analytics-om-agents.md) | Yes |The solution collects capacity and performance data from agents in a connected SCOM management group. A direct connection from the SCOM agent to OMS is not required. Data is forwarded from the management group to the OMS repository.|
+| [SCOM management group](log-analytics-om-agents.md) | Yes |The solution collects capacity and performance data from agents in a connected SCOM management group. A direct connection from the SCOM agent to Log Analytics is not required.|
 | [Azure storage account](log-analytics-azure-storage.md) | No | Azure storage does not include capacity and performance data.|
 
 ## <a name="prerequisites"></a>Prerequisites
@@ -58,11 +64,11 @@ The following table describes the connected sources that are supported by this s
 
 Perform the following step to add the Capacity and Performance solution to your workspace.
 
-- Add the Capacity and Performance solution to your OMS workspace using the process described in [Add Log Analytics solutions from the Solutions Gallery](log-analytics-add-solutions.md).
+- Add the Capacity and Performance solution to your Log Analytics workspace using the process described in [Add Log Analytics solutions from the Solutions Gallery](log-analytics-add-solutions.md).
 
 ## <a name="management-packs"></a>Management packs
 
-If your SCOM management group is connected to your OMS workspace, then the following management packs will be installed in SCOM when you add this solution. There is no configuration or maintenance of these management packs required.
+If your SCOM management group is connected to your Log Analytics workspace, then the following management packs will be installed in SCOM when you add this solution. There is no configuration or maintenance of these management packs required.
 
 - Microsoft.IntelligencePacks.CapacityPerformance
 
@@ -81,7 +87,7 @@ For more information on how solution management packs are updated, see [Connect 
 
 When you add the Capacity and Performance solution to your workspace, the Capacity and Performance is added to the Overview dashboard. This tile displays a count of the number of currently active Hyper-V hosts  and the number of active virtual machines that were monitored for the time period selected.
 
-![Capacity and Performance tile](https://docstestmedia1.blob.core.windows.net/azure-media/articles/log-analytics/media/log-analytics-capacity/capacity-tile.png)
+![Capacity and Performance tile](./media/log-analytics-capacity/capacity-tile.png)
 
 
 ### <a name="review-utilization"></a>Review utilization
@@ -103,9 +109,9 @@ Click on the Capacity and Performance tile to open the Capacity and Performance 
 - **Host Density** The top tile shows the total number of hosts and virtual machines available to the solution. Click the top tile to view additional details in log search. Also lists all hosts and the number of virtual machines that are hosted. Click a host to drill into the VM results in a log search.
 
 
-![dashboard Hosts blade](https://docstestmedia1.blob.core.windows.net/azure-media/articles/log-analytics/media/log-analytics-capacity/dashboard-hosts.png)
+![dashboard Hosts blade](./media/log-analytics-capacity/dashboard-hosts.png)
 
-![dashboard virtual machines blade](https://docstestmedia1.blob.core.windows.net/azure-media/articles/log-analytics/media/log-analytics-capacity/dashboard-vms.png)
+![dashboard virtual machines blade](./media/log-analytics-capacity/dashboard-vms.png)
 
 
 ### <a name="evaluate-performance"></a>Evaluate performance
@@ -119,22 +125,17 @@ To summarize, the solution collects capacity and performance data from a variety
 
 The following table provides sample log searches for capacity and performance data collected and calculated by this solution.
 
+
 | Query | Description |
-|---|---|
-| All host memory configurations | <code>Type=Perf ObjectName="Capacity and Performance" CounterName="Host Assigned Memory MB" &#124; measure avg(CounterValue) as MB by InstanceName</code> |
-| All VM memory configurations | <code>Type=Perf ObjectName="Capacity and Performance" CounterName="VM Assigned Memory MB" &#124; measure avg(CounterValue) as MB by InstanceName</code> |
-| Breakdown of Total Disk IOPS across all VMs | <code>Type=Perf ObjectName="Capacity and Performance" (CounterName="VHD Reads/s" OR CounterName="VHD Writes/s") &#124; top 2500 &#124; measure avg(CounterValue) by CounterName, InstanceName interval 1HOUR</code> |
-| Breakdown of Total Disk Throughput across all VMs | <code>Type=Perf ObjectName="Capacity and Performance" (CounterName="VHD Read MB/s" OR CounterName="VHD Write MB/s") &#124; top 2500 &#124; measure avg(CounterValue) by CounterName, InstanceName interval 1HOUR</code> |
-| Breakdown of Total IOPS across all CSVs | <code>Type=Perf ObjectName="Capacity and Performance" (CounterName="CSV Reads/s" OR CounterName="CSV Writes/s") &#124; top 2500 &#124; measure avg(CounterValue) by CounterName, InstanceName interval 1HOUR</code> |
-| Breakdown of Total Throughput across all CSVs | <code>Type=Perf ObjectName="Capacity and Performance" (CounterName="CSV Read MB/s" OR CounterName="CSV Write MB/s") &#124; top 2500 &#124; measure avg(CounterValue) by CounterName, InstanceName interval 1HOUR</code> |
-| Breakdown of Total Latency across all CSVs | <code> Type=Perf ObjectName="Capacity and Performance" (CounterName="CSV Read Latency" OR CounterName="CSV Write Latency") &#124; top 2500 &#124; measure avg(CounterValue) by CounterName, InstanceName interval 1HOUR</code> |
-
-
+|:--- |:--- |
+| All host memory configurations | Perf &#124; where ObjectName == "Capacity and Performance" and CounterName == "Host Assigned Memory MB" &#124; summarize MB = avg(CounterValue) by InstanceName |
+| All VM memory configurations | Perf &#124; where ObjectName == "Capacity and Performance" and CounterName == "VM Assigned Memory MB" &#124; summarize MB = avg(CounterValue) by InstanceName |
+| Breakdown of Total Disk IOPS across all VMs | Perf &#124; where ObjectName == "Capacity and Performance" and (CounterName == "VHD Reads/s" or CounterName == "VHD Writes/s") &#124; summarize AggregatedValue = avg(CounterValue) by bin(TimeGenerated, 1h), CounterName, InstanceName |
+| Breakdown of Total Disk Throughput across all VMs | Perf &#124; where ObjectName == "Capacity and Performance" and (CounterName == "VHD Read MB/s" or CounterName == "VHD Write MB/s") &#124; summarize AggregatedValue = avg(CounterValue) by bin(TimeGenerated, 1h), CounterName, InstanceName |
+| Breakdown of Total IOPS across all CSVs | Perf &#124; where ObjectName == "Capacity and Performance" and (CounterName == "CSV Reads/s" or CounterName == "CSV Writes/s") &#124; summarize AggregatedValue = avg(CounterValue) by bin(TimeGenerated, 1h), CounterName, InstanceName |
+| Breakdown of Total Throughput across all CSVs | Perf &#124; where ObjectName == "Capacity and Performance" and (CounterName == "CSV Reads/s" or CounterName == "CSV Writes/s") &#124; summarize AggregatedValue = avg(CounterValue) by bin(TimeGenerated, 1h), CounterName, InstanceName |
+| Breakdown of Total Latency across all CSVs | Perf &#124; where ObjectName == "Capacity and Performance" and (CounterName == "CSV Read Latency" or CounterName == "CSV Write Latency") &#124; summarize AggregatedValue = avg(CounterValue) by bin(TimeGenerated, 1h), CounterName, InstanceName |
 
 
 ## <a name="next-steps"></a>Next steps
-* Use [Log searches in Log Analytics](log-analytics-log-searches.md) to view detailed Capacity and Performance data.
-
-
-
-
+* Use [Log searches in Log Analytics](log-analytics-log-search.md) to view detailed Capacity and Performance data.

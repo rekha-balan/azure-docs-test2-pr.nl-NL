@@ -3,22 +3,22 @@ title: Azure DNS delegation overview | Microsoft Docs
 description: Understand how to change domain delegation and use Azure DNS name servers to provide domain hosting.
 services: dns
 documentationcenter: na
-author: georgewallace
-manager: timlt
+author: vhorne
+manager: jeconnoc
 ms.assetid: 257da6ec-d6e2-4b6f-ad76-ee2dde4efbcc
 ms.service: dns
 ms.devlang: na
 ms.topic: get-started-article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 06/30/2016
-ms.author: gwallace
-ms.openlocfilehash: 77bf7783b5979fa244f59eb6fce3b01447d3b609
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 12/18/2017
+ms.author: victorh
+ms.openlocfilehash: a00cc00dee3a505f88abef3ecf99f49aa027c30b
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44554198"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44784321"
 ---
 # <a name="delegation-of-dns-zones-with-azure-dns"></a>Delegation of DNS zones with Azure DNS
 
@@ -43,7 +43,7 @@ There are two types of DNS servers:
 * An *authoritative* DNS server hosts DNS zones. It answers DNS queries for records in those zones only.
 * A *recursive* DNS server does not host DNS zones. It answers all DNS queries by calling authoritative DNS servers to gather the data it needs.
 
-Azure DNS provides an authoritative DNS service.  It does not provide a recursive DNS service. Cloud Services and VMs in Azure are automatically configured to use a recursive DNS service that is provided separately as part of Azure's infrastructure. For information on how to change these DNS settings, see [Name Resolution in Azure](../virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances.md#name-resolution-using-your-own-dns-server).
+Azure DNS provides an authoritative DNS service.  It does not provide a recursive DNS service. Cloud Services and VMs in Azure are automatically configured to use a recursive DNS service that is provided separately as part of Azure's infrastructure. For information on how to change these DNS settings, see [Name Resolution in Azure](../virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances.md#name-resolution-that-uses-your-own-dns-server).
 
 DNS clients in PCs or mobile devices typically call a recursive DNS server to perform any DNS queries the client applications need.
 
@@ -55,7 +55,7 @@ How does a parent zone 'point' to the name servers for a child zone? It does thi
 
 The following image shows an example DNS query. The contoso.net and partners.contoso.net are Azure DNS zones.
 
-![Dns-nameserver](https://docstestmedia1.blob.core.windows.net/azure-media/articles/dns/media/dns-domain-delegation/image1.png)
+![Dns-nameserver](./media/dns-domain-delegation/image1.png)
 
 1. The client requests `www.partners.contoso.net` from their local DNS server.
 1. The local DNS server does not have the record so it makes a request to their root name server.
@@ -71,5 +71,4 @@ Each delegation actually has two copies of the NS records; one in the parent zon
 ## <a name="next-steps"></a>Next steps
 
 Learn how to [delegate your domain to Azure DNS](dns-delegate-domain-azure-dns.md)
-
 

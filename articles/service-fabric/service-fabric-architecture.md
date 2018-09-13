@@ -9,17 +9,17 @@ editor: rishirsinha
 ms.assetid: 6b554243-70cb-4c22-9b28-1a8b4703f45e
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 04/19/2016
+ms.date: 10/12/2017
 ms.author: rsinha
-ms.openlocfilehash: b87e0d508619343abb7ef6b5597db12146a81981
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 5e69d4b09261c90fd3c33e60645fe484b816e369
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44551125"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44779485"
 ---
 # <a name="service-fabric-architecture"></a>Service Fabric architecture
 Service Fabric is built with layered subsystems. These subsystems enable you to write applications that are:
@@ -31,7 +31,7 @@ Service Fabric is built with layered subsystems. These subsystems enable you to 
 
 The following diagram shows the major subsystems of Service Fabric.
 
-![Diagram of Service Fabric architecture](https://docstestmedia1.blob.core.windows.net/azure-media/articles/service-fabric/media/service-fabric-architecture/service-fabric-architecture.png)
+![Diagram of Service Fabric architecture](media/service-fabric-architecture/service-fabric-architecture.png)
 
 In a distributed system, the ability to securely communicate between nodes in a cluster is crucial. At the base of the stack is the transport subsystem, which provides secure communication between nodes. Above the transport subsystem lies the federation subsystem, which clusters the different nodes into a single entity (named clusters) so that Service Fabric can detect failures, perform leader election, and provide consistent routing. The reliability subsystem, layered on top of the federation subsystem, is responsible for the reliability of Service Fabric services through mechanisms such as replication, resource management, and failover. The federation subsystem also underlies the hosting and activation subsystem, which manages the lifecycle of an application on a single node. The management subsystem manages the lifecycle of applications and services. The testability subsystem helps application developers test their services through simulated faults before and after deploying applications and services to production environments. Service Fabric provides the ability to resolve service locations through its communication subsystem. The application programming models exposed to developers are layered on top of these subsystems along with the application model to enable tooling.
 
@@ -63,5 +63,4 @@ This subsystem provides reliable messaging within the cluster and service discov
 
 ## <a name="testability-subsystem"></a>Testability subsystem
 Testability is a suite of tools specifically designed for testing services built on Service Fabric. The tools let a developer easily induce meaningful faults and run test scenarios to exercise and validate the numerous states and transitions that a service will experience throughout its lifetime, all in a controlled and safe manner. Testability also provides a mechanism to run longer tests that can iterate through various possible failures without losing availability. This provides you with a test-in-production environment.
-
 

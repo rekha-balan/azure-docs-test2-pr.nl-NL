@@ -14,12 +14,12 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 02/27/2017
 ms.author: alkohli
-ms.openlocfilehash: faff3eef34f171fe495a3d84fd2831e3ecfb3d2a
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: a4ce2d329d0e1399cffaf886adf2b95e34b9cd7b
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44549586"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44790444"
 ---
 # <a name="use-storsimple-device-manager-to-manage-storage-account-credentials-for-storsimple-virtual-array"></a>Use StorSimple Device Manager to manage storage account credentials for StorSimple Virtual Array
 
@@ -29,7 +29,7 @@ The **Configuration** section of the StorSimple Device Manager service blade of 
 * Storage account credentials
 * Access control records
   
-  ![Device Manager Service dashboard](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-manage-storage-accounts/ova-storageaccts-dashboard.png)  
+  ![Device Manager Service dashboard](./media/storsimple-virtual-array-manage-storage-accounts/ova-storageaccts-dashboard.png)  
 
 This tutorial explains how you can add, edit, or delete storage account credentials for your StorSimple Virtual Array. The information in this tutorial only applies to the StorSimple Virtual Array. For information on how to manage storage accounts in 8000 series, see [Use the StorSimple Manager service to manage your storage account](storsimple-manage-storage-accounts.md).
 
@@ -40,7 +40,7 @@ On the **Storage account credentials** blade, all storage account credentials th
 * **Name** – The unique name assigned to the account when it was created.
 * **SSL enabled** – Whether the SSL is enabled and device-to-cloud communication is over the secure channel.
   
-  ![Configuration section](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-manage-storage-accounts/ova-storageaccountcredentials-blade.png)
+  ![Configuration section](./media/storsimple-virtual-array-manage-storage-accounts/ova-storageaccountcredentials-blade.png)
 
 The most common tasks related to storage account credentials that can be performed on the **Storage account credentials** blade are:
 
@@ -52,7 +52,7 @@ The most common tasks related to storage account credentials that can be perform
 There are three types of storage account credentials that can be used with your StorSimple device.
 
 * **Auto-generated storage account credentials** – As the name suggests, this type of storage account credential is automatically generated when the service is first created. To learn more about how this storage account credential is created, see [Create a new service](storsimple-virtual-array-manage-service.md#create-a-service).
-* **storage account credentials in the service subscription** – These are the Azure storage account credentials that are associated with the same subscription as that of the service. To learn more about how these storage account credentials are created, see [About Azure Storage Accounts](../storage/storage-create-storage-account.md).
+* **storage account credentials in the service subscription** – These are the Azure storage account credentials that are associated with the same subscription as that of the service. To learn more about how these storage account credentials are created, see [About Azure Storage Accounts](../storage/common/storage-create-storage-account.md).
 * **storage account credentials outside of the service subscription** – These are the Azure storage account credentials that are not associated with your service and likely existed before the service was created.
 
 ## <a name="add-a-storage-account-credential"></a>Add a storage account credential
@@ -77,7 +77,7 @@ Use the following procedures to add Azure storage account credentials:
     3. Select **Enable** to create a secure channel for network communication between your StorSimple device and the cloud. Select **Disable** only if you are operating within a private cloud.
     4. Click **Add**. You are notified after the storage account is successfully created.<br></br>
    
-        ![Add an existing storage account credential](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-manage-storage-accounts/ova-add-storageacct.png)
+        ![Add an existing storage account credential](./media/storsimple-virtual-array-manage-storage-accounts/ova-add-storageacct.png)
 
 #### <a name="to-add-an-azure-storage-account-credential-that-is-outside-of-the-device-manager-service-subscription"></a>To add an Azure storage account credential that is outside of the Device Manager service subscription
 
@@ -98,7 +98,7 @@ Use the following procedures to add Azure storage account credentials:
 
 5. The newly created storage account credential is displayed on the StorSimple Configure Device Manager service blade under **Storage account credentials**.
    
-    ![Add a storage account credential outside of the Device Manager service subscription](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-manage-storage-accounts/ova-add-outside-storageacct.png)
+    ![Add a storage account credential outside of the Device Manager service subscription](./media/storsimple-virtual-array-manage-storage-accounts/ova-add-outside-storageacct.png)
 
 ## <a name="edit-a-storage-account-credential"></a>Edit a storage account credential
 You can edit a storage account credential used by your device. If you edit a storage account credential that is currently in use, the fields available to modify are the access key and the SSL mode for the storage account credential. You can supply the new storage access key or modify the **Enable SSL mode** selection and save the updated settings.
@@ -110,10 +110,10 @@ You can edit a storage account credential used by your device. If you edit a sto
 4. In the storage account credential **Properties** blade, do the following:
    
    1. If necessary, you can modify the **Enable SSL** mode selection.
-   2. You can choose to regenerate your storage account credential access keys. For more information, see [Regenerate the storage account keys](../storage/storage-create-storage-account.md#manage-your-storage-access-keys). Supply the new storage account credential key. For an Azure storage account, this is the primary access key.
+   2. You can choose to regenerate your storage account credential access keys. For more information, see [Regenerate the storage account keys](../storage/common/storage-create-storage-account.md#manage-your-storage-access-keys). Supply the new storage account credential key. For an Azure storage account, this is the primary access key.
    3. Click **Save** at the top of the **Properties** blade to save the settings. The settings are updated on the **Storage account credentials** blade.
       
-      ![Edit a storage account credential](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-manage-storage-accounts/ova-edit-storageacct.png)
+      ![Edit a storage account credential](./media/storsimple-virtual-array-manage-storage-accounts/ova-edit-storageacct.png)
 
 ## <a name="delete-a-storage-account-credential"></a>Delete a storage account credential
 > [!IMPORTANT]
@@ -130,7 +130,7 @@ You can edit a storage account credential used by your device. If you edit a sto
    1. Click **Delete** to delete the credentials.
    2. When prompted for confirmation, click **Yes** to continue with the deletion. The tabular listing is updated to reflect the changes.
       
-      ![Delete a storage account credential](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-manage-storage-accounts/ova-del-storageacct.png)
+      ![Delete a storage account credential](./media/storsimple-virtual-array-manage-storage-accounts/ova-del-storageacct.png)
 
 ## <a name="synchronizing-storage-account-credential-keys"></a>Synchronizing storage account credential keys
 For security reasons, key rotation is often a requirement in data centers. A Microsoft Azure administrator can regenerate or change the primary or secondary key by directly accessing the storage account credential (via the Microsoft Azure Storage service). The StorSimple Device Manager service does not see this change automatically.
@@ -148,15 +148,8 @@ To inform the StorSimple Device Manager service of the change, you need to acces
     
 4. In the StorSimple Device Manager service, you need to update the key that was previously changed in the Microsoft Azure Storage service. In the **Synchronize storage account key** blade, if the primary access key was changed (regenerated), click Primary, and then click **Sync Key**. If the secondary key was changed, click **Secondary**, and then click **Sync Key**.
    
-    ![Sync access key](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-manage-storage-accounts/ova-sync-acess-key.png)
+    ![Sync access key](./media/storsimple-virtual-array-manage-storage-accounts/ova-sync-acess-key.png)
 
 ## <a name="next-steps"></a>Next steps
 * Learn how to [administer your StorSimple Virtual Array](storsimple-ova-web-ui-admin.md).
-
-
-
-
-
-
-
 

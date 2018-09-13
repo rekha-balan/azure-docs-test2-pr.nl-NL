@@ -2,24 +2,22 @@
 title: How to manage service configurations and profiles | Microsoft Docs
 description: Learn how to work with service configurations and profiles configuration files| which store settings for the deployment environments and publish settings for cloud services.
 services: visual-studio-online
-documentationcenter: na
-author: TomArcher
+author: ghogen
 manager: douge
-editor: ''
-ms.assetid: 7da8c551-fb06-4057-b5c7-c77f4b39d803
-ms.service: multiple
-ms.devlang: dotnet
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: multiple
-ms.date: 11/11/2016
-ms.author: tarcher
-ms.openlocfilehash: 40723d39bc9a2d55f5e02fce4b166e59f1c7df42
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+assetId: 7da8c551-fb06-4057-b5c7-c77f4b39d803
+ms.prod: visual-studio-dev15
+ms.technology: vs-azure
+ms.custom: vs-azure
+ms.workload: azure-vs
+ms.topic: conceptual
+ms.date: 8/11/2017
+ms.author: ghogen
+ms.openlocfilehash: 1acb13f8bdcb7f5a6f214a7425e13c72e21bd29d
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44553142"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44773584"
 ---
 # <a name="how-to-manage-service-configurations-and-profiles"></a>How to manage service configurations and profiles
 ## <a name="overview"></a>Overview
@@ -30,12 +28,12 @@ You can create multiple service configurations to use for each of your deploymen
 
 You can add, delete, rename, and modify these service configurations based on your requirements. You can manage these service configurations from Visual Studio, as shown in the following illustration.
 
-![Manage Service Configurations](https://docstestmedia1.blob.core.windows.net/azure-media/articles/media/vs-azure-tools-service-configurations-and-profiles-how-to-manage/manage-service-config.png)
+![Manage Service Configurations](./media/vs-azure-tools-service-configurations-and-profiles-how-to-manage/manage-service-config.png)
 
 You can also open the **Manage Configurations** dialog box from the role’s property pages. To open the properties for a role in your Azure project, open the shortcut menu for that role, and then choose **Properties**. On the **Settings** tab, expand the **Service Configuration** list, and then select **Manage** to open the **Manage Configurations** dialog box.
 
 ### <a name="to-add-a-service-configuration"></a>To add a service configuration
-1. In Solution Explorer open the shortcut menu for the Azure project and then select **Manage Configurations**.
+1. In Solution Explorer, open the shortcut menu for the Azure project and then select **Manage Configurations**.
    
     The **Manage Service Configurations** dialog box appears.
 2. To add a service configuration, you must create a copy of an existing configuration. To do this, choose the configuration that you want to copy from the Name list and then select **Create copy**.
@@ -61,7 +59,7 @@ You can also open the **Manage Configurations** dialog box from the role’s pro
     The name of the service configuration file is changed in the Azure project in Solution Explorer.
 
 ### <a name="to-change-a-service-configuration"></a>To change a service configuration
-* If you want to change a service configuration, open the shortcut menu for the specific role you want to change in the Azure project, and then select **Properties**. See [How to: Configure the Roles for an Azure Cloud Service with Visual Studio](https://msdn.microsoft.com/library/azure/hh369931.aspx) for more information.
+* If you want to change a service configuration, open the shortcut menu for the specific role you want to change in the Azure project, and then select **Properties**. See [How to: Configure the Roles for an Azure Cloud Service with Visual Studio](https://docs.microsoft.com/azure/vs-azure-tools-configure-roles-for-cloud-service) for more information.
 
 ## <a name="make-different-setting-combinations-by-using-profiles"></a>Make different setting combinations by using profiles
 By using a profile, you can automatically fill in the **Publish Wizard** with different combinations of settings for different purposes. For example, you can have one profile for debugging and another for release builds. In that case, your **Debug** profile would have **IntelliTrace** enabled and the **Debug** configuration selected, and your **Release** profile would have **IntelliTrace** disabled and the **Release** configuration selected. You could also use different profiles to deploy a service using a different storage account.
@@ -72,12 +70,12 @@ When you run the wizard for the first time, a default profile is created. Visual
 1. Open the shortcut menu for your Azure project, and then select **Publish**.
 2. Next to the **Target profile** list, select the **Save Profile** button, as the following illustration shows. This creates a profile for you.
    
-    ![Create an new profile](https://docstestmedia1.blob.core.windows.net/azure-media/articles/media/vs-azure-tools-service-configurations-and-profiles-how-to-manage/create-new-profile.png)
+    ![Create an new profile](./media/vs-azure-tools-service-configurations-and-profiles-how-to-manage/create-new-profile.png)
 3. After the profile is created, select **<Manage…>** in the **Target profile** list.
    
     The **Manage Profiles** dialog box appears, as the following illustration shows.
    
-    ![Manage Profiles Dialog](https://docstestmedia1.blob.core.windows.net/azure-media/articles/media/vs-azure-tools-service-configurations-and-profiles-how-to-manage/manage-profiles.png)
+    ![Manage Profiles Dialog](./media/vs-azure-tools-service-configurations-and-profiles-how-to-manage/manage-profiles.png)
 4. In the **Name** list, choose a profile, and then select **Create Copy**.
 5. Choose the **Close** button.
    
@@ -102,7 +100,4 @@ When you run the wizard for the first time, a default profile is created. Visual
 
 ## <a name="next-steps"></a>Next steps
 To learn about configuring other parts of your Azure project from Visual Studio, see [Configuring an Azure Project](http://go.microsoft.com/fwlink/p/?LinkID=623075)
-
-
-
 

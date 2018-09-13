@@ -5,16 +5,16 @@ services: cognitive-services
 author: RichardSunMS
 manager: wkwok
 ms.service: cognitive-services
-ms.technology: linguistic-analysis-api
+ms.component: linguistic-analysis
 ms.topic: article
 ms.date: 03/21/2016
 ms.author: lesun
-ms.openlocfilehash: 14d4239bc62ab2512e9d6982b11aabebbd5ddf1b
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: bff5e587621e1278c260d555aec280a0f4c7c8a1
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44555031"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44785374"
 ---
 # <a name="constituency-parsing"></a>Constituency Parsing
 
@@ -53,7 +53,7 @@ The goal of a parser is to find all such phrases.
 Interestingly, in natural language, the phrases tend to be nested inside one another.
 A natural representation of these phrases is a tree, such as the following:
 
-![Tree](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cognitive-services/LinguisticAnalysisAPI/Images/tree.png)
+![Tree](./Images/tree.png)
 
 In this tree, the branches marked "NP" are noun phrases.
 There are several such phrases: *I*, *a new hybrid automobile*, *Bluetooth*, and *a new hybrid automobile with Bluetooth*.
@@ -92,5 +92,4 @@ There are several such phrases: *I*, *a new hybrid automobile*, *Bluetooth*, and
 
 ## <a name="specification"></a>Specification
 
-Trees here use the S-expressions from the [Penn Treebank](https://www.cis.upenn.edu/~treebank/).
-
+Trees here use the S-expressions from the [Penn Treebank](https://catalog.ldc.upenn.edu/ldc99t42).

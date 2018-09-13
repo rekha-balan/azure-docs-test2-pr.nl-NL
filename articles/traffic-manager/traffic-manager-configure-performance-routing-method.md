@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/20/2017
 ms.author: kumud
-ms.openlocfilehash: 705f9111a045646a188a4bb990d77cdddd98c59f
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 014aa646459cd64fca7c697419324caa3edaeeea
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44563276"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44782215"
 ---
 # <a name="configure-the-performance-traffic-routing-method"></a>Configure the performance traffic routing method
 
@@ -52,4 +52,4 @@ The Performance traffic routing method allows you to direct traffic to the endpo
 - Learn how to [test Traffic Manager settings](traffic-manager-testing-settings.md).
 
 <!--Image references-->
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/traffic-manager/media/traffic-manager-performance-routing-method/traffic-manager-performance-routing-method.png
+[1]: ./media/traffic-manager-performance-routing-method/traffic-manager-performance-routing-method.png

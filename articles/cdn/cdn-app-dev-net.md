@@ -14,12 +14,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/23/2017
 ms.author: mazha
-ms.openlocfilehash: a96ed9941bb21c182125ebc2b6ca33426ae8ba2e
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 5379586355ece98af6295236d6cbd09cb31c742b
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44564492"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44775261"
 ---
 # <a name="get-started-with-azure-cdn-development"></a>Get started with Azure CDN development
 > [!div class="op_single_selector"]
@@ -44,13 +44,13 @@ Now that we've created a resource group for our CDN profiles and given our Azure
 
 From within Visual Studio 2015, click **File**, **New**, **Project...** to open the new project dialog.  Expand **Visual C#**, then select **Windows** in the pane on the left.  Click **Console Application** in the center pane.  Name your project, then click **OK**.  
 
-![New Project](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-app-dev-net/cdn-new-project.png)
+![New Project](./media/cdn-app-dev-net/cdn-new-project.png)
 
 Our project is going to use some Azure libraries contained in Nuget packages.  Let's add those to the project.
 
 1. Click the **Tools** menu, **Nuget Package Manager**, then **Package Manager Console**.
    
-    ![Manage Nuget Packages](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-app-dev-net/cdn-manage-nuget.png)
+    ![Manage Nuget Packages](./media/cdn-app-dev-net/cdn-manage-nuget.png)
 2. In the Package Manager Console, execute the following command to install the **Active Directory Authentication Library (ADAL)**:
    
     `Install-Package Microsoft.IdentityModel.Clients.ActiveDirectory`
@@ -325,15 +325,15 @@ private static void PromptDeleteCdnProfile(CdnManagementClient cdn)
 ## <a name="running-the-program"></a>Running the program
 We can now compile and run the program by clicking the **Start** button in Visual Studio.
 
-![Program running](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-app-dev-net/cdn-program-running-1.png)
+![Program running](./media/cdn-app-dev-net/cdn-program-running-1.png)
 
 When the program reaches the above prompt, you should be able to return to your resource group in the Azure portal and see that the profile has been created.
 
-![Success!](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-app-dev-net/cdn-success.png)
+![Success!](./media/cdn-app-dev-net/cdn-success.png)
 
 We can then confirm the prompts to run the rest of the program.
 
-![Program completing](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-app-dev-net/cdn-program-running-2.png)
+![Program completing](./media/cdn-app-dev-net/cdn-program-running-2.png)
 
 ## <a name="next-steps"></a>Next Steps
 To see the completed project from this walkthrough, [download the sample](https://code.msdn.microsoft.com/Azure-CDN-Management-1f2fba2c).
@@ -341,9 +341,4 @@ To see the completed project from this walkthrough, [download the sample](https:
 To find additional documentation on the Azure CDN Management Library for .NET, view the [reference on MSDN](https://msdn.microsoft.com/library/mt657769.aspx).
 
 Manage your CDN resources with [PowerShell](cdn-manage-powershell.md).
-
-
-
-
-
 

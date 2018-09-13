@@ -1,27 +1,20 @@
 ---
-title: Use .NET with Hadoop MapReduce on Linux-based HDInsight - Azure | Microsoft Docs
+title: Use .NET with Hadoop MapReduce on Linux-based HDInsight - Azure
 description: Learn how to use .NET applications for streaming MapReduce on Linux-based HDInsight.
 services: hdinsight
-documentationCenter: ''
-author: Blackmist
-manager: jhubbard
-editor: cgronlun
-tags: azure-portal
-ms.assetid: ''
+author: jasonwhowell
+ms.reviewer: jasonh
 ms.service: hdinsight
 ms.custom: hdinsightactive
-ms.devlang: dotnet
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: big-data
-ms.date: 04/12/2017
-ms.author: larryfr
-ms.openlocfilehash: 8a5eee116b9fe7652ba8ed59d78e6340a4c905ff
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.topic: conceptual
+ms.date: 02/27/2018
+ms.author: jasonh
+ms.openlocfilehash: f8a29c744d0ebfbab4127c421d0dba22e8d7ff52
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44540698"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44773909"
 ---
 # <a name="migrate-net-solutions-for-windows-based-hdinsight-to-linux-based-hdinsight"></a>Migrate .NET solutions for Windows-based HDInsight to Linux-based HDInsight
 
@@ -29,12 +22,12 @@ Linux-based HDInsight clusters use [Mono (https://mono-project.com)](https://mon
 
 ## <a name="mono-compatibility-with-net"></a>Mono compatibility with .NET
 
-Mono version 4.2.1 is included with HDInsight version 3.5. For more information on the version of Mono included with HDInsight, see [HDInsight component versions](hdinsight-component-versioning.md).
+Mono version 4.2.1 is included with HDInsight version 3.6. For more information on the version of Mono included with HDInsight, see [HDInsight component versions](hdinsight-component-versioning.md). To install a specific version of Mono, see the [Install or update Mono](hdinsight-hadoop-install-mono.md) document.
 
-For detailed information on compatibility between Mono and .NET, see the [Mono compatibility (http://www.mono-project.com/docs/about-mono/compatibility/)](http://www.mono-project.com/docs/about-mono/compatibility/) document.
+For more information on compatibility between Mono and .NET, see the [Mono compatibility (http://www.mono-project.com/docs/about-mono/compatibility/)](http://www.mono-project.com/docs/about-mono/compatibility/) document.
 
 > [!IMPORTANT]
-> The SCP.NET framework is compatible with Mono. For more information on using SCP.NET with Mono, see [Use Visual Studio to develop C# topologies for Apache Storm on HDInsight](hdinsight-storm-develop-csharp-visual-studio-topology.md).
+> The SCP.NET framework is compatible with Mono. For more information on using SCP.NET with Mono, see [Use Visual Studio to develop C# topologies for Apache Storm on HDInsight](storm/apache-storm-develop-csharp-visual-studio-topology.md).
 
 ## <a name="automated-portability-analysis"></a>Automated portability analysis
 
@@ -44,7 +37,7 @@ The [.NET Portability Analyzer](https://marketplace.visualstudio.com/items?itemN
 
 2. From Visual Studio 2015, select __Analyze__ > __Portability Analyzer Settings__, and make sure that __4.5__ is checked in the __Mono__ section.
 
-    ![4.5 checked in Mono section for the analyzer settings](https://docstestmedia1.blob.core.windows.net/azure-media/articles/hdinsight/media/hdinsight-hadoop-migrate-dotnet-to-linux/portability-analyzer-settings.png)
+    ![4.5 checked in Mono section for the analyzer settings](./media/hdinsight-hadoop-migrate-dotnet-to-linux/portability-analyzer-settings.png)
 
     Select __OK__ to save the configuration.
 
@@ -52,10 +45,10 @@ The [.NET Portability Analyzer](https://marketplace.visualstudio.com/items?itemN
 
 4. Once analysis is complete, select __Analyze__ > __View analysis reports__. In __Portability Analysis Results__, select __Open report__ to open a report.
 
-    ![Portability analyzer results dialog](https://docstestmedia1.blob.core.windows.net/azure-media/articles/hdinsight/media/hdinsight-hadoop-migrate-dotnet-to-linux/portability-analyzer-results.png)
+    ![Portability analyzer results dialog](./media/hdinsight-hadoop-migrate-dotnet-to-linux/portability-analyzer-results.png)
 
 > [!IMPORTANT]
-> The analyzer cannot catch every problem with your solution. For example, a file path of `c:\temp\file.txt` is considered OK because Mono runs on Windows and the path is valid in that context. However, the path is not valid on a Linux platform.
+> The analyzer cannot catch every problem with your solution. For example, a file path of `c:\temp\file.txt` is considered OK if Mono is running on Windows. The same path is not valid on a Linux platform.
 
 ## <a name="manual-portability-analysis"></a>Manual portability analysis
 
@@ -71,14 +64,12 @@ Once you have modified your solution using the recommendations from the .NET Por
 
 For more information on accessing logs, see the following documents:
 
-* [Analyze HDInsight logs](hdinsight-debug-jobs.md)
 * [Access YARN application logs on Linux-based HDInsight](hdinsight-hadoop-access-yarn-app-logs-linux.md)
 
 ## <a name="next-steps"></a>Next steps
 
-* [Use C# with MapReduce on HDInsight](hdinsight-hadoop-dotnet-csharp-mapreduce-streaming.md)
+* [Use C# with MapReduce on HDInsight](hadoop/apache-hadoop-dotnet-csharp-mapreduce-streaming.md)
 
-* [Use C# user defined functions with Hive and Pig](hdinsight-hadoop-hive-pig-udf-dotnet-csharp.md)
+* [Use C# user-defined functions with Hive and Pig](hadoop/apache-hadoop-hive-pig-udf-dotnet-csharp.md)
 
-* [Develop C# topologies for Storm on HDInsight](hdinsight-storm-develop-csharp-visual-studio-topology.md)
-
+* [Develop C# topologies for Storm on HDInsight](storm/apache-storm-develop-csharp-visual-studio-topology.md)
