@@ -4,7 +4,7 @@ description: Describes how to use the StorSimple Snapshot Manager MMC snap-in to
 services: storsimple
 documentationcenter: NA
 author: SharS
-manager: carmonm
+manager: timlt
 editor: ''
 ms.assetid: 04415d0b-42f0-4737-8afa-257fb2dbe5d0
 ms.service: storsimple
@@ -12,14 +12,14 @@ ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: TBD
-ms.date: 05/12/2016
+ms.date: 06/05/2017
 ms.author: v-sharos
-ms.openlocfilehash: 0f7e7c55166d705f1e4dbf798479471c72e88ce4
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 218c89e403673c16c72da95aa2c1d685bbed5a86
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44551825"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44821293"
 ---
 # <a name="use-storsimple-snapshot-manager-to-create-and-manage-backup-policies"></a>Use StorSimple Snapshot Manager to create and manage backup policies
 ## <a name="overview"></a>Overview
@@ -38,11 +38,11 @@ Use the following procedure to create a new backup policy.
 1. Click the desktop icon to start StorSimple Snapshot Manager.
 2. In the **Scope** pane, right-click **Backup Policies**, and click **Create Backup Policy**.
 
-    ![Create a backup policy](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-snapshot-manager-manage-backup-policies/HCS_SSM_Create_BU_policy.png)
+    ![Create a backup policy](./media/storsimple-snapshot-manager-manage-backup-policies/HCS_SSM_Create_BU_policy.png)
 
     The **Create a Policy** dialog box appears.
 
-    ![Create a Policy - General tab](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-snapshot-manager-manage-backup-policies/HCS_SSM_Create_policy_general.png)
+    ![Create a Policy - General tab](./media/storsimple-snapshot-manager-manage-backup-policies/HCS_SSM_Create_policy_general.png)
 3. On the **General** tab, complete the following information:
 
    1. In the **Name** text box, type a name for the policy.
@@ -51,7 +51,7 @@ Use the following procedure to create a new backup policy.
    4. Select the number of snapshots to retain. If you select **All**, 64 snapshots will be retained (the maximum).
 4. Click the **Schedule** tab.
 
-    ![Create a Policy - Schedule tab](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-snapshot-manager-manage-backup-policies/HCS_SSM_Create_policy_schedule.png)
+    ![Create a Policy - Schedule tab](./media/storsimple-snapshot-manager-manage-backup-policies/HCS_SSM_Create_policy_schedule.png)
 5. On the **Schedule** tab, complete the following information:
 
    1. Click the **Enable** check box to schedule the next backup.
@@ -77,7 +77,7 @@ Use the following procedure to edit an existing backup policy.
 2. In the **Scope** pane, click the **Backup Policies** node. All the backup policies appear in the **Results** pane.
 3. Right-click the policy that you want to edit, and then click **Edit**.
 
-    ![Edit a backup policy](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-snapshot-manager-manage-backup-policies/HCS_SSM_Edit_BU_policy.png)
+    ![Edit a backup policy](./media/storsimple-snapshot-manager-manage-backup-policies/HCS_SSM_Edit_BU_policy.png)
 4. When the **Create a Policy** window appears, enter your changes, and then click **OK**.
 
 ## <a name="delete-a-backup-policy"></a>Delete a backup policy
@@ -89,13 +89,8 @@ Use the following procedure to delete a backup policy.
 3. Right-click the backup policy that you want to delete, and then click **Delete**.
 4. When the confirmation message appears, click **Yes**.
 
-    ![Delete backup policy confirmation](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-snapshot-manager-manage-backup-policies/HCS_SSM_Delete_BU_policy.png)
+    ![Delete backup policy confirmation](./media/storsimple-snapshot-manager-manage-backup-policies/HCS_SSM_Delete_BU_policy.png)
 
 ## <a name="next-steps"></a>Next steps
 * Learn how to [use StorSimple Snapshot Manager to administer your StorSimple solution](storsimple-snapshot-manager-admin.md).
 * Learn how to [use StorSimple Snapshot Manager to view and manage backup jobs](storsimple-snapshot-manager-manage-backup-jobs.md).
-
-
-
-
-

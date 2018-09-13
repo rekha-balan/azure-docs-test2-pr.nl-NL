@@ -1,24 +1,23 @@
 ---
-title: Task start event - Azure | Microsoft Docs
-ms.custom: ''
-ms.date: 2017-02-01
-ms.prod: azure
-ms.reviewer: ''
+title: Azure Batch task start event | Microsoft Docs
+description: Reference for Batch task start event.
+services: batch
+author: dlepow
+manager: jeconnoc
+ms.assetid: ''
 ms.service: batch
-ms.suite: ''
+ms.devlang: multiple
+ms.topic: article
 ms.tgt_pltfrm: ''
-ms.topic: reference
-ms.assetid: 95f7762a-a715-4c83-907b-8aed004e69b1
-caps.latest.revision: 3
-author: tamram
-ms.author: tamram
-manager: timlt
-ms.openlocfilehash: 15825628e8eea6f6582e89532650de5470498664
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.workload: big-compute
+ms.date: 04/20/2017
+ms.author: danlep
+ms.openlocfilehash: 0ad0f87df9db39088769579d538b919b42634c4b
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44563696"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44819902"
 ---
 # <a name="task-start-event"></a>Task start event
 

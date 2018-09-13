@@ -3,6 +3,5 @@
    
    ![Azure Web Site][0]
 
-[0]: https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/create-azure-account/freetrialonwindowsazurehomepage.png
-
+[0]: ./media/create-azure-account/freetrialonwindowsazurehomepage.png
 

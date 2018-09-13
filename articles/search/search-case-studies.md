@@ -1,26 +1,21 @@
 ---
 title: "Who's using Azure Search: case studies and customer stories | Microsoft Docs"
 description: Case studies and customer stories about Azure Search, a hosted cloud search service on Microsoft Azure.
-services: search
-documentationcenter: ''
 author: HeidiSteen
-manager: jhubbard
-editor: ''
+manager: cgronlun
 tags: azure-portal
-ms.assetid: ad48e927-aaf9-48f5-8efd-48150cfe79b2
+services: search
 ms.service: search
 ms.devlang: NA
-ms.workload: search
-ms.topic: article
-ms.tgt_pltfrm: na
+ms.topic: conceptual
 ms.date: 08/29/2016
 ms.author: heidist
-ms.openlocfilehash: 76ba1458bd52267bbcf8f162130ddc6fa3b6bdf4
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: bc15d214d48978b2f8a6bceb3d1a0e945f10bd67
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44554588"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44818992"
 ---
 # <a name="whos-using-azure-search-case-studies-and-customer-stories"></a>Who's using Azure Search: case studies and customer stories
 Learn how the following organizations moved their businesses forward by integrating a rich Azure Search experience into their online applications.
@@ -47,15 +42,9 @@ Weichert Realtors is moving to the cloud—and it’s leading to a complete shif
 Learn how one Swedish start-up built an infomedia portal that connects shoppers with retailers through a highly-relevant, scoped-search experience, similar to how travel portals match tourists up with the hotels, restaurants, and entertainment when in uncharted territory.
 
 <!--Image References -- here for future reference. Had to -->
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-case-studies/autotrader_m.png
-[2]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-case-studies/gjirafa_m.png
-[3]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-case-studies/JLL_m.png
-[4]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-case-studies/medihoo_m.png
-[5]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-case-studies/weichert_m.png
-[xomni]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-case-studies/xomni_m.png
-
-
-
-
-
-
+[1]: ./media/search-case-studies/autotrader_m.png
+[2]: ./media/search-case-studies/gjirafa_m.png
+[3]: ./media/search-case-studies/JLL_m.png
+[4]: ./media/search-case-studies/medihoo_m.png
+[5]: ./media/search-case-studies/weichert_m.png
+[xomni]: ./media/search-case-studies/xomni_m.png

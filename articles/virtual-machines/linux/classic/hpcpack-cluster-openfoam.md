@@ -4,7 +4,7 @@ description: Deploy a Microsoft HPC Pack cluster on Azure and run an OpenFOAM jo
 services: virtual-machines-linux
 documentationcenter: ''
 author: dlepow
-manager: timlt
+manager: jeconnoc
 editor: ''
 tags: azure-service-management,azure-resource-manager,hpc-pack
 ms.assetid: c0bb1637-bb19-48f1-adaa-491808d3441f
@@ -15,15 +15,15 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: big-compute
 ms.date: 07/22/2016
 ms.author: danlep
-ms.openlocfilehash: 4ab1c7dd99304845c92c8099ec04d1f4cb073948
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 9032a0b68c4c8789010b0304b64a63d4924521fb
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44555597"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44814241"
 ---
 # <a name="run-openfoam-with-microsoft-hpc-pack-on-a-linux-rdma-cluster-in-azure"></a>Run OpenFoam with Microsoft HPC Pack on a Linux RDMA cluster in Azure
-This article shows you one way to run OpenFoam in Azure virtual machines. Here, you deploy a Microsoft HPC Pack cluster with Linux compute nodes on Azure and run an [OpenFoam](http://openfoam.com/) job with Intel MPI. You can use RDMA-capable Azure VMs for the compute nodes, so that the compute nodes communicate over the Azure RDMA network. Other options to run OpenFoam in Azure include fully configured commercial images available in the Marketplace, such as UberCloud's [OpenFoam 2.3 on CentOS 6](https://azure.microsoft.com/marketplace/partners/ubercloud/openfoam-v2dot3-centos-v6/), and by running on [Azure Batch](https://blogs.technet.microsoft.com/windowshpc/2016/07/20/introducing-mpi-support-for-linux-on-azure-batch/). 
+This article shows you one way to run OpenFoam in Azure virtual machines. Here, you deploy a Microsoft HPC Pack cluster with Linux compute nodes on Azure and run an [OpenFoam](http://openfoam.com/) job with Intel MPI. You can use RDMA-capable Azure VMs for the compute nodes, so that the compute nodes communicate over the Azure RDMA network. Other options to run OpenFoam in Azure include fully configured commercial images available in the Marketplace, such as UberCloud's [OpenFoam 2.3 on CentOS 6](https://azuremarketplace.microsoft.com/marketplace/apps/cfd-direct.cfd-direct-from-the-cloud), and by running on [Azure Batch](https://blogs.technet.microsoft.com/windowshpc/2016/07/20/introducing-mpi-support-for-linux-on-azure-batch/). 
 
 [!INCLUDE [learn-about-deployment-models](../../../../includes/learn-about-deployment-models-both-include.md)]
 
@@ -41,12 +41,12 @@ Microsoft HPC Pack provides features to run large-scale HPC and parallel applica
   
   **Additional things to know**
   
-  * For Linux RDMA networking prerequisites in Azure, see [About H-series and compute-intensive A-series VMs](../../windows/a8-a9-a10-a11-specs.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+  * For Linux RDMA networking prerequisites in Azure, see [High performance compute VM sizes](../../windows/sizes-hpc.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
   * If you use the Powershell script deployment option, deploy all the Linux compute nodes within one cloud service to use the RDMA network connection.
   * After deploying the Linux nodes, connect by SSH to perform any additional administrative tasks. Find the SSH connection details for each Linux VM in the Azure portal.  
 * **Intel MPI** - To run OpenFOAM on SLES 12 HPC compute nodes in Azure, you need to install the Intel MPI Library 5 runtime from the [Intel.com site](https://software.intel.com/en-us/intel-mpi-library/). (Intel MPI 5 is preinstalled on CentOS-based HPC images.)  In a later step, if necessary, install Intel MPI on your Linux compute nodes. To prepare for this step, after you register with Intel, follow the link in the confirmation email to the related web page. Then, copy the download link for the .tgz file for the appropriate version of Intel MPI. This article is based on Intel MPI version 5.0.3.048.
 * **OpenFOAM Source Pack** - Download the OpenFOAM Source Pack software for Linux from the [OpenFOAM Foundation site](http://openfoam.org/download/2-3-1-source/). This article is based on Source Pack version 2.3.1, available for download as OpenFOAM-2.3.1.tgz. Follow the instructions later in this article to unpack and compile OpenFOAM on the Linux compute nodes.
-* **EnSight** (optional) - To see the results of your OpenFOAM simulation, download and install the [EnSight](https://www.ceisoftware.com/download/) visualization and analysis program. Licensing and download information are at the EnSight site.
+* **EnSight** (optional) - To see the results of your OpenFOAM simulation, download and install the [EnSight](https://ensighttransfe.wpengine.com/direct-access-downloads/) visualization and analysis program. Licensing and download information are at the EnSight site.
 
 ## <a name="set-up-mutual-trust-between-compute-nodes"></a>Set up mutual trust between compute nodes
 Running a cross-node job on multiple Linux nodes requires the nodes to trust each other (by **rsh** or **ssh**). When you create the HPC Pack cluster with the Microsoft HPC Pack IaaS deployment script, the script automatically sets up permanent mutual trust for the administrator account you specify. For non-administrator users you create in the cluster's domain, you have to set up temporary mutual trust among the nodes when a job is allocated to them, and destroy the relationship after the job is complete. To establish trust for each user, provide an RSA key pair to the cluster that HPC Pack uses for the trust relationship.
@@ -362,7 +362,7 @@ Now you can submit a job in HPC Cluster Manager. You need to pass the script hpc
 10. When the job finishes, find the job results in folders under C:\OpenFoam\sloshingTank3D, and the log files at C:\OpenFoam.
 
 ## <a name="view-results-in-ensight"></a>View results in EnSight
-Optionally use [EnSight](https://www.ceisoftware.com/) to visualize and analyze the results of the OpenFOAM job. For more about visualization and animation in EnSight, see this [video guide](http://www.ceisoftware.com/wp-content/uploads/screencasts/vof_visualization/vof_visualization.html).
+Optionally use [EnSight](http://www.ensight.com/) to visualize and analyze the results of the OpenFOAM job. For more about visualization and animation in EnSight, see this [video guide](http://www.ensight.com/ensight.com/envideo/).
 
 1. After you install EnSight on the head node, start it.
 2. Open C:\OpenFoam\sloshingTank3D\EnSight\sloshingTank3D.case.
@@ -587,35 +587,19 @@ exit ${RTNSTS}
 
 
 <!--Image references-->
-[keygen]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/hpcpack-cluster-openfoam/keygen.png
-[keys]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/hpcpack-cluster-openfoam/keys.png
-[step_variables]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/hpcpack-cluster-openfoam/step_variables.png
-[data_files]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/hpcpack-cluster-openfoam/data_files.png
-[decompose]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/hpcpack-cluster-openfoam/decompose.png
-[job_details]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/hpcpack-cluster-openfoam/job_details.png
-[job_resources]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/hpcpack-cluster-openfoam/job_resources.png
-[task_details1]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/hpcpack-cluster-openfoam/task_details1.png
-[task_dependencies]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/hpcpack-cluster-openfoam/task_dependencies.png
-[creds]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/hpcpack-cluster-openfoam/creds.png
-[heat_map]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/hpcpack-cluster-openfoam/heat_map.png
-[tank]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/hpcpack-cluster-openfoam/tank.png
-[tank_result]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/hpcpack-cluster-openfoam/tank_result.png
-[isosurface]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/hpcpack-cluster-openfoam/isosurface.png
-[isosurface_color]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/hpcpack-cluster-openfoam/isosurface_color.png
-[linux_processes]:https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/linux/classic/media/hpcpack-cluster-openfoam/linux_processes.png
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+[keygen]:media/hpcpack-cluster-openfoam/keygen.png
+[keys]:media/hpcpack-cluster-openfoam/keys.png
+[step_variables]:media/hpcpack-cluster-openfoam/step_variables.png
+[data_files]:media/hpcpack-cluster-openfoam/data_files.png
+[decompose]:media/hpcpack-cluster-openfoam/decompose.png
+[job_details]:media/hpcpack-cluster-openfoam/job_details.png
+[job_resources]:media/hpcpack-cluster-openfoam/job_resources.png
+[task_details1]:media/hpcpack-cluster-openfoam/task_details1.png
+[task_dependencies]:media/hpcpack-cluster-openfoam/task_dependencies.png
+[creds]:media/hpcpack-cluster-openfoam/creds.png
+[heat_map]:media/hpcpack-cluster-openfoam/heat_map.png
+[tank]:media/hpcpack-cluster-openfoam/tank.png
+[tank_result]:media/hpcpack-cluster-openfoam/tank_result.png
+[isosurface]:media/hpcpack-cluster-openfoam/isosurface.png
+[isosurface_color]:media/hpcpack-cluster-openfoam/isosurface_color.png
+[linux_processes]:media/hpcpack-cluster-openfoam/linux_processes.png

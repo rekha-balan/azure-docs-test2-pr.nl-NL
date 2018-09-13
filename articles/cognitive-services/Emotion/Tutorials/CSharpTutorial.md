@@ -2,21 +2,24 @@
 title: Emotion API C# tutorial | Microsoft Docs
 description: Explore a basic Windows app that uses the Cognitive Services Emotion API to recognize the emotions expressed by faces in an image.
 services: cognitive-services
-author: v-royhar
-manager: yutkuo
+author: anrothMSFT
+manager: corncar
 ms.service: cognitive-services
-ms.technology: emotion
+ms.component: emotion-api
 ms.topic: article
 ms.date: 01/23/2017
 ms.author: anroth
-ms.openlocfilehash: cf9d9a35f7d4acb6aa68aff300dfb2f0c4ac3b69
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: f015e5720f65d0951a77de76ce8882a6dcdc1c3b
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44540963"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44819317"
 ---
 # <a name="emotion-api-in-c35-tutorial"></a>Emotion API in C&#35; Tutorial
+
+> [!IMPORTANT]
+> Video API Preview will end on October 30th, 2017. Try the new [Video Indexer API Preview](https://azure.microsoft.com/services/cognitive-services/video-indexer/) to easily extract insights from videos and to enhance content discovery experiences, such as search results, by detecting spoken words, faces, characters, and emotions. [Learn more](https://docs.microsoft.com/azure/cognitive-services/video-indexer/video-indexer-overview).
 
 Explore a basic Windows application that uses Emotion API to recognize the emotions expressed by the faces in an image. The below example lets you submit an image URL or a locally stored file. You can use this open source example as a template for building your own app for Windows using the Emotion API and WPF (Windows Presentation Foundation), a part of .NET Framework.
 
@@ -25,7 +28,7 @@ Explore a basic Windows application that uses Emotion API to recognize the emoti
 The below example has been developed for the .NET Framework using [Visual Studio 2015, Community Edition](https://www.visualstudio.com/products/visual-studio-community-vs).  
 
 #### <a name="subscribe-to-emotion-api-and-get-a-subscription-key"></a>Subscribe to Emotion API and get a subscription key  
-Before creating the example, you must subscribe to Emotion API which is part of the Microsoft Cognitive Services (previously Project Oxford). See [Subscriptions](https://www.microsoft.com/cognitive-services/en-us/sign-up). Both the primary and secondary key can be used in this tutorial. Make sure to follow best practices for keeping your API key secret and secure.  
+Before creating the example, you must subscribe to Emotion API which is part of the Microsoft Cognitive Services. See [Subscriptions](https://azure.microsoft.com/try/cognitive-services/). Both the primary and secondary key can be used in this tutorial. Make sure to follow best practices for keeping your API key secret and secure.  
 
 #### <a name="get-the-client-library-and-example"></a>Get the client library and example  
 You may download the Emotion API client library via [SDK](https://www.github.com/microsoft/cognitive-emotion-windows). The downloaded zip file needs to be extracted to a folder of your choice, many users choose the Visual Studio 2015 folder.
@@ -37,11 +40,11 @@ You may download the Emotion API client library via [SDK](https://www.github.com
 ## <a name="Step2">Step 2: Build the example</a>
 1. In **Solution Explorer**, right click **References** and select **Manage NuGet Packages**.
 
-  ![Open Nuget Package Manager](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cognitive-services/Emotion/Images/EmotionNuget.png)
+  ![Open Nuget Package Manager](../Images/EmotionNuget.png)
 
 2.  The **NuGet Package Manager** window opens. First select **Browse** in the upper left corner, then in the search box type “Newtonsoft.Json”, select the **Newtonsoft.Json** package and click **Install**.  
 
-  ![Browse to NuGet Package](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cognitive-services/Emotion/Images/EmotionNugetBrowse.png)  
+  ![Browse to NuGet Package](../Images/EmotionNugetBrowse.png)  
 
 3.  Press Ctrl+Shift+B, or click **Build** on the ribbon menu, then select **Build Solution**.
 
@@ -49,9 +52,9 @@ You may download the Emotion API client library via [SDK](https://www.github.com
 1.  After the build is complete, press **F5** or click **Start** on the ribbon menu to run the example.
 2.  Locate the Emotion API window with the **text box** reading "**Paste your subscription key here to start**". Paste your subscription key into the text box as shown in below screenshot. You can choose to persist your subscription key on your PC or laptop by clicking the "Save Key" button. When you want to delete the subscription key from the system, click "Delete Key" to remove it from your PC or laptop.
   
-  ![Emotion Functionality Interface](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cognitive-services/Emotion/Images/EmotionKey.png)
+  ![Emotion Functionality Interface](../Images/EmotionKey.png)
 
-3.  Under "**Select Scenario**" click to use either of the two scenarios, “**Detect emotion using a stream**” or “**Detect emotion using a URL**”, then follow the instructions on the screen. Microsoft receives the images you upload and may use them to improve Emotion API and related services. By submitting an image, you confirm that you have followed our [Developer Code of Conduct](http://research.microsoft.com/en-us/UM/legal/ProjectOxford_CodeOfConduct.htm).
+3.  Under "**Select Scenario**" click to use either of the two scenarios, “**Detect emotion using a stream**” or “**Detect emotion using a URL**”, then follow the instructions on the screen. Microsoft receives the images you upload and may use them to improve Emotion API and related services. By submitting an image, you confirm that you have followed our [Developer Code of Conduct](https://azure.microsoft.com/support/legal/developer-code-of-conduct/).
 4.  There are example images to be used with this example application. You can find these images on [the Face API Github repo](https://github.com/Microsoft/Cognitive-Face-Windows/tree/master/Data) under the **Data** folder. Please note the use of these images is licensed under Fair Use agreement meaning they are OK to use for testing this example, but not for republishing.
 
 ## <a name="Review">Review and Learn</a>
@@ -155,6 +158,3 @@ Shown below is how to submit your subscription key and a locally stored image to
 ## <a name="Related">Related Topics</a>
 [Emotion API Overview](.)
 -->
-
-
-

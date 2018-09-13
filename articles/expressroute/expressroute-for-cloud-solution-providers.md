@@ -14,33 +14,33 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 10/10/2016
 ms.author: richcar
-ms.openlocfilehash: 597a85ca68ac824265891ca037474d693a5c0234
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 9991da5d5ab6f43cc8c5ebf1672d7da0f1ad061e
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44552210"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44818277"
 ---
 # <a name="expressroute-for-cloud-solution-providers-csp"></a>ExpressRoute for Cloud Solution Providers (CSP)
-Microsoft provides Hyper-scale services for traditional resellers and distributors (CSP) to be able to rapidly provision new services and solutions for your customers without the need to invest in developing these new services. To allow the Cloud Solution Provider (CSP) the ability to directly manage these new services, Microsoft provides programs and APIs that allow the CSP to manage Microsoft Azure resources on behalf of your customers. One of those resources is ExpressRoute. ExpressRoute allows the CSP to connect existing customer resources to Azure services. ExpressRoute is a high speed private communications link to services in Azure. 
+Microsoft provides hyper-scale services for traditional resellers and distributors (CSP) to be able to rapidly provision new services and solutions for your customers without the need to invest in developing these new services. To allow the Cloud Solution Provider (CSP) the ability to directly manage these new services, Microsoft provides programs and APIs that allow the CSP to manage Microsoft Azure resources on behalf of your customers. One of those resources is ExpressRoute. ExpressRoute allows the CSP to connect existing customer resources to Azure services. ExpressRoute is a high speed private communications link to services in Azure. 
 
-ExpresRoute is comprised of a pair of circuits for high availability that are attached to a single customer subscription(s) and cannot be shared by multiple customers. Each circuit should be terminated in a different router to maintain the high availability.
+ExpressRoute is comprised of a pair of circuits for high availability that are attached to a single customer's subscription(s) and cannot be shared by multiple customers. Each circuit should be terminated in a different router to maintain the high availability.
 
 > [!NOTE]
 > There are bandwidth and connection caps on ExpressRoute which means that large/complex implementations will require multiple ExpressRoute circuits for a single customer.
 > 
 > 
 
-Microsoft Azure provides a growing number of services that you can offer to your customers.  To best take advantage of these services will require the use ExpressRoute connections to provide high speed low latency access to the Microsoft Azure environment.
+Microsoft Azure provides a growing number of services that you can offer to your customers. ExpressRoute helps you and your customers take advantage of these services by providing high speed low latency access to the Microsoft Azure environment.
 
 ## <a name="microsoft-azure-management"></a>Microsoft Azure management
 Microsoft provides CSPs with APIs to manage the Azure customer subscriptions by allowing programmatic integration with your own service management systems. Supported management capabilities can be found [here](https://msdn.microsoft.com/library/partnercenter/dn974944.aspx).
 
 ## <a name="microsoft-azure-resource-management"></a>Microsoft Azure resource management
-Depending on the contract you have with your customer will determine how the subscription will be managed. The CSP can directly manage the creation and maintenance of resources or the customer can maintain control of the Microsoft Azure subscription and create the Azure resources as they need. If your customer manages the creation of resources in their Microsoft Azure subscription they will use one of two models: “Connect-Through” model, or “Direct-To” model. These models are described in detail in the following sections.  
+The contract you have with your customer will determine how the subscription will be managed. The CSP can directly manage the creation and maintenance of resources or the customer can maintain control of the Microsoft Azure subscription and create the Azure resources as they need. If your customer manages the creation of resources in their Microsoft Azure subscription they will use one of two models: “*Connect-Through*” model, or “*Direct-To*” model. These models are described in detail in the following sections.  
 
 ### <a name="connect-through-model"></a>Connect-through model
-![alt text](https://docstestmedia1.blob.core.windows.net/azure-media/articles/expressroute/media/expressroute-for-cloud-solution-providers/connect-through.png)  
+![alt text](./media/expressroute-for-cloud-solution-providers/connect-through.png)  
 
 In the connect-through model, the CSP creates a direct connection between your datacenter and your customer’s Azure subscription. The direct connection is made using ExpressRoute, connecting your network with Azure. Then your customer connects to your network. This scenario requires that the customer passes through the CSP network to access Azure services. 
 
@@ -48,10 +48,10 @@ If your customer has other Azure subscriptions not managed by the you, they woul
 
 For CSP managing Azure services, it is assumed that the CSP has a previously established customer identity store which would then be replicated into Azure Active Directory for management of their CSP subscription through Administrate-On-Behalf-Of (AOBO). Key drivers for this scenario include where a given partner or service provider has an established relationship with the customer, the customer is consuming provider services currently or the partner has a desire to provide a combination of provider-hosted and Azure-hosted solutions to provide flexibility and address customer challenges which cannot be satisfied by CSP alone. This model is illustrated in **Figure**, below.
 
-![alt text](https://docstestmedia1.blob.core.windows.net/azure-media/articles/expressroute/media/expressroute-for-cloud-solution-providers/connect-through-model.png)
+![alt text](./media/expressroute-for-cloud-solution-providers/connect-through-model.png)
 
 ### <a name="connect-to-model"></a>Connect-to model
-![alt text](https://docstestmedia1.blob.core.windows.net/azure-media/articles/expressroute/media/expressroute-for-cloud-solution-providers/connect-to.png)
+![alt text](./media/expressroute-for-cloud-solution-providers/connect-to.png)
 
 In the Connect-To model, the service provider creates a direct connection between their customer’s datacenter and the CSP provisioned Azure subscription using ExpressRoute over the customer’s (customer) network.
 
@@ -62,13 +62,13 @@ In the Connect-To model, the service provider creates a direct connection betwee
 
 This connectivity scenario requires that the customer connects directly through a customer network to access CSP-managed Azure subscription, using a direct network connection that is created, owned and managed either wholly or in part by the customer. For these customers it is assumed that the provider does not currently have a customer identity store established, and the provider would assist the customer in replicating their current identify store into Azure Active Directory for management of their subscription through AOBO. Key drivers for this scenario include where a given partner or service provider has an established relationship with the customer, the customer is consuming provider services currently, or the partner has a desire to provide services that are based solely on Azure-hosted solutions without the need for an existing provider datacenter or infrastructure.
 
-![alt text](https://docstestmedia1.blob.core.windows.net/azure-media/articles/expressroute/media/expressroute-for-cloud-solution-providers/connect-to-model.png)
+![alt text](./media/expressroute-for-cloud-solution-providers/connect-to-model.png)
 
 The choice between these two option are based on your customer’s needs and your current need to provide Azure services. The details of these models and the associated role-based access control, networking, and identity design patterns are covered in details in the following links:
 
-* **Role Based Access Control (RBAC)** – RBAC is based on Azure Active Directory.  For more information on Azure RBAC see [here](../active-directory/role-based-access-control-configure.md).
+* **Role Based Access Control (RBAC)** – RBAC is based on Azure Active Directory.  For more information on Azure RBAC see [here](../role-based-access-control/role-assignments-portal.md).
 * **Networking** – Covers the various topics of networking in Microsoft Azure.
-* **Azure Active Directory (AAD)** – AAD provides the identity management for Microsoft Azure and 3rd party SaaS applications. For more information about Azure AD see [here](https://azure.microsoft.com/documentation/services/active-directory/).  
+* **Azure Active Directory (Azure AD)** – Azure AD provides the identity management for Microsoft Azure and 3rd party SaaS applications. For more information about Azure AD see [here](https://azure.microsoft.com/documentation/services/active-directory/).  
 
 ## <a name="network-speeds"></a>Network speeds
 ExpressRoute supports network speeds from 50 Mb/s to 10Gb/s. This allows customers to purchase the amount of network bandwidth needed for their unique environment.
@@ -115,7 +115,7 @@ The default route table includes the following routes:
 * Virtual network-to-virtual network using VPN gateway
 * Virtual network-to-on-premises network using a VPN or ExpressRoute gateway
 
-![alt text](https://docstestmedia1.blob.core.windows.net/azure-media/articles/expressroute/media/expressroute-for-cloud-solution-providers/default-routing.png)  
+![alt text](./media/expressroute-for-cloud-solution-providers/default-routing.png)  
 
 ### <a name="user-defined-routing-udr"></a>User-defined routing (UDR)
 User-defined routes allow the control of traffic outbound from the assigned subnet to other subnets in the virtual network or over one of the other predefined gateways (ExpressRoute; internet or VPN). The default system routing table can be replaced with a user-defined routing table that replaces the default routing table with custom routes. With user-defined routing, customers can create specific routes to appliances such as firewalls or intrusion detection appliances, or block access to specific subnets from the subnet hosting the user-defined route. For an overview of User Defined Routes look [here](../virtual-network/virtual-networks-udr-overview.md). 
@@ -128,20 +128,13 @@ Depending on which model is in use, Connect-To or Connect-Through, your customer
 3. **Force tunneling** —This is an option to redirect internet bound traffic originating in Azure to be redirected over the ExpressRoute connection to the on premises datacenter. For more information about Forced tunneling look [here](expressroute-routing.md#advertising-default-routes).  
 4. **Encryption** — Even though the ExpressRoute circuits are dedicated to a specific customer, there is the possibility that the network provider could be breached, allowing an intruder to examine packet traffic. To address this potential, a customer or CSP can encrypt traffic over the connection by defining IPSec tunnel-mode policies for all traffic flowing between the on premises resources and Azure resources (refer to the optional Tunnel mode IPSec for Customer 1 in Figure 5: ExpressRoute Security, above). The second option would be to use a firewall appliance at each the end point of the ExpressRoute circuit. This will require additional 3rd party firewall VMs/Appliances to be installed on both ends to encrypt the traffic over the ExpressRoute circuit.
 
-![alt text](https://docstestmedia1.blob.core.windows.net/azure-media/articles/expressroute/media/expressroute-for-cloud-solution-providers/expressroute-security.png)  
+![alt text](./media/expressroute-for-cloud-solution-providers/expressroute-security.png)  
 
 ## <a name="next-steps"></a>Next steps
 The Cloud Solution Provider service provides you a way to increase your value to your customers without the need for expensive infrastructure and capability purchases, while maintaining your position as the primary outsourcing provider. Seamless integration with Microsoft Azure can be accomplished through the CSP API, allowing you to integrate management of Microsoft Azure within your existing management frameworks.  
 
 Additional Information can be found at the following links:
 
-[Microsoft Cloud Solution Provider program](https://partner.microsoft.com/en-US/Solutions/cloud-reseller-overview).  
+[Azure in Cloud Solution Provider program](https://docs.microsoft.com/azure/cloud-solution-provider).  
 [Get ready to transact as a Cloud Solution Provider](https://partner.microsoft.com/en-us/solutions/cloud-reseller-pre-launch).  
 [Microsoft Cloud Solution Provider resources](https://partner.microsoft.com/en-us/solutions/cloud-reseller-resources).
-
-
-
-
-
-
-

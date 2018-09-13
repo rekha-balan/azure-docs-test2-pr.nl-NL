@@ -3,8 +3,8 @@ title: Create a Cordova app on Azure App Service Mobile Apps | Microsoft Docs
 description: Follow this tutorial to get started with using Azure mobile app backends for Apache Cordova development
 services: app-service\mobile
 documentationcenter: javascript
-author: adrianhall
-manager: adrianha
+author: conceptdev
+manager: crdun
 editor: ''
 tags: ''
 keywords: cordova,javascript,mobile,client
@@ -14,14 +14,14 @@ ms.workload: na
 ms.tgt_pltfrm: mobile-html
 ms.devlang: javascript
 ms.topic: hero-article
-ms.date: 10/30/2016
-ms.author: adrianha
-ms.openlocfilehash: 7c0595aa0cee46a2af5d901f4652fcd862521aca
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 07/07/2017
+ms.author: crdun
+ms.openlocfilehash: 223e9e35fcab347f9b5b8db01a9fd667b9f5d55d
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44550635"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44814527"
 ---
 # <a name="create-an-apache-cordova-app"></a>Create an Apache Cordova app
 [!INCLUDE [app-service-mobile-selector-get-started](../../includes/app-service-mobile-selector-get-started.md)]
@@ -34,7 +34,7 @@ Completing this tutorial is a prerequisite for all other Apache Cordova tutorial
 ## <a name="prerequisites"></a>Prerequisites
 To complete this tutorial, you need the following prerequisites:
 
-* A PC with [Visual Studio Community 2015] or newer.
+* A PC with [Visual Studio Community 2017] or newer.
 * [Visual Studio Tools for Apache Cordova].
 * An [active Azure account](https://azure.microsoft.com/pricing/free-trial/).
 
@@ -74,7 +74,7 @@ Learn how to use the SDKs.
 
 <!-- URLs -->
 [Azure portal]: https://portal.azure.com/
-[Visual Studio Community 2015]: http://www.visualstudio.com/
+[Visual Studio Community 2017]: http://www.visualstudio.com/
 [Visual Studio Tools for Apache Cordova]: https://www.visualstudio.com/en-us/features/cordova-vs.aspx
 [Offline Data]: app-service-mobile-offline-data-sync.md
 [Authentication]: app-service-mobile-auth.md

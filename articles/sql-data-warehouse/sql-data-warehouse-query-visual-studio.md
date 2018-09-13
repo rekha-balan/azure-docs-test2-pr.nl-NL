@@ -2,25 +2,20 @@
 title: Connect to Azure SQL Data Warehouse - VSTS | Microsoft Docs
 description: Query SQL Data Warehouse with Visual Studio.
 services: sql-data-warehouse
-documentationcenter: NA
-author: barbkess
-manager: jhubbard
-editor: ''
-ms.assetid: daace889-95e5-4826-b2fc-047eac9d6d95
+author: kavithaj
+manager: craigg
 ms.service: sql-data-warehouse
-ms.devlang: NA
-ms.topic: get-started-article
-ms.tgt_pltfrm: NA
-ms.workload: data-services
-ms.custom: connect
-ms.date: 10/31/2016
-ms.author: barbkess
-ms.openlocfilehash: 830a6c70e8e30af100f710d458bc51054250ab60
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.topic: conceptual
+ms.component: consume
+ms.date: 04/17/2018
+ms.author: kavithaj
+ms.reviewer: igorstan
+ms.openlocfilehash: db1c6117072157e0ca3a1bfcc735872b795a34d7
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44552150"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44823815"
 ---
 # <a name="connect-to-sql-data-warehouse-with-visual-studio-and-ssdt"></a>Connect to SQL Data Warehouse with Visual Studio and SSDT
 > [!div class="op_single_selector"]
@@ -97,17 +92,10 @@ To configure your environment for Azure Active Directory authentication, see [Au
 
 <!--Image references-->
 
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-data-warehouse/media/sql-data-warehouse-query-visual-studio/open-ssdt.png
-[2]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-data-warehouse/media/sql-data-warehouse-query-visual-studio/add-server.png
-[3]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-data-warehouse/media/sql-data-warehouse-query-visual-studio/connection-dialog.png
-[4]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-data-warehouse/media/sql-data-warehouse-query-visual-studio/explore-sample.png
-[5]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-data-warehouse/media/sql-data-warehouse-query-visual-studio/new-query2.png
-[6]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-data-warehouse/media/sql-data-warehouse-query-visual-studio/run-query.png
-[7]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/sql-data-warehouse/media/sql-data-warehouse-query-visual-studio/query-results.png
-
-
-
-
-
-
-
+[1]: media/sql-data-warehouse-query-visual-studio/open-ssdt.png
+[2]: media/sql-data-warehouse-query-visual-studio/add-server.png
+[3]: media/sql-data-warehouse-query-visual-studio/connection-dialog.png
+[4]: media/sql-data-warehouse-query-visual-studio/explore-sample.png
+[5]: media/sql-data-warehouse-query-visual-studio/new-query2.png
+[6]: media/sql-data-warehouse-query-visual-studio/run-query.png
+[7]: media/sql-data-warehouse-query-visual-studio/query-results.png

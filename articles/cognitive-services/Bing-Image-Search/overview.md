@@ -1,29 +1,67 @@
 ---
-title: Bing Image Search API | Microsoft Docs
-description: Learn how to use the Bing Image Search API in Cognitive Services. Partners can send a search query to Bing and get back a list of relevant images.
+title: What is Bing Image Search? | Microsoft Docs
+description: Learn how to use the Bing Images Search API to search the web for images.
 services: cognitive-services
-author: dwlin
-manager: zhang
+author: aahill
+manager: cgronlun
+ms.assetid: 1446AD8B-A685-4F5F-B4AA-74C8E9A40BE9
 ms.service: cognitive-services
-ms.technology: bing-image-search
-ms.topic: article
-ms.date: 11/14/2016
-ms.author: dwlin
-ms.openlocfilehash: 7befec060704da6500f583d1a47419b3cf49af44
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.component: bing-image-search
+ms.topic: overview
+ms.date: 10/11/2017
+ms.author: aahi
+ms.openlocfilehash: ebf8c28b843768a9081a0086b10e4adf04572ea1
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44554924"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44827216"
 ---
-# <a name="bing-image-search-api"></a>Bing Image Search API
+# <a name="what-is-bing-image-search"></a>What is Bing Image Search?
 
-The Bing Image Search API provides a similar (but not exact) experience to Bing.com/Images (overview on [MSDN](https://msdn.microsoft.com/en-us/library/mt711418.aspx)). The Image Search API lets partners send a search query to Bing and get back a list of relevant images. 
+The Bing Image Search API enables you to use Bing's cognitive image search capabilities in your application. By sending user search queries with the API, you can get and display relevant and high-quality images similar to [Bing Images](https://www.bing.com/images).
 
-To get started, read our [Getting Started](https://msdn.microsoft.com/en-US/library/mt712546.aspx) guide, which describes how you can obtain your own subscription keys and start making calls to the API. If you already have a subscription, try our API Testing Console [API Testing Console](https://dev.cognitive.microsoft.com/docs/services/56b43f0ccf5ff8098cef3808/operations/571fab09dbe2d933e891028f/console) where you can easily craft API requests in a sandbox environment.
+Be aware that the Bing Image Search API provides image-only search results. Use the [Bing Web Search API](../bing-web-search/search-the-web.md), [Video Search API](https://docs.microsoft.com/azure/cognitive-services/Bing-Video-Search) and [News Search API](https://review.docs.microsoft.com/azure/cognitive-services/bing-news-search) for other types of web content.
 
-For information that shows you how to use the Image Search API, see [Image Search API Guide](https://msdn.microsoft.com/en-us/library/dn760784(v=bsynd.50).aspx) on MSDN. You can also refer to a bot sample [here](https://github.com/Microsoft/BotBuilder-Samples/tree/master/Node/intelligence-SimilarProducts) that uses this API to find visually similar products.
+## <a name="bing-image-search-features"></a>Bing Image Search features
 
-For information about the programming elements that you'd use to request and consume the search results, see [Image Search API Reference](https://msdn.microsoft.com/en-us/library/dn760791(v=bsynd.50).aspx).
+While Bing Image Search primarily finds and returns relevant images from a search query, the service also provides several additional features for intelligent, and focused image retrieval on the web.
 
-For additional guide and reference content that is common to all Bing APIs, such as Paging Results and Error Codes, see [Shared Guides](https://msdn.microsoft.com/en-us/library/mt711404(v=bsynd.50).aspx) and [Shared Reference](https://msdn.microsoft.com/en-us/library/mt711403(v=bsynd.50).aspx).
+
+| Feature                                                                                                                                                                                 | Description                                                                                                                                                            |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Suggest search terms in real-time](https://docs.microsoft.com/azure/cognitive-services/bing-image-search/concepts/bing-image-search-sending-queries#using-and-suggesting-search-terms) | Improve your app experience by using the [Bing Autosuggest API](../bing-autosuggest/get-suggested-search-terms.md) to display suggested search terms as they're typed. |
+| [Filter and restrict image results](https://docs.microsoft.com/azure/cognitive-services/bing-image-search/concepts/bing-image-search-get-images#filtering-images)                       | Filter the images that Bing returns by editing query parameters.                                                                                                       |
+| [Crop, resize, and display thumbnails](https://docs.microsoft.com/azure/cognitive-services/bing-image-search/resize-and-crop-thumbnails)                                                | Edit and display thumbnail previews for the images returned by Bing Image Search.                                                                                      |
+| [Pivot & expand user search queries](https://docs.microsoft.com/azure/cognitive-services/bing-image-search/concepts/bing-image-search-sending-queries#pivoting-the-query)               | Expand your search capabilities by including and displaying Bing-suggested search terms to queries.                                                                    |
+| [Get trending images](https://review.docs.microsoft.com/azure/cognitive-services/bing-image-search/trending-images)                                                                     | Customize a search for trending images from around the world.                                                                                                          |
+
+## <a name="workflow"></a>Workflow
+
+The Bing Image Search API is a RESTful web service, making it easy to call from any programming language that can make HTTP requests and parse JSON. You can use the service using either the [REST API](https://docs.microsoft.com/azure/cognitive-services/bing-image-search/quickstarts/csharp?), or the [SDK](https://docs.microsoft.com/azure/cognitive-services/bing-image-search/image-search-sdk-quickstart).
+
+1. Create a [Cognitive Services API account](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account) with access to the Bing Search APIs. If you don't have an Azure subscription, you can [create an account](https://azure.microsoft.com/try/cognitive-services/?api=bing-web-search-api) for free. 
+2. Send a request to the API, with a valid [search query](https://docs.microsoft.com/azure/cognitive-services/bing-image-search/concepts/bing-image-search-sending-queries).
+3. Process the API response by parsing the returned JSON message. 
+
+## <a name="next-steps"></a>Next steps
+
+First, try the Bing Image Search API [interactive demo](https://azure.microsoft.com/services/cognitive-services/bing-image-search-api/).
+This demo shows how you can quickly customize a search query and scour the web for images.
+
+When you are ready to call the API, create a [Cognitive services API account](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account). If you don't have an Azure subscription, you can [create an account](https://azure.microsoft.com/try/cognitive-services/?api=bing-web-search-api) for free.
+
+To quickly get started with your first API request, you can learn to:
+
+* [Send search queries to Bing](https://docs.microsoft.com/azure/cognitive-services/bing-image-search/quickstarts/csharp) using the REST API, or
+* [Request and filter](https://docs.microsoft.com/azure/cognitive-services/bing-image-search/image-search-sdk-quickstart) the images Bing returns using the SDK.
+
+## <a name="see-also"></a>See also
+
+* The [Bing Image Search API v7](https://docs.microsoft.com/rest/api/cognitiveservices/bing-images-api-v7-reference) reference section contains definitions and information on the endpoints, headers, API responses, and query parameters that you can use to request image-based search results.
+
+* The [Bing Use and Display Requirements](./useanddisplayrequirements.md) specify acceptable uses of the content and information gained through the Bing search APIs.
+
+* The [Getting images from the web with the Bing Image Search API](https://docs.microsoft.com/azure/cognitive-services/bing-image-search/concepts/bing-image-search-get-images) topic describes how to search and get images from the web.
+
+* The [Sending and working with search queries](https://docs.microsoft.com/azure/cognitive-services/bing-image-search/concepts/bing-image-search-sending-queries) topic describes how to make, customize, and pivot search queries. 

@@ -1,5 +1,5 @@
 ---
-title: Change ReliableDictionaryActorStateProvider settings in Azure microservices | Microsoft Docs
+title: Change ReliableDictionaryActorStateProvider settings in Azure Service Fabric actors | Microsoft Docs
 description: Learn about configuring Azure Service Fabric stateful actors of type ReliableDictionaryActorStateProvider.
 services: Service-Fabric
 documentationcenter: .net
@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: 79b48ffa-2474-4f1c-a857-3471f9590ded
 ms.service: Service-Fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 02/8/2017
+ms.date: 10/2/2017
 ms.author: sumukhs
-ms.openlocfilehash: d5b102a3b57f7c25a4747f2d2974524ed75a2f5a
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 21b3d3e8b7ce1c5552432b07ca112ba3d2371d64
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44551727"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44823828"
 ---
 # <a name="configuring-reliable-actors--reliabledictionaryactorstateprovider"></a>Configuring Reliable Actors--ReliableDictionaryActorStateProvider
 You can modify the default configuration of ReliableDictionaryActorStateProvider by changing the settings.xml file generated in the Visual Studio package root under the Config folder for the specified actor.
@@ -68,6 +68,10 @@ SharedLogSizeInMB specifies the amount of disk space to preallocate for the defa
 ## <a name="replicator-security-configuration"></a>Replicator security configuration
 Replicator security configurations are used to secure the communication channel that is used during replication. This means that services cannot see each other's replication traffic, ensuring the data that is made highly available is also secure.
 By default, an empty security configuration section prevents replication security.
+
+> [!IMPORTANT]
+> On Linux nodes, certificates must be PEM-formatted. To learn more about locating and configuring certificates for Linux, see [Configure certificates on Linux](./service-fabric-configure-certificates-linux.md). 
+> 
 
 ### <a name="section-name"></a>Section name
 &lt;ActorName&gt;ServiceReplicatorSecurityConfig

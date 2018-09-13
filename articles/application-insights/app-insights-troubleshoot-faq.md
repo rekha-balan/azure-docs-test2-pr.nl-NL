@@ -3,22 +3,22 @@ title: Azure Application Insights FAQ | Microsoft Docs
 description: Frequently asked questions about Application Insights.
 services: application-insights
 documentationcenter: .net
-author: alancameronwills
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: 0e3b103c-6e2a-4634-9e8c-8b85cf5e9c84
 ms.service: application-insights
 ms.workload: mobile
 ms.tgt_pltfrm: ibiza
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.date: 04/12/2017
-ms.author: awills
-ms.openlocfilehash: 191d9e1197c3526d2f72b972b7fada76dee84447
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: mbullwin
+ms.openlocfilehash: 4f063299a0bb454c8eaf3d38a0cb0a5fb20abcc8
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44556771"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44825643"
 ---
 # <a name="application-insights-frequently-asked-questions"></a>Application Insights: Frequently Asked Questions
 
@@ -61,7 +61,7 @@ The Enterprise plan incurs a charge for each day that each web server node sends
 
 ## <a name="how-much-is-it-costing"></a>How much is it costing?
 
-* Open the **Features + pricing** page in an Application Insights resource. There's a chart of recent usage. You can set a data volume cap, if you want.
+* Open the **Usage and estimated costs page** page in an Application Insights resource. There's a chart of recent usage. You can set a data volume cap, if you want.
 * Open the [Azure Billing blade](https://portal.azure.com/#blade/Microsoft_Azure_Billing/BillingBlade/Overview) to see your bills across all resources.
 
 ## <a name="q14"></a>What does Application Insights modify in my project?
@@ -103,9 +103,9 @@ A desktop app that you can use in your IIS web server to help configure Applicat
 From server web apps:
 
 * HTTP requests
-* [Dependencies](app-insights-asp-net-dependencies.md). Calls to: SQL Databases; HTTP calls to external services; Azure DocumentDB, table, blob storage, and queue. 
+* [Dependencies](app-insights-asp-net-dependencies.md). Calls to: SQL Databases; HTTP calls to external services; Azure Cosmos DB, table, blob storage, and queue. 
 * [Exceptions](app-insights-asp-net-exceptions.md) and stack traces.
-* [Performance Counters](app-insights-performance-counters.md) - If you use [Status Monitor](app-insights-monitor-performance-live-website-now.md), Azure monitoring(app-insights-azure-web-apps.md) or the [Application Insights collectd writer](app-insights-java-collectd.md).
+* [Performance Counters](app-insights-performance-counters.md) - If you use [Status Monitor](app-insights-monitor-performance-live-website-now.md), [Azure monitoring](app-insights-azure-web-apps.md) or the [Application Insights collectd writer](app-insights-java-collectd.md).
 * [Custom events and metrics](app-insights-api-custom-events-metrics.md) that you code.
 * [Trace logs](app-insights-asp-net-trace-logs.md) if you configure the appropriate collector.
 
@@ -122,7 +122,7 @@ From other sources, if you configure them:
 * [Azure diagnostics](app-insights-azure-diagnostics.md)
 * [Docker containers](app-insights-docker.md)
 * [Import tables to Analytics](app-insights-analytics-import.md)
-* [OMS (Log Analytics)](https://azure.microsoft.com/blog/omssolutionforappinsightspublicpreview/)
+* [Log Analytics](https://azure.microsoft.com/blog/omssolutionforappinsightspublicpreview/)
 * [Logstash](app-insights-analytics-import.md)
 
 ## <a name="can-i-filter-out-or-modify-some-telemetry"></a>Can I filter out or modify some telemetry?
@@ -153,7 +153,7 @@ Take a look at [Data Retention and Privacy][data].
 
 This is possible if your code sends such data. It can also happen if variables in stack traces include PII. Your development team should conduct risk assessments to ensure that PII is properly handled. [Learn more about data retention and privacy](app-insights-data-retention-privacy.md).
 
-The last octet of the client web address is always set to 0 after ingestion by the portal.
+**All** octets of the client web address are always set to 0 after the geo location attributes are looked up.
 
 ## <a name="my-ikey-is-visible-in-my-web-page-source"></a>My iKey is visible in my web page source. 
 
@@ -172,6 +172,8 @@ We don't log POST data automatically, but you can use a TrackTrace call: put the
 
 ## <a name="should-i-use-single-or-multiple-application-insights-resources"></a>Should I use single or multiple Application Insights resources?
 
+Use a single resource for all the components or roles in a single business system. Use separate resources for development, test, and release versions, and for independent applications.
+
 * [See the discussion here](app-insights-separate-resources.md)
 * [Example - cloud service with worker and web roles](app-insights-cloudservices.md)
 
@@ -185,7 +187,7 @@ We don't log POST data automatically, but you can use a TrackTrace call: put the
 * The JavaScript SDK sets a user cookie on the web client, to identify returning users, and a session cookie to group activities.
 * If there is no client-side script, you can [set cookies at the server](http://apmtips.com/blog/2016/07/09/tracking-users-in-api-apps/).
 * If one real user uses your site in different browsers, or using in-private/incognito browsing, or different machines, then they will be counted more than once.
-* To identify a logged-in user across machines and browsers, add a call to [setAuthenticatedUserContect()](app-insights-api-custom-events-metrics.md#authenticated-users).
+* To identify a logged-in user across machines and browsers, add a call to [setAuthenticatedUserContext()](app-insights-api-custom-events-metrics.md#authenticated-users).
 
 ## <a name="q17"></a> Have I enabled everything in Application Insights?
 | What you should see | How to get it | Why you want it |
@@ -203,7 +205,7 @@ We don't log POST data automatically, but you can use a TrackTrace call: put the
 
 [Sampling](app-insights-sampling.md) reduces the number of telemetry items (requests, custom events, and so on) that are actually sent from your app to the portal. In Search, you see the number of items actually received. In metric charts that display a count of events, you see the number of original events that occurred. 
 
-Each item that is transmmitted carries an `itemCount` property that shows how many original events that item represents. To observe sampling in operation, you can run this query in Analytics:
+Each item that is transmitted carries an `itemCount` property that shows how many original events that item represents. To observe sampling in operation, you can run this query in Analytics:
 
 ```
     requests | summarize original_events = sum(itemCount), transmitted_events = count()
@@ -241,7 +243,7 @@ This doesn't depend on where your Application Insights resource is hosted. It ju
 
 ## <a name="can-i-send-telemetry-to-the-application-insights-portal"></a>Can I send telemetry to the Application Insights portal?
 
-We recommend you use our SDKs and use the SDK API (app-insights-api-custom-events-metrics.md). There are variants of the SDK for various [platforms](app-insights-platforms.md). These SDKs handle buffering, compression, throttling, retries, and so on. However, the [ingestion schema](https://github.com/Microsoft/ApplicationInsights-dotnet/tree/develop/Schema/PublicSchema) and [endpoint protocol](https://github.com/Microsoft/ApplicationInsights-Home/blob/master/EndpointSpecs/ENDPOINT-PROTOCOL.md) are public.
+We recommend you use our SDKs and use the [SDK API](app-insights-api-custom-events-metrics.md). There are variants of the SDK for various [platforms](app-insights-platforms.md). These SDKs handle buffering, compression, throttling, retries, and so on. However, the [ingestion schema](https://github.com/Microsoft/ApplicationInsights-dotnet/tree/develop/Schema/PublicSchema) and [endpoint protocol](https://github.com/Microsoft/ApplicationInsights-Home/blob/master/EndpointSpecs/ENDPOINT-PROTOCOL.md) are public.
 
 ## <a name="can-i-monitor-an-intranet-web-server"></a>Can I monitor an intranet web server?
 
@@ -253,15 +255,37 @@ Allow your web server to send telemetry to our endpoints https://dc.services.vis
 
 ### <a name="proxy"></a>Proxy
 
-Route traffic from your server to a gateway on your intranet, by setting this in ApplicationInsights.config:
+Route traffic from your server to a gateway on your intranet, by overwritting these settings in the example ApplicationInsights.config. If these "Endpoint" properties are not present in your config, these classes will be using the default values shown in the example below.
 
-```XML
-<TelemetryChannel>
-    <EndpointAddress>your gateway endpoint</EndpointAddress>
-</TelemetryChannel>
+#### <a name="example-applicationinsightsconfig"></a>Example ApplicationInsights.config:
+```xml
+<ApplicationInsights>
+    ...
+    <TelemetryChannel>
+         <EndpointAddress>https://dc.services.visualstudio.com/v2/track</EndpointAddress>
+    </TelemetryChannel>
+    ...
+    <ApplicationIdProvider Type="Microsoft.ApplicationInsights.Extensibility.Implementation.ApplicationId.ApplicationInsightsApplicationIdProvider, Microsoft.ApplicationInsights">
+        <ProfileQueryEndpoint>https://dc.services.visualstudio.com/api/profiles/{0}/appId</ProfileQueryEndpoint>
+    </ApplicationIdProvider>
+    ...
+</ApplicationInsights>
 ```
 
-Your gateway should route the traffic to https://dc.services.visualstudio.com:443/v2/track
+_Note ApplicationIdProvider is available starting in v2.6.0_
+
+Your gateway should route the traffic to https://dc.services.visualstudio.com:443
+
+Replace the values above with: `http://<your.gateway.address>/<relative path>`
+ 
+Example: 
+```
+http://<your.gateway.endpoint>/v2/track 
+http://<your.gateway.endpoint>/api/profiles/{0}/apiId
+```
+
+
+
 
 ## <a name="can-i-run-availability-web-tests-on-an-intranet-server"></a>Can I run Availability web tests on an intranet server?
 

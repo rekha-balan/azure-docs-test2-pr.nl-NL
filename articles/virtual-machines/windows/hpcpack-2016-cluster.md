@@ -4,7 +4,7 @@ description: Learn how to deploy an HPC Pack 2016 cluster in Azure
 services: virtual-machines-windows
 documentationcenter: ''
 author: dlepow
-manager: timlt
+manager: jeconnoc
 editor: ''
 tags: azure-resource-manager
 ms.assetid: 3dde6a68-e4a6-4054-8b67-d6a90fdc5e3f
@@ -13,20 +13,20 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-multiple
 ms.workload: big-compute
-ms.date: 12/15/2016
+ms.date: 03/09/2018
 ms.author: danlep
-ms.openlocfilehash: 4d180709dcef8a7a9d4fa8120ad54a85aa842a9a
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 24cd71b704c812eecbb55b11cc20cf521d31bbc4
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44549764"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44827749"
 ---
 # <a name="deploy-an-hpc-pack-2016-cluster-in-azure"></a>Deploy an HPC Pack 2016 cluster in Azure
 
-Follow the steps in this article to deploy a [Microsoft HPC Pack 2016](https://technet.microsoft.com/library/cc514029) cluster in Azure virtual machines. HPC Pack is Microsoft's free HPC solution built on Microsoft Azure and Windows Server technologies and supports a wide range of HPC workloads.
+Follow the steps in this article to deploy a [Microsoft HPC Pack 2016 Update 1](https://technet.microsoft.com/library/cc514029) cluster in Azure virtual machines. HPC Pack is Microsoft's free HPC solution built on Microsoft Azure and Windows Server technologies and supports a wide range of HPC workloads.
 
-Use one of the [Azure Resource Manager templates](https://github.com/MsHpcPack/HPCPack2016) to deploy the HPC Pack 2016 cluster. You have several choices of cluster topology with different numbers of cluster head nodes, and with either Linux or Windows compute nodes.
+Use one of the [Azure Resource Manager templates](https://github.com/MsHpcPack/HPCPack2016) to deploy the HPC Pack 2016 cluster. You have several choices of cluster topology with different numbers and types of cluster head nodes and compute nodes.
 
 ## <a name="prerequisites"></a>Prerequisites
 
@@ -38,7 +38,7 @@ A Microsoft HPC Pack 2016 cluster requires a Personal Information Exchange (PFX)
 * Key usage includes Digital Signature and Key Encipherment
 * Enhanced key usage includes Client Authentication and Server Authentication
 
-If you don’t already have a certificate that meets these requirements, you can request the certificate from a certification authority. Alternatively, you can use the following commands to generate the self-signed certificate based on the operating system on which you run the command, and export the PFX format certificate with private key.
+If you don’t already have a certificate that meets these requirements, you can request the certificate from a certification authority. Alternatively, use the following commands to generate the self-signed certificate based on the operating system on which you run the command. Then, export the certificate as a password-protected PFX file with private key.
 
 * **For Windows 10 or Windows Server 2016**, run the built-in **New-SelfSignedCertificate** PowerShell cmdlet as follows:
 
@@ -53,11 +53,13 @@ If you don’t already have a certificate that meets these requirements, you can
     New-SelfSignedCertificateEx -Subject "CN=HPC Pack 2016 Communication" -KeySpec Exchange -KeyUsage "DigitalSignature,KeyEncipherment" -EnhancedKeyUsage "Server Authentication","Client Authentication" -StoreLocation CurrentUser -Exportable -NotAfter (Get-Date).AddYears(5)
     ```
 
+After the certificate is created in the Current User store, use the Certificates snap-in to export the certificate as a password-protected PFX file with private key. You can also export the certificate using the [Export-Pfxcertificate](/powershell/module/pkiclient/export-pfxcertificate?view=win10-ps) PowerShell cmdlet.
+
 ### <a name="upload-certificate-to-an-azure-key-vault"></a>Upload certificate to an Azure key vault
 
-Before deploying the HPC cluster, upload the certificate to an [Azure key vault](../../key-vault/index.md) as a secret, and record the following information for use during the deployment: **Vault name**, **Vault resource group**, **Certificate URL**, and **Certificate thumbprint**.
+Before deploying the HPC cluster, upload the PFX certificate to an [Azure key vault](../../key-vault/index.yml) as a secret, and record the following information for use during the deployment: **Vault name**, **Vault resource group**, **Certificate URL**, and **Certificate thumbprint**.
 
-A sample PowerShell script to upload the certificate follows. For more information about uploading a certificate to an Azure key vault, see [Get started with Azure Key Vault](../../key-vault/key-vault-get-started.md).
+A sample PowerShell script to upload the certificate, create the key vault, and generate the required information follows. For more information about uploading a certificate to an Azure key vault, see [Get started with Azure Key Vault](../../key-vault/key-vault-get-started.md).
 
 ```powershell
 #Give the following values
@@ -109,21 +111,20 @@ $hpcSecret = Set-AzureKeyVaultSecret -VaultName $VaultName -Name $SecretName -Se
 
 ## <a name="supported-topologies"></a>Supported topologies
 
-Choose one of the [Azure Resource Manager templates](https://github.com/MsHpcPack/HPCPack2016) to deploy the HPC Pack 2016 cluster. Following are high-level architectures of three supported cluster topologies. High-availability topologies include multiple cluster head nodes.
+Choose one of the [Azure Resource Manager templates](https://github.com/MsHpcPack/HPCPack2016) to deploy the HPC Pack 2016 cluster. Following are high-level architectures of three example cluster topologies. High-availability topologies include multiple cluster head nodes.
 
 1. High-availability cluster with Active Directory domain
 
-    ![HA cluster in AD domain](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/media/hpcpack-2016-cluster/haad.png)
-
+    ![HA cluster in AD domain](./media/hpcpack-2016-cluster/haad.png)
 
 
 2. High-availability cluster without Active Directory domain
 
-    ![HA cluster without AD domain](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/media/hpcpack-2016-cluster/hanoad.png)
+    ![HA cluster without AD domain](./media/hpcpack-2016-cluster/hanoad.png)
 
 3. Cluster with a single head node
 
-   ![Cluster with single head node](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/media/hpcpack-2016-cluster/singlehn.png)
+   ![Cluster with single head node](./media/hpcpack-2016-cluster/singlehn.png)
 
 
 ## <a name="deploy-a-cluster"></a>Deploy a cluster
@@ -132,7 +133,7 @@ To create the cluster, choose a template and click **Deploy to Azure**. In the [
 
 ### <a name="step-1-select-the-subscription-location-and-resource-group"></a>Step 1: Select the subscription, location, and resource group
 
-The **Subscription** and the **Location** must be same that you specified when you uploaded your PFX certificate (see Prerequisites). We recommend that you create a **Resource group** for the deployment.
+The **Subscription** and the **Location** must be same that you specified when you uploaded your PFX certificate (see Prerequisites). We recommend that you create a different **Resource group** for the deployment.
 
 ### <a name="step-2-specify-the-parameter-settings"></a>Step 2: Specify the parameter settings
 
@@ -140,25 +141,22 @@ Enter or modify values for the template parameters. Click the icon next to each 
 
 Specify the values you recorded in the Prerequisites for the following parameters: **Vault name**, **Vault resource group**, **Certificate URL**, and **Certificate thumbprint**.
 
-### <a name="step-3-review-legal-terms-and-create"></a>Step 3. Review legal terms and create
-Click **Review legal terms** to review the terms. If you agree, click **Purchase**, and then click **Create** to start the deployment.
+### <a name="step-3-review-terms-and-create"></a>Step 3. Review terms and create
+Review the terms and conditions associated with the template. If you agree, click **Purchase** to start the deployment.
+
+Depending on the cluster topology, deployment can take 30 minutes or longer to complete.
 
 ## <a name="connect-to-the-cluster"></a>Connect to the cluster
 1. After the HPC Pack cluster is deployed, go to the [Azure portal](https://portal.azure.com). Click **Resource groups**, and find the resource group in which the cluster was deployed. You can find the head node virtual machines.
 
-    ![Cluster head nodes in the portal](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/media/hpcpack-2016-cluster/clusterhns.png)
+    ![Cluster head nodes in the portal](./media/hpcpack-2016-cluster/clusterhns.png)
 
-2. Click one head node (in a high-availability cluster, click any of the head nodes). In **Essentials**, you can find the public IP address or full DNS name of the cluster.
+2. Click one head node (in a high-availability cluster, click any of the head nodes). In **Overview**, you can find the public IP address or full DNS name of the cluster.
 
-    ![Cluster connection settings](https://docstestmedia1.blob.core.windows.net/azure-media/articles/virtual-machines/windows/media/hpcpack-2016-cluster/clusterconnect.png)
+    ![Cluster connection settings](./media/hpcpack-2016-cluster/clusterconnect.png)
 
-3. Click **Connect** to log on to any of the head nodes using Remote Desktop with your specified administrator user name. If the cluster you deployed is in an Active Directory Domain, the user name is of the form <privateDomainName>\<adminUsername> (for example, hpc.local\hpcadmin).
+3. Click **Connect** to log on to any of the head nodes using Remote Desktop with your specified administrator user name. If the cluster you deployed is in an Active Directory Domain, the user name is of the form \<privateDomainName>\\\<adminUsername> (for example, hpc.local\hpcadmin).
 
 ## <a name="next-steps"></a>Next steps
 * Submit jobs to your cluster. See [Submit jobs to HPC an HPC Pack cluster in Azure](hpcpack-cluster-submit-jobs.md) and [Manage an HPC Pack 2016 cluster in Azure using Azure Active Directory](hpcpack-cluster-active-directory.md).
-
-
-
-
-
 

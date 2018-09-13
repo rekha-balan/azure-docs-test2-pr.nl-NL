@@ -1,24 +1,23 @@
 ---
-title: Pool resize complete event - Azure | Microsoft Docs
-ms.custom: ''
-ms.date: 2017-02-01
-ms.prod: azure
-ms.reviewer: ''
+title: Azure Batch pool resize complete event | Microsoft Docs
+description: Reference for Batch pool resize complete event.
+services: batch
+author: dlepow
+manager: jeconnoc
+ms.assetid: ''
 ms.service: batch
-ms.suite: ''
+ms.devlang: multiple
+ms.topic: article
 ms.tgt_pltfrm: ''
-ms.topic: reference
-ms.assetid: dfee89e3-510f-41a0-ace7-737527f40d20
-caps.latest.revision: 4
-author: tamram
-ms.author: tamram
-manager: timlt
-ms.openlocfilehash: efb523933a19fdb47790f9140bda5a3e9331b50d
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.workload: big-compute
+ms.date: 04/20/2017
+ms.author: danlep
+ms.openlocfilehash: e91ba664a69d28cae1f82710d427bd2a391305a2
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44563663"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44821449"
 ---
 # <a name="pool-resize-complete-event"></a>Pool resize complete event
 

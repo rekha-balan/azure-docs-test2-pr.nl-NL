@@ -3,8 +3,8 @@ title: Create, start, or delete an application gateway | Microsoft Docs
 description: This page provides instructions to create, configure, start, and delete an Azure application gateway
 documentationcenter: na
 services: application-gateway
-author: georgewallace
-manager: timlt
+author: vhorne
+manager: jpconnock
 editor: tysonn
 ms.assetid: 577054ca-8368-4fbf-8d53-a813f29dc3bc
 ms.service: application-gateway
@@ -13,14 +13,14 @@ ms.topic: hero-article
 ms.tgt_pltfrm: na
 ms.custom: H1Hack27Feb2017
 ms.workload: infrastructure-services
-ms.date: 12/12/2016
-ms.author: gwallace
-ms.openlocfilehash: 06b32f16e334cf81c208c0579092d24515686026
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 07/31/2017
+ms.author: victorh
+ms.openlocfilehash: a1cfd42f5b1c31b911005b2539047630c6d320dd
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44563858"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44825500"
 ---
 # <a name="create-start-or-delete-an-application-gateway-with-powershell"></a>Create, start, or delete an application gateway with PowerShell 
 
@@ -106,11 +106,11 @@ DnsName       :
 
 You can configure the application gateway by using XML or a configuration object.
 
-## <a name="configure-the-application-gateway-by-using-xml"></a>Configure the application gateway by using XML
+### <a name="configure-the-application-gateway-by-using-xml"></a>Configure the application gateway by using XML
 
 In the following example, you use an XML file to configure all application gateway settings and commit them to the application gateway resource.  
 
-### <a name="step-1"></a>Step 1
+#### <a name="step-1"></a>Step 1
 
 Copy the following text to Notepad.
 
@@ -211,7 +211,7 @@ The following example shows how to use a configuration file to set up the applic
 </ApplicationGatewayConfiguration>
 ```
 
-### <a name="step-2"></a>Step 2
+#### <a name="step-2"></a>Step 2
 
 Next, set the application gateway. Use the `Set-AzureApplicationGatewayConfig` cmdlet with a configuration XML file.
 
@@ -219,14 +219,14 @@ Next, set the application gateway. Use the `Set-AzureApplicationGatewayConfig` c
 Set-AzureApplicationGatewayConfig -Name AppGwTest -ConfigFile "D:\config.xml"
 ```
 
-## <a name="configure-the-application-gateway-by-using-a-configuration-object"></a>Configure the application gateway by using a configuration object
+### <a name="configure-the-application-gateway-by-using-a-configuration-object"></a>Configure the application gateway by using a configuration object
 
 The following example shows how to configure the application gateway by using configuration objects. All configuration items must be configured individually and then added to an application gateway configuration object. After creating the configuration object, you use the `Set-AzureApplicationGateway` command to commit the configuration to the previously created application gateway resource.
 
 > [!NOTE]
 > Before assigning a value to each configuration object, you need to declare what kind of object PowerShell uses for storage. The first line to create the individual items defines what `Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model(object name)` are used.
 
-### <a name="step-1"></a>Step 1
+#### <a name="step-1"></a>Step 1
 
 Create all individual configuration items.
 
@@ -297,7 +297,7 @@ $rule.Listener = "listener1"
 $rule.BackendAddressPool = "pool1"
 ```
 
-### <a name="step-2"></a>Step 2
+#### <a name="step-2"></a>Step 2
 
 Assign all individual configuration items to an application gateway configuration object ($appgwconfig).
 
@@ -385,9 +385,9 @@ Vip           : 138.91.170.26
 DnsName       : appgw-1b8402e8-3e0d-428d-b661-289c16c82101.cloudapp.net
 ```
 
-## <a name="delete-an-application-gateway"></a>Delete an application gateway
+## <a name="delete-the-application-gateway"></a>Delete the application gateway
 
-To delete an application gateway:
+To delete the application gateway:
 
 1. Use the `Stop-AzureApplicationGateway` cmdlet to stop the gateway.
 2. Use the `Remove-AzureApplicationGateway` cmdlet to remove the gateway.
@@ -445,5 +445,4 @@ If you want more information about load balancing options in general, see:
 * [Azure Load Balancer](https://azure.microsoft.com/documentation/services/load-balancer/)
 * [Azure Traffic Manager](https://azure.microsoft.com/documentation/services/traffic-manager/)
 
-[scenario]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/application-gateway/media/application-gateway-create-gateway/scenario.png
-
+[scenario]: ./media/application-gateway-create-gateway/scenario.png
