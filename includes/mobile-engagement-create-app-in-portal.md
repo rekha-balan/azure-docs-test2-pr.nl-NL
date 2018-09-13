@@ -1,0 +1,23 @@
+1. <span data-ttu-id="6d20e-101">Log on to the [Azure Classic Portal](https://manage.windowsazure.com), and then click **+NEW** at the bottom of the screen.</span><span class="sxs-lookup"><span data-stu-id="6d20e-101">Log on to the [Azure Classic Portal](https://manage.windowsazure.com), and then click **+NEW** at the bottom of the screen.</span></span>
+2. <span data-ttu-id="6d20e-102">Click on **App Services**, then **Mobile Engagement**, and then **Create**.</span><span class="sxs-lookup"><span data-stu-id="6d20e-102">Click on **App Services**, then **Mobile Engagement**, and then **Create**.</span></span>
+   
+       ![](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/mobile-engagement-create-app-in-portal/create-mobile-engagement-app.png)
+3. <span data-ttu-id="6d20e-103">In the popup that appears, enter the following information:</span><span class="sxs-lookup"><span data-stu-id="6d20e-103">In the popup that appears, enter the following information:</span></span>
+   
+       ![](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/mobile-engagement-create-app-in-portal/create-azme-popup.png)
+   
+   * <span data-ttu-id="6d20e-104">**Application Name**: Name of your application.</span><span class="sxs-lookup"><span data-stu-id="6d20e-104">**Application Name**: Name of your application.</span></span> 
+   * <span data-ttu-id="6d20e-105">**Platform**: Target platform for the app.</span><span class="sxs-lookup"><span data-stu-id="6d20e-105">**Platform**: Target platform for the app.</span></span> <span data-ttu-id="6d20e-106">You must create one Mobile Engagement app per platform that you are targeting for your mobile application.</span><span class="sxs-lookup"><span data-stu-id="6d20e-106">You must create one Mobile Engagement app per platform that you are targeting for your mobile application.</span></span> 
+   * <span data-ttu-id="6d20e-107">**Application Resource Name**: Name by which this application will be accessible via APIs and URLs.</span><span class="sxs-lookup"><span data-stu-id="6d20e-107">**Application Resource Name**: Name by which this application will be accessible via APIs and URLs.</span></span> 
+   * <span data-ttu-id="6d20e-108">**Location**: Region/Data center where this app and app collection will be hosted.</span><span class="sxs-lookup"><span data-stu-id="6d20e-108">**Location**: Region/Data center where this app and app collection will be hosted.</span></span>
+   * <span data-ttu-id="6d20e-109">**Collection**: Select a previously created Collection or select 'New Collection'.</span><span class="sxs-lookup"><span data-stu-id="6d20e-109">**Collection**: Select a previously created Collection or select 'New Collection'.</span></span>
+   * <span data-ttu-id="6d20e-110">**Collection Name**: Represents your group of applications.</span><span class="sxs-lookup"><span data-stu-id="6d20e-110">**Collection Name**: Represents your group of applications.</span></span> <span data-ttu-id="6d20e-111">This will also ensure all your apps are in a group that will allow aggregated calculations of metrics.</span><span class="sxs-lookup"><span data-stu-id="6d20e-111">This will also ensure all your apps are in a group that will allow aggregated calculations of metrics.</span></span> <span data-ttu-id="6d20e-112">You should use your company name or department here if applicable.</span><span class="sxs-lookup"><span data-stu-id="6d20e-112">You should use your company name or department here if applicable.</span></span>
+4. <span data-ttu-id="6d20e-113">Select the app you just created in the **Applications** tab.</span><span class="sxs-lookup"><span data-stu-id="6d20e-113">Select the app you just created in the **Applications** tab.</span></span>
+5. <span data-ttu-id="6d20e-114">Click on **CONNECTION INFO** in order to display the connection settings to put into your SDK integration in your mobile app.</span><span class="sxs-lookup"><span data-stu-id="6d20e-114">Click on **CONNECTION INFO** in order to display the connection settings to put into your SDK integration in your mobile app.</span></span>
+6. <span data-ttu-id="6d20e-115">Copy the **CONNECTION STRING** - this is what you will need to identify this app in your Application code and connect with Mobile Engagement from your App.</span><span class="sxs-lookup"><span data-stu-id="6d20e-115">Copy the **CONNECTION STRING** - this is what you will need to identify this app in your Application code and connect with Mobile Engagement from your App.</span></span>
+   
+       ![](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/mobile-engagement-create-app-in-portal/app-connection-info-page.png)
+
+
+
+
