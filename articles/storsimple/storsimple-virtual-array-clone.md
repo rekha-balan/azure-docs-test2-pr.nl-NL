@@ -1,0 +1,152 @@
+---
+title: Clone a StorSimple Virtual Array backup | Microsoft Docs
+description: Learn how to clone a backup and recover a file from your StorSimple Virtual Array.
+services: storsimple
+documentationcenter: NA
+author: alkohli
+manager: carmonm
+editor: ''
+ms.assetid: af6e979c-55e3-477c-b53e-a76a697f80c9
+ms.service: storsimple
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 11/21/2016
+ms.author: alkohli
+ms.openlocfilehash: 6f1e55d81a7c2959a7f25fc41366eb51c5fa84d0
+ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
+ms.translationtype: HT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 08/02/2018
+ms.locfileid: "44549488"
+---
+# <a name="clone-from-a-backup-of-your-storsimple-virtual-array"></a><span data-ttu-id="cef30-103">Clone from a backup of your StorSimple Virtual Array</span><span class="sxs-lookup"><span data-stu-id="cef30-103">Clone from a backup of your StorSimple Virtual Array</span></span>
+
+## <a name="overview"></a><span data-ttu-id="cef30-104">Overview</span><span class="sxs-lookup"><span data-stu-id="cef30-104">Overview</span></span>
+
+<span data-ttu-id="cef30-105">This article describes step-by-step how to clone a backup set of your shares or volumes on your Microsoft Azure StorSimple Virtual Array.</span><span class="sxs-lookup"><span data-stu-id="cef30-105">This article describes step-by-step how to clone a backup set of your shares or volumes on your Microsoft Azure StorSimple Virtual Array.</span></span> <span data-ttu-id="cef30-106">The cloned backup is used to recover a deleted or lost file.</span><span class="sxs-lookup"><span data-stu-id="cef30-106">The cloned backup is used to recover a deleted or lost file.</span></span> <span data-ttu-id="cef30-107">The article also includes detailed steps to perform an item-level recovery on your StorSimple Virtual Array configured as a file server.</span><span class="sxs-lookup"><span data-stu-id="cef30-107">The article also includes detailed steps to perform an item-level recovery on your StorSimple Virtual Array configured as a file server.</span></span>
+
+## <a name="clone-shares-from-a-backup-set"></a><span data-ttu-id="cef30-108">Clone shares from a backup set</span><span class="sxs-lookup"><span data-stu-id="cef30-108">Clone shares from a backup set</span></span>
+
+<span data-ttu-id="cef30-109">**Before you try to clone shares, ensure that you have sufficient space on the device to complete this operation.**</span><span class="sxs-lookup"><span data-stu-id="cef30-109">**Before you try to clone shares, ensure that you have sufficient space on the device to complete this operation.**</span></span> <span data-ttu-id="cef30-110">To clone from a backup, in the [Azure portal](https://portal.azure.com/), perform the following steps.</span><span class="sxs-lookup"><span data-stu-id="cef30-110">To clone from a backup, in the [Azure portal](https://portal.azure.com/), perform the following steps.</span></span>
+
+#### <a name="to-clone-a-share"></a><span data-ttu-id="cef30-111">To clone a share</span><span class="sxs-lookup"><span data-stu-id="cef30-111">To clone a share</span></span>
+
+1. <span data-ttu-id="cef30-112">Browse to **Devices** blade.</span><span class="sxs-lookup"><span data-stu-id="cef30-112">Browse to **Devices** blade.</span></span> <span data-ttu-id="cef30-113">Select and click your device and then click **Shares**.</span><span class="sxs-lookup"><span data-stu-id="cef30-113">Select and click your device and then click **Shares**.</span></span> <span data-ttu-id="cef30-114">Select the share that you want to clone, right-click the share to invoke the context menu.</span><span class="sxs-lookup"><span data-stu-id="cef30-114">Select the share that you want to clone, right-click the share to invoke the context menu.</span></span> <span data-ttu-id="cef30-115">Select **Clone**.</span><span class="sxs-lookup"><span data-stu-id="cef30-115">Select **Clone**.</span></span>
+   
+   ![Clone a backup](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-clone/cloneshare1.png)
+2. <span data-ttu-id="cef30-117">In the **Clone** blade, click **Backup > Select** and then do the following:</span><span class="sxs-lookup"><span data-stu-id="cef30-117">In the **Clone** blade, click **Backup > Select** and then do the following:</span></span> 
+   
+   <span data-ttu-id="cef30-118">a.</span><span class="sxs-lookup"><span data-stu-id="cef30-118">a.</span></span>    <span data-ttu-id="cef30-119">Filter a backup on this device based on the time range.</span><span class="sxs-lookup"><span data-stu-id="cef30-119">Filter a backup on this device based on the time range.</span></span> <span data-ttu-id="cef30-120">You can choose from **Past 7 days**, **Past 30 days**, and **Past year**.</span><span class="sxs-lookup"><span data-stu-id="cef30-120">You can choose from **Past 7 days**, **Past 30 days**, and **Past year**.</span></span>
+   
+   <span data-ttu-id="cef30-121">b.</span><span class="sxs-lookup"><span data-stu-id="cef30-121">b.</span></span>    <span data-ttu-id="cef30-122">In the list of filtered backups displayed, select a backup to clone from.</span><span class="sxs-lookup"><span data-stu-id="cef30-122">In the list of filtered backups displayed, select a backup to clone from.</span></span>
+   
+   <span data-ttu-id="cef30-123">c.</span><span class="sxs-lookup"><span data-stu-id="cef30-123">c.</span></span>    <span data-ttu-id="cef30-124">Click **OK**.</span><span class="sxs-lookup"><span data-stu-id="cef30-124">Click **OK**.</span></span>
+   
+   ![Clone a backup](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-clone/cloneshare3.png)
+3. <span data-ttu-id="cef30-126">In the **Clone** blade, click **Target settings** and then do the following:</span><span class="sxs-lookup"><span data-stu-id="cef30-126">In the **Clone** blade, click **Target settings** and then do the following:</span></span>
+   
+   <span data-ttu-id="cef30-127">a.</span><span class="sxs-lookup"><span data-stu-id="cef30-127">a.</span></span>    <span data-ttu-id="cef30-128">Provide a share name.</span><span class="sxs-lookup"><span data-stu-id="cef30-128">Provide a share name.</span></span> <span data-ttu-id="cef30-129">The share name must contain 3-127 characters.</span><span class="sxs-lookup"><span data-stu-id="cef30-129">The share name must contain 3-127 characters.</span></span>
+   
+   <span data-ttu-id="cef30-130">b.</span><span class="sxs-lookup"><span data-stu-id="cef30-130">b.</span></span>    <span data-ttu-id="cef30-131">Optionally provide a description for the cloned share.</span><span class="sxs-lookup"><span data-stu-id="cef30-131">Optionally provide a description for the cloned share.</span></span>
+   
+   <span data-ttu-id="cef30-132">c.</span><span class="sxs-lookup"><span data-stu-id="cef30-132">c.</span></span>    <span data-ttu-id="cef30-133">You cannot change the type of the share you are restoring to.</span><span class="sxs-lookup"><span data-stu-id="cef30-133">You cannot change the type of the share you are restoring to.</span></span> <span data-ttu-id="cef30-134">A tiered share is cloned as a tiered and a locally pinned share as locally pinned.</span><span class="sxs-lookup"><span data-stu-id="cef30-134">A tiered share is cloned as a tiered and a locally pinned share as locally pinned.</span></span>
+   
+   <span data-ttu-id="cef30-135">d.</span><span class="sxs-lookup"><span data-stu-id="cef30-135">d.</span></span>    <span data-ttu-id="cef30-136">The capacity is set as equal to the size of the share you are cloning from.</span><span class="sxs-lookup"><span data-stu-id="cef30-136">The capacity is set as equal to the size of the share you are cloning from.</span></span>
+   
+   <span data-ttu-id="cef30-137">e.</span><span class="sxs-lookup"><span data-stu-id="cef30-137">e.</span></span>    <span data-ttu-id="cef30-138">Assign the administrators for this share.</span><span class="sxs-lookup"><span data-stu-id="cef30-138">Assign the administrators for this share.</span></span> <span data-ttu-id="cef30-139">You will be able to modify the share properties via File Explorer after the clone is complete.</span><span class="sxs-lookup"><span data-stu-id="cef30-139">You will be able to modify the share properties via File Explorer after the clone is complete.</span></span>
+   
+   <span data-ttu-id="cef30-140">f.</span><span class="sxs-lookup"><span data-stu-id="cef30-140">f.</span></span>    <span data-ttu-id="cef30-141">Click **OK**.</span><span class="sxs-lookup"><span data-stu-id="cef30-141">Click **OK**.</span></span>
+   
+   ![Clone a backup](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-clone/cloneshare6.png)
+
+4. <span data-ttu-id="cef30-143">Click **Clone** to start a clone job.</span><span class="sxs-lookup"><span data-stu-id="cef30-143">Click **Clone** to start a clone job.</span></span> <span data-ttu-id="cef30-144">After the job is complete, the clone operation starts and you are notified.</span><span class="sxs-lookup"><span data-stu-id="cef30-144">After the job is complete, the clone operation starts and you are notified.</span></span> <span data-ttu-id="cef30-145">To monitor the progress of clone, go to the **Jobs** blade and click the job to view job details.</span><span class="sxs-lookup"><span data-stu-id="cef30-145">To monitor the progress of clone, go to the **Jobs** blade and click the job to view job details.</span></span>
+5. <span data-ttu-id="cef30-146">After the clone is successfully created, navigate back to the **Shares** blade on your device.</span><span class="sxs-lookup"><span data-stu-id="cef30-146">After the clone is successfully created, navigate back to the **Shares** blade on your device.</span></span>
+6. <span data-ttu-id="cef30-147">You can now view the new cloned share in the list of shares on your device.</span><span class="sxs-lookup"><span data-stu-id="cef30-147">You can now view the new cloned share in the list of shares on your device.</span></span> <span data-ttu-id="cef30-148">A tiered share is cloned as tiered and a locally pinned share as a locally pinned share.</span><span class="sxs-lookup"><span data-stu-id="cef30-148">A tiered share is cloned as tiered and a locally pinned share as a locally pinned share.</span></span>
+   
+   ![Clone a backup](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-clone/cloneshare10.png)
+
+## <a name="clone-volumes-from-a-backup-set"></a><span data-ttu-id="cef30-150">Clone volumes from a backup set</span><span class="sxs-lookup"><span data-stu-id="cef30-150">Clone volumes from a backup set</span></span>
+
+<span data-ttu-id="cef30-151">To clone from a backup, in the Azure portal, you have to perform steps similar to the ones when cloning a share.</span><span class="sxs-lookup"><span data-stu-id="cef30-151">To clone from a backup, in the Azure portal, you have to perform steps similar to the ones when cloning a share.</span></span> <span data-ttu-id="cef30-152">The clone operation clones the backup to a new volume on the same virtual device; you cannot clone to a different device.</span><span class="sxs-lookup"><span data-stu-id="cef30-152">The clone operation clones the backup to a new volume on the same virtual device; you cannot clone to a different device.</span></span>
+
+#### <a name="to-clone-a-volume"></a><span data-ttu-id="cef30-153">To clone a volume</span><span class="sxs-lookup"><span data-stu-id="cef30-153">To clone a volume</span></span>
+
+1. <span data-ttu-id="cef30-154">Browse to **Devices** blade.</span><span class="sxs-lookup"><span data-stu-id="cef30-154">Browse to **Devices** blade.</span></span> <span data-ttu-id="cef30-155">Select and click your device and then click **Volumes**.</span><span class="sxs-lookup"><span data-stu-id="cef30-155">Select and click your device and then click **Volumes**.</span></span> <span data-ttu-id="cef30-156">Selec the volume that you want to clone, right-click the volume to invoke the context menu.</span><span class="sxs-lookup"><span data-stu-id="cef30-156">Selec the volume that you want to clone, right-click the volume to invoke the context menu.</span></span> <span data-ttu-id="cef30-157">Select **Clone**.</span><span class="sxs-lookup"><span data-stu-id="cef30-157">Select **Clone**.</span></span>
+   
+   ![Clone a volume](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-clone/clonevolume1.png)
+2. <span data-ttu-id="cef30-159">In the **Clone** blade, click **Backup** and then do the following:</span><span class="sxs-lookup"><span data-stu-id="cef30-159">In the **Clone** blade, click **Backup** and then do the following:</span></span> 
+   
+   <span data-ttu-id="cef30-160">a.</span><span class="sxs-lookup"><span data-stu-id="cef30-160">a.</span></span>    <span data-ttu-id="cef30-161">Filter a backup on this device based on the time range.</span><span class="sxs-lookup"><span data-stu-id="cef30-161">Filter a backup on this device based on the time range.</span></span> <span data-ttu-id="cef30-162">You can choose from **Past 7 days**, **Past 30 days**, and **Past year**.</span><span class="sxs-lookup"><span data-stu-id="cef30-162">You can choose from **Past 7 days**, **Past 30 days**, and **Past year**.</span></span> 
+   
+   <span data-ttu-id="cef30-163">b.</span><span class="sxs-lookup"><span data-stu-id="cef30-163">b.</span></span>    <span data-ttu-id="cef30-164">In the list of filtered backups displayed, select a backup to clone from.</span><span class="sxs-lookup"><span data-stu-id="cef30-164">In the list of filtered backups displayed, select a backup to clone from.</span></span>
+   
+   <span data-ttu-id="cef30-165">c.</span><span class="sxs-lookup"><span data-stu-id="cef30-165">c.</span></span>    <span data-ttu-id="cef30-166">Click **OK**.</span><span class="sxs-lookup"><span data-stu-id="cef30-166">Click **OK**.</span></span>
+   
+   ![Clone a backup](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-clone/clonevolume3.png)
+3. <span data-ttu-id="cef30-168">In the **Clone** blade, click **Target volume settings** and then do the following::</span><span class="sxs-lookup"><span data-stu-id="cef30-168">In the **Clone** blade, click **Target volume settings** and then do the following::</span></span>
+   
+   <span data-ttu-id="cef30-169">a.</span><span class="sxs-lookup"><span data-stu-id="cef30-169">a.</span></span> <span data-ttu-id="cef30-170">The device name is automatically populated.</span><span class="sxs-lookup"><span data-stu-id="cef30-170">The device name is automatically populated.</span></span>
+   
+   <span data-ttu-id="cef30-171">b.</span><span class="sxs-lookup"><span data-stu-id="cef30-171">b.</span></span> <span data-ttu-id="cef30-172">Provide a volume name for the **cloned volume**.</span><span class="sxs-lookup"><span data-stu-id="cef30-172">Provide a volume name for the **cloned volume**.</span></span> <span data-ttu-id="cef30-173">The volume name must contain 3 to 127 characters.</span><span class="sxs-lookup"><span data-stu-id="cef30-173">The volume name must contain 3 to 127 characters.</span></span>
+   
+   <span data-ttu-id="cef30-174">c.</span><span class="sxs-lookup"><span data-stu-id="cef30-174">c.</span></span> <span data-ttu-id="cef30-175">The volume type is automatically set to the original volume.</span><span class="sxs-lookup"><span data-stu-id="cef30-175">The volume type is automatically set to the original volume.</span></span> <span data-ttu-id="cef30-176">A tiered volume is cloned as tiered and a locally pinned volume as locally pinned.</span><span class="sxs-lookup"><span data-stu-id="cef30-176">A tiered volume is cloned as tiered and a locally pinned volume as locally pinned.</span></span>
+   
+   <span data-ttu-id="cef30-177">d.</span><span class="sxs-lookup"><span data-stu-id="cef30-177">d.</span></span> <span data-ttu-id="cef30-178">For the **Connected hosts**, click **Select**.</span><span class="sxs-lookup"><span data-stu-id="cef30-178">For the **Connected hosts**, click **Select**.</span></span>
+   
+   ![Clone a backup](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-clone/clonevolume4.png)
+4. <span data-ttu-id="cef30-180">In  the **Connected hosts** blade, select from an existing ACR or add a new ACR.</span><span class="sxs-lookup"><span data-stu-id="cef30-180">In  the **Connected hosts** blade, select from an existing ACR or add a new ACR.</span></span> <span data-ttu-id="cef30-181">To add a new ACR, you will need to provide an ACR name and the host IQN.</span><span class="sxs-lookup"><span data-stu-id="cef30-181">To add a new ACR, you will need to provide an ACR name and the host IQN.</span></span> <span data-ttu-id="cef30-182">Click **Select**.</span><span class="sxs-lookup"><span data-stu-id="cef30-182">Click **Select**.</span></span>
+   
+   ![Clone a backup](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-clone/clonevolume5.png)
+5. <span data-ttu-id="cef30-184">Click **Clone** to launch a clone job.</span><span class="sxs-lookup"><span data-stu-id="cef30-184">Click **Clone** to launch a clone job.</span></span>
+   
+   ![Clone a backup](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-clone/clonevolume6.png)  
+6. <span data-ttu-id="cef30-186">After the clone job is created, cloning will start.</span><span class="sxs-lookup"><span data-stu-id="cef30-186">After the clone job is created, cloning will start.</span></span> <span data-ttu-id="cef30-187">Once the clone is created, it is displayed on the Volumes blade on your device.</span><span class="sxs-lookup"><span data-stu-id="cef30-187">Once the clone is created, it is displayed on the Volumes blade on your device.</span></span> <span data-ttu-id="cef30-188">Note that a tiered volume is cloned as tiered and a locally pinned volume is cloned as a locally pinned volume.</span><span class="sxs-lookup"><span data-stu-id="cef30-188">Note that a tiered volume is cloned as tiered and a locally pinned volume is cloned as a locally pinned volume.</span></span>
+   
+   ![Clone a backup](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-clone/clonevolume8.png)
+7. <span data-ttu-id="cef30-190">Once the volume appears online on the list of volumes, the volume is available for use.</span><span class="sxs-lookup"><span data-stu-id="cef30-190">Once the volume appears online on the list of volumes, the volume is available for use.</span></span> <span data-ttu-id="cef30-191">On the iSCSI initiator host, refresh the list of targets in iSCSI initiator properties window.</span><span class="sxs-lookup"><span data-stu-id="cef30-191">On the iSCSI initiator host, refresh the list of targets in iSCSI initiator properties window.</span></span> <span data-ttu-id="cef30-192">A new target that contains the cloned volume name should appear as 'inactive' under the status column.</span><span class="sxs-lookup"><span data-stu-id="cef30-192">A new target that contains the cloned volume name should appear as 'inactive' under the status column.</span></span>
+8. <span data-ttu-id="cef30-193">Select the target and click **Connect**.</span><span class="sxs-lookup"><span data-stu-id="cef30-193">Select the target and click **Connect**.</span></span> <span data-ttu-id="cef30-194">After the initiator is connected to the target, the status should change to **Connected**.</span><span class="sxs-lookup"><span data-stu-id="cef30-194">After the initiator is connected to the target, the status should change to **Connected**.</span></span>
+9. <span data-ttu-id="cef30-195">In the **Disk Management** window, the mounted volumes appear as shown in the following illustration.</span><span class="sxs-lookup"><span data-stu-id="cef30-195">In the **Disk Management** window, the mounted volumes appear as shown in the following illustration.</span></span> <span data-ttu-id="cef30-196">Right-click the discovered volume (click the disk name), and then click **Online**.</span><span class="sxs-lookup"><span data-stu-id="cef30-196">Right-click the discovered volume (click the disk name), and then click **Online**.</span></span>
+
+> [!IMPORTANT]
+> <span data-ttu-id="cef30-197">When trying to clone a volume or a share from a backup set, if the clone job fails, a target volume or share may still be created in the portal.</span><span class="sxs-lookup"><span data-stu-id="cef30-197">When trying to clone a volume or a share from a backup set, if the clone job fails, a target volume or share may still be created in the portal.</span></span> <span data-ttu-id="cef30-198">It is important that you delete this target volume or share in the portal to minimize any future issues arising from this element.</span><span class="sxs-lookup"><span data-stu-id="cef30-198">It is important that you delete this target volume or share in the portal to minimize any future issues arising from this element.</span></span>
+> 
+> 
+
+## <a name="item-level-recovery-ilr"></a><span data-ttu-id="cef30-199">Item-level recovery (ILR)</span><span class="sxs-lookup"><span data-stu-id="cef30-199">Item-level recovery (ILR)</span></span>
+
+<span data-ttu-id="cef30-200">This release introduces the item-level recovery (ILR) on a StorSimple Virtual Array configured as a file server.</span><span class="sxs-lookup"><span data-stu-id="cef30-200">This release introduces the item-level recovery (ILR) on a StorSimple Virtual Array configured as a file server.</span></span> <span data-ttu-id="cef30-201">The feature allows you to do granular recovery of files and folders from a cloud backup of all the shares on the StorSimple device.</span><span class="sxs-lookup"><span data-stu-id="cef30-201">The feature allows you to do granular recovery of files and folders from a cloud backup of all the shares on the StorSimple device.</span></span> <span data-ttu-id="cef30-202">You can retrieve deleted files from recent backups using a self-service model.</span><span class="sxs-lookup"><span data-stu-id="cef30-202">You can retrieve deleted files from recent backups using a self-service model.</span></span>
+
+<span data-ttu-id="cef30-203">Every share has a *.backups* folder that contains the most recent backups.</span><span class="sxs-lookup"><span data-stu-id="cef30-203">Every share has a *.backups* folder that contains the most recent backups.</span></span> <span data-ttu-id="cef30-204">You can navigate to the desired backup, copy relevant files and folders from the backup and restore them.</span><span class="sxs-lookup"><span data-stu-id="cef30-204">You can navigate to the desired backup, copy relevant files and folders from the backup and restore them.</span></span> <span data-ttu-id="cef30-205">This feature eliminates calls to administrators for restoring files from backups.</span><span class="sxs-lookup"><span data-stu-id="cef30-205">This feature eliminates calls to administrators for restoring files from backups.</span></span>
+
+1. <span data-ttu-id="cef30-206">When performing the ILR, you can view the backups through File Explorer.</span><span class="sxs-lookup"><span data-stu-id="cef30-206">When performing the ILR, you can view the backups through File Explorer.</span></span> <span data-ttu-id="cef30-207">Click the specific share that you want to look at the backup for.</span><span class="sxs-lookup"><span data-stu-id="cef30-207">Click the specific share that you want to look at the backup for.</span></span> <span data-ttu-id="cef30-208">You will see a *.backups* folder created under the share that stores all the backups.</span><span class="sxs-lookup"><span data-stu-id="cef30-208">You will see a *.backups* folder created under the share that stores all the backups.</span></span> <span data-ttu-id="cef30-209">Expand the *.backups* folder to view the backups.</span><span class="sxs-lookup"><span data-stu-id="cef30-209">Expand the *.backups* folder to view the backups.</span></span> <span data-ttu-id="cef30-210">The folder shows the exploded view of the entire backup hierarchy.</span><span class="sxs-lookup"><span data-stu-id="cef30-210">The folder shows the exploded view of the entire backup hierarchy.</span></span> <span data-ttu-id="cef30-211">This view is created on-demand and usually takes only a couple of seconds to create.</span><span class="sxs-lookup"><span data-stu-id="cef30-211">This view is created on-demand and usually takes only a couple of seconds to create.</span></span>
+   
+   <span data-ttu-id="cef30-212">The last five backups are displayed in this way and can be used to perform an item-level recovery.</span><span class="sxs-lookup"><span data-stu-id="cef30-212">The last five backups are displayed in this way and can be used to perform an item-level recovery.</span></span> <span data-ttu-id="cef30-213">The five recent backups include both the default scheduled and the manual backups.</span><span class="sxs-lookup"><span data-stu-id="cef30-213">The five recent backups include both the default scheduled and the manual backups.</span></span>
+   
+   * <span data-ttu-id="cef30-214">**Scheduled backups** named as &lt;Device name&gt;DailySchedule-YYYYMMDD-HHMMSS-UTC.</span><span class="sxs-lookup"><span data-stu-id="cef30-214">**Scheduled backups** named as &lt;Device name&gt;DailySchedule-YYYYMMDD-HHMMSS-UTC.</span></span>
+   * <span data-ttu-id="cef30-215">**Manual backups** named as Ad-hoc-YYYYMMDD-HHMMSS-UTC.</span><span class="sxs-lookup"><span data-stu-id="cef30-215">**Manual backups** named as Ad-hoc-YYYYMMDD-HHMMSS-UTC.</span></span>
+     
+     ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-clone/image14.png)
+
+2. <span data-ttu-id="cef30-216">Identify the backup containing the most recent version of the deleted file.</span><span class="sxs-lookup"><span data-stu-id="cef30-216">Identify the backup containing the most recent version of the deleted file.</span></span> <span data-ttu-id="cef30-217">Though the folder name contains a UTC timestamp in each of the preceding cases, the time at which the folder was created is the actual device time when the backup started.</span><span class="sxs-lookup"><span data-stu-id="cef30-217">Though the folder name contains a UTC timestamp in each of the preceding cases, the time at which the folder was created is the actual device time when the backup started.</span></span> <span data-ttu-id="cef30-218">Use the folder timestamp to locate and identify the backups.</span><span class="sxs-lookup"><span data-stu-id="cef30-218">Use the folder timestamp to locate and identify the backups.</span></span>
+
+3. <span data-ttu-id="cef30-219">Locate the folder or the file that you want to restore in the backup that you identified in the previous step.</span><span class="sxs-lookup"><span data-stu-id="cef30-219">Locate the folder or the file that you want to restore in the backup that you identified in the previous step.</span></span> <span data-ttu-id="cef30-220">Note you can only view the files or folders that you have permissions for.</span><span class="sxs-lookup"><span data-stu-id="cef30-220">Note you can only view the files or folders that you have permissions for.</span></span> <span data-ttu-id="cef30-221">If you cannot access certain files or folders, contact a share administrator.</span><span class="sxs-lookup"><span data-stu-id="cef30-221">If you cannot access certain files or folders, contact a share administrator.</span></span> <span data-ttu-id="cef30-222">The administrator can use File Explorer to edit the share permissions and give you access to the specific file or folder.</span><span class="sxs-lookup"><span data-stu-id="cef30-222">The administrator can use File Explorer to edit the share permissions and give you access to the specific file or folder.</span></span> <span data-ttu-id="cef30-223">It is a recommended best practice that the share administrator is a user group instead of a single user.</span><span class="sxs-lookup"><span data-stu-id="cef30-223">It is a recommended best practice that the share administrator is a user group instead of a single user.</span></span>
+
+4. <span data-ttu-id="cef30-224">Copy the file or the folder to the appropriate share on your StorSimple file server.</span><span class="sxs-lookup"><span data-stu-id="cef30-224">Copy the file or the folder to the appropriate share on your StorSimple file server.</span></span>
+
+## <a name="next-steps"></a><span data-ttu-id="cef30-225">Next steps</span><span class="sxs-lookup"><span data-stu-id="cef30-225">Next steps</span></span>
+
+<span data-ttu-id="cef30-226">Learn more about how to [administer your StorSimple Virtual Array using the local web UI](storsimple-ova-web-ui-admin.md).</span><span class="sxs-lookup"><span data-stu-id="cef30-226">Learn more about how to [administer your StorSimple Virtual Array using the local web UI](storsimple-ova-web-ui-admin.md).</span></span>
+
+
+
+
+
+
+
+
+
+
+
+

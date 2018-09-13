@@ -1,0 +1,29 @@
+## <a name="deploy-the-arm-template-by-using-click-to-deploy"></a><span data-ttu-id="4cd06-101">Deploy the ARM template by using click to deploy</span><span class="sxs-lookup"><span data-stu-id="4cd06-101">Deploy the ARM template by using click to deploy</span></span>
+<span data-ttu-id="4cd06-102">You can reuse pre-defined ARM templates upload to a github repository maintained by Microsoft and open to the community.</span><span class="sxs-lookup"><span data-stu-id="4cd06-102">You can reuse pre-defined ARM templates upload to a github repository maintained by Microsoft and open to the community.</span></span> <span data-ttu-id="4cd06-103">THese templates can be deployed straight out of github, or downloaded and modified to fit your needs.</span><span class="sxs-lookup"><span data-stu-id="4cd06-103">THese templates can be deployed straight out of github, or downloaded and modified to fit your needs.</span></span> <span data-ttu-id="4cd06-104">To deploy a template that creates a VNet with two subnets, follow the steps below.</span><span class="sxs-lookup"><span data-stu-id="4cd06-104">To deploy a template that creates a VNet with two subnets, follow the steps below.</span></span>
+
+1. <span data-ttu-id="4cd06-105">From a browser, navigate to [https://github.com/Azure/azure-quickstart-templates](https://github.com/Azure/azure-quickstart-templates).</span><span class="sxs-lookup"><span data-stu-id="4cd06-105">From a browser, navigate to [https://github.com/Azure/azure-quickstart-templates](https://github.com/Azure/azure-quickstart-templates).</span></span>
+2. <span data-ttu-id="4cd06-106">Scroll down the list of templates, and click **101-vnet-two-subnets**.</span><span class="sxs-lookup"><span data-stu-id="4cd06-106">Scroll down the list of templates, and click **101-vnet-two-subnets**.</span></span> <span data-ttu-id="4cd06-107">Check the **README.md** file, as shown below.</span><span class="sxs-lookup"><span data-stu-id="4cd06-107">Check the **README.md** file, as shown below.</span></span>
+   
+    ![READEME.md file in github](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/virtual-networks-create-vnet-arm-template-click-include/figure1.png)
+3. <span data-ttu-id="4cd06-109">Click **Deploy to Azure**.</span><span class="sxs-lookup"><span data-stu-id="4cd06-109">Click **Deploy to Azure**.</span></span> <span data-ttu-id="4cd06-110">If necessary, enter your Azure login credentials.</span><span class="sxs-lookup"><span data-stu-id="4cd06-110">If necessary, enter your Azure login credentials.</span></span> 
+4. <span data-ttu-id="4cd06-111">In the **Parameters** blade, enter the values you want to use to create your new VNet, and then click **OK**.</span><span class="sxs-lookup"><span data-stu-id="4cd06-111">In the **Parameters** blade, enter the values you want to use to create your new VNet, and then click **OK**.</span></span> <span data-ttu-id="4cd06-112">The figure below shows the values for our scenario.</span><span class="sxs-lookup"><span data-stu-id="4cd06-112">The figure below shows the values for our scenario.</span></span>
+   
+    ![ARM template parameters](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/virtual-networks-create-vnet-arm-template-click-include/figure2.png)
+5. <span data-ttu-id="4cd06-114">Click **Resource group** and select a resource group to add the VNet to, or click **Create new** to add the VNet to a new resource group.</span><span class="sxs-lookup"><span data-stu-id="4cd06-114">Click **Resource group** and select a resource group to add the VNet to, or click **Create new** to add the VNet to a new resource group.</span></span> <span data-ttu-id="4cd06-115">The figure below shows the resource group settings for a new resource group called **TestRG**.</span><span class="sxs-lookup"><span data-stu-id="4cd06-115">The figure below shows the resource group settings for a new resource group called **TestRG**.</span></span>
+   
+    ![Resource group](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/virtual-networks-create-vnet-arm-template-click-include/figure3.png)
+6. <span data-ttu-id="4cd06-117">If necessary, change the **Subscription** and **Location** settings for your VNet.</span><span class="sxs-lookup"><span data-stu-id="4cd06-117">If necessary, change the **Subscription** and **Location** settings for your VNet.</span></span>
+7. <span data-ttu-id="4cd06-118">If you do not want to see the VNet as a tile in the **Startboard**, disable **Pin to Startboard**.</span><span class="sxs-lookup"><span data-stu-id="4cd06-118">If you do not want to see the VNet as a tile in the **Startboard**, disable **Pin to Startboard**.</span></span>
+8. <span data-ttu-id="4cd06-119">Click **Leagl terms**, read the terms, and click **Buy** to agree.</span><span class="sxs-lookup"><span data-stu-id="4cd06-119">Click **Leagl terms**, read the terms, and click **Buy** to agree.</span></span> 
+9. <span data-ttu-id="4cd06-120">Click **Create** to create the VNet.</span><span class="sxs-lookup"><span data-stu-id="4cd06-120">Click **Create** to create the VNet.</span></span>
+   
+    ![Submitting deployment tile in preview portal](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/virtual-networks-create-vnet-arm-template-click-include/figure4.png)
+10. <span data-ttu-id="4cd06-122">Once the deployment is done, click **TestVNet** > **All settings** > **Subnets** to see the subnet properties, as shown below.</span><span class="sxs-lookup"><span data-stu-id="4cd06-122">Once the deployment is done, click **TestVNet** > **All settings** > **Subnets** to see the subnet properties, as shown below.</span></span>
+    
+     ![Create VNet in preview portal](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/virtual-networks-create-vnet-arm-template-click-include/figure5.gif)
+
+
+
+
+
+

@@ -1,0 +1,11 @@
+1. <span data-ttu-id="d0b91-101">From the Visual Studio menu, select **File > New > Project**.</span><span class="sxs-lookup"><span data-stu-id="d0b91-101">From the Visual Studio menu, select **File > New > Project**.</span></span> 
+2. <span data-ttu-id="d0b91-102">Under the **Templates** section of the **New Project** dialog box, select **Visual C# > .NET Core**.</span><span class="sxs-lookup"><span data-stu-id="d0b91-102">Under the **Templates** section of the **New Project** dialog box, select **Visual C# > .NET Core**.</span></span>
+3. <span data-ttu-id="d0b91-103">Select **ASP.NET Core Web Application (.NET Core)**.</span><span class="sxs-lookup"><span data-stu-id="d0b91-103">Select **ASP.NET Core Web Application (.NET Core)**.</span></span>
+    <span data-ttu-id="d0b91-104">![New Project dialog](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/vs-docker-create-aspnetcore-app/create-new-project.png)</span><span class="sxs-lookup"><span data-stu-id="d0b91-104">![New Project dialog](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/vs-docker-create-aspnetcore-app/create-new-project.png)</span></span>
+4. <span data-ttu-id="d0b91-105">Give your new application a name (or take the default) and Tap **OK**.</span><span class="sxs-lookup"><span data-stu-id="d0b91-105">Give your new application a name (or take the default) and Tap **OK**.</span></span>  
+5. <span data-ttu-id="d0b91-106">Under **ASP.NET Core Templates**, select **.NET Core**.</span><span class="sxs-lookup"><span data-stu-id="d0b91-106">Under **ASP.NET Core Templates**, select **.NET Core**.</span></span>
+    <span data-ttu-id="d0b91-107">![New ASP.NET Project dialog](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/vs-docker-create-aspnetcore-app/aspnet-core-template.png)</span><span class="sxs-lookup"><span data-stu-id="d0b91-107">![New ASP.NET Project dialog](https://docstestmedia1.blob.core.windows.net/azure-media/includes/media/vs-docker-create-aspnetcore-app/aspnet-core-template.png)</span></span>
+6. <span data-ttu-id="d0b91-108">Deselect **Host in the cloud** as you'll be using Docker as your deployment solution.</span><span class="sxs-lookup"><span data-stu-id="d0b91-108">Deselect **Host in the cloud** as you'll be using Docker as your deployment solution.</span></span>
+
+
+

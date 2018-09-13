@@ -1,0 +1,300 @@
+items:
+- name: Azure
+  tocHref: /azure-nomedia/
+  topicHref: /azure-nomedia/index
+  items:
+  - name: Active Directory
+    tocHref: /azure-nomedia/active-directory/
+    topicHref: /azure-nomedia/active-directory/
+    items:
+    - name: Connect
+      tocHref: /azure-nomedia/active-directory/connect/
+      topicHref: /azure-nomedia/active-directory/connect/
+    - name: Connect Health
+      tocHref: /azure-nomedia/active-directory/connect-health/
+      topicHref: /azure-nomedia/active-directory/connect-health/
+    - name: Develop
+      tocHref: /azure-nomedia/active-directory/develop/
+      topicHref: /azure-nomedia/active-directory/develop/
+    - name: Privileged Identity Management
+      tocHref: /azure-nomedia/active-directory/privileged-identity-management/
+      topicHref: /azure-nomedia/active-directory/privileged-identity-management/
+  - name: Active Directory B2C
+    tocHref: /azure-nomedia/active-directory-b2c/
+    topicHref: /azure-nomedia/active-directory-b2c/
+  - name: Active Directory Domain Services
+    tocHref: /azure-nomedia/active-directory-domain-services/
+    topicHref: /azure-nomedia/active-directory-domain-services/
+  - name: Analysis Services
+    tocHref: /azure-nomedia/analysis-services/
+    topicHref: /azure-nomedia/analysis-services/
+  - name: API Management
+    tocHref: /azure-nomedia/api-management/
+    topicHref: /azure-nomedia/api-management/
+  - name: App Service
+    tocHref: /azure-nomedia/app-service/
+    topicHref: /azure-nomedia/app-service/
+    items:
+    - name: Web Apps
+      tocHref: /azure-nomedia/app-service-web/
+      topicHref: /azure-nomedia/app-service-web/
+    - name: Mobile Apps
+      tocHref: /azure-nomedia/app-service-mobile/
+      topicHref: /azure-nomedia/app-service-mobile/
+    - name: API Apps
+      tocHref: /azure-nomedia/app-service-api/
+      topicHref: /azure-nomedia/app-service-api/
+  - name: Advisor
+    tocHref: /azure-nomedia/advisor/
+    topicHref: /azure-nomedia/advisor/
+  - name: Logic Apps
+    tocHref: /azure-nomedia/logic-apps/
+    topicHref: /azure-nomedia/logic-apps/
+  - name: Application Gateway
+    tocHref: /azure-nomedia/application-gateway/
+    topicHref: /azure-nomedia/application-gateway/
+  - name: Application Insights
+    tocHref: /azure-nomedia/application-insights/
+    topicHref: /azure-nomedia/application-insights/
+  - name: Automation
+    tocHref: /azure-nomedia/automation/
+    topicHref: /azure-nomedia/automation/
+  - name: Container Registry
+    tocHref: /azure-nomedia/container-registry/
+    topicHref: /azure-nomedia/container-registry/
+  - name: Functions
+    tocHref: /azure-nomedia/azure-functions/
+    topicHref: /azure-nomedia/azure-functions/
+  - name: Government
+    tocHref: /azure-nomedia/azure-government/
+    topicHref: /azure-nomedia/azure-government/
+  - name: Portal
+    tocHref: /azure-nomedia/azure-portal/
+    topicHref: /azure-nomedia/azure-portal/
+  - name: Resource Manager
+    tocHref: /azure-nomedia/azure-resource-manager/
+    topicHref: /azure-nomedia/azure-resource-manager/
+  - name: Azure Stack
+    tocHref: /azure-nomedia/azure-stack/
+    topicHref: /azure-nomedia/azure-stack/
+  - name: Supportability
+    tocHref: /azure-nomedia/azure-supportability/
+    topicHref: /azure-nomedia/azure-supportability/
+  - name: Backup
+    tocHref: /azure-nomedia/backup/
+    topicHref: /azure-nomedia/backup/
+  - name: Batch
+    tocHref: /azure-nomedia/batch/
+    topicHref: /azure-nomedia/batch/
+  - name: Billing
+    tocHref: /azure-nomedia/billing/
+    topicHref: /azure-nomedia/billing/
+  - name: Biztalk Services
+    tocHref: /azure-nomedia/biztalk-services/
+    topicHref: /azure-nomedia/biztalk-services/
+  - name: Cache
+    tocHref: /azure-nomedia/cache/
+    topicHref: /azure-nomedia/cache/
+  - name: CDN
+    tocHref: /azure-nomedia/cdn/
+    topicHref: /azure-nomedia/cdn/
+  - name: Cloud Services
+    tocHref: /azure-nomedia/cloud-services/
+    topicHref: /azure-nomedia/cloud-services/
+  - name: Cognitive Services
+    tocHref: /azure-nomedia/cognitive-services/
+    topicHref: /azure-nomedia/cognitive-services/
+  - name: Connectors
+    tocHref: /azure-nomedia/connectors/
+    topicHref: /azure-nomedia/connectors/
+  - name: Container Service
+    tocHref: /azure-nomedia/container-service/
+    topicHref: /azure-nomedia/container-service/
+  - name: Data Catalog
+    tocHref: /azure-nomedia/data-catalog/
+    topicHref: /azure-nomedia/data-catalog/
+  - name: Data Factory
+    tocHref: /azure-nomedia/data-factory/
+    topicHref: /azure-nomedia/data-factory/
+  - name: Data Lake Analytics
+    tocHref: /azure-nomedia/data-lake-analytics/
+    topicHref: /azure-nomedia/data-lake-analytics/
+  - name: Data Lake Store
+    tocHref: /azure-nomedia/data-lake-store/
+    topicHref: /azure-nomedia/data-lake-store/
+  - name: Devtest Lab
+    tocHref: /azure-nomedia/devtest-lab/
+    topicHref: /azure-nomedia/devtest-lab/
+  - name: DNS
+    tocHref: /azure-nomedia/dns/
+    topicHref: /azure-nomedia/dns/
+  - name: DocumentDB
+    tocHref: /azure-nomedia/documentdb/
+    topicHref: /azure-nomedia/documentdb/
+  - name: Event Hubs
+    tocHref: /azure-nomedia/event-hubs/
+    topicHref: /azure-nomedia/event-hubs/
+  - name: Expressroute
+    tocHref: /azure-nomedia/expressroute/
+    topicHref: /azure-nomedia/expressroute/
+  - name: Guidance
+    tocHref: /azure-nomedia/guidance/
+    topicHref: /azure-nomedia/guidance/
+  - name: HDInsight
+    tocHref: /azure-nomedia/hdinsight/
+    topicHref: /azure-nomedia/hdinsight/
+  - name: IoT Hub
+    tocHref: /azure-nomedia/iot-hub/
+    topicHref: /azure-nomedia/iot-hub/
+  - name: IoT Suite
+    tocHref: /azure-nomedia/iot-suite/
+    topicHref: /azure-nomedia/iot-suite/
+  - name: Key Vault
+    tocHref: /azure-nomedia/key-vault/
+    topicHref: /azure-nomedia/key-vault/
+  - name: Load Balancer
+    tocHref: /azure-nomedia/load-balancer/
+    topicHref: /azure-nomedia/load-balancer/
+  - name: Log Analytics
+    tocHref: /azure-nomedia/log-analytics/
+    topicHref: /azure-nomedia/log-analytics/
+  - name: Machine Learning
+    tocHref: /azure-nomedia/machine-learning/
+    topicHref: /azure-nomedia/machine-learning/
+  - name: Marketplace Consumer
+    tocHref: /azure-nomedia/marketplace-consumer/
+    topicHref: /azure-nomedia/marketplace-consumer/
+  - name: Marketplace Publishing
+    tocHref: /azure-nomedia/marketplace-publishing/
+    topicHref: /azure-nomedia/marketplace-publishing/
+  - name: Media Services
+    tocHref: /azure-nomedia/media-services/
+    topicHref: /azure-nomedia/media-services/
+  - name: Mobile Engagement
+    tocHref: /azure-nomedia/mobile-engagement/
+    topicHref: /azure-nomedia/mobile-engagement/
+  - name: Mobile Services
+    tocHref: /azure-nomedia/mobile-services/
+    topicHref: /azure-nomedia/mobile-services/
+  - name: Monitoring And Diagnostics
+    tocHref: /azure-nomedia/monitoring-and-diagnostics/
+    topicHref: /azure-nomedia/monitoring-and-diagnostics/
+  - name: Multi-Factor Authentication
+    tocHref: /azure-nomedia/multi-factor-authentication/
+    topicHref: /azure-nomedia/multi-factor-authentication/
+    items:
+    - name: User Guide
+      tocHref: /azure-nomedia/multi-factor-authentication/end-user/
+      topicHref: /azure-nomedia/multi-factor-authentication/end-user/
+  - name: Network Watcher
+    tocHref: /azure-nomedia/network-watcher/
+    topicHref: /azure-nomedia/network-watcher/
+  - name: Notification Hubs
+    tocHref: /azure-nomedia/notification-hubs/
+    topicHref: /azure-nomedia/notification-hubs/
+  - name: Operations Management Suite
+    tocHref: /azure-nomedia/operations-management-suite/
+    topicHref: /azure-nomedia/operations-management-suite/
+  - name: Power BI Embedded
+    tocHref: /azure-nomedia/power-bi-embedded/
+    topicHref: /azure-nomedia/power-bi-embedded/
+  - name: Redis Cache
+    tocHref: /azure-nomedia/redis-cache/
+    topicHref: /azure-nomedia/redis-cache/
+  - name: Remoteapp
+    tocHref: /azure-nomedia/remoteapp/
+    topicHref: /azure-nomedia/remoteapp/
+  - name: Resiliency
+    tocHref: /azure-nomedia/resiliency/
+    topicHref: /azure-nomedia/resiliency/
+  - name: Resource Health
+    tocHref: /azure-nomedia/resource-health/
+    topicHref: /azure-nomedia/resource-health/
+  - name: Scheduler
+    tocHref: /azure-nomedia/scheduler/
+    topicHref: /azure-nomedia/scheduler/
+  - name: Search
+    tocHref: /azure-nomedia/search/
+    topicHref: /azure-nomedia/search/
+  - name: Security
+    tocHref: /azure-nomedia/security/
+    topicHref: /azure-nomedia/security/
+  - name: Security Center
+    tocHref: /azure-nomedia/security-center/
+    topicHref: /azure-nomedia/security-center/
+  - name: Service Bus
+    tocHref: /azure-nomedia/service-bus/
+    topicHref: /azure-nomedia/service-bus/
+  - name: Service Bus Messaging
+    tocHref: /azure-nomedia/service-bus-messaging/
+    topicHref: /azure-nomedia/service-bus-messaging/
+  - name: Service Bus Relay
+    tocHref: /azure-nomedia/service-bus-relay/
+    topicHref: /azure-nomedia/service-bus-relay/
+  - name: Service Fabric
+    tocHref: /azure-nomedia/service-fabric/
+    topicHref: /azure-nomedia/service-fabric/
+  - name: Site Recovery
+    tocHref: /azure-nomedia/site-recovery/
+    topicHref: /azure-nomedia/site-recovery/
+  - name: SQL Data Warehouse
+    tocHref: /azure-nomedia/sql-data-warehouse/
+    topicHref: /azure-nomedia/sql-data-warehouse/
+  - name: SQL Database
+    tocHref: /azure-nomedia/sql-database/
+    topicHref: /azure-nomedia/sql-database/
+  - name: SQL Server Stretch Database
+    tocHref: /azure-nomedia/sql-server-stretch-database/
+    topicHref: /azure-nomedia/sql-server-stretch-database/
+  - name: Storage
+    tocHref: /azure-nomedia/storage/
+    topicHref: /azure-nomedia/storage/
+  - name: StorSimple
+    tocHref: /azure-nomedia/storsimple/
+    topicHref: /azure-nomedia/storsimple/
+  - name: Stream Analytics
+    tocHref: /azure-nomedia/stream-analytics/
+    topicHref: /azure-nomedia/stream-analytics/
+  - name: Traffic Manager
+    tocHref: /azure-nomedia/traffic-manager/
+    topicHref: /azure-nomedia/traffic-manager/
+  - name: Virtual Machine Scale Sets
+    tocHref: /azure-nomedia/virtual-machine-scale-sets/
+    topicHref: /azure-nomedia/virtual-machine-scale-sets/
+  - name: Virtual Machines
+    tocHref: /azure-nomedia/virtual-machines/
+    topicHref: /azure-nomedia/virtual-machines/
+    items:
+    - name: Workloads
+      tocHref: /azure-nomedia/virtual-machines/workloads/
+      topicHref: /azure-nomedia/virtual-machines/workloads/sap/get-started
+      items:
+      - name: SAP
+        tocHref: /azure-nomedia/virtual-machines/workloads/sap/
+        topicHref: /azure-nomedia/virtual-machines/workloads/sap/get-started
+    - name: Linux
+      tocHref: /azure-nomedia/virtual-machines/linux/
+      topicHref: /azure-nomedia/virtual-machines/linux/
+      items:
+      - name: Classic Deployment
+        tocHref: /azure-nomedia/virtual-machines/linux/classic/
+        topicHref: /azure-nomedia/virtual-machines/linux/classic/
+    - name: Windows
+      tocHref: /azure-nomedia/virtual-machines/windows/
+      topicHref: /azure-nomedia/virtual-machines/windows/
+      items:
+      - name: Classic Deployment
+        tocHref: /azure-nomedia/virtual-machines/windows/classic/
+        topicHref: /azure-nomedia/virtual-machines/windows/classic/
+  - name: Virtual Network
+    tocHref: /azure-nomedia/virtual-network/
+    topicHref: /azure-nomedia/virtual-network/
+  - name: VPN Gateway
+    tocHref: /azure-nomedia/vpn-gateway/
+    topicHref: /azure-nomedia/vpn-gateway/
+ms.openlocfilehash: ad958c2da8c41532013be17b39dfe861938b26b4
+ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
+ms.translationtype: HT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 08/02/2018
+ms.locfileid: "44540984"
