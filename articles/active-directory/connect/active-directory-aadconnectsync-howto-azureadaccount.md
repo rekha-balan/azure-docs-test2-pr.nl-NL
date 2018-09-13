@@ -4,8 +4,8 @@ description: This topic documents how to restore the Azure AD service account.
 services: active-directory
 keywords: AADSTS70002, AADSTS50054, How to reset the password for the Azure AD Connect sync Connector service account
 documentationcenter: ''
-author: andkjell
-manager: femila
+author: billmath
+manager: mtillman
 editor: ''
 ms.assetid: 6077043a-27f1-4304-a44b-81dc46620f24
 ms.service: active-directory
@@ -13,14 +13,15 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 02/08/2017
+ms.date: 07/12/2017
+ms.component: hybrid
 ms.author: billmath
-ms.openlocfilehash: dfd86805fd2da48b94d776c318b246e62666b978
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 8f201f2478e2883289a6cc4b435e2c3218950b1d
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44671580"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44830778"
 ---
 # <a name="azure-ad-connect-sync-how-to-manage-the-azure-ad-service-account"></a>Azure AD Connect sync: How to manage the Azure AD service account
 The service account used by the Azure AD Connector is supposed to be service free. If you need to reset its credentials, then this topic is for you. For example, if a Global Administrator has by mistake reset the password on the service account using PowerShell.
@@ -30,7 +31,7 @@ If the service account defined on the Azure AD Connector cannot contact Azure AD
 
 1. Sign in to the Azure AD Connect sync server and start PowerShell.
 2. Run `Add-ADSyncAADServiceAccount`.  
-   ![PowerShell cmdlet addadsyncaadserviceaccount](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnectsync-howto-azureadaccount/addadsyncaadserviceaccount.png)
+   ![PowerShell cmdlet addadsyncaadserviceaccount](./media/active-directory-aadconnectsync-howto-azureadaccount/addadsyncaadserviceaccount.png)
 3. Provide Azure AD Global admin credentials.
 
 This cmdlet resets the password for the service account and update it both in Azure AD and in the sync engine.
@@ -53,5 +54,4 @@ AADSTS70002: Error validating credentials. AADSTS50054: Old password is used for
 
 * [Azure AD Connect sync: Understand and customize synchronization](active-directory-aadconnectsync-whatis.md)
 * [Integrating your on-premises identities with Azure Active Directory](active-directory-aadconnect.md)
-
 

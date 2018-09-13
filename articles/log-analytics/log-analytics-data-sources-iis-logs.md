@@ -1,30 +1,31 @@
 ---
-title: IIS logs in Log Analytics | Microsoft Docs
-description: Internet Information Services (IIS) stores user activity in log files that can be collected by Log Analytics.  This article describes how to configure collection of IIS logs and details of the records they create in the OMS repository.
+title: IIS logs in Azure Log Analytics | Microsoft Docs
+description: Internet Information Services (IIS) stores user activity in log files that can be collected by Log Analytics.  This article describes how to configure collection of IIS logs and details of the records they create in the Log Analytics workspace.
 services: log-analytics
 documentationcenter: ''
 author: bwren
-manager: jwhit
+manager: carmonm
 editor: tysonn
 ms.assetid: cec5ff0a-01f5-4262-b2e8-e3db7b7467d2
 ms.service: log-analytics
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 02/24/2017
+ms.date: 06/12/2018
 ms.author: bwren
-ms.openlocfilehash: 198cc1dd540d0519c35208dd8ef1e2857c0b7b9b
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.comopnent: na
+ms.openlocfilehash: 65320e7d3cc97a3d53fd1a00fbbeab5559c02fce
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44563200"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44830882"
 ---
 # <a name="iis-logs-in-log-analytics"></a>IIS logs in Log Analytics
 Internet Information Services (IIS) stores user activity in log files that can be collected by Log Analytics.  
 
-![IIS logs](https://docstestmedia1.blob.core.windows.net/azure-media/articles/log-analytics/media/log-analytics-data-sources-iis-logs/overview.png)
+![IIS logs](media/log-analytics-data-sources-iis-logs/overview.png)
 
 ## <a name="configuring-iis-logs"></a>Configuring IIS logs
 Log Analytics collects entries from log files created by IIS, so you must [configure IIS for logging](https://technet.microsoft.com/library/hh831775.aspx).
@@ -34,10 +35,10 @@ Log Analytics does not collect logs in NCSA or IIS native format.
 
 Configure IIS logs in Log Analytics from the [Data menu in Log Analytics Settings](log-analytics-data-sources.md#configuring-data-sources).  There is no configuration required other than selecting **Collect W3C format IIS log files**.
 
-We recommend that when you enable IIS log collection, you should configure the IIS log rollover setting on each server.
 
 ## <a name="data-collection"></a>Data collection
-Log Analytics collects IIS log entries from each connected source approximately every 15 minutes.  The agent records its place in each event log that it collects from.  If the agent goes offline, then Log Analytics collects events from where it last left off, even if those events were created while the agent was offline.
+Log Analytics collects IIS log entries from each agent each time the log is closed and a new one is created. This frequency is controlled by the **Log File Rollover Schedule** setting for the IIS site which is once a day by default. For example, if the settings is **Hourly**, then Log Analytics will collect the log each hour.  If the setting is **Daily**, then Log Analytics will collect the log every 24 hours.
+
 
 ## <a name="iis-log-record-properties"></a>IIS log record properties
 IIS log records have a type of **W3CIISLog** and have the properties in the following table:
@@ -71,15 +72,13 @@ The following table provides different examples of log queries that retrieve IIS
 
 | Query | Description |
 |:--- |:--- |
-| Type=W3CIISLog |All IIS log records. |
-| Type=W3CIISLog scStatus=500 |All IIS log records with a return status of 500. |
-| Type=W3CIISLog &#124; Measure count() by cIP |Count of IIS log entries by client IP address. |
-| Type=W3CIISLog csHost="www.contoso.com" &#124; Measure count() by csUriStem |Count of IIS log entries by URL for the host www.contoso.com. |
-| Type=W3CIISLog &#124; Measure Sum(csBytes) by Computer &#124; top 500000 |Total bytes received by each IIS computer. |
+| W3CIISLog |All IIS log records. |
+| W3CIISLog &#124; where scStatus==500 |All IIS log records with a return status of 500. |
+| W3CIISLog &#124; summarize count() by cIP |Count of IIS log entries by client IP address. |
+| W3CIISLog &#124; where csHost=="www.contoso.com" &#124; summarize count() by csUriStem |Count of IIS log entries by URL for the host www.contoso.com. |
+| W3CIISLog &#124; summarize sum(csBytes) by Computer &#124; take 500000 |Total bytes received by each IIS computer. |
 
 ## <a name="next-steps"></a>Next steps
 * Configure Log Analytics to collect other [data sources](log-analytics-data-sources.md) for analysis.
 * Learn about [log searches](log-analytics-log-searches.md) to analyze the data collected from data sources and solutions.
 * Configure alerts in Log Analytics to proactively notify you of important conditions found in IIS logs.
-
-
