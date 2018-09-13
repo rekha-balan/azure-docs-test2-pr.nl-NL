@@ -1,0 +1,63 @@
+---
+title: Custom Search endpoint | Microsoft Docs
+description: Summary of the Custom Search API endpoint.
+services: cognitive-services
+author: mikedodaro
+manager: rosh
+ms.service: cognitive-services
+ms.component: bing-custom-search
+ms.topic: article
+ms.date: 12/05/2017
+ms.author: v-gedod
+ms.openlocfilehash: 8d9851f3687a783f52a80a8dffcf2580d4710551
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44867902"
+---
+# <a name="custom-search"></a><span data-ttu-id="67e1e-103">Custom Search</span><span class="sxs-lookup"><span data-stu-id="67e1e-103">Custom Search</span></span>
+<span data-ttu-id="67e1e-104">Bing Custom Search enables you to create tailored search experiences for topics that you care about.</span><span class="sxs-lookup"><span data-stu-id="67e1e-104">Bing Custom Search enables you to create tailored search experiences for topics that you care about.</span></span> <span data-ttu-id="67e1e-105">Your users see search results tailored to the content they care about instead of having to page through search results that have irrelevant content.</span><span class="sxs-lookup"><span data-stu-id="67e1e-105">Your users see search results tailored to the content they care about instead of having to page through search results that have irrelevant content.</span></span>
+
+## <a name="custom-search-endpoint"></a><span data-ttu-id="67e1e-106">Custom Search Endpoint</span><span class="sxs-lookup"><span data-stu-id="67e1e-106">Custom Search Endpoint</span></span>
+<span data-ttu-id="67e1e-107">To get results using the Bing Custom Search API, send a `GET` request to the following endpoint.</span><span class="sxs-lookup"><span data-stu-id="67e1e-107">To get results using the Bing Custom Search API, send a `GET` request to the following endpoint.</span></span> <span data-ttu-id="67e1e-108">Use the headers and URL parameters to define further specifications.</span><span class="sxs-lookup"><span data-stu-id="67e1e-108">Use the headers and URL parameters to define further specifications.</span></span>
+
+<span data-ttu-id="67e1e-109">Endpoint: Returns search suggestions as JSON results that are relevant to the user's input defined by `?q=""`.</span><span class="sxs-lookup"><span data-stu-id="67e1e-109">Endpoint: Returns search suggestions as JSON results that are relevant to the user's input defined by `?q=""`.</span></span>
+```  
+ GET https://api.cognitive.microsoft.com/bingcustomsearch/v7.0/search  
+```
+
+<span data-ttu-id="67e1e-110">For examples that describe how to set up Custom Search sources, see the [tutorial](https://docs.microsoft.com/azure/cognitive-services/bing-custom-search/tutorials/custom-search-web-page).</span><span class="sxs-lookup"><span data-stu-id="67e1e-110">For examples that describe how to set up Custom Search sources, see the [tutorial](https://docs.microsoft.com/azure/cognitive-services/bing-custom-search/tutorials/custom-search-web-page).</span></span> <span data-ttu-id="67e1e-111">For details about headers, parameters, market codes, response objects, errors, etc., see the [Bing Custom Search API v7](https://docs.microsoft.com/rest/api/cognitiveservices/bing-custom-search-api-v7-reference) reference.</span><span class="sxs-lookup"><span data-stu-id="67e1e-111">For details about headers, parameters, market codes, response objects, errors, etc., see the [Bing Custom Search API v7](https://docs.microsoft.com/rest/api/cognitiveservices/bing-custom-search-api-v7-reference) reference.</span></span>
+
+## <a name="custom-search-response-json"></a><span data-ttu-id="67e1e-112">Custom Search Response JSON</span><span class="sxs-lookup"><span data-stu-id="67e1e-112">Custom Search Response JSON</span></span>
+<span data-ttu-id="67e1e-113">A custom search request returns results as JSON objects, see [Response objects](https://docs.microsoft.com/rest/api/cognitiveservices/bing-custom-search-api-v7-reference#response-objects).</span><span class="sxs-lookup"><span data-stu-id="67e1e-113">A custom search request returns results as JSON objects, see [Response objects](https://docs.microsoft.com/rest/api/cognitiveservices/bing-custom-search-api-v7-reference#response-objects).</span></span> 
+
+## <a name="custom-autosuggest"></a><span data-ttu-id="67e1e-114">Custom Autosuggest</span><span class="sxs-lookup"><span data-stu-id="67e1e-114">Custom Autosuggest</span></span>
+<span data-ttu-id="67e1e-115">The Custom Autosuggest API lets you send a partial search query term to Bing and get back a list of suggested queries that you can configure.</span><span class="sxs-lookup"><span data-stu-id="67e1e-115">The Custom Autosuggest API lets you send a partial search query term to Bing and get back a list of suggested queries that you can configure.</span></span> <span data-ttu-id="67e1e-116">With Custom Autosuggest, you add suggestions returned by the API and optionally specify whether to include suggestions generated by Bing.</span><span class="sxs-lookup"><span data-stu-id="67e1e-116">With Custom Autosuggest, you add suggestions returned by the API and optionally specify whether to include suggestions generated by Bing.</span></span>
+
+## <a name="custom-autosuggest-endpoint"></a><span data-ttu-id="67e1e-117">Custom Autosuggest Endpoint</span><span class="sxs-lookup"><span data-stu-id="67e1e-117">Custom Autosuggest Endpoint</span></span>
+<span data-ttu-id="67e1e-118">To request custom query suggestions, send a GET request to:</span><span class="sxs-lookup"><span data-stu-id="67e1e-118">To request custom query suggestions, send a GET request to:</span></span>
+
+```
+https://api.cognitive.microsoft.com/bingcustomsearch/v7.0/Suggestions
+```  
+
+<span data-ttu-id="67e1e-119">For information about defining custom suggestions, see [Define custom search suggestions](define-custom-suggestions.md).</span><span class="sxs-lookup"><span data-stu-id="67e1e-119">For information about defining custom suggestions, see [Define custom search suggestions](define-custom-suggestions.md).</span></span>
+
+## <a name="custom-image-search"></a><span data-ttu-id="67e1e-120">Custom Image Search</span><span class="sxs-lookup"><span data-stu-id="67e1e-120">Custom Image Search</span></span>
+<span data-ttu-id="67e1e-121">The Custom Image Search API lets you send a search query to Bing and get back a list of relevant images from your Custom Search instance.</span><span class="sxs-lookup"><span data-stu-id="67e1e-121">The Custom Image Search API lets you send a search query to Bing and get back a list of relevant images from your Custom Search instance.</span></span>
+
+## <a name="custom-image-search-endpoint"></a><span data-ttu-id="67e1e-122">Custom Image Search Endpoint</span><span class="sxs-lookup"><span data-stu-id="67e1e-122">Custom Image Search Endpoint</span></span>
+<span data-ttu-id="67e1e-123">To request images from your Custom Search instance, send a GET request to the following URL:</span><span class="sxs-lookup"><span data-stu-id="67e1e-123">To request images from your Custom Search instance, send a GET request to the following URL:</span></span>
+
+```
+https://api.cognitive.microsoft.com/bingcustomsearch/v7.0/images/search
+```
+
+<span data-ttu-id="67e1e-124">For information about configuring a Custom Search instance, see [Configure your custom search experience](https://docs.microsoft.com/azure/cognitive-services/bing-custom-search/define-your-custom-view).</span><span class="sxs-lookup"><span data-stu-id="67e1e-124">For information about configuring a Custom Search instance, see [Configure your custom search experience](https://docs.microsoft.com/azure/cognitive-services/bing-custom-search/define-your-custom-view).</span></span>
+
+## <a name="next-steps"></a><span data-ttu-id="67e1e-125">Next steps</span><span class="sxs-lookup"><span data-stu-id="67e1e-125">Next steps</span></span>
+<span data-ttu-id="67e1e-126">The **Bing** APIs support search actions that return results according to their type.</span><span class="sxs-lookup"><span data-stu-id="67e1e-126">The **Bing** APIs support search actions that return results according to their type.</span></span> <span data-ttu-id="67e1e-127">All search endpoints return results as JSON response objects.</span><span class="sxs-lookup"><span data-stu-id="67e1e-127">All search endpoints return results as JSON response objects.</span></span>  <span data-ttu-id="67e1e-128">All endpoints support queries that return a specific language and/or location by longitude, latitude, and search radius.</span><span class="sxs-lookup"><span data-stu-id="67e1e-128">All endpoints support queries that return a specific language and/or location by longitude, latitude, and search radius.</span></span>
+
+<span data-ttu-id="67e1e-129">For complete information about the parameters supported by each endpoint, see the reference pages for each type.</span><span class="sxs-lookup"><span data-stu-id="67e1e-129">For complete information about the parameters supported by each endpoint, see the reference pages for each type.</span></span>
+<span data-ttu-id="67e1e-130">For examples of basic requests using the Custom Search API, see [Custom Search Quick-starts](https://docs.microsoft.com/azure/cognitive-services/bing-custom-search/)</span><span class="sxs-lookup"><span data-stu-id="67e1e-130">For examples of basic requests using the Custom Search API, see [Custom Search Quick-starts](https://docs.microsoft.com/azure/cognitive-services/bing-custom-search/)</span></span>

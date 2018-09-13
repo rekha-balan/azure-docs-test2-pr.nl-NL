@@ -1,0 +1,75 @@
+---
+title: Use existing players to playback your content - Azure | Microsoft Docs
+description: This topic lists existing players that you can use to playback your content.
+services: media-services
+documentationcenter: ''
+author: Juliako
+manager: cfowler
+editor: ''
+ms.assetid: 7e9fcf89-0fb6-4fa4-96cb-666320684d69
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 07/02/2018
+ms.author: juliako
+ms.openlocfilehash: 3fe82b98163182c73a144b72da371e8aa195e8cf
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44867263"
+---
+# <a name="playing-your-content-with-existing-players"></a><span data-ttu-id="4340f-103">Playing your content with existing players</span><span class="sxs-lookup"><span data-stu-id="4340f-103">Playing your content with existing players</span></span>
+<span data-ttu-id="4340f-104">Azure Media Services supports many popular streaming formats, such as Smooth Streaming, HTTP Live Streaming, and MPEG-Dash.</span><span class="sxs-lookup"><span data-stu-id="4340f-104">Azure Media Services supports many popular streaming formats, such as Smooth Streaming, HTTP Live Streaming, and MPEG-Dash.</span></span> <span data-ttu-id="4340f-105">This topic points you to existing players that you can use to test your streams.</span><span class="sxs-lookup"><span data-stu-id="4340f-105">This topic points you to existing players that you can use to test your streams.</span></span>
+
+### <a name="the-azure-portal-media-services-content-player"></a><span data-ttu-id="4340f-106">The Azure portal Media Services content player</span><span class="sxs-lookup"><span data-stu-id="4340f-106">The Azure portal Media Services content player</span></span>
+<span data-ttu-id="4340f-107">The **Azure** portal provides a content player that you can use to test your video.</span><span class="sxs-lookup"><span data-stu-id="4340f-107">The **Azure** portal provides a content player that you can use to test your video.</span></span>
+
+<span data-ttu-id="4340f-108">Click on the desired video (make sure it was [published](media-services-portal-publish.md)) and click the **Play** button at the bottom of the portal.</span><span class="sxs-lookup"><span data-stu-id="4340f-108">Click on the desired video (make sure it was [published](media-services-portal-publish.md)) and click the **Play** button at the bottom of the portal.</span></span>
+
+<span data-ttu-id="4340f-109">Some considerations apply:</span><span class="sxs-lookup"><span data-stu-id="4340f-109">Some considerations apply:</span></span>
+
+* <span data-ttu-id="4340f-110">The **MEDIA SERVICES CONTENT PLAYER** plays from the default streaming endpoint.</span><span class="sxs-lookup"><span data-stu-id="4340f-110">The **MEDIA SERVICES CONTENT PLAYER** plays from the default streaming endpoint.</span></span> <span data-ttu-id="4340f-111">If you want to play from a non-default streaming endpoint, use another player.</span><span class="sxs-lookup"><span data-stu-id="4340f-111">If you want to play from a non-default streaming endpoint, use another player.</span></span> <span data-ttu-id="4340f-112">For example, [Azure Media Player](http://amsplayer.azurewebsites.net/azuremediaplayer.html).</span><span class="sxs-lookup"><span data-stu-id="4340f-112">For example, [Azure Media Player](http://amsplayer.azurewebsites.net/azuremediaplayer.html).</span></span>
+
+![AMSPlayer][AMSPlayer]
+
+### <a name="azure-media-player"></a><span data-ttu-id="4340f-114">Azure Media Player</span><span class="sxs-lookup"><span data-stu-id="4340f-114">Azure Media Player</span></span>
+<span data-ttu-id="4340f-115">Use [Azure Media Player](http://amsplayer.azurewebsites.net/azuremediaplayer.html) to playback your content (clear or protected) in any of the following formats:</span><span class="sxs-lookup"><span data-stu-id="4340f-115">Use [Azure Media Player](http://amsplayer.azurewebsites.net/azuremediaplayer.html) to playback your content (clear or protected) in any of the following formats:</span></span>
+
+* <span data-ttu-id="4340f-116">Smooth Streaming</span><span class="sxs-lookup"><span data-stu-id="4340f-116">Smooth Streaming</span></span>
+* <span data-ttu-id="4340f-117">MPEG DASH</span><span class="sxs-lookup"><span data-stu-id="4340f-117">MPEG DASH</span></span>
+* <span data-ttu-id="4340f-118">HLS</span><span class="sxs-lookup"><span data-stu-id="4340f-118">HLS</span></span>
+* <span data-ttu-id="4340f-119">Progressive MP4</span><span class="sxs-lookup"><span data-stu-id="4340f-119">Progressive MP4</span></span>
+
+### <a name="flash-player"></a><span data-ttu-id="4340f-120">Flash Player</span><span class="sxs-lookup"><span data-stu-id="4340f-120">Flash Player</span></span>
+#### <a name="aes-encrypted-with-token"></a><span data-ttu-id="4340f-121">AES-encrypted with Token</span><span class="sxs-lookup"><span data-stu-id="4340f-121">AES-encrypted with Token</span></span>
+[http://aestoken.azurewebsites.net](http://aestoken.azurewebsites.net)
+
+### <a name="silverlight-players"></a><span data-ttu-id="4340f-122">Silverlight Players</span><span class="sxs-lookup"><span data-stu-id="4340f-122">Silverlight Players</span></span>
+
+#### <a name="playready-with-token"></a><span data-ttu-id="4340f-123">PlayReady with Token</span><span class="sxs-lookup"><span data-stu-id="4340f-123">PlayReady with Token</span></span>
+[http://sltoken.azurewebsites.net](http://sltoken.azurewebsites.net)
+
+### <a name="dash-players"></a><span data-ttu-id="4340f-124">DASH Players</span><span class="sxs-lookup"><span data-stu-id="4340f-124">DASH Players</span></span>
+[http://dashplayer.azurewebsites.net](http://dashplayer.azurewebsites.net)
+
+[http://dashif.org](http://dashif.org)
+
+### <a name="other"></a><span data-ttu-id="4340f-125">Other</span><span class="sxs-lookup"><span data-stu-id="4340f-125">Other</span></span>
+<span data-ttu-id="4340f-126">To test HLS URLs you can also use:</span><span class="sxs-lookup"><span data-stu-id="4340f-126">To test HLS URLs you can also use:</span></span>
+
+* <span data-ttu-id="4340f-127">**Safari** on an iOS device or</span><span class="sxs-lookup"><span data-stu-id="4340f-127">**Safari** on an iOS device or</span></span>
+* <span data-ttu-id="4340f-128">**3ivx HLS Player** on Windows.</span><span class="sxs-lookup"><span data-stu-id="4340f-128">**3ivx HLS Player** on Windows.</span></span>
+
+## <a name="developing-video-players"></a><span data-ttu-id="4340f-129">Developing video players</span><span class="sxs-lookup"><span data-stu-id="4340f-129">Developing video players</span></span>
+<span data-ttu-id="4340f-130">For information about how to develop your own players, see [Developing video players](media-services-develop-video-players.md)</span><span class="sxs-lookup"><span data-stu-id="4340f-130">For information about how to develop your own players, see [Developing video players](media-services-develop-video-players.md)</span></span>
+
+## <a name="media-services-learning-paths"></a><span data-ttu-id="4340f-131">Media Services learning paths</span><span class="sxs-lookup"><span data-stu-id="4340f-131">Media Services learning paths</span></span>
+[!INCLUDE [media-services-learning-paths-include](../../../includes/media-services-learning-paths-include.md)]
+
+## <a name="provide-feedback"></a><span data-ttu-id="4340f-132">Provide feedback</span><span class="sxs-lookup"><span data-stu-id="4340f-132">Provide feedback</span></span>
+[!INCLUDE [media-services-user-voice-include](../../../includes/media-services-user-voice-include.md)]
+
+[AMSPlayer]: ./media/media-services-playback-content-with-existing-players/media-services-portal-player.png

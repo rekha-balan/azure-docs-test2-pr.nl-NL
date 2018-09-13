@@ -1,0 +1,35 @@
+---
+title: Recognize speech by using the REST API
+description: Learn how to use the Speech to Text API in the Cognitive Services Speech service.
+titleSuffix: Microsoft Cognitive Services
+services: cognitive-services
+author: v-jerkin
+ms.service: cognitive-services
+ms.component: speech-service
+ms.topic: article
+ms.date: 07/16/2018
+ms.author: v-jerkin
+ms.openlocfilehash: ed758b309093c9245d0b2cf00f1ebe4997c985c7
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44867934"
+---
+# <a name="recognize-speech-by-using-the-rest-api"></a><span data-ttu-id="8d469-103">Recognize speech by using the REST API</span><span class="sxs-lookup"><span data-stu-id="8d469-103">Recognize speech by using the REST API</span></span>
+
+[!INCLUDE [Selector](../../../includes/cognitive-services-speech-service-how-to-recognize-speech-selector.md)]
+
+<span data-ttu-id="8d469-104">The REST API can be used to recognize short utterances by using an HTTP POST request.</span><span class="sxs-lookup"><span data-stu-id="8d469-104">The REST API can be used to recognize short utterances by using an HTTP POST request.</span></span>
+
+<span data-ttu-id="8d469-105">The REST API is the simplest way to recognize speech if you aren't using a language that's supported by the [SDK](speech-sdk.md).</span><span class="sxs-lookup"><span data-stu-id="8d469-105">The REST API is the simplest way to recognize speech if you aren't using a language that's supported by the [SDK](speech-sdk.md).</span></span> <span data-ttu-id="8d469-106">You make an HTTP POST request to the service endpoint and pass the entire utterance in the body of the request.</span><span class="sxs-lookup"><span data-stu-id="8d469-106">You make an HTTP POST request to the service endpoint and pass the entire utterance in the body of the request.</span></span> <span data-ttu-id="8d469-107">You receive a response that has the recognized text.</span><span class="sxs-lookup"><span data-stu-id="8d469-107">You receive a response that has the recognized text.</span></span>
+
+> [!NOTE]
+> <span data-ttu-id="8d469-108">Utterances are limited to 15 seconds or less when you use the REST API.</span><span class="sxs-lookup"><span data-stu-id="8d469-108">Utterances are limited to 15 seconds or less when you use the REST API.</span></span>
+> <span data-ttu-id="8d469-109">Check out the [Speech SDK](how-to-recognize-speech-csharp.md) for recognition of longer utterances.</span><span class="sxs-lookup"><span data-stu-id="8d469-109">Check out the [Speech SDK](how-to-recognize-speech-csharp.md) for recognition of longer utterances.</span></span>
+
+<span data-ttu-id="8d469-110">For more information on the **Speech to Text** REST API, see the [REST APIs](rest-apis.md#speech-to-text) article.</span><span class="sxs-lookup"><span data-stu-id="8d469-110">For more information on the **Speech to Text** REST API, see the [REST APIs](rest-apis.md#speech-to-text) article.</span></span> <span data-ttu-id="8d469-111">To see the API in action, download the [REST API samples](https://github.com/Azure-Samples/SpeechToText-REST) from GitHub.</span><span class="sxs-lookup"><span data-stu-id="8d469-111">To see the API in action, download the [REST API samples](https://github.com/Azure-Samples/SpeechToText-REST) from GitHub.</span></span>
+
+## <a name="next-steps"></a><span data-ttu-id="8d469-112">Next steps</span><span class="sxs-lookup"><span data-stu-id="8d469-112">Next steps</span></span>
+
+- <span data-ttu-id="8d469-113">See the [REST API overview](rest-apis.md).</span><span class="sxs-lookup"><span data-stu-id="8d469-113">See the [REST API overview](rest-apis.md).</span></span>

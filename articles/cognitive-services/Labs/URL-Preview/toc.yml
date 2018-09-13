@@ -1,0 +1,35 @@
+items:
+- name: Project URL Preview Documentation
+- name: Overview
+  items:
+  - name: What is Project URL Preview?
+    href: overview.md
+  - name: URL Preview endpoint
+    href: endpoint.md
+  expanded: true
+- name: Quickstarts
+  items:
+  - name: C#
+    href: csharp.md
+  - name: Java
+    href: java-quickstart.md
+  - name: JavaScript
+    href: javascript.md
+  - name: Node
+    href: node-quickstart.md
+  - name: Python
+    href: python-quickstart.md
+  expanded: true
+- name: Reference
+  items:
+  - name: Use and Display Requirements
+    href: use-display-requirements.md
+  - name: URL Preview reference
+    href: url-preview-reference.md
+  expanded: true
+ms.openlocfilehash: 8023a16d999c1cc131d27ba43900f2fe8f997c03
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
+ms.contentlocale: nl-NL
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44867797"
