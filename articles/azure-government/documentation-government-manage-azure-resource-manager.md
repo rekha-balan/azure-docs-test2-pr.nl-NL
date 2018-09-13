@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: azure-government
 ms.date: 11/14/2016
 ms.author: brendal
-ms.openlocfilehash: ad16ef895676d5136b599a253cc28a8675e9cb5a
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 04ef1f830c2d7bf164a55eec52c9d2eb273bfeb1
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44670694"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44803249"
 ---
 # <a name="azure-resource-manager"></a>Azure Resource Manager
 For detailed information on Resource Manager providers, API versions, and schemas, please refer [here](../azure-resource-manager/resource-manager-supported-services.md). The following tables list which services are supported through Resource Manager in Azure Government.
@@ -48,7 +48,7 @@ For detailed information on Resource Manager providers, API versions, and schema
 ## <a name="data--storage"></a>Data & Storage
 | Service | Resource Manager Enabled |
 | --- | --- |
-| DocumentDB |No |
+| Azure Cosmos DB |No |
 | Redis Cache |Yes |
 | Search |No |
 | Storage |Yes |

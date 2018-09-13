@@ -1,58 +1,26 @@
 ---
 title: Recommendations API | Microsoft Docs
-description: Use the Recommendations API, built with Microsoft Azure Machine Learning, to help your customer discover items in your catalog in Cognitive Services.
+description: Preview API is now discontinued, replaced by the Recommendations Solution template.
 services: cognitive-services
 author: LuisCabrer
 manager: mwinkle
 ms.service: cognitive-services
-ms.technology: recommendations
+ms.component: recommendations
 ms.topic: article
-ms.date: 06/18/2016
+ms.date: 02/15/2018
 ms.author: luisca
-ms.openlocfilehash: 55d37e18886cc7ef4e7116091fd06f5775e89375
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 2224a44c76ce7b04ab6705babbe9fa4f3bfa1c04
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44564599"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44794789"
 ---
-# <a name="recommendations"></a>Recommendations
+# <a name="recommendations-api-discontinued"></a>Recommendations API (discontinued)
 
-The Recommendations API built with Microsoft Azure Machine Learning helps your customer discover items in your catalog. Customer activity in your digital store is used to recommend items and to improve conversion in your digital store.
+The Recommendations API preview is no longer under active development and was officially retired on February 15. 
 
-The recommendation engine may be trained by uploading data about past customer activity or by collecting data directly from your digital store. When the customer returns to your store you will be able to feature recommended items from your catalog that may increase your conversion rate.
+For an alternative, consider the new open-source [Recommendations Solution template](http://aka.ms/recopcs), which lets you host a recommendations engine within your own Azure subscription. It supports the core scenarios of the Recommendations API, while also giving you the freedom to deploy to any Azure region and more closely control the computational resources used to train models and serve recommendations. 
 
-## <a name="resources"></a>Resources ##
-
-[Getting Started Guide](../../../articles/cognitive-services/cognitive-services-recommendations-quick-start.md)
-
-[Collecting Data to Train your Model](../../../articles/cognitive-services/cognitive-services-recommendations-collecting-data.md)
-
-[Build Types and Model Quality](../../../articles/cognitive-services/cognitive-services-recommendations-buildtypes.md)
-
-[API Reference](https://westus.dev.cognitive.microsoft.com/docs/services/Recommendations.V4.0)
-
-## <a name="common-scenarios-supported-by-recommendations"></a>Common Scenarios Supported By Recommendations
-
-**Frequently Bought Together (FBT) Recommendations**
-
-In this scenario the recommendations engine will recommend items that are likely to be purchased together in the same transaction with a particular item.
-
-For instance, in the example below, customers who bought the Wedge Touch Mouse were also likely to buy the at least one of the following product in the same transaction: Wedge Mobile Keyboard, the Surface VGA Adapter and Surface 2.
-
-**Item to Item Recommendations**
-
-A common scenario that uses this capability, is "people who visited/clicked on this item, also visited/clicked on this item".
-
-For instance, in the example below, most people who visited the "Wedge Touch Mouse" details page also visited the pages related to other mouse devices.
-
-**Customer to Item Recommendations**
-
-Given a customer's prior activity, it is possible to recommend items that the customer may be interested in.
-
-For instance, given all movies watched by a customer, it is possible to recommend additional content that may be of interest to the customer.
-
-## <a name="questions"></a>Questions?
-Feel free to contacts us at mlapi@microsoft.com
-
+Learn more about the Recommendations Solution template by reading [the documentation](https://github.com/Microsoft/Product-Recommendations). 
 

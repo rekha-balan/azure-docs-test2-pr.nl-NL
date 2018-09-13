@@ -2,24 +2,18 @@
 title: Get started with Azure Search in Java | Microsoft Docs
 description: How to build a hosted cloud search application on Azure using Java as your programming language.
 services: search
-documentationcenter: ''
-author: EvanBoyle
-manager: pablocas
-editor: v-lincan
-ms.assetid: 8b4df3c9-3ae5-4e3a-b4bb-74b516a91c8e
+author: jj09
+manager: jlembicz
 ms.service: search
-ms.devlang: na
-ms.workload: search
-ms.topic: hero-article
-ms.tgt_pltfrm: na
-ms.date: 07/14/2016
-ms.author: evboyle
-ms.openlocfilehash: 1c6139fab18cf82bccc188a201ced1ac4a14463c
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.topic: conceptual
+ms.date: 08/26/2018
+ms.author: jjed
+ms.openlocfilehash: 6fed5a8afe6030038752d540bfabbc446c57db2c
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44562909"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44808566"
 ---
 # <a name="get-started-with-azure-search-in-java"></a>Get started with Azure Search in Java
 > [!div class="op_single_selector"]
@@ -34,9 +28,9 @@ To run this sample, you must have an Azure Search service, which you can sign up
 
 We used the following software to build and test this sample:
 
-* [Eclipse IDE for Java EE Developers](https://eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/lunar). Be sure to download the EE version. One of the verification steps requires a feature that is found only in this edition.
-* [JDK 8u40](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-* [Apache Tomcat 8.0](http://tomcat.apache.org/download-80.cgi)
+* [Eclipse IDE for Java EE Developers](https://www.eclipse.org/downloads/packages/release/photon/r/eclipse-ide-java-ee-developers). Be sure to download the EE version. One of the verification steps requires a feature that is found only in this edition.
+* [JDK 8u181](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+* [Apache Tomcat 8.5.33](https://tomcat.apache.org/download-80.cgi#8.5.33)
 
 ## <a name="about-the-data"></a>About the data
 This sample application uses data from the [United States Geological Services (USGS)](http://geonames.usgs.gov/domestic/download_data.htm), filtered on the state of Rhode Island to reduce the dataset size. We'll use this data to build a search application that returns landmark buildings such as hospitals and schools, as well as geological features like streams, lakes, and summits.
@@ -57,7 +51,7 @@ The following list describes the files that are relevant to this sample.
 * SearchServiceHelper.java: A helper class that provides static methods
 * Document.java: Provides the data model
 * config.properties: Sets the Search service URL and api-key
-* Pom.xml: A Maven dependency
+* pom.xml: A Maven dependency
 
 <a id="sub-2"></a>
 
@@ -73,7 +67,7 @@ All REST API calls into Azure Search require that you provide the service URL an
 5. Copy the service URL and an admin key. You will need them later, when you add them to the **config.properties** file.
 
 ## <a name="download-the-sample-files"></a>Download the sample files
-1. Go to [AzureSearchJavaDemo](https://github.com/AzureSearch/AzureSearchJavaIndexerDemo) on GitHub.
+1. Go to [search-java-indexer-demo](https://github.com/Azure-Samples/search-java-indexer-demo) on GitHub.
 2. Click **Download ZIP**, save the .zip file to disk, and then extract all the files it contains. Consider extracting the files into your Java workspace to make it easier to find the project later.
 3. The sample files are read-only. Right-click folder properties and clear the read-only attribute.
 
@@ -165,30 +159,18 @@ This is the first Azure Search tutorial based on Java and the USGS dataset. Over
 
 If you already have some background in Azure Search, you can use this sample as a springboard for further experimentation, perhaps augmenting the [search page](search-pagination-page-layout.md), or implementing [faceted navigation](search-faceted-navigation.md). You can also improve upon the search results page by adding counts and batching documents so that users can page through the results.
 
-New to Azure Search? We recommend trying other tutorials to develop an understanding of what you can create. Visit our [documentation page](https://azure.microsoft.com/documentation/services/search/) to find more resources. You can also view the links in our [Video and Tutorial list](search-video-demo-tutorial-list.md) to access more information.
+New to Azure Search? We recommend trying other tutorials to develop an understanding of what you can create. Visit our [documentation page](https://azure.microsoft.com/documentation/services/search/) to find more resources. 
 
 <!--Image references-->
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-get-started-java/create-search-portal-1.PNG
-[2]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-get-started-java/create-search-portal-21.PNG
-[3]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-get-started-java/create-search-portal-31.PNG
-[4]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-get-started-java/AzSearch-Java-Import1.PNG
-[5]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-get-started-java/AzSearch-Java-config1.PNG
-[6]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-get-started-java/AzSearch-Java-ProjectFacets1.PNG
-[7]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-get-started-java/AzSearch-Java-runtime1.PNG
-[8]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-get-started-java/AzSearch-Java-Browser1.PNG
-[9]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-get-started-java/AzSearch-Java-JREPref1.PNG
-[10]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-get-started-java/AzSearch-Java-BuildProject1.PNG
-[11]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-get-started-java/rogerwilliamsschool1.PNG
-[12]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-get-started-java/AzSearch-Java-SelectProject.png
-
-
-
-
-
-
-
-
-
-
-
-
+[1]: ./media/search-get-started-java/create-search-portal-1.PNG
+[2]: ./media/search-get-started-java/create-search-portal-21.PNG
+[3]: ./media/search-get-started-java/create-search-portal-31.PNG
+[4]: ./media/search-get-started-java/AzSearch-Java-Import1.PNG
+[5]: ./media/search-get-started-java/AzSearch-Java-config1.PNG
+[6]: ./media/search-get-started-java/AzSearch-Java-ProjectFacets1.PNG
+[7]: ./media/search-get-started-java/AzSearch-Java-runtime1.PNG
+[8]: ./media/search-get-started-java/AzSearch-Java-Browser1.PNG
+[9]: ./media/search-get-started-java/AzSearch-Java-JREPref1.PNG
+[10]: ./media/search-get-started-java/AzSearch-Java-BuildProject1.PNG
+[11]: ./media/search-get-started-java/rogerwilliamsschool1.PNG
+[12]: ./media/search-get-started-java/AzSearch-Java-SelectProject.png

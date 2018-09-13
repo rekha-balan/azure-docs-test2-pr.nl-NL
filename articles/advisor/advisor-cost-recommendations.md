@@ -3,9 +3,8 @@ title: Azure Advisor Cost recommendations | Microsoft Docs
 description: Use Azure Advisor to optimize the cost of your Azure deployments.
 services: advisor
 documentationcenter: NA
-author: kumudd
-manager: carmonm
-editor: ''
+author: manbeenkohli
+manager: ''
 ms.assetid: ''
 ms.service: advisor
 ms.devlang: NA
@@ -13,47 +12,41 @@ ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 11/16/2016
-ms.author: kumud
-ms.openlocfilehash: 81eb993bb9cfd959acb91fe1f8f9c9fb452e868d
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: makohli
+ms.openlocfilehash: 71c380a1caae730b6b01615ce3047c2e22bd6dfb
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44670471"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44788767"
 ---
 # <a name="advisor-cost-recommendations"></a>Advisor Cost recommendations
 
 Advisor helps you optimize and reduce your overall Azure spend by identifying idle and underutilized resources. You can get cost recommendations from the **Cost** tab on the Advisor dashboard.
 
-![Advisor Cost tab](https://docstestmedia1.blob.core.windows.net/azure-media/articles/advisor/media/advisor-cost-recommendations/advisor-cost-tab2.png)
-
-## <a name="optimize-virtual-machine-spend-by-resizing-underutilized-instances"></a>Optimize virtual machine spend by resizing underutilized instances 
+## <a name="optimize-virtual-machine-spend-by-resizing-or-shutting-down-underutilized-instances"></a>Optimize virtual machine spend by resizing or shutting down underutilized instances 
 Although certain application scenarios can result in low utilization by design, you can often save money by managing the size and number of your virtual machines. Advisor monitors your virtual machine usage for 14 days and then identifies low-utilization virtual machines. Virtual machines whose CPU utilization is 5 percent or less and network usage is 7 MB or less for four or more days are considered low-utilization virtual machines.
 
-Advisor shows you the estimated cost of continuing to run your virtual machine, so that you can choose to shut it down or resize it.  
+Advisor shows you the estimated cost of continuing to run your virtual machine, so that you can choose to shut it down or resize it.
 
-![Advisor cost recommendations for resizing virtual machines](https://docstestmedia1.blob.core.windows.net/azure-media/articles/advisor/media/advisor-cost-recommendations/advisor-cost-resizevms.png)
+If you want to be more aggressive at identifying underutilized virtual machines, you can adjust the average CPU utilization rule on a per subscription basis.
 
-## <a name="use-a-cost-effective-solution-to-manage-performance-goals-of-multiple-sql-databases"></a>Use a cost effective solution to manage performance goals of multiple SQL databases
-Advisor identifies SQL server instances that can benefit from creating elastic database pools. Elastic database pools provide a simple, cost-effective solution to manage the performance goals of multiple databases that have varying usage patterns. For more information about Azure elastic pools, see [What is an Azure Elastic pool?](https://azure.microsoft.com/en-us/documentation/articles/sql-database-elastic-pool/).
+## <a name="reduce-costs-by-eliminating-unprovisioned-expressroute-circuits"></a>Reduce costs by eliminating unprovisioned ExpressRoute circuits
+Advisor identifies ExpressRoute circuits that have been in the provider status of *Not Provisioned* for more than one month, and recommends deleting the circuit if you aren't planning to provision the circuit with your connectivity provider.
 
-![Advisor cost recommendations for elastic database pools](https://docstestmedia1.blob.core.windows.net/azure-media/articles/advisor/media/advisor-cost-recommendations/advisor-cost-elasticdbpools.png)
+## <a name="reduce-costs-by-deleting-or-reconfiguring-idle-virtual-network-gateways"></a>Reduce costs by deleting or reconfiguring idle virtual network gateways
+Advisor identifies virtual network gates that have been idle for over 90 days. Since these gateways are billed hourly, you should consider reconfiguring or deleting them if you don't intend to use them anymore. 
 
-## <a name="how-to-access-cost-recommendations-in-azure-advisor"></a>How to access cost recommendations in Azure Advisor
+## <a name="buy-reserved-virtual-machine-instances-to-save-money-over-pay-as-you-go-costs"></a>Buy reserved virtual machine instances to save money over pay-as-you-go costs
+Advisor will review your virtual machine usage over the last 30 days and determine if you could save money by purchasing an Azure reservation. Advisor will show you the regions and sizes where you potentially have the most savings and will show you the estimated savings from purchasing reservations. 
 
-1. Sign in to the [Azure portal](https://portal.azure.com).
+With Azure reservations, you can pre-purchase the base costs for your virtual machines. Discounts will automatically apply to new or existing VMs that have the same size and region as your reservations. [Learn more about Azure Reserved VM Instances.](https://azure.microsoft.com/pricing/reserved-vm-instances/)
 
-2. In the left pane, click **More services**.
+## <a name="how-to-access-cost-recommendations-in-azure-advisor"></a>How to access Cost recommendations in Azure Advisor
 
-3. In the service menu pane, under **Monitoring and Management**, click **Azure Advisor**.  
- The Advisor dashboard is displayed.
+1. Sign in to the [Azure portal](https://portal.azure.com), and then open [Advisor](https://aka.ms/azureadvisordashboard).
 
-4. On the Advisor dashboard, click the **Cost** tab.
-
-5. Select the subscription for which you want to receive recommendations, and then click **Get recommendations**.
-
-> [!NOTE]
-> To access Advisor recommendations, you must first *register your subscription* with Advisor. A subscription is registered when a *subscription Owner* launches the Advisor dashboard and clicks the **Get recommendations** button. This is a *one-time operation*. After the subscription is registered, you can access Advisor recommendations as *Owner*, *Contributor*, or *Reader* for a subscription, a resource group, or a specific resource.
+2.  On the Advisor dashboard, click the **Cost** tab.
 
 ## <a name="next-steps"></a>Next steps
 
@@ -63,6 +56,3 @@ To learn more about Advisor recommendations, see:
 * [Advisor Performance recommendations](advisor-cost-recommendations.md)
 * [Advisor High Availability recommendations](advisor-cost-recommendations.md)
 * [Advisor Security recommendations](advisor-cost-recommendations.md)
-
-
-

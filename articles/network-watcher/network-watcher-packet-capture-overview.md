@@ -3,7 +3,7 @@ title: Introduction to Packet capture in Azure Network Watcher | Microsoft Docs
 description: This page provides an overview of the Network Watcher packet capture capability
 services: network-watcher
 documentationcenter: na
-author: georgewallace
+author: jimdial
 manager: timlt
 editor: ''
 ms.assetid: 3a81afaa-ecd9-4004-b68e-69ab56913356
@@ -13,13 +13,13 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
-ms.author: gwallace
-ms.openlocfilehash: 1565f731074be416956063ac89cbc0e179e608df
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: jdial
+ms.openlocfilehash: 152cc8fb61aa6115c7b5863e4d798db9e7aa5b7c
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44563045"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44790938"
 ---
 # <a name="introduction-to-variable-packet-capture-in-azure-network-watcher"></a>Introduction to variable packet capture in Azure Network Watcher
 
@@ -36,7 +36,7 @@ To reduce the information you capture to only the information you want, the foll
 
 |Property|Description|
 |---|---|
-|**Maximum bytes per packet (bytes)** | The number of bytes from each packet that are captured, all bytes are captured if left blank. The number of bytes from each packet that are captured, all bytes are captured if left blank. If you need only the IPv4 header – indicate 60 here |
+|**Maximum bytes per packet (bytes)** | The number of bytes from each packet that are captured, all bytes are captured if left blank. The number of bytes from each packet that are captured, all bytes are captured if left blank. If you need only the IPv4 header – indicate 34 here |
 |**Maximum bytes per session (bytes)** | Total number of bytes in that are captured, once the value is reached the session ends.|
 |**Time limit (seconds)** | Sets a time constraint on the packet capture session. The default value is 18000 seconds or 5 hours.|
 
@@ -57,8 +57,7 @@ Learn how you can manage packet captures through the portal by visiting [Manage 
 Learn how to create proactive packet captures based on virtual machine alerts by visiting [Create an alert triggered packet capture](network-watcher-alert-triggered-packet-capture.md)
 
 <!--Image references-->
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/network-watcher/media/network-watcher-packet-capture-overview/figure1.png
-
+[1]: ./media/network-watcher-packet-capture-overview/figure1.png
 
 
 

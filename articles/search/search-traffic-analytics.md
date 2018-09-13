@@ -1,25 +1,19 @@
 ---
 title: Search Traffic Analytics for Azure Search | Microsoft Docs
 description: Enable Search traffic analytics for Azure Search, a cloud hosted search service on Microsoft Azure, to unlock insights about your users and your data.
+author: HeidiSteen
+manager: cgronlun
 services: search
-documentationcenter: ''
-author: bernitorres
-manager: jlembicz
-editor: ''
-ms.assetid: b31d79cf-5924-4522-9276-a1bb5d527b13
 ms.service: search
-ms.devlang: multiple
-ms.workload: na
-ms.topic: article
-ms.tgt_pltfrm: na
+ms.topic: conceptual
 ms.date: 04/05/2017
-ms.author: betorres
-ms.openlocfilehash: ec8b3a9845d519dcd121a1a65652284e5a5919b7
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: heidist
+ms.openlocfilehash: 4b40e8c9f681b7489c0ab2ffe7b369cc869c73e2
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44556298"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44784386"
 ---
 # <a name="what-is-search-traffic-analytics"></a>What is search traffic analytics
 Search traffic analytics is a pattern for implementing a feedback loop for your search service. This pattern describes the necessary data and how to collect it using Application Insights, an industry leader for monitoring services in multiple platforms.
@@ -158,7 +152,7 @@ Every time that a user clicks on a document, that's a signal that must be logged
 
 *JavaScript*
 
-    appInsights.TrackEvent("Click", {
+    appInsights.trackEvent("Click", {
         SearchServiceName: <service name>,
         SearchId: <search id>,
         ClickedDocId: <clicked document id>,
@@ -193,9 +187,6 @@ You can find more information on Application Insights [here](https://go.microsof
 Learn more about creating amazing reports. See [Getting started with Power BI Desktop](https://powerbi.microsoft.com/en-us/documentation/powerbi-desktop-getting-started/) for details
 
 <!--Image references-->
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-traffic-analytics/AzureSearch-TrafficAnalytics.png
-[2]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-traffic-analytics/AzureSearch-AppInsightsData.PNG
-[3]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-traffic-analytics/AzureSearch-PBITemplate.PNG
-
-
-
+[1]: ./media/search-traffic-analytics/AzureSearch-TrafficAnalytics.png
+[2]: ./media/search-traffic-analytics/AzureSearch-AppInsightsData.png
+[3]: ./media/search-traffic-analytics/AzureSearch-PBITemplate.png

@@ -1,25 +1,20 @@
 ---
 title: Azure Search performance and optimization considerations | Microsoft Docs
 description: Tune Azure Search performance and configure optimum scale
-services: search
-documentationcenter: ''
 author: LiamCavanagh
-manager: pablocas
-editor: ''
-ms.assetid: 4d3cd864-29d2-4921-be0d-a3f1a819de46
+manager: jlembicz
+services: search
 ms.service: search
 ms.devlang: rest-api
-ms.workload: search
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.date: 04/02/2017
+ms.topic: conceptual
+ms.date: 05/01/2017
 ms.author: liamca
-ms.openlocfilehash: 106da702b93f8aaa329e19ebdbcb0a0a8d354be0
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 89c0352723f1ed00784250b566902028af853d10
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44662998"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44809665"
 ---
 # <a name="azure-search-performance-and-optimization-considerations"></a>Azure Search performance and optimization considerations
 A great search experience is a key to success for many mobile and web applications. From real estate, to used car marketplaces to online catalogs, fast search and relevant results will affect the customer experience. This document is intended to help you discover best practices for how to get the most out of Azure Search, especially for advanced scenarios with sophisticated requirements for scalability, multi-language support, or custom ranking.  In addition, this document outlines internals and covers approaches that work effectively in real-world customer apps.
@@ -80,7 +75,7 @@ The goal of a geo-distributed set of search services is to have two or more inde
 There are two options for keeping your distributed search services in sync which consist of either using the [Azure Search Indexer](search-indexer-overview.md) or the Push API (also referred to as the [Azure Search REST API](https://docs.microsoft.com/rest/api/searchservice/)).  
 
 ### <a name="azure-search-indexers"></a>Azure Search Indexers
-If you are using the Azure Search Indexer, you are already importing data changes from a central datastore such as Azure SQL DB or DocumentDB. When you create a new search Service, you simply also create a new Azure Search Indexer for that service that points to this same datastore. That way, whenever new changes come into the data store, they will then be indexed by the various Indexers.  
+If you are using the Azure Search Indexer, you are already importing data changes from a central datastore such as Azure SQL DB or Azure Cosmos DB. When you create a new search Service, you simply also create a new Azure Search Indexer for that service that points to this same datastore. That way, whenever new changes come into the data store, they will then be indexed by the various Indexers.  
 
 Here is an example of what that architecture would look like.
 
@@ -111,9 +106,6 @@ For more drilldown on performance and to see some demonstrations of how to imple
 > 
 
 <!--Image references-->
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-performance-optimization/geo-redundancy.png
-[2]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-performance-optimization/scale-indexers.png
-[3]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-performance-optimization/geo-search-traffic-mgr.png
-
-
-
+[1]: ./media/search-performance-optimization/geo-redundancy.png
+[2]: ./media/search-performance-optimization/scale-indexers.png
+[3]: ./media/search-performance-optimization/geo-search-traffic-mgr.png

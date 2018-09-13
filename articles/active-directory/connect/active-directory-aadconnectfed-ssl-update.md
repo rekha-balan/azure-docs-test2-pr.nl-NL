@@ -1,10 +1,8 @@
 ---
-title: 'Azure AD Connect: Update the SSL certificate for an Active Directory Federation Services (AD FS) farm | Microsoft Docs'
+title: Azure AD Connect - Update the SSL certificate for an AD FS farm | Microsoft Docs
 description: This document details the steps to update the SSL certificate of an AD FS farm by using Azure AD Connect.
 services: active-directory
-keywords: azure ad connect, adfs ssl update, adfs certificate update, change adfs certificate, new adfs certificate, adfs certificate, update adfs ssl certificate, update ssl certificate adfs, configure adfs ssl certificate, adfs, ssl, certificate, adfs service communication certificate, update federation, configure federation, aad connect
-authors: anandyadavmsft
-manager: femila
+manager: mtillman
 editor: billmath
 ms.assetid: 7c781f61-848a-48ad-9863-eb29da78f53c
 ms.service: active-directory
@@ -12,21 +10,26 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 02/07/2016
-ms.author: anandy
-ms.openlocfilehash: 16b47f5a930746042f0456fa065675d28c3739a6
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.date: 07/09/2018
+ms.component: hybrid
+author: billmath
+ms.custom: seohack1
+ms.author: billmath
+ms.openlocfilehash: 0eeb3f7d54617ff060481795bcdaa8b54e36dfa8
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44555716"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44808436"
 ---
 # <a name="update-the-ssl-certificate-for-an-active-directory-federation-services-ad-fs-farm"></a>Update the SSL certificate for an Active Directory Federation Services (AD FS) farm
 
 ## <a name="overview"></a>Overview
-This article describes how you can use Azure AD Connect to update the SSL certificate for an Active Directory Federation Services (AD FS) farm. If the sign-in method in Azure AD Connect is set as AD FS, you can use the Azure AD Connect tool to easily update the SSL certificate for the AD FS farm. You can do this across all federation and Web Application Proxy (WAP) servers in three simple steps:
+This article describes how you can use Azure AD Connect to update the SSL certificate for an Active Directory Federation Services (AD FS) farm. You can use the Azure AD Connect tool to easily update the SSL certificate for the AD FS farm even if the user sign-in method selected is not AD FS.
 
-![Three steps](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnectfed-ssl-update/threesteps.png)
+You can perform the whole operation of updating SSL certificate for the AD FS farm across all federation and Web Application Proxy (WAP) servers in three simple steps:
+
+![Three steps](./media/active-directory-aadconnectfed-ssl-update/threesteps.png)
 
 
 >[!NOTE]
@@ -35,9 +38,9 @@ This article describes how you can use Azure AD Connect to update the SSL certif
 ## <a name="prerequisites"></a>Prerequisites
 
 * **AD FS Farm**: Make sure that your AD FS farm is Windows Server 2012 R2-based or later.
-* **Azure AD Connect**: Ensure that the version of Azure AD Connect is 1.1.443.0 or later. You'll use the task **Update AD FS SSL certificate**.
+* **Azure AD Connect**: Ensure that the version of Azure AD Connect is 1.1.553.0 or higher. You'll use the task **Update AD FS SSL certificate**.
 
-![Update SSL task](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnectfed-ssl-update/updatessltask.png)
+![Update SSL task](./media/active-directory-aadconnectfed-ssl-update/updatessltask.png)
 
 ## <a name="step-1-provide-ad-fs-farm-information"></a>Step 1: Provide AD FS farm information
 
@@ -47,11 +50,11 @@ Azure AD Connect attempts to obtain information about the AD FS farm automatical
 
 You can modify the list of servers that are displayed by adding or removing the servers to reflect the current configuration of the AD FS farm. As soon as the server information is provided, Azure AD Connect displays the connectivity and current SSL certificate status.
 
-![AD FS server info](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnectfed-ssl-update/adfsserverinfo.png)
+![AD FS server info](./media/active-directory-aadconnectfed-ssl-update/adfsserverinfo.png)
 
 If the list contains a server that's no longer part of the AD FS farm, click **Remove** to delete the server from the list of servers in your AD FS farm.
 
-![Offline server in list](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnectfed-ssl-update/offlineserverlist.png)
+![Offline server in list](./media/active-directory-aadconnectfed-ssl-update/offlineserverlist.png)
 
 >[!NOTE]
 > Removing a server from the list of servers for an AD FS farm in Azure AD Connect is a local operation and updates the information for the AD FS farm that Azure AD Connect maintains locally. Azure AD Connect doesn't modify the configuration on AD FS to reflect the change.    
@@ -60,7 +63,7 @@ If the list contains a server that's no longer part of the AD FS farm, click **R
 
 After you've confirmed the information about AD FS farm servers, Azure AD Connect asks for the new SSL certificate. Provide a password-protected PFX certificate to continue the installation.
 
-![SSL certificate](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnectfed-ssl-update/certificate.png)
+![SSL certificate](./media/active-directory-aadconnectfed-ssl-update/certificate.png)
 
 After you provide the certificate, Azure AD Connect goes through a series of prerequisites. Verify the certificate to ensure that the certificate is correct for the AD FS farm:
 
@@ -73,11 +76,11 @@ After you provide the certificate, Azure AD Connect goes through a series of pre
 
 In the next step, select the servers that need to have the SSL certificate updated. Servers that are offline can't be selected for the update.
 
-![Select servers to update](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnectfed-ssl-update/selectservers.png)
+![Select servers to update](./media/active-directory-aadconnectfed-ssl-update/selectservers.png)
 
 After you complete the configuration, Azure AD Connect displays the message that indicates the status of the update and provides an option to verify the AD FS sign-in.
 
-![Configuration complete](https://docstestmedia1.blob.core.windows.net/azure-media/articles/active-directory/connect/media/active-directory-aadconnectfed-ssl-update/configurecomplete.png)   
+![Configuration complete](./media/active-directory-aadconnectfed-ssl-update/configurecomplete.png)   
 
 ## <a name="faqs"></a>FAQs
 
@@ -105,10 +108,3 @@ After you complete the configuration, Azure AD Connect displays the message that
 
 - [Azure AD Connect and federation](active-directory-aadconnectfed-whatis.md)
 - [Active Directory Federation Services management and customization with Azure AD Connect](active-directory-aadconnect-federation-management.md)
-
-
-
-
-
-
-

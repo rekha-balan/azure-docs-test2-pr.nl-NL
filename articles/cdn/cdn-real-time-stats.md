@@ -14,12 +14,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/23/2017
 ms.author: mazha
-ms.openlocfilehash: 9f9710de33a1065930f86fb0e0b21d958511e124
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: e9b9522de6b2c54dc794b00100ffe358296ecfdd
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44553641"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44808254"
 ---
 # <a name="real-time-stats-in-microsoft-azure-cdn"></a>Real-time stats in Microsoft Azure CDN
 [!INCLUDE [cdn-premium-feature](../../includes/cdn-premium-feature.md)]
@@ -37,27 +37,27 @@ The following graphs are available:
 ## <a name="accessing-real-time-stats"></a>Accessing real-time stats
 1. In the [Azure Portal](https://portal.azure.com), browse to your CDN profile.
    
-    ![CDN profile blade](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-real-time-stats/cdn-profile-blade.png)
+    ![CDN profile blade](./media/cdn-real-time-stats/cdn-profile-blade.png)
 2. From the CDN profile blade, click the **Manage** button.
    
-    ![CDN profile blade manage button](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-real-time-stats/cdn-manage-btn.png)
+    ![CDN profile blade manage button](./media/cdn-real-time-stats/cdn-manage-btn.png)
    
     The CDN management portal opens.
 3. Hover over the **Analytics** tab, then hover over the **Real-Time Stats** flyout.  Click on **HTTP Large Object**.
    
-    ![CDN management portal](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-real-time-stats/cdn-premium-portal.png)
+    ![CDN management portal](./media/cdn-real-time-stats/cdn-premium-portal.png)
    
     The real-time stats graphs are displayed.
 
 Each of the graphs displays real-time statistics for the selected time span, starting when the page loads.  The graphs update automatically every few seconds.  The **Refresh Graph** button, if present, will clear the graph, after which it will only display the selected data.
 
 ## <a name="bandwidth"></a>Bandwidth
-![Bandwidth graph](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-real-time-stats/cdn-bandwidth.png)
+![Bandwidth graph](./media/cdn-real-time-stats/cdn-bandwidth.png)
 
 The **Bandwidth** graph displays the amount of bandwidth used for the current platform over the selected time span. The shaded portion of the graph indicates bandwidth usage. The exact amount of bandwidth currently being used is displayed directly below the line graph.
 
 ## <a name="status-codes"></a>Status Codes
-![Status code graph](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-real-time-stats/cdn-status-codes.png)
+![Status code graph](./media/cdn-real-time-stats/cdn-status-codes.png)
 
 The **Status Codes** graph indicates how often certain HTTP response codes are occurring over the selected time span.
 
@@ -71,7 +71,7 @@ A list of HTTP status codes is displayed directly above the graph. This list ind
 You can temporarily hide logged data for a particular status code.  From the legend directly below the graph, click the status code you want to hide. The status code will be immediately hidden from the graph. Clicking that status code again will cause that option to be displayed again.
 
 ## <a name="cache-statuses"></a>Cache Statuses
-![Cache Statuses graph](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-real-time-stats/cdn-cache-status.png)
+![Cache Statuses graph](./media/cdn-real-time-stats/cdn-cache-status.png)
 
 The **Cache Statuses** graph indicates how often certain types of cache statuses are occurring over the selected time span. 
 
@@ -85,7 +85,7 @@ A list of cache status codes is displayed directly above the graph. This list in
 You can temporarily hide logged data for a particular status code.  From the legend directly below the graph, click the status code you want to hide. The status code will be immediately hidden from the graph. Clicking that status code again will cause that option to be displayed again.
 
 ## <a name="connections"></a>Connections
-![Connections graph](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-real-time-stats/cdn-connections.png)
+![Connections graph](./media/cdn-real-time-stats/cdn-connections.png)
 
 This graph indicates how many connections have been established to your edge servers. Each request for an asset that passes through our CDN results in a connection.
 
@@ -93,11 +93,4 @@ This graph indicates how many connections have been established to your edge ser
 * Get notified with [Real-time alerts in Azure CDN](cdn-real-time-alerts.md)
 * Dig deeper with [advanced HTTP reports](cdn-advanced-http-reports.md)
 * Analyze [usage patterns](cdn-analyze-usage-patterns.md)
-
-
-
-
-
-
-
 

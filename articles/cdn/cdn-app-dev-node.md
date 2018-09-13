@@ -14,12 +14,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/23/2017
 ms.author: mazha
-ms.openlocfilehash: f38056835e06667b805caeff8f48e4515713a90c
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 46ae8cd9775432d126cbde856c1fb06ea319297e
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44554203"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44800740"
 ---
 # <a name="get-started-with-azure-cdn-development"></a>Get started with Azure CDN development
 > [!div class="op_single_selector"]
@@ -48,7 +48,7 @@ Create a folder to store your application.  From a console with the Node.js tool
 
 You will then be presented a series of questions to initialize your project.  For **entry point**, this tutorial uses *app.js*.  You can see my other choices in the following example.
 
-![NPM init output](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-app-dev-node/cdn-npm-init.png)
+![NPM init output](./media/cdn-app-dev-node/cdn-npm-init.png)
 
 Our project is now initialized with a *packages.json* file.  Our project is going to use some Azure libraries contained in NPM packages.  We'll use the Azure Client Runtime for Node.js (ms-rest-azure) and the Azure CDN Client Library for Node.js (azure-arm-cd).  Let's add those to the project as dependencies.
 
@@ -346,19 +346,19 @@ We can now execute our Node.js program using our favorite debugger or at the con
 
 Let's start by listing our profiles.
 
-![List profiles](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-app-dev-node/cdn-list-profiles.png)
+![List profiles](./media/cdn-app-dev-node/cdn-list-profiles.png)
 
 We got back an empty array.  Since we don't have any profiles in our resource group, that's expected.  Let's create a profile now.
 
-![Create profile](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-app-dev-node/cdn-create-profile.png)
+![Create profile](./media/cdn-app-dev-node/cdn-create-profile.png)
 
 Now, let's add an endpoint.
 
-![Create endpoint](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-app-dev-node/cdn-create-endpoint.png)
+![Create endpoint](./media/cdn-app-dev-node/cdn-create-endpoint.png)
 
 Finally, let's delete our profile.
 
-![Delete profile](https://docstestmedia1.blob.core.windows.net/azure-media/articles/cdn/media/cdn-app-dev-node/cdn-delete-profile.png)
+![Delete profile](./media/cdn-app-dev-node/cdn-delete-profile.png)
 
 ## <a name="next-steps"></a>Next Steps
 To see the completed project from this walkthrough, [download the sample](https://code.msdn.microsoft.com/Azure-CDN-SDK-for-Nodejs-c712bc74).
@@ -368,9 +368,4 @@ To see the reference for the Azure CDN SDK for Node.js, view the [reference](htt
 To find additional documentation on the Azure SDK for Node.js, view the [full reference](http://azure.github.io/azure-sdk-for-node/).
 
 Manage your CDN resources with [PowerShell](cdn-manage-powershell.md).
-
-
-
-
-
 

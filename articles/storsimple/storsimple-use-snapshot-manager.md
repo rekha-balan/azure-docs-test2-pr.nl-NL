@@ -12,15 +12,15 @@ ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: TBD
-ms.date: 02/27/2017
+ms.date: 06/05/2017
 ms.author: v-sharos
-ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: e75f3f28e327d51be77b045042e7e941a654607d
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.custom: ''
+ms.openlocfilehash: b48c507e38eb7cadff56259f617e336e4efe5708
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44554159"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44791341"
 ---
 # <a name="use-storsimple-snapshot-manager-user-interface-to-manage-backup-jobs-and-backup-catalog"></a>Use StorSimple Snapshot Manager user interface to manage backup jobs and backup catalog
 
@@ -30,7 +30,7 @@ The StorSimple Snapshot Manager has an intuitive user interface that you can use
 ### <a name="console-description"></a>Console description
 To view the user interface, click the StorSimple Snapshot Manager icon on your desktop. The console window appears, as shown in the following illustration.
 
-![StorSimple Snapshot Manager panes](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-use-snapshot-manager/HCS_SSM_gui_panes.png)
+![StorSimple Snapshot Manager panes](./media/storsimple-use-snapshot-manager/HCS_SSM_gui_panes.png)
 
 The console window has five major elements. Click the appropriate link for a complete description of each element.
 
@@ -54,7 +54,7 @@ The menu bar at the top of the console window contains [File](#file-menu), [Acti
 
 Click any item on the menu bar to see a list of available commands on that menu. The following example shows the **View** menu selected on the menu bar.
 
-![View menu selected](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-use-snapshot-manager/HCS_SSM_View_menu.png)
+![View menu selected](./media/storsimple-use-snapshot-manager/HCS_SSM_View_menu.png)
 
 ### <a name="file-menu"></a>File menu
 The **File** menu contains standard Microsoft Management Console (MMC) commands.
@@ -62,7 +62,7 @@ The **File** menu contains standard Microsoft Management Console (MMC) commands.
 #### <a name="menu-access"></a>Menu access
 To view the **File** menu, click **File** on the menu bar. The following menu appears.
 
-![StorSimple Snapshot Manager File menu](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-use-snapshot-manager/HCS_SSM_FileMenu.png) 
+![StorSimple Snapshot Manager File menu](./media/storsimple-use-snapshot-manager/HCS_SSM_FileMenu.png) 
 
 #### <a name="menu-description"></a>Menu description
 The following table describes items that appear on the **File** menu.
@@ -89,11 +89,11 @@ To view the **Action** menu, do one of the following:
 
 For example, if you select the top node in the **Scope** pane, and then right-click or click **Action** in the menu bar, the following menu appears.
 
-![StorSimple Snapshot Manager Action menu](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-use-snapshot-manager/HCS_SSM_Action_menu.png)
+![StorSimple Snapshot Manager Action menu](./media/storsimple-use-snapshot-manager/HCS_SSM_Action_menu.png)
 
 The **Actions** pane (on the right of the console) contains the same list of actions as the **Action** menu. Additionally, the **Actions** pane contains the **View** menu options, which enable you to create a custom view of the **Results** pane.
 
-![Actions pane with View menu open](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-use-snapshot-manager/HCS_SSM_ActionsPane_Results.png)
+![Actions pane with View menu open](./media/storsimple-use-snapshot-manager/HCS_SSM_ActionsPane_Results.png)
 
 #### <a name="menu-description"></a>Menu description
 The following table contains an alphabetical list of StorSimple Snapshot Manager actions. 
@@ -126,7 +126,7 @@ The following table contains an alphabetical list of StorSimple Snapshot Manager
 | Rescan volumes |Right-click the **Volumes** node. |Click **Rescan volumes** to update the list of volumes that appears in the **Results** pane. |
 | Restore |Expand **Backup Catalog**, expand a volume group, expand **Local Snapshots** or **Cloud Snapshots**, and then right-click a backup. |Click **Restore** to replace the current volume group data with the data from the selected backup. |
 | Take Backup |Do one of the following:<ul><li>Expand **Volume Groups**, and then right-click a volume group.</li><li>Expand **Backup Catalog**, and then right-click a volume group.</li></ul> |Click **Take Backup** to start a backup job immediately. |
-| Toggle Imports Display |Right-click the top node in the **Scope** pane (the **StorSimple Snapshot Manager** node in the examples). |Click **Toggle Imports Display** to show or hide the volume groups and associated backups that were imported from the StorSimple Manager service dashboard. |
+| Toggle Imports Display |Right-click the top node in the **Scope** pane (the **StorSimple Snapshot Manager** node in the examples). |Click **Toggle Imports Display** to show or hide the volume groups and associated backups that were imported from the StorSimple Device Manager service dashboard. |
 
 ### <a name="view-menu"></a>View menu
 Use the **View** menu to create a custom view of the **Results** pane contents. The **View** menu contains **Add/Remove Columns** and **Customize** options.
@@ -134,7 +134,7 @@ Use the **View** menu to create a custom view of the **Results** pane contents. 
 #### <a name="menu-access"></a>Menu access
 You can access the **View** menu on the menu bar or in the **Actions** pane.
 
-![StorSimple Snapshot Manager View menu](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-use-snapshot-manager/HCS_SSM_View_menu.png) 
+![StorSimple Snapshot Manager View menu](./media/storsimple-use-snapshot-manager/HCS_SSM_View_menu.png) 
 
 #### <a name="menu-description"></a>Menu description
 The following table describes items that appear on the **View** menu.
@@ -150,7 +150,7 @@ Use the **Favorites** menu to add, remove, and organize page views and tasks tha
 #### <a name="menu-access"></a>Menu access
 You can access the **Favorites** menu on the menu bar.
 
-![StorSimple Snapshot Manager Favorites menu](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-use-snapshot-manager/HCS_SSM_FavoritesMenu.png)
+![StorSimple Snapshot Manager Favorites menu](./media/storsimple-use-snapshot-manager/HCS_SSM_FavoritesMenu.png)
 
 #### <a name="menu-description"></a>Menu description
 The following table describes items that appear on the **Favorites** menu.
@@ -166,7 +166,7 @@ Use the **Window** menu to add and rearrange StorSimple Snapshot Manager console
 #### <a name="menu-access"></a>Menu access
 You can access the **Window** menu on the menu bar.
 
-![StorSimple Snapshot Manager Window menu](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-use-snapshot-manager/HCS_SSM_WindowMenu.png)
+![StorSimple Snapshot Manager Window menu](./media/storsimple-use-snapshot-manager/HCS_SSM_WindowMenu.png)
 
 The numbered list at the bottom of the menu shows the windows that are currently open. Click any window in that list to bring the window into the foreground. 
 
@@ -185,7 +185,7 @@ Use the **Help** menu to view available online help for StorSimple Snapshot Mana
 
 You can access the **Help** menu on the menu bar. You can also access StorSimple Snapshot Manager help topics from the **Actions** pane.
 
-![StorSimple Snapshot Manager Help menu](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-use-snapshot-manager/HCS_SSM_HelpMenu.png)
+![StorSimple Snapshot Manager Help menu](./media/storsimple-use-snapshot-manager/HCS_SSM_HelpMenu.png)
 
 #### <a name="menu-description"></a>Menu description
 The following table describes items that appear on the Help menu.
@@ -206,13 +206,13 @@ The following table describes the icons that appear on the tool bar.
 
 | Icon | Description |
 |:--- |:--- |
-| ![Left arrow](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-use-snapshot-manager/HCS_SSM_LeftArrow.png) |Click the left arrow icon to return to the previous page. |
-| ![Right arrow](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-use-snapshot-manager/HCS_SSM_RightArrow.png) |Click the right arrow to go to the next page (if the arrow is gray, the action is unavailable). |
-| ![Up icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-use-snapshot-manager/HCS_SSM_Up.png) |Click the up icon to go up one level in the console tree (the **Scope** pane). |
-| ![Show/hide console tree](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-use-snapshot-manager/HCS_SSM_ShowConsoleTree.png) |Click the show/hide console tree icon to show or hide the **Scope** pane. |
-| ![Export list](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-use-snapshot-manager/HCS_SSM_ExportListIcon.png) |Click the export list icon to export a list to a CSV file that you specify. |
-| ![Help icon](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-use-snapshot-manager/HCS_SSM_HelpIcon.png) |Click the help icon to open an online MMC help topic. |
-| ![Show/hide Actions pane](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-use-snapshot-manager/HCS_SSM_ShowAction.png) |Click the show/hide **Actions** pane icon to show or hide the **Actions** pane. |
+| ![Left arrow](./media/storsimple-use-snapshot-manager/HCS_SSM_LeftArrow.png) |Click the left arrow icon to return to the previous page. |
+| ![Right arrow](./media/storsimple-use-snapshot-manager/HCS_SSM_RightArrow.png) |Click the right arrow to go to the next page (if the arrow is gray, the action is unavailable). |
+| ![Up icon](./media/storsimple-use-snapshot-manager/HCS_SSM_Up.png) |Click the up icon to go up one level in the console tree (the **Scope** pane). |
+| ![Show/hide console tree](./media/storsimple-use-snapshot-manager/HCS_SSM_ShowConsoleTree.png) |Click the show/hide console tree icon to show or hide the **Scope** pane. |
+| ![Export list](./media/storsimple-use-snapshot-manager/HCS_SSM_ExportListIcon.png) |Click the export list icon to export a list to a CSV file that you specify. |
+| ![Help icon](./media/storsimple-use-snapshot-manager/HCS_SSM_HelpIcon.png) |Click the help icon to open an online MMC help topic. |
+| ![Show/hide Actions pane](./media/storsimple-use-snapshot-manager/HCS_SSM_ShowAction.png) |Click the show/hide **Actions** pane icon to show or hide the **Actions** pane. |
 
 ## <a name="scope-pane"></a>Scope pane
 The **Scope** pane is the leftmost pane in the StorSimple Snapshot Manager UI. It contains the console (or node) tree and is the primary navigation mechanism for StorSimple Snapshot Manager. 
@@ -220,7 +220,7 @@ The **Scope** pane is the leftmost pane in the StorSimple Snapshot Manager UI. I
 ### <a name="scope-pane-structure"></a>Scope pane structure
 The **Scope** pane contains a series of clickable objects (nodes) organized in a tree structure. 
 
-![Scope pane](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-use-snapshot-manager/HCS_SSM_Scope_pane.png) 
+![Scope pane](./media/storsimple-use-snapshot-manager/HCS_SSM_Scope_pane.png) 
 
 * To expand or collapse a node, click the arrow icon next to the node name.
 * To view the status or contents of a node, click the node name. The information appears in the **Results** pane. 
@@ -273,8 +273,7 @@ Backup policies are job schedules for local and cloud snapshots. Use the **Backu
 
 > [!NOTE]
 > You can retain a maximum of 64 backups.
-> 
-> 
+
 
 ### <a name="backup-catalog-node"></a>Backup Catalog node
 The **Backup Catalog** node contains lists of on-site and off-site backups of Azure StorSimple volumes. This node is organized by volume group, and each volume group container contains separate structures for local snapshots (the **Local Snapshot**s node) and cloud snapshots (the **Cloud Snapshots** node). When expanded, each volume group container lists all the successful backups that were taken interactively or by a configured policy.
@@ -312,7 +311,7 @@ The **Results** pane is the center pane in the StorSimple Snapshot Manager UI. I
 ### <a name="example"></a>Example
 To see the following example, click the **Volume Groups** node in the **Scope** pane. The **Results** pane displays a list of volume groups with details about each group.
 
-![Results pane](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-use-snapshot-manager/HCS_SSM_Results_pane.png) 
+![Results pane](./media/storsimple-use-snapshot-manager/HCS_SSM_Results_pane.png) 
 
 You can configure the details shown in the **Results** pane: right-click a node in the **Scope** pane, click **View**, and then click **Add/Remove Columns**.
 
@@ -322,11 +321,11 @@ The **Actions** pane is the right pane in the StorSimple Snapshot Manager UI. It
 ### <a name="examples"></a>Examples
 To see the following example, in the **Scope** pane, expand the **Jobs** node and click **Scheduled**. The **Actions** pane displays the available actions for the **Scheduled** node.
 
-![Actions pane scheduled jobs example](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-use-snapshot-manager/HCS_SSM_ActionsPane.png) 
+![Actions pane scheduled jobs example](./media/storsimple-use-snapshot-manager/HCS_SSM_ActionsPane.png) 
 
 To see more options, in the **Scope** pane, expand the **Jobs** node, click **Scheduled**, and then click a scheduled job in the **Results** pane. The **Actions** pane displays the available actions for the scheduled job, as shown in the following example.
 
-![Actions pane job actions example](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-use-snapshot-manager/HCS_SSM_ActionsPane_Results.png)
+![Actions pane job actions example](./media/storsimple-use-snapshot-manager/HCS_SSM_ActionsPane_Results.png)
 
 ## <a name="keyboard-navigation-and-shortcuts"></a>Keyboard navigation and shortcuts
 StorSimple Snapshot Manager enables the accessibility features of the Windows operating system and the Microsoft Management Console (MMC). It also includes some keyboard navigation features and shortcuts that are specific to the StorSimple Snapshot Manager, as described in the following sections.
@@ -451,24 +450,4 @@ The following tables show the shortcut key combinations for each node in the **S
 ## <a name="next-steps"></a>Next steps
 * Learn how to [use StorSimple Snapshot Manager to administer your StorSimple solution](storsimple-snapshot-manager-admin.md).
 * Learn how to [use StorSimple Snapshot Manager to connect and manage devices](storsimple-snapshot-manager-manage-devices.md).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

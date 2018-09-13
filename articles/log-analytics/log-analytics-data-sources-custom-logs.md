@@ -1,65 +1,66 @@
 ---
-title: Collect custom logs in OMS Log Analytics | Microsoft Docs
-description: Log Analytics can collect events from text files on both Windows and Linux computers.  This article describes how to define a new custom log and details of the records they create in the OMS repository.
+title: Collect custom logs in Azure Log Analytics | Microsoft Docs
+description: Log Analytics can collect events from text files on both Windows and Linux computers.  This article describes how to define a new custom log and details of the records they create in the Log Analytics workspace.
 services: log-analytics
 documentationcenter: ''
 author: bwren
-manager: jwhit
+manager: carmonm
 editor: tysonn
 ms.assetid: aca7f6bb-6f53-4fd4-a45c-93f12ead4ae1
 ms.service: log-analytics
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 01/23/2017
+ms.date: 05/27/2018
 ms.author: bwren
-ms.openlocfilehash: c4f927f0d2e045d88b2099e1a328bd2162fdbcf8
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.component: na
+ms.openlocfilehash: 831b52a27a1ccfc349b9b54f8c3d874e41ddc322
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44552001"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44782683"
 ---
 # <a name="custom-logs-in-log-analytics"></a>Custom logs in Log Analytics
-The Custom Logs data source in Log Analytics allows you to collect events from text files on both Windows and Linux computers. Many applications log information to text files instead of standard logging services such as Windows Event log or Syslog.  Once collected, you can parse each record in the log into individual fields using the [Custom Fields](log-analytics-custom-fields.md) feature of Log Analytics.
+The Custom Logs data source in Log Analytics allows you to collect events from text files on both Windows and Linux computers. Many applications log information to text files instead of standard logging services such as Windows Event log or Syslog.  Once collected, you can parse each record in the login to individual fields using the [Custom Fields](log-analytics-custom-fields.md) feature of Log Analytics.
 
-![Custom log collection](https://docstestmedia1.blob.core.windows.net/azure-media/articles/log-analytics/media/log-analytics-data-sources-custom-logs/overview.png)
+![Custom log collection](media/log-analytics-data-sources-custom-logs/overview.png)
 
 The log files to be collected must match the following criteria.
 
-* The log must either have a single entry per line or use a timestamp matching one of the following formats at the start of each entry.
-  
-    YYYY-MM-DD HH:MM:SS <br>
-    M/D/YYYY HH:MM:SS AM/PM <br>
-    Mon DD,YYYY HH:MM:SS
-* The log file must not allow circular updates where the file is overwritten with new entries. 
+- The log must either have a single entry per line or use a timestamp matching one of the following formats at the start of each entry.
 
+    YYYY-MM-DD HH:MM:SS<br>M/D/YYYY HH:MM:SS AM/PM<br>Mon DD, YYYY HH:MM:SS<br />yyMMdd HH:mm:ss<br />ddMMyy HH:mm:ss<br />MMM d hh:mm:ss<br />dd/MMM/yyyy:HH:mm:ss zzz<br />yyyy-MM-ddTHH:mm:ssK
+
+- The log file must not allow circular logging or log rotation, where the file is overwritten with new entries.
+- The log file must use ASCII or UTF-8 encoding.  Other formats such as UTF-16 are not supported.
+
+>[!NOTE]
+>If there are duplicate entries in the log file, Log Analytics will collect them.  However, the search results will be inconsistent where the filter results show more events than the result count.  It will be important that you validate the log to determine if the application that creates it is causing this behavior and address it if possible before creating the custom log collection definition.  
+>
+  
 ## <a name="defining-a-custom-log"></a>Defining a custom log
 Use the following procedure to define a custom log file.  Scroll to the end of this article for a walkthrough of a sample of adding a custom log.
 
 ### <a name="step-1-open-the-custom-log-wizard"></a>Step 1. Open the Custom Log Wizard
-The Custom Log Wizard runs in the OMS portal and allows you to define a new custom log to collect.
+The Custom Log Wizard runs in the Azure portal and allows you to define a new custom log to collect.
 
-1. In the OMS portal, go to **Settings**.
-2. Click on **Data** and then **Custom logs**.
+1. In the Azure portal, select **Log Analytics** > your workspace > **Advanced Settings**.
+2. Click on **Data** > **Custom logs**.
 3. By default, all configuration changes are automatically pushed to all agents.  For Linux agents, a configuration file is sent to the Fluentd data collector.  If you wish to modify this file manually on each Linux agent, then uncheck the box *Apply below configuration to my Linux machines*.
 4. Click **Add+** to open the Custom Log Wizard.
 
 ### <a name="step-2-upload-and-parse-a-sample-log"></a>Step 2. Upload and parse a sample log
 You start by uploading a sample of the custom log.  The wizard will parse and display the entries in this file for you to validate.  Log Analytics will use the delimiter that you specify to identify each record.
 
-**New Line** is the default delimiter and is used for log files that have a single entry per line.  If the line starts with a date and time in one of the available formats, then you can specify a **Timestamp** delimiter which supports entries that span more than one line. 
+**New Line** is the default delimiter and is used for log files that have a single entry per line.  If the line starts with a date and time in one of the available formats, then you can specify a **Timestamp** delimiter which supports entries that span more than one line.
 
-If a timestamp delimiter is used, then the TimeGenerated property of each record stored in OMS will be populated with the date/time specified for that entry in the log file.  If a new line delimiter is used, then TimeGenerated is populated with date and time that Log Analytics collected the entry. 
+If a timestamp delimiter is used, then the TimeGenerated property of each record stored in Log Analytics will be populated with the date/time specified for that entry in the log file.  If a new line delimiter is used, then TimeGenerated is populated with date and time that Log Analytics collected the entry.
 
-> [!NOTE]
-> Log Analytics currently treats the date/time collected from a log using a timestamp delimiter as UTC.  This will soon be changed to use the time zone on the agent. 
-> 
-> 
 
 1. Click **Browse** and browse to a sample file.  Note that this may button may be labeled **Choose File** in some browsers.
-2. Click **Next**. 
+2. Click **Next**.
 3. The Custom Log Wizard will upload the file and list the records that it identifies.
 4. Change the delimiter that is used to identify a new record and select the delimiter that best identifies the records in your log file.
 5. Click **Next**.
@@ -69,7 +70,7 @@ You must define one or more paths on the agent where it can locate the custom lo
 
 For example, an application might create a log file each day with the date included in the name as in log20100316.txt. A pattern for such a log might be *log\*.txt* which would apply to any log file following the application’s naming scheme.
 
-The following table provides examples of valid patterns to specify different log files. 
+The following table provides examples of valid patterns to specify different log files.
 
 | Description | Path |
 |:--- |:--- |
@@ -96,21 +97,20 @@ Once Log Analytics starts collecting from the custom log, its records will be av
 
 > [!NOTE]
 > If the RawData property is missing from the search, you may need to close and reopen your browser.
-> 
-> 
+>
+>
 
 ### <a name="step-6-parse-the-custom-log-entries"></a>Step 6. Parse the custom log entries
 The entire log entry will be stored in a single property called **RawData**.  You will most likely want to separate the different pieces of information in each entry into individual properties stored in the record.  You do this using the [Custom Fields](log-analytics-custom-fields.md) feature of Log Analytics.
 
 Detailed steps for parsing the custom log entry are not provided here.  Please refer to the [Custom Fields](log-analytics-custom-fields.md) documentation for this information.
 
-## <a name="disabling-a-custom-log"></a>Disabling a custom log
-You cannot remove a custom log definition once it's been created, but you can disable it by removing all of its collection paths.
+## <a name="removing-a-custom-log"></a>Removing a custom log
+Use the following process in the Azure portal to remove a custom log that you previously defined.
 
-1. In the OMS portal, go to **Settings**.
-2. Click on **Data** and then **Custom logs**.
-3. Click **Details** next to the custom log definition to disable.
-4. Remove each of the collection paths for the custom log definition.
+1. From the **Data** menu in the **Advanced Settings** for your workspace, select **Custom Logs** to list all your custom logs.
+2. Click **Remove** next to the custom log to remove.
+
 
 ## <a name="data-collection"></a>Data collection
 Log Analytics will collect new entries from each custom log approximately every 5 minutes.  The agent will record its place in each log file that it collects from.  If the agent goes offline for a period of time, then Log Analytics will collect entries from where it last left off, even if those entries were created while the agent was offline.
@@ -122,23 +122,24 @@ Custom log records have a type with the log name that you provide and the proper
 
 | Property | Description |
 |:--- |:--- |
-| TimeGenerated |Date and time that the record was collected by Log Analytics.  If the log uses a time based delimiter then this is the time collected from the entry. |
-| SourceSystem |Type of agent the record was collected from. <br> OpsManager – Windows agent, either direct connect or SCOM <br> Linux – All Linux agents |
+| TimeGenerated |Date and time that the record was collected by Log Analytics.  If the log uses a time-based delimiter then this is the time collected from the entry. |
+| SourceSystem |Type of agent the record was collected from. <br> OpsManager – Windows agent, either direct connect or System Center Operations Manager <br> Linux – All Linux agents |
 | RawData |Full text of the collected entry. |
-| ManagementGroupName |Name of the management group for SCOM agents.  For other agents, this is AOI-\<workspace ID\> |
+| ManagementGroupName |Name of the management group for System Center Operations Manage agents.  For other agents, this is AOI-\<workspace ID\> |
 
 ## <a name="log-searches-with-custom-log-records"></a>Log searches with custom log records
-Records from custom logs are stored in the OMS repository just like records from any other data source.  They will have a type matching the name that you provide when you define the log, so you can use the Type property in your search to retrieve records collected from a specific log.
+Records from custom logs are stored in the Log Analytics workspace just like records from any other data source.  They will have a type matching the name that you provide when you define the log, so you can use the Type property in your search to retrieve records collected from a specific log.
 
 The following table provides different examples of log searches that retrieve records from custom logs.
 
 | Query | Description |
 |:--- |:--- |
-| Type=MyApp_CL |All events from a custom log named MyApp_CL. |
-| Type=MyApp_CL Severity_CF=error |All events from a custom log named MyApp_CL with a value of *error* in a custom field named *Severity_CF*. |
+| MyApp_CL |All events from a custom log named MyApp_CL. |
+| MyApp_CL &#124; where Severity_CF=="error" |All events from a custom log named MyApp_CL with a value of *error* in a custom field named *Severity_CF*. |
+
 
 ## <a name="sample-walkthrough-of-adding-a-custom-log"></a>Sample walkthrough of adding a custom log
-The following section walks through an example of creating a custom log.  The sample log being collected has a single entry on each line starting with a date and time and then comma delimited fields for code, status, and message.  Several sample entries are shown below.
+The following section walks through an example of creating a custom log.  The sample log being collected has a single entry on each line starting with a date and time and then comma-delimited fields for code, status, and message.  Several sample entries are shown below.
 
     2016-03-10 01:34:36 207,Success,Client 05a26a97-272a-4bc9-8f64-269d154b0e39 connected
     2016-03-10 01:33:33 208,Warning,Client ec53d95c-1c88-41ae-8174-92104212de5d disconnected
@@ -149,35 +150,28 @@ The following section walks through an example of creating a custom log.  The sa
 ### <a name="upload-and-parse-a-sample-log"></a>Upload and parse a sample log
 We provide one of the log files and can see the events that it will be collecting.  In this case New Line is a sufficient delimiter.  If a single entry in the log could span multiple lines though, then a timestamp delimiter would need to be used.
 
-![Upload and parse a sample log](https://docstestmedia1.blob.core.windows.net/azure-media/articles/log-analytics/media/log-analytics-data-sources-custom-logs/delimiter.png)
+![Upload and parse a sample log](media/log-analytics-data-sources-custom-logs/delimiter.png)
 
 ### <a name="add-log-collection-paths"></a>Add log collection paths
 The log files will be located in *C:\MyApp\Logs*.  A new file will be created each day with a name that includes the date in the pattern *appYYYYMMDD.log*.  A sufficient pattern for this log would be *C:\MyApp\Logs\\\*.log*.
 
-![Log collection path](https://docstestmedia1.blob.core.windows.net/azure-media/articles/log-analytics/media/log-analytics-data-sources-custom-logs/collection-path.png)
+![Log collection path](media/log-analytics-data-sources-custom-logs/collection-path.png)
 
 ### <a name="provide-a-name-and-description-for-the-log"></a>Provide a name and description for the log
 We use a name of *MyApp_CL* and type in a **Description**.
 
-![Log name](https://docstestmedia1.blob.core.windows.net/azure-media/articles/log-analytics/media/log-analytics-data-sources-custom-logs/log-name.png)
+![Log name](media/log-analytics-data-sources-custom-logs/log-name.png)
 
 ### <a name="validate-that-the-custom-logs-are-being-collected"></a>Validate that the custom logs are being collected
 We use a query of *Type=MyApp_CL* to return all records from the collected log.
 
-![Log query with no custom fields](https://docstestmedia1.blob.core.windows.net/azure-media/articles/log-analytics/media/log-analytics-data-sources-custom-logs/query-01.png)
+![Log query with no custom fields](media/log-analytics-data-sources-custom-logs/query-01.png)
 
 ### <a name="parse-the-custom-log-entries"></a>Parse the custom log entries
 We use Custom Fields to define the *EventTime*, *Code*, *Status*, and *Message* fields and we can see the difference in the records that are returned by the query.
 
-![Log query with custom fields](https://docstestmedia1.blob.core.windows.net/azure-media/articles/log-analytics/media/log-analytics-data-sources-custom-logs/query-02.png)
+![Log query with custom fields](media/log-analytics-data-sources-custom-logs/query-02.png)
 
 ## <a name="next-steps"></a>Next steps
-* Use [Custom Fields](log-analytics-custom-fields.md) to parse the entries in the custom log into individual fields.
-* Learn about [log searches](log-analytics-log-searches.md) to analyze the data collected from data sources and solutions. 
-
-
-
-
-
-
-
+* Use [Custom Fields](log-analytics-custom-fields.md) to parse the entries in the custom login to individual fields.
+* Learn about [log searches](log-analytics-log-searches.md) to analyze the data collected from data sources and solutions.

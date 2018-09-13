@@ -1,59 +1,59 @@
 ---
-title: Query your Azure Search Index using the Azure Portal | Microsoft Docs
-description: Issue a search query in the Azure Portal's Search Explorer.
+title: Search explorer for querying indexes in Azure Search | Microsoft Docs
+description: Learn how to use Search explorer for querying indexes in Azure Search.
+manager: cgronlun
+author: HeidiSteen
 services: search
-manager: jhubbard
-documentationcenter: ''
-author: ashmaka
-ms.assetid: 8e524188-73a7-44db-9e64-ae8bf66b05d3
 ms.service: search
-ms.devlang: NA
-ms.workload: search
-ms.topic: get-started-article
-ms.tgt_pltfrm: na
-ms.date: 08/29/2016
-ms.author: ashmaka
-ms.openlocfilehash: 5366b8fa35e2187698fc433f4b53374e47846084
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.topic: conceptual
+ms.date: 07/10/2018
+ms.author: heidist
+ms.openlocfilehash: 520d9e7b1899c54d922ff6fb77e0901f9609b029
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44672347"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44783386"
 ---
-# <a name="query-your-azure-search-index-using-the-azure-portal"></a>Query your Azure Search index using the Azure Portal
-> [!div class="op_single_selector"]
-> * [Overview](search-query-overview.md)
-> * [Portal](search-explorer.md)
-> * [.NET](search-query-dotnet.md)
-> * [REST](search-query-rest-api.md)
-> 
-> 
+# <a name="how-to-use-search-explorer-to-query-indexes-in-azure-search"></a>How to use Search explorer to query indexes in Azure Search 
 
-This guide will show you how to query your Azure Search index in the Azure Portal.
+This article shows you how to query an existing Azure Search index using **Search explorer** in the Azure portal. You can use Search explorer to submit simple or full Lucene query strings to any existing index in your service.
 
-Before beginning this walkthrough, you should already have [created an Azure Search index](search-what-is-an-index.md) and [populated it with data](search-what-is-data-import.md).
+## <a name="open-the-service-dashboard"></a>Open the service dashboard
+1. Click **All resources** in the jump bar on the left side of the [Azure portal](https://portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.Search%2FsearchServices).
+2. Select your Azure Search service.
 
-## <a name="i-go-to-your-azure-search-blade"></a>I. Go to your Azure Search blade
-1. Click on "All resources" in the menu on the left side of the [Azure Portal](https://portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.Search%2FsearchServices)
-2. Select your Azure Search service
+## <a name="select-an-index"></a>Select an index
 
-## <a name="ii-select-the-index-you-would-like-to-search"></a>II. Select the index you would like to search
-1. Select the index you would like to search from the "Indexes" tile.
+Select the index you would like to search from the **Indexes** tile.
 
-![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-explorer/pick-index.png)
+   ![](./media/search-explorer/pick-index.png)
 
-## <a name="iii-click-on-the-search-explorer-tile"></a>III. Click on the "Search Explorer" tile
-![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-explorer/search-explorer-tile.png)
+## <a name="open-search-explorer"></a>Open Search explorer
 
-## <a name="iii-start-searching"></a>III. Start searching
-1. To search your Azure Search index, start typing into the "*Query string*" field and then press "**Search**".
+Click on the Search explorer tile to slide open the search bar and results pane.
+
+   ![](./media/search-explorer/search-explorer-tile.png)
+
+## <a name="start-searching"></a>Start searching
+
+When using the Search explorer, you can specify [query parameters](https://docs.microsoft.com/rest/api/searchservice/Search-Documents) to formulate the query.
+
+1. In **Query string**, type a query and then press **Search**. 
+
+   The query string is automatically parsed into the proper request URL to submit a HTTP request against the Azure Search REST API.   
    
-   * When using the Search Explorer, you can specify any of the [query parameters](https://msdn.microsoft.com/library/dn798927.aspx)
-2. In the "*Results*" section, the query's results will be presented in the raw JSON that you would receiving in an HTTP Response Body when issuing search requests against the Azure Search REST API.
-3. The query string is automatically parsed into the proper request URL to submit a HTTP request against the Azure Search REST API
+   You can use any valid simple or full Lucene query syntax to create the request. The `*` character is equivalent to an empty or unspecified search that returns all documents in no particular order.
 
-![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/search/media/search-explorer/search-bar.png)
+2. In  **Results**, query results are presented in raw JSON, identical to the payload returned in an HTTP Response Body when issuing requests programmatically.
 
+   ![](./media/search-explorer/search-bar.png)
 
+## <a name="next-steps"></a>Next steps
 
+The following resources provide additional query syntax information and examples.
 
+ + [Simple query syntax](https://docs.microsoft.com/rest/api/searchservice/simple-query-syntax-in-azure-search) 
+ + [Lucene query syntax](https://docs.microsoft.com/rest/api/searchservice/lucene-query-syntax-in-azure-search) 
+ + [Lucene query syntax examples](https://docs.microsoft.com/azure/search/search-query-lucene-examples) 
+ + [OData Filter expression syntax](https://docs.microsoft.com/rest/api/searchservice/odata-expression-syntax-for-azure-search) 

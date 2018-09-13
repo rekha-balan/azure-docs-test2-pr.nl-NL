@@ -15,12 +15,12 @@ ms.workload: NA
 ms.date: 02/27/2017
 ms.author: alkohli
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: d067c00196d820d85644129598c8dd5b0b8bd367
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 12079f8dbc409afe5acc274fa08bda878c90b76e
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44562962"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44809314"
 ---
 # <a name="disaster-recovery-and-device-failover-for-your-storsimple-virtual-array-via-azure-portal"></a>Disaster recovery and device failover for your StorSimple Virtual Array via Azure portal
 
@@ -122,12 +122,12 @@ Perform the following steps to restore the device to a target StorSimple virtual
 
 5. In the **Deactivate** blade, you are prompted for confirmation. Device deactivation is a *permanent* process that cannot be undone. You are also reminded to take your shares/volumes offline on the host. Type the device name to confirm and click **Deactivate**.
    
-    ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-failover-dr/failover1.png)
+    ![](./media/storsimple-virtual-array-failover-dr/failover1.png)
 6. The deactivation starts. You will receive a notification after the deactivation is successfully completed.
    
-    ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-failover-dr/failover2.png)
+    ![](./media/storsimple-virtual-array-failover-dr/failover2.png)
 7. On the Devices page, the device state will now change to **Deactivated**.
-    ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-failover-dr/failover3.png)
+    ![](./media/storsimple-virtual-array-failover-dr/failover3.png)
 8. In the **Devices** blade, select and click the deactivated source device for failover. 
 9. In the **Device dashboard** blade, click **Fail over**. 
 10. In the **Fail over device** blade, do the following:
@@ -140,22 +140,22 @@ Perform the following steps to restore the device to a target StorSimple virtual
 
     4. Click **Fail over**.
     
-        ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-failover-dr/failover4.png)
+        ![](./media/storsimple-virtual-array-failover-dr/failover4.png)
 11. A failover job initiates and you receive a notification. Go to **Devices > Jobs** to monitor the failover.
     
-     ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-failover-dr/failover5.png)
+     ![](./media/storsimple-virtual-array-failover-dr/failover5.png)
 12. In the **Jobs** blade, you see a failover job created for the source device. This job performs the DR prechecks.
     
-    ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-failover-dr/failover6.png)
+    ![](./media/storsimple-virtual-array-failover-dr/failover6.png)
     
      After the DR prechecks are successful, the failover job will spawn restore jobs for each share/volume that exists on your source device.
     
-    ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-failover-dr/failover7.png)
+    ![](./media/storsimple-virtual-array-failover-dr/failover7.png)
 13. After the failover is complete, go to the **Devices** blade.
     
     1. Select and click the StorSimple device that was used as the target device for the failover process.
     2. Go to **Settings > Management > Shares** (or **Volumes** if iSCSI server). In the **Shares** blade, you can view all the shares (volumes) from the old device.
-        ![](https://docstestmedia1.blob.core.windows.net/azure-media/articles/storsimple/media/storsimple-virtual-array-failover-dr/failover9.png)
+        ![](./media/storsimple-virtual-array-failover-dr/failover9.png)
 14. You will need to [create a DNS alias](https://support.microsoft.com/kb/168322) so that all the applications that are trying to connect can get redirected to the new device.
 
 ## <a name="errors-during-dr"></a>Errors during DR
@@ -181,12 +181,4 @@ If there are StorSimple devices that were registered just before a disaster occu
 ## <a name="next-steps"></a>Next steps
 
 Learn more about how to [administer your StorSimple Virtual Array using the local web UI](storsimple-ova-web-ui-admin.md).
-
-
-
-
-
-
-
-
 

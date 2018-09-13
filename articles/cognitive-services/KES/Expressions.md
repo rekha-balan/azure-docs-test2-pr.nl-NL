@@ -5,16 +5,16 @@ services: cognitive-services
 author: bojunehsu
 manager: stesp
 ms.service: cognitive-services
-ms.technology: kes
+ms.component: knowledge-exploration
 ms.topic: article
 ms.date: 03/26/2016
 ms.author: paulhsu
-ms.openlocfilehash: 952f7da608f6d2760ab91da005febb7495cef746
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: 070ee311a1153bc9fb59870dce68f385a43b15f1
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44564618"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44803772"
 ---
 # <a name="structured-query-expression"></a>Structured Query Expression
 A structured query expression specifies a set of operations to evaluate against the data index.  It consists of attribute query expressions and higher-level functions.  Use the [*evaluate*](evaluateMethod.md) method to compute the objects matching the expression.  The following is an example from the academic publications domain that returns publications authored by Jaime Teevan since the year 2013.

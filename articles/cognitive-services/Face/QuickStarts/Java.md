@@ -1,41 +1,57 @@
 ---
-title: Face API Java quick start | Microsoft Docs
-description: Get information and code samples to help you quickly get started using the Face API with Java in Cognitive Services.
+title: Face API Java quickstart | Microsoft Docs
+titleSuffix: Microsoft Cognitive Services
+description: In this quickstart, you detect faces from an image using the Face API with Java in Cognitive Services.
 services: cognitive-services
-author: v-royhar
-manager: yutkuo
+author: noellelacharite
+manager: nolachar
 ms.service: cognitive-services
-ms.technology: face
-ms.topic: article
-ms.date: 03/21/2017
-ms.author: anroth
-ms.openlocfilehash: c569c1e4792b0bfa6c39e34731d534490476518e
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.component: face-api
+ms.topic: quickstart
+ms.date: 05/10/2018
+ms.author: nolachar
+ms.openlocfilehash: 5788b5f3a91397ad0cb497004b7776fa4ec5e645
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44662699"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44800506"
 ---
-# <a name="face-api-java-quick-starts"></a>Face API Java Quick Starts
-This article provides information and code samples to help you quickly get started using the Face API with Java to accomplish the following tasks: 
-* [Detect Faces in Images](#Detect) 
-* [Create a Person Group](#Create)
+# <a name="quickstart-detect-faces-in-an-image-using-java"></a>Quickstart: Detect faces in an image using Java
+
+In this quickstart, you detect human faces in an image using the Face API.
 
 ## <a name="prerequisites"></a>Prerequisites
-* Get the Microsoft Face API Android SDK [here](https://github.com/Microsoft/Cognitive-face-android)
-* Learn more about obtaining free subscription keys [here](../../Computer-vision/Vision-API-How-to-Topics/HowToSubscribe.md)
 
-## Detect Faces in Images with Face API Using Java <a name="Detect"> </a>
-Use the [Face - Detect method](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236) to detect faces in an image and return face attributes including:
-* Face ID: Unique ID used in a number of Face API scenarios. 
+You need a subscription key to run the sample. You can get free trial subscription keys from [Try Cognitive Services](https://azure.microsoft.com/try/cognitive-services/?api=face-api).
+
+## <a name="detect-faces-in-an-image"></a>Detect faces in an image
+
+Use the [Face - Detect](https://westcentralus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236) method to detect faces in an image and return face attributes including:
+
+* Face ID: Unique ID used in several Face API scenarios.
 * Face Rectangle: The left, top, width, and height indicating the location of the face in the image.
 * Landmarks: An array of 27-point face landmarks pointing to the important positions of face components.
-* Facial attributes including age, gender, smile intensity, head pose, and facial hair. 
+* Facial attributes including age, gender, smile intensity, head pose, and facial hair.
 
-#### <a name="face-detect-java-example-request"></a>Face Detect Java Example Request
+To run the sample, do the following steps:
+
+1. Create a new command-line app in your favorite Java IDE.
+2. Replace the Main class with the following code (keep any `package` statements).
+3. Replace `<Subscription Key>` with your valid subscription key.
+4. Change the `uriBase` value to use the location where you obtained your subscription keys, if necessary.
+5. Download these global libraries from the Maven Repository to the `lib` directory in your project:
+   * `org.apache.httpcomponents:httpclient:4.2.4`
+   * `org.json:json:20170516`
+6. Run 'Main'.
+
+### <a name="face---detect-request"></a>Face - Detect request
 
 ```java
-// // This sample uses the Apache HTTP client from HTTP Components (http://hc.apache.org/httpcomponents-client-ga/)
+// This sample uses Apache HttpComponents:
+// http://hc.apache.org/httpcomponents-core-ga/httpcore/apidocs/
+// https://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/
+
 import java.net.URI;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -45,247 +61,183 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class Main
 {
+    // Replace <Subscription Key> with your valid subscription key.
+    private static final String subscriptionKey = "<Subscription Key>";
+
+    // NOTE: You must use the same region in your REST call as you used to
+    // obtain your subscription keys. For example, if you obtained your
+    // subscription keys from westus, replace "westcentralus" in the URL
+    // below with "westus".
+    //
+    // Free trial subscription keys are generated in the westcentralus region. If you
+    // use a free trial subscription key, you shouldn't need to change this region.
+    private static final String uriBase =
+        "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect";
+
+    private static final String imageWithFaces =
+        "{\"url\":\"https://upload.wikimedia.org/wikipedia/commons/c/c3/RH_Louise_Lillian_Gish.jpg\"}";
+
+    private static final String faceAttributes =
+        "age,gender,headPose,smile,facialHair,glasses,emotion,hair,makeup,occlusion,accessories,blur,exposure,noise";
+
     public static void main(String[] args)
     {
-        HttpClient httpClient = new DefaultHttpClient();
+        HttpClient httpclient = new DefaultHttpClient();
 
         try
         {
-            URIBuilder uriBuilder = new URIBuilder("https://westus.api.cognitive.microsoft.com/face/v1.0/detect");
+            URIBuilder builder = new URIBuilder(uriBase);
 
-            uriBuilder.setParameter("returnFaceId", "true");
-            uriBuilder.setParameter("returnFaceLandmarks", "false");
-            uriBuilder.setParameter("returnFaceAttributes", "age");
+            // Request parameters. All of them are optional.
+            builder.setParameter("returnFaceId", "true");
+            builder.setParameter("returnFaceLandmarks", "false");
+            builder.setParameter("returnFaceAttributes", faceAttributes);
 
-            URI uri = uriBuilder.build();
+            // Prepare the URI for the REST API call.
+            URI uri = builder.build();
             HttpPost request = new HttpPost(uri);
 
-            // Request headers. Replace the example key below with your valid subscription key.
+            // Request headers.
             request.setHeader("Content-Type", "application/json");
-            request.setHeader("Ocp-Apim-Subscription-Key", "13hc77781f7e4b19b5fcdd72a8df7156");
+            request.setHeader("Ocp-Apim-Subscription-Key", subscriptionKey);
 
-            // Request body. Replace the example URL below with the URL of the image you want to analyze.
-            StringEntity reqEntity = new StringEntity("{\"url\":\"http://example.com/1.jpg\"}");
+            // Request body.
+            StringEntity reqEntity = new StringEntity(imageWithFaces);
             request.setEntity(reqEntity);
 
-            HttpResponse response = httpClient.execute(request);
+            // Execute the REST API call and get the response entity.
+            HttpResponse response = httpclient.execute(request);
             HttpEntity entity = response.getEntity();
 
             if (entity != null)
             {
-                System.out.println(EntityUtils.toString(entity));
+                // Format and display the JSON response.
+                System.out.println("REST Response:\n");
+
+                String jsonString = EntityUtils.toString(entity).trim();
+                if (jsonString.charAt(0) == '[') {
+                    JSONArray jsonArray = new JSONArray(jsonString);
+                    System.out.println(jsonArray.toString(2));
+                }
+                else if (jsonString.charAt(0) == '{') {
+                    JSONObject jsonObject = new JSONObject(jsonString);
+                    System.out.println(jsonObject.toString(2));
+                } else {
+                    System.out.println(jsonString);
+                }
             }
         }
         catch (Exception e)
         {
+            // Display error message.
             System.out.println(e.getMessage());
         }
     }
 }
 ```
 
-#### <a name="face---detect-response"></a>Face - Detect Response
-A successful response will be returned in JSON. The following is an example of a successful response: 
+### <a name="face---detect-response"></a>Face - Detect response
+
+A successful response is returned in JSON.
 
 ```json
-[
-    {
-        "faceId": "c5c24a82-6845-4031-9d5d-978df9175426",
-        "faceRectangle": {
-            "width": 78,
-            "height": 78,
-            "left": 394,
-            "top": 54
-        },
-        "faceLandmarks": {
-            "pupilLeft": {
-                "x": 412.7,
-                "y": 78.4 
-            },
-            "pupilRight": {
-                "x": 446.8,
-                "y": 74.2 
-            },
-            "noseTip": {
-                "x": 437.7,
-                "y": 92.4 
-            },
-            "mouthLeft": {
-                "x": 417.8,
-                "y": 114.4 
-            },
-            "mouthRight": {
-                "x": 451.3,
-                "y": 109.3 
-            },
-            "eyebrowLeftOuter": {
-                "x": 397.9,
-                "y": 78.5 
-            },
-            "eyebrowLeftInner": {
-                "x": 425.4,
-                "y": 70.5 
-            },
-            "eyeLeftOuter": {
-                "x": 406.7,
-                "y": 80.6 
-            },
-            "eyeLeftTop": {
-                "x": 412.2,
-                "y": 76.2 
-            },
-            "eyeLeftBottom": {
-                "x": 413.0,
-                "y": 80.1 
-            },
-            "eyeLeftInner": {
-                "x": 418.9,
-                "y": 78.0 
-            },
-            "eyebrowRightInner": {
-                "x": 4.8,
-                "y": 69.7 
-            },
-            "eyebrowRightOuter": {
-                "x": 5.5,
-                "y": 68.5 
-            },
-            "eyeRightInner": {
-                "x": 441.5,
-                "y": 75.0 
-            },
-            "eyeRightTop": {
-                "x": 446.4,
-                "y": 71.7 
-            },
-            "eyeRightBottom": {
-                "x": 447.0,
-                "y": 75.3 
-            },
-            "eyeRightOuter": {
-                "x": 451.7,
-                "y": 73.4 
-            },
-            "noseRootLeft": {
-                "x": 428.0,
-                "y": 77.1 
-            },
-            "noseRootRight": {
-                "x": 435.8,
-                "y": 75.6 
-            },
-            "noseLeftAlarTop": {
-                "x": 428.3,
-                "y": 89.7 
-            },
-            "noseRightAlarTop": {
-                "x": 442.2,
-                "y": 87.0 
-            },
-            "noseLeftAlarOutTip": {
-                "x": 424.3,
-                "y": 96.4 
-            },
-            "noseRightAlarOutTip": {
-                "x": 446.6,
-                "y": 92.5 
-            },
-            "upperLipTop": {
-                "x": 437.6,
-                "y": 105.9 
-            },
-            "upperLipBottom": {
-                "x": 437.6,
-                "y": 108.2 
-            },
-            "underLipTop": {
-                "x": 436.8,
-                "y": 111.4 
-            },
-            "underLipBottom": {
-                "x": 437.3,
-                "y": 114.5 
-            }
-        },
-        "faceAttributes": {
-            "age": 71.0,
-            "gender": "male",
-            "smile": 0.88,
-            "facialHair": {
-                "mustache": 0.8,
-                "beard": 0.1,
-                "sideburns": 0.02
-            },
-            "glasses": "sunglasses",
-            "headPose": {
-                "roll": 2.1,
-                "yaw": 3,
-                "pitch": 0
-            }
-        }
-    }
-]
-```
-## Create a Person Group with Face API Using Java <a name="Create"> </a>
-Use the [Person Group - Create a Person Group method](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395244) to create a new person group with specified personGroupId, name, and user-provided userData. A person group is one of the most important parameters for the Face - Identify API. The Identify API searches for persons' faces in a specified person group.
-
-#### <a name="person-group---create-a-person-group-example"></a>Person Group - Create a Person Group Example
-```java
-// // This sample uses the Apache HTTP client from HTTP Components (http://hc.apache.org/httpcomponents-client-ga/)
-import java.net.URI;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
-
-public class Main
-{
-    public static void main(String[] args)
-    {
-        HttpClient httpClient = new DefaultHttpClient();
-
-        try
+[{
+  "faceRectangle": {
+    "top": 131,
+    "left": 177,
+    "width": 162,
+    "height": 162
+  },
+  "faceAttributes": {
+    "makeup": {
+      "eyeMakeup": true,
+      "lipMakeup": true
+    },
+    "facialHair": {
+      "sideburns": 0,
+      "beard": 0,
+      "moustache": 0
+    },
+    "gender": "female",
+    "accessories": [],
+    "blur": {
+      "blurLevel": "low",
+      "value": 0.06
+    },
+    "headPose": {
+      "roll": 0.1,
+      "pitch": 0,
+      "yaw": -32.9
+    },
+    "smile": 0,
+    "glasses": "NoGlasses",
+    "hair": {
+      "bald": 0,
+      "invisible": false,
+      "hairColor": [
         {
-            // The valid characters for the ID below include numbers, English letters in lower case, '-', and '_'.
-            // The maximum length of the personGroupId is 64.
-            String personGroupId = "example-group-00";
-
-            URIBuilder builder = new URIBuilder("https://westus.api.cognitive.microsoft.com/face/v1.0/persongroups/" +
-                                                personGroupId);
-
-            URI uri = builder.build();
-            HttpPut request = new HttpPut(uri);
-
-            // Request headers. Replace the example key with your valid subscription key.
-            request.setHeader("Content-Type", "application/json");
-            request.setHeader("Ocp-Apim-Subscription-Key", "13hc77781f7e4b19b5fcdd72a8df7156");
-
-            // Request body. The name field is the display name you want for the group (must be under 128 characters).
-            // The size limit for what you want to include in the userData field is 16KB.
-            String body = "{ \"name\":\"My Group\",\"userData\":\"User-provided data attached to the person group.\" }";
-
-            StringEntity reqEntity = new StringEntity(body);
-            request.setEntity(reqEntity);
-
-            HttpResponse response = httpClient.execute(request);
-            HttpEntity entity = response.getEntity();
-
-            if (entity != null)
-            {
-                System.out.println(EntityUtils.toString(entity));
-            }
-        }
-        catch (Exception e)
+          "color": "brown",
+          "confidence": 1
+        },
         {
-            System.out.println(e.getMessage());
+          "color": "black",
+          "confidence": 0.87
+        },
+        {
+          "color": "other",
+          "confidence": 0.51
+        },
+        {
+          "color": "blond",
+          "confidence": 0.08
+        },
+        {
+          "color": "red",
+          "confidence": 0.08
+        },
+        {
+          "color": "gray",
+          "confidence": 0.02
         }
-    }
-}
+      ]
+    },
+    "emotion": {
+      "contempt": 0,
+      "surprise": 0.005,
+      "happiness": 0,
+      "neutral": 0.986,
+      "sadness": 0.009,
+      "disgust": 0,
+      "anger": 0,
+      "fear": 0
+    },
+    "exposure": {
+      "value": 0.67,
+      "exposureLevel": "goodExposure"
+    },
+    "occlusion": {
+      "eyeOccluded": false,
+      "mouthOccluded": false,
+      "foreheadOccluded": false
+    },
+    "noise": {
+      "noiseLevel": "low",
+      "value": 0
+    },
+    "age": 22.9
+  },
+  "faceId": "49d55c17-e018-4a42-ba7b-8cbbdfae7c6f"
+}]
 ```
+
+## <a name="next-steps"></a>Next steps
+
+Learn how to create an Android application that uses the Face service to detect faces in an image. The application displays the image with a frame drawn around each face.
+
+> [!div class="nextstepaction"]
+> [Tutorial: Getting Started with Face API in Android](../Tutorials/FaceAPIinJavaForAndroidTutorial.md)

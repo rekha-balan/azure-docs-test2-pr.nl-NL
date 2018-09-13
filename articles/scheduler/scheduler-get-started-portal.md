@@ -14,12 +14,12 @@ ms.devlang: dotnet
 ms.topic: hero-article
 ms.date: 08/10/2016
 ms.author: deli
-ms.openlocfilehash: 229c11733839a5ef88ed187ed7c43f7975b44c73
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.openlocfilehash: f03ddb475835b30e9b931b7f057c062b57ac45f3
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44662726"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44794942"
 ---
 # <a name="get-started-with-azure-scheduler-in-azure-portal"></a>Get started with Azure Scheduler in Azure portal
 It's easy to create scheduled jobs in Azure Scheduler. In this tutorial, you'll learn how to create a job. You'll also learn Scheduler's monitoring and management capabilities.
@@ -106,7 +106,7 @@ You can click on a run to view its **History Details**, including the whole resp
    ![][job-history-details]
 
 ### <a name="users"></a>Users
-Azure Role-Based Access Control (RBAC) enables fine-grained access management for Azure Scheduler. To learn how to use the Users tab, refer to [Azure Role-Based Access Control](../active-directory/role-based-access-control-configure.md)
+Azure Role-Based Access Control (RBAC) enables fine-grained access management for Azure Scheduler. To learn how to use the Users tab, refer to [Azure Role-Based Access Control](../role-based-access-control/role-assignments-portal.md)
 
 ## <a name="see-also"></a>See also
  [What is Scheduler?](scheduler-intro.md)
@@ -127,53 +127,29 @@ Azure Role-Based Access Control (RBAC) enables fine-grained access management fo
 
  [Scheduler outbound authentication](scheduler-outbound-authentication.md)
 
-[marketplace-create]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/scheduler/media/scheduler-get-started-portal/scheduler-v2-portal-marketplace-create.png
-[action-settings]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/scheduler/media/scheduler-get-started-portal/scheduler-v2-portal-action-settings.png
-[recurrence-schedule]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/scheduler/media/scheduler-get-started-portal/scheduler-v2-portal-recurrence-schedule.png
-[job-properties]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/scheduler/media/scheduler-get-started-portal/scheduler-v2-portal-job-properties.png
-[job-overview]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/scheduler/media/scheduler-get-started-portal/scheduler-v2-portal-job-overview-1.png
-[job-action-settings]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/scheduler/media/scheduler-get-started-portal/scheduler-v2-portal-job-action-settings.png
-[job-schedule]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/scheduler/media/scheduler-get-started-portal/scheduler-v2-portal-job-schedule.png
-[job-history]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/scheduler/media/scheduler-get-started-portal/scheduler-v2-portal-job-history.png
-[job-history-details]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/scheduler/media/scheduler-get-started-portal/scheduler-v2-portal-job-history-details.png
+[marketplace-create]: ./media/scheduler-get-started-portal/scheduler-v2-portal-marketplace-create.png
+[action-settings]: ./media/scheduler-get-started-portal/scheduler-v2-portal-action-settings.png
+[recurrence-schedule]: ./media/scheduler-get-started-portal/scheduler-v2-portal-recurrence-schedule.png
+[job-properties]: ./media/scheduler-get-started-portal/scheduler-v2-portal-job-properties.png
+[job-overview]: ./media/scheduler-get-started-portal/scheduler-v2-portal-job-overview-1.png
+[job-action-settings]: ./media/scheduler-get-started-portal/scheduler-v2-portal-job-action-settings.png
+[job-schedule]: ./media/scheduler-get-started-portal/scheduler-v2-portal-job-schedule.png
+[job-history]: ./media/scheduler-get-started-portal/scheduler-v2-portal-job-history.png
+[job-history-details]: ./media/scheduler-get-started-portal/scheduler-v2-portal-job-history-details.png
 
 
-[1]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/scheduler/media/scheduler-get-started-portal/scheduler-get-started-portal001.png
-[2]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/scheduler/media/scheduler-get-started-portal/scheduler-get-started-portal002.png
-[3]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/scheduler/media/scheduler-get-started-portal/scheduler-get-started-portal003.png
-[4]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/scheduler/media/scheduler-get-started-portal/scheduler-get-started-portal004.png
-[5]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/scheduler/media/scheduler-get-started-portal/scheduler-get-started-portal005.png
-[6]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/scheduler/media/scheduler-get-started-portal/scheduler-get-started-portal006.png
-[7]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/scheduler/media/scheduler-get-started-portal/scheduler-get-started-portal007.png
-[8]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/scheduler/media/scheduler-get-started-portal/scheduler-get-started-portal008.png
-[9]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/scheduler/media/scheduler-get-started-portal/scheduler-get-started-portal009.png
-[10]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/scheduler/media/scheduler-get-started-portal/scheduler-get-started-portal010.png
-[11]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/scheduler/media/scheduler-get-started-portal/scheduler-get-started-portal011.png
-[12]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/scheduler/media/scheduler-get-started-portal/scheduler-get-started-portal012.png
-[13]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/scheduler/media/scheduler-get-started-portal/scheduler-get-started-portal013.png
-[14]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/scheduler/media/scheduler-get-started-portal/scheduler-get-started-portal014.png
-[15]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/scheduler/media/scheduler-get-started-portal/scheduler-get-started-portal015.png
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+[1]: ./media/scheduler-get-started-portal/scheduler-get-started-portal001.png
+[2]: ./media/scheduler-get-started-portal/scheduler-get-started-portal002.png
+[3]: ./media/scheduler-get-started-portal/scheduler-get-started-portal003.png
+[4]: ./media/scheduler-get-started-portal/scheduler-get-started-portal004.png
+[5]: ./media/scheduler-get-started-portal/scheduler-get-started-portal005.png
+[6]: ./media/scheduler-get-started-portal/scheduler-get-started-portal006.png
+[7]: ./media/scheduler-get-started-portal/scheduler-get-started-portal007.png
+[8]: ./media/scheduler-get-started-portal/scheduler-get-started-portal008.png
+[9]: ./media/scheduler-get-started-portal/scheduler-get-started-portal009.png
+[10]: ./media/scheduler-get-started-portal/scheduler-get-started-portal010.png
+[11]: ./media/scheduler-get-started-portal/scheduler-get-started-portal011.png
+[12]: ./media/scheduler-get-started-portal/scheduler-get-started-portal012.png
+[13]: ./media/scheduler-get-started-portal/scheduler-get-started-portal013.png
+[14]: ./media/scheduler-get-started-portal/scheduler-get-started-portal014.png
+[15]: ./media/scheduler-get-started-portal/scheduler-get-started-portal015.png

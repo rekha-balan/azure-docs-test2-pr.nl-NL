@@ -2,8 +2,8 @@
 title: Enable offline syncing with iOS mobile apps | Microsoft Docs
 description: Learn how to use Azure App Service mobile apps to cache and sync offline data in iOS applications.
 documentationcenter: ios
-author: ysxu
-manager: yochayk
+author: conceptdev
+manager: crdun
 editor: ''
 services: app-service\mobile
 ms.assetid: eb5b9520-0f39-4a09-940a-dadb6d940db8
@@ -13,13 +13,13 @@ ms.tgt_pltfrm: mobile-ios
 ms.devlang: objective-c
 ms.topic: article
 ms.date: 10/01/2016
-ms.author: yuaxu
-ms.openlocfilehash: b8554c576c4df9c3c9f7c7f034dd6868cb7f83d8
-ms.sourcegitcommit: 5b9d839c0c0a94b293fdafe1d6e5429506c07e05
-ms.translationtype: HT
+ms.author: crdun
+ms.openlocfilehash: 2f415f1886c654f3bdd880cdccaadc7aa3e69892
+ms.sourcegitcommit: d1451406a010fd3aa854dc8e5b77dc5537d8050e
+ms.translationtype: MT
 ms.contentlocale: nl-NL
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "44563846"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "44798153"
 ---
 # <a name="enable-offline-syncing-with-ios-mobile-apps"></a>Enable offline syncing with iOS mobile apps
 [!INCLUDE [app-service-mobile-selector-offline](../../includes/app-service-mobile-selector-offline.md)]
@@ -280,14 +280,10 @@ When we synchronized the local store with the server, we used the **MSSyncTable.
 [Create an iOS App]: app-service-mobile-ios-get-started.md
 [Offline Data Sync in Mobile Apps]: app-service-mobile-offline-data-sync.md
 
-[defining-core-data-tableoperationerrors-entity]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/app-service-mobile/media/app-service-mobile-ios-get-started-offline-data/defining-core-data-tableoperationerrors-entity.png
-[defining-core-data-tableoperations-entity]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/app-service-mobile/media/app-service-mobile-ios-get-started-offline-data/defining-core-data-tableoperations-entity.png
-[defining-core-data-tableconfig-entity]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/app-service-mobile/media/app-service-mobile-ios-get-started-offline-data/defining-core-data-tableconfig-entity.png
-[defining-core-data-todoitem-entity]: https://docstestmedia1.blob.core.windows.net/azure-media/articles/app-service-mobile/media/app-service-mobile-ios-get-started-offline-data/defining-core-data-todoitem-entity.png
+[defining-core-data-tableoperationerrors-entity]: ./media/app-service-mobile-ios-get-started-offline-data/defining-core-data-tableoperationerrors-entity.png
+[defining-core-data-tableoperations-entity]: ./media/app-service-mobile-ios-get-started-offline-data/defining-core-data-tableoperations-entity.png
+[defining-core-data-tableconfig-entity]: ./media/app-service-mobile-ios-get-started-offline-data/defining-core-data-tableconfig-entity.png
+[defining-core-data-todoitem-entity]: ./media/app-service-mobile-ios-get-started-offline-data/defining-core-data-todoitem-entity.png
 
 [Cloud Cover: Offline Sync in Azure Mobile Services]: http://channel9.msdn.com/Shows/Cloud+Cover/Episode-155-Offline-Storage-with-Donna-Malayeri
-[Azure Friday: Offline-enabled apps in Azure Mobile Services]: http://azure.microsoft.com/en-us/documentation/videos/azure-mobile-services-offline-enabled-apps-with-donna-malayeri/
-
-
-
-
+[Azure Friday: Offline-enabled apps in Azure Mobile Services]: http://azure.microsoft.com/documentation/videos/azure-mobile-services-offline-enabled-apps-with-donna-malayeri/
